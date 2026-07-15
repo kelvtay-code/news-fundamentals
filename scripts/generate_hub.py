@@ -145,8 +145,6 @@ def build():
 
     generated_at = datetime.now()
     sidebar_html = render_freshness_sidebar([
-        ("Business Overview", biz_dt),
-        ("News Bulletin", bulletin_dt),
         ("Page generated", generated_at),
     ])
 
