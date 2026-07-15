@@ -62,7 +62,19 @@
   #news iframe, #oil iframe { width:100%; height:calc(100vh - 220px); min-height:600px; border:1px solid var(--ft-border); background:#fff; }
   .empty { color:var(--ft-mid); font-style:italic; font-family: Arial, sans-serif; }
   footer { background:var(--ft-navy); color:#888; font-family: Arial, sans-serif; font-size:11px; text-align:center; padding:16px 40px; margin-top:20px; border-top:3px solid var(--ft-red); }
-  @media (max-width: 700px) { .masthead-inner, main { padding-left:20px; padding-right:20px; } nav.section-nav { padding-left:20px; padding-right:20px; } }
+  @media (max-width: 700px) {
+    .masthead-inner, main { padding-left:20px; padding-right:20px; }
+    nav.section-nav { padding-left:20px; padding-right:20px; }
+    .masthead-inner { padding-top:8px; padding-bottom:6px; gap:6px; }
+    .masthead-eyebrow { display:none; }
+    .masthead-title { font-size:1.15rem; }
+    .freshness-panel { gap:8px; padding-top:0; }
+    .fresh-dot { width:8px; height:8px; }
+    .fresh-item { gap:5px; }
+    .fresh-label { display:none; }
+    .fresh-ts { font-size:0.62rem; }
+    nav.section-nav button { padding:8px 10px; font-size:10px; }
+  }
 </style>
 </head>
 <body>
@@ -78,7 +90,7 @@
           <span class="fresh-dot fresh-green"></span>
           <div>
             <div class="fresh-label">Page generated</div>
-            <div class="fresh-ts">15 Jul 2026, 20:30 &middot; <strong>just now</strong></div>
+            <div class="fresh-ts">15 Jul 2026, 20:40 &middot; <strong>just now</strong></div>
           </div>
         </div>
         
