@@ -26,24 +26,24 @@
   body { margin:0; font-family: Georgia, 'Times New Roman', serif; background:var(--ft-salmon); color:var(--ft-warm-blk); font-size:14px; line-height:1.5; }
 
   .masthead { background:var(--ft-navy); color:#fff; padding:0 40px; border-bottom:4px solid var(--ft-red); position:sticky; top:0; z-index:5; }
-  .masthead-inner { max-width:1320px; margin:0 auto; padding:16px 0 12px; display:flex; align-items:flex-start; justify-content:space-between; gap:20px; flex-wrap:wrap; }
-  .masthead-eyebrow { font-family: Arial, sans-serif; font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:#AAAAAA; margin-bottom:6px; }
-  .masthead-title { font-size:2rem; font-weight:700; letter-spacing:-0.01em; }
+  .masthead-inner { max-width:1320px; margin:0 auto; padding:8px 0 6px; display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; }
+  .masthead-eyebrow { font-family: Arial, sans-serif; font-size:9px; letter-spacing:0.1em; text-transform:uppercase; color:#AAAAAA; margin-bottom:2px; }
+  .masthead-title { font-size:1.25rem; font-weight:700; letter-spacing:-0.01em; }
   .masthead-title span { color:var(--ft-gold); }
 
-  .freshness-panel { display:flex; gap:16px; flex-wrap:wrap; padding-top:6px; }
-  .fresh-item { display:flex; align-items:center; gap:8px; font-family: Arial, sans-serif; }
-  .fresh-dot { width:10px; height:10px; border-radius:50%; flex:none; }
+  .freshness-panel { display:flex; gap:10px; flex-wrap:wrap; padding-top:0; }
+  .fresh-item { display:flex; align-items:center; gap:5px; font-family: Arial, sans-serif; }
+  .fresh-dot { width:8px; height:8px; border-radius:50%; flex:none; }
   .fresh-dot.fresh-green { background:#3fce6e; box-shadow:0 0 0 3px rgba(63,206,110,0.25); }
   .fresh-dot.fresh-orange { background:var(--ft-gold); box-shadow:0 0 0 3px rgba(240,165,0,0.25); }
   .fresh-dot.fresh-red, .fresh-dot.stale-red { background:#e0546f; box-shadow:0 0 0 3px rgba(224,84,111,0.25); }
-  .fresh-label { font-size:0.68rem; text-transform:uppercase; letter-spacing:.03em; color:#AAAAAA; }
-  .fresh-ts { font-size:0.76rem; color:#fff; }
+  .fresh-label { display:none; }
+  .fresh-ts { font-size:0.66rem; color:#fff; }
 
   nav.section-nav { background:var(--ft-navy); padding:0 40px; border-bottom:1px solid #44495A; }
   nav.section-nav .nav-inner { max-width:1320px; margin:0 auto; display:flex; gap:0; overflow-x:auto; }
-  nav.section-nav button { font-family: Arial, sans-serif; font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:0.06em;
-    color:#AAAAAA; background:none; border:none; padding:10px 14px; cursor:pointer; white-space:nowrap; border-bottom:3px solid transparent; }
+  nav.section-nav button { font-family: Arial, sans-serif; font-size:10px; font-weight:600; text-transform:uppercase; letter-spacing:0.06em;
+    color:#AAAAAA; background:none; border:none; padding:7px 12px; cursor:pointer; white-space:nowrap; border-bottom:3px solid transparent; }
   nav.section-nav button:hover { color:#fff; border-bottom-color:var(--ft-red); }
   nav.section-nav button.active { color:#fff; border-bottom-color:var(--ft-red); }
 
@@ -63,17 +63,10 @@
   .empty { color:var(--ft-mid); font-style:italic; font-family: Arial, sans-serif; }
   footer { background:var(--ft-navy); color:#888; font-family: Arial, sans-serif; font-size:11px; text-align:center; padding:16px 40px; margin-top:20px; border-top:3px solid var(--ft-red); }
   @media (max-width: 700px) {
-    .masthead-inner, main { padding-left:20px; padding-right:20px; }
-    nav.section-nav { padding-left:20px; padding-right:20px; }
-    .masthead-inner { padding-top:8px; padding-bottom:6px; gap:6px; }
+    .masthead, nav.section-nav, main { padding-left:16px; padding-right:16px; }
     .masthead-eyebrow { display:none; }
-    .masthead-title { font-size:1.15rem; }
-    .freshness-panel { gap:8px; padding-top:0; }
-    .fresh-dot { width:8px; height:8px; }
-    .fresh-item { gap:5px; }
-    .fresh-label { display:none; }
-    .fresh-ts { font-size:0.62rem; }
-    nav.section-nav button { padding:8px 10px; font-size:10px; }
+    .masthead-title { font-size:1.05rem; }
+    .fresh-ts { font-size:0.6rem; }
   }
 </style>
 </head>
@@ -90,7 +83,7 @@
           <span class="fresh-dot fresh-green"></span>
           <div>
             <div class="fresh-label">Page generated</div>
-            <div class="fresh-ts">15 Jul 2026, 20:40 &middot; <strong>just now</strong></div>
+            <div class="fresh-ts">15 Jul 2026, 20:54 &middot; <strong>just now</strong></div>
           </div>
         </div>
         
