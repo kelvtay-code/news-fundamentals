@@ -10,7 +10,7 @@ A minimal installable PWA (Progressive Web App) dashboard for the Optionx pipeli
 ```
 python scripts/generate_hub.py
 ```
-This reads the latest snapshot files from the local Optionx Dashboard/News folders and rewrites `site/index.html`. Commit and push `site/` to publish an update.
+This reads the latest snapshot files from the local Optionx Dashboard/News folders and rewrites `docs/index.html`. Commit and push `docs/` to publish an update.
 
 ## Installing on your phone
 Once published via GitHub Pages, open the site URL in Safari (iPhone) or Chrome (Android) and choose "Add to Home Screen" — it installs like a native app icon, works offline for previously loaded content.

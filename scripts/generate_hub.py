@@ -15,7 +15,7 @@ from pathlib import Path
 
 DASHBOARD_DIR = Path(r"G:\My Drive\Claude\Projects\Optionx\Dashboard")
 NEWS_DIR = Path(r"G:\My Drive\Claude\Projects\Optionx\News")
-SITE_DIR = Path(__file__).resolve().parent.parent / "site"
+SITE_DIR = Path(__file__).resolve().parent.parent / "docs"
 
 BIZ_PATTERN = re.compile(r"business_overview_(\d{6})_(\d{4})\.csv$")
 NEWS_PATTERN = re.compile(r"^([A-Z]+)_news_(\d{6})\.(\d{4})\.txt$")

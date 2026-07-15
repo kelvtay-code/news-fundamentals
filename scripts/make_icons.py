@@ -2,7 +2,7 @@
 from PIL import Image, ImageDraw, ImageFont
 import os
 
-OUT_DIR = os.path.join(os.path.dirname(__file__), "..", "site", "icons")
+OUT_DIR = os.path.join(os.path.dirname(__file__), "..", "docs", "icons")
 os.makedirs(OUT_DIR, exist_ok=True)
 
 BG = (11, 61, 46)      # dark green
