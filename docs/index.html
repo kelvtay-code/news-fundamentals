@@ -11,19 +11,29 @@
   :root {
     --bg:#f9f9f7; --panel:#fcfcfb; --border:#e1e0d9; --text:#0b0b0b; --dim:#6b6a63;
     --accent:#0b3d2e; --accent2:#0ca36c;
+    --green:#0ca30c; --orange:#c2570a; --red:#d03b3b;
   }
   @media (prefers-color-scheme: dark) {
-    :root { --bg:#0b0f14; --panel:#121821; --border:#22303f; --text:#e6edf3; --dim:#8aa0b4; --accent:#3fd08a; --accent2:#2dd4bf; }
+    :root { --bg:#0b0f14; --panel:#121821; --border:#22303f; --text:#e6edf3; --dim:#8aa0b4; --accent:#3fd08a; --accent2:#2dd4bf;
+             --green:#4ade80; --orange:#f97316; --red:#ef4444; }
   }
   * { box-sizing: border-box; }
   body { margin:0; font-family: -apple-system, system-ui, Segoe UI, Roboto, sans-serif; background:var(--bg); color:var(--text); }
-  header { padding:20px 16px 12px; border-bottom:1px solid var(--border); background:var(--panel); position:sticky; top:0; z-index:5; }
+  header { padding:16px; border-bottom:1px solid var(--border); background:var(--panel); position:sticky; top:0; z-index:5;
+            display:flex; align-items:flex-start; justify-content:space-between; gap:16px; flex-wrap:wrap; }
   header h1 { margin:0; font-size:1.3rem; }
-  header .sub { color:var(--dim); font-size:0.85rem; margin-top:4px; }
+  .freshness-panel { display:flex; gap:14px; flex-wrap:wrap; }
+  .fresh-item { display:flex; align-items:center; gap:8px; font-family: Arial, sans-serif; }
+  .fresh-dot { width:10px; height:10px; border-radius:50%; flex:none; }
+  .fresh-dot.fresh-green { background:var(--green); box-shadow:0 0 0 3px color-mix(in srgb, var(--green) 25%, transparent); }
+  .fresh-dot.fresh-orange { background:var(--orange); box-shadow:0 0 0 3px color-mix(in srgb, var(--orange) 25%, transparent); }
+  .fresh-dot.fresh-red, .fresh-dot.stale-red { background:var(--red); box-shadow:0 0 0 3px color-mix(in srgb, var(--red) 25%, transparent); }
+  .fresh-label { font-size:0.72rem; text-transform:uppercase; letter-spacing:.03em; color:var(--dim); }
+  .fresh-ts { font-size:0.78rem; }
   nav { display:flex; gap:8px; padding:10px 16px; background:var(--panel); border-bottom:1px solid var(--border); overflow-x:auto; }
   nav button { border:1px solid var(--border); background:var(--bg); color:var(--text); padding:8px 14px; border-radius:20px; font-size:0.85rem; cursor:pointer; white-space:nowrap; }
   nav button.active { background:var(--accent); color:#fff; border-color:var(--accent); }
-  main { padding:16px; max-width:900px; margin:0 auto; }
+  main { padding:16px; max-width:1200px; margin:0 auto; }
   section { display:none; }
   section.active { display:block; }
   h2 { font-size:1rem; color:var(--dim); text-transform:uppercase; letter-spacing:.04em; margin:0 0 10px; }
@@ -32,15 +42,10 @@
   th, td { padding:8px 10px; text-align:left; border-bottom:1px solid var(--border); white-space:nowrap; }
   th { position:sticky; top:0; background:var(--panel); cursor:pointer; }
   tbody tr:hover { background:rgba(127,127,127,0.08); }
-  .news-card { border:1px solid var(--border); border-radius:10px; background:var(--panel); margin-bottom:10px; padding:10px 14px; }
-  .news-card summary { cursor:pointer; font-weight:600; display:flex; justify-content:space-between; align-items:center; }
-  .news-card .ts { font-weight:400; color:var(--dim); font-size:0.75rem; }
-  .news-card ul { list-style:none; margin:10px 0 0; padding:0; }
-  .news-card li { padding:8px 0; border-top:1px solid var(--border); }
-  .news-card li:first-child { border-top:none; }
-  .news-card a { color:var(--accent2); text-decoration:none; font-size:0.9rem; }
-  .news-card a:hover { text-decoration:underline; }
-  .meta { color:var(--dim); font-size:0.75rem; margin-top:2px; }
+  .news-toolbar { margin-bottom:8px; }
+  .open-full { font-family: Arial, sans-serif; font-size:0.82rem; color:var(--accent2); text-decoration:none; }
+  .open-full:hover { text-decoration:underline; }
+  #news iframe { width:100%; height:calc(100vh - 220px); min-height:600px; border:1px solid var(--border); border-radius:10px; background:#fff; }
   .empty { color:var(--dim); font-style:italic; }
   footer { text-align:center; color:var(--dim); font-size:0.75rem; padding:20px; }
 </style>
@@ -48,7 +53,35 @@
 <body>
 <header>
   <h1>Optionx Hub</h1>
-  <div class="sub">Business overview: 15 Jul 2026 07:56 &middot; Page generated 15 Jul 2026 15:53</div>
+  <div class="freshness-panel">
+    
+        <div class="fresh-item">
+          <span class="fresh-dot fresh-green"></span>
+          <div>
+            <div class="fresh-label">Business Overview</div>
+            <div class="fresh-ts">15 Jul 2026, 07:56 &middot; <strong>8h ago</strong></div>
+          </div>
+        </div>
+        
+
+        <div class="fresh-item">
+          <span class="fresh-dot fresh-green"></span>
+          <div>
+            <div class="fresh-label">News Bulletin</div>
+            <div class="fresh-ts">15 Jul 2026, 07:58 &middot; <strong>8h ago</strong></div>
+          </div>
+        </div>
+        
+
+        <div class="fresh-item">
+          <span class="fresh-dot fresh-green"></span>
+          <div>
+            <div class="fresh-label">Page generated</div>
+            <div class="fresh-ts">15 Jul 2026, 16:14 &middot; <strong>just now</strong></div>
+          </div>
+        </div>
+        
+  </div>
 </header>
 <nav>
   <button class="active" data-target="overview">Business Overview</button>
@@ -67,427 +100,8 @@
     
   </section>
   <section id="news">
-    <h2>News Bulletin (latest per ticker)</h2>
-    
-        <details class="news-card">
-          <summary>ABBV <span class="ts">updated 13 Jun 2026</span></summary>
-          <ul><li>
-                  <a href="https://247wallst.com/investing/2026/06/07/forget-wall-streets-ultimate-pharma-value-trap-here-is-a-far-better-stock-to-buy-right-now/" target="_blank" rel="noopener">Forget Wall Street’s Ultimate Pharma Value Trap: Here Is a Far Better Stock to Buy Right Now</a>
-                  <div class="meta">[=] 24/7 Wall St. &middot; 2026-06-07T14:13:34Z</div>
-                </li><li>
-                  <a href="https://247wallst.com/investing/2026/05/25/two-paths-to-growth-johnson-johnson-vs-abbvie/" target="_blank" rel="noopener">Two Paths to Growth: Johnson &amp; Johnson vs AbbVie</a>
-                  <div class="meta">[+] 24/7 Wall St. &middot; 2026-05-25T11:47:39Z</div>
-                </li><li>
-                  <a href="https://www.forbes.com/sites/investor-hub/article/best-stocks-to-buy-now-june-2026/" target="_blank" rel="noopener">Best Stocks To Buy Now For June 2026</a>
-                  <div class="meta">[=] Forbes &middot; 2026-05-22T10:30:00Z</div>
-                </li><li>
-                  <a href="https://www.forbes.com/sites/investor-hub/article/best-dividend-stocks-buy-june-2026/" target="_blank" rel="noopener">5 Best Dividend Stocks Now To Buy For June 2026</a>
-                  <div class="meta">[+] Forbes &middot; 2026-05-21T10:30:00Z</div>
-                </li><li>
-                  <a href="https://finance.yahoo.com/sectors/healthcare/articles/abbvie-abbv-announces-european-commission-220441778.html" target="_blank" rel="noopener">AbbVie (ABBV) Announces European Commission’s Approval of AQUIPTA®</a>
-                  <div class="meta">[-] Yahoo Entertainment &middot; 2026-06-05T22:04:41Z</div>
-                </li></ul>
-        </details>
-        
-
-        <details class="news-card">
-          <summary>ABT <span class="ts">updated 26 Jun 2026</span></summary>
-          <ul><li>
-                  <a href="https://www.r-bloggers.com/2026/06/boston-scientific-bsx-growth-cash-flow-and-reimbursement-risk-analysis/" target="_blank" rel="noopener">Boston Scientific (BSX): Growth, Cash Flow, and Reimbursement Risk — Analysis</a>
-                  <div class="meta">[+] R-bloggers.com &middot; 2026-06-14T22:33:11Z</div>
-                </li><li>
-                  <a href="https://finance.yahoo.com/markets/stocks/articles/goldman-sachs-maintains-buy-rating-161601413.html" target="_blank" rel="noopener">Goldman Sachs Maintains Buy Rating on Abbott Laboratories (ABT) Stock</a>
-                  <div class="meta">[=] Yahoo Entertainment &middot; 2026-06-08T16:16:01Z</div>
-                </li><li>
-                  <a href="https://finance.yahoo.com/sectors/healthcare/articles/abbott-laboratories-abt-slid-headwinds-115137359.html" target="_blank" rel="noopener">Abbott Laboratories (ABT) Slid on Headwinds in Nutrition Business</a>
-                  <div class="meta">[=] Yahoo Entertainment &middot; 2026-05-26T11:51:37Z</div>
-                </li><li>
-                  <a href="https://finance.yahoo.com/sectors/healthcare/articles/abbott-abt-secures-ce-mark-174147076.html" target="_blank" rel="noopener">Abbott (ABT) Secures CE Mark for World’s First Dual Glucose‑Ketone Sensing Technology for Diabetes</a>
-                  <div class="meta">[+] Yahoo Entertainment &middot; 2026-06-09T17:41:47Z</div>
-                </li><li>
-                  <a href="https://www.forbes.com/sites/pamdanziger/2026/06/01/sub-zero-meets-the-mixology-boom-with-the-ultimate-luxury-ice-maker/" target="_blank" rel="noopener">Sub-Zero Meets The Mixology Boom With The Ultimate Luxury Ice Maker</a>
-                  <div class="meta">[=] Forbes &middot; 2026-06-01T16:13:53Z</div>
-                </li></ul>
-        </details>
-        
-
-        <details class="news-card">
-          <summary>AMGN <span class="ts">updated 26 Jun 2026</span></summary>
-          <ul><li>
-                  <a href="https://finance.yahoo.com/markets/stocks/articles/amgen-inc-amgn-good-stock-152515113.html" target="_blank" rel="noopener">Is Amgen Inc. (AMGN) A Good Stock To Buy Now?</a>
-                  <div class="meta">[+] Yahoo Entertainment &middot; 2026-06-11T15:25:15Z</div>
-                </li><li>
-                  <a href="https://finance.yahoo.com/sectors/healthcare/articles/why-amgen-amgn-among-7-103936482.html" target="_blank" rel="noopener">Here’s Why Amgen (AMGN) is Among the 7 Best Longevity Stocks to Buy Now</a>
-                  <div class="meta">[=] Yahoo Entertainment &middot; 2026-06-13T10:39:36Z</div>
-                </li><li>
-                  <a href="https://finance.yahoo.com/sectors/healthcare/articles/amgen-inc-amgn-announces-ec-220501610.html" target="_blank" rel="noopener">Amgen Inc. (AMGN) Announces EC’s Grant of Marketing Authorization for IMDYLLTRA®</a>
-                  <div class="meta">[-] Yahoo Entertainment &middot; 2026-06-05T22:05:01Z</div>
-                </li><li>
-                  <a href="https://www.trefis.com/articles/602472/is-hca-healthcare-stock-a-trap-or-a-missed-opportunity-2/2026-06-11" target="_blank" rel="noopener">Is HCA Healthcare Stock A Trap Or A Missed Opportunity?</a>
-                  <div class="meta">[-] Trefis &middot; 2026-06-11T23:04:19Z</div>
-                </li><li>
-                  <a href="https://www.trefis.com/articles/602263/is-microsoft-stock-too-cheap-to-ignore/2026-06-10" target="_blank" rel="noopener">Is Microsoft Stock Too Cheap To Ignore?</a>
-                  <div class="meta">[=] Trefis &middot; 2026-06-10T15:05:54Z</div>
-                </li></ul>
-        </details>
-        
-
-        <details class="news-card">
-          <summary>AMZN <span class="ts">updated 13 Jun 2026</span></summary>
-          <ul><li>
-                  <a href="https://www.trefis.com/articles/600409/amazon-stocks-simple-path-to-20-upside/2026-05-26" target="_blank" rel="noopener">Amazon Stock’s Simple Path To 20% Upside</a>
-                  <div class="meta">[+] Trefis &middot; 2026-05-26T13:44:07Z</div>
-                </li><li>
-                  <a href="https://www.barchart.com/story/news/1911950/plug-power-stock-climbed-96-ytd-and-hit-new-highs-after-a-solid-q1-beat-the-turnaround-might-be-finally-sticking" target="_blank" rel="noopener">Plug Power Stock Climbed 96% YTD and Hit New Highs After a Solid Q1 Beat. The Turnaround Might Be Finally Sticking.</a>
-                  <div class="meta">[+] Barchart.com &middot; 2026-05-13T18:52:11Z</div>
-                </li><li>
-                  <a href="https://www.barchart.com/story/news/2380490/mongodb-vs-datadog-only-1-growth-stock-could-make-investors-richer" target="_blank" rel="noopener">MongoDB vs. Datadog: Only 1 Growth Stock Could Make Investors Richer</a>
-                  <div class="meta">[+] Barchart.com &middot; 2026-06-09T14:33:50Z</div>
-                </li><li>
-                  <a href="https://www.barchart.com/story/news/1998942/nvidia-stock-hit-record-highs-on-huangs-china-visit-q1-earnings-could-take-nvda-even-higher" target="_blank" rel="noopener">Nvidia Stock Hit Record Highs on Huang’s China Visit. Q1 Earnings Could Take NVDA Even Higher.</a>
-                  <div class="meta">[+] Barchart.com &middot; 2026-05-18T17:38:32Z</div>
-                </li><li>
-                  <a href="https://www.barchart.com/story/news/2217193/dropbox-gets-a-new-ceo-the-payoff-for-dbx-stock-could-take-a-long-time" target="_blank" rel="noopener">Dropbox Gets A New CEO. The Payoff for DBX Stock Could Take a Long Time.</a>
-                  <div class="meta">[=] Barchart.com &middot; 2026-05-30T15:00:02Z</div>
-                </li></ul>
-        </details>
-        
-
-        <details class="news-card">
-          <summary>DELL <span class="ts">updated 29 May 2026</span></summary>
-          <ul><li>
-                  <a href="https://gizmodo.com/its-time-for-intel-to-prove-it-can-keep-handheld-pc-gaming-alive-2000764211" target="_blank" rel="noopener">It’s Time for Intel to Prove It Can Keep Handheld PC Gaming Alive</a>
-                  <div class="meta">[=] Gizmodo.com &middot; 2026-05-28T13:00:44Z</div>
-                </li><li>
-                  <a href="https://www.theverge.com/tech/929160/dell-alienware-15-laptop-price-release-date-branding" target="_blank" rel="noopener">Dell and RAMageddon are watering down the Alienware brand</a>
-                  <div class="meta">[-] The Verge &middot; 2026-05-14T08:56:33Z</div>
-                </li><li>
-                  <a href="https://gizmodo.com/dell-xps-16-2026-review-almost-everything-i-could-have-asked-for-almost-2000757696" target="_blank" rel="noopener">Dell’s XPS 16 (2026) Is Almost Everything I Could Have Asked for… Almost</a>
-                  <div class="meta">[-] Gizmodo.com &middot; 2026-05-13T15:30:06Z</div>
-                </li><li>
-                  <a href="https://gizmodo.com/alienware-16-alien-51-2026-review-oled-screen-fixes-previous-gaming-laptop-problem-2000762742" target="_blank" rel="noopener">Alienware Fixed the One Problem With the Area-51, and Now I’m Afraid I Love It</a>
-                  <div class="meta">[=] Gizmodo.com &middot; 2026-05-26T15:00:09Z</div>
-                </li><li>
-                  <a href="https://gizmodo.com/did-trump-accidentally-buy-stock-in-a-sushi-restaurant-instead-of-a-tech-company-2000761356" target="_blank" rel="noopener">Did Trump Accidentally Buy Stock in a Sushi Restaurant Instead of a Tech Company?</a>
-                  <div class="meta">[=] Gizmodo.com &middot; 2026-05-20T17:40:18Z</div>
-                </li></ul>
-        </details>
-        
-
-        <details class="news-card">
-          <summary>GE <span class="ts">updated 26 Jun 2026</span></summary>
-          <ul><li>
-                  <a href="https://www.theverge.com/tech/942467/smart-lighting-backyard-govee-outdoor" target="_blank" rel="noopener">My backyard made me a color-changing smart lighting convert</a>
-                  <div class="meta">[=] The Verge &middot; 2026-06-16T20:40:09Z</div>
-                </li><li>
-                  <a href="https://finance.yahoo.com/sectors/healthcare/articles/ubs-flips-ge-healthcare-gehc-215607835.html" target="_blank" rel="noopener">UBS Flips GE HealthCare (GEHC) From Sell to Neutral After a 30% Stock Decline</a>
-                  <div class="meta">[+] Yahoo Entertainment &middot; 2026-05-27T21:56:07Z</div>
-                </li><li>
-                  <a href="https://247wallst.com/investing/2026/06/05/prediction-palantir-stock-will-hit-200-on-this-date/" target="_blank" rel="noopener">Prediction: Palantir Stock Will Hit $200 on This Date</a>
-                  <div class="meta">[+] 24/7 Wall St. &middot; 2026-06-05T15:23:16Z</div>
-                </li><li>
-                  <a href="https://finance.yahoo.com/markets/stocks/articles/fedex-upgraded-dollar-general-downgraded-133516743.html" target="_blank" rel="noopener">FedEx upgraded, Dollar General downgraded: Wall Street&#x27;s top analyst calls</a>
-                  <div class="meta">[=] Yahoo Entertainment &middot; 2026-05-27T13:35:16Z</div>
-                </li><li>
-                  <a href="https://www.marketbeat.com/instant-alerts/park-aerospace-q4-earnings-call-highlights-2026-05-28/?utm_source=yahoofinance&amp;amp;utm_medium=yahoofinance" target="_blank" rel="noopener">Park Aerospace Q4 Earnings Call Highlights</a>
-                  <div class="meta">[=] MarketBeat &middot; 2026-05-28T23:07:27Z</div>
-                </li></ul>
-        </details>
-        
-
-        <details class="news-card">
-          <summary>GOOGL <span class="ts">updated 25 Jun 2026</span></summary>
-          <ul><li>
-                  <a href="https://www.barchart.com/story/news/2424468/waymo-is-doubling-down-on-self-driving-car-ambitions-what-that-means-for-googl-stock" target="_blank" rel="noopener">Waymo Is Doubling Down on Self-Driving Car Ambitions. What That Means for GOOGL Stock.</a>
-                  <div class="meta">[=] Barchart.com &middot; 2026-06-11T15:28:59Z</div>
-                </li><li>
-                  <a href="https://www.barchart.com/story/news/2478828/navan-stock-surges-on-earnings-even-the-travel-company-has-ai-to-thank" target="_blank" rel="noopener">Navan Stock Surges on Earnings. Even the Travel Company Has AI to Thank</a>
-                  <div class="meta">[+] Barchart.com &middot; 2026-06-15T19:25:36Z</div>
-                </li><li>
-                  <a href="https://finance.yahoo.com/markets/stocks/articles/alphabet-googl-places-order-intel-175947094.html" target="_blank" rel="noopener">Alphabet (GOOGL) Places An Order With Intel To Manufacture More Than Three Million Tensor Processing Units In 2028</a>
-                  <div class="meta">[=] Yahoo Entertainment &middot; 2026-06-13T17:59:47Z</div>
-                </li><li>
-                  <a href="https://www.barchart.com/story/news/2380490/mongodb-vs-datadog-only-1-growth-stock-could-make-investors-richer" target="_blank" rel="noopener">MongoDB vs. Datadog: Only 1 Growth Stock Could Make Investors Richer</a>
-                  <div class="meta">[+] Barchart.com &middot; 2026-06-09T14:33:50Z</div>
-                </li><li>
-                  <a href="https://finance.yahoo.com/markets/article/broadcom-stock-sinks-15-as-ai-chip-forecast-disappoints-165602704.html" target="_blank" rel="noopener">Broadcom stock sinks nearly 15% as AI chip forecast disappoints</a>
-                  <div class="meta">[=] Yahoo Entertainment &middot; 2026-06-03T16:56:02Z</div>
-                </li></ul>
-        </details>
-        
-
-        <details class="news-card">
-          <summary>HON <span class="ts">updated 26 Jun 2026</span></summary>
-          <ul><li>
-                  <a href="https://finance.yahoo.com/markets/stocks/articles/honeywell-hon-sticks-full-forecast-033447567.html" target="_blank" rel="noopener">Honeywell (HON) Sticks with Full-Year Forecast as Aerospace Separation Nears</a>
-                  <div class="meta">[=] Yahoo Entertainment &middot; 2026-06-10T03:34:47Z</div>
-                </li><li>
-                  <a href="https://finance.yahoo.com/markets/stocks/articles/barclays-says-honeywell-hon-clear-012708272.html" target="_blank" rel="noopener">Barclays Says Honeywell (HON) Has Clear Catalysts as Spinoffs Near</a>
-                  <div class="meta">[=] Yahoo Entertainment &middot; 2026-05-30T01:27:08Z</div>
-                </li><li>
-                  <a href="https://www.forbes.com/sites/chengboliu/2026/06/10/chairman-of-ai-chip-testing-equipment-maker-is-the-wealthiest-newcomer-among-taiwans-richest/" target="_blank" rel="noopener">Chairman Of AI Chip-Testing Equipment Maker Is The Wealthiest Newcomer Among Taiwan’s Richest</a>
-                  <div class="meta">[=] Forbes &middot; 2026-06-10T21:35:00Z</div>
-                </li><li>
-                  <a href="https://247wallst.com/investing/2026/06/24/top-national-security-investor-missile-production-is-about-to-explode-as-u-s-rebuilds-arsenal/" target="_blank" rel="noopener">Top National Security Investor: Missile Production Is About to Explode as U.S. Rebuilds Arsenal</a>
-                  <div class="meta">[-] 24/7 Wall St. &middot; 2026-06-24T22:37:36Z</div>
-                </li><li>
-                  <a href="https://finance.yahoo.com/markets/stocks/articles/honeywell-international-inc-hon-good-212147412.html" target="_blank" rel="noopener">Is Honeywell International Inc. (HON) A Good Stock To Buy Now?</a>
-                  <div class="meta">[+] Yahoo Entertainment &middot; 2026-06-07T21:21:47Z</div>
-                </li></ul>
-        </details>
-        
-
-        <details class="news-card">
-          <summary>HPE <span class="ts">updated 26 Jun 2026</span></summary>
-          <ul><li>
-                  <a href="https://www.barchart.com/story/news/2305674/hpe-is-riding-the-ai-boom-wall-street-thinks-its-just-getting-started" target="_blank" rel="noopener">HPE Is Riding the AI Boom. Wall Street Thinks It’s Just Getting Started.</a>
-                  <div class="meta">[+] Barchart.com &middot; 2026-06-04T14:00:02Z</div>
-                </li><li>
-                  <a href="https://finance.yahoo.com/markets/stocks/articles/goldman-sachs-raises-pt-hewlett-171523009.html" target="_blank" rel="noopener">Goldman Sachs Raises PT on ​Hewlett Packard Enterprise (HPE)</a>
-                  <div class="meta">[+] Yahoo Entertainment &middot; 2026-06-06T17:15:23Z</div>
-                </li><li>
-                  <a href="https://247wallst.com/investing/2026/06/08/dell-soars-54-hp-enterprise-rockets-59-in-a-month-as-ai-server-demand-booms/" target="_blank" rel="noopener">Dell Soars 54%, HP Enterprise Rockets 59% in a Month as AI-Server Demand Booms</a>
-                  <div class="meta">[+] 24/7 Wall St. &middot; 2026-06-08T19:26:00Z</div>
-                </li><li>
-                  <a href="https://www.theregister.com/systems/2026/06/16/non-x86-servers-now-nearly-half-the-market-idc-says/5256248" target="_blank" rel="noopener">Non-x86 servers now nearly half the market, IDC says</a>
-                  <div class="meta">[=] Theregister.com &middot; 2026-06-16T13:31:23Z</div>
-                </li><li>
-                  <a href="https://finance.yahoo.com/markets/stocks/article/broadcom-could-be-headed-for-one-of-the-worst-1-day-destructions-in-shareholder-value-ever-121457875.html" target="_blank" rel="noopener">Broadcom could be headed for one of the worst 1-day destructions in shareholder value ever</a>
-                  <div class="meta">[=] Yahoo Entertainment &middot; 2026-06-04T12:14:57Z</div>
-                </li></ul>
-        </details>
-        
-
-        <details class="news-card">
-          <summary>IBM <span class="ts">updated 29 May 2026</span></summary>
-          <ul><li>
-                  <a href="https://yro.slashdot.org/story/26/05/21/1758205/us-to-award-2-billion-to-quantum-companies-take-equity-stakes" target="_blank" rel="noopener">US To Award $2 Billion To Quantum Companies, Take Equity Stakes</a>
-                  <div class="meta">Slashdot.org &middot; 2026-05-21T19:00:00Z</div>
-                </li><li>
-                  <a href="https://finance.yahoo.com/markets/stocks/articles/international-business-machines-corporation-ibm-132752776.html" target="_blank" rel="noopener">International Business Machines Corporation (IBM) Fell as Revenue Growth Fell Short of Expectations</a>
-                  <div class="meta">Yahoo Entertainment &middot; 2026-05-22T13:27:52Z</div>
-                </li><li>
-                  <a href="https://www.theregister.com/on-prem/2026/05/20/workforce-rebalancing-comes-for-kyndryl-and-delivery-teams-are-in-the-firing-line/5243327" target="_blank" rel="noopener">&#x27;Workforce rebalancing&#x27; comes for Kyndryl, and delivery teams are in the firing line</a>
-                  <div class="meta">Theregister.com &middot; 2026-05-20T12:15:28Z</div>
-                </li><li>
-                  <a href="https://ritholtz.com/2026/05/ai-q-earnings/" target="_blank" rel="noopener">Artificial Intelligence and Quarterly Earnings Reports</a>
-                  <div class="meta">Ritholtz.com &middot; 2026-05-11T19:00:45Z</div>
-                </li><li>
-                  <a href="https://research.ibm.com/blog/granite-4-1-ai-foundation-models" target="_blank" rel="noopener">The IBM Granite 4.1 family of models</a>
-                  <div class="meta">Ibm.com &middot; 2026-04-30T14:01:26Z</div>
-                </li></ul>
-        </details>
-        
-
-        <details class="news-card">
-          <summary>INTC <span class="ts">updated 30 May 2026</span></summary>
-          <ul><li>
-                  <a href="https://finance.yahoo.com/markets/stocks/articles/freedom-broker-upgrades-intel-corporation-180313627.html" target="_blank" rel="noopener">Freedom Broker Upgrades Intel Corporation (INTC) to Buy, Lifts PT</a>
-                  <div class="meta">[+] Yahoo Entertainment &middot; 2026-05-07T18:03:13Z</div>
-                </li><li>
-                  <a href="https://www.barchart.com/story/news/1624130/intel-stock-just-set-new-record-highs-again-did-you-miss-the-boat" target="_blank" rel="noopener">Intel Stock Just Set New Record Highs Again. Did You Miss the Boat?</a>
-                  <div class="meta">[+] Barchart.com &middot; 2026-04-30T15:55:02Z</div>
-                </li><li>
-                  <a href="https://www.thestreet.com/investing/stocks/analysts-turn-heads-with-amd-stock-forecast-after-massive-rally" target="_blank" rel="noopener">Analysts turn heads with AMD stock forecast after massive rally</a>
-                  <div class="meta">[+] TheStreet &middot; 2026-05-09T18:47:00Z</div>
-                </li><li>
-                  <a href="https://finance.yahoo.com/markets/stocks/articles/intel-intc-best-high-growth-234838721.html" target="_blank" rel="noopener">Is Intel (INTC) the Best High Growth Stock to Buy and Hold for the Next Decade?</a>
-                  <div class="meta">[+] Yahoo Entertainment &middot; 2026-05-25T23:48:38Z</div>
-                </li><li>
-                  <a href="https://finance.yahoo.com/markets/stocks/articles/intel-corporation-intc-influencers-not-205943438.html" target="_blank" rel="noopener">Intel Corporation (INTC): Influencers Not Buying the Hype?</a>
-                  <div class="meta">[=] Yahoo Entertainment &middot; 2026-05-07T20:59:43Z</div>
-                </li></ul>
-        </details>
-        
-
-        <details class="news-card">
-          <summary>INTU <span class="ts">updated 25 Jun 2026</span></summary>
-          <ul><li>
-                  <a href="https://finance.yahoo.com/markets/stocks/articles/argus-maintains-buy-rating-intuit-005227992.html" target="_blank" rel="noopener">Argus Maintains Buy Rating on Intuit (INTU)</a>
-                  <div class="meta">[+] Yahoo Entertainment &middot; 2026-05-29T00:52:27Z</div>
-                </li><li>
-                  <a href="https://www.barchart.com/story/news/2118730/do-wall-street-analysts-like-intuit-stock" target="_blank" rel="noopener">Do Wall Street Analysts Like Intuit Stock?</a>
-                  <div class="meta">[=] Barchart.com &middot; 2026-05-25T20:10:05Z</div>
-                </li><li>
-                  <a href="https://finance.yahoo.com/markets/stocks/articles/wall-street-sees-50-upside-130328574.html" target="_blank" rel="noopener">Wall Street Sees 50%+ Upside In Intuit (INTU); Check Out Why</a>
-                  <div class="meta">[+] Yahoo Entertainment &middot; 2026-06-11T13:03:28Z</div>
-                </li><li>
-                  <a href="https://finance.yahoo.com/markets/stocks/articles/intuit-intu-announces-analytics-ai-134828140.html" target="_blank" rel="noopener">Intuit (INTU) Announces Analytics AI, A Conversational Analytics Agent In Mailchimp</a>
-                  <div class="meta">[=] Yahoo Entertainment &middot; 2026-06-01T13:48:28Z</div>
-                </li><li>
-                  <a href="https://finance.yahoo.com/markets/stocks/articles/fedex-upgraded-dollar-general-downgraded-133516743.html" target="_blank" rel="noopener">FedEx upgraded, Dollar General downgraded: Wall Street&#x27;s top analyst calls</a>
-                  <div class="meta">[=] Yahoo Entertainment &middot; 2026-05-27T13:35:16Z</div>
-                </li></ul>
-        </details>
-        
-
-        <details class="news-card">
-          <summary>JNJ <span class="ts">updated 26 Jun 2026</span></summary>
-          <ul><li>
-                  <a href="https://finance.yahoo.com/markets/stocks/articles/jim-cramer-explains-johnson-johnson-190809661.html" target="_blank" rel="noopener">Jim Cramer Explains Johnson &amp; Johnson’s (JNJ) Shares Have Gained</a>
-                  <div class="meta">[+] Yahoo Entertainment &middot; 2026-06-14T19:08:09Z</div>
-                </li><li>
-                  <a href="https://finance.yahoo.com/markets/stocks/articles/johnson-johnson-jnj-good-stock-203027577.html" target="_blank" rel="noopener">Is Johnson &amp; Johnson (JNJ) A Good Stock To Buy Now?</a>
-                  <div class="meta">[+] Yahoo Entertainment &middot; 2026-06-11T20:30:27Z</div>
-                </li><li>
-                  <a href="https://247wallst.com/investing/2026/05/25/two-paths-to-growth-johnson-johnson-vs-abbvie/" target="_blank" rel="noopener">Two Paths to Growth: Johnson &amp; Johnson vs AbbVie</a>
-                  <div class="meta">[+] 24/7 Wall St. &middot; 2026-05-25T11:47:39Z</div>
-                </li><li>
-                  <a href="https://www.thestreet.com/investing/stocks/jnj-ceo-obesity-drug-message" target="_blank" rel="noopener">J&amp;J CEO sends a clear message on the obesity drug boom</a>
-                  <div class="meta">[=] TheStreet &middot; 2026-06-24T18:47:00Z</div>
-                </li><li>
-                  <a href="https://www.marketbeat.com/originals/3-dividend-kings-that-earn-their-crown-every-quarter/?utm_source=yahoofinance&amp;amp;utm_medium=yahoofinance" target="_blank" rel="noopener">3 Dividend Kings That Earn Their Crown Every Quarter</a>
-                  <div class="meta">[+] MarketBeat &middot; 2026-05-31T13:25:00Z</div>
-                </li></ul>
-        </details>
-        
-
-        <details class="news-card">
-          <summary>MRVL <span class="ts">updated 13 Jun 2026</span></summary>
-          <ul><li>
-                  <a href="https://www.investopedia.com/broadcom-stock-sinks-despite-solid-earnings-leading-chip-stocks-lower-avgo-11990737" target="_blank" rel="noopener">Broadcom&#x27;s Stock Sinks Despite Solid Earnings. Other Chip Stocks Are Sliding Too.</a>
-                  <div class="meta">[=] Investopedia &middot; 2026-06-04T14:57:38Z</div>
-                </li><li>
-                  <a href="https://www.barchart.com/story/news/2313386/avgo-stock-alert-why-broadcom-is-leading-chip-stocks-lower-today" target="_blank" rel="noopener">AVGO Stock Alert: Why Broadcom Is Leading Chip Stocks Lower Today</a>
-                  <div class="meta">[-] Barchart.com &middot; 2026-06-04T20:55:33Z</div>
-                </li><li>
-                  <a href="https://www.barchart.com/story/news/2285186/a-1-trillion-reason-to-buy-marvell-stock-now" target="_blank" rel="noopener">A $1 Trillion Reason to Buy Marvell Stock Now</a>
-                  <div class="meta">[+] Barchart.com &middot; 2026-06-03T15:24:34Z</div>
-                </li><li>
-                  <a href="https://finance.yahoo.com/markets/stocks/articles/oppenheimer-raises-price-target-marvell-202121842.html" target="_blank" rel="noopener">Oppenheimer Raises its Price Target on Marvell (MRVL)</a>
-                  <div class="meta">[=] Yahoo Entertainment &middot; 2026-05-25T20:21:21Z</div>
-                </li><li>
-                  <a href="https://247wallst.com/investing/2026/06/09/up-nearly-200-year-to-date-1-blinking-red-light-that-makes-marvell-technology-stock-a-hold-at-289/" target="_blank" rel="noopener">Up Nearly 200% Year-to-Date: 1 Blinking Red Light That Makes Marvell Technology Stock a Hold at $289</a>
-                  <div class="meta">[+] 24/7 Wall St. &middot; 2026-06-09T19:50:17Z</div>
-                </li></ul>
-        </details>
-        
-
-        <details class="news-card">
-          <summary>MSFT <span class="ts">updated 25 Jun 2026</span></summary>
-          <ul><li>
-                  <a href="https://www.r-bloggers.com/2026/06/atlassian-team-cloud-migration-needs-margin-leverage-equity-research/" target="_blank" rel="noopener">Atlassian (TEAM): Cloud Migration Needs Margin Leverage — Equity Research</a>
-                  <div class="meta">[+] R-bloggers.com &middot; 2026-06-14T21:31:59Z</div>
-                </li><li>
-                  <a href="https://www.chevron.com/newsroom/2026/q2/chevron-signs-20-year-power-agreement-with-microsoft-for-west-texas-data-center" target="_blank" rel="noopener">Chevron signs 20-year power agreement with Microsoft for West Texas data center</a>
-                  <div class="meta">[=] Chevron.com &middot; 2026-06-22T13:43:38Z</div>
-                </li><li>
-                  <a href="https://finance.yahoo.com/markets/stocks/articles/microsoft-msft-faces-shareholder-lawsuit-141221930.html" target="_blank" rel="noopener">Microsoft (MSFT) Faces Shareholder Lawsuit; TD Cowen Maintains Buy Rating</a>
-                  <div class="meta">[-] Yahoo Entertainment &middot; 2026-06-22T14:12:21Z</div>
-                </li><li>
-                  <a href="https://finance.yahoo.com/markets/stocks/articles/unrealized-potential-microsoft-msft-role-145532014.html" target="_blank" rel="noopener">Unrealized Potential of Microsoft’s (MSFT) Role in Advancing Agentic AI</a>
-                  <div class="meta">[=] Yahoo Entertainment &middot; 2026-06-09T14:55:32Z</div>
-                </li><li>
-                  <a href="https://www.marketbeat.com/originals/3-energy-stocks-built-for-the-ai-power-boomand-beyond/?utm_source=yahoofinance&amp;amp;utm_medium=yahoofinance" target="_blank" rel="noopener">3 Energy Stocks Built for the AI Power Boom—And Beyond</a>
-                  <div class="meta">[+] MarketBeat &middot; 2026-06-08T15:10:00Z</div>
-                </li></ul>
-        </details>
-        
-
-        <details class="news-card">
-          <summary>SCHW <span class="ts">updated 25 Jun 2026</span></summary>
-          <ul><li>
-                  <a href="https://www.barchart.com/story/news/2231174/how-is-charles-schwabs-stock-performance-compared-to-other-financial-stocks" target="_blank" rel="noopener">How Is Charles Schwab’s Stock Performance Compared to Other Financial Stocks?</a>
-                  <div class="meta">[+] Barchart.com &middot; 2026-06-01T11:10:42Z</div>
-                </li><li>
-                  <a href="https://finance.yahoo.com/markets/stocks/articles/charles-schwab-corporation-schw-phase-164132711.html" target="_blank" rel="noopener">The Charles Schwab Corporation (SCHW) in a Phase of Robust Growth as a Long Term Stock to Buy</a>
-                  <div class="meta">[+] Yahoo Entertainment &middot; 2026-05-30T16:41:32Z</div>
-                </li><li>
-                  <a href="https://finance.yahoo.com/economy/policy/articles/charles-schwab-schw-foundation-launches-195501921.html" target="_blank" rel="noopener">Charles Schwab (SCHW) Foundation Launches Financial Literacy Grant Program</a>
-                  <div class="meta">[=] Yahoo Entertainment &middot; 2026-06-11T19:55:01Z</div>
-                </li><li>
-                  <a href="https://finance.yahoo.com/markets/stocks/articles/charles-schwab-corporation-schw-deep-010049608.html" target="_blank" rel="noopener">The Charles Schwab Corporation (SCHW): A Deep Value Stock to Invest in Now amid Cryptocurrency Focus</a>
-                  <div class="meta">[=] Yahoo Entertainment &middot; 2026-06-11T01:00:49Z</div>
-                </li><li>
-                  <a href="https://www.marketwatch.com/story/this-mutual-fund-lets-you-buy-spacex-stock-before-the-ipo-but-what-are-you-actually-getting-907b96d1" target="_blank" rel="noopener">This mutual fund lets you buy SpaceX stock before the IPO — but what are you actually getting?</a>
-                  <div class="meta">[=] MarketWatch &middot; 2026-05-28T12:09:00Z</div>
-                </li></ul>
-        </details>
-        
-
-        <details class="news-card">
-          <summary>SMCI <span class="ts">updated 13 Jun 2026</span></summary>
-          <ul><li>
-                  <a href="https://www.barchart.com/story/news/1912583/dell-stock-has-nearly-doubled-in-2026-ubs-analysts-say-it-likely-wont-go-any-further" target="_blank" rel="noopener">Dell Stock Has Nearly Doubled in 2026. UBS Analysts Say It Likely Won’t Go Any Further.</a>
-                  <div class="meta">[=] Barchart.com &middot; 2026-05-13T19:10:31Z</div>
-                </li><li>
-                  <a href="https://finance.yahoo.com/sectors/technology/articles/why-super-micro-computer-inc-181431891.html" target="_blank" rel="noopener">This is Why Super Micro Computer Inc. (SMCI) is A Top Tech Stock in Louis Navellier’s Portfolio</a>
-                  <div class="meta">[+] Yahoo Entertainment &middot; 2026-05-12T18:14:31Z</div>
-                </li><li>
-                  <a href="https://247wallst.com/investing/2026/06/08/dell-soars-54-hp-enterprise-rockets-59-in-a-month-as-ai-server-demand-booms/" target="_blank" rel="noopener">Dell Soars 54%, HP Enterprise Rockets 59% in a Month as AI-Server Demand Booms</a>
-                  <div class="meta">[+] 24/7 Wall St. &middot; 2026-06-08T19:26:00Z</div>
-                </li><li>
-                  <a href="https://www.marketbeat.com/originals/does-nano-nuclear-energys-new-deal-amp-the-outlook/?utm_source=yahoofinance&amp;amp;utm_medium=yahoofinance" target="_blank" rel="noopener">Does Nano Nuclear Energy’s New Deal Amp the Outlook?</a>
-                  <div class="meta">[=] MarketBeat &middot; 2026-05-19T12:50:00Z</div>
-                </li><li>
-                  <a href="https://www.barchart.com/story/news/1984153/nokia-shares-jumped-after-ciscos-strong-quarterly-results-nok-could-be-the-next-networking-winner" target="_blank" rel="noopener">Nokia Shares Jumped After Cisco’s Strong Quarterly Results. NOK Could Be the Next Networking Winner.</a>
-                  <div class="meta">[+] Barchart.com &middot; 2026-05-17T15:00:02Z</div>
-                </li></ul>
-        </details>
-        
-
-        <details class="news-card">
-          <summary>TSLA <span class="ts">updated 29 May 2026</span></summary>
-          <ul><li>
-                  <a href="https://www.businessinsider.com/cpi-inflation-april-consumer-price-index-2026-5" target="_blank" rel="noopener">Inflation surged in April to the highest rate since 2023</a>
-                  <div class="meta">Business Insider &middot; 2026-05-12T12:32:28Z</div>
-                </li><li>
-                  <a href="https://finance.yahoo.com/economy/policy/articles/india-central-bank-not-favour-042305780.html" target="_blank" rel="noopener">India central bank not in favour of rate hikes to defend rupee, prioritises inflation, sources say</a>
-                  <div class="meta">Yahoo Entertainment &middot; 2026-05-22T04:23:05Z</div>
-                </li><li>
-                  <a href="https://www.theverge.com/tech/930376/amd-fsr-4-expansion" target="_blank" rel="noopener">AMD’s FSR 4.1 upscaling tech is coming to older graphics cards</a>
-                  <div class="meta">The Verge &middot; 2026-05-14T14:06:48Z</div>
-                </li><li>
-                  <a href="https://finance.yahoo.com/economy/policy/articles/bojs-himino-says-mideast-developments-021642078.html" target="_blank" rel="noopener">BOJ&#x27;s Himino says Mideast developments will factor into rate decision</a>
-                  <div class="meta">Yahoo Entertainment &middot; 2026-05-26T03:51:13Z</div>
-                </li><li>
-                  <a href="https://www.theverge.com/tech/930132/amd-ryzen-pro-9000-series-3d-v-cache" target="_blank" rel="noopener">AMD’s best CPU tech for gamers is coming to workstations too</a>
-                  <div class="meta">The Verge &middot; 2026-05-13T20:38:16Z</div>
-                </li></ul>
-        </details>
-        
-
-        <details class="news-card">
-          <summary>UPS <span class="ts">updated 26 Jun 2026</span></summary>
-          <ul><li>
-                  <a href="https://www.bbc.com/news/articles/c3w3y6qp18jo" target="_blank" rel="noopener">What can this pothole tell us about the state of UK roads?</a>
-                  <div class="meta">[=] BBC News &middot; 2026-06-10T11:56:15Z</div>
-                </li><li>
-                  <a href="https://www.theverge.com/tech/950146/microsoft-surface-laptop-8-surface-pro-12-snapdragon-x2-specs-price" target="_blank" rel="noopener">The Microsoft Surface Laptop 8 and Surface Pro 12 now come with Snapdragon X2 chips</a>
-                  <div class="meta">[+] The Verge &middot; 2026-06-16T02:31:34Z</div>
-                </li><li>
-                  <a href="https://www.bbc.com/sport/tennis/articles/c1kymddkkj7o" target="_blank" rel="noopener">&#x27;The new Emma&#x27; - positives Raducanu can take from Queen&#x27;s to Wimbledon</a>
-                  <div class="meta">[=] BBC News &middot; 2026-06-14T18:53:08Z</div>
-                </li><li>
-                  <a href="https://www.theverge.com/podcast/944138/microsoft-ai-ceo-mustafa-suleyman-superintelligence-agi-openai-automation" target="_blank" rel="noopener">Microsoft’s AI chief says superintelligence is near, but won’t take your job</a>
-                  <div class="meta">[+] The Verge &middot; 2026-06-08T13:17:24Z</div>
-                </li><li>
-                  <a href="https://www.businessinsider.com/cortisol-levels-health-wellness-influencer-longevity-bryan-johnson-2026-5" target="_blank" rel="noopener">Wellness influencers love creating problems they can profit from</a>
-                  <div class="meta">[+] Business Insider &middot; 2026-05-28T11:49:18Z</div>
-                </li></ul>
-        </details>
-        
-
-        <details class="news-card">
-          <summary>WFC <span class="ts">updated 26 Jun 2026</span></summary>
-          <ul><li>
-                  <a href="https://www.barchart.com/story/news/2213400/is-wells-fargo-stock-underperforming-the-dow" target="_blank" rel="noopener">Is Wells Fargo Stock Underperforming the Dow?</a>
-                  <div class="meta">[-] Barchart.com &middot; 2026-05-30T08:00:53Z</div>
-                </li><li>
-                  <a href="https://www.barchart.com/story/news/2611941/dear-asml-stock-fans-mark-your-calendars-for-july-15" target="_blank" rel="noopener">Dear ASML Stock Fans, Mark Your Calendars for July 15</a>
-                  <div class="meta">[+] Barchart.com &middot; 2026-06-23T19:56:53Z</div>
-                </li><li>
-                  <a href="https://www.barchart.com/story/news/2146190/is-wall-street-bullish-or-bearish-on-united-rentals-stock" target="_blank" rel="noopener">Is Wall Street Bullish or Bearish on United Rentals Stock?</a>
-                  <div class="meta">[+] Barchart.com &middot; 2026-05-27T09:56:41Z</div>
-                </li><li>
-                  <a href="https://beincrypto.com/why-is-the-us-stock-market-down-today/" target="_blank" rel="noopener">Why Is the US Stock Market Down Today?</a>
-                  <div class="meta">[-] BeInCrypto &middot; 2026-05-27T18:06:50Z</div>
-                </li><li>
-                  <a href="https://www.barchart.com/story/news/2454766/why-wells-fargo-is-warning-that-surging-ai-token-costs-is-a-death-knell-for-hyperscaler-stocks-like-meta-and-microsoft" target="_blank" rel="noopener">Why Wells Fargo Is Warning That Surging AI Token Costs Is a Death Knell for Hyperscaler Stocks Like Meta and Microsoft</a>
-                  <div class="meta">[+] Barchart.com &middot; 2026-06-13T13:00:03Z</div>
-                </li></ul>
-        </details>
-        
+    <h2>News Bulletin</h2>
+    <div class="news-toolbar"><a class="open-full" href="news-bulletin.html" target="_blank" rel="noopener">Open full bulletin in new tab &#8599;</a></div><iframe src="news-bulletin.html" title="News Bulletin"></iframe>
   </section>
 </main>
 <footer>Optionx Hub &middot; static, offline-capable &middot; regenerate after each pipeline run</footer>
