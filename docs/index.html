@@ -59,7 +59,7 @@
   .news-toolbar { margin-bottom:8px; font-family: Arial, sans-serif; }
   .open-full { font-size:0.82rem; color:var(--ft-blue); text-decoration:none; font-weight:600; }
   .open-full:hover { text-decoration:underline; }
-  #news iframe { width:100%; height:calc(100vh - 220px); min-height:600px; border:1px solid var(--ft-border); background:#fff; }
+  #news iframe, #oil iframe { width:100%; height:calc(100vh - 220px); min-height:600px; border:1px solid var(--ft-border); background:#fff; }
   .empty { color:var(--ft-mid); font-style:italic; font-family: Arial, sans-serif; }
   footer { background:var(--ft-navy); color:#888; font-family: Arial, sans-serif; font-size:11px; text-align:center; padding:16px 40px; margin-top:20px; border-top:3px solid var(--ft-red); }
   @media (max-width: 700px) { .masthead-inner, main { padding-left:20px; padding-right:20px; } nav.section-nav { padding-left:20px; padding-right:20px; } }
@@ -78,7 +78,16 @@
           <span class="fresh-dot fresh-green"></span>
           <div>
             <div class="fresh-label">Page generated</div>
-            <div class="fresh-ts">15 Jul 2026, 18:41 &middot; <strong>just now</strong></div>
+            <div class="fresh-ts">15 Jul 2026, 20:30 &middot; <strong>just now</strong></div>
+          </div>
+        </div>
+        
+
+        <div class="fresh-item">
+          <span class="fresh-dot fresh-green"></span>
+          <div>
+            <div class="fresh-label">Oil brief</div>
+            <div class="fresh-ts">15 Jul 2026, 13:46 &middot; <strong>7h ago</strong></div>
           </div>
         </div>
         
@@ -89,6 +98,7 @@
   <div class="nav-inner">
     <button class="active" data-target="overview">Business Overview</button>
     <button data-target="news">News Bulletin</button>
+    <button data-target="oil">Oil Brief</button>
   </div>
 </nav>
 <main>
@@ -106,6 +116,10 @@
   <section id="news">
     <h2>News Bulletin</h2>
     <div class="news-toolbar"><a class="open-full" href="news-bulletin.html" target="_blank" rel="noopener">Open full bulletin in new tab &#8599;</a></div><iframe src="news-bulletin.html" title="News Bulletin"></iframe>
+  </section>
+  <section id="oil">
+    <h2>Oil Brief</h2>
+    <div class="news-toolbar"><a class="open-full" href="oil-brief.html" target="_blank" rel="noopener">Open full oil brief in new tab &#8599;</a></div><iframe src="oil-brief.html" title="Oil Brief"></iframe>
   </section>
 </main>
 <footer>Optionx Hub &middot; static, offline-capable &middot; regenerate after each pipeline run</footer>
