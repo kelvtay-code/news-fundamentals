@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Bull Screener — Bullish Ticker Funnel — Thursday, 16 July 2026</title>
+<style>
+:root {
+  --ft-salmon:   #FFF1E0;
+  --ft-red:      #990F3D;
+  --ft-blue:     #0F5499;
+  --ft-navy:     #262A33;
+  --ft-warm-blk: #33302E;
+  --ft-border:   #CCB799;
+  --ft-mid:      #8D775F;
+  --ft-muted:    #66605A;
+  --ft-card-bg:  #FFFAF4;
+  --ft-card-bdr: #D4A96A;
+  --good:        #2F6D3F;
+  --good-soft:   #E3EEDF;
+  --warn:        #B15C1E;
+  --warn-soft:   #F7E3CE;
+  --warn-row-bg: #FBEAD8;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: Georgia, 'Times New Roman', serif;
+  background: var(--ft-salmon);
+  color: var(--ft-warm-blk);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* MASTHEAD */
+.masthead { background: var(--ft-navy); color: #fff; padding: 0 40px; border-bottom: 4px solid var(--ft-red); }
+.masthead-inner { max-width: 1600px; margin: 0 auto; padding: 20px 0 14px; }
+.masthead-eyebrow { font-family: Arial, sans-serif; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: #AAAAAA; margin-bottom: 6px; }
+.masthead-title { font-size: 2.4rem; font-weight: 700; letter-spacing: -0.01em; }
+.masthead-title span { color: #F0A500; }
+.masthead-date { font-family: Arial, sans-serif; font-size: 12px; color: #AAAAAA; margin-top: 6px; }
+.masthead-tagline { font-style: italic; font-size: 13px; color: #CCCCCC; border-top: 1px solid #44495A; padding-top: 8px; margin-top: 8px; }
+
+/* STATS */
+.stats-banner { background: var(--ft-red); padding: 8px 40px; }
+.stats-inner { max-width: 1600px; margin: 0 auto; display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
+.stat-item { font-family: Arial, sans-serif; font-size: 12px; color: #fff; display: flex; align-items: center; gap: 6px; }
+.stat-item strong { font-weight: 700; }
+.stat-sep { color: rgba(255,255,255,0.4); }
+
+/* SEARCH BAR */
+.search-bar { background: #F5E6D0; border-bottom: 1px solid var(--ft-border); padding: 10px 40px; }
+.search-inner { max-width: 1600px; margin: 0 auto; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.search-wrap { position: relative; flex: 1; max-width: 420px; }
+.search-input, .filter-select {
+  width: 100%; padding: 8px 36px 8px 14px;
+  font-family: Arial, sans-serif; font-size: 13px; color: var(--ft-warm-blk);
+  border: 1px solid var(--ft-border); background: #fff;
+  outline: none; border-radius: 2px;
+}
+.filter-select { width: auto; padding: 8px 12px; }
+.search-input:focus, .filter-select:focus { border-color: var(--ft-red); box-shadow: 0 0 0 2px rgba(153,15,61,0.15); }
+.search-hint { font-family: Arial, sans-serif; font-size: 11px; color: var(--ft-muted); }
+.search-count { font-family: Arial, sans-serif; font-size: 11px; color: var(--ft-red); font-weight: 700; margin-left: auto; }
+
+.content { max-width: 1600px; margin: 0 auto; padding: 24px 40px 40px; }
+
+/* TABLE CARD (styled as a sector-block) */
+.table-card { border: 1px solid var(--ft-border); background: var(--ft-salmon); }
+.table-hdr { background: var(--ft-navy); color: #fff; padding: 10px 20px; display: flex; align-items: center; gap: 16px; }
+.table-hdr-name { font-family: Arial, sans-serif; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; }
+.table-hdr-count { margin-left: auto; font-family: Arial, sans-serif; font-size: 10px; color: #888; }
+
+.table-scroll { overflow-x: auto; padding: 14px; }
+table { width: 100%; border-collapse: collapse; background: var(--ft-card-bg); }
+thead th {
+  text-align: left;
+  font-family: Arial, sans-serif;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #fff;
+  background: var(--ft-navy);
+  padding: 9px 10px;
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+  border-right: 1px solid #3d4250;
+}
+thead th:hover { background: #33384a; }
+thead th.sorted-asc::after { content: " \25B2"; font-size: 9px; color: #F0A500; }
+thead th.sorted-desc::after { content: " \25BC"; font-size: 9px; color: #F0A500; }
+tbody td {
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--ft-border);
+  border-right: 1px solid #EEDFC8;
+  vertical-align: middle;
+  white-space: nowrap;
+  font-size: 12.5px;
+}
+tbody tr:nth-child(even) { background: #FFF6EA; }
+tbody tr:hover { background: #FBEAD0; }
+tbody tr.warn-row { background: var(--warn-row-bg); }
+tbody tr.warn-row:nth-child(even) { background: #F6E1CC; }
+tbody tr.warn-row:hover { background: #F2D6BC; }
+
+td.rank { color: var(--ft-mid); font-family: Arial, sans-serif; font-size: 11px; width: 22px; }
+td.ticker { font-family: Arial, sans-serif; font-weight: 700; color: var(--ft-red); letter-spacing: 0.01em; }
+td.num { text-align: right; font-variant-numeric: tabular-nums; font-family: "Cascadia Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace; font-size: 12px; }
+th.num { text-align: right; }
+td.newscell { white-space: normal; max-width: 320px; font-size: 12px; color: var(--ft-muted); font-family: Arial, sans-serif; }
+
+.chip {
+  display: inline-block;
+  font-family: Arial, sans-serif;
+  font-size: 10.5px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 2px;
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+}
+.chip-bull { background: var(--good-soft); color: var(--good); }
+.chip-gex { background: var(--good-soft); color: var(--good); }
+.chip-warn { background: var(--warn-soft); color: var(--warn); }
+.chip-none { color: var(--ft-mid); font-family: Arial, sans-serif; font-size: 11px; }
+
+footer { background: var(--ft-navy); color: #888; font-family: Arial, sans-serif; font-size: 11px; text-align: center; padding: 16px 40px; margin-top: 20px; border-top: 3px solid var(--ft-red); }
+
+@media (max-width: 900px) { .content { padding: 16px 20px 30px; } .masthead, .stats-banner, .search-bar { padding-left: 20px; padding-right: 20px; } }
+</style>
+</head>
+<body>
+<div class="masthead">
+  <div class="masthead-inner">
+    <div class="masthead-eyebrow">Optionx Intelligence — Experimental Funnel</div>
+    <div class="masthead-title">Bull <span>Screener</span> — Bullish Ticker Funnel</div>
+    <div class="masthead-date">Data: stock_analysis_160726.0835.csv &nbsp;&middot;&nbsp; IV_160726_0846.csv &nbsp;&middot;&nbsp; business_overview_160726_0835.csv</div>
+    <div class="masthead-tagline">"Sequential funnel — a ticker that fails a gate is dropped, not carried forward."</div>
+  </div>
+</div>
+<div class="stats-banner"><div class="stats-inner">
+  <div class="stat-item">Step 1 Wyckoff Uptrend/Spring <strong>50</strong></div><span class="stat-sep">&rarr;</span>
+  <div class="stat-item">Step 2 top7 bull-confirm <strong>26</strong></div><span class="stat-sep">&rarr;</span>
+  <div class="stat-item">Step 3 ivchk IV/trend gate <strong>17</strong></div><span class="stat-sep">&rarr;</span>
+  <div class="stat-item">Step 4 Positive-GEX final <strong>17</strong></div>
+  <span class="stat-sep">|</span>
+  <div class="stat-item">Final List <strong>17</strong> tickers</div>
+  <div class="stat-item">Divergence-flagged <strong>6</strong>/17</div>
+</div></div>
+<div class="search-bar">
+  <div class="search-inner">
+    <div class="search-wrap">
+      <input class="search-input" id="tickerSearch" type="text" placeholder="Search ticker or sector..." oninput="applyFilters()" autocomplete="off" spellcheck="false">
+    </div>
+    <select class="filter-select" id="sectorFilter" onchange="applyFilters()"><option value="">All Sectors</option></select>
+    <select class="filter-select" id="divFilter" onchange="applyFilters()">
+      <option value="">All Divergence</option>
+      <option value="flag">Flagged only</option>
+      <option value="none">No flag</option>
+    </select>
+    <span class="search-hint">Sorted by Sector (A&rarr;Z), then Price descending</span>
+    <span class="search-count" id="searchCount"></span>
+  </div>
+</div>
+
+<div class="content">
+  <div class="table-card">
+    <div class="table-hdr">
+      <span class="table-hdr-name">Final List — Positive-GEX Bullish Survivors</span>
+      <span class="table-hdr-count">17 tickers</span>
+    </div>
+    <div class="table-scroll">
+      <table id="mainTable">
+        <thead>
+          <tr>
+            <th>#</th><th onclick="sortTable(1)">Ticker</th><th onclick="sortTable(2)">Sector</th><th class="num" onclick="sortTable(3)">Price</th><th onclick="sortTable(4)">7-Day Verdict</th><th onclick="sortTable(5)">Recency &Delta;</th><th class="num" onclick="sortTable(6)">IV Rank</th><th onclick="sortTable(7)">Trend Flag</th><th onclick="sortTable(8)">Divergence Flag</th><th onclick="sortTable(9)">GEX Rating</th><th class="num" onclick="sortTable(10)">Call Wall</th><th class="num" onclick="sortTable(11)">Put Wall</th><th class="num" onclick="sortTable(12)">PEG Ratio</th><th onclick="sortTable(13)">Earnings Date</th><th onclick="sortTable(14)">News</th>
+          </tr>
+        </thead>
+        <tbody id="mainBody">
+<tr data-sector="Consumer Discretionary"><td class="rank">1</td><td class="ticker">HD</td><td>Consumer Discretionary</td><td class="num">$339.95</td><td><span class="chip chip-bull">BULL SETUP</span></td><td>Reinforced</td><td class="num">56</td><td>Greenshoots</td><td><span class="chip-none">&mdash;</span></td><td><span class="chip chip-gex">+4 Very Long</span></td><td class="num">$345</td><td class="num">$315</td><td class="num">1.94</td><td>18/08/2026</td><td class="newscell">Wolfe downgrade + housing slowdown; -3.4% (Jul 8)</td></tr>
+<tr data-sector="Consumer Discretionary" class="warn-row"><td class="rank">2</td><td class="ticker">CMG</td><td>Consumer Discretionary</td><td class="num">$34.63</td><td><span class="chip chip-bull">BULL SETUP</span></td><td>Reinforced</td><td class="num">78</td><td>Greenshoots</td><td><span class="chip chip-warn">IV Expansion / Price Drop</span></td><td><span class="chip chip-gex">+4 Very Long</span></td><td class="num">$37</td><td class="num">$35</td><td class="num">1.90</td><td>29/07/2026</td><td class="newscell">Weak same-store comps, leadership uncertainty into Jul 29 earnings</td></tr>
+<tr data-sector="Consumer Staples"><td class="rank">3</td><td class="ticker">PG</td><td>Consumer Staples</td><td class="num">$147.89</td><td><span class="chip chip-bull">BULL SETUP</span></td><td>Reinforced</td><td class="num">78</td><td>First Test</td><td><span class="chip-none">&mdash;</span></td><td><span class="chip chip-gex">+4 Very Long</span></td><td class="num">$150</td><td class="num">$140</td><td class="num">4.13</td><td>29/07/2026</td><td class="newscell">$1B cost warning, Zacks Sell rank, EPS seen -4%</td></tr>
+<tr data-sector="Consumer Staples"><td class="rank">4</td><td class="ticker">CL</td><td>Consumer Staples</td><td class="num">$91.47</td><td><span class="chip chip-bull">BULL SETUP</span></td><td>Reinforced</td><td class="num">63</td><td>Second Test</td><td><span class="chip-none">&mdash;</span></td><td><span class="chip chip-gex">+4 Very Long</span></td><td class="num">$93</td><td class="num">$93</td><td class="num">1.65</td><td>31/07/2026</td><td class="newscell">Q1 EPS -6% on weak organic growth, NA sales declined</td></tr>
+<tr data-sector="Consumer Staples"><td class="rank">5</td><td class="ticker">KO</td><td>Consumer Staples</td><td class="num">$82.50</td><td><span class="chip chip-bull">BULL SETUP</span></td><td>Reinforced</td><td class="num">73</td><td>BULLISH</td><td><span class="chip-none">&mdash;</span></td><td><span class="chip chip-gex">+4 Very Long</span></td><td class="num">$82</td><td class="num">$84 &#9888;</td><td class="num">4.28</td><td>28/07/2026</td><td class="newscell">Minor valuation dip only (-1.3%, Jul 14) - near clean</td></tr>
+<tr data-sector="Financials"><td class="rank">6</td><td class="ticker">SOFI</td><td>Financials</td><td class="num">$17.95</td><td><span class="chip chip-bull">BULL SETUP</span></td><td>Reinforced</td><td class="num">54</td><td>Greenshoots</td><td><span class="chip-none">&mdash;</span></td><td><span class="chip chip-gex">+4 Very Long</span></td><td class="num">$20</td><td class="num">$17</td><td class="num">0.85</td><td>29/07/2026</td><td class="newscell">Regulatory scrutiny + negative FCF; -3.7% to -4.6% (Jul 13-15)</td></tr>
+<tr data-sector="Healthcare"><td class="rank">7</td><td class="ticker">UNH</td><td>Healthcare</td><td class="num">$415.90</td><td><span class="chip chip-bull">BULL SETUP</span></td><td>Reinforced</td><td class="num">42</td><td>Second Test</td><td><span class="chip-none">&mdash;</span></td><td><span class="chip chip-gex">+4 Very Long</span></td><td class="num">$435</td><td class="num">$410</td><td class="num">1.47</td><td>16/07/2026</td><td class="newscell">Active DOJ Medicare Advantage billing probe + MA Medicaid fraud suit</td></tr>
+<tr data-sector="Healthcare" class="warn-row"><td class="rank">8</td><td class="ticker">AMGN</td><td>Healthcare</td><td class="num">$358.32</td><td><span class="chip chip-bull">BULL SETUP</span></td><td>Reinforced</td><td class="num">80</td><td>BULLISH</td><td><span class="chip chip-warn">IV Expansion / Price Drop</span></td><td><span class="chip chip-gex">+4 Very Long</span></td><td class="num">$360</td><td class="num">$365 &#9888;</td><td class="num">1.99</td><td>04/08/2026</td><td class="newscell">FDA/EMA Tavneos withdrawal hearing Jul 29; Corlanor recall (Jun 30, stale)</td></tr>
+<tr data-sector="Healthcare" class="warn-row"><td class="rank">9</td><td class="ticker">ABBV</td><td>Healthcare</td><td class="num">$244.60</td><td><span class="chip chip-bull">BULL SETUP</span></td><td>Reinforced</td><td class="num">77</td><td>BULLISH</td><td><span class="chip chip-warn">IV Expansion / Price Drop</span></td><td><span class="chip chip-gex">+4 Very Long</span></td><td class="num">$245</td><td class="num">$247.50 &#9888;</td><td class="num">0.40</td><td>31/07/2026</td><td class="newscell">House Select Committee China trial-practices inquiry, response due Jul 17</td></tr>
+<tr data-sector="Healthcare"><td class="rank">10</td><td class="ticker">GILD</td><td>Healthcare</td><td class="num">$131.70</td><td><span class="chip chip-bull">BULL SETUP</span></td><td>Reinforced</td><td class="num">58</td><td>BULLISH</td><td><span class="chip-none">&mdash;</span></td><td><span class="chip chip-gex">+4 Very Long</span></td><td class="num">$134</td><td class="num">$134</td><td class="num">2.14</td><td>06/08/2026</td><td class="newscell">Phase 3 oncology trial failed primary endpoint; -3.7% (Jul 10)</td></tr>
+<tr data-sector="Healthcare"><td class="rank">11</td><td class="ticker">MRK</td><td>Healthcare</td><td class="num">$123.85</td><td><span class="chip chip-bull">BULL SETUP</span></td><td>Reinforced</td><td class="num">73</td><td>BULLISH</td><td><span class="chip-none">&mdash;</span></td><td><span class="chip chip-gex">+4 Very Long</span></td><td class="num">$126</td><td class="num">$119</td><td class="num">6.10</td><td>04/08/2026</td><td class="newscell">Alzheimer&#x27;s candidate MK-1167 terminated (Jul 1, stale) - otherwise positive</td></tr>
+<tr data-sector="Industrials"><td class="rank">12</td><td class="ticker">GD</td><td>Industrials</td><td class="num">$365.63</td><td><span class="chip chip-bull">BULL SETUP</span></td><td>Reinforced</td><td class="num">62</td><td>BULLISH</td><td><span class="chip-none">&mdash;</span></td><td><span class="chip chip-gex">+4 Very Long</span></td><td class="num">$345</td><td class="num">$350 &#9888;</td><td class="num">2.79</td><td>29/07/2026</td><td class="newscell">Mild defense-sector selloff + $3.54B ESOP dilution risk - largely clean</td></tr>
+<tr data-sector="Technology"><td class="rank">13</td><td class="ticker">AMAT</td><td>Technology</td><td class="num">$581.44</td><td><span class="chip chip-bull">BULL SETUP</span></td><td>Reinforced</td><td class="num">98</td><td>Second Test</td><td><span class="chip-none">&mdash;</span></td><td><span class="chip chip-gex">+4 Very Long</span></td><td class="num">$700</td><td class="num">$550</td><td class="num">1.52</td><td>13/08/2026</td><td class="newscell">China export-curb headwind ($600-710M); -6.5% to -9.5% (Jul 2-13)</td></tr>
+<tr data-sector="Technology" class="warn-row"><td class="rank">14</td><td class="ticker">Dell</td><td>Technology</td><td class="num">$408.33</td><td><span class="chip chip-bull">BULL SETUP</span></td><td>Reinforced</td><td class="num">95</td><td>Second Test</td><td><span class="chip chip-warn">IV Expansion / Price Drop</span></td><td><span class="chip chip-gex">+4 Very Long</span></td><td class="num">$450</td><td class="num">$390</td><td class="num">0.71</td><td>27/08/2026</td><td class="newscell">AI-hardware selloff, UBS downgrade; -14% (Jul 15)</td></tr>
+<tr data-sector="Technology" class="warn-row"><td class="rank">15</td><td class="ticker">CSCO</td><td>Technology</td><td class="num">$112.18</td><td><span class="chip chip-bull">BULL SETUP</span></td><td>Reinforced</td><td class="num">100</td><td>First Test</td><td><span class="chip chip-warn">IV Expansion / Price Drop</span></td><td><span class="chip chip-gex">+4 Very Long</span></td><td class="num">$118</td><td class="num">$106</td><td class="num">1.68</td><td>12/08/2026</td><td class="newscell">Downgrades on AI-networking slowdown fears; -4.5% (Jul 15)</td></tr>
+<tr data-sector="Technology" class="warn-row"><td class="rank">16</td><td class="ticker">NOW</td><td>Technology</td><td class="num">$104.90</td><td><span class="chip chip-bull">BULL SETUP</span></td><td>Reinforced</td><td class="num">100</td><td>Greenshoots</td><td><span class="chip chip-warn">IV Expansion / Price Drop</span></td><td><span class="chip chip-gex">+4 Very Long</span></td><td class="num">$120</td><td class="num">$92</td><td class="num">1.05</td><td>22/07/2026</td><td class="newscell">IBM weak Q2 read-through + COO departure; -8% (Jul 14)</td></tr>
+<tr data-sector="Technology"><td class="rank">17</td><td class="ticker">HPE</td><td>Technology</td><td class="num">$47.17</td><td><span class="chip chip-bull">BULL SETUP</span></td><td>Reinforced</td><td class="num">49</td><td>BULLISH</td><td><span class="chip-none">&mdash;</span></td><td><span class="chip chip-gex">+4 Very Long</span></td><td class="num">$50</td><td class="num">$46</td><td class="num">0.85</td><td>02/09/2026</td><td class="newscell">Overvaluation call + insider selling; -6.2% (Jul 2)</td></tr>
+</tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<footer>
+  Bull Screener (experimental funnel) &middot; Step 1 Wyckoff Uptrend/Spring (50) &rarr; Step 2 top7 bull-confirm + recency (26) &rarr; Step 3 ivchk IV Rank&gt;38 + bullish trend flag (17) &rarr; Step 4 positive-GEX final filter (17) &middot; PEG Ratio/Earnings enriched from business_overview_160726_0835.csv / IV_160726_0846.csv &middot; distinct workflow from opt_strategist.
+</footer>
+
+<script>
+(function() {
+  const sectors = new Set();
+  document.querySelectorAll('#mainBody tr').forEach(r => sectors.add(r.dataset.sector));
+  const sel = document.getElementById('sectorFilter');
+  Array.from(sectors).sort().forEach(s => {
+    const opt = document.createElement('option');
+    opt.value = s; opt.textContent = s;
+    sel.appendChild(opt);
+  });
+})();
+
+function applyFilters() {
+  const search = document.getElementById('tickerSearch').value.toLowerCase();
+  const sector = document.getElementById('sectorFilter').value;
+  const div = document.getElementById('divFilter').value;
+  const rows = document.querySelectorAll('#mainBody tr');
+  let count = 0;
+  rows.forEach(r => {
+    const matchSearch = !search || r.innerText.toLowerCase().includes(search);
+    const matchSector = !sector || r.dataset.sector === sector;
+    const hasFlag = r.innerText.includes('IV Expansion / Price Drop');
+    const matchDiv = !div || (div === 'flag' ? hasFlag : !hasFlag);
+    const show = matchSearch && matchSector && matchDiv;
+    r.style.display = show ? '' : 'none';
+    if (show) count++;
+  });
+  document.getElementById('searchCount').textContent = count + ' of 17 shown';
+}
+applyFilters();
+
+let sortState = {};
+function sortTable(colIdx) {
+  const table = document.getElementById('mainTable');
+  const tbody = document.getElementById('mainBody');
+  const rows = Array.from(tbody.querySelectorAll('tr'));
+  const asc = !sortState[colIdx];
+  sortState = {};
+  sortState[colIdx] = asc;
+
+  const headers = table.querySelectorAll('thead th');
+  headers.forEach(h => h.classList.remove('sorted-asc','sorted-desc'));
+  headers[colIdx].classList.add(asc ? 'sorted-asc' : 'sorted-desc');
+
+  rows.sort((a, b) => {
+    let va = a.children[colIdx].innerText.trim();
+    let vb = b.children[colIdx].innerText.trim();
+    const na = parseFloat(va.replace(/[^0-9.\-]/g, ''));
+    const nb = parseFloat(vb.replace(/[^0-9.\-]/g, ''));
+    let cmp;
+    if (!isNaN(na) && !isNaN(nb) && va.match(/[0-9]/) && vb.match(/[0-9]/)) {
+      cmp = na - nb;
+    } else {
+      cmp = va.localeCompare(vb);
+    }
+    return asc ? cmp : -cmp;
+  });
+
+  rows.forEach(r => tbody.appendChild(r));
+}
+</script>
+</body>
+</html>

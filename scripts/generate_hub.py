@@ -3,6 +3,7 @@ Generate a static PWA hub page (docs/index.html) from:
   - latest business_overview_*.csv   (Dashboard folder)
   - latest news_bulletin_*.html      (Dashboard folder, copied in full)
   - latest oil brief html            (Dashboard folder, copied in full)
+  - latest bull_screener_*.html      (Dashboard folder, copied in full)
 
 Run this after each pipeline run, then commit+push the docs/ folder
 to publish an updated version.
@@ -19,6 +20,7 @@ SITE_DIR = Path(__file__).resolve().parent.parent / "docs"
 
 BIZ_PATTERN = re.compile(r"business_overview_(\d{6})_(\d{4})\.csv$")
 BULLETIN_PATTERN = re.compile(r"news_bulletin_(\d{8})_(\d{4})\.html$")
+BULL_SCREENER_PATTERN = re.compile(r"bull_screener_(\d{6})_(\d{4})\.html$")
 
 # Oil brief filenames have never had one consistent convention
 # (Oil_brief_*, oilbrief_*, oil_dashboard_*, oil_brief_platts_analysis_*, etc.)
@@ -80,6 +82,21 @@ def latest_oil_brief():
                 continue
             seen.add(f)
             candidates.append((datetime.fromtimestamp(f.stat().st_mtime), f))
+    if not candidates:
+        return None, None
+    dt, path = max(candidates, key=lambda x: x[0])
+    return dt, path
+
+
+def latest_bull_screener():
+    candidates = []
+    for f in DASHBOARD_DIR.glob("bull_screener_*.html"):
+        m = BULL_SCREENER_PATTERN.match(f.name)
+        if not m:
+            continue
+        date_str, time_str = m.groups()
+        dt = datetime.strptime(date_str + time_str, "%d%m%y%H%M")
+        candidates.append((dt, f))
     if not candidates:
         return None, None
     dt, path = max(candidates, key=lambda x: x[0])
@@ -178,10 +195,23 @@ def build():
     else:
         oil_frame = "<p class='empty'>No oil brief file found.</p>"
 
+    bull_dt, bull_path = latest_bull_screener()
+    if bull_path:
+        shutil.copyfile(bull_path, SITE_DIR / "bull-screener.html")
+        bull_frame = (
+            '<div class="news-toolbar">'
+            '<a class="open-full" href="bull-screener.html" target="_blank" rel="noopener">'
+            'Open full bull screener in new tab &#8599;</a></div>'
+            '<iframe src="bull-screener.html" title="Bull Screener"></iframe>'
+        )
+    else:
+        bull_frame = "<p class='empty'>No bull screener file found.</p>"
+
     generated_at = datetime.now()
     sidebar_html = render_freshness_sidebar([
         ("Page generated", generated_at),
         ("Oil brief", oil_dt),
+        ("Bull screener", bull_dt),
     ])
 
     page = f"""<!doctype html>
@@ -245,7 +275,7 @@ def build():
   .news-toolbar {{ margin-bottom:8px; font-family: Arial, sans-serif; }}
   .open-full {{ font-size:0.82rem; color:var(--ft-blue); text-decoration:none; font-weight:600; }}
   .open-full:hover {{ text-decoration:underline; }}
-  #news iframe, #oil iframe {{ width:100%; height:calc(100vh - 220px); min-height:600px; border:1px solid var(--ft-border); background:#fff; }}
+  #news iframe, #oil iframe, #bullscreener iframe {{ width:100%; height:calc(100vh - 220px); min-height:600px; border:1px solid var(--ft-border); background:#fff; }}
   .empty {{ color:var(--ft-mid); font-style:italic; font-family: Arial, sans-serif; }}
   footer {{ background:var(--ft-navy); color:#888; font-family: Arial, sans-serif; font-size:11px; text-align:center; padding:16px 40px; margin-top:20px; border-top:3px solid var(--ft-red); }}
   @media (max-width: 700px) {{
@@ -273,6 +303,7 @@ def build():
     <button class="active" data-target="overview">Business Overview</button>
     <button data-target="news">News Bulletin</button>
     <button data-target="oil">Oil Brief</button>
+    <button data-target="bullscreener">Bull Screener</button>
   </div>
 </nav>
 <main>
@@ -287,6 +318,10 @@ def build():
   <section id="oil">
     <h2>Oil Brief</h2>
     {oil_frame}
+  </section>
+  <section id="bullscreener">
+    <h2>Bull Screener</h2>
+    {bull_frame}
   </section>
 </main>
 <footer>Optionx Hub &middot; static, offline-capable &middot; regenerate after each pipeline run</footer>
@@ -328,7 +363,8 @@ def build():
     print(
         f"Wrote {SITE_DIR / 'index.html'}  "
         f"({len(biz_rows)} overview rows, bulletin: {bulletin_path.name if bulletin_path else 'none'}, "
-        f"oil brief: {oil_path.name if oil_path else 'none'})"
+        f"oil brief: {oil_path.name if oil_path else 'none'}, "
+        f"bull screener: {bull_path.name if bull_path else 'none'})"
     )
 
 
