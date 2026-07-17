@@ -172,20 +172,56 @@ def _top_level_sector(table_html, sector_map):
     return BULL_ROW_RE.sub(replace_row, table_html)
 
 
+def _extract_balanced_div(text, start_marker):
+    """Return the full '<div ...>...</div>' block starting at start_marker,
+    correctly handling nested <div> tags inside it (simple regexes break on
+    the first inner </div>)."""
+    start = text.find(start_marker)
+    if start == -1:
+        return None
+    open_re = re.compile(r"<div\b")
+    close_re = re.compile(r"</div>")
+    pos = start
+    depth = 0
+    while pos < len(text):
+        om = open_re.match(text, pos)
+        if om:
+            depth += 1
+            pos = om.end()
+            continue
+        cm = close_re.match(text, pos)
+        if cm:
+            depth -= 1
+            pos = cm.end()
+            if depth == 0:
+                return text[start:pos]
+            continue
+        pos += 1
+    return None
+
+
 def render_bull_screener_table(path, sector_map=None):
-    """Parse the #mainTable markup out of the bull-screener HTML and render it
-    natively (same table-wrap treatment as the Business Overview tab) instead
-    of loading the standalone page in an iframe."""
+    """Parse the masthead/stats-banner/#mainTable markup out of the
+    bull-screener HTML and render them natively (table-wrap treatment
+    matching the Business Overview tab, masthead re-namespaced to avoid
+    colliding with the hub's own top-of-page masthead) instead of loading
+    the standalone page in an iframe."""
     if not path:
         return "<p class='empty'>No bull screener file found.</p>"
     text = path.read_text(encoding="utf-8")
+
+    masthead_html = _extract_balanced_div(text, '<div class="masthead">')
+    stats_html = _extract_balanced_div(text, '<div class="stats-banner">')
+    masthead_html = (masthead_html or "").replace("masthead", "bull-masthead")
+    stats_html = (stats_html or "").replace("stats-banner", "bull-stats-banner").replace("stats-inner", "bull-stats-inner").replace("stat-item", "bull-stat-item").replace("stat-sep", "bull-stat-sep")
+
     m = BULL_TABLE_RE.search(text)
     if not m:
         return "<p class='empty'>Bull screener file found but table markup could not be parsed.</p>"
     table_html = BULL_SORT_ATTR_RE.sub("", m.group(0))
     if sector_map:
         table_html = _top_level_sector(table_html, sector_map)
-    return f'<div class="table-wrap">{table_html}</div>'
+    return f'{masthead_html}{stats_html}<div class="table-wrap">{table_html}</div>'
 
 
 def render_freshness_sidebar(sources):
@@ -325,8 +361,28 @@ def build():
 
   /* Autosize: fixed layout + wrapping so all 15 columns fit without a horizontal scrollbar */
   #bullscreener table {{ table-layout:fixed; background:#fff; }}
-  #bullscreener th, #bullscreener td {{ white-space:normal; word-break:break-word; background:#fff; vertical-align:top; }}
-  #bullscreener tbody tr:nth-child(even), #bullscreener tbody tr.warn-row {{ background:#fff; }}
+  #bullscreener th, #bullscreener td {{ white-space:normal; word-break:break-word; vertical-align:top; }}
+  #bullscreener td {{ background:#fff; }}
+  #bullscreener tbody tr:nth-child(even) td, #bullscreener tbody tr.warn-row td {{ background:#fff; }}
+  #bullscreener thead th {{ border-right:1px solid #3d4250; }}
+  #bullscreener thead th:last-child {{ border-right:none; }}
+  #bullscreener tbody td {{ border-right:1px solid var(--ft-border); }}
+  #bullscreener tbody td:last-child {{ border-right:none; }}
+
+  /* Tab-specific masthead + stats banner, re-namespaced from the standalone dashboard page
+     (site-level .masthead above is a different, sticky element -- keep these separate) */
+  #bullscreener .bull-masthead {{ background:var(--ft-navy); color:#fff; border-bottom:4px solid var(--ft-red); border-radius:4px; padding:18px 20px 14px; margin-bottom:0; }}
+  #bullscreener .bull-masthead-eyebrow {{ font-family: Arial, sans-serif; font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:#AAAAAA; margin-bottom:6px; }}
+  #bullscreener .bull-masthead-title {{ font-family: Georgia, 'Times New Roman', serif; font-size:1.6rem; font-weight:700; letter-spacing:-0.01em; }}
+  #bullscreener .bull-masthead-title span {{ color:var(--ft-gold); }}
+  #bullscreener .bull-masthead-date {{ font-family: Arial, sans-serif; font-size:11px; color:#AAAAAA; margin-top:6px; }}
+  #bullscreener .bull-masthead-tagline {{ font-style:italic; font-size:12px; color:#CCCCCC; border-top:1px solid #44495A; padding-top:8px; margin-top:8px; }}
+  #bullscreener .bull-stats-banner {{ background:var(--ft-red); padding:8px 20px; }}
+  #bullscreener .bull-stats-inner {{ display:flex; align-items:center; gap:20px; flex-wrap:wrap; }}
+  #bullscreener .bull-stat-item {{ font-family: Arial, sans-serif; font-size:12px; color:#fff; display:flex; align-items:center; gap:6px; }}
+  #bullscreener .bull-stat-item strong {{ font-weight:700; }}
+  #bullscreener .bull-stat-sep {{ color:rgba(255,255,255,0.4); }}
+  #bullscreener .table-wrap {{ margin-top:14px; }}
   #bullscreener th:nth-child(1),  #bullscreener td:nth-child(1)  {{ width:3%; }}
   #bullscreener th:nth-child(2),  #bullscreener td:nth-child(2)  {{ width:6%; }}
   #bullscreener th:nth-child(3),  #bullscreener td:nth-child(3)  {{ width:10%; }}
@@ -385,7 +441,6 @@ def build():
     {oil_frame}
   </section>
   <section id="bullscreener">
-    <h2>Bull Screener</h2>
     {bull_html}
   </section>
 </main>
