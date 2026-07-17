@@ -66,11 +66,30 @@
   #bullscreener .chip-bull, #bullscreener .chip-gex { background:#E3EEDF; color:#2F6D3F; }
   #bullscreener .chip-warn { background:#F7E3CE; color:#B15C1E; }
   #bullscreener .chip-none { color:var(--ft-mid); font-family: Arial, sans-serif; font-size:11px; }
-  #bullscreener td.rank { color:var(--ft-mid); font-family: Arial, sans-serif; font-size:11px; white-space:nowrap; }
+  #bullscreener td.rank { color:var(--ft-mid); font-family: Arial, sans-serif; font-size:11px; }
   #bullscreener td.ticker { font-family: Arial, sans-serif; font-weight:700; color:var(--ft-red); letter-spacing:0.01em; }
   #bullscreener td.num, #bullscreener th.num { text-align:right; font-variant-numeric:tabular-nums; }
-  #bullscreener td.newscell { white-space:normal; max-width:320px; font-size:0.78rem; color:var(--ft-muted); }
-  #bullscreener tbody tr.warn-row { background:#FBEAD8; }
+  #bullscreener td.newscell { font-size:0.78rem; color:var(--ft-muted); }
+
+  /* Autosize: fixed layout + wrapping so all 15 columns fit without a horizontal scrollbar */
+  #bullscreener table { table-layout:fixed; background:#fff; }
+  #bullscreener th, #bullscreener td { white-space:normal; word-break:break-word; background:#fff; vertical-align:top; }
+  #bullscreener tbody tr:nth-child(even), #bullscreener tbody tr.warn-row { background:#fff; }
+  #bullscreener th:nth-child(1),  #bullscreener td:nth-child(1)  { width:3%; }
+  #bullscreener th:nth-child(2),  #bullscreener td:nth-child(2)  { width:6%; }
+  #bullscreener th:nth-child(3),  #bullscreener td:nth-child(3)  { width:10%; }
+  #bullscreener th:nth-child(4),  #bullscreener td:nth-child(4)  { width:6%; }
+  #bullscreener th:nth-child(5),  #bullscreener td:nth-child(5)  { width:8%; }
+  #bullscreener th:nth-child(6),  #bullscreener td:nth-child(6)  { width:7%; }
+  #bullscreener th:nth-child(7),  #bullscreener td:nth-child(7)  { width:5%; }
+  #bullscreener th:nth-child(8),  #bullscreener td:nth-child(8)  { width:7%; }
+  #bullscreener th:nth-child(9),  #bullscreener td:nth-child(9)  { width:8%; }
+  #bullscreener th:nth-child(10), #bullscreener td:nth-child(10) { width:7%; }
+  #bullscreener th:nth-child(11), #bullscreener td:nth-child(11) { width:5%; }
+  #bullscreener th:nth-child(12), #bullscreener td:nth-child(12) { width:5%; }
+  #bullscreener th:nth-child(13), #bullscreener td:nth-child(13) { width:5%; }
+  #bullscreener th:nth-child(14), #bullscreener td:nth-child(14) { width:6%; }
+  #bullscreener th:nth-child(15), #bullscreener td:nth-child(15) { width:12%; }
   footer { background:var(--ft-navy); color:#888; font-family: Arial, sans-serif; font-size:11px; text-align:center; padding:16px 40px; margin-top:20px; border-top:3px solid var(--ft-red); }
   @media (max-width: 700px) {
     .masthead, nav.section-nav, main { padding-left:16px; padding-right:16px; }
@@ -93,7 +112,7 @@
           <span class="fresh-dot fresh-green"></span>
           <div>
             <div class="fresh-label">Page generated</div>
-            <div class="fresh-ts">17 Jul 2026, 19:25 &middot; <strong>just now</strong></div>
+            <div class="fresh-ts">17 Jul 2026, 19:31 &middot; <strong>just now</strong></div>
           </div>
         </div>
         
@@ -155,8 +174,8 @@
           </tr>
         </thead>
         <tbody id="mainBody">
-<tr data-sector="Systems Software" class="warn-row"><td class="rank">1</td><td class="ticker">NOW</td><td>Systems Software</td><td class="num">$102.60</td><td><span class="chip chip-bull">BULL SETUP</span></td><td><span class="chip chip-warn">Downgraded</span></td><td class="num">97</td><td>First Test</td><td><span class="chip-none">&mdash;</span></td><td><span class="chip chip-gex">+4 Very Long</span></td><td class="num">$115</td><td class="num">$92</td><td class="num">0.92</td><td>22/07/2026</td><td class="newscell">IBM Q2 miss contagion + AI seat-count/monetization worries, elevated rates compressing SaaS multiples; -5.8% (Jul 14-16), earnings Jul 22</td></tr>
-<tr data-sector="Technology (Enterprise Hardware)" class="warn-row"><td class="rank">2</td><td class="ticker">HPE</td><td>Technology (Enterprise Hardware)</td><td class="num">$44.80</td><td><span class="chip chip-bull">BULL SETUP</span></td><td><span class="chip chip-warn">Downgraded</span></td><td class="num">48</td><td>Second Test</td><td><span class="chip chip-warn">IV Expansion / Price Drop</span></td><td><span class="chip chip-gex">+4 Very Long</span></td><td class="num">$50</td><td class="num">$46</td><td class="num">0.85</td><td>02/09/2026</td><td class="newscell">AI-hardware sector-wide selloff (with Dell, Super Micro), no company-specific catalyst; -8% (Jul 15-16), still GF-flagged overvalued after -6.2% (Jul 2)</td></tr>
+<tr data-sector="Technology" class="warn-row"><td class="rank">1</td><td class="ticker">NOW</td><td>Technology</td><td class="num">$102.60</td><td><span class="chip chip-bull">BULL SETUP</span></td><td><span class="chip chip-warn">Downgraded</span></td><td class="num">97</td><td>First Test</td><td><span class="chip-none">&mdash;</span></td><td><span class="chip chip-gex">+4 Very Long</span></td><td class="num">$115</td><td class="num">$92</td><td class="num">0.92</td><td>22/07/2026</td><td class="newscell">IBM Q2 miss contagion + AI seat-count/monetization worries, elevated rates compressing SaaS multiples; -5.8% (Jul 14-16), earnings Jul 22</td></tr>
+<tr data-sector="Technology" class="warn-row"><td class="rank">2</td><td class="ticker">HPE</td><td>Technology</td><td class="num">$44.80</td><td><span class="chip chip-bull">BULL SETUP</span></td><td><span class="chip chip-warn">Downgraded</span></td><td class="num">48</td><td>Second Test</td><td><span class="chip chip-warn">IV Expansion / Price Drop</span></td><td><span class="chip chip-gex">+4 Very Long</span></td><td class="num">$50</td><td class="num">$46</td><td class="num">0.85</td><td>02/09/2026</td><td class="newscell">AI-hardware sector-wide selloff (with Dell, Super Micro), no company-specific catalyst; -8% (Jul 15-16), still GF-flagged overvalued after -6.2% (Jul 2)</td></tr>
 </tbody>
       </table></div>
   </section>

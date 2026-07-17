@@ -148,7 +148,31 @@ def render_business_table(rows):
     """
 
 
-def render_bull_screener_table(path):
+BULL_ROW_RE = re.compile(r"<tr[^>]*>.*?</tr>", re.DOTALL)
+BULL_TICKER_TD_RE = re.compile(r'<td class="ticker">([^<]*)</td>')
+BULL_SECTOR_TD_RE = re.compile(r'(<td class="ticker">[^<]*</td>)<td>[^<]*</td>')
+BULL_DATA_SECTOR_RE = re.compile(r'data-sector="[^"]*"')
+
+
+def _top_level_sector(table_html, sector_map):
+    """Swap the granular Sector column (e.g. 'Technology (Enterprise Hardware)')
+    for the top-level Sector from business_overview (e.g. 'Technology'), keyed
+    by the ticker already present in each row."""
+    def replace_row(m):
+        row = m.group(0)
+        tmatch = BULL_TICKER_TD_RE.search(row)
+        if not tmatch:
+            return row
+        top_sector = sector_map.get(tmatch.group(1).strip())
+        if not top_sector:
+            return row
+        row = BULL_DATA_SECTOR_RE.sub(f'data-sector="{esc(top_sector)}"', row, count=1)
+        row = BULL_SECTOR_TD_RE.sub(rf"\1<td>{esc(top_sector)}</td>", row, count=1)
+        return row
+    return BULL_ROW_RE.sub(replace_row, table_html)
+
+
+def render_bull_screener_table(path, sector_map=None):
     """Parse the #mainTable markup out of the bull-screener HTML and render it
     natively (same table-wrap treatment as the Business Overview tab) instead
     of loading the standalone page in an iframe."""
@@ -159,6 +183,8 @@ def render_bull_screener_table(path):
     if not m:
         return "<p class='empty'>Bull screener file found but table markup could not be parsed.</p>"
     table_html = BULL_SORT_ATTR_RE.sub("", m.group(0))
+    if sector_map:
+        table_html = _top_level_sector(table_html, sector_map)
     return f'<div class="table-wrap">{table_html}</div>'
 
 
@@ -214,7 +240,8 @@ def build():
     bull_dt, bull_path = latest_bull_screener()
     if bull_path:
         shutil.copyfile(bull_path, SITE_DIR / "bull-screener.html")
-    bull_html = render_bull_screener_table(bull_path)
+    biz_sector_map = {r.get("Ticker", "").strip(): r.get("Sector", "").strip() for r in biz_rows}
+    bull_html = render_bull_screener_table(bull_path, biz_sector_map)
 
     generated_at = datetime.now()
     sidebar_html = render_freshness_sidebar([
@@ -291,11 +318,30 @@ def build():
   #bullscreener .chip-bull, #bullscreener .chip-gex {{ background:#E3EEDF; color:#2F6D3F; }}
   #bullscreener .chip-warn {{ background:#F7E3CE; color:#B15C1E; }}
   #bullscreener .chip-none {{ color:var(--ft-mid); font-family: Arial, sans-serif; font-size:11px; }}
-  #bullscreener td.rank {{ color:var(--ft-mid); font-family: Arial, sans-serif; font-size:11px; white-space:nowrap; }}
+  #bullscreener td.rank {{ color:var(--ft-mid); font-family: Arial, sans-serif; font-size:11px; }}
   #bullscreener td.ticker {{ font-family: Arial, sans-serif; font-weight:700; color:var(--ft-red); letter-spacing:0.01em; }}
   #bullscreener td.num, #bullscreener th.num {{ text-align:right; font-variant-numeric:tabular-nums; }}
-  #bullscreener td.newscell {{ white-space:normal; max-width:320px; font-size:0.78rem; color:var(--ft-muted); }}
-  #bullscreener tbody tr.warn-row {{ background:#FBEAD8; }}
+  #bullscreener td.newscell {{ font-size:0.78rem; color:var(--ft-muted); }}
+
+  /* Autosize: fixed layout + wrapping so all 15 columns fit without a horizontal scrollbar */
+  #bullscreener table {{ table-layout:fixed; background:#fff; }}
+  #bullscreener th, #bullscreener td {{ white-space:normal; word-break:break-word; background:#fff; vertical-align:top; }}
+  #bullscreener tbody tr:nth-child(even), #bullscreener tbody tr.warn-row {{ background:#fff; }}
+  #bullscreener th:nth-child(1),  #bullscreener td:nth-child(1)  {{ width:3%; }}
+  #bullscreener th:nth-child(2),  #bullscreener td:nth-child(2)  {{ width:6%; }}
+  #bullscreener th:nth-child(3),  #bullscreener td:nth-child(3)  {{ width:10%; }}
+  #bullscreener th:nth-child(4),  #bullscreener td:nth-child(4)  {{ width:6%; }}
+  #bullscreener th:nth-child(5),  #bullscreener td:nth-child(5)  {{ width:8%; }}
+  #bullscreener th:nth-child(6),  #bullscreener td:nth-child(6)  {{ width:7%; }}
+  #bullscreener th:nth-child(7),  #bullscreener td:nth-child(7)  {{ width:5%; }}
+  #bullscreener th:nth-child(8),  #bullscreener td:nth-child(8)  {{ width:7%; }}
+  #bullscreener th:nth-child(9),  #bullscreener td:nth-child(9)  {{ width:8%; }}
+  #bullscreener th:nth-child(10), #bullscreener td:nth-child(10) {{ width:7%; }}
+  #bullscreener th:nth-child(11), #bullscreener td:nth-child(11) {{ width:5%; }}
+  #bullscreener th:nth-child(12), #bullscreener td:nth-child(12) {{ width:5%; }}
+  #bullscreener th:nth-child(13), #bullscreener td:nth-child(13) {{ width:5%; }}
+  #bullscreener th:nth-child(14), #bullscreener td:nth-child(14) {{ width:6%; }}
+  #bullscreener th:nth-child(15), #bullscreener td:nth-child(15) {{ width:12%; }}
   footer {{ background:var(--ft-navy); color:#888; font-family: Arial, sans-serif; font-size:11px; text-align:center; padding:16px 40px; margin-top:20px; border-top:3px solid var(--ft-red); }}
   @media (max-width: 700px) {{
     .masthead, nav.section-nav, main {{ padding-left:16px; padding-right:16px; }}
