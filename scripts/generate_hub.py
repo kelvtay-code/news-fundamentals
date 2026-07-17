@@ -21,6 +21,8 @@ SITE_DIR = Path(__file__).resolve().parent.parent / "docs"
 BIZ_PATTERN = re.compile(r"business_overview_(\d{6})_(\d{4})\.csv$")
 BULLETIN_PATTERN = re.compile(r"news_bulletin_(\d{8})_(\d{4})\.html$")
 BULL_SCREENER_PATTERN = re.compile(r"bull_screener_(\d{6})_(\d{4})\.html$")
+BULL_TABLE_RE = re.compile(r'<table id="mainTable">.*?</table>', re.DOTALL)
+BULL_SORT_ATTR_RE = re.compile(r'\s*onclick="sortTable\(\d+\)"')
 
 # Oil brief filenames have never had one consistent convention
 # (Oil_brief_*, oilbrief_*, oil_dashboard_*, oil_brief_platts_analysis_*, etc.)
@@ -146,6 +148,20 @@ def render_business_table(rows):
     """
 
 
+def render_bull_screener_table(path):
+    """Parse the #mainTable markup out of the bull-screener HTML and render it
+    natively (same table-wrap treatment as the Business Overview tab) instead
+    of loading the standalone page in an iframe."""
+    if not path:
+        return "<p class='empty'>No bull screener file found.</p>"
+    text = path.read_text(encoding="utf-8")
+    m = BULL_TABLE_RE.search(text)
+    if not m:
+        return "<p class='empty'>Bull screener file found but table markup could not be parsed.</p>"
+    table_html = BULL_SORT_ATTR_RE.sub("", m.group(0))
+    return f'<div class="table-wrap">{table_html}</div>'
+
+
 def render_freshness_sidebar(sources):
     """sources: list of (label, dt) tuples."""
     items = []
@@ -198,14 +214,7 @@ def build():
     bull_dt, bull_path = latest_bull_screener()
     if bull_path:
         shutil.copyfile(bull_path, SITE_DIR / "bull-screener.html")
-        bull_frame = (
-            '<div class="news-toolbar">'
-            '<a class="open-full" href="bull-screener.html" target="_blank" rel="noopener">'
-            'Open full bull screener in new tab &#8599;</a></div>'
-            '<iframe src="bull-screener.html" title="Bull Screener"></iframe>'
-        )
-    else:
-        bull_frame = "<p class='empty'>No bull screener file found.</p>"
+    bull_html = render_bull_screener_table(bull_path)
 
     generated_at = datetime.now()
     sidebar_html = render_freshness_sidebar([
@@ -275,8 +284,18 @@ def build():
   .news-toolbar {{ margin-bottom:8px; font-family: Arial, sans-serif; }}
   .open-full {{ font-size:0.82rem; color:var(--ft-blue); text-decoration:none; font-weight:600; }}
   .open-full:hover {{ text-decoration:underline; }}
-  #news iframe, #oil iframe, #bullscreener iframe {{ width:100%; height:calc(100vh - 220px); min-height:600px; border:1px solid var(--ft-border); background:#fff; }}
+  #news iframe, #oil iframe {{ width:100%; height:calc(100vh - 220px); min-height:600px; border:1px solid var(--ft-border); background:#fff; }}
   .empty {{ color:var(--ft-mid); font-style:italic; font-family: Arial, sans-serif; }}
+
+  #bullscreener .chip {{ display:inline-block; font-family: Arial, sans-serif; font-size:10.5px; font-weight:700; padding:2px 8px; border-radius:2px; white-space:nowrap; letter-spacing:0.02em; }}
+  #bullscreener .chip-bull, #bullscreener .chip-gex {{ background:#E3EEDF; color:#2F6D3F; }}
+  #bullscreener .chip-warn {{ background:#F7E3CE; color:#B15C1E; }}
+  #bullscreener .chip-none {{ color:var(--ft-mid); font-family: Arial, sans-serif; font-size:11px; }}
+  #bullscreener td.rank {{ color:var(--ft-mid); font-family: Arial, sans-serif; font-size:11px; white-space:nowrap; }}
+  #bullscreener td.ticker {{ font-family: Arial, sans-serif; font-weight:700; color:var(--ft-red); letter-spacing:0.01em; }}
+  #bullscreener td.num, #bullscreener th.num {{ text-align:right; font-variant-numeric:tabular-nums; }}
+  #bullscreener td.newscell {{ white-space:normal; max-width:320px; font-size:0.78rem; color:var(--ft-muted); }}
+  #bullscreener tbody tr.warn-row {{ background:#FBEAD8; }}
   footer {{ background:var(--ft-navy); color:#888; font-family: Arial, sans-serif; font-size:11px; text-align:center; padding:16px 40px; margin-top:20px; border-top:3px solid var(--ft-red); }}
   @media (max-width: 700px) {{
     .masthead, nav.section-nav, main {{ padding-left:16px; padding-right:16px; }}
@@ -321,7 +340,7 @@ def build():
   </section>
   <section id="bullscreener">
     <h2>Bull Screener</h2>
-    {bull_frame}
+    {bull_html}
   </section>
 </main>
 <footer>Optionx Hub &middot; static, offline-capable &middot; regenerate after each pipeline run</footer>
@@ -334,10 +353,11 @@ def build():
       document.getElementById(btn.dataset.target).classList.add('active');
     }});
   }});
-  document.querySelectorAll('#bizTable th').forEach((th, idx) => {{
+  document.querySelectorAll('.table-wrap table thead th').forEach((th) => {{
     let asc = true;
     th.addEventListener('click', () => {{
       const table = th.closest('table');
+      const idx = Array.from(th.parentNode.children).indexOf(th);
       const rows = Array.from(table.querySelectorAll('tbody tr'));
       rows.sort((a, b) => {{
         const av = a.children[idx].textContent.trim();

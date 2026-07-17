@@ -59,8 +59,18 @@
   .news-toolbar { margin-bottom:8px; font-family: Arial, sans-serif; }
   .open-full { font-size:0.82rem; color:var(--ft-blue); text-decoration:none; font-weight:600; }
   .open-full:hover { text-decoration:underline; }
-  #news iframe, #oil iframe, #bullscreener iframe { width:100%; height:calc(100vh - 220px); min-height:600px; border:1px solid var(--ft-border); background:#fff; }
+  #news iframe, #oil iframe { width:100%; height:calc(100vh - 220px); min-height:600px; border:1px solid var(--ft-border); background:#fff; }
   .empty { color:var(--ft-mid); font-style:italic; font-family: Arial, sans-serif; }
+
+  #bullscreener .chip { display:inline-block; font-family: Arial, sans-serif; font-size:10.5px; font-weight:700; padding:2px 8px; border-radius:2px; white-space:nowrap; letter-spacing:0.02em; }
+  #bullscreener .chip-bull, #bullscreener .chip-gex { background:#E3EEDF; color:#2F6D3F; }
+  #bullscreener .chip-warn { background:#F7E3CE; color:#B15C1E; }
+  #bullscreener .chip-none { color:var(--ft-mid); font-family: Arial, sans-serif; font-size:11px; }
+  #bullscreener td.rank { color:var(--ft-mid); font-family: Arial, sans-serif; font-size:11px; white-space:nowrap; }
+  #bullscreener td.ticker { font-family: Arial, sans-serif; font-weight:700; color:var(--ft-red); letter-spacing:0.01em; }
+  #bullscreener td.num, #bullscreener th.num { text-align:right; font-variant-numeric:tabular-nums; }
+  #bullscreener td.newscell { white-space:normal; max-width:320px; font-size:0.78rem; color:var(--ft-muted); }
+  #bullscreener tbody tr.warn-row { background:#FBEAD8; }
   footer { background:var(--ft-navy); color:#888; font-family: Arial, sans-serif; font-size:11px; text-align:center; padding:16px 40px; margin-top:20px; border-top:3px solid var(--ft-red); }
   @media (max-width: 700px) {
     .masthead, nav.section-nav, main { padding-left:16px; padding-right:16px; }
@@ -83,7 +93,7 @@
           <span class="fresh-dot fresh-green"></span>
           <div>
             <div class="fresh-label">Page generated</div>
-            <div class="fresh-ts">17 Jul 2026, 14:24 &middot; <strong>just now</strong></div>
+            <div class="fresh-ts">17 Jul 2026, 19:25 &middot; <strong>just now</strong></div>
           </div>
         </div>
         
@@ -92,7 +102,7 @@
           <span class="fresh-dot fresh-green"></span>
           <div>
             <div class="fresh-label">Oil brief</div>
-            <div class="fresh-ts">17 Jul 2026, 14:19 &middot; <strong>just now</strong></div>
+            <div class="fresh-ts">17 Jul 2026, 14:19 &middot; <strong>5h ago</strong></div>
           </div>
         </div>
         
@@ -101,7 +111,7 @@
           <span class="fresh-dot fresh-green"></span>
           <div>
             <div class="fresh-label">Bull screener</div>
-            <div class="fresh-ts">17 Jul 2026, 07:52 &middot; <strong>7h ago</strong></div>
+            <div class="fresh-ts">17 Jul 2026, 07:52 &middot; <strong>12h ago</strong></div>
           </div>
         </div>
         
@@ -138,7 +148,17 @@
   </section>
   <section id="bullscreener">
     <h2>Bull Screener</h2>
-    <div class="news-toolbar"><a class="open-full" href="bull-screener.html" target="_blank" rel="noopener">Open full bull screener in new tab &#8599;</a></div><iframe src="bull-screener.html" title="Bull Screener"></iframe>
+    <div class="table-wrap"><table id="mainTable">
+        <thead>
+          <tr>
+            <th>#</th><th>Ticker</th><th>Sector</th><th class="num">Price</th><th>7-Day Verdict</th><th>Recency &Delta;</th><th class="num">IV Rank</th><th>Trend Flag</th><th>Divergence Flag</th><th>GEX Rating</th><th class="num">Call Wall</th><th class="num">Put Wall</th><th class="num">PEG Ratio</th><th>Earnings Date</th><th>News</th>
+          </tr>
+        </thead>
+        <tbody id="mainBody">
+<tr data-sector="Systems Software" class="warn-row"><td class="rank">1</td><td class="ticker">NOW</td><td>Systems Software</td><td class="num">$102.60</td><td><span class="chip chip-bull">BULL SETUP</span></td><td><span class="chip chip-warn">Downgraded</span></td><td class="num">97</td><td>First Test</td><td><span class="chip-none">&mdash;</span></td><td><span class="chip chip-gex">+4 Very Long</span></td><td class="num">$115</td><td class="num">$92</td><td class="num">0.92</td><td>22/07/2026</td><td class="newscell">IBM Q2 miss contagion + AI seat-count/monetization worries, elevated rates compressing SaaS multiples; -5.8% (Jul 14-16), earnings Jul 22</td></tr>
+<tr data-sector="Technology (Enterprise Hardware)" class="warn-row"><td class="rank">2</td><td class="ticker">HPE</td><td>Technology (Enterprise Hardware)</td><td class="num">$44.80</td><td><span class="chip chip-bull">BULL SETUP</span></td><td><span class="chip chip-warn">Downgraded</span></td><td class="num">48</td><td>Second Test</td><td><span class="chip chip-warn">IV Expansion / Price Drop</span></td><td><span class="chip chip-gex">+4 Very Long</span></td><td class="num">$50</td><td class="num">$46</td><td class="num">0.85</td><td>02/09/2026</td><td class="newscell">AI-hardware sector-wide selloff (with Dell, Super Micro), no company-specific catalyst; -8% (Jul 15-16), still GF-flagged overvalued after -6.2% (Jul 2)</td></tr>
+</tbody>
+      </table></div>
   </section>
 </main>
 <footer>Optionx Hub &middot; static, offline-capable &middot; regenerate after each pipeline run</footer>
@@ -151,10 +171,11 @@
       document.getElementById(btn.dataset.target).classList.add('active');
     });
   });
-  document.querySelectorAll('#bizTable th').forEach((th, idx) => {
+  document.querySelectorAll('.table-wrap table thead th').forEach((th) => {
     let asc = true;
     th.addEventListener('click', () => {
       const table = th.closest('table');
+      const idx = Array.from(th.parentNode.children).indexOf(th);
       const rows = Array.from(table.querySelectorAll('tbody tr'));
       rows.sort((a, b) => {
         const av = a.children[idx].textContent.trim();
