@@ -200,6 +200,94 @@ def _extract_balanced_div(text, start_marker):
     return None
 
 
+def _split_css_rules(css):
+    """Split top-level CSS text into (selector, body, is_media) tuples,
+    handling one level of @media nesting via manual brace balancing
+    (regex alone can't reliably match nested braces)."""
+    rules = []
+    i, n = 0, len(css)
+    while i < n:
+        if css[i:i + 2] == "/*":
+            end = css.find("*/", i + 2)
+            i = end + 2 if end != -1 else n
+            continue
+        if css[i].isspace():
+            i += 1
+            continue
+        brace = css.find("{", i)
+        if brace == -1:
+            break
+        header = css[i:brace].strip()
+        if header.startswith("@media"):
+            depth, j = 1, brace + 1
+            while j < n and depth > 0:
+                if css[j] == "{":
+                    depth += 1
+                elif css[j] == "}":
+                    depth -= 1
+                j += 1
+            rules.append((header, css[brace + 1:j - 1], True))
+            i = j
+        else:
+            end = css.find("}", brace)
+            if end == -1:
+                break
+            rules.append((header, css[brace + 1:end], False))
+            i = end + 1
+    return rules
+
+
+def _scope_selector(selector, scope):
+    scoped = []
+    for part in (p.strip() for p in selector.split(",")):
+        if not part or part == ":root":
+            continue  # hub already defines the same --ft-* tokens at :root
+        if part == "*":
+            scoped.append(f"{scope} *")
+        elif part == "body" or part.startswith("body "):
+            scoped.append(f"{scope}{part[4:]}")
+        else:
+            scoped.append(f"{scope} {part}")
+    return ", ".join(scoped) if scoped else None
+
+
+def scope_css(css_text, scope):
+    """Namespace a standalone dashboard's <style> block under `scope` (e.g.
+    '#newsEmbed') so it can be embedded directly into the hub page without
+    its .masthead/.stats-banner/etc classes colliding with the hub's own."""
+    out = []
+    for header, body, is_media in _split_css_rules(css_text):
+        if is_media:
+            inner = []
+            for h2, b2, _ in _split_css_rules(body):
+                sel = _scope_selector(h2, scope)
+                if sel:
+                    inner.append(f"{sel} {{{b2}}}")
+            out.append(f"{header} {{{''.join(inner)}}}")
+        else:
+            sel = _scope_selector(header, scope)
+            if sel:
+                out.append(f"{sel} {{{body}}}")
+    return "\n".join(out)
+
+
+def render_embedded_dashboard(path, scope_id):
+    """Pull a standalone FT-style dashboard's <style> + <body> content and
+    embed it directly (namespaced under #scope_id) instead of loading it in
+    an iframe, which forces its own internal scrollbar. Returns
+    (scoped_css, body_html) or (None, None) if the file can't be parsed."""
+    if not path:
+        return None, None
+    text = path.read_text(encoding="utf-8")
+    style_m = re.search(r"<style>(.*?)</style>", text, re.DOTALL)
+    body_m = re.search(r"<body>(.*?)</body>", text, re.DOTALL)
+    if not style_m or not body_m:
+        return None, None
+    scoped_css = scope_css(style_m.group(1), f"#{scope_id}")
+    body_html = re.sub(r"<footer>.*?</footer>", "", body_m.group(1), flags=re.DOTALL)
+    return scoped_css, f'<div id="{scope_id}">{body_html}</div>'
+
+
 def render_bull_screener_table(path, sector_map=None):
     """Parse the masthead/stats-banner/#mainTable markup out of the
     bull-screener HTML and render them natively (table-wrap treatment
@@ -252,14 +340,10 @@ def build():
     bulletin_dt, bulletin_path = latest_news_bulletin()
     if bulletin_path:
         shutil.copyfile(bulletin_path, SITE_DIR / "news-bulletin.html")
-        bulletin_frame = (
-            '<div class="news-toolbar">'
-            '<a class="open-full" href="news-bulletin.html" target="_blank" rel="noopener">'
-            'Open full bulletin in new tab &#8599;</a></div>'
-            '<iframe src="news-bulletin.html" title="News Bulletin"></iframe>'
-        )
-    else:
+    bulletin_css, bulletin_frame = render_embedded_dashboard(bulletin_path, "newsEmbed")
+    if bulletin_frame is None:
         bulletin_frame = "<p class='empty'>No news bulletin file found.</p>"
+        bulletin_css = ""
 
     oil_dt, oil_path = latest_oil_brief()
     if oil_path:
@@ -347,7 +431,7 @@ def build():
   .news-toolbar {{ margin-bottom:8px; font-family: Arial, sans-serif; }}
   .open-full {{ font-size:0.82rem; color:var(--ft-blue); text-decoration:none; font-weight:600; }}
   .open-full:hover {{ text-decoration:underline; }}
-  #news iframe, #oil iframe {{ width:100%; height:calc(100vh - 220px); min-height:600px; border:1px solid var(--ft-border); background:#fff; }}
+  #oil iframe {{ width:100%; height:calc(100vh - 220px); min-height:600px; border:1px solid var(--ft-border); background:#fff; }}
   .empty {{ color:var(--ft-mid); font-style:italic; font-family: Arial, sans-serif; }}
 
   #bullscreener .chip {{ display:inline-block; font-family: Arial, sans-serif; font-size:10.5px; font-weight:700; padding:2px 8px; border-radius:2px; white-space:normal; letter-spacing:0.02em; }}
@@ -407,6 +491,8 @@ def build():
     .masthead-title {{ font-size:1.05rem; }}
     .fresh-ts {{ font-size:0.6rem; }}
   }}
+  #newsEmbed {{ overflow-x:hidden; }}
+  {bulletin_css}
 </style>
 </head>
 <body>
@@ -435,7 +521,6 @@ def build():
     {biz_html}
   </section>
   <section id="news">
-    <h2>News Bulletin</h2>
     {bulletin_frame}
   </section>
   <section id="oil">
