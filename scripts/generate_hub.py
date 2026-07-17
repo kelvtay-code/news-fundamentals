@@ -21,6 +21,7 @@ SITE_DIR = Path(__file__).resolve().parent.parent / "docs"
 BIZ_PATTERN = re.compile(r"business_overview_(\d{6})_(\d{4})\.csv$")
 BULLETIN_PATTERN = re.compile(r"news_bulletin_(\d{8})_(\d{4})\.html$")
 BULL_SCREENER_PATTERN = re.compile(r"bull_screener_(\d{6})_(\d{4})\.html$")
+SECTOR_SCAN_PATTERN = re.compile(r"sector_scan_(\d{6})_(\d{4})\.html$")
 BULL_TABLE_RE = re.compile(r'<table id="mainTable">.*?</table>', re.DOTALL)
 BULL_SORT_ATTR_RE = re.compile(r'\s*onclick="sortTable\(\d+\)"')
 
@@ -94,6 +95,21 @@ def latest_bull_screener():
     candidates = []
     for f in DASHBOARD_DIR.glob("bull_screener_*.html"):
         m = BULL_SCREENER_PATTERN.match(f.name)
+        if not m:
+            continue
+        date_str, time_str = m.groups()
+        dt = datetime.strptime(date_str + time_str, "%d%m%y%H%M")
+        candidates.append((dt, f))
+    if not candidates:
+        return None, None
+    dt, path = max(candidates, key=lambda x: x[0])
+    return dt, path
+
+
+def latest_sector_scan():
+    candidates = []
+    for f in DASHBOARD_DIR.glob("sector_scan_*.html"):
+        m = SECTOR_SCAN_PATTERN.match(f.name)
         if not m:
             continue
         date_str, time_str = m.groups()
@@ -363,11 +379,24 @@ def build():
     biz_sector_map = {r.get("Ticker", "").strip(): r.get("Sector", "").strip() for r in biz_rows}
     bull_html = render_bull_screener_table(bull_path, biz_sector_map)
 
+    sector_dt, sector_path = latest_sector_scan()
+    if sector_path:
+        shutil.copyfile(sector_path, SITE_DIR / "sector-scan.html")
+        sector_frame = (
+            '<div class="news-toolbar">'
+            '<a class="open-full" href="sector-scan.html" target="_blank" rel="noopener">'
+            'Open full sector scan in new tab &#8599;</a></div>'
+            '<iframe src="sector-scan.html" title="Sector Scan"></iframe>'
+        )
+    else:
+        sector_frame = "<p class='empty'>No sector scan file found.</p>"
+
     generated_at = datetime.now()
     sidebar_html = render_freshness_sidebar([
         ("Page generated", generated_at),
         ("Oil brief", oil_dt),
         ("Bull screener", bull_dt),
+        ("Sector scan", sector_dt),
     ])
 
     page = f"""<!doctype html>
@@ -431,7 +460,7 @@ def build():
   .news-toolbar {{ margin-bottom:8px; font-family: Arial, sans-serif; }}
   .open-full {{ font-size:0.82rem; color:var(--ft-blue); text-decoration:none; font-weight:600; }}
   .open-full:hover {{ text-decoration:underline; }}
-  #oil iframe {{ width:100%; height:calc(100vh - 220px); min-height:600px; border:1px solid var(--ft-border); background:#fff; }}
+  #oil iframe, #sectorscan iframe {{ width:100%; height:calc(100vh - 220px); min-height:600px; border:1px solid var(--ft-border); background:#fff; }}
   .empty {{ color:var(--ft-mid); font-style:italic; font-family: Arial, sans-serif; }}
 
   #bullscreener .chip {{ display:inline-block; font-family: Arial, sans-serif; font-size:10.5px; font-weight:700; padding:2px 8px; border-radius:2px; white-space:normal; letter-spacing:0.02em; }}
@@ -513,6 +542,7 @@ def build():
     <button data-target="news">News Bulletin</button>
     <button data-target="oil">Oil Brief</button>
     <button data-target="bullscreener">Bull Screener</button>
+    <button data-target="sectorscan">Sector Scan</button>
   </div>
 </nav>
 <main>
@@ -529,6 +559,10 @@ def build():
   </section>
   <section id="bullscreener">
     {bull_html}
+  </section>
+  <section id="sectorscan">
+    <h2>Sector Scan</h2>
+    {sector_frame}
   </section>
 </main>
 <footer>Optionx Hub &middot; static, offline-capable &middot; regenerate after each pipeline run</footer>
@@ -572,7 +606,8 @@ def build():
         f"Wrote {SITE_DIR / 'index.html'}  "
         f"({len(biz_rows)} overview rows, bulletin: {bulletin_path.name if bulletin_path else 'none'}, "
         f"oil brief: {oil_path.name if oil_path else 'none'}, "
-        f"bull screener: {bull_path.name if bull_path else 'none'})"
+        f"bull screener: {bull_path.name if bull_path else 'none'}, "
+        f"sector scan: {sector_path.name if sector_path else 'none'})"
     )
 
 
