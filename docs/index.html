@@ -62,7 +62,7 @@
   #news iframe, #oil iframe { width:100%; height:calc(100vh - 220px); min-height:600px; border:1px solid var(--ft-border); background:#fff; }
   .empty { color:var(--ft-mid); font-style:italic; font-family: Arial, sans-serif; }
 
-  #bullscreener .chip { display:inline-block; font-family: Arial, sans-serif; font-size:10.5px; font-weight:700; padding:2px 8px; border-radius:2px; white-space:nowrap; letter-spacing:0.02em; }
+  #bullscreener .chip { display:inline-block; font-family: Arial, sans-serif; font-size:10.5px; font-weight:700; padding:2px 8px; border-radius:2px; white-space:normal; letter-spacing:0.02em; }
   #bullscreener .chip-bull, #bullscreener .chip-gex { background:#E3EEDF; color:#2F6D3F; }
   #bullscreener .chip-warn { background:#F7E3CE; color:#B15C1E; }
   #bullscreener .chip-none { color:var(--ft-mid); font-family: Arial, sans-serif; font-size:11px; }
@@ -73,7 +73,9 @@
 
   /* Autosize: fixed layout + wrapping so all 15 columns fit without a horizontal scrollbar */
   #bullscreener table { table-layout:fixed; background:#fff; }
-  #bullscreener th, #bullscreener td { white-space:normal; word-break:break-word; vertical-align:top; }
+  #bullscreener th, #bullscreener td { white-space:normal; overflow-wrap:break-word; vertical-align:top; }
+  #bullscreener th { line-height:1.3; padding:10px 8px; }
+  #bullscreener td { padding:10px 8px; }
   #bullscreener td { background:#fff; }
   #bullscreener tbody tr:nth-child(even) td, #bullscreener tbody tr.warn-row td { background:#fff; }
   #bullscreener thead th { border-right:1px solid #3d4250; }
@@ -95,21 +97,21 @@
   #bullscreener .bull-stat-item strong { font-weight:700; }
   #bullscreener .bull-stat-sep { color:rgba(255,255,255,0.4); }
   #bullscreener .table-wrap { margin-top:14px; }
-  #bullscreener th:nth-child(1),  #bullscreener td:nth-child(1)  { width:3%; }
-  #bullscreener th:nth-child(2),  #bullscreener td:nth-child(2)  { width:6%; }
-  #bullscreener th:nth-child(3),  #bullscreener td:nth-child(3)  { width:10%; }
+  #bullscreener th:nth-child(1),  #bullscreener td:nth-child(1)  { width:2%; }
+  #bullscreener th:nth-child(2),  #bullscreener td:nth-child(2)  { width:5%; }
+  #bullscreener th:nth-child(3),  #bullscreener td:nth-child(3)  { width:7%; }
   #bullscreener th:nth-child(4),  #bullscreener td:nth-child(4)  { width:6%; }
   #bullscreener th:nth-child(5),  #bullscreener td:nth-child(5)  { width:8%; }
   #bullscreener th:nth-child(6),  #bullscreener td:nth-child(6)  { width:7%; }
-  #bullscreener th:nth-child(7),  #bullscreener td:nth-child(7)  { width:5%; }
+  #bullscreener th:nth-child(7),  #bullscreener td:nth-child(7)  { width:4%; }
   #bullscreener th:nth-child(8),  #bullscreener td:nth-child(8)  { width:7%; }
-  #bullscreener th:nth-child(9),  #bullscreener td:nth-child(9)  { width:8%; }
-  #bullscreener th:nth-child(10), #bullscreener td:nth-child(10) { width:7%; }
+  #bullscreener th:nth-child(9),  #bullscreener td:nth-child(9)  { width:11%; }
+  #bullscreener th:nth-child(10), #bullscreener td:nth-child(10) { width:8%; }
   #bullscreener th:nth-child(11), #bullscreener td:nth-child(11) { width:5%; }
   #bullscreener th:nth-child(12), #bullscreener td:nth-child(12) { width:5%; }
   #bullscreener th:nth-child(13), #bullscreener td:nth-child(13) { width:5%; }
-  #bullscreener th:nth-child(14), #bullscreener td:nth-child(14) { width:6%; }
-  #bullscreener th:nth-child(15), #bullscreener td:nth-child(15) { width:12%; }
+  #bullscreener th:nth-child(14), #bullscreener td:nth-child(14) { width:7%; }
+  #bullscreener th:nth-child(15), #bullscreener td:nth-child(15) { width:13%; }
   footer { background:var(--ft-navy); color:#888; font-family: Arial, sans-serif; font-size:11px; text-align:center; padding:16px 40px; margin-top:20px; border-top:3px solid var(--ft-red); }
   @media (max-width: 700px) {
     .masthead, nav.section-nav, main { padding-left:16px; padding-right:16px; }
@@ -132,7 +134,7 @@
           <span class="fresh-dot fresh-green"></span>
           <div>
             <div class="fresh-label">Page generated</div>
-            <div class="fresh-ts">17 Jul 2026, 19:38 &middot; <strong>just now</strong></div>
+            <div class="fresh-ts">17 Jul 2026, 19:42 &middot; <strong>just now</strong></div>
           </div>
         </div>
         
