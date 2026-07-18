@@ -498,12 +498,12 @@ def build():
   #bullscreener td.newscell {{ font-size:0.78rem; color:var(--ft-muted); }}
 
   /* Autosize: fixed layout + wrapping so all 15 columns fit without a horizontal scrollbar */
-  #bullscreener table {{ table-layout:fixed; background:#fff; }}
+  #bullscreener table {{ table-layout:fixed; background:var(--ft-salmon); }}
   #bullscreener th, #bullscreener td {{ white-space:normal; overflow-wrap:break-word; vertical-align:top; }}
   #bullscreener th {{ line-height:1.3; padding:10px 8px; }}
   #bullscreener td {{ padding:10px 8px; }}
-  #bullscreener td {{ background:#fff; }}
-  #bullscreener tbody tr:nth-child(even) td, #bullscreener tbody tr.warn-row td {{ background:#fff; }}
+  #bullscreener td {{ background:var(--ft-salmon); }}
+  #bullscreener tbody tr:nth-child(even) td, #bullscreener tbody tr.warn-row td {{ background:var(--ft-salmon); }}
   #bullscreener thead th {{ border-right:1px solid #3d4250; }}
   #bullscreener thead th:last-child {{ border-right:none; }}
   #bullscreener tbody td {{ border-right:1px solid var(--ft-border); }}
