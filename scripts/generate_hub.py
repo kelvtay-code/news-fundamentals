@@ -477,7 +477,7 @@ def build():
   section {{ display:none; }}
   section.active {{ display:block; }}
   h2 {{ font-family: Arial, sans-serif; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; color:var(--ft-mid); margin:0 0 12px; }}
-  .table-wrap {{ overflow-x:auto; border:1px solid var(--ft-border); background:var(--ft-salmon); }}
+  .table-wrap {{ overflow-x:auto; border:1px solid var(--ft-border); background:var(--ft-card-bg); }}
   table {{ border-collapse:collapse; width:100%; font-size:0.82rem; font-family: Arial, sans-serif; }}
   th, td {{ padding:8px 10px; text-align:left; border-bottom:1px solid var(--ft-border); white-space:nowrap; }}
   th {{ position:sticky; top:0; background:var(--ft-navy); color:#fff; font-size:10px; text-transform:uppercase; letter-spacing:0.06em; cursor:pointer; }}
