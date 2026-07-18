@@ -22,6 +22,7 @@ BIZ_PATTERN = re.compile(r"business_overview_(\d{6})_(\d{4})\.csv$")
 BULLETIN_PATTERN = re.compile(r"news_bulletin_(\d{8})_(\d{4})\.html$")
 BULL_SCREENER_PATTERN = re.compile(r"bull_screener_(\d{6})_(\d{4})\.html$")
 SECTOR_SCAN_PATTERN = re.compile(r"sector_scan_(\d{6})_(\d{4})\.html$")
+REBOUND_PATTERN = re.compile(r"Rebound_candidate_(\d{6})_(\d{4})\.html$")
 BULL_TABLE_RE = re.compile(r'<table id="mainTable">.*?</table>', re.DOTALL)
 BULL_SORT_ATTR_RE = re.compile(r'\s*onclick="sortTable\(\d+\)"')
 
@@ -110,6 +111,21 @@ def latest_sector_scan():
     candidates = []
     for f in DASHBOARD_DIR.glob("sector_scan_*.html"):
         m = SECTOR_SCAN_PATTERN.match(f.name)
+        if not m:
+            continue
+        date_str, time_str = m.groups()
+        dt = datetime.strptime(date_str + time_str, "%d%m%y%H%M")
+        candidates.append((dt, f))
+    if not candidates:
+        return None, None
+    dt, path = max(candidates, key=lambda x: x[0])
+    return dt, path
+
+
+def latest_rebound_candidate():
+    candidates = []
+    for f in DASHBOARD_DIR.glob("Rebound_candidate_*.html"):
+        m = REBOUND_PATTERN.match(f.name)
         if not m:
             continue
         date_str, time_str = m.groups()
@@ -391,12 +407,21 @@ def build():
     else:
         sector_frame = "<p class='empty'>No sector scan file found.</p>"
 
+    rebound_dt, rebound_path = latest_rebound_candidate()
+    if rebound_path:
+        shutil.copyfile(rebound_path, SITE_DIR / "rebounder.html")
+    rebound_css, rebound_frame = render_embedded_dashboard(rebound_path, "reboundEmbed")
+    if rebound_frame is None:
+        rebound_frame = "<p class='empty'>No rebound candidate file found.</p>"
+        rebound_css = ""
+
     generated_at = datetime.now()
     sidebar_html = render_freshness_sidebar([
         ("Page generated", generated_at),
         ("Oil brief", oil_dt),
         ("Bull screener", bull_dt),
         ("Sector scan", sector_dt),
+        ("Rebounder", rebound_dt),
     ])
 
     page = f"""<!doctype html>
@@ -522,6 +547,8 @@ def build():
   }}
   #newsEmbed {{ overflow-x:hidden; }}
   {bulletin_css}
+  #reboundEmbed {{ overflow-x:hidden; }}
+  {rebound_css}
 </style>
 </head>
 <body>
@@ -543,6 +570,7 @@ def build():
     <button data-target="oil">Oil Brief</button>
     <button data-target="bullscreener">Bull Screener</button>
     <button data-target="sectorscan">Sector Scan</button>
+    <button data-target="rebounder">Rebounder</button>
   </div>
 </nav>
 <main>
@@ -563,6 +591,9 @@ def build():
   <section id="sectorscan">
     <h2>Sector Scan</h2>
     {sector_frame}
+  </section>
+  <section id="rebounder">
+    {rebound_frame}
   </section>
 </main>
 <footer>Optionx Hub &middot; static, offline-capable &middot; regenerate after each pipeline run</footer>
@@ -607,7 +638,8 @@ def build():
         f"({len(biz_rows)} overview rows, bulletin: {bulletin_path.name if bulletin_path else 'none'}, "
         f"oil brief: {oil_path.name if oil_path else 'none'}, "
         f"bull screener: {bull_path.name if bull_path else 'none'}, "
-        f"sector scan: {sector_path.name if sector_path else 'none'})"
+        f"sector scan: {sector_path.name if sector_path else 'none'}, "
+        f"rebounder: {rebound_path.name if rebound_path else 'none'})"
     )
 
 
