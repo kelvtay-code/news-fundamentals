@@ -200,9 +200,9 @@
 #reboundEmbed .stat-item { font-family: Arial, sans-serif; font-size: 12px; color: #fff; display: flex; align-items: center; gap: 6px; }
 #reboundEmbed .stat-item strong { font-weight: 700; }
 #reboundEmbed .stat-sep { color: rgba(255,255,255,0.4); }
-#reboundEmbed main { max-width: 1320px; margin: 0 auto; padding: 20px; }
+#reboundEmbed .rb-main { max-width: 1320px; margin: 0 auto; padding: 20px; }
 #reboundEmbed h2 { font-family: Arial, sans-serif; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ft-mid); margin: 0 0 12px; }
-#reboundEmbed section { margin-bottom: 32px; }
+#reboundEmbed .rb-section { margin-bottom: 32px; }
 #reboundEmbed .rb-table-wrap { overflow-x: auto; border: 1px solid var(--ft-border); background: #fff; }
 #reboundEmbed table { border-collapse: collapse; width: 100%; table-layout: fixed; font-size: 0.75rem; font-family: Arial, sans-serif; }
 #reboundEmbed th, #reboundEmbed td { padding: 7px 6px; text-align: left; border-bottom: 1px solid var(--ft-border); border-right: 1px solid var(--ft-border); vertical-align: top; overflow: hidden; }
@@ -254,7 +254,7 @@
 #reboundEmbed .legend-card { background: var(--ft-card-bg); border: 1px solid var(--ft-border); border-top: 3px solid var(--ft-card-bdr); padding: 14px 18px; font-family: Arial, sans-serif; font-size: 12px; color: var(--ft-muted); line-height: 1.8; }
 #reboundEmbed .legend-card b { color: var(--ft-warm-blk); }
 #reboundEmbed footer { background: var(--ft-navy); color: #888; font-family: Arial, sans-serif; font-size: 11px; text-align: center; padding: 16px 40px; margin-top: 20px; border-top: 3px solid var(--ft-red); }
-@media (max-width: 700px) {#reboundEmbed .masthead, #reboundEmbed .stats-banner { margin-left: 10px; margin-right: 10px; padding-left: 14px; padding-right: 14px; }#reboundEmbed main { padding: 14px; }#reboundEmbed .masthead-title { font-size: 1.3rem; }}
+@media (max-width: 700px) {#reboundEmbed .masthead, #reboundEmbed .stats-banner { margin-left: 10px; margin-right: 10px; padding-left: 14px; padding-right: 14px; }#reboundEmbed .rb-main { padding: 14px; }#reboundEmbed .masthead-title { font-size: 1.3rem; }}
 </style>
 </head>
 <body>
@@ -270,7 +270,7 @@
           <span class="fresh-dot fresh-green"></span>
           <div>
             <div class="fresh-label">Page generated</div>
-            <div class="fresh-ts">18 Jul 2026, 19:07 &middot; <strong>just now</strong></div>
+            <div class="fresh-ts">18 Jul 2026, 19:15 &middot; <strong>just now</strong></div>
           </div>
         </div>
         
@@ -306,7 +306,7 @@
           <span class="fresh-dot fresh-green"></span>
           <div>
             <div class="fresh-label">Rebounder</div>
-            <div class="fresh-ts">18 Jul 2026, 19:07 &middot; <strong>just now</strong></div>
+            <div class="fresh-ts">18 Jul 2026, 19:15 &middot; <strong>just now</strong></div>
           </div>
         </div>
         
@@ -484,7 +484,7 @@
 <div class="masthead">
   <div class="masthead-eyebrow">Optionx Intelligence — Rebound Screener</div>
   <div class="masthead-title">Rebound <span>Candidate</span> Dashboard</div>
-  <div class="masthead-date">Stock Analysis window Jul 01–Jul 18, 2026 &nbsp;&middot;&nbsp; IV window Jul 03–Jul 18, 2026 &nbsp;&middot;&nbsp; Generated 18 Jul 2026, 19:07</div>
+  <div class="masthead-date">Stock Analysis window Jul 01–Jul 18, 2026 &nbsp;&middot;&nbsp; IV window Jul 03–Jul 18, 2026 &nbsp;&middot;&nbsp; Generated 18 Jul 2026, 19:15</div>
   <div class="masthead-tagline">"Distribution/Mark-down phase, pulled back &gt;15% from the 10-day high — screened for volume, IV, GEX and trend confirmation before the bounce."</div>
 </div>
 <div class="stats-banner"><div class="stats-inner">
@@ -496,8 +496,8 @@
   <div class="stat-item">GEX Improving (2d) <strong>2</strong></div>
 </div></div>
 
-<main>
-  <section>
+<div class="rb-main">
+  <div class="rb-section">
     <h2>Rebound Candidates — ranked by pullback depth</h2>
     <div class="rb-table-wrap">
     <table id="reboundTable">
@@ -820,9 +820,9 @@
       </tbody>
     </table>
     </div>
-  </section>
+  </div>
 
-  <section>
+  <div class="rb-section">
     <h2>Legend</h2>
     <div class="legend-card">
       <b>Range Pos:</b> LR (0–25%) = near 10-day low · MR (25–75%) = mid-range · HR (&gt;75%) = near 10-day high.<br>
@@ -832,8 +832,8 @@
       <b>EMA Trend:</b> BULLISH (above EMA21/SMA50/SMA200) &gt; Green Shoots (above EMA21+SMA50) &gt; Second Test (above 2 of 3 MAs) &gt; First Test (above 1 of 3 MAs).<br>
       <b>Sorting:</b> click any column header to sort by that column; click again to reverse.
     </div>
-  </section>
-</main>
+  </div>
+</div>
 
 
 
