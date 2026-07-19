@@ -59,7 +59,7 @@
   .news-toolbar { margin-bottom:8px; font-family: Arial, sans-serif; }
   .open-full { font-size:0.82rem; color:var(--ft-blue); text-decoration:none; font-weight:600; }
   .open-full:hover { text-decoration:underline; }
-  #oil iframe, #sectorscan iframe { width:100%; height:calc(100vh - 220px); min-height:600px; border:1px solid var(--ft-border); background:#fff; }
+  #oil iframe, #sectorscan iframe, #tradedesk iframe { width:100%; height:calc(100vh - 220px); min-height:600px; border:1px solid var(--ft-border); background:#fff; }
   .empty { color:var(--ft-mid); font-style:italic; font-family: Arial, sans-serif; }
 
   #bullscreener .chip { display:inline-block; font-family: Arial, sans-serif; font-size:10.5px; font-weight:700; padding:2px 8px; border-radius:2px; white-space:normal; letter-spacing:0.02em; }
@@ -321,6 +321,7 @@
     <button data-target="bullscreener">Bull Screener</button>
     <button data-target="sectorscan">Sector Scan</button>
     <button data-target="rebounder">Rebounder</button>
+    <button data-target="tradedesk">Trade Desk</button>
   </div>
 </nav>
 <main>
@@ -477,6 +478,10 @@
   <section id="sectorscan">
     <h2>Sector Scan</h2>
     <div class="news-toolbar"><a class="open-full" href="sector-scan.html" target="_blank" rel="noopener">Open full sector scan in new tab &#8599;</a></div><iframe src="sector-scan.html" title="Sector Scan"></iframe>
+  </section>
+  <section id="tradedesk">
+    <h2>Trade Desk</h2>
+    <div class="news-toolbar"><a class="open-full" href="trade-desk.html" target="_blank" rel="noopener">Open full trade desk in new tab &#8599;</a></div><iframe src="trade-desk.html" title="Trade Desk"></iframe>
   </section>
   <section id="rebounder">
     <div id="reboundEmbed">

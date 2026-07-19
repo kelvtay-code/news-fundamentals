@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Optionx — Trade Desk Architecture</title>
+<style>
+  :root{
+    --ft-salmon:   #FFF1E0;
+    --ft-red:      #990F3D;
+    --ft-blue:     #0F5499;
+    --ft-navy:     #262A33;
+    --ft-warm-blk: #33302E;
+    --ft-border:   #CCB799;
+    --ft-mid:      #8D775F;
+    --ft-muted:    #66605A;
+    --ft-card-bg:  #FFFAF4;
+    --ft-card-bdr: #D4A96A;
+    --ft-gold:     #F0A500;
+    --tier-red-tx:#990F3D;   --tier-red-bg:#F6DCE0;   --tier-red-bdr:#990F3D;
+    --tier-org-tx:#B5651D;   --tier-org-bg:#F3E0C9;   --tier-org-bdr:#B5651D;
+    --tier-gold-tx:#B8860B;  --tier-gold-bg:#F5E8C8;  --tier-gold-bdr:#B8860B;
+    --tier-grn-tx:#4B7F3D;   --tier-grn-bg:#E3EDDB;   --tier-grn-bdr:#4B7F3D;
+  }
+
+  *{ box-sizing:border-box; }
+  html,body{ overflow-x:hidden; }
+  body{
+    margin:0;
+    font-family: Georgia, 'Times New Roman', serif;
+    background:var(--ft-salmon);
+    color:var(--ft-warm-blk);
+    font-size:13px;
+    line-height:1.4;
+  }
+  a{ color:var(--ft-blue); }
+
+  .masthead{ background:var(--ft-navy); color:#fff; padding:0 28px; border-bottom:4px solid var(--ft-red); }
+  .masthead-inner{ max-width:1400px; margin:0 auto; padding:9px 0 8px; display:flex; align-items:baseline; gap:14px; flex-wrap:wrap; }
+  .masthead-eyebrow{ font-family:Arial,sans-serif; font-size:8.5px; letter-spacing:0.1em; text-transform:uppercase; color:#AAAAAA; }
+  .masthead-title{ font-size:1.35rem; font-weight:700; letter-spacing:-0.01em; white-space:nowrap; }
+  .masthead-title span{ color:var(--ft-gold); }
+  .masthead-tagline{ font-style:italic; font-size:11.5px; color:#CCCCCC; margin:0; }
+
+  main{ max-width:1400px; margin:0 auto; padding:14px 28px 16px; }
+
+  h2.section-label{
+    font-family:Arial,sans-serif; font-size:10px; font-weight:700; text-transform:uppercase;
+    letter-spacing:0.1em; color:var(--ft-mid); margin:0 0 8px;
+  }
+
+  /* pipeline: fluid 11-col grid = 6 stages + 5 connectors, never overflows */
+  .pipeline{
+    display:grid;
+    grid-template-columns: 1fr 26px 1fr 26px 1fr 26px 1fr 26px 1fr 26px 1fr;
+    align-items:stretch;
+    margin-bottom:10px;
+  }
+  .stage{ display:flex; flex-direction:column; min-width:0; }
+  .stage-hdr{
+    background:var(--ft-navy); color:#fff; padding:5px 8px;
+    font-family:Arial,sans-serif; font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:0.06em;
+    margin-bottom:6px; min-height:26px; display:flex; align-items:center; line-height:1.2;
+  }
+  .connector{ display:flex; align-items:center; justify-content:center; min-width:0; position:relative; }
+  .connector svg{ width:20px; height:12px; overflow:visible; flex:0 0 auto; }
+  .connector path{ stroke:var(--ft-mid); }
+  .connector polygon{ fill:var(--ft-mid); }
+  .connector-label{
+    position:absolute; top:calc(50% - 20px); font-size:8px; color:var(--ft-mid); white-space:nowrap;
+    font-family:Arial,sans-serif; letter-spacing:0.03em; text-transform:uppercase;
+  }
+
+  .card-grid{ display:grid; grid-template-columns:1fr 1fr; gap:6px; flex:1; align-content:start; }
+  .card-grid .card:last-child:nth-child(odd){ grid-column:1 / -1; }
+
+  .card{
+    background:var(--ft-card-bg); border:1px solid var(--ft-border); border-top:3px solid var(--ft-card-bdr);
+    padding:7px 9px; min-width:0;
+  }
+  .stage > .card + .card{ margin-top:6px; }
+  .card-title{
+    font-family:Arial,sans-serif; font-size:10px; font-weight:700; letter-spacing:0.01em;
+    margin:0 0 3px; color:var(--ft-warm-blk); overflow-wrap:break-word;
+  }
+  .card-desc{ font-size:10.5px; color:var(--ft-muted); margin:0; font-family:Georgia,serif; line-height:1.3; overflow-wrap:break-word; }
+
+  .chip{
+    display:inline-block; font-family:Arial,sans-serif; font-size:8px; font-weight:700;
+    padding:2px 6px; border-radius:2px; letter-spacing:0.02em; text-transform:uppercase;
+    margin-top:5px; border:1px solid; background:var(--ft-salmon); color:var(--ft-mid); border-color:var(--ft-border);
+  }
+  .card.t-grn{ border-top-color:var(--tier-grn-bdr); }
+  .card.t-grn .chip{ color:var(--tier-grn-tx); background:var(--tier-grn-bg); border-color:var(--tier-grn-bdr); }
+  .card.t-red{ border-top-color:var(--tier-red-bdr); }
+  .card.t-red .chip{ color:var(--tier-red-tx); background:var(--tier-red-bg); border-color:var(--tier-red-bdr); }
+  .card.t-gold{ border-top-color:var(--tier-gold-bdr); }
+  .card.t-gold .chip{ color:var(--tier-gold-tx); background:var(--tier-gold-bg); border-color:var(--tier-gold-bdr); }
+  .card.t-org{ border-top-color:var(--tier-org-bdr); }
+  .card.t-org .chip{ color:var(--tier-org-tx); background:var(--tier-org-bg); border-color:var(--tier-org-bdr); }
+  .card.t-navy{ border-top-color:var(--ft-navy); }
+  .card.t-navy .chip{ color:#fff; background:var(--ft-navy); border-color:var(--ft-navy); }
+
+  .stack{ display:flex; flex-direction:column; justify-content:center; gap:5px; flex:1; }
+  .discussion{
+    align-self:center; font-family:Arial,sans-serif; font-size:8px; color:var(--ft-mid);
+    letter-spacing:0.06em; text-transform:uppercase; display:flex; align-items:center; gap:4px;
+  }
+  .solo{ display:flex; flex-direction:column; justify-content:center; flex:1; }
+
+  /* roster */
+  .table-wrap{ overflow-x:auto; border:1px solid var(--ft-border); background:var(--ft-card-bg); margin-top:6px; }
+  table{ border-collapse:collapse; width:100%; font-size:11px; font-family:Arial,sans-serif; }
+  th, td{ padding:5px 10px; text-align:left; border-bottom:1px solid var(--ft-border); vertical-align:top; }
+  th{ background:var(--ft-navy); color:#fff; font-size:9px; text-transform:uppercase; letter-spacing:0.05em; white-space:nowrap; }
+  tbody tr:hover{ background:var(--ft-salmon); }
+  td.agents{ font-weight:700; white-space:nowrap; }
+  td.desc{ color:var(--ft-muted); font-family:Georgia,serif; font-size:11.5px; line-height:1.3; }
+
+  .roster{ margin-top:14px; }
+
+  footer{
+    background:var(--ft-navy); color:#888; font-family:Arial,sans-serif; font-size:9.5px;
+    text-align:center; padding:8px 28px; margin-top:12px; border-top:3px solid var(--ft-red);
+    display:flex; align-items:center; justify-content:center; gap:16px; flex-wrap:wrap;
+  }
+  footer .legend{ display:flex; align-items:center; gap:14px; flex-wrap:wrap; }
+  footer .sw{ width:8px; height:8px; border-radius:2px; display:inline-block; margin-right:4px; }
+  footer .sep{ color:#555; }
+
+  @media (max-width:900px){
+    .pipeline{
+      grid-template-columns:1fr;
+      gap:4px;
+    }
+    .connector{ transform:rotate(90deg); height:22px; }
+    .card-grid{ grid-template-columns:1fr 1fr; }
+  }
+  @media (max-width:520px){
+    .masthead, main{ padding-left:14px; padding-right:14px; }
+    .masthead-eyebrow{ display:none; }
+    .masthead-title{ font-size:1.05rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <div class="masthead-inner">
+    <div>
+      <div class="masthead-eyebrow">Optionx Intelligence</div>
+      <div class="masthead-title">The Trade <span>Desk</span></div>
+    </div>
+    <p class="masthead-tagline">Sourcing → bull/bear debate → trade proposal → risk gate → manager sign-off → execution, built from the skills and agents already running in this repo.</p>
+  </div>
+</div>
+
+<main>
+
+  <h2 class="section-label">Pipeline</h2>
+  <div class="pipeline">
+
+    <!-- DATA SOURCES -->
+    <div class="stage">
+      <div class="stage-hdr">Data Sources</div>
+      <div class="card-grid">
+        <div class="card"><p class="card-title">Market &amp; Options</p><p class="card-desc">ivextract → IV_*.csv, watchlist_main.csv, TigerTrade CSV</p></div>
+        <div class="card"><p class="card-title">Technicals</p><p class="card-desc">wyck — phase/pattern · top7 — 7-day grid</p></div>
+        <div class="card"><p class="card-title">News &amp; Sentiment</p><p class="card-desc">heady, news_investigator, news-reporter</p></div>
+        <div class="card"><p class="card-title">Fundamentals</p><p class="card-desc">finfetch — valuation, margins, overview</p></div>
+      </div>
+    </div>
+
+    <div class="connector"><svg viewBox="0 0 20 12"><path d="M0 6 H14" stroke-width="1.5" fill="none"/><polygon points="14,2 20,6 14,10"/></svg></div>
+
+    <!-- RESEARCHER TEAM -->
+    <div class="stage">
+      <div class="stage-hdr">Researcher Team</div>
+      <div class="stack">
+        <div class="card t-grn">
+          <p class="card-title">bull_screener</p>
+          <p class="card-desc">Spring/Uptrend filter → top7 confirm → ivchk gate → positive-GEX cut</p>
+          <span class="chip">Bull case</span>
+        </div>
+        <div class="discussion">↕ discussion</div>
+        <div class="card t-red">
+          <p class="card-title">riskcheck / option-riskmgr</p>
+          <p class="card-desc">Wyckoff + Top7 + IVchk trend — FAIL if 2-of-3 turn bearish</p>
+          <span class="chip">Skeptic case</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="connector"><div class="connector-label">buy/veto</div><svg viewBox="0 0 20 12"><path d="M0 6 H14" stroke-width="1.5" fill="none"/><polygon points="14,2 20,6 14,10"/></svg></div>
+
+    <!-- TRADER -->
+    <div class="stage">
+      <div class="stage-hdr">Trader</div>
+      <div class="solo">
+        <div class="card t-gold">
+          <p class="card-title">opt_strategist</p>
+          <p class="card-desc">Dedupes top7-bullish per sector, runs full risk audit, ranks bull → bear, outputs HTML + CSV</p>
+          <span class="chip">Proposal</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="connector"><div class="connector-label">proposal</div><svg viewBox="0 0 20 12"><path d="M0 6 H14" stroke-width="1.5" fill="none"/><polygon points="14,2 20,6 14,10"/></svg></div>
+
+    <!-- RISK MGMT TEAM -->
+    <div class="stage">
+      <div class="stage-hdr">Risk Mgmt Team</div>
+      <div class="card-grid">
+        <div class="card t-org"><p class="card-title">voltbuster</p><p class="card-desc">Strict 3-gate check — all clear or no-trade</p></div>
+        <div class="card t-org"><p class="card-title">evaluator</p><p class="card-desc">EMA/SMA flag, IV-spot divergence, news spawn</p></div>
+        <div class="card t-org"><p class="card-title">sector_scanner</p><p class="card-desc">Flags weakest sector via IV Rank + GEX</p></div>
+      </div>
+    </div>
+
+    <div class="connector"><div class="connector-label">decision</div><svg viewBox="0 0 20 12"><path d="M0 6 H14" stroke-width="1.5" fill="none"/><polygon points="14,2 20,6 14,10"/></svg></div>
+
+    <!-- MANAGER -->
+    <div class="stage">
+      <div class="stage-hdr">Manager</div>
+      <div class="solo">
+        <div class="card t-navy">
+          <p class="card-title">dailyreview</p>
+          <p class="card-desc">Audits every entry against Trading Rules v2.3, updates the Trade Journal, authorizes what stands</p>
+          <span class="chip">Kelv signs off</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="connector"><svg viewBox="0 0 20 12"><path d="M0 6 H14" stroke-width="1.5" fill="none"/><polygon points="14,2 20,6 14,10"/></svg></div>
+
+    <!-- EXECUTION -->
+    <div class="stage">
+      <div class="stage-hdr">Execution</div>
+      <div class="solo">
+        <div class="card t-navy">
+          <p class="card-title">TigerTrade</p>
+          <p class="card-desc">Fills flow back into Portfolio Live CSV → feeds evaluator + dailyreview next cycle</p>
+          <span class="chip">Live book</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <section class="roster">
+    <h2 class="section-label">Team Roster</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Role</th><th>Agent(s)</th><th>What it does</th></tr></thead>
+        <tbody>
+          <tr><td>Analyst</td><td class="agents">deepdive</td><td class="desc">Spawns funda-analyst + option-riskmgr + news-reporter in parallel, compiles one workup</td></tr>
+          <tr><td>Researcher</td><td class="agents">bull_screener ↔ riskcheck</td><td class="desc">Argues the bull case against the veto case before anything reaches the trader</td></tr>
+          <tr><td>Trader</td><td class="agents">opt_strategist</td><td class="desc">Turns surviving candidates into a ranked, sector-sorted trade list</td></tr>
+          <tr><td>Risk Team</td><td class="agents">evaluator · voltbuster · sector_scanner</td><td class="desc">Ongoing book health, entry gating, macro/sector exposure checks</td></tr>
+          <tr><td>Manager</td><td class="agents">dailyreview</td><td class="desc">Final authority — rules audit, journal update, go/no-go on every new position</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="legend">
+    <span><span class="sw" style="background:var(--tier-grn-tx)"></span>bull evidence</span>
+    <span><span class="sw" style="background:var(--tier-red-tx)"></span>skeptic / veto</span>
+    <span><span class="sw" style="background:var(--tier-gold-tx)"></span>proposal</span>
+    <span><span class="sw" style="background:var(--tier-org-tx)"></span>risk gate</span>
+    <span><span class="sw" style="background:#fff"></span>manager / execution</span>
+  </div>
+  <span class="sep">|</span>
+  <span>Also in rotation: opt_reporter · rebounder · wyckoff-extract</span>
+</footer>
+</body>
+</html>
