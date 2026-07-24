@@ -1,693 +1,906 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Oil Market Deep Dive — July 23, 2026</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oil Market Brief — 23 Jul 2026 | Platts Multi-Report Review</title>
 <style>
-  :root{
-    --ft-salmon:#FFF1E0;--ft-red:#990F3D;--ft-blue:#0F5499;--ft-navy:#262A33;--ft-warm-blk:#33302E;
-    --ft-border:#CCB799;--ft-mid:#8D775F;--ft-muted:#66605A;--ft-card-bg:#FFFAF4;--ft-card-bdr:#D4A96A;--ft-gold:#F0A500;
-    --bg:var(--ft-salmon);--panel:var(--ft-card-bg);--border:var(--ft-border);--text:var(--ft-warm-blk);--dim:var(--ft-muted);
-    --green:#4B7F3D;--orange:#B5651D;--red:var(--ft-red);--yellow:#B8860B;--blue:var(--ft-blue);
-    --green-bg:#E3EDDB;--orange-bg:#F3E0C9;--red-bg:#F6DCE0;--yellow-bg:#F5E8C8;
+  :root {
+    --bg: #0d1117;
+    --surface: #161b22;
+    --surface2: #1c2330;
+    --border: #30363d;
+    --text: #e6edf3;
+    --muted: #8b949e;
+    --bull: #3fb950;
+    --bull-bg: rgba(63,185,80,0.12);
+    --bear: #f85149;
+    --bear-bg: rgba(248,81,73,0.12);
+    --neutral: #d29922;
+    --neutral-bg: rgba(210,153,34,0.12);
+    --info: #58a6ff;
+    --info-bg: rgba(88,166,255,0.12);
+    --critical: #ff7b72;
+    --critical-bg: rgba(255,123,114,0.12);
+    --accent: #79c0ff;
   }
-  @media (prefers-color-scheme: dark){
-    :root{--bg:#060d1a;--panel:#0d1a2e;--border:#1a2e4a;--text:#c8d8f0;--dim:#5a7a9a;
-      --green:#4ade80;--orange:#f97316;--red:#ef4444;--yellow:#fbbf24;--blue:#38bdf8;
-      --green-bg:rgba(74,222,128,0.12);--orange-bg:rgba(249,115,22,0.12);--red-bg:rgba(239,68,68,0.12);--yellow-bg:rgba(251,191,36,0.12);}
-  }
-  :root[data-theme="dark"]{--bg:#060d1a;--panel:#0d1a2e;--border:#1a2e4a;--text:#c8d8f0;--dim:#5a7a9a;
-    --green:#4ade80;--orange:#f97316;--red:#ef4444;--yellow:#fbbf24;--blue:#38bdf8;
-    --green-bg:rgba(74,222,128,0.12);--orange-bg:rgba(249,115,22,0.12);--red-bg:rgba(239,68,68,0.12);--yellow-bg:rgba(251,191,36,0.12);}
-  :root[data-theme="light"]{--bg:var(--ft-salmon);--panel:var(--ft-card-bg);--border:var(--ft-border);--text:var(--ft-warm-blk);--dim:var(--ft-muted);
-    --green:#4B7F3D;--orange:#B5651D;--red:var(--ft-red);--yellow:#B8860B;--blue:var(--ft-blue);
-    --green-bg:#E3EDDB;--orange-bg:#F3E0C9;--red-bg:#F6DCE0;--yellow-bg:#F5E8C8;}
 
-  * { box-sizing: border-box; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
   body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     background: var(--bg);
     color: var(--text);
-    font-family: Georgia, 'Times New Roman', serif;
-    margin: 0;
-    padding: 0;
+    font-size: 13px;
     line-height: 1.5;
-    font-size: 14px;
   }
-  .wrap { max-width: 1320px; margin: 0 auto; padding: 24px 40px 40px; }
 
-  /* Masthead */
-  .masthead { background: var(--ft-navy); color: #fff; padding: 0 40px; border-bottom: 4px solid var(--ft-red); }
-  .masthead-inner { max-width: 1320px; margin: 0 auto; padding: 14px 0 12px; display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
-  .masthead-eyebrow { font-family: Arial, sans-serif; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: #AAAAAA; margin-bottom: 3px; }
-  .masthead-title { font-size: 1.9rem; font-weight: 700; letter-spacing: -0.01em; }
-  .masthead-title span { color: var(--ft-gold); }
-  .masthead-date { font-family: Arial, sans-serif; font-size: 12px; color: #AAAAAA; margin-top: 8px; }
-  .masthead-sources { font-family: Arial, sans-serif; font-size: 11px; color: #CCCCCC; margin-top: 4px; }
-
-  /* Stats banner */
-  .stats-banner { background: var(--ft-red); padding: 10px 40px; }
-  .stats-inner { max-width: 1320px; margin: 0 auto; display: flex; align-items: center; gap: 22px; flex-wrap: wrap; }
-  .stat-tile { font-family: Arial, sans-serif; color: #fff; }
-  .stat-tile .label { font-size: 9.5px; text-transform: uppercase; letter-spacing: 0.07em; color: rgba(255,255,255,0.75); }
-  .stat-tile .value { font-family: Georgia, serif; font-size: 1.05rem; font-weight: 700; margin-top: 2px; }
-  .stat-tile .delta { font-family: Arial, sans-serif; font-size: 10.5px; color: #FFE3EC; display: block; margin-top: 1px; }
-
-  main.content { max-width: 1320px; margin: 0 auto; padding: 24px 40px 40px; }
-
-  h2 { font-family: Arial, sans-serif; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ft-mid); margin: 0 0 14px; display:flex; align-items:center; gap:10px; }
-  h3 { font-family: Arial, sans-serif; font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ft-red); margin: 18px 0 6px; border-bottom: 1px solid var(--ft-border); padding-bottom: 4px; }
-
-  .ft-card {
-    background: var(--panel);
-    border: 1px solid var(--border);
-    border-top: 3px solid var(--ft-card-bdr);
-    padding: 20px 22px;
-    margin-bottom: 20px;
+  .header {
+    background: linear-gradient(135deg, #161b22 0%, #1c2330 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 20px 28px 16px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
   }
-  .ft-card p { margin: 0 0 10px; font-size: 0.95rem; }
-  .ft-card ul { margin: 6px 0 10px; padding-left: 20px; font-size: 0.9rem; }
-  .ft-card li { margin-bottom: 4px; }
-
-  .table-wrap { overflow-x: auto; border: 1px solid var(--border); }
-  table { border-collapse: collapse; width: 100%; font-size: 0.8rem; font-family: Arial, sans-serif; min-width: 900px; }
-  th, td { text-align: left; padding: 9px 11px; border-bottom: 1px solid var(--border); vertical-align: top; }
-  th { position: sticky; top: 0; background: var(--ft-navy); color: #fff; font-size: 10px; font-weight:700; text-transform: uppercase; letter-spacing: 0.05em; }
-  tbody tr:hover { background: var(--ft-salmon); }
-  tr:last-child td { border-bottom: none; }
-
-  .chip {
-    display: inline-block;
-    font-family: Arial, sans-serif;
-    font-size: 10.5px;
-    font-weight: 700;
-    padding: 3px 10px;
-    border-radius: 2px;
-    letter-spacing: 0.02em;
-    white-space: nowrap;
-    border: 1px solid transparent;
+  .header-left h1 { font-size: 20px; font-weight: 700; color: var(--text); letter-spacing: -0.3px; }
+  .header-left .sub { font-size: 12px; color: var(--muted); margin-top: 3px; }
+  .header-right { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
+  .badge-source {
+    background: var(--info-bg); color: var(--info); border: 1px solid rgba(88,166,255,0.3);
+    padding: 2px 10px; border-radius: 20px; font-size: 11px; font-weight: 600;
   }
-  .chip-bull  { color: var(--green);  background: var(--green-bg);  border-color: var(--green); }
-  .chip-crit  { color: var(--red);    background: var(--red-bg);    border-color: var(--red); }
-  .chip-watch { color: var(--yellow); background: var(--yellow-bg); border-color: var(--yellow); }
-  .chip-warn  { color: var(--orange); background: var(--orange-bg); border-color: var(--orange); }
+  .badge-date { font-size: 11px; color: var(--muted); }
 
-  .ft-note { font-family: Arial, sans-serif; color: var(--dim); font-size: 0.78rem; margin-top: 10px; line-height:1.55; border-left: 3px solid var(--ft-border); padding: 8px 12px; background: rgba(0,0,0,0.02); }
-
-  .factor-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 12px; }
-  .factor-cols .bull-title { color: var(--green); font-weight: 700; font-family: Arial, sans-serif; font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.06em; }
-  .factor-cols .bear-title { color: var(--red); font-weight: 700; font-family: Arial, sans-serif; font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.06em; }
-
-  .toc { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
-  .toc a {
-    font-family: Arial, sans-serif; font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;
-    text-decoration: none; color: var(--ft-red);
-    border: 1px solid var(--ft-border); padding: 5px 12px; border-radius: 2px; background: var(--ft-card-bg);
+  .macro-banner {
+    margin: 16px 28px; background: var(--critical-bg); border: 1px solid rgba(255,123,114,0.35);
+    border-left: 4px solid var(--critical); border-radius: 8px; padding: 14px 18px;
   }
-  .toc a:hover { background: var(--ft-red); color: #fff; border-color: var(--ft-red); }
-
-  footer { background: var(--ft-navy); color: #888; font-family: Arial, sans-serif; font-size: 11px; text-align: center; padding: 18px 40px; margin-top: 12px; border-top: 3px solid var(--ft-red); }
-
-  @media (max-width: 700px) {
-    .masthead, .stats-banner, .wrap, main.content { padding-left: 16px; padding-right: 16px; }
-    .masthead-eyebrow { display: none; }
-    .masthead-title { font-size: 1.3rem; }
-    .factor-cols { grid-template-columns: 1fr; }
+  .macro-banner h2 {
+    font-size: 12px; font-weight: 700; color: var(--critical); text-transform: uppercase;
+    letter-spacing: 0.8px; margin-bottom: 6px;
   }
+  .macro-banner p { font-size: 12.5px; color: #cdd9e5; line-height: 1.6; }
+  .macro-banner p + p { margin-top: 8px; }
+  .macro-banner .macro-flags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+  .macro-flag {
+    background: rgba(255,123,114,0.15); border: 1px solid rgba(255,123,114,0.3); color: #ff9492;
+    padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 600;
+  }
+
+  .prior-banner {
+    margin: 0 28px 16px; background: var(--info-bg); border: 1px solid rgba(88,166,255,0.3);
+    border-radius: 8px; padding: 12px 18px; font-size: 12px; color: #cdd9e5;
+  }
+  .prior-banner strong { color: var(--accent); }
+  .prior-chip { display: inline-block; padding: 2px 9px; border-radius: 10px; font-size: 10.5px; font-weight: 700; margin: 2px 3px; }
+  .prior-chip.bull { background: var(--bull-bg); color: var(--bull); }
+  .prior-chip.bear { background: var(--bear-bg); color: var(--bear); }
+  .prior-chip.neutral { background: var(--neutral-bg); color: var(--neutral); }
+
+  .bench-strip { margin: 0 28px 16px; display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 8px; }
+  .bench-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; }
+  .bench-card .label { font-size: 10px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.6px; }
+  .bench-card .price { font-size: 16px; font-weight: 700; margin-top: 2px; }
+  .bench-card .delta { font-size: 11px; margin-top: 1px; }
+  .bench-card .prev { font-size: 10px; color: var(--muted); margin-top: 1px; }
+  .up { color: var(--bull); }
+  .dn { color: var(--bear); }
+  .flat { color: var(--neutral); }
+
+  .section-header { padding: 0 28px; margin: 20px 0 10px; display: flex; align-items: center; gap: 10px; }
+  .section-header h2 { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); }
+  .section-header::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  .dashboard-grid { padding: 0 28px 28px; display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 12px; }
+  .product-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; }
+  .card-header { padding: 12px 16px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border); }
+  .card-header-left { display: flex; align-items: center; gap: 10px; }
+  .product-name { font-size: 13px; font-weight: 700; color: var(--text); }
+  .product-price { font-size: 11px; color: var(--muted); margin-top: 1px; }
+
+  .verdict { display: flex; flex-direction: column; align-items: flex-end; gap: 3px; }
+  .verdict-badge { padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.3px; }
+  .verdict-badge.bull { background: var(--bull-bg); color: var(--bull); border: 1px solid rgba(63,185,80,0.3); }
+  .verdict-badge.xbull { background: rgba(63,185,80,0.22); color: var(--bull); border: 1px solid rgba(63,185,80,0.55); }
+  .verdict-badge.bear { background: var(--bear-bg); color: var(--bear); border: 1px solid rgba(248,81,73,0.3); }
+  .verdict-badge.neutral { background: var(--neutral-bg); color: var(--neutral); border: 1px solid rgba(210,153,34,0.3); }
+  .verdict-badge.nodata { background: var(--surface2); color: var(--muted); border: 1px solid var(--border); }
+  .conviction { font-size: 10px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+
+  .card-body { padding: 12px 16px; flex: 1; display: flex; flex-direction: column; gap: 10px; }
+  .pillar { display: flex; flex-direction: column; gap: 4px; }
+  .pillar-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.7px; color: var(--muted); }
+  .pillar-text { font-size: 12px; color: #cdd9e5; line-height: 1.5; }
+
+  .signals-row { display: flex; gap: 6px; flex-wrap: wrap; }
+  .signal-chip { padding: 2px 8px; border-radius: 10px; font-size: 10px; font-weight: 600; }
+  .signal-chip.bull { background: var(--bull-bg); color: var(--bull); }
+  .signal-chip.bear { background: var(--bear-bg); color: var(--bear); }
+  .signal-chip.warn { background: rgba(210,153,34,0.15); color: var(--neutral); }
+  .signal-chip.info { background: var(--info-bg); color: var(--info); }
+
+  .divider { height: 1px; background: var(--border); }
+  .rationale-box { background: var(--surface2); border-radius: 6px; padding: 8px 10px; font-size: 11.5px; color: #adbac7; line-height: 1.55; }
+  .rationale-box em { color: var(--accent); font-style: normal; font-weight: 600; }
+
+  .risk-section { padding: 0 28px 20px; }
+  .risk-table { width: 100%; border-collapse: collapse; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .risk-table th { background: var(--surface2); padding: 9px 14px; text-align: left; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.7px; color: var(--muted); border-bottom: 1px solid var(--border); }
+  .risk-table td { padding: 9px 14px; font-size: 12px; color: #cdd9e5; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .risk-table tr:last-child td { border-bottom: none; }
+  .risk-table tr:hover td { background: var(--surface2); }
+  .sev-critical { color: #ff7b72; font-weight: 700; }
+  .sev-high { color: #ffa657; font-weight: 700; }
+  .sev-mod { color: var(--neutral); font-weight: 700; }
+
+  .summary-section { padding: 0 28px 20px; }
+  .summary-table { width: 100%; border-collapse: collapse; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .summary-table th { background: var(--surface2); padding: 9px 14px; text-align: left; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.7px; color: var(--muted); border-bottom: 1px solid var(--border); }
+  .summary-table td { padding: 9px 14px; font-size: 12px; color: #cdd9e5; border-bottom: 1px solid var(--border); vertical-align: middle; }
+  .summary-table tr:last-child td { border-bottom: none; }
+  .summary-table tr:hover td { background: var(--surface2); }
+  .td-product { font-weight: 700; color: var(--text); }
+  .td-driver { color: var(--muted); font-size: 11px; }
+  .conf-high { color: var(--bull); font-weight: 700; font-size: 11px; }
+  .conf-med { color: var(--neutral); font-weight: 700; font-size: 11px; }
+  .conf-low { color: var(--muted); font-weight: 700; font-size: 11px; }
+  .td-move { font-size: 11px; font-weight: 700; }
+
+  .info-grid { padding: 0 28px 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 700px) { .info-grid { grid-template-columns: 1fr; } }
+  .info-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; }
+  .info-card h3 { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.7px; color: var(--muted); margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+  .info-card .stat-row { display: flex; justify-content: space-between; align-items: center; padding: 5px 0; border-bottom: 1px solid var(--border); font-size: 12px; }
+  .info-card .stat-row:last-child { border-bottom: none; }
+  .stat-label { color: var(--muted); }
+  .stat-val { font-weight: 600; color: var(--text); }
+  .stat-val.up { color: var(--bull); }
+  .stat-val.dn { color: var(--bear); }
+  .stat-val.warn { color: var(--neutral); }
+
+  .footer { padding: 14px 28px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
+  .footer-text { font-size: 11px; color: var(--muted); }
+  .footer-disclaimer { font-size: 10px; color: #484f58; max-width: 500px; }
 </style>
 </head>
 <body>
-<div class="masthead">
-  <div class="masthead-inner">
-    <div>
-      <div class="masthead-eyebrow">Optionx Intelligence</div>
-      <div class="masthead-title">Oil Market <span>Brief</span></div>
-      <div class="masthead-date">Thursday, 23 July 2026 &nbsp;&middot;&nbsp; Generated 24 Jul 2026</div>
-      <div class="masthead-sources">Sources: Platts Asia-Pacific/Arab Gulf Marketscan, LPGaswire &amp; Oilgram News</div>
-    </div>
+
+<div class="header">
+  <div class="header-left">
+    <h1>Oil Market Brief</h1>
+    <div class="sub">Platts Oilgram News + Asia-Pacific/Arab Gulf Marketscan + LPGaswire — Analyst Synthesis | July 23, 2026</div>
+  </div>
+  <div class="header-right">
+    <span class="badge-source">Sources: Oilgram News · APAC/AG Marketscan · LPGaswire — 23 Jul 2026</span>
+    <span class="badge-date">Generated: 24 Jul 2026 09:39</span>
   </div>
 </div>
 
-<div class="stats-banner">
-  <div class="stats-inner">
-    <div class="stat-tile"><div class="label">ICE Sept Brent</div><div class="value">$100.69/b</div><span class="delta">+$6.62, +7% &mdash; highest since May 22</span></div>
-    <div class="stat-tile"><div class="label">NYMEX Sept WTI</div><div class="value">$92.19/b</div><span class="delta">+$5.36, +6.2% &mdash; highest since Jun 4</span></div>
-    <div class="stat-tile"><div class="label">Dated Brent</div><div class="value">$104.92/b</div><span class="delta">+$10.755, 7-wk high</span></div>
-    <div class="stat-tile"><div class="label">Cash Dubai</div><div class="value">$97.19/b</div><span class="delta">+$7.78, +8.7%</span></div>
-    <div class="stat-tile"><div class="label">Brent-Dubai Spread</div><div class="value">$15.80/b</div><span class="delta">+31.12% on day</span></div>
-    <div class="stat-tile"><div class="label">Hormuz Crossings</div><div class="value">20 ships Jul 22</div><span class="delta">doubled; 16/20 Iran-linked</span></div>
-    <div class="stat-tile"><div class="label">Bab al-Mandab</div><div class="value">44 ships Jul 22</div><span class="delta">up from 30; Houthi attacks confirmed</span></div>
+<div class="macro-banner">
+  <h2>🚨 Macro Alert — Houthis Hit Saudi Tankers Layla &amp; Encelia (First Red Sea Attack in a Year); Brent Clears $100/b for First Time Since May 22; Kazakhstan CPC Suspended; Rhine Heading for Record Low</h2>
+  <p>
+    A second major chokepoint opened up today on top of an already-restricted Strait of Hormuz: Yemen's Houthi militants attacked the Saudi-flagged crude tanker <strong>Layla</strong> and products tanker <strong>Encelia</strong> in the Red Sea — the first Houthi-linked strike on Red Sea shipping in a year. The Encelia fire was confirmed by Saudi Press Agency (crew safe); Iran has separately told the Houthis to "stand ready to close the Red Sea oil route" should the US strike Iranian infrastructure, and President Trump has vowed to bomb an Iranian bridge or power plant for every future Iranian strike on a ship in Hormuz. Crude cleared a psychological line: ICE Sep Brent settled <span class="up">$100.69/b (+$6.62, +7%)</span> — above $100/b for the first time since May 22 — while NYMEX Sep WTI settled <span class="up">$92.19/b (+$5.36, +6.2%)</span>, highest since June 4. Dated Brent hit a seven-week high of $104.92/b and cash Dubai jumped 8.7% to $97.19/b, with the Murban-Dubai premium surging $17.58/b to $24.98/b (highest since April 7). Backwardation blew out on both benchmarks — 6th-month ICE Brent's discount to front-month widened to $17.48/b (widest since May 18), NYMEX WTI's equivalent to $15.47/b (widest since May 20) — a textbook near-term tightness signal layered under the outright spike. Compounding the supply picture: <strong>Kazakhstan cut oil output</strong> after repeated attacks on tankers loading at the CPC terminal in Novorossiysk forced loadings to be suspended (briefly resumed Jul 20, then re-suspended), with UBS flagging up to 1.8mn b/d of Kazakh crude at risk if the disruption persists. And in Europe, <strong>Rhine water levels</strong> at the Kaub chokepoint were near 60cm late Jul 23 and forecast to fall toward 43cm within 24 hours, with a sub-20cm — potentially all-time-record — low forecast for Aug 2-6, already forcing LyondellBasell to declare force majeure on its Wesseling butadiene unit and pushing 10ppm diesel FOB ARA barge to $1,319.75/mt, its highest since April 9.
+  </p>
+  <div class="macro-flags">
+    <span class="macro-flag">🚢 Houthis Attack Layla &amp; Encelia — First Red Sea Strike in a Year</span>
+    <span class="macro-flag">📈 Brent Clears $100/b First Time Since May 22, +7% on the Day</span>
+    <span class="macro-flag">🇰🇿 Kazakhstan CPC Loadings Suspended Twice in 4 Days, 1.8mn b/d at Risk</span>
+    <span class="macro-flag">🌊 Rhine Heading for Sub-20cm, Possibly Record-Low, by Aug 2-6</span>
+    <span class="macro-flag">🛡️ Backwardation Blows Out — Widest Since Mid-May on Both Brent &amp; WTI</span>
+    <span class="macro-flag">🎯 Trump: Bomb an Iranian Bridge/Power Plant per Hormuz Strike</span>
   </div>
 </div>
 
-<main class="content">
+<div class="prior-banner">
+  <strong>Vs. July 22 conviction calls:</strong>
+  Crude <span class="prior-chip bull">was Extremely Bullish</span> → <span class="prior-chip bull">remains Extremely Bullish</span> (fresh Houthi Red Sea attack, Kazakhstan's CPC re-suspension and a genuine 7% extreme-move Brent rally with Done-deal MOC confirmation all layer on top of an already-maximal call) &nbsp;|&nbsp;
+  Gasoil <span class="prior-chip bull">was Extremely Bullish</span> → <span class="prior-chip bull">remains Extremely Bullish</span> (Aug-Sep backwardation widened further to $10.40/b, S-Oil canceled its Korean sell tender, and the Rhine crisis is now a second, still-escalating structural driver on top of the Middle East risk premium) &nbsp;|&nbsp;
+  HSFO <span class="prior-chip bull">was Extremely Bullish</span> → <span class="prior-chip bull">eased to Bullish</span> (the underlying tightening trend — 131% backwardation widening this week, cash premium at a post-Jun-15 high — is intact, but today's FOB Singapore print relied on notional values with no firm bid/offer/trade, and the HSFO-as-feedstock-substitution channel remains hypothetical rather than confirmed, so the desk is not re-validating the Extreme tier on today's evidence alone) &nbsp;|&nbsp;
+  LSFO <span class="prior-chip bull">was Extremely Bullish</span> → <span class="prior-chip bull">eased to Bullish</span> (cash premium continues a clean multi-session uptrend to $37.72/mt and Fujairah stocks hit a 3-week low, but the Aug-Sep swap spread actually narrowed intraday to $45/mt from $50/mt and no trade printed in the deep FOB Straits bid cluster — genuine tightening, but not the fresh Extreme-tier confirmation seen yesterday) &nbsp;|&nbsp;
+  Gasoline <span class="prior-chip bull">was Bullish</span> → <span class="prior-chip bear">downgraded to Bearish</span> (physical and RBOB-Brent cracks both compressed day-over-day as Brent spiked, no Pertamina buy tender materialized this cycle, and Indonesia's Dumai restart eases regional import pull — a clean crack-compression-led flip) &nbsp;|&nbsp;
+  Naphtha <span class="prior-chip bull">was Bullish</span> → <span class="prior-chip bull">remains Bullish</span> (CFR Japan crack jumped to a &gt;3-month high on Bab al-Mandab-driven European-barrel disruption, though the Aug-Sep swap spread eased slightly and India's Indian Oil spot sale is a mild bearish counter-signal on tender terms) &nbsp;|&nbsp;
+  Jet Kero <span class="prior-chip neutral">was Neutral (downgraded)</span> → <span class="prior-chip bull">recovers to Bullish</span> (Pertamina Patra Niaga reissued a sizeable 600,000-bbl buy tender and US jet product supplied hit an all-time high of 2.146mn b/d with inventories drawing — hard demand data now corroborates the price strength that was missing yesterday, even as the backwardation spike itself cooled off intraday) &nbsp;|&nbsp;
+  LPG <span class="prior-chip bull">was split Bullish (Asia) / </span><span class="prior-chip bear">Bearish (US)</span> → <span class="prior-chip bull">Bullish, crude/freight-led, demand soft both ends</span> (North Asia cargoes up $13-16/mt on Hormuz war-risk premium and Rhine-driven European feedstock strain, but AG differentials weakened on "lackluster demand" and US propane stocks built to a 2026 high at ~4x consensus — held at Bullish rather than upgraded given demand softness on both continents) &nbsp;|&nbsp;
+  SAF <span class="prior-chip neutral">new to coverage this cycle</span> → <span class="prior-chip neutral">Neutral</span> (outright price tracking the fossil-jet rally, but the premium over jet compressed -$269.50/mt month-over-month and multiple Straits-based traders confirm EU SAF buying "dried up" for Q3 — a clean structure-vs-demand divergence)
+</div>
 
-  <section class="ft-card">
-    <h2>Headline Context</h2>
-    <p>Yemen's Houthi militants attacked the Saudi-flagged crude tanker <strong>Layla</strong> and the products tanker <strong>Encelia</strong> in the Red Sea on July 23 — the first Houthi-linked attacks on Red Sea shipping in a year — opening a second major chokepoint (Bab al-Mandab) on top of an already-restricted Strait of Hormuz. The Encelia fire was confirmed by Saudi Press Agency (crew safe); Iran has separately told the Houthis to "stand ready to close the Red Sea oil route" should the US strike Iranian infrastructure, and President Trump has vowed to bomb an Iranian bridge or power plant every time Iran fires on a ship in Hormuz. ICE September Brent settled <strong>$100.69/b (+$6.62, +7%)</strong> — above $100/b for the first time since May 22 — while NYMEX WTI settled $92.19/b (+$5.36, +6.2%). Dated Brent hit a seven-week high of $104.92/b and cash Dubai jumped 8.7% to $97.19/b, with the Murban-Dubai premium surging $17.58/b to $24.98/b (highest since April 7) as undisrupted light-sour barrels are bid up hard. Backwardation exploded: sixth-month ICE Brent's discount to front-month widened to $17.48/b (widest since May 18) and the equivalent NYMEX WTI spread hit $15.47/b (widest since May 20) — a classic near-term-tightness signal.</p>
-    <p>Layered on top: <strong>Kazakhstan cut oil output</strong> after repeated attacks on tankers loading at the Caspian Pipeline Consortium (CPC) terminal at Novorossiysk forced loadings to be suspended (briefly resumed July 20, then suspended again) — UBS estimates up to 1.8 million b/d of Kazakh crude could be at risk if the disruption persists, though the ministry says all CPC infrastructure remains "in good working order" and ready to resume once conditions normalize. <strong>TotalEnergies</strong> warned the Middle East war could keep 5%-10% of its oil and gas output at risk while hostilities persist, having already absorbed an 8% annual production loss (Q2 output 2.4 million boe/d, down from 2.55 million boe/d) and a 12% refinery-throughput decline (SATORP drone-attack damage, Donges planned maintenance, Port Arthur lightning strike) — CEO Patrick Pouyanne called the Gulf situation "extremely volatile" and floated a "new normal" of the strait opening and closing with the tension cycle. Separately, <strong>Rhine water levels</strong> at the Kaub chokepoint were near 60cm late July 23 and falling toward ~43cm within 24 hours, with WSV forecasting a sub-20cm low by Aug 2-6 — potentially the lowest levels on record, threatening to halt barge navigation entirely and already forcing LyondellBasell to declare force majeure on its Wesseling butadiene unit. European 10ppm diesel FOB ARA barge was assessed $1,319.75/mt, highest since April 9.</p>
-  </section>
+<div class="section-header"><h2>Benchmark Prices — 23 Jul 2026</h2></div>
+<div class="bench-strip">
+  <div class="bench-card">
+    <div class="label">ICE Sep Brent</div>
+    <div class="price up">$100.69/b</div>
+    <div class="delta up">▲ +$6.62 (+7%) — highest since May 22</div>
+    <div class="prev">22 Jul close: $94.07/b</div>
+  </div>
+  <div class="bench-card">
+    <div class="label">NYMEX Sep WTI</div>
+    <div class="price up">$92.19/b</div>
+    <div class="delta up">▲ +$5.36 (+6.2%) — highest since Jun 4</div>
+    <div class="prev">22 Jul close: $86.83/b</div>
+  </div>
+  <div class="bench-card">
+    <div class="label">Dated Brent</div>
+    <div class="price up">$104.92/b</div>
+    <div class="delta up">+$10.755 — 7-week high</div>
+    <div class="prev">Backwardation widest since May 18</div>
+  </div>
+  <div class="bench-card">
+    <div class="label">Platts Cash Dubai</div>
+    <div class="price up">$97.19/b</div>
+    <div class="delta up">+$7.78 (+8.7%) d/d</div>
+    <div class="prev">Murban-Dubai premium +$17.58 to $24.98/b</div>
+  </div>
+  <div class="bench-card">
+    <div class="label">FOB Sing Naphtha</div>
+    <div class="price up">$110.78/b</div>
+    <div class="delta up">+$2.08 d/d</div>
+    <div class="prev">CFR Japan crack +$71.33 to $263.13/mt, &gt;3-mo high</div>
+  </div>
+  <div class="bench-card">
+    <div class="label">FOB Sing Gasoil 10ppm</div>
+    <div class="price up">$167.62/b</div>
+    <div class="delta up">+$4.03 d/d</div>
+    <div class="prev">Aug-Sep swap spread widened to $10.40/b</div>
+  </div>
+  <div class="bench-card">
+    <div class="label">FOB Sing Jet Kero</div>
+    <div class="price up">$160.99/b</div>
+    <div class="delta up">+$1.22 d/d</div>
+    <div class="prev">Cash premium fell 57c to $1.86/b</div>
+  </div>
+  <div class="bench-card">
+    <div class="label">FOB Sing 92 RON Gasoline</div>
+    <div class="price up">$124.73/b</div>
+    <div class="delta up">+$2.38 d/d</div>
+    <div class="prev">Physical crack compressed to $27.75-27.80/b</div>
+  </div>
+  <div class="bench-card">
+    <div class="label">Marine Fuel 0.5% FOB Sing</div>
+    <div class="price up">$759.95/mt</div>
+    <div class="delta up">+$1.17 d/d</div>
+    <div class="prev">Cash premium 3rd straight rise, $37.72/mt</div>
+  </div>
+  <div class="bench-card">
+    <div class="label">HSFO 380cst FOB Sing</div>
+    <div class="price up">$588.52/mt</div>
+    <div class="delta up">+$4.41 d/d</div>
+    <div class="prev">M1-M2 backwardation +131% this week</div>
+  </div>
+  <div class="bench-card">
+    <div class="label">CFR N.Asia Propane</div>
+    <div class="price up">$803/mt</div>
+    <div class="delta up">+$13 d/d</div>
+    <div class="prev">AG differential weakened to -$11/mt</div>
+  </div>
+  <div class="bench-card">
+    <div class="label">SAF FOB Straits</div>
+    <div class="price up">$2,545/mt</div>
+    <div class="delta up">+$25 d/d, +$115 MoM</div>
+    <div class="prev">Premium over jet -$269.50/mt MoM</div>
+  </div>
+</div>
 
-  <section class="ft-card">
-    <h2>Part A — Product Conviction Dashboard</h2>
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>Product</th>
-            <th>Platts Window</th>
-            <th>Tender Signal</th>
-            <th>Outages</th>
-            <th>Geo/Policy Factor</th>
-            <th>Flows (Vortexa/CAS)</th>
-            <th>View</th>
-            <th>Conviction</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>Crude</strong></td>
-            <td>Brent $100.69 (+7%), WTI $92.19 (+6.2%); Dated Brent $104.92 (7-wk high); cash Dubai $97.19 (+8.7%); Murban-Dubai premium +$17.58 to $24.98 (highest since Apr 7); Dubai MOC Done-deal cluster (Mitsui buys from Mercuria/Vitol, Phillips66 buys from Unipec $96.60-97.20) confirms bullish move</td>
-            <td>India's MRPL 650,000-bbl tender (closes Jul24); Mangalore Refinery 650,000-bbl tender for early Aug delivery — term demand signal</td>
-            <td>TotalEnergies SATORP drone-attack damage (unplanned, run rate cut to 70% from full); Donges (planned maint) and Port Arthur (lightning, unplanned) also curbing Total's 1.4M b/d Q2 throughput (-12% QoQ)</td>
-            <td>Houthi attack on Layla/Encelia (Day 1, fresh); Iran-Houthi Red Sea closure threat; Trump "bomb a bridge" warning; Kazakhstan CPC suspended after tanker attacks (-1.8M b/d risk per UBS)</td>
-            <td>Hormuz 20 ships Jul22 (doubled, 16 Iran-linked); Bab al-Mandab 44 ships (up from 30, but 60%+ still Suez-bound); Bab al-Mandab total transits down to 2.6M b/d (Jul1-20) from 5.5M b/d in June; 2 VLCCs (Xin Long Yang, Cosnew Lake) still transited Bab al-Mandab post-attack en route China</td>
-            <td>Bullish</td>
-            <td><span class="chip chip-bull">Extremely Bullish</span></td>
-          </tr>
-          <tr>
-            <td><strong>LPG</strong></td>
-            <td>CFR North Asia propane/butane +$13/mt to $803/$808; East/South China propane +$16 to $815/$813; AG propane $633 (+6), butane $658 (+9); Saudi CP Aug swap +$8 to $644; only 2 bids in North Asia MOC (Mitsui, SwissChemGas), no trades</td>
-            <td>No East-of-Suez LPG tenders reported this issue (quiet week)</td>
-            <td>None specific this issue</td>
-            <td>Hormuz/Bab al-Mandab war-risk premium: marine insurance for Hormuz transits up to 7.5%-10% of full value, creating a two-tier market (risk-averse operators holding outside strait)</td>
-            <td>AG propane/butane differentials to Saudi CP weakened to -$11/mt (from -$9) on "lackluster" demand + healthy inventories; US propane/propylene stocks built 6.287M bbl to a 2026-high 99.776M bbl (vs 1.532M bbl expected) as exports fell to lowest since Jul 2025 — a clear demand-side miss</td>
-            <td>Bullish (crude/freight-led, demand soft)</td>
-            <td><span class="chip chip-bull">Bullish</span></td>
-          </tr>
-          <tr>
-            <td><strong>Naphtha</strong></td>
-            <td>CFR Japan crack +$71.33/mt to $263.13/mt — highest in over 3 months (last higher Apr 15); FOB Spore $110.78 (+2.08); Aug-Sep MOPJ swap spread eased to $74/mt (from $76/mt) — slight softening even as crack surges</td>
-            <td>Indian Oil <em>sold</em> 35,000mt for Aug22-31 loading at a premium of ~$160/mt to MOPAG — a spot seller-side print (bearish counter-signal per India/AG supplier framework), though the rich premium itself signals genuine tightness</td>
-            <td>None specific this issue</td>
-            <td>Bab al-Mandab blockade risk seen limiting European naphtha flows into Asia; up to 20 extra days via Cape of Good Hope reroute floated; US barrels incentivized east if prices hold, but compete with US gasoline blenders into hurricane season</td>
-            <td>US gasoline supplied (demand proxy) +1.16% WoW to 8.947M b/d — competing pull on naphtha-as-blendstock; no Vortexa-specific Asia naphtha flow data this issue beyond tanker-routing commentary</td>
-            <td>Bullish</td>
-            <td><span class="chip chip-bull">Bullish</span></td>
-          </tr>
-          <tr>
-            <td><strong>Gasoline</strong></td>
-            <td>FOB Spore 92 RON $124.73 (+2.38); physical crack vs Brent fell to $27.75-27.80/b intraday (from $28.40/b July22 close) — cracks compressing as crude spikes; RBOB-Brent crack down to $49.35/b (from $51.08/b)</td>
-            <td>No Pertamina buy tender this issue (bullish signal absent); Pertamina completed scheduled Dumai refinery turnaround — easing regional import pull</td>
-            <td>Pertamina Dumai (170,000 b/d) turnaround completed (planned, moderate) — restart adds supply/reduces import need</td>
-            <td>US-Iran/Red Sea tensions add derivatives volatility broadly, but AG gasoline supply options heard "limited" — a genuine tightening counter-note</td>
-            <td>California PADD5 gasoline imports down ~25% YoY (1.43M bbl Jul25 to 1.08M bbl Jul26); Bahamas/Saudi origins vanished, India stepped in with a 318,000-bbl SF cargo; CARBOB/RBOB differentials held stable despite the shift</td>
-            <td>Bearish (crack compression)</td>
-            <td><span class="chip chip-crit">Bearish</span></td>
-          </tr>
-          <tr>
-            <td><strong>Gasoil</strong></td>
-            <td>FOB Spore 10ppm $167.62 (+4.03); cash diff $6.50 (MOPS+6.48/6.52); Aug-Sep swap spread widened to $10.40/b (from $9.81/b July22 close); heavy MOC deal flow — Aramco/Trafigura bids, Total buys from BP twice ($5.50, $8.00 premiums), Vitol/Unipec offers priced above bids</td>
-            <td>South Korea's S-Oil <em>canceled</em> its 300,000-bbl 10ppm sell tender (Onsan, Aug21-25) — reason unconfirmed, but a canceled sell tender removes supply and reads bullish</td>
-            <td>None specific this issue</td>
-            <td>Rhine record-low water levels threatening to halt barge navigation into Germany/Switzerland — structural European distillate logistics premium building on top of the Middle East risk premium; 10ppm FOB ARA barge at $1,319.75/mt, highest since Apr 9</td>
-            <td>East-West arb firmly shut ("East refineries unclear about forward programs" per Singapore trader) — EFS spread rallied 34.65% to a 3-week high of -$61.60/mt (from -$94.26/mt), i.e. less negative = less lucrative to send barrels west, reinforcing Asian tightness; USGC-Europe arb still open, holding >$1/b since Jul 1; US ULSD exports +58kb/d WoW to 1.604M b/d (above 5-yr avg) even as US ULSD stocks built to 99.16M bbl (highest since Apr10)</td>
-            <td>Bullish</td>
-            <td><span class="chip chip-bull">Extremely Bullish</span></td>
-          </tr>
-          <tr>
-            <td><strong>Jet Kero</strong></td>
-            <td>FOB Spore $160.99 (+1.22), cash diff down 57c to +$1.86/b as Aug-Sep swap spread eased to +$4.36/b (from +$5.50/b July22 close, which itself had widened 25% day earlier) — backwardation cooling off a spike, not collapsing</td>
-            <td>Indonesia's Pertamina Patra Niaga launched a reissued buy tender for three 200,000-bbl Jet A-1 cargoes (Jul29-Aug1, Aug2-4, Aug8-10 to Jakarta), pricing basis changed to lower-of-August-whole-month average — a bullish high-weight buy signal, though the pricing-basis change suggests Pertamina is trying to protect against further upside</td>
-            <td>None specific this issue</td>
-            <td>Tracking European jet sector gains and US-Iran tensions broadly; Saudi Arabia routing more crude via East-West pipeline to Yanbu, lifting Suez Canal flows ~30% (Adm. Donegan, MEI webinar) — logistics reshuffling, not clean demand destruction</td>
-            <td>US jet fuel product supplied hit an all-time high of 2.146M b/d (week ended Jul17, +386,000 b/d WoW) — inventories drew 1.03M bbl to 47.388M bbl despite a modest production dip; a strong, confirmed demand data point</td>
-            <td>Bullish</td>
-            <td><span class="chip chip-bull">Bullish</span></td>
-          </tr>
-          <tr>
-            <td><strong>SAF</strong></td>
-            <td>FOB Straits $2,545/mt (+$25 day, +$115 MoM); premium over jet $1,287.75/mt (+$10.75 day, but -$269.50/mt MoM) — outright tracking the fossil-jet rally while the premium compresses hard on a monthly view; FOB China $2,525/mt (+$25)</td>
-            <td>None reported this issue</td>
-            <td>Ecoceres' Tanjung Langsat (420,000 mt/yr) plant back online after temporary shutdown, ramping progressively; China's Blue Whale Bioenergy shipped its first SAF cargo to Europe Jul 19</td>
-            <td>No new SAF-specific policy event; UK HEFA SAF certificates +2p to 86p/84p (2025/2026 vintages)</td>
-            <td>EU SAF buying "dried up" in Q3 per Straits-based trader ("Q3 supply from Asia will be quiet"); China SAF exports halved in June (to 56,342mt) while HVO exports rose 28%; France imported zero SAF in June (Belgium/Spain still healthy)</td>
-            <td>Neutral (premium compression vs. EU demand softness)</td>
-            <td><span class="chip chip-watch">Neutral</span></td>
-          </tr>
-          <tr>
-            <td><strong>LSFO (0.5%)</strong></td>
-            <td>FOB Spore Marine Fuel 0.5% $759.95/mt (+1.17); cash premium $37.72/mt (+2.47); Aug-Sep swap backwardation $45/mt intraday (narrowed slightly from $50/mt July22 close) — still elevated, first pullback in the recent widening trend</td>
-            <td>No LSFO-specific tender this issue; NOC (KPC/ADNOC/QP/IOC) sell-tender absence continues to support structure</td>
-            <td>None specific; Fujairah heavy-distillate stocks fell 19% WoW to a 3-week low of 5.865M bbl (first drop in 5 weeks)</td>
-            <td>Platts explicitly links Hormuz/Bab al-Mandab risk to the firming LSFO structure — "supply concerns going forward as renewed tensions... could disrupt gradually normalizing Persian Gulf flows"</td>
-            <td>Fujairah inventory data confirms physical tightening (light distillates also -649kb); no reported buyer-hesitation quotes this issue (contrast to prior cycle)</td>
-            <td>Bullish</td>
-            <td><span class="chip chip-bull">Bullish</span></td>
-          </tr>
-          <tr>
-            <td><strong>HSFO (380cst)</strong></td>
-            <td>FOB Spore 380cst $588.52/mt (+4.41); cash premium at Asian close $12/mt (July22), up from $10.28/mt, highest since Jun15; Aug-Sep swap spread $29.50/mt intraday (from $28.30/mt) — M1-M2 backwardation up 131% this week, widest since May29; crack vs Brent improved to -62c (from -$2.68), strongest since Jun2</td>
-            <td>No NOC (KPC/ADNOC/ATC/QP/IOC) sell tenders flagged — absence of the usual bearish signal continues</td>
-            <td>None specific for Singapore; Fujairah heavy-distillate stocks -19% to 3-wk low</td>
-            <td>Platts headline: "supply concerns, barge tightness lift HSFO fundamentals" amid the same Hormuz/Bab al-Mandab backdrop</td>
-            <td>Singapore 180cst premium widened to $15.75/mt (from $10.25/mt); heavy paper deal flow ($583-585/mt cluster, Onyx/BP/Aramco active); Fujairah heavy-distillate draw corroborates tightening physical picture</td>
-            <td>Bullish</td>
-            <td><span class="chip chip-bull">Bullish</span></td>
-          </tr>
-        </tbody>
-      </table>
+<div class="section-header"><h2>Product Analysis</h2></div>
+<div class="dashboard-grid">
+
+  <div class="product-card" style="border-color: rgba(63,185,80,0.55);">
+    <div class="card-header" style="background: rgba(63,185,80,0.1);">
+      <div class="card-header-left">
+        <div>
+          <div class="product-name">Crude Oil — Unchanged, Reinforced</div>
+          <div class="product-price">Cash Dubai $97.19/b · Brent $100.69/b · WTI $92.19/b · Dated Brent $104.92/b</div>
+        </div>
+      </div>
+      <div class="verdict">
+        <span class="verdict-badge xbull">Extremely Bullish</span>
+        <span class="conviction">Conviction: Very High</span>
+      </div>
     </div>
-    <p class="ft-note">Note: the two Marketscan feature articles (naphtha/jet/gasoil dailies) cite Hormuz/Bab al-Mandab CAS traffic counts one reporting cycle behind the front-page figures ("10 ships Jul21, down from 16 Jul20" vs. the front-page "20 ships Jul22, doubled from 16 Jul21") — both are genuine CAS prints from consecutive days and are presented as sourced, not reconciled into a single number.</p>
-  </section>
-
-  <section class="ft-card">
-    <h2>Part B — Product Deep Dives</h2>
-    <div class="toc">
-      <a href="#crude">Crude</a>
-      <a href="#lpg">LPG</a>
-      <a href="#naphtha">Naphtha</a>
-      <a href="#gasoline">Gasoline</a>
-      <a href="#gasoil">Gasoil</a>
-      <a href="#jet">Jet Kero</a>
-      <a href="#saf">SAF</a>
-      <a href="#lsfo">LSFO</a>
-      <a href="#hsfo">HSFO</a>
+    <div class="card-body">
+      <div class="pillar">
+        <div class="pillar-label">Supply — Second Chokepoint Opens</div>
+        <div class="pillar-text">The Houthi attack on the Layla (crude VLCC) and Encelia (products tanker) on Jul 23 is the first Houthi-linked strike on Red Sea shipping in a year. Iran has told the Houthis to "stand ready to close the Red Sea oil route" if the US strikes Iranian infrastructure. TotalEnergies' 465,000 b/d SATORP refinery remains drone-damaged (Q2 utilization down to 80% from 92%), and Kazakhstan's CPC loadings at Novorossiysk were suspended for a second time in days after further tanker attacks — UBS flags up to 1.8mn b/d of Kazakh crude at risk, though the ministry maintains all CPC infrastructure remains intact and ready to resume the moment security clears.</div>
+      </div>
+      <div class="divider"></div>
+      <div class="pillar">
+        <div class="pillar-label">Structure — Backwardation Blows Out</div>
+        <div class="pillar-text">6th-month ICE Brent's discount to front-month widened to $17.48/b (widest since May 18); the equivalent NYMEX WTI spread hit $15.47/b (widest since May 20). Murban-Dubai premium surged $17.58/b to $24.98/b, highest since Apr 7. The Dubai MOC printed a genuine Done-deal cluster — Mitsui buying from Mercuria/Vitol, Phillips 66 buying from Unipec at $96.60-97.20 — fully confirming the 7% extreme move.</div>
+      </div>
+      <div class="divider"></div>
+      <div class="pillar">
+        <div class="pillar-label">Execution Risk — Still Porous, Not a Clean Shutdown</div>
+        <div class="pillar-text">Hormuz crossings actually doubled to 20 ships (from 16), though 16 of those 20 are Iran-linked/sanctioned; Bab al-Mandab traffic rose to 44 ships (from 30) with over 60% Suez-bound, and two VLCCs (Xin Long Yang, Cosnew Lake) that loaded at Yanbu still transited Bab al-Mandab post-attack en route to China. Full-transit crude/product flows through Bab al-Mandab averaged just 2.6mn b/d (Jul 1-20) versus 5.5mn b/d in June — a real but still-graduated drain, not an instant flood of stranded barrels.</div>
+      </div>
+      <div class="signals-row">
+        <span class="signal-chip bull">Houthi Attack on Layla/Encelia — First in a Year</span>
+        <span class="signal-chip bull">Kazakhstan CPC Re-Suspended, 1.8mn b/d at Risk</span>
+        <span class="signal-chip bull">Backwardation Widest Since Mid-May</span>
+        <span class="signal-chip bull">Dubai MOC Done-Deal Cluster Confirms</span>
+        <span class="signal-chip warn">Bab al-Mandab Traffic Actually Rose (30→44)</span>
+      </div>
+      <div class="rationale-box">
+        <em>Held at Extremely Bullish.</em> All three pillars converge — a fresh, MOC-confirmed supply shock (Houthi attack, Kazakh re-suspension) meeting an extreme (&gt;3.5%) benchmark move with blown-out backwardation. The execution-risk modifier tempers the magnitude: because Bab al-Mandab traffic is still flowing and CPC's physical infrastructure is undamaged and quick to restart, expect the spike to hold near current highs over the next 2-3 sessions rather than extend linearly.
+      </div>
     </div>
-  </section>
+  </div>
+
+  <div class="product-card" style="border-color: rgba(63,185,80,0.55);">
+    <div class="card-header" style="background: rgba(63,185,80,0.1);">
+      <div class="card-header-left">
+        <div>
+          <div class="product-name">Gasoil / Diesel — Unchanged, Two Structural Drivers Now</div>
+          <div class="product-price">FOB Sing 10ppm $167.62/b (+$4.03) · Aug-Sep swap $10.40/b</div>
+        </div>
+      </div>
+      <div class="verdict">
+        <span class="verdict-badge xbull">Extremely Bullish</span>
+        <span class="conviction">Conviction: Very High</span>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="pillar">
+        <div class="pillar-label">Structure — Backwardation Widening Further, MOC Confirms</div>
+        <div class="pillar-text">The Aug-Sep Singapore swap spread widened to $10.40/b (from $9.81/b at the Jul 22 close). The FOB Straits MOC printed confirmed escalating-premium trades — Total bought from BP at MOPS+$5.50/b, then again at +$8.00/b. The front-month EFS spread rallied 34.65% to a 3-week high of -$61.60/mt (from -$94.26/mt), signaling the East-West arb is becoming markedly less attractive and keeping barrels in Asia.</div>
+      </div>
+      <div class="divider"></div>
+      <div class="pillar">
+        <div class="pillar-label">Supply — S-Oil Cancels, Rhine Adds a Second Front</div>
+        <div class="pillar-text">South Korea's S-Oil canceled its 300,000-bbl 10ppm sell tender (Onsan, Aug 21-25) — a bullish reversal of the usual Korean export signal. Separately, Rhine water levels are forecast to hit a record or near-record low by early August, with 10ppm diesel FOB ARA barge already at $1,319.75/mt, the highest since Apr 9 — a structural European logistics premium layering on top of the Middle East risk, with rail-substitution capacity itself constrained (a key Rhine-corridor freight line is closed through Dec 12).</div>
+      </div>
+      <div class="divider"></div>
+      <div class="pillar">
+        <div class="pillar-label">Fundamentals — Global Pull Confirmed</div>
+        <div class="pillar-text">US ULSD production rose to a post-Dec-2025 high of 5.16mn b/d and exports rose 58kb/d WoW to 1.604mn b/d (above the 5-year average) even as inventories built to a post-April high of 99.16mn barrels — a market simultaneously building US stock and exporting hard, consistent with strong global distillate pull, not just a US phenomenon.</div>
+      </div>
+      <div class="signals-row">
+        <span class="signal-chip bull">S-Oil Cancels 300kb Korean Sell Tender</span>
+        <span class="signal-chip bull">Rhine Record-Low Adds Second Structural Driver</span>
+        <span class="signal-chip bull">EFS Spread Rallied 34.65% to 3-Wk High</span>
+        <span class="signal-chip bull">MOC Confirms Escalating Premium Trades</span>
+      </div>
+      <div class="rationale-box">
+        <em>Held at Extremely Bullish.</em> All three pillars converge and confirm across the week's trend rather than a single-day read — the Rhine crisis is a genuine, still-escalating weather/infrastructure surprise layered on top of the pre-existing Middle East risk premium and SATORP-driven distillate loss.
+      </div>
+    </div>
+  </div>
+
+  <div class="product-card" style="border-color: rgba(63,185,80,0.4);">
+    <div class="card-header" style="background: rgba(63,185,80,0.06);">
+      <div class="card-header-left">
+        <div>
+          <div class="product-name">HSFO 380cst — Eased Back From Extreme</div>
+          <div class="product-price">FOB Sing $588.52/mt (+$4.41) · Cash premium $12/mt</div>
+        </div>
+      </div>
+      <div class="verdict">
+        <span class="verdict-badge bull">Bullish</span>
+        <span class="conviction">Conviction: Medium-High</span>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="pillar">
+        <div class="pillar-label">Structure — Trend Intact, Still Widening</div>
+        <div class="pillar-text">The Aug-Sep 380cst swap spread firmed to $29.50/mt intraday (from $28.30/mt at the Jul 22 close) — the M1-M2 spread has widened roughly 131% this week to its widest since May 29. The crack vs Brent improved to -62c (from -$2.68/b), strongest since Jun 2, and the cash premium rose to $12/mt, highest since Jun 15, with the 180cst premium widening even more sharply to $15.75/mt.</div>
+      </div>
+      <div class="divider"></div>
+      <div class="pillar">
+        <div class="pillar-label">MOC Execution — Caveat</div>
+        <div class="pillar-text">FOB Singapore 380cst was assessed on notional values in the absence of firm competitive bids/offers this session — the underlying trend is real, but today's specific print did not clear on a firm quote, and the feedstock-substitution demand channel (refiners switching to HSFO if crude stays unavailable) remains hypothetical: "currently, the feedstock demand for HSFO is not really there," per a Singapore trader.</div>
+      </div>
+      <div class="divider"></div>
+      <div class="pillar">
+        <div class="pillar-label">Read-Through</div>
+        <div class="pillar-text">No NOC (KPC/ADNOC/ATC/QP/IOC) sell tenders reported this issue — the usual bearish counter-signal remains absent, supporting the structural read even at the eased conviction tier.</div>
+      </div>
+      <div class="signals-row">
+        <span class="signal-chip bull">M1-M2 Backwardation +131% This Week</span>
+        <span class="signal-chip bull">Cash Premium Highest Since Jun 15</span>
+        <span class="signal-chip warn">FOB Print on Notional Values, No Firm Trade</span>
+        <span class="signal-chip info">Feedstock-Substitution Demand Still Hypothetical</span>
+      </div>
+      <div class="rationale-box">
+        <em>Eased from Extremely Bullish to Bullish.</em> The structural tightening trend that earned yesterday's upgrade remains genuinely in place, but today's evidence doesn't independently re-clear the Extreme bar — the FOB print relied on notional values rather than a firm bid/offer/trade, and the secondary feedstock-demand channel is still unconfirmed. Held at Bullish pending a firmer physical print.
+      </div>
+    </div>
+  </div>
+
+  <div class="product-card" style="border-color: rgba(63,185,80,0.4);">
+    <div class="card-header" style="background: rgba(63,185,80,0.06);">
+      <div class="card-header-left">
+        <div>
+          <div class="product-name">LSFO / Marine 0.5% — Eased Back From Extreme</div>
+          <div class="product-price">FOB Sing $759.95/mt (+$1.17) · Cash premium $37.72/mt</div>
+        </div>
+      </div>
+      <div class="verdict">
+        <span class="verdict-badge bull">Bullish</span>
+        <span class="conviction">Conviction: Medium-High</span>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="pillar">
+        <div class="pillar-label">Structure — Cash Premium Uptrend Intact, Swap Softened</div>
+        <div class="pillar-text">The cash differential climbed to $37.72/mt (+$2.47/mt), extending a clean three-session uptrend ($27.92→$35.25→$37.72/mt). But the Aug-Sep swap spread was pegged at $45/mt backwardation intraday, down from $50/mt at the Jul 22 close — the first pullback in the recent widening trend, even though the structure remains firmly backwardated.</div>
+      </div>
+      <div class="divider"></div>
+      <div class="pillar">
+        <div class="pillar-label">MOC Execution — Caveat</div>
+        <div class="pillar-text">A deep multi-party bid cluster (BP, Mercuria, Maersk, Gunvor, Vitol, Glencore) sat at MOPS+30 to +38/mt with Shell offering at +47-50/mt — offers priced meaningfully above bids, a genuine tightness signal — but no trade printed at the close.</div>
+      </div>
+      <div class="divider"></div>
+      <div class="pillar">
+        <div class="pillar-label">Fundamentals</div>
+        <div class="pillar-text">Fujairah heavy-distillate stocks fell 19% WoW to a three-week low of 5.865mn barrels, the first drop in five weeks. Platts explicitly links the firm structure to "supply concerns going forward as renewed tensions over the Strait of Hormuz and Bab al-Mandab could disrupt gradually normalizing Persian Gulf flows" — now reinforced by the fresh Houthi attack.</div>
+      </div>
+      <div class="signals-row">
+        <span class="signal-chip bull">Cash Premium 3rd Straight Rise, $37.72/mt</span>
+        <span class="signal-chip bull">Fujairah Stocks 3-Wk Low, First Draw in 5 Wks</span>
+        <span class="signal-chip warn">Swap Backwardation Narrowed $50→$45/mt</span>
+        <span class="signal-chip warn">Deep Bid Cluster, No Trade Printed</span>
+      </div>
+      <div class="rationale-box">
+        <em>Eased from Extremely Bullish to Bullish.</em> Supply and cash-premium structure both remain genuinely tight, but the swap spread's intraday narrowing and the absence of a confirmed trade in an otherwise deep bid cluster mean today's evidence doesn't independently re-validate the Extreme tier reached yesterday. Held at Bullish as a still-strong, but not freshly escalating, call.
+      </div>
+    </div>
+  </div>
+
+  <div class="product-card" style="border-color: rgba(248,81,73,0.45);">
+    <div class="card-header" style="background: rgba(248,81,73,0.08);">
+      <div class="card-header-left">
+        <div>
+          <div class="product-name">Gasoline / RBOB ⚠️ Downgraded</div>
+          <div class="product-price">FOB Sing 92 RON $124.73/b (+$2.38) · Crack compressed to $27.75-27.80/b</div>
+        </div>
+      </div>
+      <div class="verdict">
+        <span class="verdict-badge bear">Bearish</span>
+        <span class="conviction">Conviction: Medium</span>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="pillar">
+        <div class="pillar-label">Structure — Crack Compression Against the Spike</div>
+        <div class="pillar-text">The physical FOB Singapore 92 RON crack against front-month Brent fell to $27.75-27.80/b (from $28.40/b at the Jul 22 close) as crude spiked; the US RBOB-Brent crack similarly fell to $49.35/b (from $51.08/b). Per the crude-coupling rule, this is margin destruction driven by Brent's own >$6/b move rather than standalone gasoline weakness — but it is real and MOC-confirmed.</div>
+      </div>
+      <div class="divider"></div>
+      <div class="pillar">
+        <div class="pillar-label">Demand — Bullish Signal Absent, Import Pull Easing</div>
+        <div class="pillar-text">No Pertamina buy tender was reported this issue — the high-weight bullish signal is missing. Instead, Indonesia's Pertamina completed its scheduled 170,000 b/d Dumai refinery turnaround, easing the region's largest gasoline importer's need for spot cargoes. California PADD5 gasoline imports fell ~25% YoY to just under 1.08mn barrels, with Bahamas and Saudi origins disappearing entirely (India stepped in with a single 318,000-bbl cargo) — though CARBOB/RBOB differentials held stable, suggesting no local scarcity premium has shown through yet.</div>
+      </div>
+      <div class="divider"></div>
+      <div class="pillar">
+        <div class="pillar-label">Watch Item</div>
+        <div class="pillar-text">AG gasoline supply was heard "limited" per a Middle East-based source — a genuine counter-note that is not yet translating into wider physical cracks, and Asian alkylate is flowing west on strong US hurricane-season blending demand. Either could reverse the compression quickly.</div>
+      </div>
+      <div class="signals-row">
+        <span class="signal-chip bear">Physical &amp; RBOB Cracks Both Compressed d/d</span>
+        <span class="signal-chip bear">No Pertamina Buy Tender This Cycle</span>
+        <span class="signal-chip bear">Dumai Restart Eases Import Pull</span>
+        <span class="signal-chip warn">AG Supply Heard "Limited" — Counter-Note</span>
+      </div>
+      <div class="rationale-box">
+        <em>Downgraded from Bullish to Bearish.</em> Market Structure (crack compression against the Brent spike) and Demand (no Pertamina tender, Dumai restart easing import need) both lean bearish, clearing the 2-pillar threshold. AG supply tightness is a genuine bullish counter-note that keeps this at Bearish rather than a deeper call.
+      </div>
+    </div>
+  </div>
+
+  <div class="product-card" style="border-color: rgba(63,185,80,0.4);">
+    <div class="card-header" style="background: rgba(63,185,80,0.06);">
+      <div class="card-header-left">
+        <div>
+          <div class="product-name">Naphtha — Unchanged</div>
+          <div class="product-price">FOB Sing $110.78/b (+$2.08) · CFR Japan crack $263.13/mt (+$71.33, &gt;3-mo high)</div>
+        </div>
+      </div>
+      <div class="verdict">
+        <span class="verdict-badge bull">Bullish</span>
+        <span class="conviction">Conviction: Medium</span>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="pillar">
+        <div class="pillar-label">Structure — Crack at a &gt;3-Month High</div>
+        <div class="pillar-text">The CFR Japan naphtha crack against front-month Brent surged $71.33/mt to $263.13/mt — a level last seen higher on Apr 15 ($277.18/mt). The Aug-Sep MOPJ swap spread eased slightly to $74/mt (from $76/mt) even as the crack itself exploded — a mild internal divergence worth flagging.</div>
+      </div>
+      <div class="divider"></div>
+      <div class="pillar">
+        <div class="pillar-label">Supply — Bab al-Mandab Limiting European Barrels</div>
+        <div class="pillar-text">Platts explicitly cites Bab al-Mandab blockade risk as capable of limiting Asian buyers' access to European naphtha, with one source floating a Suez/Cape of Good Hope reroute adding up to 20 days of voyage time. Indian Oil sold 35,000mt for Aug 22-31 loading at a rich ~$160/mt premium to MOPAG — a spot seller-side print that reads as a mild bearish counter-signal on tender terms, though the premium size itself signals genuine tightness.</div>
+      </div>
+      <div class="divider"></div>
+      <div class="pillar">
+        <div class="pillar-label">Execution Risk</div>
+        <div class="pillar-text">Any US-barrel response east competes directly with hurricane-season US gasoline blending demand (gasoline supplied +1.16% WoW to 8.947mn b/d) — the arbitrage relief is not instantaneous.</div>
+      </div>
+      <div class="signals-row">
+        <span class="signal-chip bull">Crack +$71.33/mt to &gt;3-Mo High</span>
+        <span class="signal-chip bull">Bab al-Mandab Risk Limiting European Barrels</span>
+        <span class="signal-chip warn">Swap Spread Eased $76→$74/mt</span>
+        <span class="signal-chip warn">Indian Oil Spot Sale — Bearish on Tender Terms</span>
+      </div>
+      <div class="rationale-box">
+        <em>Held at Bullish.</em> Supply (Bab al-Mandab risk to European flows) and Market Structure (the crack's &gt;3-month high) both clear the threshold; held rather than upgraded because the forward swap spread softened slightly and the move remains crude-complex-coupled rather than an independent naphtha demand story.
+      </div>
+    </div>
+  </div>
+
+  <div class="product-card" style="border-color: rgba(63,185,80,0.4);">
+    <div class="card-header" style="background: rgba(63,185,80,0.06);">
+      <div class="card-header-left">
+        <div>
+          <div class="product-name">Jet Kerosene ✅ Recovers to Bullish</div>
+          <div class="product-price">FOB Sing $160.99/b (+$1.22) · Cash premium eased to $1.86/b</div>
+        </div>
+      </div>
+      <div class="verdict">
+        <span class="verdict-badge bull">Bullish</span>
+        <span class="conviction">Conviction: Medium</span>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="pillar">
+        <div class="pillar-label">Demand — Confirmed by Hard Data, Not Just Tenders</div>
+        <div class="pillar-text">US jet fuel product supplied hit an all-time high of 2.146mn b/d (+386,000 b/d WoW, 38,000 b/d above the prior Dec-2017 record) with inventories drawing 1.03mn barrels to 47.388mn barrels despite only a modest production dip — production and demand both elevated, a genuinely tight market rather than a paper-only rally. This directly resolves yesterday's physical-cash-vs-paper divergence that triggered the downgrade.</div>
+      </div>
+      <div class="divider"></div>
+      <div class="pillar">
+        <div class="pillar-label">Tender Activity — Pertamina Reissues</div>
+        <div class="pillar-text">Indonesia's Pertamina Patra Niaga launched what several sources view as a reissued buy tender for three 200,000-bbl Jet A-1 cargoes (Jul29-Aug1, Aug2-4, Aug8-10 to Jakarta) — a high-weight, sizeable bullish signal. The pricing basis was changed to the lower of the August whole-month average, which a Singapore trader read as Pertamina protecting against further upside rather than backing away.</div>
+      </div>
+      <div class="divider"></div>
+      <div class="pillar">
+        <div class="pillar-label">MOC Execution — Caveat</div>
+        <div class="pillar-text">The balance Aug-Sep swap spread eased $1.14/b to +$4.36/b — a cooling-off after the prior session's sharp +25% widening to +$5.50/b. The Singapore MOC saw active offers (BP, Unipec, Ampol) but no bids or trades reported — physically thin even as the structure stays elevated versus the prior week.</div>
+      </div>
+      <div class="signals-row">
+        <span class="signal-chip bull">Pertamina Reissues 600kb Buy Tender</span>
+        <span class="signal-chip bull">US Jet Product Supplied at All-Time High</span>
+        <span class="signal-chip bull">US Jet Inventories Drawing</span>
+        <span class="signal-chip warn">Backwardation Cooling Intraday, Offers-Only MOC</span>
+      </div>
+      <div class="rationale-box">
+        <em>Upgraded from Neutral back to Bullish.</em> Unlike yesterday, physical demand commentary and hard EIA data now corroborate the price strength rather than contradicting it — Demand (Pertamina's reissued tender, record US jet demand) and Structure (still-elevated backwardation, crude/European pass-through) both clear the threshold. The intraday cooling in backwardation and thin physical MOC participation argue against re-rating all the way to Extreme.
+      </div>
+    </div>
+  </div>
+
+  <div class="product-card" style="border-color: rgba(63,185,80,0.35);">
+    <div class="card-header" style="background: rgba(63,185,80,0.05);">
+      <div class="card-header-left">
+        <div>
+          <div class="product-name">LPG / Propane — Crude/Freight-Led, Demand Soft Both Ends</div>
+          <div class="product-price">CFR N.Asia Propane $803/mt (+$13) · AG Propane $633/mt (+6)</div>
+        </div>
+      </div>
+      <div class="verdict">
+        <span class="verdict-badge bull">Bullish</span>
+        <span class="conviction">Conviction: Medium</span>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="pillar">
+        <div class="pillar-label">Structure — Price Up, Liquidity Thin, AG Softening</div>
+        <div class="pillar-text">CFR North Asia propane/butane rose $13/mt to $803/808/mt; East/South China cargoes rose $16/mt. Only two bids were heard in the North Asia MOC all session (Mitsui, SwissChemGas), with no trades printed. FOB AG propane/butane differentials to Saudi CP weakened to -$11/mt (from -$9/mt), explicitly attributed to "lackluster" demand and healthy inventories.</div>
+      </div>
+      <div class="divider"></div>
+      <div class="pillar">
+        <div class="pillar-label">Geo/Infrastructure — Two Risk Theaters</div>
+        <div class="pillar-text">Hormuz marine war-risk insurance has risen to 7.5-10% of cargo value; Ukraine struck 10 cargo ships, an oil tanker and two tugboats in the Black Sea over 48 hours (196 vessels struck since Jul 6), and Romania flagged a possible LPG tanker attack Jul 20. In Europe, LyondellBasell's Wesseling force majeure (Rhine-driven feedstock shortage) is a direct symptom of the same logistics strain hitting naphtha/gasoil.</div>
+      </div>
+      <div class="divider"></div>
+      <div class="pillar">
+        <div class="pillar-label">Fundamentals — US Demand Miss</div>
+        <div class="pillar-text">US propane/propylene stocks built 6.287mn barrels to a 2026-high 99.776mn barrels — roughly 4x the build S&amp;P Global CERA had projected — as exports fell to their lowest since Jul 2025. NWE summer LPG demand remains subdued per Platts.</div>
+      </div>
+      <div class="signals-row">
+        <span class="signal-chip bull">N.Asia/China Cargoes +$13-16/mt</span>
+        <span class="signal-chip bull">Hormuz Insurance 7.5-10% of Cargo Value</span>
+        <span class="signal-chip bear">AG Differential Weakened to -$11/mt</span>
+        <span class="signal-chip bear">US Stocks 2026-High, ~4x Consensus Build</span>
+      </div>
+      <div class="rationale-box">
+        <em>Held at Bullish, crude/freight-led.</em> Supply/freight (Hormuz war-risk premium, Black Sea attacks, Rhine-driven European feedstock constraints) and Market Structure (broad-based Asian cargo gains) both lean bullish, clearing the threshold, but Demand is explicitly soft on two continents — this is a crude/freight-cost-driven move, not a standalone LPG demand story, so any Hormuz-risk premium could unwind faster than the crude complex if security conditions ease.
+      </div>
+    </div>
+  </div>
+
+  <div class="product-card" style="border-color: rgba(210,153,34,0.4);">
+    <div class="card-header" style="background: rgba(210,153,34,0.06);">
+      <div class="card-header-left">
+        <div>
+          <div class="product-name">SAF — New to Coverage, Neutral</div>
+          <div class="product-price">FOB Straits $2,545/mt (+$25 d/d) · Premium over jet $1,287.75/mt</div>
+        </div>
+      </div>
+      <div class="verdict">
+        <span class="verdict-badge neutral">Neutral</span>
+        <span class="conviction">Conviction: Low-Medium</span>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="pillar">
+        <div class="pillar-label">Structure — Outright Up, Premium Compressing</div>
+        <div class="pillar-text">FOB Straits SAF (HEFA-SPK) rose $25/mt d/d and $115/mt MoM, tracking the fossil jet/crude rally. But the premium over the Jet Kero forward curve fell a sharp $269.50/mt MoM even as it rose $10.75/mt d/d — a clean divergence between a rising crude-coupled outright and a compressing, more economically meaningful, SAF-specific premium.</div>
+      </div>
+      <div class="divider"></div>
+      <div class="pillar">
+        <div class="pillar-label">Demand — Multiple Traders Confirm a Quiet Market</div>
+        <div class="pillar-text">EU SAF buying "dried up" in Q3 per multiple Straits-based traders ("Q3 supply from Asia will be quiet"). China's SAF exports halved MoM (to 56,342mt) while HVO exports rose 28% — a substitution away from SAF. France imported zero SAF in June versus 5,065mt in March and 10,950mt in May, while Belgium and Spain continued healthy imports — a bifurcated European picture.</div>
+      </div>
+      <div class="divider"></div>
+      <div class="pillar">
+        <div class="pillar-label">Supply / Watch Item</div>
+        <div class="pillar-text">Ecoceres' 420,000mt/yr Tanjung Langsat HEFA plant is back online and progressively ramping after a temporary shutdown — a gradual, not instant, capacity restoration. Indonesia's Pertamina is preparing Cilacap/Dumai/Balongan capacity ahead of its 2027 1% SAF mandate — a structural, long-run demand signal to monitor rather than a near-term price driver.</div>
+      </div>
+      <div class="signals-row">
+        <span class="signal-chip bear">Premium Over Jet -$269.50/mt MoM</span>
+        <span class="signal-chip bear">EU Buying "Dried Up" — Multiple Trader Quotes</span>
+        <span class="signal-chip bear">China SAF Exports Halved MoM</span>
+        <span class="signal-chip info">Ecoceres Ramp-Up Still Gradual</span>
+      </div>
+      <div class="rationale-box">
+        <em>Neutral — new to coverage this cycle.</em> Market Structure (premium compression) and Demand (explicit, multi-source confirmation of a quiet EU/Asia market) both lean bearish and meet the 2-pillar threshold, but the outright price is rising in lockstep with the broader jet/crude complex — a crude-coupling effect offsetting the demand-side softness in the headline number. Held at Neutral given the clean divergence between outright and premium.
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="section-header"><h2>Asia MOC — Window Activity &amp; Print Conviction (23 Jul vs 22 Jul)</h2></div>
+<div class="risk-section">
+  <p style="color:#adbac7; font-size:12.5px; line-height:1.6; margin-bottom:12px;">
+    The clearest story today is that crude's Dubai MOC produced a genuine Done-deal cluster confirming the 7% extreme move, while the fuel oil complex's physical prints thinned even as its underlying spread structure kept widening — a caution flag on how much conviction to place in the outright HSFO/LSFO moves specifically, addressed in this cycle's easing of both back to Bullish.
+  </p>
+  <table class="risk-table">
+    <thead>
+      <tr>
+        <th>Window</th>
+        <th>Trades Printed (23 Jul vs 22 Jul)</th>
+        <th>Price / Range</th>
+        <th>Read</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="td-product" style="font-weight:700;">Cash Dubai MOC</td>
+        <td><span class="conf-high">Done-deal cluster confirmed</span></td>
+        <td>$96.60-97.20/b</td>
+        <td><span class="signal-chip bull" style="display:inline-block;">Cleanest confirmation on the board</span> — Mitsui buying from Mercuria/Vitol, Phillips66 buying from Unipec three times, plus a cargo convergence (Mercuria declares Sept Oman cargo to Mitsui). Directly underwrites the Extremely Bullish crude call.</td>
+      </tr>
+      <tr>
+        <td class="td-product" style="font-weight:700;">Gasoil FOB Straits MOC</td>
+        <td><span class="conf-high">Confirmed escalating trades</span></td>
+        <td>Total from BP at +$5.50, then +$8.00/b</td>
+        <td>An improvement in character from yesterday's total silence (8→0 trades) — today's window cleared, and at an escalating premium, reinforcing the Extremely Bullish call.</td>
+      </tr>
+      <tr>
+        <td class="td-product" style="font-weight:700; color:var(--muted);">HSFO 380cst FOB Sing</td>
+        <td><span class="conf-low">Notional values, no firm trade</span></td>
+        <td>$588.52/mt</td>
+        <td><span class="signal-chip warn" style="display:inline-block;">Execution caveat</span> — the underlying swap/crack structure kept widening, but the outright assessment itself relied on notional values in the absence of firm bids/offers. Direct driver of easing HSFO back to Bullish.</td>
+      </tr>
+      <tr>
+        <td class="td-product" style="font-weight:700; color:var(--muted);">LSFO / Marine Fuel 0.5% FOB Straits</td>
+        <td><span class="conf-med">Deep bid cluster, zero trades</span></td>
+        <td>Bids MOPS+30-38/mt, offers +47-50/mt</td>
+        <td>BP/Mercuria/Maersk/Gunvor/Vitol/Glencore all bidding, Shell offering above — a genuine tightness signal by bid depth, but nothing cleared. Direct driver of easing LSFO back to Bullish.</td>
+      </tr>
+      <tr>
+        <td class="td-product" style="font-weight:700; color:var(--muted);">Jet Kero FOB Singapore MOC</td>
+        <td><span class="conf-low">Offers only, no bids/trades</span></td>
+        <td>BP +2.50, Unipec +4.00, Ampol +5.50</td>
+        <td>Still physically thin, but the desk's read is now anchored on the EIA/tender demand data rather than this window alone — hence the recovery to Bullish despite continued MOC silence.</td>
+      </tr>
+      <tr>
+        <td class="td-product" style="font-weight:700;">Gasoline FOB Straits 97 RON MOC</td>
+        <td><span class="conf-med">Active bidding, paper trades cleared</span></td>
+        <td>Bids to $134.60/b; Mogas 92 Aug26 $120.50-120.60/mt</td>
+        <td>Vitol/Onyx/Trafigura/Dare active — a functioning market, but the physical crack itself compressed against the crude spike, consistent with the Bearish downgrade on structure grounds.</td>
+      </tr>
+      <tr>
+        <td class="td-product" style="font-weight:700;">North Asia LPG Cargo MOC</td>
+        <td><span class="conf-low">2 bids, zero trades</span></td>
+        <td>Mitsui FEI+12, SwissChemGas FEI+20</td>
+        <td>Thin liquidity behind a real price move — consistent with the "crude/freight-led, not demand-led" read on LPG.</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="rationale-box" style="margin-top:12px;">
+    <em>Read-through for the conviction calls:</em> The Dubai cash MOC's Done-deal cluster and the Gasoil FOB Straits window's escalating-premium trades are the strongest execution confirmations on the board today, directly underwriting the Extremely Bullish crude and gasoil calls. By contrast, both HSFO and LSFO showed genuine structural tightening (widening backwardation, rising cash premiums) without a firm, fresh physical print clearing at the close — the specific reason both are eased back to Bullish rather than re-validated at Extreme. Jet Kero's MOC remains offers-only and thin, but the desk is weighting the EIA demand print and Pertamina's reissued tender more heavily than this one window, hence the recovery to Bullish.
+  </div>
+</div>
+
+<div class="section-header"><h2>Key Story Details</h2></div>
+<div class="info-grid">
+  <div class="info-card">
+    <h3>🌊 Hormuz &amp; Bab al-Mandab — Traffic Still Porous (23 Jul)</h3>
+    <div class="stat-row"><span class="stat-label">Hormuz transits (Jul 22)</span><span class="stat-val warn">20, doubled from 16 Jul 21 — 16 of 20 Iran-linked/sanctioned</span></div>
+    <div class="stat-row"><span class="stat-label">Bab al-Mandab transits (Jul 22)</span><span class="stat-val warn">44, up from 30 — over 60% Suez-bound</span></div>
+    <div class="stat-row"><span class="stat-label">Full-transit crude/product flows, Bab al-Mandab</span><span class="stat-val dn">2.6mn b/d (Jul1-20) vs 5.5mn b/d in June</span></div>
+    <div class="stat-row"><span class="stat-label">VLCCs from Yanbu still transiting post-attack</span><span class="stat-val warn">Xin Long Yang, Cosnew Lake — en route China</span></div>
+    <div class="stat-row"><span class="stat-label">Reroute cost if forced onto Suez/SUMED</span><span class="stat-val dn">Voyage stretches 13-19 days to 40+ days</span></div>
+    <div class="stat-row"><span class="stat-label">Hormuz war-risk insurance</span><span class="stat-val dn">7.5-10% of cargo value</span></div>
+    <div class="stat-row"><span class="stat-label">Reporting-cycle note</span><span class="stat-val">Marketscan feature articles cite a 1-cycle-lagged CAS count ("10, down from 16 Jul21") vs. the front-page "20, doubled from 16" — both genuine, not reconciled</span></div>
+  </div>
+
+  <div class="info-card">
+    <h3>🎯 Escalation &amp; Diplomacy</h3>
+    <div class="stat-row"><span class="stat-label">Houthi attack</span><span class="stat-val dn">Layla (crude VLCC) &amp; Encelia (products) struck Jul 23 — 1st in a year</span></div>
+    <div class="stat-row"><span class="stat-label">Iran-Houthi threat</span><span class="stat-val dn">"Stand ready to close the Red Sea oil route" if US strikes Iran</span></div>
+    <div class="stat-row"><span class="stat-label">Trump threat</span><span class="stat-val dn">Bomb 1 Iranian bridge/power plant per Hormuz strike</span></div>
+    <div class="stat-row"><span class="stat-label">Kazakhstan CPC</span><span class="stat-val dn">Suspended twice in 4 days; UBS flags 1.8mn b/d at risk</span></div>
+    <div class="stat-row"><span class="stat-label">TotalEnergies</span><span class="stat-val warn">5-10% of oil/gas output at risk while hostilities persist</span></div>
+    <div class="stat-row"><span class="stat-label">EU 21st Russia sanctions package (Jul 23)</span><span class="stat-val warn">Price cap frozen at $44.10/b for another year</span></div>
+    <div class="stat-row"><span class="stat-label">Black Sea vessels struck since Jul 6</span><span class="stat-val dn">196 (Ukraine MoD, incl. 10 cargo ships in last 48h)</span></div>
+  </div>
+
+  <div class="info-card">
+    <h3>⛽ Refining, Cracks &amp; Rhine</h3>
+    <div class="stat-row"><span class="stat-label">Rhine at Kaub (Jul 23 late)</span><span class="stat-val dn">~60cm, falling toward 43cm within 24h</span></div>
+    <div class="stat-row"><span class="stat-label">Rhine forecast low (Aug 2-6)</span><span class="stat-val dn">Sub-20cm — potentially all-time record (2018 low: 25cm)</span></div>
+    <div class="stat-row"><span class="stat-label">10ppm diesel FOB ARA barge</span><span class="stat-val dn">$1,319.75/mt — highest since Apr 9</span></div>
+    <div class="stat-row"><span class="stat-label">LyondellBasell Wesseling</span><span class="stat-val dn">Force majeure on butadiene unit, Rhine feedstock shortage</span></div>
+    <div class="stat-row"><span class="stat-label">SATORP (TotalEnergies) utilization</span><span class="stat-val dn">Cut to 80% from 92% (Q1→Q2)</span></div>
+    <div class="stat-row"><span class="stat-label">Gasoil Aug-Sep swap spread</span><span class="stat-val dn">$10.40/b, from $9.81/b Jul22 close</span></div>
+    <div class="stat-row"><span class="stat-label">Rhine rail-substitution constraint</span><span class="stat-val warn">Right-bank Middle Rhine freight line closed through Dec 12</span></div>
+  </div>
+
+  <div class="info-card">
+    <h3>🇮🇩🇺🇸 Asia &amp; US Trade Flow Data</h3>
+    <div class="stat-row"><span class="stat-label">US jet fuel product supplied (wk Jul17)</span><span class="stat-val up">2.146mn b/d, all-time high (+386kb/d WoW)</span></div>
+    <div class="stat-row"><span class="stat-label">US jet inventories</span><span class="stat-val dn">-1.03mn bbl to 47.388mn bbl</span></div>
+    <div class="stat-row"><span class="stat-label">US ULSD exports (wk Jul17)</span><span class="stat-val up">1.604mn b/d, +58kb/d WoW, above 5-yr avg</span></div>
+    <div class="stat-row"><span class="stat-label">US propane/propylene stocks (wk Jul17)</span><span class="stat-val dn">99.776mn bbl, 2026-high, ~4x consensus build</span></div>
+    <div class="stat-row"><span class="stat-label">California PADD5 gasoline imports</span><span class="stat-val dn">~1.08mn bbl, -25% YoY; Bahamas/Saudi origins gone</span></div>
+    <div class="stat-row"><span class="stat-label">Fujairah heavy-distillate stocks</span><span class="stat-val dn">-19% WoW to 5.865mn bbl, 3-wk low</span></div>
+  </div>
+</div>
+
+<div class="section-header"><h2>Critical Watch Items — Jul 24+</h2></div>
+<div class="risk-section">
+  <table class="risk-table">
+    <thead>
+      <tr>
+        <th>Severity</th>
+        <th>Risk Event</th>
+        <th>Products Affected</th>
+        <th>Timeline</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="sev-critical">🚨 CRITICAL</span></td>
+        <td>Whether Iran/Houthis follow through on the threat to close the Red Sea oil route if the US strikes Iranian infrastructure — the Layla/Encelia attack was framed as a warning shot, not necessarily a sustained campaign. Confirm whether further Red Sea attacks materialize or this remains an isolated incident.</td>
+        <td>Crude, all products, freight, insurance</td>
+        <td>Immediate</td>
+      </tr>
+      <tr>
+        <td><span class="sev-critical">🚨 CRITICAL</span></td>
+        <td>Kazakhstan's CPC loadings have now been suspended twice in four days despite infrastructure reported intact — confirm whether a third suspension occurs (a genuine escalation pattern) or loadings stabilize, given UBS's 1.8mn b/d at-risk estimate hinges on persistence, not a one-off.</td>
+        <td>Crude (Kazakh/CPC-blend grades, European refiners)</td>
+        <td>1-3 sessions</td>
+      </tr>
+      <tr>
+        <td><span class="sev-high">🔴 HIGH</span></td>
+        <td>Rhine levels are forecast to fall toward a potential all-time record low by Aug 2-6 — confirm whether the DWD's slight Jul 26 rain-relief chance materializes (easing the crisis) or the dry pattern persists, given rail-substitution capacity is itself constrained through Dec 12.</td>
+        <td>Gasoil/Diesel, LPG/naphtha (European crackers)</td>
+        <td>~9 days (Aug 2-6)</td>
+      </tr>
+      <tr>
+        <td><span class="sev-high">🔴 HIGH</span></td>
+        <td>Both HSFO and LSFO showed widening backwardation/rising cash premiums without a firm physical trade clearing at the close today — confirm whether tomorrow's session produces a confirmed print (supporting a re-upgrade to Extreme) or the execution gap persists (a genuine caution signal under an otherwise bullish structural narrative).</td>
+        <td>HSFO 380cst, LSFO / Marine Fuel 0.5%</td>
+        <td>1 session</td>
+      </tr>
+      <tr>
+        <td><span class="sev-mod">🟡 MODERATE</span></td>
+        <td>Gasoline's crack compression is a same-day reading against a >$6/b crude spike — confirm whether the crack stabilizes/recovers as crude consolidates (supporting a return to Bullish) or compresses further (reinforcing the Bearish call), and watch China's outstanding August export quota as the key swing factor.</td>
+        <td>Gasoline / RBOB</td>
+        <td>1-2 sessions</td>
+      </tr>
+      <tr>
+        <td><span class="sev-mod">🟡 MODERATE</span></td>
+        <td>Jet Kero's backwardation eased intraday after the prior session's sharp widening, and the Singapore physical MOC remains offers-only — confirm whether the recovery to Bullish holds as bids resume, or whether the structure cools further even as the underlying US demand data stays strong.</td>
+        <td>Jet Kerosene</td>
+        <td>1-2 sessions</td>
+      </tr>
+      <tr>
+        <td><span class="sev-mod">🟡 MODERATE</span></td>
+        <td>SAF's premium-over-jet compression is now a confirmed multi-week trend (-$269.50/mt MoM) with multiple traders flagging a "quiet" Q3 — watch for any reversal in EU buying interest or a widening premium as the first signal the Neutral call should move directional.</td>
+        <td>SAF</td>
+        <td>Ongoing</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="section-header"><h2>Conviction Summary — 23 Jul vs 22 Jul</h2></div>
+<div class="summary-section">
+  <table class="summary-table">
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>22 Jul View</th>
+        <th>23 Jul View</th>
+        <th>Conviction</th>
+        <th>Key Driver of Change</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="background: rgba(63,185,80,0.06);">
+        <td class="td-product">Crude (Brent/Dubai/WTI)</td>
+        <td class="td-move">Extremely Bullish</td>
+        <td><span class="verdict-badge xbull" style="display:inline-block;padding:2px 8px;font-size:11px;">Extremely Bullish —</span></td>
+        <td><span class="conf-high">VERY HIGH</span></td>
+        <td class="td-driver">Reinforced — fresh Houthi Red Sea attack, Kazakhstan CPC re-suspension, extreme 7% Brent move confirmed by Dubai Done-deal cluster</td>
+      </tr>
+      <tr style="background: rgba(63,185,80,0.06);">
+        <td class="td-product">⭐ Gasoil / Diesel</td>
+        <td class="td-move">Extremely Bullish</td>
+        <td><span class="verdict-badge xbull" style="display:inline-block;padding:2px 8px;font-size:11px;">Extremely Bullish —</span></td>
+        <td><span class="conf-high">VERY HIGH</span></td>
+        <td class="td-driver">Reinforced — S-Oil sell-tender cancellation, Rhine crisis adds a second structural driver, backwardation widened further</td>
+      </tr>
+      <tr>
+        <td class="td-product">HSFO 380cst</td>
+        <td class="td-move">Extremely Bullish</td>
+        <td><span class="verdict-badge bull" style="display:inline-block;padding:2px 8px;font-size:11px;">Bullish — Eased</span></td>
+        <td><span class="conf-med">MEDIUM-HIGH</span></td>
+        <td class="td-driver">Structure still widening, but FOB print relied on notional values with no firm trade; feedstock-substitution demand still hypothetical</td>
+      </tr>
+      <tr>
+        <td class="td-product">LSFO / Marine 0.5%</td>
+        <td class="td-move">Extremely Bullish</td>
+        <td><span class="verdict-badge bull" style="display:inline-block;padding:2px 8px;font-size:11px;">Bullish — Eased</span></td>
+        <td><span class="conf-med">MEDIUM-HIGH</span></td>
+        <td class="td-driver">Cash premium uptrend intact, but swap spread narrowed intraday and deep bid cluster failed to clear a trade</td>
+      </tr>
+      <tr style="background: rgba(248,81,73,0.06);">
+        <td class="td-product">Gasoline / RBOB</td>
+        <td class="td-move">Bullish</td>
+        <td><span class="verdict-badge bear" style="display:inline-block;padding:2px 8px;font-size:11px;">Bearish ⚠️ — Downgraded</span></td>
+        <td><span class="conf-med">MEDIUM</span></td>
+        <td class="td-driver">Physical and RBOB cracks both compressed against the crude spike; no Pertamina buy tender; Dumai restart eases import pull</td>
+      </tr>
+      <tr>
+        <td class="td-product">Naphtha</td>
+        <td class="td-move">Bullish</td>
+        <td><span class="verdict-badge bull" style="display:inline-block;padding:2px 8px;font-size:11px;">Bullish —</span></td>
+        <td><span class="conf-med">MEDIUM</span></td>
+        <td class="td-driver">Unchanged — crack at a &gt;3-month high on Bab al-Mandab risk, though swap spread eased slightly</td>
+      </tr>
+      <tr style="background: rgba(63,185,80,0.06);">
+        <td class="td-product">Jet Kerosene</td>
+        <td class="td-move">Neutral</td>
+        <td><span class="verdict-badge bull" style="display:inline-block;padding:2px 8px;font-size:11px;">Bullish ✅ — Recovered</span></td>
+        <td><span class="conf-med">MEDIUM</span></td>
+        <td class="td-driver">Pertamina reissued 600kb buy tender + US jet demand at an all-time high resolve yesterday's cash-vs-paper divergence</td>
+      </tr>
+      <tr>
+        <td class="td-product">LPG / Propane</td>
+        <td class="td-move">Bullish (Asia) / Bearish (US)</td>
+        <td><span class="verdict-badge bull" style="display:inline-block;padding:2px 8px;font-size:11px;">Bullish, crude/freight-led —</span></td>
+        <td><span class="conf-low">MEDIUM</span></td>
+        <td class="td-driver">Unchanged split character — N.Asia up on Hormuz/Rhine risk, but AG differentials weakened and US stocks built to a 2026 high</td>
+      </tr>
+      <tr style="background: rgba(210,153,34,0.06);">
+        <td class="td-product">SAF</td>
+        <td class="td-move">Not previously covered</td>
+        <td><span class="verdict-badge neutral" style="display:inline-block;padding:2px 8px;font-size:11px;">Neutral — New</span></td>
+        <td><span class="conf-low">LOW-MEDIUM</span></td>
+        <td class="td-driver">Outright tracking the jet/crude rally, but premium over jet compressed -$269.50/mt MoM amid confirmed EU demand softness</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="footer">
+  <div class="footer-text">Oil Market Brief · Sources: Platts Oilgram News · Platts Asia-Pacific/Arab Gulf Marketscan · Platts LPGaswire · July 23, 2026 · Analyst Review generated July 24, 2026</div>
+  <div class="footer-disclaimer">Analysis synthesized by the oil-analyst agent from condensed excerpts of three source PDFs (not full raw MOC bid/offer feeds). Window direction inferred from settlement prices, spread movements, tender activity and source commentary. This is an analytical synthesis only, not a trading recommendation.</div>
+</div>
 
-  <section class="ft-card" id="crude">
-    <h2>Crude <span class="chip chip-bull" style="margin-left:8px;">Extremely Bullish</span></h2>
-
-    <h3>Platts Window (MOC last 30 min)</h3>
-    <p>September cash Dubai was assessed $97.19/b, up $7.78/b (8.7%) day over day, taking into account an offer for cash Dubai partials at $97.20/b that traded toward the end of the MOC window and a standing offer at $97.20/b at the close — a Done-deal cluster (Mitsui buying from Mercuria twice and from Vitol; Phillips 66 buying from Unipec three times at $96.60-97.20) that fully confirms the bullish move, with a cargo convergence (Mercuria declaring a September Oman cargo to Mitsui after 20 partials converged). Front-month ICE Brent settled $100.69/b (+$6.62, +7%) — the highest close since May 22 — and NYMEX WTI settled $92.19/b (+$5.36, +6.2%), highest since June 4. Dated Brent was assessed at a seven-week high of $104.92/b (+$10.755). Backwardation blew out: the sixth-month ICE Brent discount to front-month widened to $17.48/b (widest since May 18) and the equivalent NYMEX WTI spread hit $15.47/b (widest since May 20) — an unambiguous near-term physical tightness signal layered on top of the outright rally.</p>
-
-    <h3>Tender Activity</h3>
-    <p>India's Mangalore Refinery and Petrochemicals Ltd. (MRPL) issued a tender seeking 650,000 barrels of various sweet/sour crude grades for first-half August arrival, closing July 24 with same-day validity — a term-structural Indian demand signal against a backdrop of India's newest refiner ramping imports. No comparable Asian seller-side tenders were flagged this issue.</p>
-
-    <h3>Refinery / Cracker Outages</h3>
-    <p><strong>Unplanned, high-weight:</strong> TotalEnergies' 465,000 b/d SATORP refinery (joint venture with Saudi Aramco) suffered losses after a drone attack, pulling the company's overall refinery utilization down from 92% in Q1 to 80% in Q2 (1.4 million b/d average throughput, down from 1.6 million b/d) — Q3 utilization is guided at 80%-85% assuming SATORP recovers from ~70% to full capacity by quarter-end. Port Arthur (US) was also struck by lightning during a tropical storm (unplanned); France's 220,000 b/d Donges refinery underwent planned maintenance. <strong>Partially offsetting:</strong> Norway's Equinor made a new satellite discovery (7.6-10.5 million bbl) 6km north of the recovering Johan Castberg field, which itself was back online after an 18-day outage (Q3 production impact just 14,000 b/d) — a modest bullish-for-longevity, near-term-neutral data point.</p>
-
-    <h3>Geopolitical &amp; Policy Factors</h3>
-    <p>The Houthi attack on the Layla (crude VLCC, Bahri-managed) and Encelia (products tanker, Bihar International-managed) on July 23 is a fresh (Day 1), high-weight, MOC-confirmed shock — the first Houthi attack on Red Sea shipping since July 2025. Iran has told the Houthis to "stand ready to close the Red Sea oil route" if the US strikes Iranian infrastructure; President Trump has vowed a US strike on an Iranian bridge or power plant for every Iranian shot fired at a ship in Hormuz — an active, escalating policy-and-military feedback loop. Separately, Kazakhstan's Energy Ministry confirmed a "controlled adjustment" (cut) to oil output after CPC loadings at Novorossiysk were suspended following attacks on tankers there (suspended, briefly resumed July 20, re-suspended) — UBS estimates up to 1.8 million b/d of Kazakh crude is at risk if the disruption extends, though the ministry stresses all CPC infrastructure remains intact and ready to resume immediately once conditions normalize. The EU also finalized its 21st Russia sanctions package July 23, freezing the oil price cap at $44.10/b for another year (rather than letting it float up >$10/b as market conditions would otherwise dictate) while carving out a 12-month Russian LNG transshipment allowance — a policy move that caps, rather than adds, price pressure.</p>
-
-    <h3>Infrastructure / Execution Risk</h3>
-    <p>Real tanker-flow data shows a genuine but still-porous disruption, not a clean shutdown: Hormuz crossings doubled to 20 ships July 22 from 16 the day before, but 16 of those 20 are Iran-linked/sanctioned, meaning normal commercial flow remains thin. Bab al-Mandab traffic actually rose to 44 ships (from 30), with over 60% linked to Suez/Egypt transits — "vessel movements through the waterway remained active despite heightened security concerns" (CAS). Crude/product flows completing full Bab al-Mandab transits averaged just 2.6 million b/d over July 1-20 versus 5.5 million b/d in June, and at least five tankers that departed Yanbu bound south have altered course — yet two VLCCs (Xin Long Yang, Cosnew Lake) that loaded at Yanbu were tracked transiting Bab al-Mandab on July 23 en route to China, a live test of whether Saudi exports can keep moving. Should VLCCs be forced onto the SUMED-pipeline/Suez workaround, voyage times would stretch from 13-19 days to 40+ days — a real but gradual capacity drain, not an instant flood of stranded barrels. The CPC network is reported "technically ready to resume normal operations" the moment security conditions allow, meaning any Kazakh recovery, once security clears, should be faster than a typical infrastructure-repair ramp — but recurrence risk (this is at least the second suspension in weeks) argues for treating the disruption as intermittent rather than resolved.</p>
-
-    <h3>Seasonality / Weather</h3>
-    <p>No material seasonal driver overrides the geopolitical shock; Northern Hemisphere summer driving season provides a background demand floor, secondary to the supply narrative this week.</p>
-
-    <h3>Flow Data</h3>
-    <p>China's crude tanker fixtures continue to show steady Malaysian-blend and ESPO (Russia) cargoes arriving at Dongjiakou, Yantai, Longkou and Rizhao, alongside two TMX (Canadian) cargoes discharging at Zhoushan to Zhejiang Petroleum & Chemical — Pacific-basin supply into China appears largely undisrupted by the Red Sea/Hormuz story so far. Atlantic-basin crude differentials are also firming in sympathy: CPC Blend CIF Augusta narrowed to a 20-cent/b discount to Dated Brent (from a wider discount at the start of the week, on loading-cancellation uncertainty), WTI Midland September-arrival DAP Rotterdam values jumped to as high as $6/b over Dated Brent (from ~$2.50/b the prior session) as European refiners scramble to replace CPC-linked barrels, and West African offer levels rose ~$5/b in Angola on the combined Hormuz/CPC disruption news.</p>
-
-    <h3>7-Day Consistency</h3>
-    <p>This is a genuinely fresh escalation (Day 1 for the Houthi tanker attacks specifically), but it lands on top of a Hormuz/Kazakhstan disruption narrative that has been building steadily for 1-2 weeks (CPC suspended-resumed-suspended since July 19-20; Hormuz traffic restricted since the ceasefire ended July 8). The MOC fully validates the move with Done-deal trades and a 7% Brent rally (an extreme, >3.5% move by the standard framework), so conviction is not discounted for freshness despite the single-day trigger.</p>
-
-    <h3>Bullish Factors</h3>
-    <ul>
-      <li>Fresh Houthi attack on Layla/Encelia (Day 1), first Red Sea attack in a year, MOC-confirmed</li>
-      <li>Kazakhstan CPC loadings suspended twice in 4 days; UBS flags up to 1.8M b/d at risk</li>
-      <li>TotalEnergies confirms 5-10% Middle East output at risk while hostilities persist; SATORP drone damage cut Q2 refining utilization to 80% from 92%</li>
-      <li>Backwardation blew out to widest since mid-May on both Brent and WTI curves</li>
-      <li>Dated Brent 7-week high; Murban-Dubai premium highest since April 7</li>
-      <li>India's MRPL/Mangalore 650,000-bbl term tender — continued Indian demand pull</li>
-    </ul>
-
-    <h3>Bearish Factors</h3>
-    <ul>
-      <li>Bab al-Mandab traffic actually rose (30→44 ships) with majority still Suez-bound — not a clean closure</li>
-      <li>Two VLCCs continued transiting Bab al-Mandab post-attack, testing continuity of Saudi exports</li>
-      <li>CPC infrastructure confirmed intact and "ready to resume" immediately — this is a security-driven pause, not physical damage</li>
-      <li>EU froze (rather than let float) its Russian oil price cap at $44.10/b, capping one upside channel</li>
-    </ul>
-
-    <p class="ft-note">Rationale: all three pillars converge bullish — Supply (Houthi Red Sea attacks, Kazakh CPC suspension, TotalEnergies SATORP/output-at-risk), Demand (India tenders continuing), and Market Structure (extreme 7% Brent move, Done-deal MOC confirmation, blown-out backwardation) — with two genuine surprise elements (Houthi attack, CPC re-suspension) clearing the bar for Extremely Bullish. Execution-risk modifier: because Bab al-Mandab traffic is still flowing (44 ships, majority Suez-bound) and CPC's physical infrastructure is undamaged and quick to restart once security clears, the realistic supply-loss magnitude should be read as smaller and more front-loaded than a naive "two chokepoints closed" headline implies — expect the acute price spike to hold near current highs over the next 2-3 sessions rather than extend linearly, pending confirmation from the next Hormuz/Bab al-Mandab crossing counts.</p>
-  </section>
-
-  <section class="ft-card" id="lpg">
-    <h2>LPG <span class="chip chip-bull" style="margin-left:8px;">Bullish</span></h2>
-
-    <h3>Platts Window (MOC last 30 min)</h3>
-    <p>CFR North Asia propane and butane cargoes were both assessed $13/mt higher at $803/mt and $808/mt respectively. CFR East China and South China propane cargoes rose $16/mt to $815/mt and $813/mt. Only two bids were heard in the North Asia MOC all session — Mitsui bid $12/mt over the August Far East Index for a 23,000mt H1 September CFR Japan propane cargo, and SwissChemGas bid August FEI +$20/mt for a 23,000mt H2 August cargo — with no trades printed at the close, a thin-liquidity signal even as prices track crude higher. FOB Arab Gulf propane/butane were assessed $633/mt (+6) and $658/mt (+9); the FOB AG cargo differential to Saudi CP for both grades weakened to minus $11/mt (from minus $9/mt) — a genuine bearish counter-note attributed explicitly to "lackluster" demand and healthy near-term inventories.</p>
-
-    <h3>Tender Activity</h3>
-    <p>No East-of-Suez LPG buy or sell tenders were reported this issue — a quiet week for the tender channel specifically, meaning this pillar is effectively silent rather than bullish or bearish.</p>
-
-    <h3>Refinery / Cracker Outages</h3>
-    <p>No LPG-specific refinery or cracker outage reported this issue in Asia. In Europe, LyondellBasell declared force majeure (effective July 16, unplanned) on its butadiene extraction unit at Wesseling, Germany — directly attributed to Rhine water levels being too low to deliver sufficient naphtha/LPG feedstock to steam crackers, curbing ethylene/propylene/crude-C4/butadiene output.</p>
-
-    <h3>Geopolitical &amp; Policy Factors</h3>
-    <p>Marine insurance premiums for Strait of Hormuz transits have risen to 7.5%-10% of full cargo value, creating a genuine two-tier freight market (risk-averse operators sitting outside the strait, others attempting shuttle runs) — a direct cost-of-carry inflator for LPG cargoes moving through the Gulf. In the Black Sea, Ukraine's Ministry of Defense said its forces struck 10 cargo ships, one oil tanker and two tugboats in the prior 48 hours (196 vessels struck since July 6), and Romania flagged a possible LPG tanker attack July 20 — adding a second, distinct maritime-risk theater relevant to European LPG/naphtha logistics.</p>
-
-    <h3>Infrastructure / Execution Risk</h3>
-    <p>Rhine water levels are the dominant European logistics constraint: levels at Kaub were near 60cm late July 23 and forecast to fall to ~43cm within 24 hours, with a sub-20cm low (potentially an all-time record, below the 2018 record of 25cm) forecast for Aug 2-6. Below 40cm, large barges cannot operate at all — a binary, near-term supply-chain risk to LPG/naphtha deliveries into German/Swiss cracker sites that argues for treating any European LPG tightness as escalating over the next 7-10 days rather than already priced in.</p>
-
-    <h3>Seasonality / Weather</h3>
-    <p>Northwest Europe summer LPG demand remains subdued (comfortable inventories, ample availability), which is capping the pace of the price move despite the freight/Hormuz risk premium — a genuine demand-side offset to the supply story.</p>
-
-    <h3>Flow Data</h3>
-    <p>US propane and propylene inventories built 6.287 million barrels to 99.776 million barrels in the week ended July 17 — a new 2026 high and roughly 4x the 1.532 million barrel build S&amp;P Global CERA analysts had projected — as US exports fell to their lowest level since July 2025. This is an explicit, EIA-confirmed demand miss on the US side even as Middle East-driven freight/supply risk pushes Asian and European cash prices higher; the Enterprise butane-propane spread in the US widened to ~44 cents/gal (back above 40 cents for the first time since May) as US butane is increasingly eyed as a replacement for curtailed Middle East supply, though recent US export softness reflects a currently weak arbitrage. West Mediterranean butane spiked $18/mt to $734/mt even as underlying fundamentals were explicitly described as "weak" (comfortable inventories, Morocco port congestion limiting spot flows) — a clean example of price tracking the broader energy complex higher while physical demand lags.</p>
-
-    <h3>7-Day Consistency</h3>
-    <p>The North Asia cargo uptrend (+$13/mt) is consistent with the broader crude/naphtha rally over the past several sessions, not a single-day spike. The AG differential weakening (-$9 → -$11/mt) and the US inventory build are both fresh, same-week data points that argue for tempering conviction rather than reinforcing it.</p>
-
-    <h3>Bullish Factors</h3>
-    <ul>
-      <li>CFR North Asia/East China/South China cargoes all up $13-16/mt, tracking crude/naphtha higher</li>
-      <li>Hormuz marine insurance premiums up to 7.5%-10% of cargo value — genuine freight-cost inflation</li>
-      <li>Black Sea attacks (196 vessels struck since Jul 6) adding a second maritime risk theater</li>
-      <li>Rhine record-low water levels forcing LyondellBasell force majeure — European feedstock logistics genuinely constrained</li>
-      <li>US butane-propane spread widening on Middle East substitution demand</li>
-    </ul>
-
-    <h3>Bearish Factors</h3>
-    <ul>
-      <li>FOB AG propane/butane differentials to Saudi CP weakened to -$11/mt on explicit "lackluster demand" + healthy inventories</li>
-      <li>US propane/propylene stocks built to a 2026 high, ~4x consensus, as exports fell to a 1-year low</li>
-      <li>NWE summer LPG demand subdued; West Med fundamentals explicitly described as weak despite the price spike</li>
-      <li>Only 2 bids, zero trades in the North Asia cargo MOC — thin physical liquidity behind the price move</li>
-    </ul>
-
-    <p class="ft-note">Rationale: Supply/freight (Hormuz war-risk premium, Black Sea attacks, Rhine-driven European feedstock constraints) and Market Structure (broad-based Asian cargo gains) both lean bullish, clearing the 2-pillar threshold, but Demand is explicitly soft on two separate continents (AG differential weakening, US inventory build far above forecast) — this is a crude/freight-cost-driven move, not a standalone LPG demand story. Held at Bullish rather than Extremely Bullish, with the demand-softness modifier reducing the implied magnitude of further upside and flagging that any Hormuz-risk premium could unwind faster than the crude complex if security conditions ease, given inventories are comfortable on both ends of the supply chain.</p>
-  </section>
-
-  <section class="ft-card" id="naphtha">
-    <h2>Naphtha <span class="chip chip-bull" style="margin-left:8px;">Bullish</span></h2>
-
-    <h3>Platts Window (MOC last 30 min)</h3>
-    <p>FOB Singapore naphtha assessed $110.78/b, up $2.08, as a freight netback from CFR Japan, which took into account a bid for a cargo loading over H1 September at $1,026/mt with a $294.30/mt crack value. The CFR Japan naphtha physical crack against front-month ICE Brent surged $71.33/mt day over day to $263.13/mt at the July 22 Asian close — an over three-month high, last seen higher at $277.18/mt on April 15. The Aug-Sep MOPJ swap time spread eased to $74/mt in midmorning trading (from $76/mt at the July 22 close) — a mild softening in backwardation even as the crack itself explodes higher, worth flagging as an internal divergence.</p>
-
-    <h3>Tender Activity</h3>
-    <p>Indian Oil sold 35,000mt of naphtha for Aug 22-31 loading at a premium of about $160/mt to Mean of Platts/Argus Arab Gulf naphtha assessments — a spot seller-side print from an Indian NOC, which per the framework's weighting reads as a bearish counter-signal on tender-flow terms, though the richness of the premium itself (India's second such sale, after an Aug 12-21 sale via a tender that closed July 6) is a genuine tightness indicator rather than distress selling.</p>
-
-    <h3>Refinery / Cracker Outages</h3>
-    <p>No specific Asia naphtha cracker outage reported this issue.</p>
-
-    <h3>Geopolitical &amp; Policy Factors</h3>
-    <p>The Bab al-Mandab blockade risk is explicitly cited by Platts as capable of limiting Asian buyers' access to European naphtha barrels; one Asia-based source raised the possibility of Red Sea cargoes rerouting via Suez/Cape of Good Hope, adding up to 20 days of voyage time and raising freight costs. Another source noted that continued price strength would incentivize US barrels to move east ("If the situation continues, US barrels would move east").</p>
-
-    <h3>Infrastructure / Execution Risk</h3>
-    <p>Any US-to-Asia naphtha response is constrained by competing demand from US gasoline blenders during hurricane season — US gasoline supplied (a demand proxy) rose 1.16% WoW to 8.947 million b/d — meaning the arbitrage relief from US barrels moving east is not instantaneous and will compete directly with domestic blending needs.</p>
-
-    <h3>Seasonality / Weather</h3>
-    <p>Hurricane-season gasoline blending demand in the US is a genuine seasonal driver competing for naphtha barrels this week, reinforcing rather than offsetting the bullish Asian crack read.</p>
-
-    <h3>Flow Data</h3>
-    <p>No Vortexa-specific Asia naphtha flow data was reported this issue beyond the tanker-routing/reroute commentary above.</p>
-
-    <h3>7-Day Consistency</h3>
-    <p>The crack's jump to a >3-month high is a same-day (Jul22 close vs Jul21 close) reading, but sits on top of a well-established, multi-week Red Sea/Hormuz risk narrative — this reads as a confirmed extension of an existing bullish trend rather than a Day-1 setup.</p>
-
-    <h3>Bullish Factors</h3>
-    <ul>
-      <li>CFR Japan crack at a >3-month high, +$71.33/mt in a single session</li>
-      <li>Bab al-Mandab blockade risk explicitly cited as limiting European-to-Asia naphtha flows</li>
-      <li>Indian Oil's rich ~$160/mt premium sale signals genuine underlying tightness despite being a spot sell</li>
-    </ul>
-
-    <h3>Bearish Factors</h3>
-    <ul>
-      <li>Aug-Sep MOPJ swap backwardation eased slightly ($76→$74/mt) — a mild softening in forward structure</li>
-      <li>Indian Oil spot sell tender is a bearish counter-signal per the country-weighting framework</li>
-      <li>US gasoline-blending demand competes for any US barrels incentivized to move east</li>
-    </ul>
-
-    <p class="ft-note">Rationale: Supply (Bab al-Mandab risk to European-Asia naphtha flows) and Market Structure (the crack's >3-month high) both clear the bullish threshold, with the Indian Oil spot sale read as a tightness confirmation rather than a demand-destruction signal given the size of the premium achieved. Held at Bullish rather than Extremely Bullish because the forward swap spread softened slightly and the move remains crude-complex-coupled rather than an independent naphtha demand story.</p>
-  </section>
-
-  <section class="ft-card" id="gasoline">
-    <h2>Gasoline <span class="chip chip-crit" style="margin-left:8px;">Bearish</span></h2>
-
-    <h3>Platts Window (MOC last 30 min)</h3>
-    <p>FOB Singapore 92 RON assessed $124.73/b (+2.38), taking into account the notional physical cash differential in the absence of demonstrable bids, offers and trades. Brokers pegged the physical FOB Singapore 92 RON crack against front-month ICE Brent at $27.75-27.80/b at 0300 GMT July 23, down from the Platts assessment of $28.40/b at the July 22 Asian close — cracks compressing even as outright prices track the crude spike higher. The US RBOB-Brent crack similarly fell to $49.35/b (from $51.08/b). The FOB Straits 97 RON MOC saw active bidding — bids up to $134.60/b for Aug 7-11 loading and $130.90/b for Aug 12-16 — with paper-market trades (Mogas 92 Aug26) clustering $120.50-120.60/b across Vitol, Onyx, Trafigura, Dare.</p>
-
-    <h3>Tender Activity</h3>
-    <p>No Pertamina buy tender was reported this issue — the high-weight bullish signal for the product is absent. Indonesia's Pertamina Patra Niaga instead completed a scheduled turnaround at its 170,000 b/d Dumai refinery (originally planned Oct 2025, postponed to this year), which eases the region's largest gasoline importer's need for spot cargoes going forward.</p>
-
-    <h3>Refinery / Cracker Outages</h3>
-    <p>Pertamina's Dumai restart (planned, moderate weight) is a supply/import-need-reducing event. No unplanned Asian gasoline-specific outage reported this issue.</p>
-
-    <h3>Geopolitical &amp; Policy Factors</h3>
-    <p>US-Iran/Red Sea tensions are cited as adding general derivatives volatility, and gasoline supply options in the Arabian Gulf were heard to be "limited" per a Middle East-based source — a genuine tightening counter-note that is not, however, translating into wider physical cracks per the MOC read.</p>
-
-    <h3>Infrastructure / Execution Risk</h3>
-    <p>On the US West Coast, California's gasoline import mix shifted sharply: total PADD5 imports fell ~25% YoY to just under 1.08 million barrels in July 2026 (from 1.43 million barrels in July 2025), with the Bahamas and Saudi Arabia — together nearly 900,000 barrels in 2025 — disappearing entirely as origins, while India stepped in as a new supplier (a single ~318,000-barrel cargo to San Francisco was the largest of the month). Despite this reshuffling, Los Angeles and San Francisco CARBOB/RBOB differentials held stable day over day, suggesting the trade-route shift has not yet created a local price dislocation.</p>
-
-    <h3>Seasonality / Weather</h3>
-    <p>Northern Hemisphere summer driving/hurricane-season blending demand is supportive in the background (US gasoline supplied +1.16% WoW), but is not overriding the crack compression and easing Indonesian import pull this week.</p>
-
-    <h3>Flow Data</h3>
-    <p>US nationwide gasoline stocks rose 0.36% WoW to 211.294 million barrels (week ended July 17) — a mild inventory build that is possibly buoying supply sentiment. Asian alkylate blending components were heard flowing westward to the US West Coast on strong US blending demand, a bullish demand-pull note partially offsetting the crack-compression read.</p>
-
-    <h3>7-Day Consistency</h3>
-    <p>The crack compression is a same-day (Jul23 vs Jul22 close) reading, but sits alongside the now-multi-week trend of Pertamina/Indonesia demand easing (Dumai restart) and generally elevated Korean/regional RFCC run rates from prior weeks — consistent rather than a one-off.</p>
-
-    <h3>Bullish Factors</h3>
-    <ul>
-      <li>AG gasoline supply heard "limited" — genuine regional tightness note</li>
-      <li>Asian alkylate flowing west on strong US blending demand (hurricane season)</li>
-      <li>US gasoline stocks and gasoline-supplied both rose modestly WoW</li>
-    </ul>
-
-    <h3>Bearish Factors</h3>
-    <ul>
-      <li>Physical and RBOB-Brent cracks both compressed day-over-day as crude spiked</li>
-      <li>No Pertamina buy tender this cycle (bullish signal absent)</li>
-      <li>Pertamina's Dumai restart eases Indonesia's import pull</li>
-      <li>California PADD5 imports down 25% YoY even as CARBOB differentials stay flat — no local scarcity premium showing through</li>
-    </ul>
-
-    <p class="ft-note">Rationale: Market Structure (crack compression against the spiking Brent complex) and Demand (no Pertamina buy tender, Dumai restart easing Indonesian import need) both lean bearish, clearing the 2-pillar threshold. Per the crude-coupling rule, Brent's >$6/b same-day move is explicitly compressing the gasoline crack — margin destruction driven by the crude spike rather than standalone gasoline weakness, but real and MOC-confirmed. AG supply tightness is a genuine bullish counter-note that keeps this at Bearish rather than a deeper call.</p>
-  </section>
-
-  <section class="ft-card" id="gasoil">
-    <h2>Gasoil <span class="chip chip-bull" style="margin-left:8px;">Extremely Bullish</span></h2>
-
-    <h3>Platts Window (MOC last 30 min)</h3>
-    <p>FOB Singapore 10ppm assessed $167.62/b (+4.03), with the cash differential at MOPS +$6.50/b. The Aug-Sep Singapore gasoil swaps time spread widened to $10.40/b in midafternoon trading July 23 (from $9.81/b at the July 22 Asian close) — a further widening of an already-strong backwardation trend. In the FOB Straits MOC: Aramco bid MOPS+5.50 (150kb, Aug7-11), Trafigura bid +7.50 (165kb, Aug15-19); offers came in from Vitol (+5.00/+4.00/+3.00 across three windows) and Unipec (+4.50) — with confirmed trades: Total bought from BP at +$5.50/b (Aug7-11, 150kb) and again at +$8.00/b (Aug12-16, 150kb) — a genuine, escalating premium print. The front-month August gasoil EFS (exchange-of-futures-for-swaps) spread rallied 34.65% day over day to a three-week high of minus $61.60/mt (from minus $94.26/mt) — less negative, signaling the East-West arbitrage is becoming markedly less economically attractive, which keeps more barrels in Asia.</p>
-
-    <h3>Tender Activity</h3>
-    <p>South Korea's S-Oil <em>canceled</em> its sell tender for 300,000 barrels of 10ppm gasoil (Onsan, Aug21-25 loading, had closed July 22) — the reason could not be ascertained, but a canceled Korean sell tender removes supply from the market and reads bullish per the framework (Korean export tenders are otherwise flagged bearish; their cancellation is the inverse signal).</p>
-
-    <h3>Refinery / Cracker Outages</h3>
-    <p>No specific Asia gasoil refinery outage reported this issue; Indonesia's Pertamina completed its scheduled Dumai turnaround (170,000 b/d, planned) — a moderate-weight supply-normalizing event, though gasoil-specific impact is secondary to the naphtha/gasoline read for that refinery.</p>
-
-    <h3>Geopolitical &amp; Policy Factors</h3>
-    <p>Rhine water levels — the key European distillate logistics artery — are forecast to hit record or near-record lows by early August, adding a structural inland premium on top of an already elevated global price environment; the 10ppm diesel FOB ARA barge price was assessed at $1,319.75/mt, the highest since April 9. LyondellBasell's force majeure at Wesseling (butadiene, but symptomatic of broader Rhine-fed logistics strain) reinforces the European distillate tightness story layered on top of Middle East risk. Separately, the drone-attack damage at TotalEnergies' SATORP refinery (which processes distillate-heavy output) removes incremental Middle East distillate supply.</p>
-
-    <h3>Infrastructure / Execution Risk</h3>
-    <p>Alternative European inland logistics (rail, pipeline, trucks) are being lined up as Rhine barge capacity falls, but a key German freight rail route (right-bank Middle Rhine line) is closed for refurbishment through Dec 12 — meaning the substitution capacity is itself constrained, arguing for a genuinely graduated, weeks-long European distillate tightening rather than an instant resolution once barge levels recover (if they do, before autumn rains).</p>
-
-    <h3>Seasonality / Weather</h3>
-    <p>The Rhine's water-level crisis is itself weather-driven (extended dry/hot conditions per DWD, with only a slight chance of rain relief July 26) — a genuine seasonal/weather overlay on top of the geopolitical risk premium, reinforcing rather than offsetting the bullish read this week.</p>
-
-    <h3>Flow Data</h3>
-    <p>The East-West gasoil arb is described directly by a Singapore-based trader as "firmly shut" amid Middle East-driven forward-program uncertainty at Chinese refiners, while the USGC-Europe arb remains open, holding above a $1/b incentive since July 1 (encouraging trans-Atlantic flows to help fill the Rhine-driven European gap). US ULSD production rose 84,000 b/d to a post-Dec-2025 high of 5.16 million b/d, and exports rose 58,000 b/d WoW to 1.604 million b/d (above the 5-year average) even as ULSD inventories built 751,000 barrels to a post-April high of 99.16 million barrels — a market simultaneously building US stock and exporting hard, consistent with strong global (not just US) distillate pull.</p>
-
-    <h3>7-Day Consistency</h3>
-    <p>Confirmed, not a same-day setup: the Aug-Sep backwardation has widened steadily this week ($9.81/b → $10.40/b), and the Rhine crisis has been building since at least July 16 (LyondellBasell force majeure date) with the worst levels still ahead (Aug 2-6 forecast) — a multi-day, still-escalating trend rather than a single-day spike.</p>
-
-    <h3>Bullish Factors</h3>
-    <ul>
-      <li>S-Oil canceled its 300,000-bbl Korean sell tender — bullish per the country-weighting framework</li>
-      <li>Aug-Sep backwardation widened further ($9.81→$10.40/b) on top of an already strong structure</li>
-      <li>FOB Straits MOC shows confirmed escalating-premium trades (Total buys from BP at +$5.50, then +$8.00)</li>
-      <li>Rhine record-low water levels adding a structural European distillate logistics premium, with a constrained rail-substitution alternative</li>
-      <li>East-West arb "firmly shut" — keeping barrels in Asia; EFS spread rallied 34.65% to a 3-week high</li>
-      <li>SATORP drone-attack damage removing incremental Middle East distillate supply</li>
-    </ul>
-
-    <h3>Bearish Factors</h3>
-    <ul>
-      <li>US ULSD inventories built to a post-April high despite strong exports — some slack building in the US specifically</li>
-      <li>USGC-Europe arb remaining open is helping relieve some of the Rhine-driven European tightness</li>
-    </ul>
-
-    <p class="ft-note">Rationale: all three pillars converge — Supply (S-Oil sell-tender cancellation, SATORP damage, Rhine-driven European logistics crisis), Demand (US ULSD demand strong enough to draw exports even as domestic stocks build), and Market Structure (widening backwardation, confirmed escalating MOC trades, a 34.65% EFS rally) — with the Rhine crisis representing a genuine, still-escalating weather/infrastructure surprise. This clears the bar for Extremely Bullish, confirmed across the week's trend rather than a single-day read.</p>
-  </section>
-
-  <section class="ft-card" id="jet">
-    <h2>Jet Kero <span class="chip chip-bull" style="margin-left:8px;">Bullish</span></h2>
-
-    <h3>Platts Window (MOC last 30 min)</h3>
-    <p>FOB Singapore Jet Kero assessed $160.99/b (+1.22), with the cash differential down 57 cents day over day to +$1.86/b as the balance Aug-Sep swap spread eased $1.14/b to +$4.36/b — a cooling-off after the prior session's sharp rally (the spread had widened 25% to +$5.50/b at the July 22 close). Brokers pegged the spread lower still intraday at $4.95/b. The Singapore MOC saw active offers (BP at MOPS+2.50 across several August windows, Unipec at +4.00, Ampol at +5.50) but no bids or trades reported — a physically thin session even as the paper structure stays elevated versus the prior week.</p>
-
-    <h3>Tender Activity</h3>
-    <p>Indonesia's Pertamina Patra Niaga launched what several sources view as a reissue of a buy tender, seeking three 200,000-barrel Jet A-1 cargoes for delivery to Jakarta over July 29-Aug 1, Aug 2-4 and Aug 8-10 (closing July 23, next-day validity) — a high-weight, sizeable bullish signal. Notably, the pricing basis was changed to the lower of the August whole-month average (from the lower of a June 25-July 24 average) — a Singapore-based trader suggested Pertamina's prior pricing basis "was too low already," implying the buyer is adjusting to protect against further price upside rather than backing away from the market.</p>
-
-    <h3>Refinery / Cracker Outages</h3>
-    <p>No jet-specific refinery outage reported this issue. Sinopec's completed CNAF takeover (structural, prior-cycle context) continues to underpin China's long-run aviation-fuel security narrative but is not a near-term price driver.</p>
-
-    <h3>Geopolitical &amp; Policy Factors</h3>
-    <p>Asia jet is explicitly described as tracking gains in the European jet sector and rising US-Iran tensions. Saudi Arabia's rerouting of more crude through the East-West pipeline to Yanbu has lifted Suez Canal-bound flows by roughly 30% (per a retired US Navy admiral) — a logistics adaptation that is helping keep physical barrels moving even amid the heightened chokepoint risk.</p>
-
-    <h3>Infrastructure / Execution Risk</h3>
-    <p>Same Hormuz/Bab al-Mandab corridor risk applies to Arab Gulf-loaded jet cargoes as to crude/gasoil; any AG jet supply response will be constrained by the same vessel-availability/insurance cost issues (7.5%-10% of cargo value for Hormuz transits).</p>
-
-    <h3>Seasonality / Weather</h3>
-    <p>Summer travel season is providing genuine, confirmed demand support this cycle (see Flow Data below) — a reversal from the prior cycle's explicit "jet demand is very bad" commentary.</p>
-
-    <h3>Flow Data</h3>
-    <p>US jet fuel product supplied hit an all-time high of 2.146 million barrels/day in the week ended July 17 (+386,000 b/d WoW, 38,000 b/d above the prior record set December 2017) — a strong, EIA-confirmed demand data point. US jet inventories drew 1.030 million barrels to 47.388 million barrels despite production falling only modestly (45,000 b/d lower WoW, still 249,000 b/d above year-ago levels) — production and demand both elevated, consistent with a genuinely tight market rather than a paper-only rally.</p>
-
-    <h3>7-Day Consistency</h3>
-    <p>The backwardation move is a partial retracement of a sharp prior-day widening (July21→July22: +25% to $5.50/b; July22→July23: -$1.14/b to $4.36/b) — a cooling-off within an elevated range rather than a trend reversal. The US demand data (record product-supplied) is a fresh, single-week print but is directionally consistent with the seasonal summer-travel pattern.</p>
-
-    <h3>Bullish Factors</h3>
-    <ul>
-      <li>Pertamina's reissued, sizeable 600,000-bbl buy tender — high-weight bullish signal</li>
-      <li>US jet fuel product supplied at an all-time high; inventories drawing</li>
-      <li>Backwardation remains elevated versus the prior week despite the intraday retracement</li>
-      <li>Saudi East-West pipeline reroute is successfully keeping physical crude/product flows moving despite the chokepoint risk</li>
-    </ul>
-
-    <h3>Bearish Factors</h3>
-    <ul>
-      <li>Backwardation eased intraday (-$1.14/b to $4.36/b) after the prior day's sharp widening — momentum cooling</li>
-      <li>Singapore physical Jet Kero MOC saw offers only, no bids or trades — thin physical confirmation</li>
-      <li>Pertamina's pricing-basis change suggests some buyer caution around further upside, not unconditional aggression</li>
-    </ul>
-
-    <p class="ft-note">Rationale: Demand (Pertamina's reissued buy tender, US jet demand at an all-time high) and Geopolitics/Market Structure (crude/European sector pass-through, still-elevated backwardation) both lean bullish, clearing the 2-pillar threshold. Unlike the prior cycle, physical demand commentary and hard EIA data now corroborate the price strength rather than contradicting it, but the intraday cooling in backwardation and thin physical MOC participation argue against an Extremely Bullish call — held at Bullish.</p>
-  </section>
-
-  <section class="ft-card" id="saf">
-    <h2>SAF <span class="chip chip-watch" style="margin-left:8px;">Neutral</span></h2>
-
-    <h3>Platts Window (MOC last 30 min)</h3>
-    <p>SAF (HEFA-SPK) FOB Straits assessed $2,545/mt, up $25/mt day over day and up $115/mt month over month, tracking the broader Middle East-driven rally in the fossil jet complex. The FOB Straits premium over the Jet Kero FOB Singapore forward curve was assessed $1,287.75/mt, up $10.75/mt day over day but down a sharp $269.50/mt month over month — a clear divergence between a rising outright price (crude/jet-complex-driven) and a compressing premium (weaker underlying SAF-specific demand). FOB China SAF was assessed $2,525/mt (+$25/mt day, +~$150/mt month).</p>
-
-    <h3>Tender Activity</h3>
-    <p>No SAF-specific tender activity reported this issue.</p>
-
-    <h3>Refinery / Cracker Outages</h3>
-    <p>Ecoceres' 420,000 mt/year Tanjung Langsat (Johor Bahru) HEFA plant has been back online for a few weeks after a temporary shutdown, progressively ramping toward pre-shutdown utilization while working with local authorities on effluent-treatment enhancements — a supply-side positive still in a gradual recovery phase.</p>
-
-    <h3>Geopolitical &amp; Policy Factors</h3>
-    <p>No new SAF-specific policy catalyst this issue; UK HEFA SAF certificates for both 2025 and 2026 vintages rose 2 pence to 86p/84p, moving toward an indicative 88p level. Indonesia's Pertamina Patra Niaga confirmed it is preparing Cilacap refinery capacity and co-processing trials at Dumai/Balongan ahead of the country's 1% SAF mandate taking effect in 2027 — a structural long-run demand signal, not a near-term price driver.</p>
-
-    <h3>Infrastructure / Execution Risk</h3>
-    <p>Not directly applicable this issue beyond the Ecoceres ramp-up, which itself should be read as a multi-week (not instant) capacity restoration.</p>
-
-    <h3>Seasonality / Weather</h3>
-    <p>Not a material factor this issue.</p>
-
-    <h3>Flow Data</h3>
-    <p>EU SAF buying "dried up" in Q3 per multiple Straits-based traders, with one flatly stating "Q3 supply from Asia will be quiet" — a clear, first-hand demand-softness signal. China's SAF exports halved month over month in June (to 56,342mt) even as HVO exports rose 28% (55,973mt) — a substitution pattern away from SAF specifically. France imported zero SAF in June (versus 5,065mt in March and 10,950mt in May), while Belgium (51,331mt) and Spain (5,011mt) continued healthy imports — a bifurcated European demand picture. China's Blue Whale Bioenergy shipped its first SAF cargo to Europe July 19 (a 5,000mt August cargo reportedly sold around $2,550/mt FOB China, in a market one participant called "quiet").</p>
-
-    <h3>7-Day Consistency</h3>
-    <p>The premium compression is a clear month-over-month trend (-$269.50/mt), not a single-day reading, and is corroborated by the multiple first-hand trader quotes about a quiet Q3 — a confirmed, not emerging, demand-softness signal.</p>
-
-    <h3>Bullish Factors</h3>
-    <ul>
-      <li>Outright FOB Straits/China prices tracking the broader crude/jet rally higher, up ~$115-150/mt MoM</li>
-      <li>Indonesia's 2027 SAF mandate build-out (Pertamina Cilacap/Dumai/Balongan) — long-run structural demand</li>
-      <li>Ecoceres Tanjung Langsat restart still ramping — supply normalizing but not flooding the market</li>
-    </ul>
-
-    <h3>Bearish Factors</h3>
-    <ul>
-      <li>SAF premium over jet compressed sharply on a monthly view (-$269.50/mt) even as the day-over-day print rose</li>
-      <li>Multiple trader quotes confirm EU SAF buying "dried up" and Q3 Asia supply outlook is "quiet"</li>
-      <li>China SAF exports halved MoM while HVO exports rose — a substitution away from SAF</li>
-      <li>France imported zero SAF in June, a clean demand-absence data point</li>
-    </ul>
-
-    <p class="ft-note">Rationale: Market Structure (premium compression) and Demand (explicit, multi-source trader confirmation of a quiet EU/Asia SAF market) both lean bearish and meet the 2-pillar threshold on their own, but the outright price is rising in lockstep with the broader jet/crude complex — a crude-coupling effect that offsets the demand-side softness in the headline number. Given the clean divergence between a rising outright and a compressing premium (the more economically meaningful figure), held at Neutral rather than assigning a directional call on the outright alone.</p>
-  </section>
-
-  <section class="ft-card" id="lsfo">
-    <h2>LSFO (0.5%S Marine Fuel) <span class="chip chip-bull" style="margin-left:8px;">Bullish</span></h2>
-
-    <h3>Platts Window (MOC last 30 min)</h3>
-    <p>FOB Singapore Marine Fuel 0.5% cargo assessed $759.95/mt, up $1.17/mt, with the cash differential at $37.72/mt (+2.47/mt) — a premium that had already climbed to $35.25/mt at the July 21 Asian close (from $27.92/mt the prior session), continuing a multi-session uptrend. The balance Aug-Sep swap time spread was pegged at $45/mt backwardation intraday July 23, compared with the Platts assessment of $50/mt at the July 22 close — the first pullback in the recent widening trend, though the structure remains firmly backwardated. A deep multi-party bid cluster was again seen in the FOB Straits MOC (BP, Mercuria, Maersk, Gunvor, Vitol, Glencore all active at MOPS+30 to +38/mt across various loading windows), with Shell offering at MOPS+47-50/mt — offers still priced meaningfully above the bid cluster, a genuine tightness signal, though no trade printed at the close.</p>
-
-    <h3>Tender Activity</h3>
-    <p>No LSFO-specific buy or sell tender reported this issue; the fuel-oil tender framework's bearish NOC-seller signal (KPC/ADNOC/ATC/QP/IOC) remains notably absent.</p>
-
-    <h3>Refinery / Cracker Outages</h3>
-    <p>No specific LSFO refinery outage reported; Fujairah's commercial heavy-distillate stockpiles fell 19% week over week to a three-week low of 5.865 million barrels (the first drop in five weeks), per Fujairah Oil Industry Zone data — a clear physical draw corroborating the structural tightening.</p>
-
-    <h3>Geopolitical &amp; Policy Factors</h3>
-    <p>Platts explicitly attributes the LSFO structure's continued firmness to "supply concerns going forward as renewed tensions over the Strait of Hormuz and Bab al-Mandab could disrupt gradually normalizing Persian Gulf flows" — a direct, MOC-confirmed geo linkage, now compounded by the fresh Houthi tanker attacks.</p>
-
-    <h3>Infrastructure / Execution Risk</h3>
-    <p>Unlike the prior reporting cycle, no explicit "buyer holding inquiries" quote was heard from Fujairah bunker buyers this issue — a modest easing of the demand-side-friction signal that had been present two weeks ago, though the underlying Hormuz/Bab al-Mandab risk premium is arguably now higher given the fresh Red Sea attacks.</p>
-
-    <h3>Seasonality / Weather</h3>
-    <p>No material weather driver flagged for LSFO specifically this issue (contrast to HSFO's Busan/typhoon dynamic in prior cycles).</p>
-
-    <h3>Flow Data</h3>
-    <p>Fujairah's heavy-distillate stock draw (-19% WoW, 3-week low) is the clearest physical confirmation of tightening this issue, alongside light distillates also falling (-649kb) as overall Fujairah stocks declined 16% WoW — the first drop in five weeks across the hub.</p>
-
-    <h3>7-Day Consistency</h3>
-    <p>Confirmed over the prior sessions: the cash premium has been on a multi-day uptrend ($27.92/mt → $35.25/mt → $37.72/mt across three consecutive readings) even as the Aug-Sep swap spread ticked down slightly intraday — the cash/physical signal remains the stronger and more consistent of the two.</p>
-
-    <h3>Bullish Factors</h3>
-    <ul>
-      <li>Cash premium extending a clean multi-session uptrend to $37.72/mt</li>
-      <li>Fujairah heavy-distillate stocks at a 3-week low, first draw in 5 weeks</li>
-      <li>Deep multi-party bid cluster in the MOC with offers still priced above bids</li>
-      <li>Hormuz/Bab al-Mandab risk explicitly cited by Platts as the structural driver, now reinforced by the fresh Houthi attack</li>
-      <li>Absence of the usual NOC sell-tender bearish signal</li>
-    </ul>
-
-    <h3>Bearish Factors</h3>
-    <ul>
-      <li>Aug-Sep swap backwardation eased slightly intraday ($50/mt → $45/mt) — a modest cooling in forward structure</li>
-      <li>No trade printed in the FOB Straits MOC bid cluster despite the deep bid/offer activity</li>
-    </ul>
-
-    <p class="ft-note">Rationale: Supply (Fujairah stock draw, Hormuz/Bab al-Mandab risk) and Market Structure (multi-session cash premium uptrend, deep MOC bid interest) both converge bullish, clearing the 2-pillar threshold. Held at Bullish rather than Extremely Bullish because the swap backwardation itself softened slightly intraday and no confirmed trade printed at the close — a genuine but not yet fully MOC-validated extension of the existing tightening trend.</p>
-  </section>
-
-  <section class="ft-card" id="hsfo">
-    <h2>HSFO (380cst) <span class="chip chip-bull" style="margin-left:8px;">Bullish</span></h2>
-
-    <h3>Platts Window (MOC last 30 min)</h3>
-    <p>FOB Singapore 380 CST HSFO assessed $588.52/mt (+4.41), taking into account notional values in the absence of competitive bids/offers demonstrating value otherwise. The Singapore 380 CST Aug-Sep swaps time spread was pegged at $29.50/mt intraday July 23, up from the Platts assessment of $28.30/mt at the July 22 close — the M1-M2 intermonth spread has firmed about 131% this week and is now at its widest backwardation since $47.45/mt on May 29 (versus a June average of just $6.62/mt). The front-month crack against prompt Brent improved to minus 62 cents/b on July 22 (from minus $2.68/b July 21) — the strongest level since June 2. The cash differential to MOPS rose to a premium of $12/mt at the July 22 close (from $10.28/mt), the highest since June 15, buoyed by competitive bids from Mercuria during the MOC; the 180cst premium widened even further to $15.75/mt (from $10.25/mt).</p>
-
-    <h3>Tender Activity</h3>
-    <p>No NOC (KPC/ADNOC/ATC/QP/IOC) fuel-oil export tenders were reported this issue — the continued absence of the usual bearish NOC-seller signal supports the bullish structural read.</p>
-
-    <h3>Refinery / Cracker Outages</h3>
-    <p>No specific HSFO refinery outage reported for Singapore this issue; Fujairah heavy-distillate stocks (shared category with LSFO) fell 19% WoW to a three-week low, a relevant regional supply-tightness data point.</p>
-
-    <h3>Geopolitical &amp; Policy Factors</h3>
-    <p>Platts headlines "HSFO swaps spreads, crack spreads strengthen" fueled by "amplifying supply concerns amid escalating tensions in the Middle East," with President Trump vowing to target Iranian infrastructure and Iran having declared the Strait of Hormuz shut — the same Hormuz/Bab al-Mandab backdrop lifting the broader complex.</p>
-
-    <h3>Infrastructure / Execution Risk</h3>
-    <p>A Singapore-based trader noted that if the Middle East conflict persists long enough to keep crude supplies unavailable, regional refiners could start looking at HSFO as a feedstock substitute even at elevated prices — a potential secondary demand channel that has not yet materialized ("currently, the feedstock demand for HSFO is not really there").</p>
-
-    <h3>Seasonality / Weather</h3>
-    <p>No major weather-driven North Asia disruption flagged this issue (contrast to the Typhoon Bavi/Busan dynamic seen in prior cycles) — the tightening this week is a cleaner, Middle East-driven structural story rather than a weather-compounded one.</p>
-
-    <h3>Flow Data</h3>
-    <p>No specific North Asia bunker-delivery spike (e.g., Busan) was reported this issue; the Singapore-centric premium and backwardation moves are the primary flow-confirming data points, alongside the shared Fujairah heavy-distillate stock draw.</p>
-
-    <h3>7-Day Consistency</h3>
-    <p>Confirmed, multi-day trend: the M1-M2 backwardation has firmed roughly 131% over the course of this week alone, and the cash premium has been climbing steadily (to its highest since June 15) — not a single-day print.</p>
-
-    <h3>Bullish Factors</h3>
-    <ul>
-      <li>M1-M2 backwardation up 131% this week, widest since May 29</li>
-      <li>Crack vs Brent improved to its strongest level since June 2</li>
-      <li>Cash premium at a post-June-15 high; 180cst premium widened even more sharply</li>
-      <li>Continued absence of NOC (KPC/ADNOC/QP/IOC) sell tenders</li>
-      <li>Hormuz/Bab al-Mandab risk explicitly cited by Platts as the structural driver</li>
-    </ul>
-
-    <h3>Bearish Factors</h3>
-    <ul>
-      <li>HSFO-as-feedstock-substitution demand "not really there" yet — the secondary demand channel is only a future possibility, not a current driver</li>
-      <li>FOB Singapore 380cst assessed on notional values in the absence of firm bids/offers — some thinness in the direct physical print</li>
-    </ul>
-
-    <p class="ft-note">Rationale: Supply (Fujairah stock draw, absence of NOC sell tenders, Hormuz/Bab al-Mandab risk) and Market Structure (widening backwardation, improving crack, rising cash premium) both point bullish, meeting the 2-pillar threshold. Held at Bullish rather than Extremely Bullish because the physical feedstock-substitution demand channel remains hypothetical rather than confirmed, and the FOB Singapore print itself relies on notional values this session rather than a firm bid/offer/trade.</p>
-  </section>
-
-  <p class="ft-note">Generated from Platts Asia-Pacific/Arab Gulf Marketscan, LPGaswire and Oilgram News (all dated July 23, 2026) via the oil-analyst workflow. Flow claims are limited to what each Platts report itself cites (S&amp;P Global Commodities at Sea data, Fujairah Oil Industry Zone stock data, China tanker fixtures, EIA weekly stats) — no independent Vortexa file was supplied this cycle.</p>
-</main>
-<footer>Optionx Hub &middot; Oil Market Brief &middot; Data: S&amp;P Global Platts &middot; Not investment advice</footer>
 </body>
 </html>
