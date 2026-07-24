@@ -23,6 +23,7 @@ BULLETIN_PATTERN = re.compile(r"news_bulletin_(\d{8})_(\d{4})\.html$")
 BULL_SCREENER_PATTERN = re.compile(r"bull_screener_(\d{6})_(\d{4})\.html$")
 SECTOR_SCAN_PATTERN = re.compile(r"sector_scan_(\d{6})_(\d{4})\.html$")
 REBOUND_PATTERN = re.compile(r"Rebound_candidate_(\d{6})_(\d{4})\.html$")
+IV_SCREEN_PATTERN = re.compile(r"iv40_top7_gex_(\d{6})_(\d{4})\.html$")
 BULL_TABLE_RE = re.compile(r'<table id="mainTable">.*?</table>', re.DOTALL)
 BULL_SORT_ATTR_RE = re.compile(r'\s*onclick="sortTable\(\d+\)"')
 
@@ -126,6 +127,21 @@ def latest_rebound_candidate():
     candidates = []
     for f in DASHBOARD_DIR.glob("Rebound_candidate_*.html"):
         m = REBOUND_PATTERN.match(f.name)
+        if not m:
+            continue
+        date_str, time_str = m.groups()
+        dt = datetime.strptime(date_str + time_str, "%d%m%y%H%M")
+        candidates.append((dt, f))
+    if not candidates:
+        return None, None
+    dt, path = max(candidates, key=lambda x: x[0])
+    return dt, path
+
+
+def latest_iv_screen():
+    candidates = []
+    for f in DASHBOARD_DIR.glob("iv40_top7_gex_*.html"):
+        m = IV_SCREEN_PATTERN.match(f.name)
         if not m:
             continue
         date_str, time_str = m.groups()
@@ -415,6 +431,18 @@ def build():
         rebound_frame = "<p class='empty'>No rebound candidate file found.</p>"
         rebound_css = ""
 
+    iv_dt, iv_path = latest_iv_screen()
+    if iv_path:
+        shutil.copyfile(iv_path, SITE_DIR / "iv-screen.html")
+        iv_frame = (
+            '<div class="news-toolbar">'
+            '<a class="open-full" href="iv-screen.html" target="_blank" rel="noopener">'
+            'Open full IV screen in new tab &#8599;</a></div>'
+            '<iframe src="iv-screen.html" title="IV Screen"></iframe>'
+        )
+    else:
+        iv_frame = "<p class='empty'>No IV screen file found.</p>"
+
     generated_at = datetime.now()
     sidebar_html = render_freshness_sidebar([
         ("Page generated", generated_at),
@@ -422,6 +450,7 @@ def build():
         ("Bull screener", bull_dt),
         ("Sector scan", sector_dt),
         ("Rebounder", rebound_dt),
+        ("IV screen", iv_dt),
     ])
 
     page = f"""<!doctype html>
@@ -485,7 +514,7 @@ def build():
   .news-toolbar {{ margin-bottom:8px; font-family: Arial, sans-serif; }}
   .open-full {{ font-size:0.82rem; color:var(--ft-blue); text-decoration:none; font-weight:600; }}
   .open-full:hover {{ text-decoration:underline; }}
-  #oil iframe, #sectorscan iframe {{ width:100%; height:calc(100vh - 220px); min-height:600px; border:1px solid var(--ft-border); background:#fff; }}
+  #oil iframe, #sectorscan iframe, #ivscreen iframe {{ width:100%; height:calc(100vh - 220px); min-height:600px; border:1px solid var(--ft-border); background:#fff; }}
   .empty {{ color:var(--ft-mid); font-style:italic; font-family: Arial, sans-serif; }}
 
   #bullscreener .chip {{ display:inline-block; font-family: Arial, sans-serif; font-size:10.5px; font-weight:700; padding:2px 8px; border-radius:2px; white-space:normal; letter-spacing:0.02em; }}
@@ -571,6 +600,7 @@ def build():
     <button data-target="bullscreener">Bull Screener</button>
     <button data-target="sectorscan">Sector Scan</button>
     <button data-target="rebounder">Rebounder</button>
+    <button data-target="ivscreen">IV Screen</button>
   </div>
 </nav>
 <main>
@@ -594,6 +624,10 @@ def build():
   </section>
   <section id="rebounder">
     {rebound_frame}
+  </section>
+  <section id="ivscreen">
+    <h2>IV Screen</h2>
+    {iv_frame}
   </section>
 </main>
 <footer>Optionx Hub &middot; static, offline-capable &middot; regenerate after each pipeline run</footer>
@@ -639,7 +673,8 @@ def build():
         f"oil brief: {oil_path.name if oil_path else 'none'}, "
         f"bull screener: {bull_path.name if bull_path else 'none'}, "
         f"sector scan: {sector_path.name if sector_path else 'none'}, "
-        f"rebounder: {rebound_path.name if rebound_path else 'none'})"
+        f"rebounder: {rebound_path.name if rebound_path else 'none'}, "
+        f"iv screen: {iv_path.name if iv_path else 'none'})"
     )
 
 

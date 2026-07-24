@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Options Watchlist Brief — 23 Jul 2026 | IV Screen + Top7 GEX Check</title>
+<style>
+  :root {
+    --bg: #0d1117;
+    --surface: #161b22;
+    --surface2: #1c2330;
+    --border: #30363d;
+    --text: #e6edf3;
+    --muted: #8b949e;
+    --bull: #3fb950;
+    --bull-bg: rgba(63,185,80,0.12);
+    --bear: #f85149;
+    --bear-bg: rgba(248,81,73,0.12);
+    --neutral: #d29922;
+    --neutral-bg: rgba(210,153,34,0.12);
+    --info: #58a6ff;
+    --info-bg: rgba(88,166,255,0.12);
+    --critical: #ff7b72;
+    --critical-bg: rgba(255,123,114,0.12);
+    --accent: #79c0ff;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); font-size: 13px; line-height: 1.5; }
+  .header { background: linear-gradient(135deg, #161b22 0%, #1c2330 100%); border-bottom: 1px solid var(--border); padding: 20px 28px 16px; display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  .header-left h1 { font-size: 20px; font-weight: 700; color: var(--text); letter-spacing: -0.3px; }
+  .header-left .sub { font-size: 12px; color: var(--muted); margin-top: 3px; }
+  .header-right { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
+  .badge-source { background: var(--info-bg); color: var(--info); border: 1px solid rgba(88,166,255,0.3); padding: 2px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; }
+  .badge-date { font-size: 11px; color: var(--muted); }
+  .macro-banner { margin: 16px 28px; background: var(--critical-bg); border: 1px solid rgba(255,123,114,0.35); border-left: 4px solid var(--critical); border-radius: 8px; padding: 14px 18px; }
+  .macro-banner h2 { font-size: 12px; font-weight: 700; color: var(--critical); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 6px; }
+  .macro-banner p { font-size: 12.5px; color: #cdd9e5; line-height: 1.6; }
+  .macro-banner .macro-flags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+  .macro-flag { background: rgba(255,123,114,0.15); border: 1px solid rgba(255,123,114,0.3); color: #ff9492; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 600; }
+  .bench-strip { margin: 0 28px 16px; display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 8px; }
+  .bench-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; }
+  .bench-card .label { font-size: 10px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.6px; }
+  .bench-card .price { font-size: 16px; font-weight: 700; margin-top: 2px; }
+  .bench-card .delta { font-size: 11px; margin-top: 1px; }
+  .up { color: var(--bull); } .dn { color: var(--bear); } .flat { color: var(--neutral); }
+  .section-header { padding: 0 28px; margin: 20px 0 10px; display: flex; align-items: center; gap: 10px; }
+  .section-header h2 { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); }
+  .section-header::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .dashboard-grid { padding: 0 28px 28px; display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 12px; }
+  .product-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; }
+  .card-header { padding: 12px 16px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border); }
+  .card-header-left { display: flex; align-items: center; gap: 10px; }
+  .product-name { font-size: 13px; font-weight: 700; color: var(--text); }
+  .product-price { font-size: 11px; color: var(--muted); margin-top: 1px; }
+  .verdict { display: flex; flex-direction: column; align-items: flex-end; gap: 3px; }
+  .verdict-badge { padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.3px; }
+  .verdict-badge.bull { background: var(--bull-bg); color: var(--bull); border: 1px solid rgba(63,185,80,0.3); }
+  .verdict-badge.bear { background: var(--bear-bg); color: var(--bear); border: 1px solid rgba(248,81,73,0.3); }
+  .verdict-badge.neutral { background: var(--neutral-bg); color: var(--neutral); border: 1px solid rgba(210,153,34,0.3); }
+  .verdict-badge.nodata { background: var(--surface2); color: var(--muted); border: 1px solid var(--border); }
+  .conviction { font-size: 10px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+  .card-body { padding: 12px 16px; flex: 1; display: flex; flex-direction: column; gap: 10px; }
+  .pillar { display: flex; flex-direction: column; gap: 4px; }
+  .pillar-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.7px; color: var(--muted); }
+  .pillar-text { font-size: 12px; color: #cdd9e5; line-height: 1.5; }
+  .signals-row { display: flex; gap: 6px; flex-wrap: wrap; }
+  .signal-chip { padding: 2px 8px; border-radius: 10px; font-size: 10px; font-weight: 600; }
+  .signal-chip.bull { background: var(--bull-bg); color: var(--bull); }
+  .signal-chip.bear { background: var(--bear-bg); color: var(--bear); }
+  .signal-chip.warn { background: rgba(210,153,34,0.15); color: var(--neutral); }
+  .signal-chip.info { background: var(--info-bg); color: var(--info); }
+  .divider { height: 1px; background: var(--border); }
+  .rationale-box { background: var(--surface2); border-radius: 6px; padding: 8px 10px; font-size: 11.5px; color: #adbac7; line-height: 1.55; }
+  .rationale-box em { color: var(--accent); font-style: normal; font-weight: 600; }
+  .risk-section, .summary-section { padding: 0 28px 20px; }
+  .risk-table, .summary-table { width: 100%; border-collapse: collapse; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .risk-table th, .summary-table th { background: var(--surface2); padding: 9px 14px; text-align: left; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.7px; color: var(--muted); border-bottom: 1px solid var(--border); }
+  .risk-table td, .summary-table td { padding: 8px 14px; font-size: 11.5px; color: #cdd9e5; border-bottom: 1px solid var(--border); vertical-align: middle; }
+  .risk-table tr:last-child td, .summary-table tr:last-child td { border-bottom: none; }
+  .risk-table tr:hover td, .summary-table tr:hover td { background: var(--surface2); }
+  .sev-critical { color: #ff7b72; font-weight: 700; } .sev-high { color: #ffa657; font-weight: 700; } .sev-mod { color: var(--neutral); font-weight: 700; }
+  .td-product { font-weight: 700; color: var(--text); }
+  .td-driver { color: var(--muted); font-size: 11px; }
+  .table-scroll { overflow-x: auto; border-radius: 10px; }
+  .footer { padding: 14px 28px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
+  .footer-text { font-size: 11px; color: var(--muted); }
+  .footer-disclaimer { font-size: 10px; color: #484f58; max-width: 500px; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-left">
+    <h1>Options Watchlist Brief</h1>
+    <div class="sub">IV &gt; 40% Screen + Top7 GEX Consistency Check | July 23, 2026</div>
+  </div>
+  <div class="header-right">
+    <span class="badge-source">Sources: IV_230726_0808.csv &middot; stock_analysis_*.csv (7-day window)</span>
+    <span class="badge-date">Generated: 23 Jul 2026 08:08</span>
+  </div>
+</div>
+
+<div class="macro-banner">
+  <h2>&#128202; Screen Summary &mdash; 59 High-IV Watchlist Names, Only 6 Show Clean Long-Gamma Structure</h2>
+  <p>
+    Of the 59 watchlist tickers carrying IV Implied above 40% (from today's IV_230726_0808.csv snapshot), the top7 7-day GEX pull shows dealer positioning has been consistently long gamma (&ge;+2, no flip) for only <strong>6 names</strong> &mdash; <strong>HPE, PINS, CRWD, VLO, TGT, PYPL</strong>. The remaining book splits between <strong>23 names</strong> whose GEX flipped sign at least once in the window (mechanically ABORT-tier, unstable dealer book despite whatever badge is showing) and <strong>30 names</strong> that hold a stable-but-not-fully-bullish structure (REJECT-tier &mdash; no flip, but not enough consecutive long-gamma/bullish-phase days to clear the bar). One ticker (<strong>NBIS</strong>) shows a direct badge/GEX contradiction &mdash; a BULL CONFIRM badge sitting on top of Very Short GEX every day this week &mdash; flagged as a stale/miscalibrated signal, not a real bull case. GEV was excluded outright: its source row in the IV CSV is corrupted (an unescaped comma broke column alignment), so no reliable price/IV data exists for it.
+  </p>
+  <div class="macro-flags">
+    <span class="macro-flag">&#128994; 6/59 Clean Long-GEX (Bull Setup Tier)</span>
+    <span class="macro-flag">&#128308; 23 ABORT-Tier (Gamma Flip in Window)</span>
+    <span class="macro-flag">&#9898; 30 REJECT-Tier (Stable, Not Bullish Enough)</span>
+    <span class="macro-flag">&#9888;&#65039; 1 Badge/GEX Override (NBIS)</span>
+    <span class="macro-flag">&#128683; 1 Data Corruption Excluded (GEV)</span>
+    <span class="macro-flag">&#8987; 3 Names With &lt;7 Days History (Newer Watchlist Adds)</span>
+  </div>
+</div>
+
+<div class="section-header"><h2>Screen Stats</h2></div>
+<div class="bench-strip">
+  <div class="bench-card"><div class="label">Tickers Screened</div><div class="price">59</div><div class="delta">IV Implied &gt; 40%</div></div>
+  <div class="bench-card"><div class="label">Clean Long-GEX</div><div class="price up">6</div><div class="delta up">Bull Setup tier, no flip</div></div>
+  <div class="bench-card"><div class="label">ABORT Tier</div><div class="price dn">23</div><div class="delta dn">Gamma flip in window</div></div>
+  <div class="bench-card"><div class="label">REJECT Tier</div><div class="price flat">30</div><div class="delta flat">No flip, not bullish enough</div></div>
+  <div class="bench-card"><div class="label">Override Flags</div><div class="price dn">1</div><div class="delta dn">Badge contradicts GEX</div></div>
+  <div class="bench-card"><div class="label">Short History</div><div class="price flat">3</div><div class="delta flat">&lt;7 trading days on file</div></div>
+</div>
+
+<div class="section-header"><h2>Featured Names</h2></div>
+<div class="dashboard-grid">
+
+  <div class="product-card" style="border-color: rgba(63,185,80,0.55);">
+    <div class="card-header" style="background: rgba(63,185,80,0.1);">
+      <div class="card-header-left">
+        <div>
+          <div class="product-name">HPE &mdash; Technology</div>
+          <div class="product-price">$48.13 &middot; IV Implied 74.8% &middot; IV Rank 48</div>
+        </div>
+      </div>
+      <div class="verdict">
+        <span class="verdict-badge bull">Bull Setup</span>
+        <span class="conviction">GEX: Long 7/7 Days</span>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="pillar">
+        <div class="pillar-label">GEX Structure &mdash; 7-Day Consistency</div>
+        <div class="pillar-text">+4 +4 +4 +4 +4 +4 +4 &mdash; every day &ge;+2 (Long/Very Long), no gamma flip detected across the window.</div>
+      </div>
+      <div class="divider"></div>
+      <div class="pillar">
+        <div class="pillar-label">Badge &amp; Phase (Latest Snapshot)</div>
+        <div class="pillar-text">◉ PINNED &middot; Mark-up phase &middot; GEX 4.0 (Very Long)</div>
+      </div>
+      <div class="divider"></div>
+      <div class="pillar">
+        <div class="pillar-label">Recency (Last 2 Days)</div>
+        <div class="pillar-text">BULL SETUP &mdash; Reinforced. Earnings: 02/09/2026.</div>
+      </div>
+      <div class="signals-row">
+        <span class="signal-chip bull">GEX &ge;+2 All 7 Days</span>
+        <span class="signal-chip bull">No Gamma Flip</span>
+        <span class="signal-chip info">IV Implied 74.8%</span>
+      </div>
+      <div class="rationale-box">
+        <em>Cleanest structure in the screen.</em> High implied vol paired with a dealer book that has stayed long gamma the entire 7-day window &mdash; the combination this screen is designed to surface.
+      </div>
+    </div>
+  </div>
+
+  <div class="product-card" style="border-color: rgba(63,185,80,0.55);">
+    <div class="card-header" style="background: rgba(63,185,80,0.1);">
+      <div class="card-header-left">
+        <div>
+          <div class="product-name">PINS &mdash; Communication Services</div>
+          <div class="product-price">$22.54 &middot; IV Implied 72.1% &middot; IV Rank 83</div>
+        </div>
+      </div>
+      <div class="verdict">
+        <span class="verdict-badge bull">Bull Setup</span>
+        <span class="conviction">GEX: Long 7/7 Days</span>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="pillar">
+        <div class="pillar-label">GEX Structure &mdash; 7-Day Consistency</div>
+        <div class="pillar-text">+3 +4 +4 +4 +4 +4 +4 &mdash; every day &ge;+2 (Long/Very Long), no gamma flip detected across the window.</div>
+      </div>
+      <div class="divider"></div>
+      <div class="pillar">
+        <div class="pillar-label">Badge &amp; Phase (Latest Snapshot)</div>
+        <div class="pillar-text">◉ PINNED &middot; Mark-up phase &middot; GEX 4.0 (Very Long)</div>
+      </div>
+      <div class="divider"></div>
+      <div class="pillar">
+        <div class="pillar-label">Recency (Last 2 Days)</div>
+        <div class="pillar-text">BULL SETUP &mdash; Reinforced. Earnings: 04/08/2026.</div>
+      </div>
+      <div class="signals-row">
+        <span class="signal-chip bull">GEX &ge;+2 All 7 Days</span>
+        <span class="signal-chip bull">No Gamma Flip</span>
+        <span class="signal-chip info">IV Implied 72.1%</span>
+      </div>
+      <div class="rationale-box">
+        <em>Cleanest structure in the screen.</em> High implied vol paired with a dealer book that has stayed long gamma the entire 7-day window &mdash; the combination this screen is designed to surface.
+      </div>
+    </div>
+  </div>
+
+  <div class="product-card" style="border-color: rgba(63,185,80,0.55);">
+    <div class="card-header" style="background: rgba(63,185,80,0.1);">
+      <div class="card-header-left">
+        <div>
+          <div class="product-name">CRWD &mdash; Technology</div>
+          <div class="product-price">$188.42 &middot; IV Implied 64.2% &middot; IV Rank 78</div>
+        </div>
+      </div>
+      <div class="verdict">
+        <span class="verdict-badge bull">Bull Setup</span>
+        <span class="conviction">GEX: Long 7/7 Days</span>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="pillar">
+        <div class="pillar-label">GEX Structure &mdash; 7-Day Consistency</div>
+        <div class="pillar-text">+4 +4 +4 +4 +4 +4 +4 &mdash; every day &ge;+2 (Long/Very Long), no gamma flip detected across the window.</div>
+      </div>
+      <div class="divider"></div>
+      <div class="pillar">
+        <div class="pillar-label">Badge &amp; Phase (Latest Snapshot)</div>
+        <div class="pillar-text">◉ PINNED &middot; Mark-up phase &middot; GEX 4.0 (Very Long)</div>
+      </div>
+      <div class="divider"></div>
+      <div class="pillar">
+        <div class="pillar-label">Recency (Last 2 Days)</div>
+        <div class="pillar-text">BULL SETUP &mdash; Reinforced. Earnings: 26/08/2026.</div>
+      </div>
+      <div class="signals-row">
+        <span class="signal-chip bull">GEX &ge;+2 All 7 Days</span>
+        <span class="signal-chip bull">No Gamma Flip</span>
+        <span class="signal-chip info">IV Implied 64.2%</span>
+      </div>
+      <div class="rationale-box">
+        <em>Cleanest structure in the screen.</em> High implied vol paired with a dealer book that has stayed long gamma the entire 7-day window &mdash; the combination this screen is designed to surface.
+      </div>
+    </div>
+  </div>
+
+  <div class="product-card" style="border-color: rgba(63,185,80,0.55);">
+    <div class="card-header" style="background: rgba(63,185,80,0.1);">
+      <div class="card-header-left">
+        <div>
+          <div class="product-name">VLO &mdash; Energy</div>
+          <div class="product-price">$310.92 &middot; IV Implied 46.1% &middot; IV Rank 79</div>
+        </div>
+      </div>
+      <div class="verdict">
+        <span class="verdict-badge bull">Bull Setup</span>
+        <span class="conviction">GEX: Long 7/7 Days</span>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="pillar">
+        <div class="pillar-label">GEX Structure &mdash; 7-Day Consistency</div>
+        <div class="pillar-text">+4 +4 +4 +4 +4 +4 +4 &mdash; every day &ge;+2 (Long/Very Long), no gamma flip detected across the window.</div>
+      </div>
+      <div class="divider"></div>
+      <div class="pillar">
+        <div class="pillar-label">Badge &amp; Phase (Latest Snapshot)</div>
+        <div class="pillar-text">◉ PINNED &middot; Mark-up phase &middot; GEX 4.0 (Very Long)</div>
+      </div>
+      <div class="divider"></div>
+      <div class="pillar">
+        <div class="pillar-label">Recency (Last 2 Days)</div>
+        <div class="pillar-text">BULL SETUP &mdash; Reinforced. Earnings: 30/07/2026.</div>
+      </div>
+      <div class="signals-row">
+        <span class="signal-chip bull">GEX &ge;+2 All 7 Days</span>
+        <span class="signal-chip bull">No Gamma Flip</span>
+        <span class="signal-chip info">IV Implied 46.1%</span>
+      </div>
+      <div class="rationale-box">
+        <em>Cleanest structure in the screen.</em> High implied vol paired with a dealer book that has stayed long gamma the entire 7-day window &mdash; the combination this screen is designed to surface.
+      </div>
+    </div>
+  </div>
+
+  <div class="product-card" style="border-color: rgba(63,185,80,0.55);">
+    <div class="card-header" style="background: rgba(63,185,80,0.1);">
+      <div class="card-header-left">
+        <div>
+          <div class="product-name">TGT &mdash; Consumer Defensive</div>
+          <div class="product-price">$137.92 &middot; IV Implied 44.2% &middot; IV Rank 63</div>
+        </div>
+      </div>
+      <div class="verdict">
+        <span class="verdict-badge bull">Bull Setup</span>
+        <span class="conviction">GEX: Long 7/7 Days</span>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="pillar">
+        <div class="pillar-label">GEX Structure &mdash; 7-Day Consistency</div>
+        <div class="pillar-text">+4 +4 +4 +4 +4 +4 +4 &mdash; every day &ge;+2 (Long/Very Long), no gamma flip detected across the window.</div>
+      </div>
+      <div class="divider"></div>
+      <div class="pillar">
+        <div class="pillar-label">Badge &amp; Phase (Latest Snapshot)</div>
+        <div class="pillar-text">◉ PINNED &middot; Mark-up phase &middot; GEX 4.0 (Very Long)</div>
+      </div>
+      <div class="divider"></div>
+      <div class="pillar">
+        <div class="pillar-label">Recency (Last 2 Days)</div>
+        <div class="pillar-text">BULL SETUP &mdash; Reinforced. Earnings: 19/08/2026.</div>
+      </div>
+      <div class="signals-row">
+        <span class="signal-chip bull">GEX &ge;+2 All 7 Days</span>
+        <span class="signal-chip bull">No Gamma Flip</span>
+        <span class="signal-chip info">IV Implied 44.2%</span>
+      </div>
+      <div class="rationale-box">
+        <em>Cleanest structure in the screen.</em> High implied vol paired with a dealer book that has stayed long gamma the entire 7-day window &mdash; the combination this screen is designed to surface.
+      </div>
+    </div>
+  </div>
+
+  <div class="product-card" style="border-color: rgba(63,185,80,0.55);">
+    <div class="card-header" style="background: rgba(63,185,80,0.1);">
+      <div class="card-header-left">
+        <div>
+          <div class="product-name">PYPL &mdash; Financial Services</div>
+          <div class="product-price">$55.51 &middot; IV Implied 41.5% &middot; IV Rank 50</div>
+        </div>
+      </div>
+      <div class="verdict">
+        <span class="verdict-badge bull">Bull Setup</span>
+        <span class="conviction">GEX: Long 7/7 Days</span>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="pillar">
+        <div class="pillar-label">GEX Structure &mdash; 7-Day Consistency</div>
+        <div class="pillar-text">+4 +4 +4 +4 +4 +4 +4 &mdash; every day &ge;+2 (Long/Very Long), no gamma flip detected across the window.</div>
+      </div>
+      <div class="divider"></div>
+      <div class="pillar">
+        <div class="pillar-label">Badge &amp; Phase (Latest Snapshot)</div>
+        <div class="pillar-text">◉ PINNED &middot; Mark-up phase &middot; GEX 4.0 (Very Long)</div>
+      </div>
+      <div class="divider"></div>
+      <div class="pillar">
+        <div class="pillar-label">Recency (Last 2 Days)</div>
+        <div class="pillar-text">BULL SETUP &mdash; Reinforced. Earnings: 28/07/2026.</div>
+      </div>
+      <div class="signals-row">
+        <span class="signal-chip bull">GEX &ge;+2 All 7 Days</span>
+        <span class="signal-chip bull">No Gamma Flip</span>
+        <span class="signal-chip info">IV Implied 41.5%</span>
+      </div>
+      <div class="rationale-box">
+        <em>Cleanest structure in the screen.</em> High implied vol paired with a dealer book that has stayed long gamma the entire 7-day window &mdash; the combination this screen is designed to surface.
+      </div>
+    </div>
+  </div>
+
+  <div class="product-card" style="border-color: rgba(248,81,73,0.55);">
+    <div class="card-header" style="background: rgba(248,81,73,0.1);">
+      <div class="card-header-left">
+        <div>
+          <div class="product-name">NBIS &mdash; Communication Services</div>
+          <div class="product-price">$218.16 &middot; IV Implied 156.4% &middot; IV Rank 90</div>
+        </div>
+      </div>
+      <div class="verdict">
+        <span class="verdict-badge bear">System Override</span>
+        <span class="conviction">Badge/GEX Contradiction</span>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="pillar">
+        <div class="pillar-label">The Contradiction</div>
+        <div class="pillar-text">Latest badge reads <strong>[!!] BULL CONFIRM</strong> in an <strong>Accumulation</strong> phase &mdash; but GEX has been <strong>-4 -4 -4 -4 -4 -4 -4</strong> (Very Short) every single day this week.</div>
+      </div>
+      <div class="divider"></div>
+      <div class="pillar">
+        <div class="pillar-label">Override Rule Applied</div>
+        <div class="pillar-text">Per top7's System Override rule, a bullish badge riding negative GEX is flagged rather than trusted. This badge is stale or miscalibrated, not a live signal.</div>
+      </div>
+      <div class="signals-row">
+        <span class="signal-chip bear">GEX Very Short All 7 Days</span>
+        <span class="signal-chip warn">Badge Says BULL CONFIRM</span>
+        <span class="signal-chip info">IV Implied 156.4%</span>
+      </div>
+      <div class="rationale-box">
+        <em>Do not trade on badge alone.</em> Dealer positioning has been consistently short gamma all week &mdash; the badge is the outlier here, not the GEX.
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-header"><h2>Full Screen &mdash; All 59 Tickers</h2></div>
+<div class="summary-section">
+  <div class="table-scroll">
+  <table class="summary-table">
+    <thead>
+      <tr>
+        <th>Ticker</th><th>Price</th><th>IV Impl.</th><th>Sector</th><th>GEX 7-Day (oldest&rarr;newest)</th><th>GEX&ge;2</th><th>Verdict</th><th>Recency</th><th>Latest Badge</th><th>Flags</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="td-product">HPE</td>
+        <td>$48.13</td>
+        <td>74.8%</td>
+        <td class="td-driver">Technology</td>
+        <td style="font-family:monospace; font-size:11px;">+4 +4 +4 +4 +4 +4 +4</td>
+        <td>7/7</td>
+        <td><span class="verdict-badge bull" style="display:inline-block;padding:2px 8px;font-size:10px;">BULL SETUP</span></td>
+        <td class="td-driver">Reinforced</td>
+        <td class="td-driver">◉ PINNED</td>
+        <td>&mdash;</td>
+      </tr>
+      <tr>
+        <td class="td-product">PINS</td>
+        <td>$22.54</td>
+        <td>72.1%</td>
+        <td class="td-driver">Communication Services</td>
+        <td style="font-family:monospace; font-size:11px;">+3 +4 +4 +4 +4 +4 +4</td>
+        <td>7/7</td>
+        <td><span class="verdict-badge bull" style="display:inline-block;padding:2px 8px;font-size:10px;">BULL SETUP</span></td>
+        <td class="td-driver">Reinforced</td>
+        <td class="td-driver">◉ PINNED</td>
+        <td>&mdash;</td>
+      </tr>
+      <tr>
+        <td class="td-product">CRWD</td>
+        <td>$188.42</td>
+        <td>64.2%</td>
+        <td class="td-driver">Technology</td>
+        <td style="font-family:monospace; font-size:11px;">+4 +4 +4 +4 +4 +4 +4</td>
+        <td>7/7</td>
+        <td><span class="verdict-badge bull" style="display:inline-block;padding:2px 8px;font-size:10px;">BULL SETUP</span></td>
+        <td class="td-driver">Reinforced</td>
+        <td class="td-driver">◉ PINNED</td>
+        <td>&mdash;</td>
+      </tr>
+      <tr>
+        <td class="td-product">VLO</td>
+        <td>$310.92</td>
+        <td>46.1%</td>
+        <td class="td-driver">Energy</td>
+        <td style="font-family:monospace; font-size:11px;">+4 +4 +4 +4 +4 +4 +4</td>
+        <td>7/7</td>
+        <td><span class="verdict-badge bull" style="display:inline-block;padding:2px 8px;font-size:10px;">BULL SETUP</span></td>
+        <td class="td-driver">Reinforced</td>
+        <td class="td-driver">◉ PINNED</td>
+        <td>&mdash;</td>
+      </tr>
+      <tr>
+        <td class="td-product">TGT</td>
+        <td>$137.92</td>
+        <td>44.2%</td>
+        <td class="td-driver">Consumer Defensive</td>
+        <td style="font-family:monospace; font-size:11px;">+4 +4 +4 +4 +4 +4 +4</td>
+        <td>7/7</td>
+        <td><span class="verdict-badge bull" style="display:inline-block;padding:2px 8px;font-size:10px;">BULL SETUP</span></td>
+        <td class="td-driver">Reinforced</td>
+        <td class="td-driver">◉ PINNED</td>
+        <td>&mdash;</td>
+      </tr>
+      <tr>
+        <td class="td-product">PYPL</td>
+        <td>$55.51</td>
+        <td>41.5%</td>
+        <td class="td-driver">Financial Services</td>
+        <td style="font-family:monospace; font-size:11px;">+4 +4 +4 +4 +4 +4 +4</td>
+        <td>7/7</td>
+        <td><span class="verdict-badge bull" style="display:inline-block;padding:2px 8px;font-size:10px;">BULL SETUP</span></td>
+        <td class="td-driver">Reinforced</td>
+        <td class="td-driver">◉ PINNED</td>
+        <td>&mdash;</td>
+      </tr>
+      <tr>
+        <td class="td-product">INTC</td>
+        <td>$102.62</td>
+        <td>101.7%</td>
+        <td class="td-driver">Technology</td>
+        <td style="font-family:monospace; font-size:11px;">+4 +4 +4 +4 +4 +4 +4</td>
+        <td>7/7</td>
+        <td><span class="verdict-badge neutral" style="display:inline-block;padding:2px 8px;font-size:10px;">REJECT</span></td>
+        <td class="td-driver">Reinforced</td>
+        <td class="td-driver">◉ PINNED</td>
+        <td>&mdash;</td>
+      </tr>
+      <tr>
+        <td class="td-product">QUBT</td>
+        <td>$7.91</td>
+        <td>87.9%</td>
+        <td class="td-driver">Technology</td>
+        <td style="font-family:monospace; font-size:11px;">+3 +3 +2 +2 +2 +3 +3</td>
+        <td>7/7</td>
+        <td><span class="verdict-badge neutral" style="display:inline-block;padding:2px 8px;font-size:10px;">REJECT</span></td>
+        <td class="td-driver">Reinforced</td>
+        <td class="td-driver">◉ PINNED</td>
+        <td>&mdash;</td>
+      </tr>
+      <tr>
+        <td class="td-product">PLTR</td>
+        <td>$124.57</td>
+        <td>68.6%</td>
+        <td class="td-driver">Technology</td>
+        <td style="font-family:monospace; font-size:11px;">+4 +4 +4 +4 +4 +4 +4</td>
+        <td>7/7</td>
+        <td><span class="verdict-badge neutral" style="display:inline-block;padding:2px 8px;font-size:10px;">REJECT</span></td>
+        <td class="td-driver">Reinforced</td>
+        <td class="td-driver">◉ PINNED</td>
+        <td>&mdash;</td>
+      </tr>
+      <tr>
+        <td class="td-product">TSLA</td>
+        <td>$374.01</td>
+        <td>48.3%</td>
+        <td class="td-driver">Consumer Cyclical</td>
+        <td style="font-family:monospace; font-size:11px;">+4 +4 +4 +4 +4 +4 +4</td>
+        <td>7/7</td>
+        <td><span class="verdict-badge neutral" style="display:inline-block;padding:2px 8px;font-size:10px;">REJECT</span></td>
+        <td class="td-driver">Reinforced</td>
+        <td class="td-driver">◉ PINNED</td>
+        <td>&mdash;</td>
+      </tr>
+      <tr>
+        <td class="td-product">TEVA</td>
+        <td>$30.15</td>
+        <td>47.5%</td>
+        <td class="td-driver">Healthcare</td>
+        <td style="font-family:monospace; font-size:11px;">+4 +4 +4 +4 +4 +4 +3</td>
+        <td>7/7</td>
+        <td><span class="verdict-badge neutral" style="display:inline-block;padding:2px 8px;font-size:10px;">REJECT</span></td>
+        <td class="td-driver">Reinforced</td>
+        <td class="td-driver">◉ PINNED</td>
+        <td>&mdash;</td>
+      </tr>
+      <tr>
+        <td class="td-product">CRM</td>
+        <td>$163.00</td>
+        <td>46.7%</td>
+        <td class="td-driver">Technology</td>
+        <td style="font-family:monospace; font-size:11px;">+4 +4 +4 +4 +4 +4 +4</td>
+        <td>7/7</td>
+        <td><span class="verdict-badge neutral" style="display:inline-block;padding:2px 8px;font-size:10px;">REJECT</span></td>
+        <td class="td-driver">Reinforced</td>
+        <td class="td-driver">◉ PINNED</td>
+        <td>&mdash;</td>
+      </tr>
+      <tr>
+        <td class="td-product">MSFT</td>
+        <td>$390.34</td>
+        <td>46.0%</td>
+        <td class="td-driver">Technology</td>
+        <td style="font-family:monospace; font-size:11px;">+4 +4 +4 +4 +4 +4 +4</td>
+        <td>7/7</td>
+        <td><span class="verdict-badge neutral" style="display:inline-block;padding:2px 8px;font-size:10px;">REJECT</span></td>
+        <td class="td-driver">Reinforced</td>
+        <td class="td-driver">◉ PINNED</td>
+        <td>&mdash;</td>
+      </tr>
+      <tr>
+        <td class="td-product">ARQQ</td>
+        <td>$18.08</td>
+        <td>121.0%</td>
+        <td class="td-driver">Technology</td>
+        <td style="font-family:monospace; font-size:11px;">? ? ? ? +2 +2 +2</td>
+        <td>3/7</td>
+        <td><span class="verdict-badge neutral" style="display:inline-block;padding:2px 8px;font-size:10px;">REJECT</span></td>
+        <td class="td-driver">Reinforced</td>
+        <td class="td-driver">📈 UPTREND</td>
+        <td>&mdash;</td>
+      </tr>
+      <tr>
+        <td class="td-product">QNT</td>
+        <td>$54.88</td>
+        <td>112.3%</td>
+        <td class="td-driver">Technology</td>
+        <td style="font-family:monospace; font-size:11px;">? ? ? ? +2 +4 +2</td>
+        <td>3/7</td>
+        <td><span class="verdict-badge neutral" style="display:inline-block;padding:2px 8px;font-size:10px;">REJECT</span></td>
+        <td class="td-driver">Reinforced</td>
+        <td class="td-driver">◎ NEUTRAL</td>
+        <td>&mdash;</td>
+      </tr>
+      <tr>
+        <td class="td-product">INFQ</td>
+        <td>$10.24</td>
+        <td>111.8%</td>
+        <td class="td-driver">Technology</td>
+        <td style="font-family:monospace; font-size:11px;">? ? ? ? +4 +4 +4</td>
+        <td>3/7</td>
+        <td><span class="verdict-badge neutral" style="display:inline-block;padding:2px 8px;font-size:10px;">REJECT</span></td>
+        <td class="td-driver">Reinforced</td>
+        <td class="td-driver">◉ PINNED</td>
+        <td>&mdash;</td>
+      </tr>
+      <tr>
+        <td class="td-product">ONTO</td>
+        <td>$295.25</td>
+        <td>108.4%</td>
+        <td class="td-driver">Technology</td>
+        <td style="font-family:monospace; font-size:11px;">? ? ? ? +4 +4 +4</td>
+        <td>3/7</td>
+        <td><span class="verdict-badge neutral" style="display:inline-block;padding:2px 8px;font-size:10px;">REJECT</span></td>
+        <td class="td-driver">Upgraded</td>
+        <td class="td-driver">◉ PINNED</td>
+        <td>&mdash;</td>
+      </tr>
+      <tr>
+        <td class="td-product">DRAM</td>
+        <td>$57.77</td>
+        <td>108.2%</td>
+        <td class="td-driver">-</td>
+        <td style="font-family:monospace; font-size:11px;">-4 -4 -4 -4 +4 +4 +4</td>
+        <td>3/7</td>
+        <td><span class="verdict-badge neutral" style="display:inline-block;padding:2px 8px;font-size:10px;">REJECT</span></td>
+        <td class="td-driver">Reinforced</td>
+        <td class="td-driver">◉ PINNED</td>
+        <td>&mdash;</td>
+      </tr>
+      <tr>
+        <td class="td-product">CRWV</td>
+        <td>$82.64</td>
+        <td>107.1%</td>
+        <td class="td-driver">Technology</td>
+        <td style="font-family:monospace; font-size:11px;">-4 -4 -4 -4 +4 +4 +4</td>
+        <td>3/7</td>
+        <td><span class="verdict-badge neutral" style="display:inline-block;padding:2px 8px;font-size:10px;">REJECT</span></td>
+        <td class="td-driver">Reinforced</td>
+        <td class="td-driver">◉ PINNED</td>
+        <td>&mdash;</td>
+      </tr>
+      <tr>
+        <td class="td-product">QBTS</td>
+        <td>$17.35</td>
+        <td>98.6%</td>
+        <td class="td-driver">Technology</td>
+        <td style="font-family:monospace; font-size:11px;">-3 -3 -3 -3 +2 +4 +4</td>
+        <td>3/7</td>
+        <td><span class="verdict-badge neutral" style="display:inline-block;padding:2px 8px;font-size:10px;">REJECT</span></td>
+        <td class="td-driver">Reinforced</td>
+        <td class="td-driver">◉ PINNED</td>
+        <td>&mdash;</td>
+      </tr>
+      <tr>
+        <td class="td-product">QCOM</td>
+        <td>$175.63</td>
+        <td>71.8%</td>
+        <td class="td-driver">Technology</td>
+        <td style="font-family:monospace; font-size:11px;">-4 -4 -4 -4 +4 +4 +4</td>
+        <td>3/7</td>
+        <td><span class="verdict-badge neutral" style="display:inline-block;padding:2px 8px;font-size:10px;">REJECT</span></td>
+        <td class="td-driver">Reinforced</td>
+        <td class="td-driver">◉ PINNED</td>
+        <td>&mdash;</td>
+      </tr>
+      <tr>
+        <td class="td-product">ORCL</td>
+        <td>$125.84</td>
+        <td>66.8%</td>
+        <td class="td-driver">Technology</td>
+        <td style="font-family:monospace; font-size:11px;">-4 -4 -4 -4 +4 +4 +4</td>
+        <td>3/7</td>
+        <td><span class="verdict-badge neutral" style="display:inline-block;padding:2px 8px;font-size:10px;">REJECT</span></td>
+        <td class="td-driver">Reinforced</td>
+        <td class="td-driver">◉ PINNED</td>
+        <td>&mdash;</td>
+      </tr>
+      <tr>
+        <td class="td-product">AVGO</td>
+        <td>$396.81</td>
+        <td>52.7%</td>
+        <td class="td-driver">Technology</td>
+        <td style="font-family:monospace; font-size:11px;">-4 -4 -4 -4 +4 +4 +4</td>
+        <td>3/7</td>
+        <td><span class="verdict-badge neutral" style="display:inline-block;padding:2px 8px;font-size:10px;">REJECT</span></td>
+        <td class="td-driver">Reinforced</td>
+        <td class="td-driver">◉ PINNED</td>
+        <td>&mdash;</td>
+      </tr>
+      <tr>
+        <td class="td-product">IBM</td>
+        <td>$205.77</td>
+        <td>50.4%</td>
+        <td class="td-driver">Technology</td>
+        <td style="font-family:monospace; font-size:11px;">-4 -4 -4 -4 +4 +4 +4</td>
+        <td>3/7</td>
+        <td><span class="verdict-badge neutral" style="display:inline-block;padding:2px 8px;font-size:10px;">REJECT</span></td>
+        <td class="td-driver">Reinforced</td>
+        <td class="td-driver">◉ PINNED</td>
+        <td>&mdash;</td>
+      </tr>
+      <tr>
+        <td class="td-product">WDC</td>
+        <td>$556.67</td>
+        <td>108.5%</td>
+        <td class="td-driver">Technology</td>
+        <td style="font-family:monospace; font-size:11px;">-4 -4 -4 -4 -4 +4 +4</td>
+        <td>2/7</td>
+        <td><span class="verdict-badge neutral" style="display:inline-block;padding:2px 8px;font-size:10px;">REJECT</span></td>
+        <td class="td-driver">Upgraded</td>
+        <td class="td-driver">◉ PINNED</td>
+        <td>&mdash;</td>
+      </tr>
+      <tr>
+        <td class="td-product">CLS</td>
+        <td>$335.50</td>
+        <td>95.2%</td>
+        <td class="td-driver">Technology</td>
+        <td style="font-family:monospace; font-size:11px;">-4 -4 -4 -4 -4 +4 +4</td>
+        <td>2/7</td>
+        <td><span class="verdict-badge neutral" style="display:inline-block;padding:2px 8px;font-size:10px;">REJECT</span></td>
+        <td class="td-driver">Reinforced</td>
+        <td class="td-driver">◉ PINNED</td>
+        <td>&mdash;</td>
+      </tr>
+      <tr>
+        <td class="td-product">CELH</td>
+        <td>$28.47</td>
+        <td>79.6%</td>
+        <td class="td-driver">Consumer Defensive</td>
+        <td style="font-family:monospace; font-size:11px;">-4 -3 +4 +4 -4 -4 -4</td>
+        <td>2/7</td>
+        <td><span class="verdict-badge neutral" style="display:inline-block;padding:2px 8px;font-size:10px;">REJECT</span></td>
+        <td class="td-driver">Reinforced</td>
+        <td class="td-driver">[!] HIGH VOL RISK</td>
+        <td>&mdash;</td>
+      </tr>
+      <tr>
+        <td class="td-product">MRVL</td>
+        <td>$210.99</td>
+        <td>93.3%</td>
+        <td class="td-driver">Technology</td>
+        <td style="font-family:monospace; font-size:11px;">-4 -4 -4 -4 -4 -4 +4</td>
+        <td>1/7</td>
+        <td><span class="verdict-badge neutral" style="display:inline-block;padding:2px 8px;font-size:10px;">REJECT</span></td>
+        <td class="td-driver">Reinforced</td>
+        <td class="td-driver">◉ PINNED</td>
+        <td>&mdash;</td>
+      </tr>
+      <tr>
+        <td class="td-product">NBIS</td>
+        <td>$218.16</td>
+        <td>156.4%</td>
+        <td class="td-driver">Communication Services</td>
+        <td style="font-family:monospace; font-size:11px;">-4 -4 -4 -4 -4 -4 -4</td>
+        <td>0/7</td>
+        <td><span class="verdict-badge neutral" style="display:inline-block;padding:2px 8px;font-size:10px;">REJECT</span></td>
+        <td class="td-driver">Reinforced</td>
+        <td class="td-driver">[!!] BULL CONFIRM</td>
+        <td><span class="signal-chip warn" style="font-size:9px;">OVERRIDE</span></td>
+      </tr>
+      <tr>
+        <td class="td-product">ARM</td>
+        <td>$283.40</td>
+        <td>111.1%</td>
+        <td class="td-driver">Technology</td>
+        <td style="font-family:monospace; font-size:11px;">-4 -4 -4 -3 -4 -4 -4</td>
+        <td>0/7</td>
+        <td><span class="verdict-badge neutral" style="display:inline-block;padding:2px 8px;font-size:10px;">REJECT</span></td>
+        <td class="td-driver">Reinforced</td>
+        <td class="td-driver">[!] HIGH VOL RISK</td>
+        <td>&mdash;</td>
+      </tr>
+      <tr>
+        <td class="td-product">COHR</td>
+        <td>$312.19</td>
+        <td>109.2%</td>
+        <td class="td-driver">Technology</td>
+        <td style="font-family:monospace; font-size:11px;">-4 -4 -4 -4 -4 -4 -4</td>
+        <td>0/7</td>
+        <td><span class="verdict-badge neutral" style="display:inline-block;padding:2px 8px;font-size:10px;">REJECT</span></td>
+        <td class="td-driver">Reinforced</td>
+        <td class="td-driver">[!] HIGH VOL RISK</td>
+        <td>&mdash;</td>
+      </tr>
+      <tr>
+        <td class="td-product">GLW</td>
+        <td>$154.06</td>
+        <td>91.4%</td>
+        <td class="td-driver">Technology</td>
+        <td style="font-family:monospace; font-size:11px;">-4 -4 -4 -4 -4 -4 -4</td>
+        <td>0/7</td>
+        <td><span class="verdict-badge neutral" style="display:inline-block;padding:2px 8px;font-size:10px;">REJECT</span></td>
+        <td class="td-driver">Reinforced</td>
+        <td class="td-driver">[!] HIGH VOL RISK</td>
+        <td>&mdash;</td>
+      </tr>
+      <tr>
+        <td class="td-product">TLN</td>
+        <td>$377.41</td>
+        <td>66.9%</td>
+        <td class="td-driver">Utilities</td>
+        <td style="font-family:monospace; font-size:11px;">-4 -4</td>
+        <td>0/2</td>
+        <td><span class="verdict-badge neutral" style="display:inline-block;padding:2px 8px;font-size:10px;">REJECT</span></td>
+        <td class="td-driver">Reinforced</td>
+        <td class="td-driver">[!] HIGH VOL RISK</td>
+        <td><span class="signal-chip info" style="font-size:9px;">2/7d</span></td>
+      </tr>
+      <tr>
+        <td class="td-product">SNPS</td>
+        <td>$377.61</td>
+        <td>55.2%</td>
+        <td class="td-driver">Technology</td>
+        <td style="font-family:monospace; font-size:11px;">-4 -4</td>
+        <td>0/2</td>
+        <td><span class="verdict-badge neutral" style="display:inline-block;padding:2px 8px;font-size:10px;">REJECT</span></td>
+        <td class="td-driver">Reinforced</td>
+        <td class="td-driver">[!] HIGH VOL RISK</td>
+        <td><span class="signal-chip info" style="font-size:9px;">2/7d</span></td>
+      </tr>
+      <tr>
+        <td class="td-product">ETN</td>
+        <td>$406.91</td>
+        <td>50.8%</td>
+        <td class="td-driver">Industrials</td>
+        <td style="font-family:monospace; font-size:11px;">-4 -4</td>
+        <td>0/2</td>
+        <td><span class="verdict-badge neutral" style="display:inline-block;padding:2px 8px;font-size:10px;">REJECT</span></td>
+        <td class="td-driver">Reinforced</td>
+        <td class="td-driver">[!] HIGH VOL RISK</td>
+        <td><span class="signal-chip info" style="font-size:9px;">2/7d</span></td>
+      </tr>
+      <tr>
+        <td class="td-product">TSM</td>
+        <td>$421.21</td>
+        <td>50.8%</td>
+        <td class="td-driver">Technology</td>
+        <td style="font-family:monospace; font-size:11px;">-4 -4 -4 -4 -4 -4 -4</td>
+        <td>0/7</td>
+        <td><span class="verdict-badge neutral" style="display:inline-block;padding:2px 8px;font-size:10px;">REJECT</span></td>
+        <td class="td-driver">Reinforced</td>
+        <td class="td-driver">[!] HIGH VOL RISK</td>
+        <td>&mdash;</td>
+      </tr>
+      <tr>
+        <td class="td-product">NOW</td>
+        <td>$95.46</td>
+        <td>75.8%</td>
+        <td class="td-driver">Technology</td>
+        <td style="font-family:monospace; font-size:11px;">+4 +4 +4 +4 +4 +4 -4</td>
+        <td>6/7</td>
+        <td><span class="verdict-badge bear" style="display:inline-block;padding:2px 8px;font-size:10px;">ABORT</span></td>
+        <td class="td-driver">Reinforced</td>
+        <td class="td-driver">[!] HIGH VOL RISK</td>
+        <td><span class="signal-chip bear" style="font-size:9px;">FLIP</span></td>
+      </tr>
+      <tr>
+        <td class="td-product">SE</td>
+        <td>$104.88</td>
+        <td>69.7%</td>
+        <td class="td-driver">Communication Services</td>
+        <td style="font-family:monospace; font-size:11px;">+4 +4 +3 -3 +4 +4 +4</td>
+        <td>6/7</td>
+        <td><span class="verdict-badge bear" style="display:inline-block;padding:2px 8px;font-size:10px;">ABORT</span></td>
+        <td class="td-driver">Upgraded</td>
+        <td class="td-driver">◉ PINNED</td>
+        <td><span class="signal-chip bear" style="font-size:9px;">FLIP</span></td>
+      </tr>
+      <tr>
+        <td class="td-product">INTU</td>
+        <td>$284.47</td>
+        <td>62.7%</td>
+        <td class="td-driver">Technology</td>
+        <td style="font-family:monospace; font-size:11px;">+3 -4 +4 +4 +4 +4 +4</td>
+        <td>6/7</td>
+        <td><span class="verdict-badge bear" style="display:inline-block;padding:2px 8px;font-size:10px;">ABORT</span></td>
+        <td class="td-driver">Upgraded</td>
+        <td class="td-driver">◉ PINNED</td>
+        <td><span class="signal-chip bear" style="font-size:9px;">FLIP</span></td>
+      </tr>
+      <tr>
+        <td class="td-product">META</td>
+        <td>$627.17</td>
+        <td>53.4%</td>
+        <td class="td-driver">Communication Services</td>
+        <td style="font-family:monospace; font-size:11px;">+4 +4 +4 +4 +4 +4 -4</td>
+        <td>6/7</td>
+        <td><span class="verdict-badge bear" style="display:inline-block;padding:2px 8px;font-size:10px;">ABORT</span></td>
+        <td class="td-driver">Reinforced</td>
+        <td class="td-driver">[!] HIGH VOL RISK</td>
+        <td><span class="signal-chip bear" style="font-size:9px;">FLIP</span></td>
+      </tr>
+      <tr>
+        <td class="td-product">ADBE</td>
+        <td>$218.36</td>
+        <td>49.0%</td>
+        <td class="td-driver">Technology</td>
+        <td style="font-family:monospace; font-size:11px;">+4 +4 +4 +4 +4 +4 -4</td>
+        <td>6/7</td>
+        <td><span class="verdict-badge bear" style="display:inline-block;padding:2px 8px;font-size:10px;">ABORT</span></td>
+        <td class="td-driver">Reinforced</td>
+        <td class="td-driver">[!] HIGH VOL RISK</td>
+        <td><span class="signal-chip bear" style="font-size:9px;">FLIP</span></td>
+      </tr>
+      <tr>
+        <td class="td-product">AMZN</td>
+        <td>$244.85</td>
+        <td>43.6%</td>
+        <td class="td-driver">Consumer Cyclical</td>
+        <td style="font-family:monospace; font-size:11px;">+4 +4 +4 -4 +4 +4 +4</td>
+        <td>6/7</td>
+        <td><span class="verdict-badge bear" style="display:inline-block;padding:2px 8px;font-size:10px;">ABORT</span></td>
+        <td class="td-driver">Upgraded</td>
+        <td class="td-driver">◉ PINNED</td>
+        <td><span class="signal-chip bear" style="font-size:9px;">FLIP</span></td>
+      </tr>
+      <tr>
+        <td class="td-product">NOK</td>
+        <td>$10.28</td>
+        <td>83.1%</td>
+        <td class="td-driver">Technology</td>
+        <td style="font-family:monospace; font-size:11px;">+4 +4 -4 +4 -3 +4 +4</td>
+        <td>5/7</td>
+        <td><span class="verdict-badge bear" style="display:inline-block;padding:2px 8px;font-size:10px;">ABORT</span></td>
+        <td class="td-driver">Upgraded</td>
+        <td class="td-driver">◉ PINNED</td>
+        <td><span class="signal-chip bear" style="font-size:9px;">FLIP</span></td>
+      </tr>
+      <tr>
+        <td class="td-product">SOFI</td>
+        <td>$17.07</td>
+        <td>67.3%</td>
+        <td class="td-driver">Financial Services</td>
+        <td style="font-family:monospace; font-size:11px;">+4 +4 -4 -4 +4 +4 +4</td>
+        <td>5/7</td>
+        <td><span class="verdict-badge bear" style="display:inline-block;padding:2px 8px;font-size:10px;">ABORT</span></td>
+        <td class="td-driver">Upgraded</td>
+        <td class="td-driver">◉ PINNED</td>
+        <td><span class="signal-chip bear" style="font-size:9px;">FLIP</span></td>
+      </tr>
+      <tr>
+        <td class="td-product">CMG</td>
+        <td>$32.20</td>
+        <td>54.4%</td>
+        <td class="td-driver">Consumer Cyclical</td>
+        <td style="font-family:monospace; font-size:11px;">+4 +4 -4 -4 +4 +4 +4</td>
+        <td>5/7</td>
+        <td><span class="verdict-badge bear" style="display:inline-block;padding:2px 8px;font-size:10px;">ABORT</span></td>
+        <td class="td-driver">Upgraded</td>
+        <td class="td-driver">◉ PINNED</td>
+        <td><span class="signal-chip bear" style="font-size:9px;">FLIP</span></td>
+      </tr>
+      <tr>
+        <td class="td-product">RGTI</td>
+        <td>$15.23</td>
+        <td>103.2%</td>
+        <td class="td-driver">Technology</td>
+        <td style="font-family:monospace; font-size:11px;">+2 +3 -3 -3 -2 +4 +4</td>
+        <td>4/7</td>
+        <td><span class="verdict-badge bear" style="display:inline-block;padding:2px 8px;font-size:10px;">ABORT</span></td>
+        <td class="td-driver">Upgraded</td>
+        <td class="td-driver">◉ PINNED</td>
+        <td><span class="signal-chip bear" style="font-size:9px;">FLIP</span></td>
+      </tr>
+      <tr>
+        <td class="td-product">NRG</td>
+        <td>$139.98</td>
+        <td>55.7%</td>
+        <td class="td-driver">Utilities</td>
+        <td style="font-family:monospace; font-size:11px;">+4 -3 -4 -4 +3 +4 +4</td>
+        <td>4/7</td>
+        <td><span class="verdict-badge bear" style="display:inline-block;padding:2px 8px;font-size:10px;">ABORT</span></td>
+        <td class="td-driver">Upgraded</td>
+        <td class="td-driver">◉ PINNED</td>
+        <td><span class="signal-chip bear" style="font-size:9px;">FLIP</span></td>
+      </tr>
+      <tr>
+        <td class="td-product">CSCO</td>
+        <td>$112.21</td>
+        <td>49.7%</td>
+        <td class="td-driver">Technology</td>
+        <td style="font-family:monospace; font-size:11px;">+4 +4 -4 +4 -4 +4 -2</td>
+        <td>4/7</td>
+        <td><span class="verdict-badge bear" style="display:inline-block;padding:2px 8px;font-size:10px;">ABORT</span></td>
+        <td class="td-driver">Upgraded</td>
+        <td class="td-driver">◎ NEUTRAL</td>
+        <td><span class="signal-chip bear" style="font-size:9px;">FLIP</span></td>
+      </tr>
+      <tr>
+        <td class="td-product">NVO</td>
+        <td>$48.19</td>
+        <td>47.8%</td>
+        <td class="td-driver">Healthcare</td>
+        <td style="font-family:monospace; font-size:11px;">+4 +4 +4 +4 -4 -4 -4</td>
+        <td>4/7</td>
+        <td><span class="verdict-badge bear" style="display:inline-block;padding:2px 8px;font-size:10px;">ABORT</span></td>
+        <td class="td-driver">Upgraded</td>
+        <td class="td-driver">[!] HIGH VOL RISK</td>
+        <td><span class="signal-chip bear" style="font-size:9px;">FLIP</span></td>
+      </tr>
+      <tr>
+        <td class="td-product">AAOI</td>
+        <td>$110.52</td>
+        <td>142.9%</td>
+        <td class="td-driver">Technology</td>
+        <td style="font-family:monospace; font-size:11px;">+2 -4 -4 -4 -4 +4 +4</td>
+        <td>3/7</td>
+        <td><span class="verdict-badge bear" style="display:inline-block;padding:2px 8px;font-size:10px;">ABORT</span></td>
+        <td class="td-driver">Upgraded</td>
+        <td class="td-driver">◉ PINNED</td>
+        <td><span class="signal-chip bear" style="font-size:9px;">FLIP</span></td>
+      </tr>
+      <tr>
+        <td class="td-product">MU</td>
+        <td>$959.48</td>
+        <td>100.4%</td>
+        <td class="td-driver">Technology</td>
+        <td style="font-family:monospace; font-size:11px;">+4 -4 -4 -4 -4 +4 +4</td>
+        <td>3/7</td>
+        <td><span class="verdict-badge bear" style="display:inline-block;padding:2px 8px;font-size:10px;">ABORT</span></td>
+        <td class="td-driver">Upgraded</td>
+        <td class="td-driver">◉ PINNED</td>
+        <td><span class="signal-chip bear" style="font-size:9px;">FLIP</span></td>
+      </tr>
+      <tr>
+        <td class="td-product">AMD</td>
+        <td>$552.33</td>
+        <td>85.9%</td>
+        <td class="td-driver">Technology</td>
+        <td style="font-family:monospace; font-size:11px;">+4 -4 -4 -4 -4 +4 +4</td>
+        <td>3/7</td>
+        <td><span class="verdict-badge bear" style="display:inline-block;padding:2px 8px;font-size:10px;">ABORT</span></td>
+        <td class="td-driver">Upgraded</td>
+        <td class="td-driver">◉ PINNED</td>
+        <td><span class="signal-chip bear" style="font-size:9px;">FLIP</span></td>
+      </tr>
+      <tr>
+        <td class="td-product">DELL</td>
+        <td>$441.80</td>
+        <td>84.0%</td>
+        <td class="td-driver">Technology</td>
+        <td style="font-family:monospace; font-size:11px;">+4 +4 -4 -4 -4 -4 +4</td>
+        <td>3/7</td>
+        <td><span class="verdict-badge bear" style="display:inline-block;padding:2px 8px;font-size:10px;">ABORT</span></td>
+        <td class="td-driver">Upgraded</td>
+        <td class="td-driver">◉ PINNED</td>
+        <td><span class="signal-chip bear" style="font-size:9px;">FLIP</span></td>
+      </tr>
+      <tr>
+        <td class="td-product">UBER</td>
+        <td>$70.33</td>
+        <td>46.0%</td>
+        <td class="td-driver">Technology</td>
+        <td style="font-family:monospace; font-size:11px;">-4 +4 +4 +4 -4 -4 -4</td>
+        <td>3/7</td>
+        <td><span class="verdict-badge bear" style="display:inline-block;padding:2px 8px;font-size:10px;">ABORT</span></td>
+        <td class="td-driver">Upgraded</td>
+        <td class="td-driver">[!] HIGH VOL RISK</td>
+        <td><span class="signal-chip bear" style="font-size:9px;">FLIP</span></td>
+      </tr>
+      <tr>
+        <td class="td-product">AMAT</td>
+        <td>$553.92</td>
+        <td>93.6%</td>
+        <td class="td-driver">Technology</td>
+        <td style="font-family:monospace; font-size:11px;">+4 +4 -4 -4 -4 -4 -4</td>
+        <td>2/7</td>
+        <td><span class="verdict-badge bear" style="display:inline-block;padding:2px 8px;font-size:10px;">ABORT</span></td>
+        <td class="td-driver">Upgraded</td>
+        <td class="td-driver">[!] HIGH VOL RISK</td>
+        <td><span class="signal-chip bear" style="font-size:9px;">FLIP</span></td>
+      </tr>
+      <tr>
+        <td class="td-product">CIEN</td>
+        <td>$397.16</td>
+        <td>89.1%</td>
+        <td class="td-driver">Technology</td>
+        <td style="font-family:monospace; font-size:11px;">+4 +4 -4 -4 -4 -4 -4</td>
+        <td>2/7</td>
+        <td><span class="verdict-badge bear" style="display:inline-block;padding:2px 8px;font-size:10px;">ABORT</span></td>
+        <td class="td-driver">Upgraded</td>
+        <td class="td-driver">[!] HIGH VOL RISK</td>
+        <td><span class="signal-chip bear" style="font-size:9px;">FLIP</span></td>
+      </tr>
+      <tr>
+        <td class="td-product">IONQ</td>
+        <td>$34.68</td>
+        <td>105.9%</td>
+        <td class="td-driver">Technology</td>
+        <td style="font-family:monospace; font-size:11px;">-4 -4 -4 -4 -3 +3 -4</td>
+        <td>1/7</td>
+        <td><span class="verdict-badge bear" style="display:inline-block;padding:2px 8px;font-size:10px;">ABORT</span></td>
+        <td class="td-driver">Reinforced</td>
+        <td class="td-driver">[!] HIGH VOL RISK</td>
+        <td><span class="signal-chip bear" style="font-size:9px;">FLIP</span></td>
+      </tr>
+      <tr>
+        <td class="td-product">LRCX</td>
+        <td>$319.29</td>
+        <td>96.9%</td>
+        <td class="td-driver">Technology</td>
+        <td style="font-family:monospace; font-size:11px;">+4 -4 -4 -4 -4 -4 -4</td>
+        <td>1/7</td>
+        <td><span class="verdict-badge bear" style="display:inline-block;padding:2px 8px;font-size:10px;">ABORT</span></td>
+        <td class="td-driver">Upgraded</td>
+        <td class="td-driver">[!] HIGH VOL RISK</td>
+        <td><span class="signal-chip bear" style="font-size:9px;">FLIP</span></td>
+      </tr>
+      <tr>
+        <td class="td-product">NET</td>
+        <td>$268.98</td>
+        <td>76.0%</td>
+        <td class="td-driver">Technology</td>
+        <td style="font-family:monospace; font-size:11px;">+4 -4 -4 -4 -4 -4 -4</td>
+        <td>1/7</td>
+        <td><span class="verdict-badge bear" style="display:inline-block;padding:2px 8px;font-size:10px;">ABORT</span></td>
+        <td class="td-driver">Upgraded</td>
+        <td class="td-driver">[!] HIGH VOL RISK</td>
+        <td><span class="signal-chip bear" style="font-size:9px;">FLIP</span></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<div class="section-header"><h2>Watch Items</h2></div>
+<div class="risk-section">
+  <table class="risk-table">
+    <thead><tr><th>Severity</th><th>Item</th><th>Tickers</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><span class="sev-high">&#128308; HIGH</span></td>
+        <td>Badge/GEX contradiction &mdash; bullish badge riding negative GEX all week. Treat badge as stale, not a signal.</td>
+        <td>NBIS</td>
+      </tr>
+      <tr>
+        <td><span class="sev-mod">&#128993; MODERATE</span></td>
+        <td>Fewer than 7 trading days of history on file &mdash; likely recent watchlist additions. Re-check once a full 7-day window builds.</td>
+        <td>TLN, SNPS, ETN</td>
+      </tr>
+      <tr>
+        <td><span class="sev-mod">&#128993; MODERATE</span></td>
+        <td>Source IV row corrupted (unescaped comma broke CSV column alignment) &mdash; excluded from this screen entirely. Needs a manual check against the raw UnusualWhales export.</td>
+        <td>GEV</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="footer">
+  <div class="footer-text">Options Watchlist Brief &middot; Sources: IV_230726_0808.csv &middot; stock_analysis_*.csv (Jul 11&ndash;23 window) &middot; Generated 23 Jul 2026</div>
+  <div class="footer-disclaimer">Verdict/recency tiers computed from raw GEX Scale, Wyckoff Phase, and Confluence Badge fields per top7's skill logic (duplicate-day exclusion, gamma-flip detection, recency overlay). Analytical synthesis only, not a trading recommendation.</div>
+</div>
+
+</body>
+</html>
