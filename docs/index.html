@@ -59,7 +59,7 @@
   .news-toolbar { margin-bottom:8px; font-family: Arial, sans-serif; }
   .open-full { font-size:0.82rem; color:var(--ft-blue); text-decoration:none; font-weight:600; }
   .open-full:hover { text-decoration:underline; }
-  #oil iframe, #sectorscan iframe, #ivscreen iframe, #fliplist iframe { width:100%; height:calc(100vh - 220px); min-height:600px; border:1px solid var(--ft-border); background:#fff; }
+  #oil iframe, #sectorscan iframe, #ivscreen iframe, #fliplist iframe, #threesixty iframe { width:100%; height:calc(100vh - 220px); min-height:600px; border:1px solid var(--ft-border); background:#fff; }
   .empty { color:var(--ft-mid); font-style:italic; font-family: Arial, sans-serif; }
 
   #bullscreener .chip { display:inline-block; font-family: Arial, sans-serif; font-size:10.5px; font-weight:700; padding:2px 8px; border-radius:2px; white-space:normal; letter-spacing:0.02em; }
@@ -332,6 +332,7 @@
     <button data-target="rebounder">Rebounder</button>
     <button data-target="ivscreen">IV Screen</button>
     <button data-target="fliplist">Flip List</button>
+    <button data-target="threesixty">360Analysis</button>
   </div>
 </nav>
 <main>
@@ -723,6 +724,10 @@
   <section id="fliplist">
     <h2>Flip List</h2>
     <div class="news-toolbar"><a class="open-full" href="flip-list.html" target="_blank" rel="noopener">Open full flip list in new tab &#8599;</a></div><iframe src="flip-list.html" title="Flip List"></iframe>
+  </section>
+  <section id="threesixty">
+    <h2>360Analysis</h2>
+    <div class="news-toolbar"><a class="open-full" href="360-analysis.html" target="_blank" rel="noopener">Open full 360 analysis in new tab &#8599;</a></div><iframe src="360-analysis.html" title="360 Analysis"></iframe>
   </section>
 </main>
 <footer>Optionx Hub &middot; static, offline-capable &middot; regenerate after each pipeline run</footer>

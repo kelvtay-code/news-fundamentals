@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>360&deg; Analyst Dashboard</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+:root {
+  --ft-salmon:   #FFF1E0;
+  --ft-red:      #990F3D;
+  --ft-blue:     #0F5499;
+  --ft-navy:     #262A33;
+  --ft-warm-blk: #33302E;
+  --ft-border:   #CCB799;
+  --ft-mid:      #8D775F;
+  --ft-muted:    #66605A;
+  --ft-card-bg:  #FFFAF4;
+  --ft-card-bdr: #D4A96A;
+  --ft-gold:     #F0A500;
+  --green:#4B7F3D; --orange:#B5651D; --red:#990F3D; --gold:#B8860B;
+}
+* { box-sizing:border-box; }
+body { margin:0; font-family:Georgia,'Times New Roman',serif; background:var(--ft-salmon); color:var(--ft-warm-blk); font-size:14px; line-height:1.5; }
+main, .content { max-width:1320px; margin:0 auto; padding:24px 40px 40px; }
+h2 { font-family:Arial,sans-serif; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; color:var(--ft-mid); margin:28px 0 12px; }
+h2:first-child { margin-top:0; }
+
+.masthead { background:var(--ft-navy); color:#fff; padding:0 40px; border-bottom:4px solid var(--ft-red); position:sticky; top:0; z-index:5; }
+.masthead-inner { max-width:1320px; margin:0 auto; padding:8px 0 6px; display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; }
+.masthead-eyebrow { font-family:Arial,sans-serif; font-size:9px; letter-spacing:0.1em; text-transform:uppercase; color:#AAAAAA; margin-bottom:2px; }
+.masthead-title { font-size:1.25rem; font-weight:700; letter-spacing:-0.01em; }
+.masthead-title span { color:var(--ft-gold); }
+.masthead-date { font-family:Arial,sans-serif; font-size:12px; color:#AAAAAA; margin-top:6px; }
+
+nav.section-nav { background:var(--ft-navy); padding:0 40px; border-bottom:1px solid #44495A; }
+nav.section-nav .nav-inner { max-width:1320px; margin:0 auto; display:flex; gap:0; overflow-x:auto; }
+nav.section-nav button.tab-btn { font-family:Arial,sans-serif; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.06em;
+  color:#AAAAAA; background:none; border:none; padding:9px 16px; cursor:pointer; white-space:nowrap; border-bottom:3px solid transparent; }
+nav.section-nav button.tab-btn:hover, nav.section-nav button.tab-btn.active { color:#fff; border-bottom-color:var(--ft-red); }
+
+.tab-panel { display:none; }
+.tab-panel.active { display:block; }
+
+.scorecard { background:var(--ft-card-bg); border:1px solid var(--ft-border); border-top:3px solid var(--ft-card-bdr); padding:18px 22px; margin-bottom:8px; }
+.scorecard .score-row { display:flex; align-items:baseline; gap:18px; flex-wrap:wrap; margin-bottom:8px; }
+.scorecard .score-num { font-size:2.2rem; font-weight:700; color:var(--ft-red); }
+.scorecard .score-label { font-family:Arial,sans-serif; font-size:10px; text-transform:uppercase; letter-spacing:0.08em; color:var(--ft-mid); }
+.scorecard .verdict { font-family:Arial,sans-serif; font-size:12px; font-weight:700; color:var(--ft-warm-blk); }
+.scorecard .thesis { margin-top:8px; }
+
+.table-wrap { overflow-x:auto; border:1px solid var(--ft-border); background:var(--ft-card-bg); margin-bottom:8px; }
+table { border-collapse:collapse; width:100%; font-size:0.82rem; font-family:Arial,sans-serif; }
+th, td { padding:8px 10px; text-align:left; border-bottom:1px solid var(--ft-border); white-space:nowrap; }
+th { position:sticky; top:0; background:var(--ft-navy); color:#fff; font-size:10px; text-transform:uppercase; letter-spacing:0.06em; }
+tbody tr:hover { background:var(--ft-salmon); }
+td.num, th.num { text-align:right; font-variant-numeric:tabular-nums; }
+td.hl { color:var(--ft-red); font-weight:700; }
+
+.card { background:var(--ft-card-bg); border:1px solid var(--ft-border); border-top:3px solid var(--ft-card-bdr); padding:14px 18px; margin-bottom:10px; }
+.card.risk-critical { border-top-color:var(--red); }
+.card.risk-high { border-top-color:var(--orange); }
+.card.risk-med { border-top-color:var(--gold); }
+.card ul, .card ol { margin:6px 0 0; padding-left:20px; }
+.card li { margin-bottom:6px; }
+
+.chip { display:inline-block; font-family:Arial,sans-serif; font-size:10px; font-weight:700; padding:2px 8px; border-radius:2px; letter-spacing:0.03em; margin-right:6px; }
+.chip-critical { color:#990F3D; background:#F6DCE0; }
+.chip-high     { color:#B5651D; background:#F3E0C9; }
+.chip-med      { color:#B8860B; background:#F5E8C8; }
+.chip-clean    { color:#4B7F3D; background:#E3EDDB; }
+.chip-flag     { color:#B5651D; background:#F3E0C9; }
+
+.meta-note { font-family:Arial,sans-serif; font-size:11px; color:var(--ft-muted); margin:6px 0 16px; }
+.sources { font-family:Arial,sans-serif; font-size:11px; color:var(--ft-muted); }
+.sources li { margin-bottom:4px; }
+.sources a { color:var(--ft-blue); }
+
+footer { background:var(--ft-navy); color:#888; font-family:Arial,sans-serif; font-size:11px; text-align:center; padding:16px 40px; margin-top:20px; border-top:3px solid var(--ft-red); }
+
+@media (max-width:700px) {
+  .masthead, nav.section-nav, main, .content { padding-left:16px; padding-right:16px; }
+  .masthead-eyebrow { display:none; }
+  .masthead-title { font-size:1.05rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <div class="masthead-inner">
+    <div>
+      <div class="masthead-eyebrow">Optionx Intelligence</div>
+      <div class="masthead-title">360&deg; Analyst <span>Dashboard</span></div>
+      <div class="masthead-date">Senior Business Analyst assessments &mdash; updated as new tickers are analyzed</div>
+    </div>
+  </div>
+</div>
+
+<nav class="section-nav">
+  <div class="nav-inner" id="tab-bar">
+    <button class="tab-btn active" data-tab="GOOGL">GOOGL</button>
+    <button class="tab-btn" data-tab="COHR">COHR</button>
+    <button class="tab-btn" data-tab="COF">COF</button>
+  </div>
+</nav>
+
+<main>
+
+<!-- ===================== GOOGL ===================== -->
+<div class="tab-panel active" id="panel-GOOGL">
+
+  <div class="meta-note">Alphabet Inc. (GOOGL) &nbsp;&middot;&nbsp; Local snapshots as-of 25 Jul 2026 ~09:49&ndash;09:53 SGT &nbsp;&middot;&nbsp; starry live pull 16:08 same day &nbsp;&middot;&nbsp; WebSearch figures dated as noted below</div>
+
+  <h2>1. Executive Summary &amp; Scorecard</h2>
+  <div class="scorecard">
+    <div class="score-row">
+      <div><span class="score-num">7</span><span class="verdict">/10</span></div>
+      <div>
+        <div class="score-label">Valuation Verdict</div>
+        <div class="verdict">Fairly valued on earnings (PEG 1.25) &middot; Rich on free-cash-flow basis (EV/FCF ~71&ndash;76x vs. ~27x 10-yr median)</div>
+      </div>
+    </div>
+    <div class="thesis">Alphabet has the strongest balance sheet in the mega-cap internet cohort (near-zero net leverage, interest income exceeds interest expense, 54.8% net margin) and trades at a below-peer forward P/E (21.6x) despite Google Cloud/Search AI integration driving genuine earnings acceleration. The bear case is almost entirely regulatory: the DOJ is still pushing for a <strong>structural AdX divestiture</strong> in the ad-tech case &mdash; a more severe potential outcome than the search-remedies case produced &mdash; and heavy AI capex is compressing free cash flow conversion even as GAAP earnings look strong. Options dealer positioning shows <strong>conflicting signals today</strong> between two same-day GEX reads (see Phase 4) &mdash; a near-term instability signal, not a clean directional read.</div>
+  </div>
+
+  <h2>2. Fundamental &amp; US Peer Comparison Matrix</h2>
+  <div class="meta-note">Peer group: MSFT (cloud/AI infra), META (ad-platform economics), AMZN (AWS + adjacent ads) &mdash; closest US-listed mega-cap competitors across Alphabet's three business lines.</div>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>Metric</th><th class="num">GOOGL</th><th class="num">MSFT</th><th class="num">META</th><th class="num">AMZN</th></tr></thead>
+    <tbody>
+      <tr><td>Price (local, 25 Jul)</td><td class="num hl">$319.74</td><td class="num">$381.70</td><td class="num">$595.19</td><td class="num">$232.11</td></tr>
+      <tr><td>Market Cap</td><td class="num">$3.91T</td><td class="num">$2.84T</td><td class="num">$1.51T</td><td class="num">$2.50T</td></tr>
+      <tr><td>Trailing P/E</td><td class="num">15.9x</td><td class="num">22.7x</td><td class="num">22.0x</td><td class="num">27.7x</td></tr>
+      <tr><td>Forward P/E</td><td class="num hl">21.6x</td><td class="num">19.7x</td><td class="num">16.1x</td><td class="num">23.4x</td></tr>
+      <tr><td>PEG Ratio (FWD)</td><td class="num hl">1.25</td><td class="num">1.18</td><td class="num">0.88</td><td class="num">1.25</td></tr>
+      <tr><td>YoY Revenue Growth</td><td class="num">+24.2%</td><td class="num">+18.3%</td><td class="num">+33.1%</td><td class="num">+16.6%</td></tr>
+      <tr><td>YoY Earnings Growth</td><td class="num">+294.1%&sup1;</td><td class="num">+23.4%</td><td class="num">+62.4%</td><td class="num">+74.8%</td></tr>
+      <tr><td>Gross Margin</td><td class="num">60.9%</td><td class="num">68.3%</td><td class="num">81.9%</td><td class="num">50.6%</td></tr>
+      <tr><td>Profit Margin</td><td class="num hl">54.8%</td><td class="num">39.3%</td><td class="num">32.8%</td><td class="num">12.2%</td></tr>
+      <tr><td>EV/Sales (WebSearch, Feb'26)</td><td class="num">~9.2x</td><td class="num">~9.8x</td><td class="num">N/A</td><td class="num">~3.0x</td></tr>
+      <tr><td>EV/EBITDA (WebSearch)</td><td class="num">~22&ndash;25x (Jun&ndash;Jul'26)</td><td class="num">~15.0x</td><td class="num">~14.7&ndash;15.0x (Jul'26)</td><td class="num">~15.6&ndash;17.9x (Apr&ndash;May'26)</td></tr>
+      <tr><td>EV/FCF (WebSearch, May'26)</td><td class="num hl">~71&ndash;76x (160% above 10Y median)</td><td class="num">N/A</td><td class="num">N/A</td><td class="num">N/A</td></tr>
+      <tr><td>Op Cash Flow</td><td class="num">$185.7B</td><td class="num">$170.1B</td><td class="num">$124.0B</td><td class="num">$148.5B</td></tr>
+      <tr><td>Beta</td><td class="num">1.25</td><td class="num">1.13</td><td class="num">1.25</td><td class="num">1.46</td></tr>
+      <tr><td>Analyst Target (&plusmn;%)</td><td class="num">$428.12 (+33.9%)</td><td class="num">$556.75 (+45.9%)</td><td class="num">$825.84 (+38.7%)</td><td class="num">$313.13 (+34.9%)</td></tr>
+      <tr><td>Analyst Rating</td><td class="num">Strong Buy</td><td class="num">Strong Buy</td><td class="num">Strong Buy</td><td class="num">Strong Buy</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="meta-note">&sup1; Data-quality flag: GOOGL's +294.1% YoY earnings growth is likely distorted by non-operating mark-to-market swings on Alphabet's equity securities portfolio, not pure operating leverage &mdash; directionally positive but not literally comparable across peers. Local snapshot Dividend Yield fields for GOOGL/MSFT/META are known unit-bug artifacts (ignore raw value); AMZN correctly shows N/A.</div>
+
+  <h2>3. Peer Benchmarking &amp; Moat Insights</h2>
+  <div class="card">
+    <ul>
+      <li><strong>Valuation verdict &mdash; neither premium nor value-trap:</strong> GOOGL is the value name of the group on an earnings basis (21.6x/1.25 PEG, cheaper than AMZN, in line with MSFT), but the most expensive on an FCF basis (EV/FCF ~71&ndash;76x, 160% above its own 10-year median) &mdash; AI infrastructure capex is eating into free cash flow conversion faster than it shows up in the earnings multiple. This is the single most important valuation tension in the name right now.</li>
+      <li><strong>Margin profile:</strong> best-in-class 54.8% net margin (Search's near-monopoly economics), but lowest gross margin (60.9%) of the ad/software peers because Google Cloud and Other Bets carry higher COGS than pure-software or pure-ad-serving businesses.</li>
+      <li><strong>Concentration risk (biggest qualitative flag):</strong> Alphabet pays Apple an estimated $20B+/year for Safari default-search placement &mdash; roughly three-quarters of total traffic-acquisition-cost spend. Losing or restructuring this deal could cost 20&ndash;30 points of U.S. search share in a worst case; the closest thing GOOGL has to a &gt;30%-of-segment single-channel concentration risk.</li>
+      <li><strong>Pricing power:</strong> intact on Search/YouTube (24.2% revenue growth against a 60.9% gross margin base implies no meaningful price/volume degradation); the emerging threat is substitution &mdash; AI chat interfaces diverting query volume from the paid-search funnel &mdash; a demand-side risk, not a pricing-power one.</li>
+    </ul>
+  </div>
+
+  <h2>4. Balance Sheet &amp; Critical Risk Register</h2>
+  <div class="meta-note">Balance sheet itself is a non-issue: Debt/EBITDA ~0.27x, Debt/Equity ~0.16x, $98.5B cash &amp; short-term investments, interest income &gt; interest expense, OCF covers total debt ~569%. Risks below are regulatory, not financial.</div>
+  <div class="card risk-critical">
+    <span class="chip chip-critical">HIGH</span><strong>Ad-tech antitrust &mdash; structural remedy still on the table</strong>
+    <div>A federal judge (Brinkema, EDVA) ruled Apr 2026 that Google illegally monopolizes the display-publisher ad-server and ad-exchange markets. DOJ's remedies ask includes divestiture of AdX and, if insufficient, further divestiture of DFP &mdash; a genuine structural risk (unlike the search case, where the court rejected Chrome/Android breakup). Remedies ruling was imminent as of the most recent coverage but not yet filed &mdash; live, unresolved binary-outcome risk over the ad business.</div>
+  </div>
+  <div class="card risk-high">
+    <span class="chip chip-high">MEDIUM-HIGH</span><strong>Search antitrust appeal + AI demand substitution</strong>
+    <div>Dec 2025 search-remedies judgment (data-sharing/syndication obligations, no Chrome/Android breakup) is now under cross-appeal by Alphabet and DOJ/state AGs at the D.C. Circuit; oral arguments not expected until late 2026/early 2027 &mdash; a multi-quarter overhang. Layered on top: heavy AI capex compressing FCF conversion precisely while AI chat interfaces threaten to erode the query volume funding the entire TAC/ad-pricing model.</div>
+  </div>
+  <div class="card risk-med">
+    <span class="chip chip-med">MEDIUM</span><strong>Apple TAC channel concentration</strong>
+    <div>~$20B+/year, ~75% of TAC spend, tied to a single counterparty relationship (Apple/Safari default placement) that remains subject to ongoing litigation risk even though near-term court decisions have preserved it. Any adverse future ruling is a direct hit to both search volume and TAC economics simultaneously.</div>
+  </div>
+  <div class="meta-note">No material patent-expiry, single-supplier, or near-term litigation-damages (fines/settlements) items surfaced beyond the two antitrust matters above.</div>
+
+  <h2>5. Options Market Structure &amp; Gamma Profile</h2>
+  <div class="meta-note">&#9888;&#65039; Two conflicting same-day GEX reads &mdash; flagged, not resolved. Treat GOOGL as regime-uncertain today rather than confidently long-gamma-pinned; recheck GEX closer to any trade decision.</div>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>Source</th><th>Timestamp</th><th>GEX Read</th><th class="num">Gamma Flip</th><th class="num">Call Wall</th><th class="num">Put Wall</th></tr></thead>
+    <tbody>
+      <tr><td>stock_analysis_250726.0949.csv (primary)</td><td>09:49</td><td>Very Long / +4.0 &mdash; dealers stabilizing</td><td class="num">$321.25</td><td class="num">$322.50</td><td class="num">$320.00</td></tr>
+      <tr><td>starry live pull</td><td>16:08</td><td>Very Short / &minus;3.5 &mdash; dealers amplifying</td><td class="num">n/a</td><td class="num">$340.00</td><td class="num">$315.00 / $335.00</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="meta-note">Spot ($319.74&ndash;$319.85) sits directly between the Put Wall ($320.00) and Gamma Flip ($321.25) on the primary snapshot &mdash; consistent with the independently-assigned &ldquo;PINNED / MEDIUM confidence&rdquo; badge. The later starry re-run flipped the GEX sign entirely (legacy-fallback methodology) &mdash; this divergence is itself the actionable signal.</div>
+
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>Ticker</th><th class="num">IV Rank</th><th>Read</th><th class="num">P/C</th><th>Days to Earnings</th></tr></thead>
+    <tbody>
+      <tr><td class="hl">GOOGL</td><td class="num hl">28</td><td>&#9888;&#65039; Low &mdash; poor premium-capture setup</td><td class="num">0.43</td><td>~102 days (4 Nov 2026)</td></tr>
+      <tr><td>MSFT</td><td class="num">87</td><td>&#128293; Excellent</td><td class="num">0.49</td><td>4 days (29 Jul)</td></tr>
+      <tr><td>META</td><td class="num">80</td><td>&#128293; Excellent</td><td class="num">0.43</td><td>4 days (29 Jul)</td></tr>
+      <tr><td>AMZN</td><td class="num">70</td><td>&#128293; Excellent</td><td class="num">0.48</td><td>5 days (30 Jul)</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="meta-note">Standout finding: GOOGL's IV Rank (28) is dramatically below all three peers (70&ndash;87) because it just reported while MSFT/META/AMZN all report within the next 4&ndash;5 days (pre-earnings IV expansion, not structural mispricing). GOOGL is a poor premium-selling candidate right now on IV grounds; the peer group is set up for classic pre-earnings IV-crush dynamics &mdash; &#128680; premium-buying-into-the-print setup for MSFT/META/AMZN, not premium-selling, given imminent gap/assignment risk.</div>
+  <div class="meta-note"><strong>Short interest / squeeze read vs. peers:</strong> thin, dated coverage &mdash; flagged rather than guessed. GOOGL ~0.70% of float (last confirmed days-to-cover 1.8, as of Sep 2025, now stale). META 1.42&ndash;1.64% of float (mid-2025, stale). MSFT/AMZN current short-interest % not available (no live ORTEX/Fintel-style provider in this toolchain). None of the four names screen anywhere near squeeze territory (&gt;15&ndash;25% of float) &mdash; short-squeeze mechanics are not a relevant dynamic for this mega-cap peer set.</div>
+
+  <h2>Sources</h2>
+  <ul class="sources">
+    <li><a href="https://www.gurufocus.com/term/enterprise-value-to-fcf/GOOG" target="_blank">GOOG EV-to-FCF &mdash; GuruFocus</a></li>
+    <li><a href="https://valueinvesting.io/GOOGL/valuation/ev_ebitda-multiples" target="_blank">Alphabet EV/EBITDA &mdash; valueinvesting.io</a></li>
+    <li><a href="https://www.pymnts.com/google/2026/justice-department-to-appeal-ruling-in-google-search-antitrust-case/" target="_blank">DOJ to Appeal Ruling in Google Search Antitrust Case &mdash; PYMNTS</a></li>
+    <li><a href="https://www.congress.gov/crs-product/LSB11362" target="_blank">Federal Court Endorses Behavioral Remedies, Rejects Structural Relief &mdash; Congress.gov CRS</a></li>
+    <li><a href="https://www.campaignlive.com/article/doj-google-split-fix-its-ad-monopoly/1940828" target="_blank">DOJ: Google must be split up to fix its ad monopoly &mdash; Campaign US</a></li>
+    <li><a href="https://www.adexchanger.com/antitrust/closing-arguments-are-done-in-the-us-v-google-ad-tech-case/" target="_blank">Closing Arguments Done in US v. Google Ad Tech Case &mdash; AdExchanger</a></li>
+    <li><a href="https://www.cnbc.com/2023/11/14/google-pays-apple-36percent-of-safari-search-revenue-sundar-pichai-confirms/" target="_blank">Alphabet pays Apple 36% of Safari search revenue &mdash; CNBC</a></li>
+    <li><a href="https://finance.yahoo.com/news/apple-risks-12-5-billion-152458330.html" target="_blank">Apple risks $12.5B revenue hit &mdash; Yahoo Finance/JPMorgan</a></li>
+    <li><a href="https://www.gurufocus.com/term/debt-to-ebitda/GOOG" target="_blank">GOOG Debt-to-EBITDA &mdash; GuruFocus</a></li>
+    <li><a href="https://www.gurufocus.com/term/enterprise-value-to-ebitda/META" target="_blank">Meta Platforms EV/EBITDA &mdash; GuruFocus</a></li>
+    <li><a href="https://www.gurufocus.com/term/enterprise-value-to-ebitda/AMZN" target="_blank">AMZN EV-to-EBITDA / EV-to-Sales &mdash; GuruFocus / financecharts.com</a></li>
+    <li><a href="https://fintel.io/ss/us/googl" target="_blank">GOOGL Short Interest &mdash; Fintel</a></li>
+  </ul>
+  <div class="meta-note">Local data files used: business_overview_250726_0949.csv &middot; IV_250726_0953.csv &middot; stock_analysis_250726.0949.csv</div>
+
+</div>
+<!-- =================== END GOOGL =================== -->
+
+<!-- ===================== COHR ===================== -->
+<div class="tab-panel" id="panel-COHR">
+
+  <div class="meta-note">Coherent Corp. (COHR) &nbsp;&middot;&nbsp; Local snapshots as-of 25 Jul 2026 09:49&ndash;09:53 SGT &nbsp;&middot;&nbsp; starry live pull 16:24 same day &nbsp;&middot;&nbsp; WebSearch figures dated as noted below &mdash; several WebSearch valuation figures appear to reflect a stale/earlier-week price point (see footnote)</div>
+
+  <h2>1. Executive Summary &amp; Scorecard</h2>
+  <div class="scorecard">
+    <div class="score-row">
+      <div><span class="score-num">6</span><span class="verdict">/10</span></div>
+      <div>
+        <div class="score-label">Valuation Verdict</div>
+        <div class="verdict">Cheapest PEG in the optical/photonics peer set (0.92) on an earnings-growth basis &middot; Rich on EV/EBITDA (~31x FWD) with genuine balance-sheet leverage &mdash; a levered AI-optics growth story, not a clean value play</div>
+      </div>
+    </div>
+    <div class="thesis">Coherent is riding the AI-datacenter optics buildout hard &mdash; 20.5% revenue growth, a $2B NVIDIA equity investment plus multiyear supply agreement, and a Data Center &amp; Communications segment that now makes up 75% of total revenue. That same concentration is the thesis's biggest structural risk: COHR's fate is now tightly coupled to one customer's capex cadence. Layer on real balance-sheet stress (Net Debt/EBITDA ~4.3x, Interest Coverage ~1.96x &mdash; both past standard risk thresholds) and extreme, sector-correlated volatility (beta 2.04, multiple &plusmn;7&ndash;11% single-session moves in July 2026 alone, largely moving in lockstep with LITE/AAOI rather than idiosyncratic news), and this reads as a high-growth, high-leverage, high-beta momentum name rather than a durable-moat compounder. Options dealer positioning is <strong>internally conflicting today</strong> between the morning snapshot and the live afternoon pull (see Phase 4) &mdash; treat as regime-uncertain, not confidently pinned.</div>
+  </div>
+
+  <h2>2. Fundamental &amp; US Peer Comparison Matrix</h2>
+  <div class="meta-note">Peer group &amp; rationale: <strong>LITE</strong> (Lumentum) &mdash; closest direct comp, optical/photonic components riding the same AI-transceiver ramp; <strong>CIEN</strong> (Ciena) &mdash; overlapping datacenter/telecom optical-networking systems end markets, though more systems- than components-level; <strong>FN</strong> (Fabrinet) &mdash; the contract manufacturer many optical-component makers (including COHR's own supply chain) outsource to, useful for margin/valuation benchmarking within the same value chain; <strong>AAOI</strong> (Applied Optoelectronics) &mdash; smaller-cap direct competitor in optical transceivers for datacenter/telecom, a higher-beta small-cap analog.</div>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>Metric</th><th class="num">COHR</th><th class="num">LITE</th><th class="num">CIEN</th><th class="num">FN</th><th class="num">AAOI</th></tr></thead>
+    <tbody>
+      <tr><td>Price (local, 25 Jul)</td><td class="num hl">$282.39</td><td class="num">$762.99</td><td class="num">$390.96</td><td class="num">$476.04</td><td class="num">$100.15</td></tr>
+      <tr><td>Market Cap</td><td class="num">$55.2B</td><td class="num">$59.4B</td><td class="num">$55.3B</td><td class="num">$17.1B</td><td class="num">$8.0B</td></tr>
+      <tr><td>Trailing P/E</td><td class="num">149.4x</td><td class="num">147.0x</td><td class="num">129.5x</td><td class="num">44.4x</td><td class="num">N/A (neg. TTM EPS)</td></tr>
+      <tr><td>Forward P/E</td><td class="num hl">34.1x</td><td class="num">41.6x</td><td class="num">40.6x</td><td class="num">27.5x</td><td class="num">21.0x</td></tr>
+      <tr><td>PEG Ratio (FWD)</td><td class="num hl">0.92</td><td class="num">0.63</td><td class="num">0.70</td><td class="num">N/A</td><td class="num">0.78</td></tr>
+      <tr><td>YoY Revenue Growth</td><td class="num">+20.5%</td><td class="num">+90.1%</td><td class="num">+39.5%</td><td class="num">+39.3%</td><td class="num">+51.4%</td></tr>
+      <tr><td>YoY Earnings Growth</td><td class="num">N/A</td><td class="num">N/A</td><td class="num">+2383.3%&sup1;</td><td class="num">+53.3%</td><td class="num">N/A</td></tr>
+      <tr><td>Gross Margin</td><td class="num">37.0%</td><td class="num">40.8%</td><td class="num">43.0%</td><td class="num">12.0%&sup2;</td><td class="num">29.6%</td></tr>
+      <tr><td>Profit Margin</td><td class="num">7.1%</td><td class="num">17.7%</td><td class="num">7.9%</td><td class="num">9.9%</td><td class="num">-8.5%</td></tr>
+      <tr><td>EV/Sales (WebSearch)</td><td class="num">~7.4x (FWD)</td><td class="num">~26.4x</td><td class="num">N/A</td><td class="num">N/A</td><td class="num">N/A</td></tr>
+      <tr><td>EV/EBITDA (WebSearch)</td><td class="num">~31.4x (FWD) / ~42.6x (TTM)</td><td class="num">~80&ndash;108x</td><td class="num">~75&ndash;97x</td><td class="num">~39&ndash;52x</td><td class="num">N/A</td></tr>
+      <tr><td>Price/FCF or EV/FCF (WebSearch)</td><td class="num">~54.3x (Price/CF FWD)</td><td class="num hl">~483x EV/FCF</td><td class="num">N/A</td><td class="num">N/A</td><td class="num">N/A &mdash; negative OCF</td></tr>
+      <tr><td>Op Cash Flow</td><td class="num">$140M</td><td class="num">$452M</td><td class="num">$1.0B</td><td class="num">$257M</td><td class="num hl">-$208.9M</td></tr>
+      <tr><td>Beta</td><td class="num hl">2.04</td><td class="num">1.48</td><td class="num">1.27</td><td class="num">1.20</td><td class="num hl">3.69</td></tr>
+      <tr><td>Analyst Target (&plusmn;%)</td><td class="num">$391.45 (+38.6%)</td><td class="num">$1,104.89 (+44.8%)</td><td class="num">$565.71 (+44.7%)</td><td class="num">$732.44 (+53.9%)</td><td class="num">$157.30 (+57.1%)</td></tr>
+      <tr><td>Analyst Rating</td><td class="num">Buy</td><td class="num">Buy</td><td class="num">Buy</td><td class="num">Buy</td><td class="num">Buy</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="meta-note">&sup1; CIEN's +2383.3% YoY earnings growth reflects an easy prior-year comp (near break-even base), not a like-for-like operating comparison. &sup2; FN's 12.0% gross margin is structurally lower than the component-makers &mdash; Fabrinet is a contract manufacturer/EMS business, not an IP-owning optics designer, so low gross margin with high revenue throughput is the normal shape of that model. Data-quality flag: WebSearch pulled COHR market cap ($70.72B) and Forward P/E (48.56x) figures that don't reconcile with today's local snapshot price ($282.39, post the stock's -10% intraday move) &mdash; those cached figures likely reflect an earlier-week price point (COHR traded as high as ~$427 in early June 2026 and has been extremely volatile since); the local-snapshot Forward P/E (34.1x, using $8.29 FWD EPS) is used as primary above. EV/Sales, EV/EBITDA and Price/FCF multiples for all names are WebSearch-derived (Seeking Alpha/stockanalysis.com-style aggregators) with unconfirmed exact as-of timestamps &mdash; treat as directionally indicative, not tick-precise.</div>
+
+  <h2>3. Peer Benchmarking &amp; Moat Insights</h2>
+  <div class="card">
+    <ul>
+      <li><strong>Valuation verdict &mdash; growth-adjusted cheap, but not cheap in absolute terms:</strong> COHR has the best (lowest) PEG in the group at 0.92, and the cheapest EV/EBITDA (~31x FWD) versus LITE (~80&ndash;108x) and CIEN (~75&ndash;97x) &mdash; but that's "cheapest in an expensive group," not cheap outright; the entire optical/photonics/AI-transceiver complex is trading at nosebleed EV/EBITDA multiples on the back of the AI-datacenter buildout narrative. LITE's ~483x EV/FCF stands out as the most stretched name in the peer set on a cash-generation basis.</li>
+      <li><strong>Margin profile:</strong> COHR's 37.0% gross margin and 7.1% net margin sit mid-pack &mdash; behind LITE (40.8% GM / 17.7% NM) and CIEN (43.0% GM) on profitability conversion, ahead of FN (which is structurally low-margin by business model) and well ahead of AAOI (currently net-margin negative with a large negative operating cash flow, i.e. real cash burn at the small-cap end of the peer set).</li>
+      <li><strong>Concentration risk (the central qualitative flag):</strong> Coherent's Data Center &amp; Communications segment is now ~75% of total company revenue, anchored by a $2B NVIDIA equity investment plus multiyear optics supply agreement. This is a powerful growth engine but also a textbook customer/end-market concentration risk &mdash; a slowdown, pause, or renegotiation in AI-datacenter capex (Nvidia's or the broader hyperscaler cohort's) hits COHR disproportionately versus more diversified peers. A single customer was separately disclosed at ~10% of FY2024 consolidated revenue (Networking segment) &mdash; below the 30% single-customer flag threshold on its own, but the AI-optics vertical as a whole is the real concentration.</li>
+      <li><strong>Pricing power:</strong> demand-pull dynamics (800G/1.6T transceiver ramp, record backlog visibility through 2028 per management) suggest COHR is currently a price-taker in a favorable position, not being forced to discount for volume &mdash; but this is capacity-cycle pricing power, which can reverse quickly if AI capex growth decelerates or hyperscalers dual-source more aggressively across LITE/CIEN/FN/AAOI.</li>
+    </ul>
+  </div>
+
+  <h2>4. Balance Sheet &amp; Critical Risk Register</h2>
+  <div class="card risk-critical">
+    <span class="chip chip-critical">CRITICAL</span><strong>Balance-sheet leverage past standard risk thresholds</strong>
+    <div>Net Debt/EBITDA is reported at ~4.30x (TTM basis, &gt;3.5x critical threshold) and Interest Coverage at ~1.96x (&lt;3.0x high-risk threshold) by third-party aggregators. Note a data-reconciliation flag: Coherent's own investor materials separately reference a much lower "leverage ratio" of 0.5x (down from 1.7x/2.1x a year prior) after $162M of debt paydown and the $2B NVIDIA equity infusion &mdash; likely a company-defined adjusted-net-debt/forward-run-rate-EBITDA metric rather than the same trailing GAAP calculation. Both can be simultaneously true (rapid deleveraging trend + still-elevated trailing ratio), but the trailing 4.3x/1.96x figures are the more conservative read and the ones that matter for near-term debt-service risk if AI-optics demand were to soften. Current ratio (3.05x) and Debt/Equity (0.31x) are healthy, which somewhat offsets the coverage concern.</div>
+  </div>
+  <div class="card risk-high">
+    <span class="chip chip-high">HIGH</span><strong>Single-vertical customer concentration (AI datacenter / NVIDIA)</strong>
+    <div>75% of total revenue now runs through the Data Center &amp; Communications segment, with NVIDIA as a strategic anchor (equity stake + multiyear supply commitment). This is the flip side of the growth story: any deceleration, delay, or in-sourcing move in AI-datacenter optics capex &mdash; whether Nvidia-specific or hyperscaler-wide &mdash; would hit COHR harder than more diversified peers like CIEN (broader telecom/enterprise mix) or FN (multi-customer EMS model).</div>
+  </div>
+  <div class="card risk-med">
+    <span class="chip chip-med">MEDIUM</span><strong>Extreme, sector-correlated share-price volatility</strong>
+    <div>Beta 2.04, with multiple &plusmn;7&ndash;11% single-session moves through July 2026 (e.g. -9.6% on Jul 2, -7.5% on Jul 17, +11.2% on Jul 21) that largely tracked broad "AI photonics" risk-on/risk-off rotation alongside LITE and AAOI rather than COHR-specific news &mdash; underlying fundamentals (reaffirmed FY27 growth guidance, record backlog through 2028) have stayed intact through the swings. This makes COHR a high-beta proxy for AI-capex sentiment as much as a name driven by its own idiosyncratic execution, which matters for position-sizing and options structuring (wide-spread guidance below is directly a function of this).</div>
+  </div>
+  <div class="meta-note">No active antitrust probe, material class action, or near-term (24-month) patent-cliff was surfaced in WebSearch coverage of COHR's most recent 10-K risk factors &mdash; disclosed risk language is largely standard cyclicality/litigation/customer-concentration boilerplate rather than a specific dealbreaker beyond the concentration and leverage items above.</div>
+
+  <h2>5. Options Market Structure &amp; Gamma Profile</h2>
+  <div class="meta-note">&#9888;&#65039; Conflicting same-day GEX reads, mirroring the pattern seen on GOOGL &mdash; flagged, not resolved. Treat COHR as regime-uncertain today rather than confidently directional; recheck GEX closer to any trade decision.</div>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>Source</th><th>Timestamp</th><th>GEX Read</th><th class="num">Gamma Flip</th><th class="num">Call Wall</th><th class="num">Put Wall</th></tr></thead>
+    <tbody>
+      <tr><td>stock_analysis_250726.0949.csv (AM snapshot)</td><td>09:49</td><td>Very Short / &minus;4.0 &mdash; dealers amplifying, avoid naked shorts</td><td class="num">$275.00</td><td class="num">$275.00</td><td class="num">$275.00</td></tr>
+      <tr><td>starry live pull (legacy fallback)</td><td>16:24</td><td>Mildly Long / +2.0 &mdash; dealers stabilizing, range-bound / PINNED</td><td class="num">n/a (walls only)</td><td class="num">$275.00 (near) / $350.00 (far)</td><td class="num">$195.00 (far) / $275.00 (near)</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="meta-note">Spot ($282.39) sits just ~2.6% above a dense $275 strike-concentration zone that both reads independently flag &mdash; AM snapshot pins Call Wall, Put Wall, and Gamma Flip all at exactly $275; the live afternoon pull separately flags $275 as the nearest resistance/support cluster on both sides, with $350 as a distant call wall (+23.9%) and $195 as a distant put wall (-30.9%). The GEX sign itself flipped between reads (Very Short &rarr; Mildly Long), consistent with COHR's whipsaw price action this month &mdash; treat $275 as the key near-term pivot regardless of which GEX sign is live, and size any short-gamma exposure (naked shorts) conservatively given the AM read's explicit "avoid naked shorts, use wide spreads" flag.</div>
+
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>Ticker</th><th class="num">IV Rank</th><th>Read</th><th class="num">P/C</th><th>Days to Earnings</th><th>Trend Flag</th></tr></thead>
+    <tbody>
+      <tr><td class="hl">COHR</td><td class="num hl">93</td><td>&#128293; Excellent</td><td class="num">1.09</td><td>18 days (12 Aug 2026)</td><td>&#128269; First Test (only above SMA200)</td></tr>
+      <tr><td>CIEN</td><td class="num">68</td><td>&#9989; OK</td><td class="num">0.89</td><td>40 days (3 Sep 2026)</td><td>&#128269; First Test (only above SMA200)</td></tr>
+      <tr><td>AAOI</td><td class="num">74</td><td>&#128293; Excellent</td><td class="num">0.66</td><td>12 days (6 Aug 2026)</td><td>&#128269; First Test (only above SMA200)</td></tr>
+      <tr><td>LITE</td><td class="num">N/A</td><td>N/A &mdash; not in latest IV_250726_0953.csv export</td><td class="num">N/A</td><td>N/A</td><td>N/A</td></tr>
+      <tr><td>FN</td><td class="num">N/A</td><td>N/A &mdash; not in latest IV_250726_0953.csv export</td><td class="num">N/A</td><td>N/A</td><td>N/A</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="meta-note">COHR's IV Rank (93) is the highest of the covered names &mdash; excellent premium-capture setup on a pure IV-rank basis, but every covered peer (COHR/CIEN/AAOI) is showing the same "First Test" technical posture (price recovering above SMA200 only, still below EMA21/SMA50) after the sector-wide July drawdown, i.e. this is a group-wide bottoming/basing signal, not COHR-specific strength. Earnings is 18 days out (12 Aug) &mdash; outside the 7-day proximity window, so no near-term earnings-IV-expansion flag applies today, but IV Rank 93 already prices in a lot of realized-vol memory from this month's swings; premium-selling here is a bet that the extreme intraday volatility regime calms down, not a free lunch.</div>
+  <div class="meta-note"><strong>Short interest / squeeze read vs. peers:</strong> COHR itself is not a squeeze candidate &mdash; short interest is reported at either ~3.3% of shares outstanding (StockAnalysis, recent) or ~7.1% of float (MarketBeat, dated Sep 2025 &mdash; stale), with days-to-cover ~2.0&ndash;2.2 either way; well below the 15% elevated threshold. The peer set is more interesting: <strong>LITE stands out as the clear squeeze-risk outlier</strong> at ~19.9&ndash;24.3% of float shorted (two WebSearch sources, both elevated, approaching the 25% high-risk threshold) despite being the largest-cap, most liquid name in the group &mdash; likely reflects genuine bear conviction on its ~483x EV/FCF valuation rather than typical small-cap squeeze mechanics. <strong>AAOI</strong> is also elevated at ~15.0&ndash;19.9% of float (days-to-cover ~2.4, so it would unwind fast if triggered). CIEN (~3.2% of shares) and FN (~5.9% of shares) are unremarkable. Cost-to-borrow, utilization, and 0DTE/unusual-sweep concentration were not surfaced by any WebSearch source for any of these five names &mdash; no ORTEX/Fintel-style live provider in this toolchain, marked N/A rather than guessed.</div>
+
+  <h2>Sources</h2>
+  <ul class="sources">
+    <li><a href="https://seekingalpha.com/symbol/COHR/valuation/metrics" target="_blank">COHR Valuation Metrics (EV/Sales, EV/EBITDA, Price/CF) &mdash; Seeking Alpha</a></li>
+    <li><a href="https://stockanalysis.com/stocks/cohr/statistics/" target="_blank">Coherent (COHR) Statistics &amp; Valuation &mdash; stockanalysis.com</a></li>
+    <li><a href="https://www.fool.com/earnings/call-transcripts/2026/05/06/coherent-cohr-q3-2026-earnings-transcript/" target="_blank">Coherent Q3 2026 Earnings Transcript &mdash; The Motley Fool</a></li>
+    <li><a href="https://m.macrotrends.net/stocks/charts/COHR/coherent/net-long-term-debt" target="_blank">Coherent Net Long-Term Debt &mdash; Macrotrends</a></li>
+    <li><a href="https://www.benzinga.com/quote/COHR/short-interest" target="_blank">Coherent Short Interest Report &mdash; Benzinga</a></li>
+    <li><a href="https://www.marketbeat.com/stocks/NYSE/COHR/short-interest/" target="_blank">COHR Short Interest &mdash; MarketBeat</a></li>
+    <li><a href="https://www.tikr.com/blog/coherent-stock-fell-nearly-10-in-a-day-heres-where-the-stock-could-go-in-2026" target="_blank">Coherent Stock Fell Nearly 10% in a Day &mdash; TIKR</a></li>
+    <li><a href="https://www.sdxcentral.com/news/nvidia-backed-coherent-posts-record-quarter-as-ai-infrastructure-buildout-accelerates-optics-demand/" target="_blank">Nvidia-backed Coherent Posts Record Quarter &mdash; SDxCentral</a></li>
+    <li><a href="https://simplywall.st/stocks/us/tech/nyse-cohr/coherent/news/is-nvidias-us2-billion-ai-optics-deal-altering-the-investmen" target="_blank">Is NVIDIA's $2B AI Optics Deal Altering the Investment Case for Coherent? &mdash; Simply Wall St</a></li>
+    <li><a href="https://drrobertcastellano.substack.com/p/coherent-strong-datacom-transceiver" target="_blank">Coherent: Strong Datacom Transceiver Demand on the Back of Nvidia</a></li>
+    <li><a href="https://fintel.io/ss/us/lite" target="_blank">LITE Short Interest &amp; Squeeze &mdash; Fintel</a></li>
+    <li><a href="https://finance.yahoo.com/news/short-sellers-betting-against-lumentum-165003370.html" target="_blank">Short Sellers Are Betting Against Lumentum Stock &mdash; Yahoo Finance</a></li>
+    <li><a href="https://valueinvesting.io/LITE/valuation/ev_ebitda-multiples" target="_blank">Lumentum EV/EBITDA &mdash; valueinvesting.io</a></li>
+    <li><a href="https://valueinvesting.io/CIEN/valuation/ev_ebitda-multiples" target="_blank">Ciena EV/EBITDA &mdash; valueinvesting.io</a></li>
+    <li><a href="https://www.gurufocus.com/term/ev2ebitda/FRA:FAN" target="_blank">Fabrinet EV/EBITDA &mdash; GuruFocus</a></li>
+    <li><a href="https://shortsqueeze.com/shortinterest/stock/AAOI.htm" target="_blank">AAOI Short Interest &mdash; ShortSqueeze.com</a></li>
+  </ul>
+  <div class="meta-note">Local data files used: business_overview_250726_0949.csv &middot; IV_250726_0953.csv &middot; stock_analysis_250726.0949.csv &middot; starry live pull (16:24, 25 Jul 2026)</div>
+
+</div>
+<!-- =================== END COHR =================== -->
+
+<!-- ===================== COF ===================== -->
+<div class="tab-panel" id="panel-COF">
+
+  <div class="meta-note">Capital One Financial Corp (COF) &nbsp;&middot;&nbsp; Local snapshots as-of 25 Jul 2026 09:49&ndash;09:53 SGT (business_overview, IV, stock_analysis) &nbsp;&middot;&nbsp; WebSearch figures dated as noted below &mdash; AXP/SYF priced 24&ndash;25 Jul 2026 (WebSearch, not in local watchlist snapshot)</div>
+
+  <h2>1. Executive Summary &amp; Scorecard</h2>
+  <div class="scorecard">
+    <div class="score-row">
+      <div><span class="score-num">7</span><span class="verdict">/10</span></div>
+      <div>
+        <div class="score-label">Valuation Verdict</div>
+        <div class="verdict">Steep discount to card-network peers on earnings basis (8.4x FWD P/E, PEG 0.22) vs AXP (19.2x, PEG 1.47) and JPM (14.3x, PEG 1.76) &mdash; a GARP setup, not a clean re-rate; part of the gap is deserved (integration/credit-cycle risk), part looks like genuine mispricing post-Discover.</div>
+      </div>
+    </div>
+    <div class="thesis">Capital One's completed acquisition of Discover (closed 18 May 2025; DFS delisted from the NYSE the next day, converted at 1.0192 COF shares each) is the single biggest structural change in the US card-issuer landscape in a decade &mdash; COF is now the only major issuer besides American Express that owns its own closed-loop payment network, capturing network economics that used to flow to Visa/Mastercard on Discover-branded volume. Q2 2026 results show the integration working (NIM up 14bp to 8.01%, domestic card charge-offs down 39bp, one-third of opex synergies realized) but the Discover book itself is in a temporary "brownout" (loan balances -1.5% YoY) that masks underlying growth, full core-system migration doesn't complete until Q1 2027, and CET1 has drifted down to 13.7% on buybacks plus the Brex acquisition. Options positioning is constructive (Very Long GEX, PINNED near the $205 gamma flip) with low IV Rank (32) and negligible short-interest squeeze risk. Net: real value plus a genuine strategic network upgrade, tempered by consumer-credit cyclicality and unfinished integration execution &mdash; a 7/10, not a screaming buy nor a value trap.</div>
+  </div>
+
+  <h2>2. Fundamental &amp; US Peer Comparison Matrix</h2>
+  <div class="meta-note">Peer group &amp; rationale: <strong>AXP</strong> (American Express) &mdash; the only other major US issuer running its own closed-loop network, now COF's most direct structural comp post-Discover; <strong>SYF</strong> (Synchrony) &mdash; private-label/general-purpose card issuer competing directly for near-prime/subprime revolving-credit customers, COF's closest risk-profile peer; <strong>JPM</strong> (JPMorgan Chase) &mdash; largest diversified US bank/card issuer (Chase card portfolio), useful large-bank valuation anchor. <strong>DFS (Discover)</strong> is not included as a live peer &mdash; it merged into COF and was delisted from the NYSE effective 19 May 2025; any "current" DFS quote surfaced by generic web search is stale pre-merger data and has been excluded from this table.</div>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>Metric</th><th class="num">COF</th><th class="num">AXP</th><th class="num">SYF</th><th class="num">JPM</th></tr></thead>
+    <tbody>
+      <tr><td>Price</td><td class="num hl">$202.84 (local, 25 Jul)</td><td class="num">$326.17 (WebSearch, 24 Jul)</td><td class="num">~$71&ndash;74 (WebSearch, 25 Jul)&sup1;</td><td class="num">$353.21 (local, 25 Jul)</td></tr>
+      <tr><td>Market Cap</td><td class="num">$124.4B</td><td class="num">$240.1B (WebSearch)</td><td class="num">$24.0B (WebSearch)</td><td class="num">$938.9B</td></tr>
+      <tr><td>Trailing P/E</td><td class="num">11.2x</td><td class="num">N/A &mdash; not confirmed by WebSearch pass</td><td class="num">~7.3&ndash;7.8x&sup2;</td><td class="num">15.1x</td></tr>
+      <tr><td>Forward P/E</td><td class="num hl">8.4x</td><td class="num">19.18x</td><td class="num">~7.8x&sup2;</td><td class="num">14.3x</td></tr>
+      <tr><td>PEG Ratio (FWD)</td><td class="num hl">0.22&sup3;</td><td class="num">1.47</td><td class="num">0.85&sup2;</td><td class="num">1.76</td></tr>
+      <tr><td>YoY Revenue Growth</td><td class="num">N/A&sup4;</td><td class="num">+10.0%</td><td class="num">+2.0% (Q2) / -7.4% (Q1)&sup5;</td><td class="num">+30.4%</td></tr>
+      <tr><td>Net Profit Margin</td><td class="num">21.9%</td><td class="num">15.1%</td><td class="num">15.8% (Q1&rsquo;26)&sup6;</td><td class="num">34.9%</td></tr>
+      <tr><td>Gross Margin</td><td class="num" colspan="4" style="text-align:center">N/A across all four &mdash; not a meaningful metric for bank/card-issuer P&amp;Ls (interest income/expense structure, not COGS); Net Profit Margin used instead</td></tr>
+      <tr><td>EV/Sales, EV/EBITDA</td><td class="num" colspan="4" style="text-align:center">N/A across all four &mdash; not standard for financial institutions (debt is funding, not leverage on operating EBITDA); Price/Book substituted below where available</td></tr>
+      <tr><td>Price/Book (approx., mixed as-of dates)</td><td class="num">~1.15x (May 2025, stale)</td><td class="num">~6.1&ndash;6.9x</td><td class="num">~1.7x (Jul 2025, stale)</td><td class="num">N/A &mdash; not surfaced</td></tr>
+      <tr><td>Dividend Yield (true)</td><td class="num">1.74%&sup7;</td><td class="num">~1.0&ndash;1.1%</td><td class="num">1.68%</td><td class="num">1.72%&sup7;</td></tr>
+      <tr><td>Beta</td><td class="num">1.02</td><td class="num">1.04</td><td class="num">1.32</td><td class="num">0.98</td></tr>
+      <tr><td>Analyst Target (&plusmn;%)</td><td class="num hl">$257.05 (+26.7%)</td><td class="num">N/A &mdash; not surfaced this pass</td><td class="num">N/A &mdash; not surfaced this pass</td><td class="num">$371.25 (+5.1%)</td></tr>
+      <tr><td>Analyst Rating</td><td class="num">Buy</td><td class="num">N/A</td><td class="num">N/A</td><td class="num">Buy</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="meta-note">&sup1; SYF quote dispersion across sources ($71.38&ndash;$73.62) same day &mdash; treat as approximate. &sup2; SYF P/E and PEG show wide dispersion across sources (fwd P/E 7.3&ndash;7.8x cited in different places; PEG cited as both 0.21 and 0.85 depending on growth-estimate denominator) &mdash; used the more conservative/commonly-cited figures. &sup3; COF's 0.22 PEG is partly a function of the +32% jump from trailing ($18.16) to forward ($24.04) EPS baked in by Discover synergy realization &mdash; treat as a GARP flag, not assume it persists at that ratio long-term once synergies fully phase in. &sup4; COF YoY revenue growth is N/A in the local snapshot and not cleanly calculable from WebSearch because the Q2 2025 prior-year comp already included ~6 weeks of Discover post-close (18 May 2025), distorting a clean YoY read; qualitatively, Q2 2026 total net revenue was $15.9B, +4% sequentially. &sup5; SYF revenue growth swung from -7.4% YoY (Q1 2026) to +2.0% YoY (Q2 2026) &mdash; a volatile, not a clean accelerating or decelerating trend; flagged rather than smoothed. &sup6; SYF net margin also cited at 34.7% on a TTM basis by one source vs 15.8% quarterly by another &mdash; likely different net-income bases (adjusted vs GAAP, or annualized vs quarterly); quarterly GAAP figure shown as more comparable to the other three. &sup7; Local business_overview snapshot shows Dividend Yield as +160.0% (COF) and +171.0% (JPM) &mdash; this is the known unit-scale bug (100x), raw source values shown here for the record; true web-sourced yields (1.74% / 1.72%) used in the table.</div>
+
+  <h2>3. Peer Benchmarking &amp; Moat Insights</h2>
+  <div class="card">
+    <ul>
+      <li><strong>Valuation verdict &mdash; discount is real but partly deserved:</strong> COF trades at less than half AXP's forward multiple (8.4x vs 19.2x) and below JPM (14.3x), with a much lower PEG. Some of that gap is structural mispricing (the market hasn't fully re-rated COF for owning a Discover-caliber closed-loop network), but some is fair compensation for real risk: COF's card book skews more mass-market than AXP's affluent/travel-rewards base, integration execution isn't finished until Q1 2027, and the forward EPS jump driving the low PEG is partly one-time synergy capture rather than pure organic growth.</li>
+      <li><strong>Post-Discover competitive positioning &mdash; the central strategic story:</strong> by absorbing Discover, COF eliminated a standalone competitor and simultaneously became the second US issuer (after AXP) to control both the card-issuing and network-processing legs of the transaction &mdash; capturing interchange/network economics on Discover-branded volume that previously would have partly flowed to Visa/Mastercard-style network partners. This is a genuine moat upgrade versus SYF, which remains a pure card-issuer with no proprietary network.</li>
+      <li><strong>Concentration / credit risk:</strong> no single-customer concentration in the traditional sense (diversified card/consumer/commercial book), but real credit-quality concentration in near-prime/mass-market US consumer revolving credit &mdash; domestic card charge-off rate 4.71% (Q2 2026, improving but still the highest of the group) versus AXP's more affluent, lower-loss card base. Allowance coverage declined to 5.02% from 5.28% QoQ, a reserve-release tailwind to current EPS that would reverse if credit deteriorates.</li>
+      <li><strong>Pricing power / integration synergy capture:</strong> full debit-network revenue synergies already realized, one-third of targeted opex synergies achieved, 50% of Discover originations migrated to COF's tech stack &mdash; genuine execution progress, but the Discover portfolio's "brownout" (issuer intentionally throttling growth during systems migration, loan balances -1.5% YoY) is masking the network's true organic demand and will not be a clean read until migration completes across Q3 2026&ndash;Q1 2027.</li>
+    </ul>
+  </div>
+
+  <h2>4. Balance Sheet &amp; Critical Risk Register</h2>
+  <div class="meta-note">Standard industrial balance-sheet ratios (Net Debt/EBITDA, Interest Coverage) are not meaningful for a bank/card-issuer &mdash; debt is funding, not operating leverage. Bank-appropriate health checks used instead: CET1 13.7% (Q2 2026, comfortably above the 4.5% regulatory minimum and COF's own ~11% long-term target, though down 70bp QoQ), NIM 8.01% (expanding), allowance coverage 5.02% (declining from 5.28%).</div>
+  <div class="card risk-high">
+    <span class="chip chip-high">HIGH</span><strong>Consumer-credit cyclicality in the (former) Discover book</strong>
+    <div>Domestic Card charge-off rate is 4.71% (Q2 2026) &mdash; down 39bp QoQ but still the highest loss rate of any segment, and allowance coverage fell to 5.02% from 5.28% (a reserve release that flattered current-quarter EPS). COF's combined card book skews more mass-market/near-prime than AXP's affluent base, meaning it is more exposed than any peer in this set to a labor-market or consumer-credit downturn. Total net charge-off rate is 3.23%, still elevated relative to pre-pandemic norms.</div>
+  </div>
+  <div class="card risk-med">
+    <span class="chip chip-med">MEDIUM-HIGH</span><strong>Unfinished Discover integration + residual merger litigation</strong>
+    <div>Discover's loan book is in a deliberate "brownout" (balances -1.5% YoY) while systems migration continues; full core-system migration across the back book isn't complete until Q1 2027 (waves through July, October, January). Multiple merger-related lawsuits were filed at signing (Illinois Circuit Court, Jan 2025, plus a proposed interchange-fee class action alleging reduced competition/higher fees); regulatory approval (Fed/OCC, Apr 2025; DOJ non-objection) is final and the deal has closed, but the residual civil litigation has not been confirmed as fully resolved in this research pass.</div>
+  </div>
+  <div class="card risk-med">
+    <span class="chip chip-med">MEDIUM</span><strong>Capital cushion being spent down</strong>
+    <div>CET1 fell 70bp to 13.7% in Q2 2026 &mdash; ~40bp from the Brex acquisition close (April 2026) and the remainder from $2.7B of share buybacks plus risk-weighted-asset growth. Still well above regulatory minimums and management's own long-term target, but the trend direction (drawing down the Discover-driven capital surplus via M&amp;A + buybacks rather than banking it) reduces the buffer available if the credit cycle turns before integration is fully complete.</div>
+  </div>
+  <div class="meta-note">No active antitrust probe blocking the deal (DOJ/Fed/OCC approvals final, deal closed 18 May 2025), no near-term patent-cliff or single-supplier dependency surfaced &mdash; the risk register here is credit-cycle and integration-execution risk, not a dealbreaker-grade structural threat.</div>
+
+  <h2>5. Options Market Structure &amp; Gamma Profile</h2>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>Ticker</th><th>GEX Class</th><th class="num">Gamma Flip</th><th class="num">Call Wall</th><th class="num">Put Wall</th><th>Badge / Wyckoff</th></tr></thead>
+    <tbody>
+      <tr><td class="hl">COF</td><td class="num hl">Very Long (+4.0) &mdash; dealers stabilize</td><td class="num">$205.00</td><td class="num">$210.00</td><td class="num">$200.00</td><td>&#9679; PINNED &middot; Mark-up / Uptrend continuation (60% confidence)</td></tr>
+      <tr><td>JPM</td><td class="num">Very Long (+4.0) &mdash; dealers stabilize</td><td class="num">$345.00</td><td class="num">$350.00</td><td class="num">$340.00</td><td>&#9679; PINNED &middot; Mark-up / Strong uptrend (70% confidence)</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="meta-note">Spot $202.84 sits between the Put Wall ($200.00) and Gamma Flip ($205.00), inside dealer long-gamma territory (Very Long GEX classification) &mdash; consistent with the PINNED/range-bound badge and "theta decay favorable, avoid large moves" recommendation. JPM's spot ($353.21) has actually pushed just above its own Call Wall ($350.00), a stronger breakout posture than COF's more contained setup. AXP and SYF are off the local watchlist snapshot &mdash; no GEX/gamma-wall data available for them this run (flagged, not guessed).</div>
+
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>Ticker</th><th class="num">IV Rank</th><th>Read</th><th class="num">P/C</th><th>Days to Earnings</th><th>Trend Flag</th></tr></thead>
+    <tbody>
+      <tr><td class="hl">COF</td><td class="num hl">32</td><td>&#9888;&#65039; Low &mdash; poor premium-capture setup</td><td class="num">0.74</td><td>87 days (20 Oct 2026)</td><td>&#127793; Greenshoots (above EMA21 &amp; SMA50, below SMA200)</td></tr>
+      <tr><td>JPM</td><td class="num">25</td><td>&#9888;&#65039; Low</td><td class="num">0.67</td><td>80 days (13 Oct 2026)</td><td>&#128640; Bullish (above EMA21, SMA50 &amp; SMA200)</td></tr>
+      <tr><td>AXP</td><td class="num">N/A</td><td>N/A &mdash; not in latest IV_250726_0953.csv export</td><td class="num">N/A</td><td>N/A</td><td>N/A</td></tr>
+      <tr><td>SYF</td><td class="num">N/A</td><td>N/A &mdash; not in latest IV_250726_0953.csv export</td><td class="num">N/A</td><td>N/A</td><td>N/A</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="meta-note">Both covered names (COF, JPM) show Low IV Rank (25&ndash;32) &mdash; a weak premium-selling backdrop across large-cap financials right now, consistent with the sector's low realized volatility this month; neither has an earnings-proximity flag (both 80+ days out). COF is technically a shade behind JPM (Greenshoots vs full Bullish trend) since spot is still below its 200-day SMA ($207.45) despite being above EMA21/SMA50.</div>
+  <div class="meta-note"><strong>Short interest / squeeze read vs. peers:</strong> none of the four names screen anywhere near squeeze territory (all well under the 15% elevated / 25% high-risk thresholds) &mdash; short-interest mechanics are not a relevant near-term dynamic for this large-cap financials group. COF: 1.26% of float, ~1.84 days to cover (below its own peer-group average of ~9.8%, per Benzinga). AXP: 1.42% of float, ~3.9 days to cover. SYF: 4.12% of float (highest of the group, still low in absolute terms), ~4.7 days to cover. JPM: not surfaced this pass &mdash; typically negligible for a mega-cap bank of this size, but not confirmed, so marked N/A rather than assumed. DFS: no longer applicable &mdash; delisted 19 May 2025, folded into COF; any current-dated DFS short-interest figure returned by generic search is stale legacy data. Cost-to-borrow, utilization, and 0DTE/unusual-sweep concentration were not surfaced for any of these four names &mdash; no ORTEX/Fintel-style live provider in this toolchain, marked N/A rather than guessed.</div>
+
+  <h2>Sources</h2>
+  <ul class="sources">
+    <li><a href="https://www.businesswire.com/news/home/20260717547590/en/Capital-One-Reports-Second-Quarter-2026-Net-Income-of-$3.0-billion-or-$4.73-per-share" target="_blank">Capital One Reports Q2 2026 Net Income &mdash; BusinessWire</a></li>
+    <li><a href="https://www.investing.com/news/company-news/capital-one-q2-2026-slides-strong-beat-as-credit-improves-nim-expands-93CH-4804457" target="_blank">Capital One Q2 2026 slides: credit improves, NIM expands &mdash; Investing.com</a></li>
+    <li><a href="https://finance.biggo.com/news/US_COF_2026-07-21" target="_blank">COF Q2 2026: Card Charge-Offs Plunge 39bps; Discover Brownout Tempers Loan Growth &mdash; BigGo Finance</a></li>
+    <li><a href="https://www.gurufocus.com/news/8970629/capital-one-financial-corp-cof-q2-2026-earnings-call-highlights-strong-earnings-and-robust-card-growth-amid-liquidity-challenges" target="_blank">COF Q2 2026 Earnings Call Highlights &mdash; GuruFocus</a></li>
+    <li><a href="https://www.tipranks.com/news/company-announcements/discover-financial-merges-with-capital-one-delists-stock" target="_blank">Discover Financial Merges with Capital One, Delists Stock &mdash; TipRanks</a></li>
+    <li><a href="https://investor.capitalone.com/news-releases/news-release-details/capital-one-completes-acquisition-discover/" target="_blank">Capital One Completes Acquisition of Discover &mdash; Capital One IR</a></li>
+    <li><a href="https://www.bankingdive.com/news/warren-justice-doj-capital-one-discover-antitrust-competition-slater-sue/748061/" target="_blank">Warren prods DOJ to sue to block Capital One-Discover deal &mdash; Banking Dive</a></li>
+    <li><a href="https://www.cutoday.info/Fresh-Today/Lawsuit-Alleges-Capital-One-Discover-Merger-will-Reduce-Competition-Drive-Up-Prices" target="_blank">Lawsuit Alleges Capital One-Discover Merger Will Reduce Competition &mdash; CU Today</a></li>
+    <li><a href="https://www.benzinga.com/insights/short-sellers/25/12/49340584/peering-into-capital-one-financial-corps-recent-short-interest" target="_blank">Capital One Short Interest &mdash; Benzinga</a></li>
+    <li><a href="https://fintel.io/ss/us/dfs" target="_blank">DFS Short Interest / Squeeze (pre-delisting, legacy) &mdash; Fintel</a></li>
+    <li><a href="https://valueinvesting.io/DFS/valuation/ev_ebitda-multiples" target="_blank">Discover Financial Valuation (legacy, pre-merger) &mdash; valueinvesting.io</a></li>
+    <li><a href="https://www.themarketsdaily.com/2026/07/22/synchrony-financial-nysesyf-updates-fy-2026-earnings-guidance.html" target="_blank">Synchrony Financial Updates FY2026 Earnings Guidance &mdash; Markets Daily</a></li>
+    <li><a href="https://www.stocktitan.net/sec-filings/SYF/8-k-synchrony-financial-reports-material-event-a89950308f5a.html" target="_blank">Synchrony Financial Q2 2026 8-K &mdash; StockTitan</a></li>
+    <li><a href="https://www.gurufocus.com/term/forward-pe-ratio/AXP" target="_blank">American Express Forward P/E Ratio &mdash; GuruFocus</a></li>
+    <li><a href="https://en.cryptonomist.ch/2026/07/24/why-is-american-express-company-stock-sliding-despite-an-8-earnings-beat/" target="_blank">Why American Express Stock Is Sliding Despite an 8% Earnings Beat &mdash; Cryptonomist</a></li>
+    <li><a href="https://www.fool.com/investing/2026/07/24/why-american-express-stock-fell-65-friday-morning/" target="_blank">Why American Express Stock Fell 6.5% Friday Morning &mdash; The Motley Fool</a></li>
+  </ul>
+  <div class="meta-note">Local data files used: business_overview_250726_0949.csv &middot; IV_250726_0953.csv &middot; stock_analysis_250726.0949.csv. AXP and SYF are off this watchlist snapshot &mdash; all AXP/SYF fundamentals, price, and short-interest figures above are WebSearch-sourced (24&ndash;25 Jul 2026) and flagged inline where dispersion or staleness was found.</div>
+
+</div>
+<!-- =================== END COF =================== -->
+
+</main>
+
+<footer>360&deg; Analyst Dashboard &mdash; Optionx &middot; generated by analyst-360</footer>
+
+<script>
+document.querySelectorAll('.tab-btn').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
+    document.querySelectorAll('.tab-panel').forEach(function(p){ p.classList.remove('active'); });
+    btn.classList.add('active');
+    document.getElementById('panel-' + btn.getAttribute('data-tab')).classList.add('active');
+  });
+});
+</script>
+
+</body>
+</html>
