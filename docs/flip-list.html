@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flip List — Oversold Reversal Candidates</title>
+  <style>
+    :root {
+      --ft-salmon:#FFF1E0; --ft-red:#990F3D; --ft-blue:#0F5499; --ft-navy:#262A33;
+      --ft-warm-blk:#33302E; --ft-border:#CCB799; --ft-mid:#8D775F; --ft-muted:#66605A;
+      --ft-card-bg:#FFFAF4; --ft-card-bdr:#D4A96A; --ft-gold:#F0A500; --ft-navy-dim:#AAAAAA;
+      --bg:var(--ft-salmon); --panel:var(--ft-card-bg); --border:var(--ft-border);
+      --text:var(--ft-warm-blk); --dim:var(--ft-muted);
+      --green:#4B7F3D; --orange:#B5651D; --red:var(--ft-red); --yellow:#B8860B;
+      --blue:var(--ft-blue); --purple:#7C5C99; --teal:#0D7680;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root { --bg:#060d1a; --panel:#0d1a2e; --border:#1a2e4a; --text:#c8d8f0; --dim:#5a7a9a; --green:#4ade80; --orange:#f97316; --red:#ef4444; --yellow:#fbbf24; --blue:#38bdf8; --purple:#a78bfa; --teal:#2dd4bf; }
+    }
+    :root[data-theme="dark"] { --bg:#060d1a; --panel:#0d1a2e; --border:#1a2e4a; --text:#c8d8f0; --dim:#5a7a9a; --green:#4ade80; --orange:#f97316; --red:#ef4444; --yellow:#fbbf24; --blue:#38bdf8; --purple:#a78bfa; --teal:#2dd4bf; }
+    :root[data-theme="light"] { --bg:var(--ft-salmon); --panel:var(--ft-card-bg); --border:var(--ft-border); --text:var(--ft-warm-blk); --dim:var(--ft-muted); --green:#4B7F3D; --orange:#B5651D; --red:var(--ft-red); --yellow:#B8860B; --blue:var(--ft-blue); --purple:#7C5C99; --teal:#0D7680; }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:Georgia,'Times New Roman',serif; background:var(--bg); color:var(--text); padding:16px; }
+    .container { max-width:1600px; margin:0 auto; }
+
+    header { background:var(--ft-navy); color:#fff; border-bottom:4px solid var(--ft-red); border-radius:6px; padding:20px 24px; margin-bottom:16px; }
+    h1 { font-family:Georgia,'Times New Roman',serif; font-size:1.7em; color:#fff; font-weight:700; letter-spacing:-0.01em; }
+    h1 span { color:var(--ft-gold); }
+    .meta { font-family:Arial,sans-serif; color:var(--ft-navy-dim); font-size:0.78em; margin-top:6px; letter-spacing:.02em; }
+    .criteria-pill { display:inline-block; font-family:Arial,sans-serif; background:rgba(240,165,0,.14); color:var(--ft-gold); border:1px solid rgba(240,165,0,.35); padding:3px 10px; border-radius:20px; font-size:0.68em; font-weight:700; text-transform:uppercase; letter-spacing:.06em; margin-top:8px; margin-right:6px; }
+
+    .summary-bar { display:flex; flex-wrap:wrap; gap:12px; background:var(--panel); border:1px solid var(--border); border-top:3px solid var(--ft-card-bdr); padding:14px 20px; border-radius:6px; margin-bottom:16px; align-items:center; }
+    .summary-item { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+    .summary-label { font-family:Arial,sans-serif; font-size:0.72em; font-weight:700; color:var(--dim); text-transform:uppercase; letter-spacing:.08em; white-space:nowrap; }
+    .summary-val { font-family:Georgia,'Times New Roman',serif; font-size:1.8em; font-weight:700; color:var(--red); line-height:1; }
+    .stat-pill { font-family:Arial,sans-serif; background:rgba(204,183,153,.28); color:var(--text); padding:3px 10px; border-radius:12px; font-size:0.75em; margin-right:4px; }
+    .stat-pill b { color:var(--red); }
+    .summary-item + .summary-item { border-left:1px solid var(--border); padding-left:12px; }
+
+    .controls { background:var(--panel); border:1px solid var(--border); padding:12px 16px; border-radius:6px; margin-bottom:16px; display:flex; gap:14px; flex-wrap:wrap; align-items:center; }
+    .controls label { font-family:Arial,sans-serif; font-size:0.75em; font-weight:700; text-transform:uppercase; letter-spacing:.06em; color:var(--dim); }
+    .controls select { padding:6px 10px; border:1px solid var(--border); border-radius:4px; font-family:Arial,sans-serif; font-size:0.8em; background:#fff; color:var(--text); cursor:pointer; }
+    .controls select:focus { outline:none; border-color:var(--red); }
+    .count-badge { font-family:Arial,sans-serif; background:var(--red); color:#fff; padding:4px 12px; border-radius:12px; font-size:0.75em; font-weight:700; letter-spacing:.04em; }
+
+    .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(360px,1fr)); gap:14px; }
+    .section-header { grid-column:1/-1; font-family:Arial,sans-serif; padding:8px 16px; font-size:0.8em; font-weight:700; text-transform:uppercase; letter-spacing:.1em; border-left:4px solid; border-radius:3px; background:var(--panel); border-top:1px solid var(--border); border-right:1px solid var(--border); border-bottom:1px solid var(--border); }
+
+    .card { background:var(--panel); border:1px solid var(--border); border-left:5px solid var(--ft-card-bdr); border-radius:6px; padding:16px; transition:box-shadow .2s,transform .2s; }
+    .card:hover { box-shadow:0 6px 16px rgba(38,42,51,.12); transform:translateY(-2px); }
+    .card-header { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:10px; padding-bottom:10px; border-bottom:1px solid var(--border); }
+    .card-left { flex:1; }
+    .symbol { font-family:Georgia,'Times New Roman',serif; font-size:1.45em; font-weight:700; color:var(--text); letter-spacing:.02em; }
+    .price { font-family:Georgia,'Times New Roman',serif; font-size:1.1em; color:var(--green); font-weight:700; margin-top:2px; }
+    .sector { font-family:Arial,sans-serif; font-size:0.68em; color:var(--dim); margin-top:3px; text-transform:uppercase; letter-spacing:.04em; }
+    .rank-badge { font-family:Arial,sans-serif; background:var(--ft-navy); color:#fff; padding:4px 10px; border-radius:4px; font-size:0.75em; font-weight:700; min-width:38px; text-align:center; }
+
+    .chips-row { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:8px; }
+    .chip { font-family:Arial,sans-serif; border:1.5px solid; border-radius:12px; padding:3px 10px; font-size:0.68em; font-weight:700; text-transform:uppercase; letter-spacing:.04em; background:transparent; white-space:nowrap; }
+    .badges-row { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:10px; min-height:22px; }
+    .badge { font-family:Arial,sans-serif; padding:4px 10px; border-radius:3px; font-size:0.68em; font-weight:700; text-transform:uppercase; letter-spacing:.06em; }
+
+    .metrics-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:10px; }
+    .metric { background:rgba(204,183,153,.18); padding:8px 10px; border-radius:4px; }
+    .metric-label { font-family:Arial,sans-serif; font-size:0.62em; color:var(--dim); text-transform:uppercase; font-weight:700; letter-spacing:.06em; margin-bottom:3px; }
+    .metric-value { font-family:Georgia,'Times New Roman',serif; font-size:0.88em; color:var(--text); font-weight:700; }
+
+    .walls-row { display:flex; gap:12px; flex-wrap:wrap; font-family:Arial,sans-serif; font-size:0.72em; color:var(--dim); margin-bottom:8px; padding:8px; background:rgba(204,183,153,.18); border-radius:4px; }
+    .dist-bar { font-family:Arial,sans-serif; font-size:0.72em; color:var(--purple); font-weight:700; margin-bottom:6px; }
+    .rec-box { font-family:Georgia,'Times New Roman',serif; font-size:0.78em; color:var(--text); background:rgba(75,127,61,.1); padding:7px 10px; border-radius:4px; border-left:3px solid var(--green); line-height:1.4; }
+
+    .no-results { grid-column:1/-1; text-align:center; padding:60px; font-family:Arial,sans-serif; color:var(--dim); font-size:1.1em; font-style:italic; }
+  </style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>Flip List — <span>Oversold Reversal Candidates</span></h1>
+    <div class="meta">Generated: 2026-07-25 09:50 &nbsp;|&nbsp; Source: stock_analysis_250726.0949.csv &nbsp;|&nbsp; 21 tickers matched</div>
+    <div style="margin-top:10px;">
+      <span class="criteria-pill">GEX: Very Short / Short / Mildly Short</span>
+      <span class="criteria-pill">GEX Scale: -1 to -4</span>
+      <span class="criteria-pill">Phase: Accumulation / Mark-up / Distribution</span>
+      <span class="criteria-pill">Ranked: Bottom → Middle → Top</span>
+    </div>
+  </header>
+
+  
+    <div class="summary-bar">
+      <div class="summary-item"><span class="summary-label">Total Flips</span><span class="summary-val">21</span></div>
+      <div class="summary-item"><span class="summary-label">Price Position</span><span class="stat-pill">Middle: <b>11</b></span> <span class="stat-pill">Bottom 33%: <b>10</b></span></div>
+      <div class="summary-item"><span class="summary-label">Wyckoff Phase</span><span class="stat-pill">Mark-up: <b>19</b></span> <span class="stat-pill">Distribution: <b>2</b></span></div>
+      <div class="summary-item"><span class="summary-label">GEX Class</span><span class="stat-pill">Very Short: <b>20</b></span> <span class="stat-pill">Mildly Short: <b>1</b></span></div>
+    </div>
+
+  <div class="controls">
+    <label>Price Position:</label>
+    <select id="posFilter" onchange="applyFilters()">
+      <option value="">All</option>
+      <option value="Bottom 33%">Bottom 33%</option>
+      <option value="Middle">Middle</option>
+      <option value="Top 33%">Top 33%</option>
+    </select>
+    <label>Wyckoff Phase:</label>
+    <select id="phaseFilter" onchange="applyFilters()">
+      <option value="">All</option>
+      <option value="Accumulation">Accumulation</option>
+      <option value="Mark-up">Mark-up</option>
+      <option value="Distribution">Distribution</option>
+    </select>
+    <label>GEX Class:</label>
+    <select id="gexFilter" onchange="applyFilters()">
+      <option value="">All</option>
+      <option value="Very Short">Very Short</option>
+      <option value="Short">Short</option>
+      <option value="Mildly Short">Mildly Short</option>
+    </select>
+    <span class="count-badge" id="resultCount">21 results</span>
+  </div>
+
+  <div class="grid" id="mainGrid">
+    <div class="section-header" style="border-left-color:#7C5C99;color:#7C5C99;">↓ Bottom 33%</div>
+
+    <div class="card" data-price-pos="Bottom 33%" data-phase="Mark-up" data-gex-class="Very Short">
+      <div class="card-header" style="border-left-color:#7A0B33;">
+        <div class="card-left">
+          <div class="symbol">AMAT</div>
+          <div class="price">$536.25</div>
+          <div class="sector">Semiconductor Manufacturing Equipment</div>
+        </div>
+        <div class="rank-badge">#1</div>
+      </div>
+      <div class="chips-row">
+        <span class="chip" style="border-color:#4B7F3D;color:#4B7F3D;">Mark-up</span>
+        <span class="chip" style="border-color:#7A0B33;color:#7A0B33;">Very Short</span>
+        <span class="chip" style="border-color:#7C5C99;color:#7C5C99;">Bottom 33%</span>
+      </div>
+      <div class="badges-row"><span class="badge" style="background:rgba(181,101,29,.16);color:#8A4E17;">HIGH VOL RISK</span></div>
+      <div class="metrics-grid">
+        <div class="metric"><div class="metric-label">GEX Value</div><div class="metric-value" style="color:#7A0B33;">-124,330</div></div>
+        <div class="metric"><div class="metric-label">GEX Scale</div><div class="metric-value" style="color:#7A0B33;">-4</div></div>
+        <div class="metric"><div class="metric-label">Wyckoff Conf.</div><div class="metric-value">60%</div></div>
+        <div class="metric"><div class="metric-label">Pattern</div><div class="metric-value">Uptrend continuation</div></div>
+      </div>
+      <div class="walls-row">
+        <span><b>Call Wall:</b> 640.0</span>
+        <span><b>Put Wall:</b> 540.0</span>
+        <span><b>Gamma Flip:</b> 590.0</span>
+      </div>
+      <div class="dist-bar">44.0% from 52W range</div>
+      <div class="rec-box">Very short gamma - avoid naked shorts, use wide spreads</div>
+    </div>
+
+    <div class="card" data-price-pos="Bottom 33%" data-phase="Mark-up" data-gex-class="Very Short">
+      <div class="card-header" style="border-left-color:#7A0B33;">
+        <div class="card-left">
+          <div class="symbol">ASML</div>
+          <div class="price">$1,757.09</div>
+          <div class="sector">Lithography Systems</div>
+        </div>
+        <div class="rank-badge">#2</div>
+      </div>
+      <div class="chips-row">
+        <span class="chip" style="border-color:#4B7F3D;color:#4B7F3D;">Mark-up</span>
+        <span class="chip" style="border-color:#7A0B33;color:#7A0B33;">Very Short</span>
+        <span class="chip" style="border-color:#7C5C99;color:#7C5C99;">Bottom 33%</span>
+      </div>
+      <div class="badges-row"><span class="badge" style="background:rgba(181,101,29,.16);color:#8A4E17;">HIGH VOL RISK</span></div>
+      <div class="metrics-grid">
+        <div class="metric"><div class="metric-label">GEX Value</div><div class="metric-value" style="color:#7A0B33;">-61,545</div></div>
+        <div class="metric"><div class="metric-label">GEX Scale</div><div class="metric-value" style="color:#7A0B33;">-4</div></div>
+        <div class="metric"><div class="metric-label">Wyckoff Conf.</div><div class="metric-value">60%</div></div>
+        <div class="metric"><div class="metric-label">Pattern</div><div class="metric-value">Uptrend continuation</div></div>
+      </div>
+      <div class="walls-row">
+        <span><b>Call Wall:</b> 1800.0</span>
+        <span><b>Put Wall:</b> 1750.0</span>
+        <span><b>Gamma Flip:</b> 1775.0</span>
+      </div>
+      <div class="dist-bar">61.8% from 52W range</div>
+      <div class="rec-box">Very short gamma - avoid naked shorts, use wide spreads</div>
+    </div>
+
+    <div class="card" data-price-pos="Bottom 33%" data-phase="Mark-up" data-gex-class="Very Short">
+      <div class="card-header" style="border-left-color:#7A0B33;">
+        <div class="card-left">
+          <div class="symbol">CRWD</div>
+          <div class="price">$183.28</div>
+          <div class="sector">Technology (Quantum Computing)</div>
+        </div>
+        <div class="rank-badge">#3</div>
+      </div>
+      <div class="chips-row">
+        <span class="chip" style="border-color:#4B7F3D;color:#4B7F3D;">Mark-up</span>
+        <span class="chip" style="border-color:#7A0B33;color:#7A0B33;">Very Short</span>
+        <span class="chip" style="border-color:#7C5C99;color:#7C5C99;">Bottom 33%</span>
+      </div>
+      <div class="badges-row"><span class="badge" style="background:rgba(181,101,29,.16);color:#8A4E17;">HIGH VOL RISK</span></div>
+      <div class="metrics-grid">
+        <div class="metric"><div class="metric-label">GEX Value</div><div class="metric-value" style="color:#7A0B33;">-4,801</div></div>
+        <div class="metric"><div class="metric-label">GEX Scale</div><div class="metric-value" style="color:#7A0B33;">-4</div></div>
+        <div class="metric"><div class="metric-label">Wyckoff Conf.</div><div class="metric-value">60%</div></div>
+        <div class="metric"><div class="metric-label">Pattern</div><div class="metric-value">Uptrend continuation</div></div>
+      </div>
+      <div class="walls-row">
+        <span><b>Call Wall:</b> 185.0</span>
+        <span><b>Put Wall:</b> 190.0</span>
+        <span><b>Gamma Flip:</b> 187.5</span>
+      </div>
+      <div class="dist-bar">68.7% from 52W range</div>
+      <div class="rec-box">Very short gamma - avoid naked shorts, use wide spreads</div>
+    </div>
+
+    <div class="card" data-price-pos="Bottom 33%" data-phase="Distribution" data-gex-class="Very Short">
+      <div class="card-header" style="border-left-color:#7A0B33;">
+        <div class="card-left">
+          <div class="symbol">ISRG</div>
+          <div class="price">$337.50</div>
+          <div class="sector">Medical Robotics / Devices</div>
+        </div>
+        <div class="rank-badge">#4</div>
+      </div>
+      <div class="chips-row">
+        <span class="chip" style="border-color:#B5651D;color:#B5651D;">Distribution</span>
+        <span class="chip" style="border-color:#7A0B33;color:#7A0B33;">Very Short</span>
+        <span class="chip" style="border-color:#7C5C99;color:#7C5C99;">Bottom 33%</span>
+      </div>
+      <div class="badges-row"><span class="badge" style="background:rgba(153,15,61,.14);color:#990F3D;">BEAR CONFIRM</span></div>
+      <div class="metrics-grid">
+        <div class="metric"><div class="metric-label">GEX Value</div><div class="metric-value" style="color:#7A0B33;">-12,484</div></div>
+        <div class="metric"><div class="metric-label">GEX Scale</div><div class="metric-value" style="color:#7A0B33;">-4</div></div>
+        <div class="metric"><div class="metric-label">Wyckoff Conf.</div><div class="metric-value">85%</div></div>
+        <div class="metric"><div class="metric-label">Pattern</div><div class="metric-value">Upthrust detected</div></div>
+      </div>
+      <div class="walls-row">
+        <span><b>Call Wall:</b> 350.0</span>
+        <span><b>Put Wall:</b> 345.0</span>
+        <span><b>Gamma Flip:</b> 347.5</span>
+      </div>
+      <div class="dist-bar">5.6% from 52W range</div>
+      <div class="rec-box">Short Call Spreads - High Probability</div>
+    </div>
+
+    <div class="card" data-price-pos="Bottom 33%" data-phase="Mark-up" data-gex-class="Very Short">
+      <div class="card-header" style="border-left-color:#7A0B33;">
+        <div class="card-left">
+          <div class="symbol">MS</div>
+          <div class="price">$214.48</div>
+          <div class="sector">Investment Banking & Wealth Management</div>
+        </div>
+        <div class="rank-badge">#5</div>
+      </div>
+      <div class="chips-row">
+        <span class="chip" style="border-color:#4B7F3D;color:#4B7F3D;">Mark-up</span>
+        <span class="chip" style="border-color:#7A0B33;color:#7A0B33;">Very Short</span>
+        <span class="chip" style="border-color:#7C5C99;color:#7C5C99;">Bottom 33%</span>
+      </div>
+      <div class="badges-row"><span class="badge" style="background:rgba(181,101,29,.16);color:#8A4E17;">HIGH VOL RISK</span></div>
+      <div class="metrics-grid">
+        <div class="metric"><div class="metric-label">GEX Value</div><div class="metric-value" style="color:#7A0B33;">-3,333</div></div>
+        <div class="metric"><div class="metric-label">GEX Scale</div><div class="metric-value" style="color:#7A0B33;">-4</div></div>
+        <div class="metric"><div class="metric-label">Wyckoff Conf.</div><div class="metric-value">60%</div></div>
+        <div class="metric"><div class="metric-label">Pattern</div><div class="metric-value">Uptrend continuation</div></div>
+      </div>
+      <div class="walls-row">
+        <span><b>Call Wall:</b> 215.0</span>
+        <span><b>Put Wall:</b> 202.5</span>
+        <span><b>Gamma Flip:</b> 208.75</span>
+      </div>
+      <div class="dist-bar">63.0% from 52W range</div>
+      <div class="rec-box">Very short gamma - avoid naked shorts, use wide spreads</div>
+    </div>
+
+    <div class="card" data-price-pos="Bottom 33%" data-phase="Mark-up" data-gex-class="Very Short">
+      <div class="card-header" style="border-left-color:#7A0B33;">
+        <div class="card-left">
+          <div class="symbol">MU</div>
+          <div class="price">$920.95</div>
+          <div class="sector">Memory & Storage Solutions</div>
+        </div>
+        <div class="rank-badge">#6</div>
+      </div>
+      <div class="chips-row">
+        <span class="chip" style="border-color:#4B7F3D;color:#4B7F3D;">Mark-up</span>
+        <span class="chip" style="border-color:#7A0B33;color:#7A0B33;">Very Short</span>
+        <span class="chip" style="border-color:#7C5C99;color:#7C5C99;">Bottom 33%</span>
+      </div>
+      <div class="badges-row"><span class="badge" style="background:rgba(181,101,29,.16);color:#8A4E17;">HIGH VOL RISK</span></div>
+      <div class="metrics-grid">
+        <div class="metric"><div class="metric-label">GEX Value</div><div class="metric-value" style="color:#7A0B33;">-54,769</div></div>
+        <div class="metric"><div class="metric-label">GEX Scale</div><div class="metric-value" style="color:#7A0B33;">-4</div></div>
+        <div class="metric"><div class="metric-label">Wyckoff Conf.</div><div class="metric-value">60%</div></div>
+        <div class="metric"><div class="metric-label">Pattern</div><div class="metric-value">Uptrend continuation</div></div>
+      </div>
+      <div class="walls-row">
+        <span><b>Call Wall:</b> 980.0</span>
+        <span><b>Put Wall:</b> 850.0</span>
+        <span><b>Gamma Flip:</b> 915.0</span>
+      </div>
+      <div class="dist-bar">56.5% from 52W range</div>
+      <div class="rec-box">Very short gamma - avoid naked shorts, use wide spreads</div>
+    </div>
+
+    <div class="card" data-price-pos="Bottom 33%" data-phase="Mark-up" data-gex-class="Very Short">
+      <div class="card-header" style="border-left-color:#7A0B33;">
+        <div class="card-left">
+          <div class="symbol">TTWO</div>
+          <div class="price">$231.65</div>
+          <div class="sector">Interactive Home Entertainment</div>
+        </div>
+        <div class="rank-badge">#7</div>
+      </div>
+      <div class="chips-row">
+        <span class="chip" style="border-color:#4B7F3D;color:#4B7F3D;">Mark-up</span>
+        <span class="chip" style="border-color:#7A0B33;color:#7A0B33;">Very Short</span>
+        <span class="chip" style="border-color:#7C5C99;color:#7C5C99;">Bottom 33%</span>
+      </div>
+      <div class="badges-row"><span class="badge" style="background:rgba(181,101,29,.16);color:#8A4E17;">HIGH VOL RISK</span></div>
+      <div class="metrics-grid">
+        <div class="metric"><div class="metric-label">GEX Value</div><div class="metric-value" style="color:#7A0B33;">-43,415</div></div>
+        <div class="metric"><div class="metric-label">GEX Scale</div><div class="metric-value" style="color:#7A0B33;">-4</div></div>
+        <div class="metric"><div class="metric-label">Wyckoff Conf.</div><div class="metric-value">60%</div></div>
+        <div class="metric"><div class="metric-label">Pattern</div><div class="metric-value">Uptrend continuation</div></div>
+      </div>
+      <div class="walls-row">
+        <span><b>Call Wall:</b> 220.0</span>
+        <span><b>Put Wall:</b> 210.0</span>
+        <span><b>Gamma Flip:</b> 215.0</span>
+      </div>
+      <div class="dist-bar">42.8% from 52W range</div>
+      <div class="rec-box">Very short gamma - avoid naked shorts, use wide spreads</div>
+    </div>
+
+    <div class="card" data-price-pos="Bottom 33%" data-phase="Distribution" data-gex-class="Very Short">
+      <div class="card-header" style="border-left-color:#7A0B33;">
+        <div class="card-left">
+          <div class="symbol">WBD</div>
+          <div class="price">$25.77</div>
+          <div class="sector">Entertainment & Media Content</div>
+        </div>
+        <div class="rank-badge">#8</div>
+      </div>
+      <div class="chips-row">
+        <span class="chip" style="border-color:#B5651D;color:#B5651D;">Distribution</span>
+        <span class="chip" style="border-color:#7A0B33;color:#7A0B33;">Very Short</span>
+        <span class="chip" style="border-color:#7C5C99;color:#7C5C99;">Bottom 33%</span>
+      </div>
+      <div class="badges-row"><span class="badge" style="background:rgba(153,15,61,.14);color:#990F3D;">BEAR CONFIRM</span></div>
+      <div class="metrics-grid">
+        <div class="metric"><div class="metric-label">GEX Value</div><div class="metric-value" style="color:#7A0B33;">-51,383</div></div>
+        <div class="metric"><div class="metric-label">GEX Scale</div><div class="metric-value" style="color:#7A0B33;">-4</div></div>
+        <div class="metric"><div class="metric-label">Wyckoff Conf.</div><div class="metric-value">85%</div></div>
+        <div class="metric"><div class="metric-label">Pattern</div><div class="metric-value">Upthrust detected</div></div>
+      </div>
+      <div class="walls-row">
+        <span><b>Call Wall:</b> 28.0</span>
+        <span><b>Put Wall:</b> 25.0</span>
+        <span><b>Gamma Flip:</b> 26.5</span>
+      </div>
+      <div class="dist-bar">6.9% from 52W range</div>
+      <div class="rec-box">Short Call Spreads - High Probability</div>
+    </div>
+
+    <div class="card" data-price-pos="Bottom 33%" data-phase="Mark-up" data-gex-class="Very Short">
+      <div class="card-header" style="border-left-color:#7A0B33;">
+        <div class="card-left">
+          <div class="symbol">XLP</div>
+          <div class="price">$84.13</div>
+          <div class="sector">Consumer Staples</div>
+        </div>
+        <div class="rank-badge">#9</div>
+      </div>
+      <div class="chips-row">
+        <span class="chip" style="border-color:#4B7F3D;color:#4B7F3D;">Mark-up</span>
+        <span class="chip" style="border-color:#7A0B33;color:#7A0B33;">Very Short</span>
+        <span class="chip" style="border-color:#7C5C99;color:#7C5C99;">Bottom 33%</span>
+      </div>
+      <div class="badges-row"><span class="badge" style="background:rgba(181,101,29,.16);color:#8A4E17;">HIGH VOL RISK</span></div>
+      <div class="metrics-grid">
+        <div class="metric"><div class="metric-label">GEX Value</div><div class="metric-value" style="color:#7A0B33;">-10,167</div></div>
+        <div class="metric"><div class="metric-label">GEX Scale</div><div class="metric-value" style="color:#7A0B33;">-4</div></div>
+        <div class="metric"><div class="metric-label">Wyckoff Conf.</div><div class="metric-value">60%</div></div>
+        <div class="metric"><div class="metric-label">Pattern</div><div class="metric-value">Uptrend continuation</div></div>
+      </div>
+      <div class="walls-row">
+        <span><b>Call Wall:</b> 85.5</span>
+        <span><b>Put Wall:</b> 83.0</span>
+        <span><b>Gamma Flip:</b> 84.25</span>
+      </div>
+      <div class="dist-bar">49.3% from 52W range</div>
+      <div class="rec-box">Very short gamma - avoid naked shorts, use wide spreads</div>
+    </div>
+
+    <div class="card" data-price-pos="Bottom 33%" data-phase="Mark-up" data-gex-class="Very Short">
+      <div class="card-header" style="border-left-color:#7A0B33;">
+        <div class="card-left">
+          <div class="symbol">DIA</div>
+          <div class="price">$518.76</div>
+          <div class="sector">Dow Jones Industrial Average Index</div>
+        </div>
+        <div class="rank-badge">#10</div>
+      </div>
+      <div class="chips-row">
+        <span class="chip" style="border-color:#4B7F3D;color:#4B7F3D;">Mark-up</span>
+        <span class="chip" style="border-color:#7A0B33;color:#7A0B33;">Very Short</span>
+        <span class="chip" style="border-color:#7C5C99;color:#7C5C99;">Bottom 33%</span>
+      </div>
+      <div class="badges-row"><span class="badge" style="background:rgba(181,101,29,.16);color:#8A4E17;">HIGH VOL RISK</span></div>
+      <div class="metrics-grid">
+        <div class="metric"><div class="metric-label">GEX Value</div><div class="metric-value" style="color:#7A0B33;">-117,533</div></div>
+        <div class="metric"><div class="metric-label">GEX Scale</div><div class="metric-value" style="color:#7A0B33;">-4</div></div>
+        <div class="metric"><div class="metric-label">Wyckoff Conf.</div><div class="metric-value">60%</div></div>
+        <div class="metric"><div class="metric-label">Pattern</div><div class="metric-value">Uptrend continuation</div></div>
+      </div>
+      <div class="walls-row">
+        <span><b>Call Wall:</b> 525.0</span>
+        <span><b>Put Wall:</b> 520.0</span>
+        <span><b>Gamma Flip:</b> 522.5</span>
+      </div>
+      <div class="dist-bar">71.1% from 52W range</div>
+      <div class="rec-box">Very short gamma - avoid naked shorts, use wide spreads</div>
+    </div>
+<div class="section-header" style="border-left-color:#0F5499;color:#0F5499;">→ Middle</div>
+
+    <div class="card" data-price-pos="Middle" data-phase="Mark-up" data-gex-class="Very Short">
+      <div class="card-header" style="border-left-color:#7A0B33;">
+        <div class="card-left">
+          <div class="symbol">AMD</div>
+          <div class="price">$521.95</div>
+          <div class="sector">Semiconductors</div>
+        </div>
+        <div class="rank-badge">#11</div>
+      </div>
+      <div class="chips-row">
+        <span class="chip" style="border-color:#4B7F3D;color:#4B7F3D;">Mark-up</span>
+        <span class="chip" style="border-color:#7A0B33;color:#7A0B33;">Very Short</span>
+        <span class="chip" style="border-color:#0F5499;color:#0F5499;">Middle</span>
+      </div>
+      <div class="badges-row"><span class="badge" style="background:rgba(181,101,29,.16);color:#8A4E17;">HIGH VOL RISK</span></div>
+      <div class="metrics-grid">
+        <div class="metric"><div class="metric-label">GEX Value</div><div class="metric-value" style="color:#7A0B33;">-25,665</div></div>
+        <div class="metric"><div class="metric-label">GEX Scale</div><div class="metric-value" style="color:#7A0B33;">-4</div></div>
+        <div class="metric"><div class="metric-label">Wyckoff Conf.</div><div class="metric-value">60%</div></div>
+        <div class="metric"><div class="metric-label">Pattern</div><div class="metric-value">Uptrend continuation</div></div>
+      </div>
+      <div class="walls-row">
+        <span><b>Call Wall:</b> 550.0</span>
+        <span><b>Put Wall:</b> 495.0</span>
+        <span><b>Gamma Flip:</b> 522.5</span>
+      </div>
+      <div class="dist-bar">77.1% from 52W range</div>
+      <div class="rec-box">Very short gamma - avoid naked shorts, use wide spreads</div>
+    </div>
+
+    <div class="card" data-price-pos="Middle" data-phase="Mark-up" data-gex-class="Very Short">
+      <div class="card-header" style="border-left-color:#7A0B33;">
+        <div class="card-left">
+          <div class="symbol">GS</div>
+          <div class="price">$1,061.23</div>
+          <div class="sector">Investment Banking & Capital Markets</div>
+        </div>
+        <div class="rank-badge">#12</div>
+      </div>
+      <div class="chips-row">
+        <span class="chip" style="border-color:#4B7F3D;color:#4B7F3D;">Mark-up</span>
+        <span class="chip" style="border-color:#7A0B33;color:#7A0B33;">Very Short</span>
+        <span class="chip" style="border-color:#0F5499;color:#0F5499;">Middle</span>
+      </div>
+      <div class="badges-row"><span class="badge" style="background:rgba(181,101,29,.16);color:#8A4E17;">HIGH VOL RISK</span></div>
+      <div class="metrics-grid">
+        <div class="metric"><div class="metric-label">GEX Value</div><div class="metric-value" style="color:#7A0B33;">-208,260</div></div>
+        <div class="metric"><div class="metric-label">GEX Scale</div><div class="metric-value" style="color:#7A0B33;">-4</div></div>
+        <div class="metric"><div class="metric-label">Wyckoff Conf.</div><div class="metric-value">60%</div></div>
+        <div class="metric"><div class="metric-label">Pattern</div><div class="metric-value">Uptrend continuation</div></div>
+      </div>
+      <div class="walls-row">
+        <span><b>Call Wall:</b> 1100.0</span>
+        <span><b>Put Wall:</b> 1050.0</span>
+        <span><b>Gamma Flip:</b> 1075.0</span>
+      </div>
+      <div class="dist-bar">64.2% from 52W range</div>
+      <div class="rec-box">Very short gamma - avoid naked shorts, use wide spreads</div>
+    </div>
+
+    <div class="card" data-price-pos="Middle" data-phase="Mark-up" data-gex-class="Very Short">
+      <div class="card-header" style="border-left-color:#7A0B33;">
+        <div class="card-left">
+          <div class="symbol">NET</div>
+          <div class="price">$262.15</div>
+          <div class="sector">Technology (Quantum Computing)</div>
+        </div>
+        <div class="rank-badge">#13</div>
+      </div>
+      <div class="chips-row">
+        <span class="chip" style="border-color:#4B7F3D;color:#4B7F3D;">Mark-up</span>
+        <span class="chip" style="border-color:#7A0B33;color:#7A0B33;">Very Short</span>
+        <span class="chip" style="border-color:#0F5499;color:#0F5499;">Middle</span>
+      </div>
+      <div class="badges-row"><span class="badge" style="background:rgba(181,101,29,.16);color:#8A4E17;">HIGH VOL RISK</span></div>
+      <div class="metrics-grid">
+        <div class="metric"><div class="metric-label">GEX Value</div><div class="metric-value" style="color:#7A0B33;">-66,685</div></div>
+        <div class="metric"><div class="metric-label">GEX Scale</div><div class="metric-value" style="color:#7A0B33;">-4</div></div>
+        <div class="metric"><div class="metric-label">Wyckoff Conf.</div><div class="metric-value">60%</div></div>
+        <div class="metric"><div class="metric-label">Pattern</div><div class="metric-value">Uptrend continuation</div></div>
+      </div>
+      <div class="walls-row">
+        <span><b>Call Wall:</b> 250.0</span>
+        <span><b>Put Wall:</b> 250.0</span>
+        <span><b>Gamma Flip:</b> 250.0</span>
+      </div>
+      <div class="dist-bar">72.6% from 52W range</div>
+      <div class="rec-box">Very short gamma - avoid naked shorts, use wide spreads</div>
+    </div>
+
+    <div class="card" data-price-pos="Middle" data-phase="Mark-up" data-gex-class="Very Short">
+      <div class="card-header" style="border-left-color:#7A0B33;">
+        <div class="card-left">
+          <div class="symbol">PANW</div>
+          <div class="price">$323.79</div>
+          <div class="sector">Technology (Quantum Computing)</div>
+        </div>
+        <div class="rank-badge">#14</div>
+      </div>
+      <div class="chips-row">
+        <span class="chip" style="border-color:#4B7F3D;color:#4B7F3D;">Mark-up</span>
+        <span class="chip" style="border-color:#7A0B33;color:#7A0B33;">Very Short</span>
+        <span class="chip" style="border-color:#0F5499;color:#0F5499;">Middle</span>
+      </div>
+      <div class="badges-row"><span class="badge" style="background:rgba(181,101,29,.16);color:#8A4E17;">HIGH VOL RISK</span></div>
+      <div class="metrics-grid">
+        <div class="metric"><div class="metric-label">GEX Value</div><div class="metric-value" style="color:#7A0B33;">-7,350</div></div>
+        <div class="metric"><div class="metric-label">GEX Scale</div><div class="metric-value" style="color:#7A0B33;">-4</div></div>
+        <div class="metric"><div class="metric-label">Wyckoff Conf.</div><div class="metric-value">60%</div></div>
+        <div class="metric"><div class="metric-label">Pattern</div><div class="metric-value">Uptrend continuation</div></div>
+      </div>
+      <div class="walls-row">
+        <span><b>Call Wall:</b> 350.0</span>
+        <span><b>Put Wall:</b> 312.5</span>
+        <span><b>Gamma Flip:</b> 331.25</span>
+      </div>
+      <div class="dist-bar">77.0% from 52W range</div>
+      <div class="rec-box">Very short gamma - avoid naked shorts, use wide spreads</div>
+    </div>
+
+    <div class="card" data-price-pos="Middle" data-phase="Mark-up" data-gex-class="Very Short">
+      <div class="card-header" style="border-left-color:#7A0B33;">
+        <div class="card-left">
+          <div class="symbol">SE</div>
+          <div class="price">$100.00</div>
+          <div class="sector">Consumer Discretionary (E-commerce/Gaming)</div>
+        </div>
+        <div class="rank-badge">#15</div>
+      </div>
+      <div class="chips-row">
+        <span class="chip" style="border-color:#4B7F3D;color:#4B7F3D;">Mark-up</span>
+        <span class="chip" style="border-color:#7A0B33;color:#7A0B33;">Very Short</span>
+        <span class="chip" style="border-color:#0F5499;color:#0F5499;">Middle</span>
+      </div>
+      <div class="badges-row"><span class="badge" style="background:rgba(181,101,29,.16);color:#8A4E17;">HIGH VOL RISK</span></div>
+      <div class="metrics-grid">
+        <div class="metric"><div class="metric-label">GEX Value</div><div class="metric-value" style="color:#7A0B33;">-2,186</div></div>
+        <div class="metric"><div class="metric-label">GEX Scale</div><div class="metric-value" style="color:#7A0B33;">-4</div></div>
+        <div class="metric"><div class="metric-label">Wyckoff Conf.</div><div class="metric-value">60%</div></div>
+        <div class="metric"><div class="metric-label">Pattern</div><div class="metric-value">Uptrend continuation</div></div>
+      </div>
+      <div class="walls-row">
+        <span><b>Call Wall:</b> 108.0</span>
+        <span><b>Put Wall:</b> 100.0</span>
+        <span><b>Gamma Flip:</b> 104.0</span>
+      </div>
+      <div class="dist-bar">55.0% from 52W range</div>
+      <div class="rec-box">Very short gamma - avoid naked shorts, use wide spreads</div>
+    </div>
+
+    <div class="card" data-price-pos="Middle" data-phase="Mark-up" data-gex-class="Very Short">
+      <div class="card-header" style="border-left-color:#7A0B33;">
+        <div class="card-left">
+          <div class="symbol">SPGI</div>
+          <div class="price">$426.40</div>
+          <div class="sector">Financial Information & Analytics</div>
+        </div>
+        <div class="rank-badge">#16</div>
+      </div>
+      <div class="chips-row">
+        <span class="chip" style="border-color:#4B7F3D;color:#4B7F3D;">Mark-up</span>
+        <span class="chip" style="border-color:#7A0B33;color:#7A0B33;">Very Short</span>
+        <span class="chip" style="border-color:#0F5499;color:#0F5499;">Middle</span>
+      </div>
+      <div class="badges-row"><span class="badge" style="background:rgba(181,101,29,.16);color:#8A4E17;">HIGH VOL RISK</span></div>
+      <div class="metrics-grid">
+        <div class="metric"><div class="metric-label">GEX Value</div><div class="metric-value" style="color:#7A0B33;">-1,151</div></div>
+        <div class="metric"><div class="metric-label">GEX Scale</div><div class="metric-value" style="color:#7A0B33;">-4</div></div>
+        <div class="metric"><div class="metric-label">Wyckoff Conf.</div><div class="metric-value">60%</div></div>
+        <div class="metric"><div class="metric-label">Pattern</div><div class="metric-value">Uptrend continuation</div></div>
+      </div>
+      <div class="walls-row">
+        <span><b>Call Wall:</b> 437.5</span>
+        <span><b>Put Wall:</b> 420.0</span>
+        <span><b>Gamma Flip:</b> 428.75</span>
+      </div>
+      <div class="dist-bar">60.5% from 52W range</div>
+      <div class="rec-box">Very short gamma - avoid naked shorts, use wide spreads</div>
+    </div>
+
+    <div class="card" data-price-pos="Middle" data-phase="Mark-up" data-gex-class="Very Short">
+      <div class="card-header" style="border-left-color:#7A0B33;">
+        <div class="card-left">
+          <div class="symbol">TGT</div>
+          <div class="price">$136.78</div>
+          <div class="sector">General Merchandise Retail</div>
+        </div>
+        <div class="rank-badge">#17</div>
+      </div>
+      <div class="chips-row">
+        <span class="chip" style="border-color:#4B7F3D;color:#4B7F3D;">Mark-up</span>
+        <span class="chip" style="border-color:#7A0B33;color:#7A0B33;">Very Short</span>
+        <span class="chip" style="border-color:#0F5499;color:#0F5499;">Middle</span>
+      </div>
+      <div class="badges-row"><span class="badge" style="background:rgba(181,101,29,.16);color:#8A4E17;">HIGH VOL RISK</span></div>
+      <div class="metrics-grid">
+        <div class="metric"><div class="metric-label">GEX Value</div><div class="metric-value" style="color:#7A0B33;">-9,006</div></div>
+        <div class="metric"><div class="metric-label">GEX Scale</div><div class="metric-value" style="color:#7A0B33;">-4</div></div>
+        <div class="metric"><div class="metric-label">Wyckoff Conf.</div><div class="metric-value">60%</div></div>
+        <div class="metric"><div class="metric-label">Pattern</div><div class="metric-value">Uptrend continuation</div></div>
+      </div>
+      <div class="walls-row">
+        <span><b>Call Wall:</b> 134.0</span>
+        <span><b>Put Wall:</b> 133.0</span>
+        <span><b>Gamma Flip:</b> 133.5</span>
+      </div>
+      <div class="dist-bar">72.6% from 52W range</div>
+      <div class="rec-box">Very short gamma - avoid naked shorts, use wide spreads</div>
+    </div>
+
+    <div class="card" data-price-pos="Middle" data-phase="Mark-up" data-gex-class="Very Short">
+      <div class="card-header" style="border-left-color:#7A0B33;">
+        <div class="card-left">
+          <div class="symbol">WFC</div>
+          <div class="price">$86.31</div>
+          <div class="sector">Diversified Banking</div>
+        </div>
+        <div class="rank-badge">#18</div>
+      </div>
+      <div class="chips-row">
+        <span class="chip" style="border-color:#4B7F3D;color:#4B7F3D;">Mark-up</span>
+        <span class="chip" style="border-color:#7A0B33;color:#7A0B33;">Very Short</span>
+        <span class="chip" style="border-color:#0F5499;color:#0F5499;">Middle</span>
+      </div>
+      <div class="badges-row"><span class="badge" style="background:rgba(181,101,29,.16);color:#8A4E17;">HIGH VOL RISK</span></div>
+      <div class="metrics-grid">
+        <div class="metric"><div class="metric-label">GEX Value</div><div class="metric-value" style="color:#7A0B33;">-3,386</div></div>
+        <div class="metric"><div class="metric-label">GEX Scale</div><div class="metric-value" style="color:#7A0B33;">-4</div></div>
+        <div class="metric"><div class="metric-label">Wyckoff Conf.</div><div class="metric-value">60%</div></div>
+        <div class="metric"><div class="metric-label">Pattern</div><div class="metric-value">Uptrend continuation</div></div>
+      </div>
+      <div class="walls-row">
+        <span><b>Call Wall:</b> 87.0</span>
+        <span><b>Put Wall:</b> 86.0</span>
+        <span><b>Gamma Flip:</b> 86.5</span>
+      </div>
+      <div class="dist-bar">79.5% from 52W range</div>
+      <div class="rec-box">Very short gamma - avoid naked shorts, use wide spreads</div>
+    </div>
+
+    <div class="card" data-price-pos="Middle" data-phase="Mark-up" data-gex-class="Very Short">
+      <div class="card-header" style="border-left-color:#7A0B33;">
+        <div class="card-left">
+          <div class="symbol">XLB</div>
+          <div class="price">$51.26</div>
+          <div class="sector">Materials</div>
+        </div>
+        <div class="rank-badge">#19</div>
+      </div>
+      <div class="chips-row">
+        <span class="chip" style="border-color:#4B7F3D;color:#4B7F3D;">Mark-up</span>
+        <span class="chip" style="border-color:#7A0B33;color:#7A0B33;">Very Short</span>
+        <span class="chip" style="border-color:#0F5499;color:#0F5499;">Middle</span>
+      </div>
+      <div class="badges-row"><span class="badge" style="background:rgba(181,101,29,.16);color:#8A4E17;">HIGH VOL RISK</span></div>
+      <div class="metrics-grid">
+        <div class="metric"><div class="metric-label">GEX Value</div><div class="metric-value" style="color:#7A0B33;">-943</div></div>
+        <div class="metric"><div class="metric-label">GEX Scale</div><div class="metric-value" style="color:#7A0B33;">-4</div></div>
+        <div class="metric"><div class="metric-label">Wyckoff Conf.</div><div class="metric-value">60%</div></div>
+        <div class="metric"><div class="metric-label">Pattern</div><div class="metric-value">Uptrend continuation</div></div>
+      </div>
+      <div class="walls-row">
+        <span><b>Call Wall:</b> 52.0</span>
+        <span><b>Put Wall:</b> 50.0</span>
+        <span><b>Gamma Flip:</b> 51.0</span>
+      </div>
+      <div class="dist-bar">58.0% from 52W range</div>
+      <div class="rec-box">Very short gamma - avoid naked shorts, use wide spreads</div>
+    </div>
+
+    <div class="card" data-price-pos="Middle" data-phase="Mark-up" data-gex-class="Very Short">
+      <div class="card-header" style="border-left-color:#7A0B33;">
+        <div class="card-left">
+          <div class="symbol">XLI</div>
+          <div class="price">$182.66</div>
+          <div class="sector">Industrials</div>
+        </div>
+        <div class="rank-badge">#20</div>
+      </div>
+      <div class="chips-row">
+        <span class="chip" style="border-color:#4B7F3D;color:#4B7F3D;">Mark-up</span>
+        <span class="chip" style="border-color:#7A0B33;color:#7A0B33;">Very Short</span>
+        <span class="chip" style="border-color:#0F5499;color:#0F5499;">Middle</span>
+      </div>
+      <div class="badges-row"><span class="badge" style="background:rgba(181,101,29,.16);color:#8A4E17;">HIGH VOL RISK</span></div>
+      <div class="metrics-grid">
+        <div class="metric"><div class="metric-label">GEX Value</div><div class="metric-value" style="color:#7A0B33;">-104,188</div></div>
+        <div class="metric"><div class="metric-label">GEX Scale</div><div class="metric-value" style="color:#7A0B33;">-4</div></div>
+        <div class="metric"><div class="metric-label">Wyckoff Conf.</div><div class="metric-value">60%</div></div>
+        <div class="metric"><div class="metric-label">Pattern</div><div class="metric-value">Uptrend continuation</div></div>
+      </div>
+      <div class="walls-row">
+        <span><b>Call Wall:</b> 190.0</span>
+        <span><b>Put Wall:</b> 179.0</span>
+        <span><b>Gamma Flip:</b> 184.5</span>
+      </div>
+      <div class="dist-bar">79.8% from 52W range</div>
+      <div class="rec-box">Very short gamma - avoid naked shorts, use wide spreads</div>
+    </div>
+
+    <div class="card" data-price-pos="Middle" data-phase="Mark-up" data-gex-class="Mildly Short">
+      <div class="card-header" style="border-left-color:#C0525F;">
+        <div class="card-left">
+          <div class="symbol">BKNG</div>
+          <div class="price">$177.46</div>
+          <div class="sector">Internet Travel Services</div>
+        </div>
+        <div class="rank-badge">#21</div>
+      </div>
+      <div class="chips-row">
+        <span class="chip" style="border-color:#4B7F3D;color:#4B7F3D;">Mark-up</span>
+        <span class="chip" style="border-color:#C0525F;color:#C0525F;">Mildly Short</span>
+        <span class="chip" style="border-color:#0F5499;color:#0F5499;">Middle</span>
+      </div>
+      <div class="badges-row"><span class="badge" style="background:rgba(141,119,95,.16);color:#66605A;">◎ NEUTRAL</span></div>
+      <div class="metrics-grid">
+        <div class="metric"><div class="metric-label">GEX Value</div><div class="metric-value" style="color:#C0525F;">-2</div></div>
+        <div class="metric"><div class="metric-label">GEX Scale</div><div class="metric-value" style="color:#C0525F;">-2</div></div>
+        <div class="metric"><div class="metric-label">Wyckoff Conf.</div><div class="metric-value">60%</div></div>
+        <div class="metric"><div class="metric-label">Pattern</div><div class="metric-value">Uptrend continuation</div></div>
+      </div>
+      <div class="walls-row">
+        <span><b>Call Wall:</b> 180.0</span>
+        <span><b>Put Wall:</b> 175.0</span>
+        <span><b>Gamma Flip:</b> 177.5</span>
+      </div>
+      <div class="dist-bar">71.9% from 52W range</div>
+      <div class="rec-box">Insufficient confluence - wait for alignment</div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  function applyFilters() {
+    const pos = document.getElementById('posFilter').value;
+    const phase = document.getElementById('phaseFilter').value;
+    const gex = document.getElementById('gexFilter').value;
+    const cards = document.querySelectorAll('.card');
+    const headers = document.querySelectorAll('.section-header');
+    let count = 0;
+    cards.forEach(c => {
+      const match =
+        (!pos || c.dataset.pricePos === pos) &&
+        (!phase || c.dataset.phase === phase) &&
+        (!gex || c.dataset.gexClass === gex);
+      c.style.display = match ? '' : 'none';
+      if (match) count++;
+    });
+    headers.forEach(h => {
+      const next = h.nextElementSibling;
+      h.style.display = (next && next.style.display !== 'none') ? '' : 'none';
+    });
+    document.getElementById('resultCount').textContent = count + ' results';
+  }
+</script>
+</body>
+</html>
