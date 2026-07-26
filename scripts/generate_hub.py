@@ -526,17 +526,12 @@ def build():
   #bullscreener td.num, #bullscreener th.num {{ text-align:right; font-variant-numeric:tabular-nums; }}
   #bullscreener td.newscell {{ font-size:0.78rem; color:var(--ft-muted); }}
 
-  /* Autosize: fixed layout + wrapping so all 15 columns fit without a horizontal scrollbar */
-  #bullscreener table {{ table-layout:fixed; background:var(--ft-card-bg); }}
-  #bullscreener th, #bullscreener td {{ white-space:normal; overflow-wrap:break-word; vertical-align:top; }}
-  #bullscreener th {{ line-height:1.3; padding:10px 8px; }}
-  #bullscreener td {{ padding:10px 8px; }}
+  /* Business Overview-style grid: auto-width columns, no wrapping, horizontal scroll on overflow */
+  #bullscreener table {{ background:var(--ft-card-bg); }}
+  #bullscreener th, #bullscreener td {{ white-space:nowrap; vertical-align:top; }}
+  #bullscreener th {{ line-height:1.3; }}
   #bullscreener td {{ background:var(--ft-card-bg); }}
   #bullscreener tbody tr:nth-child(even) td, #bullscreener tbody tr.warn-row td {{ background:var(--ft-card-bg); }}
-  #bullscreener thead th {{ border-right:1px solid #3d4250; }}
-  #bullscreener thead th:last-child {{ border-right:none; }}
-  #bullscreener tbody td {{ border-right:1px solid var(--ft-border); }}
-  #bullscreener tbody td:last-child {{ border-right:none; }}
 
   /* Tab-specific masthead + stats banner, re-namespaced from the standalone dashboard page
      (site-level .masthead above is a different, sticky element -- keep these separate) */
@@ -552,21 +547,6 @@ def build():
   #bullscreener .bull-stat-item strong {{ font-weight:700; }}
   #bullscreener .bull-stat-sep {{ color:rgba(255,255,255,0.4); }}
   #bullscreener .table-wrap {{ margin-top:14px; }}
-  #bullscreener th:nth-child(1),  #bullscreener td:nth-child(1)  {{ width:2%; }}
-  #bullscreener th:nth-child(2),  #bullscreener td:nth-child(2)  {{ width:5%; }}
-  #bullscreener th:nth-child(3),  #bullscreener td:nth-child(3)  {{ width:7%; }}
-  #bullscreener th:nth-child(4),  #bullscreener td:nth-child(4)  {{ width:6%; }}
-  #bullscreener th:nth-child(5),  #bullscreener td:nth-child(5)  {{ width:8%; }}
-  #bullscreener th:nth-child(6),  #bullscreener td:nth-child(6)  {{ width:7%; }}
-  #bullscreener th:nth-child(7),  #bullscreener td:nth-child(7)  {{ width:4%; }}
-  #bullscreener th:nth-child(8),  #bullscreener td:nth-child(8)  {{ width:7%; }}
-  #bullscreener th:nth-child(9),  #bullscreener td:nth-child(9)  {{ width:11%; }}
-  #bullscreener th:nth-child(10), #bullscreener td:nth-child(10) {{ width:8%; }}
-  #bullscreener th:nth-child(11), #bullscreener td:nth-child(11) {{ width:5%; }}
-  #bullscreener th:nth-child(12), #bullscreener td:nth-child(12) {{ width:5%; }}
-  #bullscreener th:nth-child(13), #bullscreener td:nth-child(13) {{ width:5%; }}
-  #bullscreener th:nth-child(14), #bullscreener td:nth-child(14) {{ width:7%; }}
-  #bullscreener th:nth-child(15), #bullscreener td:nth-child(15) {{ width:13%; }}
   footer {{ background:var(--ft-navy); color:#888; font-family: Arial, sans-serif; font-size:11px; text-align:center; padding:16px 40px; margin-top:20px; border-top:3px solid var(--ft-red); }}
   @media (max-width: 700px) {{
     .masthead, nav.section-nav, main {{ padding-left:16px; padding-right:16px; }}
