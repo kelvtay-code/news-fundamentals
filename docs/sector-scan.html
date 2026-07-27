@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Sector Scan — 25 Jul 2026</title>
+<title>Sector Scan — 28 Jul 2026</title>
 <style>
 :root {
   --ft-salmon:   #FFF1E0;
@@ -22,236 +22,200 @@
   --orange: #B5651D;
 }
 * { box-sizing: border-box; }
-body { margin:0; background: var(--ft-salmon); color: var(--ft-warm-blk); font-family: Arial, sans-serif; }
-.masthead { background: var(--ft-navy); color:#fff; padding: 0 40px; border-bottom: 4px solid var(--ft-red); }
-.masthead-inner { max-width: 1320px; margin:0 auto; padding: 20px 0 14px; }
-.masthead-eyebrow { font-family: Arial, sans-serif; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color:#AAAAAA; margin-bottom:6px; }
-.masthead-title { font-family: Georgia, 'Times New Roman', serif; font-size: 2.4rem; font-weight:700; letter-spacing:-0.01em; }
+body { margin: 0; background: var(--ft-salmon); color: var(--ft-warm-blk); font-family: Arial, sans-serif; }
+.masthead { background: var(--ft-navy); color: #fff; padding: 20px 40px; border-bottom: 4px solid var(--ft-red); }
+.masthead-eyebrow { font-family: Arial, sans-serif; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: #AAAAAA; margin-bottom: 6px; }
+.masthead-title { font-family: Georgia, 'Times New Roman', serif; font-size: 2.4rem; font-weight: 700; letter-spacing: -0.01em; }
 .masthead-title span { color: var(--ft-gold); }
-.masthead-date { font-family: Arial, sans-serif; font-size: 12px; color:#AAAAAA; margin-top:6px; }
-.stats-banner { background: var(--ft-red); padding: 8px 40px; }
-.stats-inner { max-width:1320px; margin:0 auto; display:flex; align-items:center; gap:14px; flex-wrap:wrap; }
-.stat-item { font-family: Arial, sans-serif; font-size:12px; color:#fff; display:flex; align-items:center; gap:6px; }
-.stat-item strong { font-weight:700; }
+.masthead-date { font-family: Arial, sans-serif; font-size: 12px; color: #ccc; margin-top: 6px; }
+.stats-banner { background: var(--ft-red); padding: 10px 40px; }
+.stats-inner { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.stat-item { font-family: Arial, sans-serif; font-size: 12px; color: #fff; display: flex; align-items: center; gap: 6px; }
+.stat-item strong { font-weight: 700; }
 .stat-sep { color: rgba(255,255,255,0.4); }
-.content { max-width:1320px; margin:0 auto; padding: 24px 40px 30px; }
-h2.section-title { font-family: Georgia, 'Times New Roman', serif; font-size: 1.3rem; color: var(--ft-navy); border-bottom: 2px solid var(--ft-border); padding-bottom:6px; margin: 30px 0 14px; }
-h2.section-title:first-child { margin-top:0; }
-table.scan { width:100%; border-collapse: collapse; background: var(--ft-card-bg); font-family: Arial, sans-serif; font-size:12.5px; }
-table.scan th { background: var(--ft-navy); color:#fff; text-align:left; padding:8px 8px; font-weight:700; letter-spacing:0.03em; }
-table.scan td { padding:7px 8px; border: 1px solid var(--ft-border); }
-table.scan tr.divider td { background: var(--ft-mid); color:#fff; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; font-size:11px; padding:5px 8px; }
-table.scan td.num { font-variant-numeric: tabular-nums; }
-.pos { color: var(--green); font-weight:700; }
-.neg { color: var(--red2); font-weight:700; }
-.gex-up { color: var(--teal); font-weight:700; }
-.gex-down { color: var(--orange); font-weight:700; }
-.gex-flat { color: var(--ft-mid); }
+.content { padding: 26px 40px 40px; max-width: 1300px; margin: 0 auto; }
+h2.section-title { font-family: Georgia, 'Times New Roman', serif; font-size: 1.3rem; color: var(--ft-navy); border-bottom: 2px solid var(--ft-border); padding-bottom: 6px; margin: 30px 0 14px; }
+table.scan { width: 100%; border-collapse: collapse; background: var(--ft-card-bg); font-size: 12px; }
+table.scan th { background: var(--ft-navy); color: #fff; font-family: Arial, sans-serif; font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em; padding: 8px 6px; text-align: left; }
+table.scan td { padding: 6px; border: 1px solid var(--ft-border); }
+table.scan tr.divider td { background: var(--ft-navy); color: var(--ft-gold); font-weight: 700; letter-spacing: 0.1em; font-size: 10px; text-align: center; }
+.gex-up { color: var(--teal); font-weight: 700; }
+.gex-down { color: var(--orange); font-weight: 700; }
+.gex-flat { color: var(--ft-muted); }
 .gex-nd { color: var(--ft-border); }
-.badge { font-family: Arial, sans-serif; font-size:10.5px; font-weight:700; padding:2px 6px; border-radius:2px; white-space:nowrap; }
-.badge-pinned { color: var(--ft-blue); background: rgba(15,84,153,0.1); }
-.badge-hvr { color: var(--orange); background: rgba(181,101,29,0.12); }
-.sector-grid { display:grid; grid-template-columns: repeat(3, 1fr); gap:14px; margin-top: 6px; }
+.pos { color: var(--green); font-weight: 700; }
+.neg { color: var(--red2); font-weight: 700; }
+.badge-pinned { color: var(--ft-blue); font-weight: 700; }
+.badge-risk { color: var(--orange); font-weight: 700; }
+.badge-mid { color: var(--ft-mid); }
+.sector-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 10px; }
 .sector-card { background: var(--ft-card-bg); border: 1px solid var(--ft-border); border-top: 4px solid var(--ft-mid); padding: 12px 14px; }
 .sector-card.strong { border-top-color: var(--green); }
 .sector-card.weak { border-top-color: var(--red2); }
-.sector-card h3 { margin: 0 0 6px; font-family: Georgia, serif; font-size: 14px; color: var(--ft-navy); }
-.sector-card ul { margin:0; padding-left: 16px; font-size: 12px; line-height:1.45; }
-.sector-card li { margin-bottom:4px; }
-.news-box { background: var(--ft-card-bg); border: 1px solid var(--ft-border); border-left: 4px solid var(--red2); padding: 12px 16px; margin-top: 10px; }
-.news-box h3 { margin:0 0 6px; font-family: Georgia, serif; font-size: 14px; color: var(--ft-navy); }
-.news-box ul { margin:0; padding-left:16px; font-size:12.5px; line-height:1.5; }
-footer { background: var(--ft-navy); color:#888; font-family: Arial, sans-serif; font-size:11px; text-align:center; padding:16px 40px; margin-top:20px; border-top:3px solid var(--ft-red); }
-@media (max-width: 900px) { .sector-grid { grid-template-columns: 1fr; } }
+.sector-card h3 { font-family: Georgia, serif; font-size: 14px; margin: 0 0 8px; color: var(--ft-navy); }
+.sector-card ul { margin: 0; padding-left: 16px; font-size: 12px; line-height: 1.45; }
+.news-box { background: var(--ft-card-bg); border: 1px solid var(--ft-border); border-left: 5px solid var(--red2); padding: 14px 18px; margin-top: 10px; }
+.news-box h3 { font-family: Georgia, serif; margin: 0 0 8px; font-size: 15px; color: var(--ft-navy); }
+.news-box ul { margin: 0; padding-left: 18px; font-size: 12.5px; line-height: 1.5; }
+footer { background: var(--ft-navy); color: #999; font-family: Arial, sans-serif; font-size: 11px; text-align: center; padding: 16px 40px; margin-top: 30px; border-top: 3px solid var(--ft-red); }
+@media (max-width: 900px) { .sector-grid { grid-template-columns: 1fr; } .content { padding: 20px; } .masthead, .stats-banner { padding-left: 20px; padding-right: 20px; } }
 </style>
 </head>
 <body>
 
 <div class="masthead">
-  <div class="masthead-inner">
-    <div class="masthead-eyebrow">Optionx Intelligence · Sector Relative-Strength Scan</div>
-    <div class="masthead-title">Sector <span>Scan</span></div>
-    <div class="masthead-date">Saturday, 25 July 2026 &nbsp;·&nbsp; 09:49 SGT &nbsp;·&nbsp; 7-day window: 17–25 Jul 2026 &nbsp;·&nbsp; Source: stock_analysis_*.csv + IV_*.csv (Watchlist)</div>
-  </div>
+  <div class="masthead-eyebrow">Optionx Intelligence</div>
+  <div class="masthead-title">Sector <span>Relative Strength</span> Scan</div>
+  <div class="masthead-date">28 July 2026 &nbsp;|&nbsp; 7-day window: Jul 21–28, 2026 &nbsp;|&nbsp; Source: stock_analysis_*.csv (GEX/Wyckoff) + IV_*.csv (IV Rank/Volume)</div>
 </div>
 
 <div class="stats-banner">
   <div class="stats-inner">
-    <div class="stat-item">🏆 Leader: <strong>XLY (Consumer Disc.)</strong></div>
+    <div class="stat-item">🏆 Leader: <strong>XLU (Utilities)</strong></div>
     <span class="stat-sep">|</span>
     <div class="stat-item">🔻 Laggard: <strong>XLK (Technology)</strong></div>
     <span class="stat-sep">|</span>
-    <div class="stat-item">📊 <strong>21/21</strong> tickers covered</div>
+    <div class="stat-item"><strong>21/21</strong> tickers full data</div>
     <span class="stat-sep">|</span>
-    <div class="stat-item">⚠️ QQQ/DIA missing Jul-17 (6/7 days) · 5 sector ETFs missing IV history before Jul-21</div>
+    <div class="stat-item">QQQ/DIA fully tracked this week — no gap</div>
   </div>
 </div>
 
 <div class="content">
 
-<h2 class="section-title">Main Scan</h2>
+<h2 class="section-title">7-Day Scan — All Tickers</h2>
 <table class="scan">
-<tr><th>Ticker</th><th>Spot</th><th>Δ</th><th>%Δ</th><th>7D GEX</th><th>7D IV Rank</th><th>Volume</th><th>Vol Ratio</th><th>GEX Class</th><th>Badge</th></tr>
-
-<tr><td>SPY</td><td class="num">$738.93</td><td class="num pos">+0.75</td><td class="num pos">+0.10%</td><td><span class="gex-down">▼</span><span class="gex-down">▼</span><span class="gex-down">▼</span><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-down">▼</span><span class="gex-down">▼</span></td><td>28→28 (18–30)</td><td>44.8M</td><td>0.93x</td><td>Very Short</td><td><span class="badge badge-hvr">HIGH VOL RISK</span></td></tr>
-
-<tr class="divider"><td colspan="10">Sector ETFs</td></tr>
-
-<tr><td>QQQ</td><td class="num">$684.23</td><td class="num neg">-7.73</td><td class="num neg">-1.12%</td><td><span class="gex-nd">·</span><span class="gex-down">▼</span><span class="gex-down">▼</span><span class="gex-up">▲</span><span class="gex-down">▼</span><span class="gex-down">▼</span><span class="gex-down">▼</span></td><td>78→76 (63–79)</td><td>42.9M</td><td>1.11x</td><td>Very Short</td><td><span class="badge badge-hvr">HIGH VOL RISK</span></td></tr>
-
-<tr><td>DIA</td><td class="num">$518.76</td><td class="num pos">+2.50</td><td class="num pos">+0.48%</td><td><span class="gex-nd">·</span><span class="gex-down">▼</span><span class="gex-down">▼</span><span class="gex-up">▲</span><span class="gex-down">▼</span><span class="gex-down">▼</span><span class="gex-down">▼</span></td><td>20→21 (15–24)</td><td>3.33M</td><td>0.90x</td><td>Very Short</td><td><span class="badge badge-hvr">HIGH VOL RISK</span></td></tr>
-
-<tr><td>XLK</td><td class="num">$175.88</td><td class="num neg">-2.57</td><td class="num neg">-1.44%</td><td><span class="gex-down">▼</span><span class="gex-down">▼</span><span class="gex-down">▼</span><span class="gex-down">▼</span><span class="gex-down">▼</span><span class="gex-down">▼</span><span class="gex-down">▼</span></td><td>88→87 (85–91)</td><td>7.74M</td><td>0.81x</td><td>Very Short</td><td><span class="badge badge-hvr">HIGH VOL RISK</span></td></tr>
-
-<tr><td>XLV</td><td class="num">$162.57</td><td class="num pos">+1.13</td><td class="num pos">+0.70%</td><td><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-down">▼</span><span class="gex-down">▼</span><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-up">▲</span></td><td>36→41 (36–45)</td><td>7.65M</td><td>0.75x</td><td>Very Long</td><td><span class="badge badge-pinned">PINNED</span></td></tr>
-
-<tr><td>XLF</td><td class="num">$56.31</td><td class="num pos">+0.48</td><td class="num pos">+0.86%</td><td><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-down">▼</span><span class="gex-down">▼</span><span class="gex-down">▼</span><span class="gex-up">▲</span></td><td>22→15 (15–24)</td><td>32.2M</td><td>0.96x</td><td>Very Long</td><td><span class="badge badge-pinned">PINNED</span></td></tr>
-
-<tr><td>XLY</td><td class="num">$109.41</td><td class="num pos">+0.65</td><td class="num pos">+0.60%</td><td><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-up">▲</span></td><td>40→43 (23–44)</td><td>8.21M</td><td>0.95x</td><td>Very Long</td><td><span class="badge badge-pinned">PINNED</span></td></tr>
-
-<tr><td>XLC</td><td class="num">$106.30</td><td class="num pos">+0.92</td><td class="num pos">+0.87%</td><td><span class="gex-down">▼</span><span class="gex-down">▼</span><span class="gex-down">▼</span><span class="gex-down">▼</span><span class="gex-down">▼</span><span class="gex-down">▼</span><span class="gex-down">▼</span></td><td>59→64 (50–64)</td><td>6.15M</td><td>0.89x</td><td>Short</td><td><span class="badge badge-hvr">HIGH VOL RISK</span></td></tr>
-
-<tr><td>XLP</td><td class="num">$84.13</td><td class="num pos">+0.92</td><td class="num pos">+1.11%</td><td><span class="gex-up">▲</span><span class="gex-down">▼</span><span class="gex-down">▼</span><span class="gex-down">▼</span><span class="gex-down">▼</span><span class="gex-down">▼</span><span class="gex-down">▼</span></td><td>47→56 (47–56)</td><td>9.63M</td><td>0.90x</td><td>Very Short</td><td><span class="badge badge-hvr">HIGH VOL RISK</span></td></tr>
-
-<tr><td>XLE</td><td class="num">$59.62</td><td class="num pos">+0.24</td><td class="num pos">+0.40%</td><td><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-up">▲</span></td><td>63→64 (55–64)</td><td>34.2M</td><td>1.14x</td><td>Very Long</td><td><span class="badge badge-pinned">PINNED</span></td></tr>
-
-<tr><td>XLB</td><td class="num">$51.26</td><td class="num pos">+0.97</td><td class="num pos">+1.93%</td><td><span class="gex-down">▼</span><span class="gex-down">▼</span><span class="gex-down">▼</span><span class="gex-up">▲</span><span class="gex-down">▼</span><span class="gex-down">▼</span><span class="gex-down">▼</span></td><td>46→42 (40–51)</td><td>12.2M</td><td>1.12x</td><td>Very Short</td><td><span class="badge badge-hvr">HIGH VOL RISK</span></td></tr>
-
-<tr><td>XLI</td><td class="num">$182.66</td><td class="num pos">+0.72</td><td class="num pos">+0.40%</td><td><span class="gex-down">▼</span><span class="gex-down">▼</span><span class="gex-down">▼</span><span class="gex-down">▼</span><span class="gex-down">▼</span><span class="gex-down">▼</span><span class="gex-down">▼</span></td><td>50→47 (38–50)</td><td>5.51M</td><td>0.82x</td><td>Very Short</td><td><span class="badge badge-hvr">HIGH VOL RISK</span></td></tr>
-
-<tr><td>XLU</td><td class="num">$46.29</td><td class="num pos">+0.10</td><td class="num pos">+0.22%</td><td><span class="gex-down">▼</span><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-up">▲</span></td><td>35→29 (29–40)</td><td>16.1M</td><td>0.88x</td><td>Very Long</td><td><span class="badge badge-pinned">PINNED</span></td></tr>
-
-<tr><td>XLRE</td><td class="num">$45.95</td><td class="num pos">+1.00</td><td class="num pos">+2.22%</td><td><span class="gex-nd">·</span><span class="gex-nd">·</span><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-up">▲</span></td><td>32→24 (20–32)</td><td>4.74M</td><td>0.97x</td><td>Very Long</td><td><span class="badge badge-pinned">PINNED</span></td></tr>
-
-<tr class="divider"><td colspan="10">Mag 7</td></tr>
-
-<tr><td>AMZN</td><td class="num">$232.11</td><td class="num neg">-1.55</td><td class="num neg">-0.66%</td><td><span class="gex-up">▲</span><span class="gex-down">▼</span><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-nd">·</span><span class="gex-up">▲</span></td><td>73→70 (70–76)</td><td>35M</td><td>0.65x</td><td>Very Long</td><td><span class="badge badge-pinned">PINNED</span></td></tr>
-
-<tr><td>MSFT</td><td class="num">$381.70</td><td class="num pos">+0.12</td><td class="num pos">+0.03%</td><td><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-up">▲</span></td><td>98→87 (87–99)</td><td>27.7M</td><td>0.66x</td><td>Very Long</td><td><span class="badge badge-pinned">PINNED</span></td></tr>
-
-<tr><td>GOOGL</td><td class="num">$319.74</td><td class="num pos">+2.05</td><td class="num pos">+0.65%</td><td><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-down">▼</span><span class="gex-up">▲</span></td><td>77→28 (28–77)</td><td>31.8M</td><td>0.93x</td><td>Very Long</td><td><span class="badge badge-pinned">PINNED</span></td></tr>
-
-<tr><td>META</td><td class="num">$595.19</td><td class="num neg">-10.91</td><td class="num neg">-1.80%</td><td><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-down">▼</span><span class="gex-up">▲</span><span class="gex-up">▲</span></td><td>95→80 (80–95)</td><td>11.5M</td><td>0.60x</td><td>Very Long</td><td><span class="badge badge-pinned">PINNED</span></td></tr>
-
-<tr><td>AAPL</td><td class="num">$333.02</td><td class="num pos">+11.36</td><td class="num pos">+3.53%</td><td><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-down">▼</span><span class="gex-down">▼</span><span class="gex-down">▼</span><span class="gex-down">▼</span><span class="gex-up">▲</span></td><td>79→71 (71–80)</td><td>47.5M</td><td>0.75x</td><td>Very Long</td><td><span class="badge badge-pinned">PINNED</span></td></tr>
-
-<tr><td>NVDA</td><td class="num">$206.84</td><td class="num neg">-1.92</td><td class="num neg">-0.92%</td><td><span class="gex-down">▼</span><span class="gex-down">▼</span><span class="gex-down">▼</span><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-down">▼</span></td><td>45→46 (34–46)</td><td>114.8M</td><td>0.86x</td><td>Very Short</td><td><span class="badge badge-hvr">HIGH VOL RISK</span></td></tr>
-
-<tr><td>TSLA</td><td class="num">$313.03</td><td class="num neg">-6.66</td><td class="num neg">-2.08%</td><td><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-down">▼</span><span class="gex-down">▼</span></td><td>38→36 (33–42)</td><td>62.8M</td><td>1.43x</td><td>Very Short</td><td><span class="badge badge-hvr">HIGH VOL RISK</span></td></tr>
-
+<tr><th>Ticker</th><th>Spot</th><th>Δ</th><th>%Δ</th><th>7D GEX (Jul21→28)</th><th>7D IV Rank</th><th>Volume</th><th>Vol Ratio</th><th>GEX Class</th><th>Badge</th></tr>
+<tr><td>SPY</td><td>$739.09</td><td class="neg">+0.16</td><td>+0.02%</td><td><span class="gex-down">▼</span><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-down">▼</span><span class="gex-down">▼</span><span class="gex-up">▲</span><span class="gex-down">▼</span></td><td>30 (rng 18-30)</td><td>41.4M</td><td>0.86x</td><td>Very Short</td><td class="badge-risk">HIGH VOL RISK</td></tr>
+<tr><td>QQQ</td><td>$682.12</td><td class="neg">-2.11</td><td class="neg">-0.31%</td><td><span class="gex-down">▼</span><span class="gex-up">▲</span><span class="gex-down">▼</span><span class="gex-down">▼</span><span class="gex-down">▼</span><span class="gex-up">▲</span><span class="gex-down">▼</span></td><td>76 (rng 63-79)</td><td>42.6M</td><td>1.10x</td><td>Very Short</td><td class="badge-risk">HIGH VOL RISK</td></tr>
+<tr><td>DIA</td><td>$521.26</td><td class="pos">+2.50</td><td class="pos">+0.48%</td><td><span class="gex-down">▼</span><span class="gex-up">▲</span><span class="gex-down">▼</span><span class="gex-down">▼</span><span class="gex-down">▼</span><span class="gex-up">▲</span><span class="gex-up">▲</span></td><td>26 (rng 15-26)</td><td>3.35M</td><td>0.91x</td><td>Very Long</td><td class="badge-pinned">PINNED</td></tr>
+<tr class="divider"><td colspan="10">SECTOR ETFS</td></tr>
+<tr><td>XLK</td><td>$174.30</td><td class="neg">-1.58</td><td class="neg">-0.90%</td><td><span class="gex-down">▼</span><span class="gex-down">▼</span><span class="gex-down">▼</span><span class="gex-down">▼</span><span class="gex-down">▼</span><span class="gex-up">▲</span><span class="gex-down">▼</span></td><td>82 (rng 82-91)</td><td>8.38M</td><td>0.88x</td><td>Very Short</td><td class="badge-risk">HIGH VOL RISK</td></tr>
+<tr><td>XLV</td><td>$163.40</td><td class="pos">+0.83</td><td class="pos">+0.51%</td><td><span class="gex-down">▼</span><span class="gex-down">▼</span><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-up">▲</span></td><td>50 (rng 36-50)</td><td>8.06M</td><td>0.79x</td><td>Very Long</td><td class="badge-pinned">PINNED</td></tr>
+<tr><td>XLF</td><td>$56.88</td><td class="pos">+0.57</td><td class="pos">+1.01%</td><td><span class="gex-up">▲</span><span class="gex-down">▼</span><span class="gex-down">▼</span><span class="gex-down">▼</span><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-down">▼</span></td><td>19 (rng 15-24)</td><td>29.8M</td><td>0.89x</td><td>Short</td><td class="badge-risk">HIGH VOL RISK</td></tr>
+<tr><td>XLY</td><td>$110.84</td><td class="pos">+1.43</td><td class="pos">+1.31%</td><td><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-down">▼</span></td><td>43 (rng 23-44)</td><td>6.98M</td><td>0.81x</td><td>Very Short</td><td class="badge-risk">HIGH VOL RISK</td></tr>
+<tr><td>XLC</td><td>$107.66</td><td class="pos">+1.36</td><td class="pos">+1.28%</td><td><span class="gex-down">▼</span><span class="gex-down">▼</span><span class="gex-down">▼</span><span class="gex-down">▼</span><span class="gex-down">▼</span><span class="gex-up">▲</span><span class="gex-up">▲</span></td><td>63 (rng 50-64)</td><td>6.67M</td><td>0.96x</td><td>Very Long</td><td class="badge-pinned">PINNED</td></tr>
+<tr><td>XLP</td><td>$85.36</td><td class="pos">+1.23</td><td class="pos">+1.46%</td><td><span class="gex-down">▼</span><span class="gex-down">▼</span><span class="gex-down">▼</span><span class="gex-down">▼</span><span class="gex-down">▼</span><span class="gex-up">▲</span><span class="gex-down">▼</span></td><td>60 (rng 47-60)</td><td>12.2M</td><td>1.14x</td><td>Very Short</td><td class="badge-risk">HIGH VOL RISK</td></tr>
+<tr><td>XLE</td><td>$58.36</td><td class="neg">-1.26</td><td class="neg">-2.11%</td><td><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-down">▼</span><span class="gex-down">▼</span></td><td>60 (rng 55-64)</td><td>33.8M</td><td>1.13x</td><td>Very Short</td><td class="badge-risk">HIGH VOL RISK</td></tr>
+<tr><td>XLB</td><td>$51.39</td><td class="pos">+0.13</td><td class="pos">+0.25%</td><td><span class="gex-down">▼</span><span class="gex-up">▲</span><span class="gex-down">▼</span><span class="gex-down">▼</span><span class="gex-down">▼</span><span class="gex-up">▲</span><span class="gex-down">▼</span></td><td>45 (rng 40-51)</td><td>8.7M</td><td>0.80x</td><td>Short</td><td class="badge-risk">HIGH VOL RISK</td></tr>
+<tr><td>XLI</td><td>$183.20</td><td class="pos">+0.54</td><td class="pos">+0.30%</td><td><span class="gex-down">▼</span><span class="gex-down">▼</span><span class="gex-down">▼</span><span class="gex-down">▼</span><span class="gex-down">▼</span><span class="gex-up">▲</span><span class="gex-down">▼</span></td><td>55 (rng 38-55)</td><td>6.19M</td><td>0.92x</td><td>Very Short</td><td class="badge-risk">HIGH VOL RISK</td></tr>
+<tr><td>XLU</td><td>$45.68</td><td class="neg">-0.61</td><td class="neg">-1.32%</td><td><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-up">▲</span></td><td>36 (rng 29-36)</td><td>16.6M</td><td>0.91x</td><td>Very Long</td><td class="badge-pinned">PINNED</td></tr>
+<tr><td>XLRE</td><td>$45.76</td><td class="neg">-0.19</td><td class="neg">-0.41%</td><td><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-up">▲</span></td><td>19 (rng 19-32)</td><td>4.22M</td><td>0.87x</td><td>Very Long</td><td class="badge-pinned">PINNED</td></tr>
+<tr class="divider"><td colspan="10">MAG 7</td></tr>
+<tr><td>AMZN</td><td>$231.39</td><td class="neg">-0.72</td><td class="neg">-0.31%</td><td><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-nd">·</span><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-up">▲</span></td><td>72 (rng 70-76)</td><td>35M</td><td>0.65x</td><td>Very Long</td><td class="badge-pinned">PINNED</td></tr>
+<tr><td>MSFT</td><td>$389.10</td><td class="pos">+7.40</td><td class="pos">+1.94%</td><td><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-up">▲</span></td><td>89 (rng 87-99)</td><td>27.8M</td><td>0.66x</td><td>Very Long</td><td class="badge-pinned">PINNED</td></tr>
+<tr><td>GOOGL</td><td>$326.56</td><td class="pos">+6.82</td><td class="pos">+2.13%</td><td><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-down">▼</span><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-up">▲</span></td><td>30 (rng 28-77)</td><td>28.4M</td><td>0.83x</td><td>Very Long</td><td class="badge-pinned">PINNED</td></tr>
+<tr><td>META</td><td>$593.87</td><td class="neg">-1.32</td><td class="neg">-0.22%</td><td><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-down">▼</span><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-up">▲</span></td><td>81 (rng 80-95)</td><td>11.2M</td><td>0.58x</td><td>Very Long</td><td class="badge-pinned">PINNED</td></tr>
+<tr><td>AAPL</td><td>$336.91</td><td class="pos">+3.89</td><td class="pos">+1.17%</td><td><span class="gex-down">▼</span><span class="gex-down">▼</span><span class="gex-down">▼</span><span class="gex-down">▼</span><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-up">▲</span></td><td>75 (rng 71-80)</td><td>49.6M</td><td>0.78x</td><td>Very Long</td><td class="badge-pinned">PINNED</td></tr>
+<tr><td>NVDA</td><td>$196.51</td><td class="neg">-10.33</td><td class="neg">-5.00%</td><td><span class="gex-down">▼</span><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-down">▼</span><span class="gex-up">▲</span><span class="gex-down">▼</span></td><td>63 (rng 33-63)</td><td>154.1M</td><td>1.16x</td><td>Very Short</td><td class="badge-risk">HIGH VOL RISK</td></tr>
+<tr><td>TSLA</td><td>$309.22</td><td class="neg">-3.81</td><td class="neg">-1.22%</td><td><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-up">▲</span><span class="gex-down">▼</span><span class="gex-down">▼</span><span class="gex-up">▲</span><span class="gex-up">▲</span></td><td>33 (rng 33-42)</td><td>44.8M</td><td>1.02x</td><td>Very Long</td><td class="badge-pinned">PINNED</td></tr>
 </table>
 
 <h2 class="section-title">Sector-by-Sector Read</h2>
 <div class="sector-grid">
 
-<div class="sector-card">
-<h3>SPY / QQQ / DIA — Broad Index</h3>
-<ul>
-<li>SPY 2/7 GEX-positive, fresh 2-day weak signal despite flat price.</li>
-<li>QQQ/DIA both HIGH VOL RISK, only 1/6 GEX-positive days.</li>
-</ul>
-</div>
+<div class="sector-card"><h3>SPY — S&amp;P 500</h3><ul>
+<li>GEX flipped sign 4x in 7 days — dealer positioning unstable, no clean trend.</li>
+<li>Flat week: spot $739.09, +0.02% latest day; IV Rank cooling to 30.</li>
+<li>HIGH VOL RISK badge on 4 of 7 days.</li>
+</ul></div>
 
-<div class="sector-card strong">
-<h3>XLY — Consumer Discretionary (LEADER)</h3>
-<ul>
-<li>7/7 days GEX-positive, zero flips, PINNED every session.</li>
-<li>+0.60% on the day — cleanest, most consistent read in the scan.</li>
-</ul>
-</div>
+<div class="sector-card weak"><h3>QQQ — Nasdaq 100</h3><ul>
+<li>GEX-positive only 2 of 7 days, 4 sign flips — weakest index.</li>
+<li>Spot $682.12, -0.31% latest day; IV Rank still elevated at 76.</li>
+<li>HIGH VOL RISK badge on 5 of 7 days.</li>
+</ul></div>
 
-<div class="sector-card">
-<h3>XLV — Healthcare</h3>
-<ul>
-<li>5/7 GEX-positive, PINNED, last 2 days fresh-strong.</li>
-<li>Mid-week dip already reversed; +0.70% on the day.</li>
-</ul>
-</div>
+<div class="sector-card"><h3>DIA — Dow</h3><ul>
+<li>Fresh 2-day strength: GEX positive and PINNED both Jul 27-28.</li>
+<li>Spot $521.26, +0.48% latest day; lowest IV Rank of the indices at 26.</li>
+</ul></div>
 
-<div class="sector-card">
-<h3>XLF — Financials</h3>
-<ul>
-<li>4/7 GEX-positive, 2 flips — choppier than XLY/XLE.</li>
-<li>+0.86% on the day; IV Rank fell 22→15, no clean edge.</li>
-</ul>
-</div>
+<div class="sector-card weak"><h3>XLK — Technology (LAGGARD)</h3><ul>
+<li>Weakest sector: GEX positive only 1 of 7 days, HIGH VOL RISK 6 of 7 days.</li>
+<li>Spot $174.30, -0.90% latest day; IV Rank pinned near-extreme, 82-91 all week.</li>
+<li>Broad mega-cap tech de-risking — see news callout below.</li>
+</ul></div>
 
-<div class="sector-card weak">
-<h3>XLK — Technology (LAGGARD)</h3>
-<ul>
-<li>0/7 GEX-positive, every day Very Short — zero relief all week.</li>
-<li>Worst move of any sector: -1.44%, HIGH VOL RISK held throughout.</li>
-<li>IV Rank pinned 85-91, highest of any sector ETF.</li>
-</ul>
-</div>
+<div class="sector-card strong"><h3>XLV — Health Care</h3><ul>
+<li>GEX positive 5 of 7 days, only 1 flip, PINNED both Jul 27-28.</li>
+<li>Spot $163.40, +0.51% latest day — steadiest confluence read among sectors.</li>
+<li>IV Rank climbing 36→50, still moderate, room to run.</li>
+</ul></div>
 
-<div class="sector-card">
-<h3>XLC — Communication Services</h3>
-<ul>
-<li>0/7 GEX-positive, HIGH VOL RISK — yet price still +0.87% (divergence).</li>
-<li>Dealer book short gamma even as tape grinds higher; watch for a snap-back.</li>
-</ul>
-</div>
+<div class="sector-card"><h3>XLF — Financials</h3><ul>
+<li>Choppy: 3 flips, GEX swung from PINNED to HIGH VOL RISK into Jul 28.</li>
+<li>Spot $56.88, +1.01% latest day; IV Rank stays low, 15-24 range.</li>
+</ul></div>
 
-<div class="sector-card">
-<h3>XLP — Consumer Staples</h3>
-<ul>
-<li>Only 1/7 GEX-positive day, HIGH VOL RISK — but +1.11% (mismatch).</li>
-<li>IV Rank rising 47→56, possible defensive rotation.</li>
-</ul>
-</div>
+<div class="sector-card"><h3>XLY — Consumer Discretionary</h3><ul>
+<li>Long gamma 6 of 7 days, but fresh flip negative into Jul 28.</li>
+<li>Spot $110.84, +1.31% latest day — best percentage gainer of the week.</li>
+</ul></div>
 
-<div class="sector-card strong">
-<h3>XLE — Energy</h3>
-<ul>
-<li>7/7 GEX-positive, zero flips, PINNED all week — steady strength.</li>
-<li>+0.40% on the day; second-cleanest read behind XLY.</li>
-</ul>
-</div>
+<div class="sector-card"><h3>XLC — Communication Services</h3><ul>
+<li>Turnaround: weak all week, then PINNED with GEX flipping positive last 2 days.</li>
+<li>Spot $107.66, +1.28% latest day; IV Rank elevated at 63.</li>
+<li>Early-stage recovery, not yet confirmed strong.</li>
+</ul></div>
 
-<div class="sector-card">
-<h3>XLB / XLI — Materials &amp; Industrials</h3>
-<ul>
-<li>Both mostly GEX-negative (XLI 0/7, XLB 1/7) yet both posted positive daily returns.</li>
-<li>HIGH VOL RISK on both — positioning/price divergence, treat any break as fast.</li>
-</ul>
-</div>
+<div class="sector-card"><h3>XLP — Consumer Staples</h3><ul>
+<li>GEX negative 5 of 7 days, HIGH VOL RISK badge dominant.</li>
+<li>Spot $85.36, +1.46% latest day — grinding higher despite dealer-short gamma.</li>
+<li>IV Rank rising 47→60, defensive rotation building.</li>
+</ul></div>
 
-<div class="sector-card strong">
-<h3>XLU / XLRE — Utilities &amp; Real Estate</h3>
-<ul>
-<li>XLU 6/7, XLRE 5/5 (all data days) GEX-positive — both PINNED, Very Long.</li>
-<li>XLRE best %Δ in the scan at +2.22%, though only 5 days of history.</li>
-</ul>
-</div>
+<div class="sector-card"><h3>XLE — Energy</h3><ul>
+<li>Was strong (5 of 7 GEX positive) but fresh 2-day flip negative into Jul 28.</li>
+<li>Spot $58.36, -2.11% latest day — sharpest single-day pullback in the scan.</li>
+</ul></div>
 
-<div class="sector-card">
-<h3>MAG7 · Mega-cap Tech</h3>
-<ul>
-<li>MSFT strongest: 7/7 GEX-positive, zero flips, PINNED.</li>
-<li>META/AMZN/GOOGL PINNED but noisier (2 flips each).</li>
-<li>NVDA/TSLA both HIGH VOL RISK — mirrors XLK's weak sector read.</li>
-</ul>
-</div>
+<div class="sector-card"><h3>XLB — Materials</h3><ul>
+<li>Most flip-prone sector: 4 sign changes in 7 days, no clean trend.</li>
+<li>Spot $51.39, +0.25% latest day; IV Rank mid-range, 40-51.</li>
+</ul></div>
+
+<div class="sector-card"><h3>XLI — Industrials</h3><ul>
+<li>GEX negative 6 of 7 days yet price kept grinding up.</li>
+<li>Spot $183.20, +0.30% latest day; IV Rank climbing 38→55 — fragile, dealer-short-gamma uptrend.</li>
+</ul></div>
+
+<div class="sector-card strong"><h3>XLU — Utilities (LEADER)</h3><ul>
+<li>Cleanest read in the scan: GEX positive 7 of 7 days, zero flips, PINNED throughout.</li>
+<li>Spot $45.68, -1.32% latest day — minor pullback inside a dominant long-gamma trend.</li>
+<li>IV Rank low, 29-36 — room for premium expansion.</li>
+</ul></div>
+
+<div class="sector-card strong"><h3>XLRE — Real Estate</h3><ul>
+<li>Also 7 of 7 GEX positive, zero flips, PINNED every day — tied with XLU.</li>
+<li>Spot $45.76, -0.41% latest day; lowest IV Rank in the scan at 19.</li>
+<li>Quiet, stable long-gamma sector all week.</li>
+</ul></div>
+
+<div class="sector-card"><h3>MAG7 — Mega-cap Tech</h3><ul>
+<li>Split picture: MSFT/AMZN clean PINNED strength; GOOGL/META recovering after mid-week flips.</li>
+<li>NVDA weakest of the seven: 4 flips, -5.0% latest day, HIGH VOL RISK.</li>
+<li>TSLA flag: GEX still PINNED but Wyckoff turned Distribution/Sign-of-Weakness — divergence to watch.</li>
+</ul></div>
 
 </div>
 
+<h2 class="section-title">Why XLK Is Weakest — Negative News Watch (NVDA, MSFT, AAPL)</h2>
 <div class="news-box">
-<h3>Why XLK Is the Weakest Sector This Week</h3>
-<ul>
-<li>Jul 23: "Magnificent Seven" (incl. MSFT, AAPL, NVDA) shed ~$797B in worst single-day rout since Apr 2025 on AI capex fears.</li>
-<li>NVDA cut Asia customer whitelist by half as US chip export controls on China intensified (mid-Jul).</li>
-<li>MSFT down ~18% YTD as of Jul 20 — investors punishing $190B FY26 AI capex guidance, margin/depreciation worries.</li>
-<li>MSFT faces intensifying antitrust scrutiny, including a UK probe into cloud licensing tied to its OpenAI partnership.</li>
-<li>NVDA fell Jul 14 on reports China restricted H200 chip imports, though shipments there remain minimal.</li>
+<h3>Laggard Sector Callout</h3>
+<ul id="news-list">
+<li>NVDA: China reportedly ordered customs to block H200 chip imports, stock slid 1%+ (Jul 16).</li>
+<li>NVDA: renewed Washington export-control scrutiny on Blackwell/H20 chips adds overhang into earnings.</li>
+<li>MSFT: down 18% YTD vs S&amp;P +9% — investors punishing $190B FY26 AI capex guide ahead of Jul 29 earnings.</li>
+<li>"Big Seven" tech saw worst single-day drop since Apr 2025 on Jul 23, ~$797B market-cap wipeout on AI-capex fears.</li>
+<li>AAPL: valuation stretch flagged ahead of Jul 30 earnings, seen as next vulnerable test.</li>
 </ul>
 </div>
 
 </div>
 
 <footer>
-Generated 25 Jul 2026 09:57 SGT · Data: stock_analysis_170726–250726 (GEX/Wyckoff) + IV_180726–250726 (IV Rank/Volume) · Watchlist folder<br>
-Gaps: QQQ/DIA missing Jul-17 file · XLC/XLB/XLI/XLU/XLRE missing IV history before Jul-21 · News scoped to NVDA/MSFT/AAPL (XLK top weights) via news_investigator
+Generated 28 Jul 2026 from stock_analysis_280726.0704.csv (GEX/Wyckoff, 7-day window Jul 21-28) and IV_280726_0702.csv (IV Rank/Volume, 7-day window Jul 20-28). Jul 26 (Sun) had no snapshot; Jul 27 pre-market file may reflect Fri Jul 25 closing price carryover. All 21 tickers had full data this week — no QQQ/DIA gap.
 </footer>
 
 </body>
