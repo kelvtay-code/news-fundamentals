@@ -1,0 +1,627 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Strat Score Dashboard</title>
+<style>
+  :root {
+    --ft-salmon:   #FFF1E0;
+    --ft-red:      #990F3D;
+    --ft-blue:     #0F5499;
+    --ft-navy:     #262A33;
+    --ft-warm-blk: #33302E;
+    --ft-border:   #CCB799;
+    --ft-mid:      #8D775F;
+    --ft-muted:    #66605A;
+    --ft-card-bg:  #FFFAF4;
+    --ft-card-bdr: #D4A96A;
+    --ft-gold:     #F0A500;
+    --green: #0ca30c; --orange: #c2570a; --red: #990F3D;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: Georgia, 'Times New Roman', serif; background: var(--ft-salmon); color: var(--ft-warm-blk); font-size: 14px; line-height: 1.5; }
+
+  .masthead { background: var(--ft-navy); color: #fff; border-bottom: 4px solid var(--ft-red); border-radius: 4px; padding: 18px 20px 14px; margin: 20px 20px 0; }
+  .masthead-eyebrow { font-family: Arial, sans-serif; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: #AAAAAA; margin-bottom: 6px; }
+  .masthead-title { font-family: Georgia, 'Times New Roman', serif; font-size: 1.7rem; font-weight: 700; letter-spacing: -0.01em; }
+  .masthead-title span { color: var(--ft-gold); }
+  .masthead-date { font-family: Arial, sans-serif; font-size: 11px; color: #AAAAAA; margin-top: 6px; }
+  .masthead-tagline { font-style: italic; font-size: 12px; color: #CCCCCC; border-top: 1px solid #44495A; padding-top: 8px; margin-top: 8px; }
+
+  .stats-banner { background: var(--ft-red); padding: 8px 20px; margin: 0 20px; }
+  .stats-inner { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+  .stat-item { font-family: Arial, sans-serif; font-size: 12px; color: #fff; display: flex; align-items: center; gap: 6px; }
+  .stat-item strong { font-weight: 700; }
+  .stat-sep { color: rgba(255,255,255,0.4); }
+
+  .rb-main { max-width: 1400px; margin: 0 auto; padding: 20px; }
+  h2 { font-family: Arial, sans-serif; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ft-mid); margin: 0 0 12px; }
+  .rb-section { margin-bottom: 32px; }
+
+  .rb-table-wrap { overflow-x: auto; border: 1px solid var(--ft-border); background: var(--ft-card-bg); }
+  table { border-collapse: collapse; width: 100%; font-size: 0.75rem; font-family: Arial, sans-serif; }
+  th, td { padding: 7px 6px; text-align: left; border-bottom: 1px solid var(--ft-border); vertical-align: top; }
+  td { white-space: nowrap; }
+  td.driver { white-space: normal; min-width: 260px; color: var(--ft-muted); }
+  th {
+    position: sticky; top: 0; background: var(--ft-navy); color: #fff; font-size: 9.5px;
+    text-transform: uppercase; letter-spacing: 0.04em;
+    cursor: pointer; user-select: none; line-height: 1.3;
+  }
+  th:hover { background: #3a3f4d; }
+  th.sort-asc::after { content: " \25B2"; font-size: 8px; color: var(--ft-gold); }
+  th.sort-desc::after { content: " \25BC"; font-size: 8px; color: var(--ft-gold); }
+  tbody tr:hover { background: var(--ft-salmon); }
+  td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+  td.ticker { font-weight: 700; color: var(--ft-red); letter-spacing: 0.01em; }
+
+  .chip { display: inline-block; font-family: Arial, sans-serif; font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 2px; white-space: nowrap; letter-spacing: 0.02em; }
+  .chip-bull { background: #E3EEDF; color: #2F6D3F; }
+  .chip-warn { background: #F7E3CE; color: #B15C1E; }
+  .chip-none { background: #F0EBE2; color: var(--ft-mid); }
+
+  .legend-card { background: var(--ft-card-bg); border: 1px solid var(--ft-border); border-top: 3px solid var(--ft-card-bdr); padding: 14px 18px; font-family: Arial, sans-serif; font-size: 12px; color: var(--ft-muted); line-height: 1.8; }
+  .legend-card b { color: var(--ft-warm-blk); }
+
+  footer { background: var(--ft-navy); color: #888; font-family: Arial, sans-serif; font-size: 11px; text-align: center; padding: 16px 40px; margin-top: 20px; border-top: 3px solid var(--ft-red); }
+
+  @media (max-width: 700px) {
+    .masthead, .stats-banner { margin-left: 10px; margin-right: 10px; padding-left: 14px; padding-right: 14px; }
+    .rb-main { padding: 14px; }
+    .masthead-title { font-size: 1.3rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <div class="masthead-eyebrow">Optionx Intelligence — Strat Score Screener</div>
+  <div class="masthead-title">Strat <span>Score</span> Dashboard</div>
+  <div class="masthead-date">IV snapshot 29 Jul 2026 09:06 &nbsp;&middot;&nbsp; Stock analysis 29 Jul 2026 08:57 &nbsp;&middot;&nbsp; News bulletin 29 Jul 2026 08:59 &nbsp;&middot;&nbsp; Generated 29 Jul 2026</div>
+  <div class="masthead-tagline">"IV Implied &ge;40%, price &lt;$500, sentiment score &ge;5 — cross-referenced against GEX dealer positioning and Wyckoff phase for a single-glance structural + sentiment read."</div>
+</div>
+<div class="stats-banner"><div class="stats-inner">
+  <div class="stat-item">Tickers <strong>39</strong></div>
+  <span class="stat-sep">|</span>
+  <div class="stat-item">Bullish <strong>8</strong></div>
+  <div class="stat-item">Neutral/Mixed <strong>31</strong></div>
+  <div class="stat-item">Bearish <strong>0</strong></div>
+  <span class="stat-sep">|</span>
+  <div class="stat-item">Avg Senti Score <strong>6.1</strong></div>
+</div></div>
+
+<div class="rb-main">
+  <div class="rb-section">
+    <h2>High-IV Sentiment Screen — ranked by sector, then Senti Score</h2>
+    <div class="rb-table-wrap">
+    <table id="stratTable">
+      <thead>
+        <tr>
+          <th>Sector</th><th>Ticker</th><th class="num">Price</th><th class="num">IV Implied</th>
+          <th>GEX Rating</th><th>Wyckoff Phase</th><th>Wyckoff Pattern</th>
+          <th class="num">Senti Score</th><th>Label</th><th>Driver</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td data-sort="Basic Materials">Basic Materials</td>
+          <td class="ticker" data-sort="NEM">NEM</td>
+          <td class="num" data-sort="91.57">$91.57</td>
+          <td class="num" data-sort="42.7">42.7%</td>
+          <td data-sort="Neutral / Transition Zone"><span class="chip chip-none">Neutral / Transition Zone</span></td>
+          <td data-sort="Mark-down"><span class="chip chip-warn">Mark-down</span></td>
+          <td data-sort="Strong downtrend">Strong downtrend</td>
+          <td class="num" data-sort="6">6</td>
+          <td data-sort="Neutral/Mixed"><span class="chip chip-none">Neutral/Mixed</span></td>
+          <td class="driver" data-sort="&quot;Still mispriced&quot; (undervalued lean), trending mention">&quot;Still mispriced&quot; (undervalued lean), trending mention</td>
+        </tr>
+        <tr>
+          <td data-sort="Communication Services">Communication Services</td>
+          <td class="ticker" data-sort="SE">SE</td>
+          <td class="num" data-sort="107.00">$107.00</td>
+          <td class="num" data-sort="71.3">71.3%</td>
+          <td data-sort="Neutral / Transition Zone"><span class="chip chip-none">Neutral / Transition Zone</span></td>
+          <td data-sort="Mark-up"><span class="chip chip-bull">Mark-up</span></td>
+          <td data-sort="Strong uptrend">Strong uptrend</td>
+          <td class="num" data-sort="6">6</td>
+          <td data-sort="Neutral/Mixed"><span class="chip chip-none">Neutral/Mixed</span></td>
+          <td class="driver" data-sort="Insider sale vs. &quot;stock up today,&quot; net flat">Insider sale vs. &quot;stock up today,&quot; net flat</td>
+        </tr>
+        <tr>
+          <td data-sort="Consumer Cyclical">Consumer Cyclical</td>
+          <td class="ticker" data-sort="BKNG">BKNG</td>
+          <td class="num" data-sort="199.27">$199.27</td>
+          <td class="num" data-sort="47.6">47.6%</td>
+          <td data-sort="Neutral / Transition Zone"><span class="chip chip-none">Neutral / Transition Zone</span></td>
+          <td data-sort="Mark-up"><span class="chip chip-bull">Mark-up</span></td>
+          <td data-sort="Strong uptrend">Strong uptrend</td>
+          <td class="num" data-sort="7">7</td>
+          <td data-sort="Bullish"><span class="chip chip-bull">Bullish</span></td>
+          <td class="driver" data-sort="Closed +6.82%, fund adds, earnings growth expected">Closed +6.82%, fund adds, earnings growth expected</td>
+        </tr>
+        <tr>
+          <td data-sort="Consumer Cyclical">Consumer Cyclical</td>
+          <td class="ticker" data-sort="CMG">CMG</td>
+          <td class="num" data-sort="33.67">$33.67</td>
+          <td class="num" data-sort="52.4">52.4%</td>
+          <td data-sort="Neutral / Transition Zone"><span class="chip chip-none">Neutral / Transition Zone</span></td>
+          <td data-sort="Mark-up"><span class="chip chip-bull">Mark-up</span></td>
+          <td data-sort="Uptrend continuation">Uptrend continuation</td>
+          <td class="num" data-sort="5">5</td>
+          <td data-sort="Neutral/Mixed"><span class="chip chip-none">Neutral/Mixed</span></td>
+          <td class="driver" data-sort="Down 31%/yr but +4.4% surge into earnings">Down 31%/yr but +4.4% surge into earnings</td>
+        </tr>
+        <tr>
+          <td data-sort="Consumer Defensive">Consumer Defensive</td>
+          <td class="ticker" data-sort="CELH">CELH</td>
+          <td class="num" data-sort="29.42">$29.42</td>
+          <td class="num" data-sort="72.0">72.0%</td>
+          <td data-sort="Neutral / Transition Zone"><span class="chip chip-none">Neutral / Transition Zone</span></td>
+          <td data-sort="Mark-down"><span class="chip chip-warn">Mark-down</span></td>
+          <td data-sort="Downtrend continuation">Downtrend continuation</td>
+          <td class="num" data-sort="6">6</td>
+          <td data-sort="Neutral/Mixed"><span class="chip chip-none">Neutral/Mixed</span></td>
+          <td class="driver" data-sort="+3% today, institutional adds">+3% today, institutional adds</td>
+        </tr>
+        <tr>
+          <td data-sort="Consumer Defensive">Consumer Defensive</td>
+          <td class="ticker" data-sort="TGT">TGT</td>
+          <td class="num" data-sort="143.92">$143.92</td>
+          <td class="num" data-sort="43.5">43.5%</td>
+          <td data-sort="Neutral / Transition Zone"><span class="chip chip-none">Neutral / Transition Zone</span></td>
+          <td data-sort="Mark-up"><span class="chip chip-bull">Mark-up</span></td>
+          <td data-sort="Strong uptrend">Strong uptrend</td>
+          <td class="num" data-sort="6">6</td>
+          <td data-sort="Neutral/Mixed"><span class="chip chip-none">Neutral/Mixed</span></td>
+          <td class="driver" data-sort="Thin (1 hit, widened) - +5.15% price move">Thin (1 hit, widened) - +5.15% price move</td>
+        </tr>
+        <tr>
+          <td data-sort="Energy">Energy</td>
+          <td class="ticker" data-sort="VLO">VLO</td>
+          <td class="num" data-sort="303.31">$303.31</td>
+          <td class="num" data-sort="46.8">46.8%</td>
+          <td data-sort="Moderate Positive Gamma"><span class="chip chip-bull">Moderate Positive Gamma</span></td>
+          <td data-sort="Mark-up"><span class="chip chip-bull">Mark-up</span></td>
+          <td data-sort="Uptrend continuation">Uptrend continuation</td>
+          <td class="num" data-sort="5">5</td>
+          <td data-sort="Neutral/Mixed"><span class="chip chip-none">Neutral/Mixed</span></td>
+          <td class="driver" data-sort="Institutional sale vs. Zacks value highlight">Institutional sale vs. Zacks value highlight</td>
+        </tr>
+        <tr>
+          <td data-sort="Financial Services">Financial Services</td>
+          <td class="ticker" data-sort="SOFI">SOFI</td>
+          <td class="num" data-sort="16.75">$16.75</td>
+          <td class="num" data-sort="66.6">66.6%</td>
+          <td data-sort="Neutral / Transition Zone"><span class="chip chip-none">Neutral / Transition Zone</span></td>
+          <td data-sort="Mark-down"><span class="chip chip-warn">Mark-down</span></td>
+          <td data-sort="Strong downtrend">Strong downtrend</td>
+          <td class="num" data-sort="6">6</td>
+          <td data-sort="Neutral/Mixed"><span class="chip chip-none">Neutral/Mixed</span></td>
+          <td class="driver" data-sort="Climbing into earnings despite -40% YTD">Climbing into earnings despite -40% YTD</td>
+        </tr>
+        <tr>
+          <td data-sort="Healthcare">Healthcare</td>
+          <td class="ticker" data-sort="TEVA">TEVA</td>
+          <td class="num" data-sort="31.66">$31.66</td>
+          <td class="num" data-sort="45.5">45.5%</td>
+          <td data-sort="Neutral / Transition Zone"><span class="chip chip-none">Neutral / Transition Zone</span></td>
+          <td data-sort="Mark-down"><span class="chip chip-warn">Mark-down</span></td>
+          <td data-sort="Downtrend continuation">Downtrend continuation</td>
+          <td class="num" data-sort="6">6</td>
+          <td data-sort="Neutral/Mixed"><span class="chip chip-none">Neutral/Mixed</span></td>
+          <td class="driver" data-sort="PT raised to $44 vs. &quot;55.9% overvalued&quot; note">PT raised to $44 vs. &quot;55.9% overvalued&quot; note</td>
+        </tr>
+        <tr>
+          <td data-sort="Healthcare">Healthcare</td>
+          <td class="ticker" data-sort="VRTX">VRTX</td>
+          <td class="num" data-sort="492.00">$492.00</td>
+          <td class="num" data-sort="40.9">40.9%</td>
+          <td data-sort="Neutral / Transition Zone"><span class="chip chip-none">Neutral / Transition Zone</span></td>
+          <td data-sort="Mark-up"><span class="chip chip-bull">Mark-up</span></td>
+          <td data-sort="Uptrend continuation">Uptrend continuation</td>
+          <td class="num" data-sort="5">5</td>
+          <td data-sort="Neutral/Mixed"><span class="chip chip-none">Neutral/Mixed</span></td>
+          <td class="driver" data-sort="Routine earnings-preview coverage, no real catalyst">Routine earnings-preview coverage, no real catalyst</td>
+        </tr>
+        <tr>
+          <td data-sort="Industrials">Industrials</td>
+          <td class="ticker" data-sort="DCO">DCO</td>
+          <td class="num" data-sort="177.66">$177.66</td>
+          <td class="num" data-sort="55.2">55.2%</td>
+          <td data-sort="Neutral / Transition Zone"><span class="chip chip-none">Neutral / Transition Zone</span></td>
+          <td data-sort="Mark-up"><span class="chip chip-bull">Mark-up</span></td>
+          <td data-sort="Uptrend continuation">Uptrend continuation</td>
+          <td class="num" data-sort="6">6</td>
+          <td data-sort="Neutral/Mixed"><span class="chip chip-none">Neutral/Mixed</span></td>
+          <td class="driver" data-sort="Institutional buy, thin coverage">Institutional buy, thin coverage</td>
+        </tr>
+        <tr>
+          <td data-sort="Industrials">Industrials</td>
+          <td class="ticker" data-sort="ETN">ETN</td>
+          <td class="num" data-sort="387.00">$387.00</td>
+          <td class="num" data-sort="50.1">50.1%</td>
+          <td data-sort="Neutral / Transition Zone"><span class="chip chip-none">Neutral / Transition Zone</span></td>
+          <td data-sort="Mark-down"><span class="chip chip-warn">Mark-down</span></td>
+          <td data-sort="Strong downtrend">Strong downtrend</td>
+          <td class="num" data-sort="5">5</td>
+          <td data-sort="Neutral/Mixed"><span class="chip chip-none">Neutral/Mixed</span></td>
+          <td class="driver" data-sort="Down 3.1% but framed as possibly undervalued">Down 3.1% but framed as possibly undervalued</td>
+        </tr>
+        <tr>
+          <td data-sort="Technology">Technology</td>
+          <td class="ticker" data-sort="CLS">CLS</td>
+          <td class="num" data-sort="350.02">$350.02</td>
+          <td class="num" data-sort="85.2">85.2%</td>
+          <td data-sort="Neutral / Transition Zone"><span class="chip chip-none">Neutral / Transition Zone</span></td>
+          <td data-sort="Mark-down"><span class="chip chip-warn">Mark-down</span></td>
+          <td data-sort="Downtrend continuation">Downtrend continuation</td>
+          <td class="num" data-sort="9">9</td>
+          <td data-sort="Strongly Bullish"><span class="chip chip-bull">Strongly Bullish</span></td>
+          <td class="driver" data-sort="Tops Q2 earnings, beat + raised outlook, &quot;massively underpriced&quot;">Tops Q2 earnings, beat + raised outlook, &quot;massively underpriced&quot;</td>
+        </tr>
+        <tr>
+          <td data-sort="Technology">Technology</td>
+          <td class="ticker" data-sort="IONQ">IONQ</td>
+          <td class="num" data-sort="33.88">$33.88</td>
+          <td class="num" data-sort="104.0">104.0%</td>
+          <td data-sort="Neutral / Transition Zone"><span class="chip chip-none">Neutral / Transition Zone</span></td>
+          <td data-sort="Mark-down"><span class="chip chip-warn">Mark-down</span></td>
+          <td data-sort="Strong downtrend">Strong downtrend</td>
+          <td class="num" data-sort="8">8</td>
+          <td data-sort="Bullish"><span class="chip chip-bull">Bullish</span></td>
+          <td class="driver" data-sort="&quot;Tipping point,&quot; Benchmark buy ratings, stock jumped">&quot;Tipping point,&quot; Benchmark buy ratings, stock jumped</td>
+        </tr>
+        <tr>
+          <td data-sort="Technology">Technology</td>
+          <td class="ticker" data-sort="CSCO">CSCO</td>
+          <td class="num" data-sort="116.62">$116.62</td>
+          <td class="num" data-sort="51.5">51.5%</td>
+          <td data-sort="Neutral / Transition Zone"><span class="chip chip-none">Neutral / Transition Zone</span></td>
+          <td data-sort="Mark-up"><span class="chip chip-bull">Mark-up</span></td>
+          <td data-sort="Uptrend continuation">Uptrend continuation</td>
+          <td class="num" data-sort="8">8</td>
+          <td data-sort="Bullish"><span class="chip chip-bull">Bullish</span></td>
+          <td class="driver" data-sort="Record highs, beat guidance">Record highs, beat guidance</td>
+        </tr>
+        <tr>
+          <td data-sort="Technology">Technology</td>
+          <td class="ticker" data-sort="TSM">TSM</td>
+          <td class="num" data-sort="395.49">$395.49</td>
+          <td class="num" data-sort="49.4">49.4%</td>
+          <td data-sort="Moderate Negative Gamma"><span class="chip chip-warn">Moderate Negative Gamma</span></td>
+          <td data-sort="Mark-down"><span class="chip chip-warn">Mark-down</span></td>
+          <td data-sort="Strong downtrend">Strong downtrend</td>
+          <td class="num" data-sort="8">8</td>
+          <td data-sort="Bullish"><span class="chip chip-bull">Bullish</span></td>
+          <td class="driver" data-sort="Record results, raised guidance, AI demand surge">Record results, raised guidance, AI demand surge</td>
+        </tr>
+        <tr>
+          <td data-sort="Technology">Technology</td>
+          <td class="ticker" data-sort="RGTI">RGTI</td>
+          <td class="num" data-sort="14.53">$14.53</td>
+          <td class="num" data-sort="99.2">99.2%</td>
+          <td data-sort="Neutral / Transition Zone"><span class="chip chip-none">Neutral / Transition Zone</span></td>
+          <td data-sort="Mark-down"><span class="chip chip-warn">Mark-down</span></td>
+          <td data-sort="Strong downtrend">Strong downtrend</td>
+          <td class="num" data-sort="7">7</td>
+          <td data-sort="Bullish"><span class="chip chip-bull">Bullish</span></td>
+          <td class="driver" data-sort="+10.5%, $100M CHIPS Act LOI, Buy ratings">+10.5%, $100M CHIPS Act LOI, Buy ratings</td>
+        </tr>
+        <tr>
+          <td data-sort="Technology">Technology</td>
+          <td class="ticker" data-sort="CRM">CRM</td>
+          <td class="num" data-sort="180.51">$180.51</td>
+          <td class="num" data-sort="47.8">47.8%</td>
+          <td data-sort="Moderate Positive Gamma"><span class="chip chip-bull">Moderate Positive Gamma</span></td>
+          <td data-sort="Mark-up"><span class="chip chip-bull">Mark-up</span></td>
+          <td data-sort="Strong uptrend">Strong uptrend</td>
+          <td class="num" data-sort="7">7</td>
+          <td data-sort="Bullish"><span class="chip chip-bull">Bullish</span></td>
+          <td class="driver" data-sort="+5.9%/+4.51% moves, surging Monday">+5.9%/+4.51% moves, surging Monday</td>
+        </tr>
+        <tr>
+          <td data-sort="Technology">Technology</td>
+          <td class="ticker" data-sort="MSFT">MSFT</td>
+          <td class="num" data-sort="395.01">$395.01</td>
+          <td class="num" data-sort="43.9">43.9%</td>
+          <td data-sort="Moderate Positive Gamma"><span class="chip chip-bull">Moderate Positive Gamma</span></td>
+          <td data-sort="Mark-down"><span class="chip chip-warn">Mark-down</span></td>
+          <td data-sort="Downtrend continuation">Downtrend continuation</td>
+          <td class="num" data-sort="7">7</td>
+          <td data-sort="Bullish"><span class="chip chip-bull">Bullish</span></td>
+          <td class="driver" data-sort="&quot;30.6% undervalued,&quot; rallies, affordable-growth framing">&quot;30.6% undervalued,&quot; rallies, affordable-growth framing</td>
+        </tr>
+        <tr>
+          <td data-sort="Technology">Technology</td>
+          <td class="ticker" data-sort="CRWV">CRWV</td>
+          <td class="num" data-sort="67.50">$67.50</td>
+          <td class="num" data-sort="114.4">114.4%</td>
+          <td data-sort="Neutral / Transition Zone"><span class="chip chip-none">Neutral / Transition Zone</span></td>
+          <td data-sort="Mark-down"><span class="chip chip-warn">Mark-down</span></td>
+          <td data-sort="Strong downtrend">Strong downtrend</td>
+          <td class="num" data-sort="6">6</td>
+          <td data-sort="Neutral/Mixed"><span class="chip chip-none">Neutral/Mixed</span></td>
+          <td class="driver" data-sort="Nvidia/OpenAI &quot;constructive&quot; signal vs. &quot;staying away&quot; caution">Nvidia/OpenAI &quot;constructive&quot; signal vs. &quot;staying away&quot; caution</td>
+        </tr>
+        <tr>
+          <td data-sort="Technology">Technology</td>
+          <td class="ticker" data-sort="QNT">QNT</td>
+          <td class="num" data-sort="49.39">$49.39</td>
+          <td class="num" data-sort="113.5">113.5%</td>
+          <td data-sort="Neutral / Transition Zone"><span class="chip chip-none">Neutral / Transition Zone</span></td>
+          <td data-sort="Mark-down"><span class="chip chip-warn">Mark-down</span></td>
+          <td data-sort="Strong downtrend">Strong downtrend</td>
+          <td class="num" data-sort="6">6</td>
+          <td data-sort="Neutral/Mixed"><span class="chip chip-none">Neutral/Mixed</span></td>
+          <td class="driver" data-sort="Rolls-Royce partnership, valuation doubts noted">Rolls-Royce partnership, valuation doubts noted</td>
+        </tr>
+        <tr>
+          <td data-sort="Technology">Technology</td>
+          <td class="ticker" data-sort="INFQ">INFQ</td>
+          <td class="num" data-sort="9.58">$9.58</td>
+          <td class="num" data-sort="108.0">108.0%</td>
+          <td data-sort="Neutral / Transition Zone"><span class="chip chip-none">Neutral / Transition Zone</span></td>
+          <td data-sort="Mark-down"><span class="chip chip-warn">Mark-down</span></td>
+          <td data-sort="Strong downtrend">Strong downtrend</td>
+          <td class="num" data-sort="6">6</td>
+          <td data-sort="Neutral/Mixed"><span class="chip chip-none">Neutral/Mixed</span></td>
+          <td class="driver" data-sort="Quantum-rally +$5B mkt cap vs. &quot;heavy losses&quot; note">Quantum-rally +$5B mkt cap vs. &quot;heavy losses&quot; note</td>
+        </tr>
+        <tr>
+          <td data-sort="Technology">Technology</td>
+          <td class="ticker" data-sort="QBTS">QBTS</td>
+          <td class="num" data-sort="17.62">$17.62</td>
+          <td class="num" data-sort="102.0">102.0%</td>
+          <td data-sort="Neutral / Transition Zone"><span class="chip chip-none">Neutral / Transition Zone</span></td>
+          <td data-sort="Distribution"><span class="chip chip-warn">Distribution</span></td>
+          <td data-sort="Upthrust detected">Upthrust detected</td>
+          <td class="num" data-sort="6">6</td>
+          <td data-sort="Neutral/Mixed"><span class="chip chip-none">Neutral/Mixed</span></td>
+          <td class="driver" data-sort="AT&amp;T deal expansion vs. &quot;overvalued, lagging roadmap&quot;">AT&amp;T deal expansion vs. &quot;overvalued, lagging roadmap&quot;</td>
+        </tr>
+        <tr>
+          <td data-sort="Technology">Technology</td>
+          <td class="ticker" data-sort="QUBT">QUBT</td>
+          <td class="num" data-sort="7.70">$7.70</td>
+          <td class="num" data-sort="96.4">96.4%</td>
+          <td data-sort="Neutral / Transition Zone"><span class="chip chip-none">Neutral / Transition Zone</span></td>
+          <td data-sort="Mark-down"><span class="chip chip-warn">Mark-down</span></td>
+          <td data-sort="Strong downtrend">Strong downtrend</td>
+          <td class="num" data-sort="6">6</td>
+          <td data-sort="Neutral/Mixed"><span class="chip chip-none">Neutral/Mixed</span></td>
+          <td class="driver" data-sort="+9.3% move, mixed fair-value framing">+9.3% move, mixed fair-value framing</td>
+        </tr>
+        <tr>
+          <td data-sort="Technology">Technology</td>
+          <td class="ticker" data-sort="CIEN">CIEN</td>
+          <td class="num" data-sort="352.10">$352.10</td>
+          <td class="num" data-sort="92.0">92.0%</td>
+          <td data-sort="Neutral / Transition Zone"><span class="chip chip-none">Neutral / Transition Zone</span></td>
+          <td data-sort="Mark-down"><span class="chip chip-warn">Mark-down</span></td>
+          <td data-sort="Strong downtrend">Strong downtrend</td>
+          <td class="num" data-sort="6">6</td>
+          <td data-sort="Neutral/Mixed"><span class="chip chip-none">Neutral/Mixed</span></td>
+          <td class="driver" data-sort="Institutional buy + Verizon-Google tailwind vs. overvalued note">Institutional buy + Verizon-Google tailwind vs. overvalued note</td>
+        </tr>
+        <tr>
+          <td data-sort="Technology">Technology</td>
+          <td class="ticker" data-sort="NET">NET</td>
+          <td class="num" data-sort="263.00">$263.00</td>
+          <td class="num" data-sort="75.6">75.6%</td>
+          <td data-sort="Neutral / Transition Zone"><span class="chip chip-none">Neutral / Transition Zone</span></td>
+          <td data-sort="Mark-up"><span class="chip chip-bull">Mark-up</span></td>
+          <td data-sort="Uptrend continuation">Uptrend continuation</td>
+          <td class="num" data-sort="6">6</td>
+          <td data-sort="Neutral/Mixed"><span class="chip chip-none">Neutral/Mixed</span></td>
+          <td class="driver" data-sort="Thin real coverage (&quot;laps the market&quot; mild positive)">Thin real coverage (&quot;laps the market&quot; mild positive)</td>
+        </tr>
+        <tr>
+          <td data-sort="Technology">Technology</td>
+          <td class="ticker" data-sort="QCOM">QCOM</td>
+          <td class="num" data-sort="164.78">$164.78</td>
+          <td class="num" data-sort="69.5">69.5%</td>
+          <td data-sort="Neutral / Transition Zone"><span class="chip chip-none">Neutral / Transition Zone</span></td>
+          <td data-sort="Mark-down"><span class="chip chip-warn">Mark-down</span></td>
+          <td data-sort="Strong downtrend">Strong downtrend</td>
+          <td class="num" data-sort="6">6</td>
+          <td data-sort="Neutral/Mixed"><span class="chip chip-none">Neutral/Mixed</span></td>
+          <td class="driver" data-sort="Pullback framed as buying opportunity into earnings">Pullback framed as buying opportunity into earnings</td>
+        </tr>
+        <tr>
+          <td data-sort="Technology">Technology</td>
+          <td class="ticker" data-sort="NOW">NOW</td>
+          <td class="num" data-sort="110.25">$110.25</td>
+          <td class="num" data-sort="59.1">59.1%</td>
+          <td data-sort="Moderate Positive Gamma"><span class="chip chip-bull">Moderate Positive Gamma</span></td>
+          <td data-sort="Accumulation"><span class="chip chip-bull">Accumulation</span></td>
+          <td data-sort="Spring detected">Spring detected</td>
+          <td class="num" data-sort="6">6</td>
+          <td data-sort="Neutral/Mixed"><span class="chip chip-none">Neutral/Mixed</span></td>
+          <td class="driver" data-sort="+4.7%, fund adds shares">+4.7%, fund adds shares</td>
+        </tr>
+        <tr>
+          <td data-sort="Technology">Technology</td>
+          <td class="ticker" data-sort="SNPS">SNPS</td>
+          <td class="num" data-sort="385.49">$385.49</td>
+          <td class="num" data-sort="58.6">58.6%</td>
+          <td data-sort="Neutral / Transition Zone"><span class="chip chip-none">Neutral / Transition Zone</span></td>
+          <td data-sort="Mark-down"><span class="chip chip-warn">Mark-down</span></td>
+          <td data-sort="Strong downtrend">Strong downtrend</td>
+          <td class="num" data-sort="6">6</td>
+          <td data-sort="Neutral/Mixed"><span class="chip chip-none">Neutral/Mixed</span></td>
+          <td class="driver" data-sort="Up today, AI/Ansys growth story">Up today, AI/Ansys growth story</td>
+        </tr>
+        <tr>
+          <td data-sort="Technology">Technology</td>
+          <td class="ticker" data-sort="CDNS">CDNS</td>
+          <td class="num" data-sort="347.62">$347.62</td>
+          <td class="num" data-sort="49.2">49.2%</td>
+          <td data-sort="Neutral / Transition Zone"><span class="chip chip-none">Neutral / Transition Zone</span></td>
+          <td data-sort="Distribution"><span class="chip chip-warn">Distribution</span></td>
+          <td data-sort="Upthrust detected">Upthrust detected</td>
+          <td class="num" data-sort="6">6</td>
+          <td data-sort="Neutral/Mixed"><span class="chip chip-none">Neutral/Mixed</span></td>
+          <td class="driver" data-sort="Up today, positive Rosenblatt forecast vs. &quot;expensive&quot; note">Up today, positive Rosenblatt forecast vs. &quot;expensive&quot; note</td>
+        </tr>
+        <tr>
+          <td data-sort="Technology">Technology</td>
+          <td class="ticker" data-sort="UBER">UBER</td>
+          <td class="num" data-sort="70.40">$70.40</td>
+          <td class="num" data-sort="47.3">47.3%</td>
+          <td data-sort="Neutral / Transition Zone"><span class="chip chip-none">Neutral / Transition Zone</span></td>
+          <td data-sort="Mark-down"><span class="chip chip-warn">Mark-down</span></td>
+          <td data-sort="Downtrend continuation">Downtrend continuation</td>
+          <td class="num" data-sort="6">6</td>
+          <td data-sort="Neutral/Mixed"><span class="chip chip-none">Neutral/Mixed</span></td>
+          <td class="driver" data-sort="Unusual options imply upside vs. Waymo exclusivity-loss headline">Unusual options imply upside vs. Waymo exclusivity-loss headline</td>
+        </tr>
+        <tr>
+          <td data-sort="Technology">Technology</td>
+          <td class="ticker" data-sort="SAP">SAP</td>
+          <td class="num" data-sort="176.90">$176.90</td>
+          <td class="num" data-sort="43.5">43.5%</td>
+          <td data-sort="Neutral / Transition Zone"><span class="chip chip-none">Neutral / Transition Zone</span></td>
+          <td data-sort="Accumulation"><span class="chip chip-bull">Accumulation</span></td>
+          <td data-sort="Spring detected">Spring detected</td>
+          <td class="num" data-sort="6">6</td>
+          <td data-sort="Neutral/Mixed"><span class="chip chip-none">Neutral/Mixed</span></td>
+          <td class="driver" data-sort="Surging today, undervalued framing">Surging today, undervalued framing</td>
+        </tr>
+        <tr>
+          <td data-sort="Technology">Technology</td>
+          <td class="ticker" data-sort="ARQQ">ARQQ</td>
+          <td class="num" data-sort="17.29">$17.29</td>
+          <td class="num" data-sort="117.2">117.2%</td>
+          <td data-sort="Neutral / Transition Zone"><span class="chip chip-none">Neutral / Transition Zone</span></td>
+          <td data-sort="Mark-down"><span class="chip chip-warn">Mark-down</span></td>
+          <td data-sort="Strong downtrend">Strong downtrend</td>
+          <td class="num" data-sort="5">5</td>
+          <td data-sort="Neutral/Mixed"><span class="chip chip-none">Neutral/Mixed</span></td>
+          <td class="driver" data-sort="Thin (1 hit, widened), stale/neutral dividend note">Thin (1 hit, widened), stale/neutral dividend note</td>
+        </tr>
+        <tr>
+          <td data-sort="Technology">Technology</td>
+          <td class="ticker" data-sort="ARM">ARM</td>
+          <td class="num" data-sort="247.84">$247.84</td>
+          <td class="num" data-sort="100.1">100.1%</td>
+          <td data-sort="Neutral / Transition Zone"><span class="chip chip-none">Neutral / Transition Zone</span></td>
+          <td data-sort="Mark-down"><span class="chip chip-warn">Mark-down</span></td>
+          <td data-sort="Strong downtrend">Strong downtrend</td>
+          <td class="num" data-sort="5">5</td>
+          <td data-sort="Neutral/Mixed"><span class="chip chip-none">Neutral/Mixed</span></td>
+          <td class="driver" data-sort="Pre-earnings, China supply-chain concerns vs. soaring potential">Pre-earnings, China supply-chain concerns vs. soaring potential</td>
+        </tr>
+        <tr>
+          <td data-sort="Technology">Technology</td>
+          <td class="ticker" data-sort="HPE">HPE</td>
+          <td class="num" data-sort="45.52">$45.52</td>
+          <td class="num" data-sort="74.4">74.4%</td>
+          <td data-sort="Neutral / Transition Zone"><span class="chip chip-none">Neutral / Transition Zone</span></td>
+          <td data-sort="Mark-up"><span class="chip chip-bull">Mark-up</span></td>
+          <td data-sort="Uptrend continuation">Uptrend continuation</td>
+          <td class="num" data-sort="5">5</td>
+          <td data-sort="Neutral/Mixed"><span class="chip chip-none">Neutral/Mixed</span></td>
+          <td class="driver" data-sort="Record high on new AI server vs. tumbling/overvalued notes">Record high on new AI server vs. tumbling/overvalued notes</td>
+        </tr>
+        <tr>
+          <td data-sort="Technology">Technology</td>
+          <td class="ticker" data-sort="ORCL">ORCL</td>
+          <td class="num" data-sort="120.08">$120.08</td>
+          <td class="num" data-sort="65.5">65.5%</td>
+          <td data-sort="Neutral / Transition Zone"><span class="chip chip-none">Neutral / Transition Zone</span></td>
+          <td data-sort="Mark-down"><span class="chip chip-warn">Mark-down</span></td>
+          <td data-sort="Strong downtrend">Strong downtrend</td>
+          <td class="num" data-sort="5">5</td>
+          <td data-sort="Neutral/Mixed"><span class="chip chip-none">Neutral/Mixed</span></td>
+          <td class="driver" data-sort="Beaten-down stock, mixed buy-the-dip framing">Beaten-down stock, mixed buy-the-dip framing</td>
+        </tr>
+        <tr>
+          <td data-sort="Technology">Technology</td>
+          <td class="ticker" data-sort="ADBE">ADBE</td>
+          <td class="num" data-sort="248.00">$248.00</td>
+          <td class="num" data-sort="47.2">47.2%</td>
+          <td data-sort="Moderate Positive Gamma"><span class="chip chip-bull">Moderate Positive Gamma</span></td>
+          <td data-sort="Mark-up"><span class="chip chip-bull">Mark-up</span></td>
+          <td data-sort="Strong uptrend">Strong uptrend</td>
+          <td class="num" data-sort="5">5</td>
+          <td data-sort="Neutral/Mixed"><span class="chip chip-none">Neutral/Mixed</span></td>
+          <td class="driver" data-sort="Mixed: climbs post-IBM warning vs. &quot;lagged the market&quot;">Mixed: climbs post-IBM warning vs. &quot;lagged the market&quot;</td>
+        </tr>
+        <tr>
+          <td data-sort="Utilities">Utilities</td>
+          <td class="ticker" data-sort="TLN">TLN</td>
+          <td class="num" data-sort="330.48">$330.48</td>
+          <td class="num" data-sort="67.6">67.6%</td>
+          <td data-sort="Neutral / Transition Zone"><span class="chip chip-none">Neutral / Transition Zone</span></td>
+          <td data-sort="Mark-down"><span class="chip chip-warn">Mark-down</span></td>
+          <td data-sort="Strong downtrend">Strong downtrend</td>
+          <td class="num" data-sort="6">6</td>
+          <td data-sort="Neutral/Mixed"><span class="chip chip-none">Neutral/Mixed</span></td>
+          <td class="driver" data-sort="PT raised to $482 vs. pre-earnings rally cooling">PT raised to $482 vs. pre-earnings rally cooling</td>
+        </tr>
+        <tr>
+          <td data-sort="Utilities">Utilities</td>
+          <td class="ticker" data-sort="NRG">NRG</td>
+          <td class="num" data-sort="127.56">$127.56</td>
+          <td class="num" data-sort="57.2">57.2%</td>
+          <td data-sort="Neutral / Transition Zone"><span class="chip chip-none">Neutral / Transition Zone</span></td>
+          <td data-sort="Mark-down"><span class="chip chip-warn">Mark-down</span></td>
+          <td data-sort="Strong downtrend">Strong downtrend</td>
+          <td class="num" data-sort="6">6</td>
+          <td data-sort="Neutral/Mixed"><span class="chip chip-none">Neutral/Mixed</span></td>
+          <td class="driver" data-sort="Institutional stake disclosures vs. -3.2%/overvalued note">Institutional stake disclosures vs. -3.2%/overvalued note</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <div class="rb-section">
+    <h2>Legend</h2>
+    <div class="legend-card">
+      <b>Screen criteria:</b> IV Implied &ge;40%, price &lt;$500 (from latest IV_*.csv), then senti-scored 1-10 against the latest news bulletin, filtered to Score &ge;5.<br>
+      <b>Senti Score:</b> 1-2 Strongly Bearish &middot; 3-4 Bearish &middot; 5-6 Neutral/Mixed &middot; 7-8 Bullish &middot; 9-10 Strongly Bullish — judged on financial materiality/direction of recent headlines, weighted toward the most recent news.<br>
+      <b>GEX Rating:</b> dealer gamma positioning classification from the latest stock_analysis snapshot (Positive = dealers long gamma/stabilizing, Negative = dealers short gamma/amplifying, Neutral = transition zone).<br>
+      <b>Wyckoff Phase:</b> Accumulation &middot; Mark-up &middot; Distribution &middot; Mark-down, with specific pattern (Spring, SOS, Upthrust, SOW, trend continuation) from Wyckoff technical analysis.<br>
+      <b>Sorting:</b> click any column header to sort by that column; click again to reverse.
+    </div>
+  </div>
+</div>
+
+<footer>Strat Score Screener &middot; IV_*.csv + stock_analysis_*.csv + news_bulletin_*.html cross-reference &middot; Optionx Trade Desk</footer>
+
+<script>
+(function() {
+  var table = document.getElementById('stratTable');
+  if (!table) return;
+  var tbody = table.querySelector('tbody');
+  var state = { col: null, asc: true };
+  table.querySelectorAll('thead th').forEach(function(th, idx) {
+    th.addEventListener('click', function() {
+      var asc = state.col === idx ? !state.asc : true;
+      var rows = Array.prototype.slice.call(tbody.querySelectorAll('tr'));
+      rows.sort(function(a, b) {
+        var av = a.children[idx].getAttribute('data-sort');
+        var bv = b.children[idx].getAttribute('data-sort');
+        if (av === null) av = a.children[idx].textContent.trim();
+        if (bv === null) bv = b.children[idx].textContent.trim();
+        var an = parseFloat(av), bn = parseFloat(bv);
+        var cmp;
+        if (!isNaN(an) && !isNaN(bn) && av !== '' && bv !== '') {
+          cmp = an - bn;
+        } else {
+          cmp = String(av).localeCompare(String(bv));
+        }
+        return asc ? cmp : -cmp;
+      });
+      rows.forEach(function(r) { tbody.appendChild(r); });
+      state = { col: idx, asc: asc };
+      table.querySelectorAll('thead th').forEach(function(h) { h.classList.remove('sort-asc', 'sort-desc'); });
+      th.classList.add(asc ? 'sort-asc' : 'sort-desc');
+    });
+  });
+})();
+</script>
+</body>
+</html>
