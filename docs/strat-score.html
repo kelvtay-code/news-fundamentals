@@ -35,15 +35,13 @@
   .stat-item strong { font-weight: 700; }
   .stat-sep { color: rgba(255,255,255,0.4); }
 
-  .rb-main { max-width: 1400px; margin: 0 auto; padding: 20px; }
+  .rb-main { max-width: 1440px; margin: 0 auto; padding: 20px; }
   h2 { font-family: Arial, sans-serif; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ft-mid); margin: 0 0 12px; }
   .rb-section { margin-bottom: 32px; }
 
   .rb-table-wrap { overflow-x: auto; border: 1px solid var(--ft-border); background: var(--ft-card-bg); }
   table { border-collapse: collapse; width: 100%; font-size: 0.75rem; font-family: Arial, sans-serif; }
-  th, td { padding: 7px 6px; text-align: left; border-bottom: 1px solid var(--ft-border); vertical-align: top; }
-  td { white-space: nowrap; }
-  td.driver { white-space: normal; min-width: 260px; color: var(--ft-muted); }
+  th, td { padding: 7px 6px; text-align: left; border-bottom: 1px solid var(--ft-border); white-space: nowrap; vertical-align: top; }
   th {
     position: sticky; top: 0; background: var(--ft-navy); color: #fff; font-size: 9.5px;
     text-transform: uppercase; letter-spacing: 0.04em;
@@ -55,11 +53,28 @@
   tbody tr:hover { background: var(--ft-salmon); }
   td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
   td.ticker { font-weight: 700; color: var(--ft-red); letter-spacing: 0.01em; }
+  td.driver { white-space: normal; min-width: 260px; color: var(--ft-muted); }
 
   .chip { display: inline-block; font-family: Arial, sans-serif; font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 2px; white-space: nowrap; letter-spacing: 0.02em; }
   .chip-bull { background: #E3EEDF; color: #2F6D3F; }
   .chip-warn { background: #F7E3CE; color: #B15C1E; }
   .chip-none { background: #F0EBE2; color: var(--ft-mid); }
+
+  .gex-glyphs { font-size: 12px; letter-spacing: 1px; }
+  .gex-up { color: #2F6D3F; }
+  .gex-down { color: var(--ft-red); }
+  .gex-flat { color: var(--ft-gold); }
+
+  .iv-cell { display: flex; flex-direction: column; gap: 2px; align-items: flex-start; }
+  .iv-spark-row { line-height: 0; }
+  .spark { display: block; }
+  .spark .bar-up { fill: #2F6D3F; }
+  .spark .bar-down { fill: var(--ft-red); }
+  .spark .bar-flat { fill: var(--ft-mid); }
+  .iv-last { font-family: Arial, sans-serif; font-size: 11px; font-weight: 700; color: var(--ft-warm-blk); }
+  .iv-last.bar-up { color: #2F6D3F; }
+  .iv-last.bar-down { color: var(--ft-red); }
+  .muted { color: var(--ft-mid); }
 
   .legend-card { background: var(--ft-card-bg); border: 1px solid var(--ft-border); border-top: 3px solid var(--ft-card-bdr); padding: 14px 18px; font-family: Arial, sans-serif; font-size: 12px; color: var(--ft-muted); line-height: 1.8; }
   .legend-card b { color: var(--ft-warm-blk); }
@@ -78,8 +93,8 @@
 <div class="masthead">
   <div class="masthead-eyebrow">Optionx Intelligence — Strat Score Screener</div>
   <div class="masthead-title">Strat <span>Score</span> Dashboard</div>
-  <div class="masthead-date">IV snapshot 29 Jul 2026 09:06 &nbsp;&middot;&nbsp; Stock analysis 29 Jul 2026 08:57 &nbsp;&middot;&nbsp; News bulletin 29 Jul 2026 08:59 &nbsp;&middot;&nbsp; Generated 29 Jul 2026</div>
-  <div class="masthead-tagline">"IV Implied &ge;40%, price &lt;$500, sentiment score &ge;5 — cross-referenced against GEX dealer positioning and Wyckoff phase for a single-glance structural + sentiment read."</div>
+  <div class="masthead-date">IV window 18&ndash;29 Jul 2026 &nbsp;&middot;&nbsp; Stock Analysis window 18&ndash;29 Jul 2026 &nbsp;&middot;&nbsp; News bulletin 29 Jul 2026 08:59 &nbsp;&middot;&nbsp; Generated 29 Jul 2026</div>
+  <div class="masthead-tagline">"IV Implied &ge;40%, price &lt;$500, sentiment score &ge;5 — cross-referenced against GEX dealer positioning, Wyckoff phase and a 5&ndash;9 day IV/GEX/Volume trend read before the trade."</div>
 </div>
 <div class="stats-banner"><div class="stats-inner">
   <div class="stat-item">Tickers <strong>39</strong></div>
@@ -98,475 +113,592 @@
     <table id="stratTable">
       <thead>
         <tr>
-          <th>Sector</th><th>Ticker</th><th class="num">Price</th><th class="num">IV Implied</th>
-          <th>GEX Rating</th><th>Wyckoff Phase</th><th>Wyckoff Pattern</th>
-          <th class="num">Senti Score</th><th>Label</th><th>Driver</th>
+          <th>Ticker</th><th>Sector</th><th>Wyckoff Phase</th><th class="num">Price</th>
+          <th class="num">IV Implied</th><th>IV Rank Trend</th><th>GEX Trend</th><th>GEX Rating</th>
+          <th>Vol Read</th><th>Wyckoff Pattern</th><th class="num">Senti Score</th><th>Label</th><th>Driver</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td data-sort="Basic Materials">Basic Materials</td>
           <td class="ticker" data-sort="NEM">NEM</td>
+          <td class="sector" data-sort="Basic Materials">Basic Materials</td>
+          <td data-sort="Mark-down"><span class="chip chip-warn">Mark-down</span></td>
           <td class="num" data-sort="91.57">$91.57</td>
           <td class="num" data-sort="42.7">42.7%</td>
-          <td data-sort="Neutral / Transition Zone"><span class="chip chip-none">Neutral / Transition Zone</span></td>
-          <td data-sort="Mark-down"><span class="chip chip-warn">Mark-down</span></td>
+          <td data-sort="39.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 16 22" width="16" height="22"><rect class="bar-flat" x="0" y="12.8" width="6" height="9.2" rx="1"/><rect class="bar-down" x="8" y="13.4" width="6" height="8.6" rx="1"/></svg></div><div class="iv-last bar-down">39</div></div></td>
+          <td data-sort="1"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-flat">&#9632;</span></div><span class="chip chip-none">STABLE</span></div></td>
+          <td data-sort="Neutral / Transition Zone">Neutral / Transition Zone</td>
+          <td data-sort="-1"><span class="chip chip-none">N/A</span></td>
           <td data-sort="Strong downtrend">Strong downtrend</td>
           <td class="num" data-sort="6">6</td>
           <td data-sort="Neutral/Mixed"><span class="chip chip-none">Neutral/Mixed</span></td>
           <td class="driver" data-sort="&quot;Still mispriced&quot; (undervalued lean), trending mention">&quot;Still mispriced&quot; (undervalued lean), trending mention</td>
         </tr>
         <tr>
-          <td data-sort="Communication Services">Communication Services</td>
           <td class="ticker" data-sort="SE">SE</td>
+          <td class="sector" data-sort="Communication Services">Communication Services</td>
+          <td data-sort="Mark-up"><span class="chip chip-bull">Mark-up</span></td>
           <td class="num" data-sort="107.00">$107.00</td>
           <td class="num" data-sort="71.3">71.3%</td>
-          <td data-sort="Neutral / Transition Zone"><span class="chip chip-none">Neutral / Transition Zone</span></td>
-          <td data-sort="Mark-up"><span class="chip chip-bull">Mark-up</span></td>
+          <td data-sort="85.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 72 22" width="72" height="22"><rect class="bar-flat" x="0" y="4.2" width="6" height="17.8" rx="1"/><rect class="bar-flat" x="8" y="4.2" width="6" height="17.8" rx="1"/><rect class="bar-up" x="16" y="3.3" width="6" height="18.7" rx="1"/><rect class="bar-up" x="24" y="3.1" width="6" height="18.9" rx="1"/><rect class="bar-down" x="32" y="4.2" width="6" height="17.8" rx="1"/><rect class="bar-up" x="40" y="1.5" width="6" height="20.5" rx="1"/><rect class="bar-down" x="48" y="3.1" width="6" height="18.9" rx="1"/><rect class="bar-up" x="56" y="2.6" width="6" height="19.4" rx="1"/><rect class="bar-down" x="64" y="3.3" width="6" height="18.7" rx="1"/></svg></div><div class="iv-last bar-down">85</div></div></td>
+          <td data-sort="2"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-flat">&#9632;</span><span class="gex-up">&#9650;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-down">&#9660;</span><span class="gex-flat">&#9632;</span><span class="gex-up">&#9650;</span><span class="gex-down">&#9660;</span></div><span class="chip chip-bull">IMPROVING</span></div></td>
+          <td data-sort="Neutral / Transition Zone">Neutral / Transition Zone</td>
+          <td data-sort="1"><span class="chip chip-none">Neutral</span></td>
           <td data-sort="Strong uptrend">Strong uptrend</td>
           <td class="num" data-sort="6">6</td>
           <td data-sort="Neutral/Mixed"><span class="chip chip-none">Neutral/Mixed</span></td>
           <td class="driver" data-sort="Insider sale vs. &quot;stock up today,&quot; net flat">Insider sale vs. &quot;stock up today,&quot; net flat</td>
         </tr>
         <tr>
-          <td data-sort="Consumer Cyclical">Consumer Cyclical</td>
           <td class="ticker" data-sort="BKNG">BKNG</td>
+          <td class="sector" data-sort="Consumer Cyclical">Consumer Cyclical</td>
+          <td data-sort="Mark-up"><span class="chip chip-bull">Mark-up</span></td>
           <td class="num" data-sort="199.27">$199.27</td>
           <td class="num" data-sort="47.6">47.6%</td>
-          <td data-sort="Neutral / Transition Zone"><span class="chip chip-none">Neutral / Transition Zone</span></td>
-          <td data-sort="Mark-up"><span class="chip chip-bull">Mark-up</span></td>
+          <td data-sort="87.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 32 22" width="32" height="22"><rect class="bar-flat" x="0" y="3.7" width="6" height="18.3" rx="1"/><rect class="bar-down" x="8" y="4.6" width="6" height="17.4" rx="1"/><rect class="bar-up" x="16" y="3.3" width="6" height="18.7" rx="1"/><rect class="bar-up" x="24" y="2.9" width="6" height="19.1" rx="1"/></svg></div><div class="iv-last bar-up">87</div></div></td>
+          <td data-sort="0"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-down">&#9660;</span><span class="gex-up">&#9650;</span><span class="gex-down">&#9660;</span><span class="gex-up">&#9650;</span></div><span class="chip chip-warn">WEAKENING</span></div></td>
+          <td data-sort="Neutral / Transition Zone">Neutral / Transition Zone</td>
+          <td data-sort="1"><span class="chip chip-none">Neutral</span></td>
           <td data-sort="Strong uptrend">Strong uptrend</td>
           <td class="num" data-sort="7">7</td>
           <td data-sort="Bullish"><span class="chip chip-bull">Bullish</span></td>
           <td class="driver" data-sort="Closed +6.82%, fund adds, earnings growth expected">Closed +6.82%, fund adds, earnings growth expected</td>
         </tr>
         <tr>
-          <td data-sort="Consumer Cyclical">Consumer Cyclical</td>
           <td class="ticker" data-sort="CMG">CMG</td>
+          <td class="sector" data-sort="Consumer Cyclical">Consumer Cyclical</td>
+          <td data-sort="Mark-up"><span class="chip chip-bull">Mark-up</span></td>
           <td class="num" data-sort="33.67">$33.67</td>
           <td class="num" data-sort="52.4">52.4%</td>
-          <td data-sort="Neutral / Transition Zone"><span class="chip chip-none">Neutral / Transition Zone</span></td>
-          <td data-sort="Mark-up"><span class="chip chip-bull">Mark-up</span></td>
+          <td data-sort="82.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 72 22" width="72" height="22"><rect class="bar-flat" x="0" y="3.5" width="6" height="18.5" rx="1"/><rect class="bar-flat" x="8" y="3.5" width="6" height="18.5" rx="1"/><rect class="bar-up" x="16" y="1.5" width="6" height="20.5" rx="1"/><rect class="bar-down" x="24" y="2.2" width="6" height="19.8" rx="1"/><rect class="bar-down" x="32" y="2.4" width="6" height="19.6" rx="1"/><rect class="bar-flat" x="40" y="2.4" width="6" height="19.6" rx="1"/><rect class="bar-down" x="48" y="3.3" width="6" height="18.7" rx="1"/><rect class="bar-flat" x="56" y="3.3" width="6" height="18.7" rx="1"/><rect class="bar-down" x="64" y="4.0" width="6" height="18.0" rx="1"/></svg></div><div class="iv-last bar-down">82</div></div></td>
+          <td data-sort="0"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-flat">&#9632;</span><span class="gex-up">&#9650;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-down">&#9660;</span><span class="gex-down">&#9660;</span><span class="gex-flat">&#9632;</span></div><span class="chip chip-warn">WEAKENING</span></div></td>
+          <td data-sort="Neutral / Transition Zone">Neutral / Transition Zone</td>
+          <td data-sort="1"><span class="chip chip-none">Neutral</span></td>
           <td data-sort="Uptrend continuation">Uptrend continuation</td>
           <td class="num" data-sort="5">5</td>
           <td data-sort="Neutral/Mixed"><span class="chip chip-none">Neutral/Mixed</span></td>
           <td class="driver" data-sort="Down 31%/yr but +4.4% surge into earnings">Down 31%/yr but +4.4% surge into earnings</td>
         </tr>
         <tr>
-          <td data-sort="Consumer Defensive">Consumer Defensive</td>
           <td class="ticker" data-sort="CELH">CELH</td>
+          <td class="sector" data-sort="Consumer Defensive">Consumer Defensive</td>
+          <td data-sort="Mark-down"><span class="chip chip-warn">Mark-down</span></td>
           <td class="num" data-sort="29.42">$29.42</td>
           <td class="num" data-sort="72.0">72.0%</td>
-          <td data-sort="Neutral / Transition Zone"><span class="chip chip-none">Neutral / Transition Zone</span></td>
-          <td data-sort="Mark-down"><span class="chip chip-warn">Mark-down</span></td>
+          <td data-sort="74.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 72 22" width="72" height="22"><rect class="bar-flat" x="0" y="3.5" width="6" height="18.5" rx="1"/><rect class="bar-flat" x="8" y="3.5" width="6" height="18.5" rx="1"/><rect class="bar-up" x="16" y="3.3" width="6" height="18.7" rx="1"/><rect class="bar-up" x="24" y="2.0" width="6" height="20.0" rx="1"/><rect class="bar-flat" x="32" y="2.0" width="6" height="20.0" rx="1"/><rect class="bar-down" x="40" y="3.5" width="6" height="18.5" rx="1"/><rect class="bar-flat" x="48" y="3.5" width="6" height="18.5" rx="1"/><rect class="bar-down" x="56" y="3.7" width="6" height="18.3" rx="1"/><rect class="bar-down" x="64" y="5.7" width="6" height="16.3" rx="1"/></svg></div><div class="iv-last bar-down">74</div></div></td>
+          <td data-sort="2"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-flat">&#9632;</span><span class="gex-down">&#9660;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-up">&#9650;</span><span class="gex-up">&#9650;</span><span class="gex-flat">&#9632;</span></div><span class="chip chip-bull">IMPROVING</span></div></td>
+          <td data-sort="Neutral / Transition Zone">Neutral / Transition Zone</td>
+          <td data-sort="1"><span class="chip chip-none">Neutral</span></td>
           <td data-sort="Downtrend continuation">Downtrend continuation</td>
           <td class="num" data-sort="6">6</td>
           <td data-sort="Neutral/Mixed"><span class="chip chip-none">Neutral/Mixed</span></td>
           <td class="driver" data-sort="+3% today, institutional adds">+3% today, institutional adds</td>
         </tr>
         <tr>
-          <td data-sort="Consumer Defensive">Consumer Defensive</td>
           <td class="ticker" data-sort="TGT">TGT</td>
+          <td class="sector" data-sort="Consumer Defensive">Consumer Defensive</td>
+          <td data-sort="Mark-up"><span class="chip chip-bull">Mark-up</span></td>
           <td class="num" data-sort="143.92">$143.92</td>
           <td class="num" data-sort="43.5">43.5%</td>
-          <td data-sort="Neutral / Transition Zone"><span class="chip chip-none">Neutral / Transition Zone</span></td>
-          <td data-sort="Mark-up"><span class="chip chip-bull">Mark-up</span></td>
+          <td data-sort="61.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 72 22" width="72" height="22"><rect class="bar-flat" x="0" y="15.2" width="6" height="6.8" rx="1"/><rect class="bar-flat" x="8" y="15.2" width="6" height="6.8" rx="1"/><rect class="bar-up" x="16" y="9.7" width="6" height="12.3" rx="1"/><rect class="bar-up" x="24" y="9.0" width="6" height="13.0" rx="1"/><rect class="bar-up" x="32" y="8.1" width="6" height="13.9" rx="1"/><rect class="bar-up" x="40" y="7.5" width="6" height="14.5" rx="1"/><rect class="bar-down" x="48" y="8.6" width="6" height="13.4" rx="1"/><rect class="bar-up" x="56" y="8.1" width="6" height="13.9" rx="1"/><rect class="bar-down" x="64" y="8.6" width="6" height="13.4" rx="1"/></svg></div><div class="iv-last bar-down">61</div></div></td>
+          <td data-sort="0"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-down">&#9660;</span><span class="gex-flat">&#9632;</span><span class="gex-up">&#9650;</span><span class="gex-down">&#9660;</span><span class="gex-flat">&#9632;</span></div><span class="chip chip-warn">WEAKENING</span></div></td>
+          <td data-sort="Neutral / Transition Zone">Neutral / Transition Zone</td>
+          <td data-sort="1"><span class="chip chip-none">Neutral</span></td>
           <td data-sort="Strong uptrend">Strong uptrend</td>
           <td class="num" data-sort="6">6</td>
           <td data-sort="Neutral/Mixed"><span class="chip chip-none">Neutral/Mixed</span></td>
           <td class="driver" data-sort="Thin (1 hit, widened) - +5.15% price move">Thin (1 hit, widened) - +5.15% price move</td>
         </tr>
         <tr>
-          <td data-sort="Energy">Energy</td>
           <td class="ticker" data-sort="VLO">VLO</td>
+          <td class="sector" data-sort="Energy">Energy</td>
+          <td data-sort="Mark-up"><span class="chip chip-bull">Mark-up</span></td>
           <td class="num" data-sort="303.31">$303.31</td>
           <td class="num" data-sort="46.8">46.8%</td>
-          <td data-sort="Moderate Positive Gamma"><span class="chip chip-bull">Moderate Positive Gamma</span></td>
-          <td data-sort="Mark-up"><span class="chip chip-bull">Mark-up</span></td>
+          <td data-sort="82.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 72 22" width="72" height="22"><rect class="bar-flat" x="0" y="4.6" width="6" height="17.4" rx="1"/><rect class="bar-flat" x="8" y="4.6" width="6" height="17.4" rx="1"/><rect class="bar-flat" x="16" y="4.6" width="6" height="17.4" rx="1"/><rect class="bar-up" x="24" y="3.7" width="6" height="18.3" rx="1"/><rect class="bar-down" x="32" y="4.6" width="6" height="17.4" rx="1"/><rect class="bar-up" x="40" y="4.0" width="6" height="18.0" rx="1"/><rect class="bar-down" x="48" y="4.8" width="6" height="17.2" rx="1"/><rect class="bar-up" x="56" y="3.5" width="6" height="18.5" rx="1"/><rect class="bar-down" x="64" y="4.0" width="6" height="18.0" rx="1"/></svg></div><div class="iv-last bar-down">82</div></div></td>
+          <td data-sort="2"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-down">&#9660;</span><span class="gex-up">&#9650;</span></div><span class="chip chip-bull">IMPROVING</span></div></td>
+          <td data-sort="Moderate Positive Gamma">Moderate Positive Gamma</td>
+          <td data-sort="1"><span class="chip chip-none">Neutral</span></td>
           <td data-sort="Uptrend continuation">Uptrend continuation</td>
           <td class="num" data-sort="5">5</td>
           <td data-sort="Neutral/Mixed"><span class="chip chip-none">Neutral/Mixed</span></td>
           <td class="driver" data-sort="Institutional sale vs. Zacks value highlight">Institutional sale vs. Zacks value highlight</td>
         </tr>
         <tr>
-          <td data-sort="Financial Services">Financial Services</td>
           <td class="ticker" data-sort="SOFI">SOFI</td>
+          <td class="sector" data-sort="Financial Services">Financial Services</td>
+          <td data-sort="Mark-down"><span class="chip chip-warn">Mark-down</span></td>
           <td class="num" data-sort="16.75">$16.75</td>
           <td class="num" data-sort="66.6">66.6%</td>
-          <td data-sort="Neutral / Transition Zone"><span class="chip chip-none">Neutral / Transition Zone</span></td>
-          <td data-sort="Mark-down"><span class="chip chip-warn">Mark-down</span></td>
+          <td data-sort="47.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 72 22" width="72" height="22"><rect class="bar-flat" x="0" y="10.6" width="6" height="11.4" rx="1"/><rect class="bar-flat" x="8" y="10.6" width="6" height="11.4" rx="1"/><rect class="bar-up" x="16" y="10.1" width="6" height="11.9" rx="1"/><rect class="bar-down" x="24" y="11.0" width="6" height="11.0" rx="1"/><rect class="bar-down" x="32" y="11.4" width="6" height="10.6" rx="1"/><rect class="bar-up" x="40" y="11.2" width="6" height="10.8" rx="1"/><rect class="bar-down" x="48" y="12.5" width="6" height="9.5" rx="1"/><rect class="bar-up" x="56" y="10.6" width="6" height="11.4" rx="1"/><rect class="bar-down" x="64" y="11.7" width="6" height="10.3" rx="1"/></svg></div><div class="iv-last bar-down">47</div></div></td>
+          <td data-sort="0"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-flat">&#9632;</span><span class="gex-up">&#9650;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-down">&#9660;</span><span class="gex-flat">&#9632;</span></div><span class="chip chip-warn">WEAKENING</span></div></td>
+          <td data-sort="Neutral / Transition Zone">Neutral / Transition Zone</td>
+          <td data-sort="1"><span class="chip chip-none">Neutral</span></td>
           <td data-sort="Strong downtrend">Strong downtrend</td>
           <td class="num" data-sort="6">6</td>
           <td data-sort="Neutral/Mixed"><span class="chip chip-none">Neutral/Mixed</span></td>
           <td class="driver" data-sort="Climbing into earnings despite -40% YTD">Climbing into earnings despite -40% YTD</td>
         </tr>
         <tr>
-          <td data-sort="Healthcare">Healthcare</td>
           <td class="ticker" data-sort="TEVA">TEVA</td>
+          <td class="sector" data-sort="Healthcare">Healthcare</td>
+          <td data-sort="Mark-down"><span class="chip chip-warn">Mark-down</span></td>
           <td class="num" data-sort="31.66">$31.66</td>
           <td class="num" data-sort="45.5">45.5%</td>
-          <td data-sort="Neutral / Transition Zone"><span class="chip chip-none">Neutral / Transition Zone</span></td>
-          <td data-sort="Mark-down"><span class="chip chip-warn">Mark-down</span></td>
+          <td data-sort="49.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 72 22" width="72" height="22"><rect class="bar-flat" x="0" y="8.4" width="6" height="13.6" rx="1"/><rect class="bar-flat" x="8" y="8.4" width="6" height="13.6" rx="1"/><rect class="bar-down" x="16" y="9.7" width="6" height="12.3" rx="1"/><rect class="bar-up" x="24" y="8.4" width="6" height="13.6" rx="1"/><rect class="bar-down" x="32" y="9.9" width="6" height="12.1" rx="1"/><rect class="bar-up" x="40" y="8.6" width="6" height="13.4" rx="1"/><rect class="bar-down" x="48" y="9.7" width="6" height="12.3" rx="1"/><rect class="bar-up" x="56" y="9.5" width="6" height="12.5" rx="1"/><rect class="bar-down" x="64" y="11.2" width="6" height="10.8" rx="1"/></svg></div><div class="iv-last bar-down">49</div></div></td>
+          <td data-sort="0"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-down">&#9660;</span><span class="gex-up">&#9650;</span><span class="gex-flat">&#9632;</span><span class="gex-down">&#9660;</span><span class="gex-down">&#9660;</span><span class="gex-flat">&#9632;</span></div><span class="chip chip-warn">WEAKENING</span></div></td>
+          <td data-sort="Neutral / Transition Zone">Neutral / Transition Zone</td>
+          <td data-sort="1"><span class="chip chip-none">Neutral</span></td>
           <td data-sort="Downtrend continuation">Downtrend continuation</td>
           <td class="num" data-sort="6">6</td>
           <td data-sort="Neutral/Mixed"><span class="chip chip-none">Neutral/Mixed</span></td>
           <td class="driver" data-sort="PT raised to $44 vs. &quot;55.9% overvalued&quot; note">PT raised to $44 vs. &quot;55.9% overvalued&quot; note</td>
         </tr>
         <tr>
-          <td data-sort="Healthcare">Healthcare</td>
           <td class="ticker" data-sort="VRTX">VRTX</td>
+          <td class="sector" data-sort="Healthcare">Healthcare</td>
+          <td data-sort="Mark-up"><span class="chip chip-bull">Mark-up</span></td>
           <td class="num" data-sort="492.00">$492.00</td>
           <td class="num" data-sort="40.9">40.9%</td>
-          <td data-sort="Neutral / Transition Zone"><span class="chip chip-none">Neutral / Transition Zone</span></td>
-          <td data-sort="Mark-up"><span class="chip chip-bull">Mark-up</span></td>
+          <td data-sort="76.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 72 22" width="72" height="22"><rect class="bar-flat" x="0" y="8.1" width="6" height="13.9" rx="1"/><rect class="bar-flat" x="8" y="8.1" width="6" height="13.9" rx="1"/><rect class="bar-up" x="16" y="7.7" width="6" height="14.3" rx="1"/><rect class="bar-flat" x="24" y="7.7" width="6" height="14.3" rx="1"/><rect class="bar-up" x="32" y="7.5" width="6" height="14.5" rx="1"/><rect class="bar-up" x="40" y="6.4" width="6" height="15.6" rx="1"/><rect class="bar-down" x="48" y="6.6" width="6" height="15.4" rx="1"/><rect class="bar-down" x="56" y="6.8" width="6" height="15.2" rx="1"/><rect class="bar-up" x="64" y="5.3" width="6" height="16.7" rx="1"/></svg></div><div class="iv-last bar-up">76</div></div></td>
+          <td data-sort="1"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-flat">&#9632;</span></div><span class="chip chip-none">STABLE</span></div></td>
+          <td data-sort="Neutral / Transition Zone">Neutral / Transition Zone</td>
+          <td data-sort="-1"><span class="chip chip-none">N/A</span></td>
           <td data-sort="Uptrend continuation">Uptrend continuation</td>
           <td class="num" data-sort="5">5</td>
           <td data-sort="Neutral/Mixed"><span class="chip chip-none">Neutral/Mixed</span></td>
           <td class="driver" data-sort="Routine earnings-preview coverage, no real catalyst">Routine earnings-preview coverage, no real catalyst</td>
         </tr>
         <tr>
-          <td data-sort="Industrials">Industrials</td>
           <td class="ticker" data-sort="DCO">DCO</td>
+          <td class="sector" data-sort="Industrials">Industrials</td>
+          <td data-sort="Mark-up"><span class="chip chip-bull">Mark-up</span></td>
           <td class="num" data-sort="177.66">$177.66</td>
           <td class="num" data-sort="55.2">55.2%</td>
-          <td data-sort="Neutral / Transition Zone"><span class="chip chip-none">Neutral / Transition Zone</span></td>
-          <td data-sort="Mark-up"><span class="chip chip-bull">Mark-up</span></td>
+          <td data-sort="76.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 32 22" width="32" height="22"><rect class="bar-flat" x="0" y="7.3" width="6" height="14.7" rx="1"/><rect class="bar-down" x="8" y="7.5" width="6" height="14.5" rx="1"/><rect class="bar-up" x="16" y="7.0" width="6" height="15.0" rx="1"/><rect class="bar-up" x="24" y="5.3" width="6" height="16.7" rx="1"/></svg></div><div class="iv-last bar-up">76</div></div></td>
+          <td data-sort="0"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-down">&#9660;</span><span class="gex-flat">&#9632;</span></div><span class="chip chip-warn">WEAKENING</span></div></td>
+          <td data-sort="Neutral / Transition Zone">Neutral / Transition Zone</td>
+          <td data-sort="0"><span class="chip chip-warn">CONTRACTION</span></td>
           <td data-sort="Uptrend continuation">Uptrend continuation</td>
           <td class="num" data-sort="6">6</td>
           <td data-sort="Neutral/Mixed"><span class="chip chip-none">Neutral/Mixed</span></td>
           <td class="driver" data-sort="Institutional buy, thin coverage">Institutional buy, thin coverage</td>
         </tr>
         <tr>
-          <td data-sort="Industrials">Industrials</td>
           <td class="ticker" data-sort="ETN">ETN</td>
+          <td class="sector" data-sort="Industrials">Industrials</td>
+          <td data-sort="Mark-down"><span class="chip chip-warn">Mark-down</span></td>
           <td class="num" data-sort="387.00">$387.00</td>
           <td class="num" data-sort="50.1">50.1%</td>
-          <td data-sort="Neutral / Transition Zone"><span class="chip chip-none">Neutral / Transition Zone</span></td>
-          <td data-sort="Mark-down"><span class="chip chip-warn">Mark-down</span></td>
+          <td data-sort="92.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 48 22" width="48" height="22"><rect class="bar-flat" x="0" y="0.0" width="6" height="22.0" rx="1"/><rect class="bar-down" x="8" y="1.1" width="6" height="20.9" rx="1"/><rect class="bar-down" x="16" y="1.3" width="6" height="20.7" rx="1"/><rect class="bar-down" x="24" y="3.1" width="6" height="18.9" rx="1"/><rect class="bar-up" x="32" y="2.4" width="6" height="19.6" rx="1"/><rect class="bar-up" x="40" y="1.8" width="6" height="20.2" rx="1"/></svg></div><div class="iv-last bar-up">92</div></div></td>
+          <td data-sort="0"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-up">&#9650;</span><span class="gex-down">&#9660;</span><span class="gex-down">&#9660;</span></div><span class="chip chip-warn">WEAKENING</span></div></td>
+          <td data-sort="Neutral / Transition Zone">Neutral / Transition Zone</td>
+          <td data-sort="1"><span class="chip chip-none">Neutral</span></td>
           <td data-sort="Strong downtrend">Strong downtrend</td>
           <td class="num" data-sort="5">5</td>
           <td data-sort="Neutral/Mixed"><span class="chip chip-none">Neutral/Mixed</span></td>
           <td class="driver" data-sort="Down 3.1% but framed as possibly undervalued">Down 3.1% but framed as possibly undervalued</td>
         </tr>
         <tr>
-          <td data-sort="Technology">Technology</td>
           <td class="ticker" data-sort="CLS">CLS</td>
+          <td class="sector" data-sort="Technology">Technology</td>
+          <td data-sort="Mark-down"><span class="chip chip-warn">Mark-down</span></td>
           <td class="num" data-sort="350.02">$350.02</td>
           <td class="num" data-sort="85.2">85.2%</td>
-          <td data-sort="Neutral / Transition Zone"><span class="chip chip-none">Neutral / Transition Zone</span></td>
-          <td data-sort="Mark-down"><span class="chip chip-warn">Mark-down</span></td>
+          <td data-sort="73.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 64 22" width="64" height="22"><rect class="bar-flat" x="0" y="0.9" width="6" height="21.1" rx="1"/><rect class="bar-flat" x="8" y="0.9" width="6" height="21.1" rx="1"/><rect class="bar-up" x="16" y="0.2" width="6" height="21.8" rx="1"/><rect class="bar-down" x="24" y="0.9" width="6" height="21.1" rx="1"/><rect class="bar-flat" x="32" y="0.9" width="6" height="21.1" rx="1"/><rect class="bar-down" x="40" y="3.1" width="6" height="18.9" rx="1"/><rect class="bar-up" x="48" y="2.9" width="6" height="19.1" rx="1"/><rect class="bar-down" x="56" y="5.9" width="6" height="16.1" rx="1"/></svg></div><div class="iv-last bar-down">73</div></div></td>
+          <td data-sort="1"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-up">&#9650;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-down">&#9660;</span><span class="gex-up">&#9650;</span><span class="gex-down">&#9660;</span><span class="gex-up">&#9650;</span></div><span class="chip chip-none">STABLE</span></div></td>
+          <td data-sort="Neutral / Transition Zone">Neutral / Transition Zone</td>
+          <td data-sort="2"><span class="chip chip-bull">EXPANSION</span></td>
           <td data-sort="Downtrend continuation">Downtrend continuation</td>
           <td class="num" data-sort="9">9</td>
           <td data-sort="Strongly Bullish"><span class="chip chip-bull">Strongly Bullish</span></td>
           <td class="driver" data-sort="Tops Q2 earnings, beat + raised outlook, &quot;massively underpriced&quot;">Tops Q2 earnings, beat + raised outlook, &quot;massively underpriced&quot;</td>
         </tr>
         <tr>
-          <td data-sort="Technology">Technology</td>
           <td class="ticker" data-sort="IONQ">IONQ</td>
+          <td class="sector" data-sort="Technology">Technology</td>
+          <td data-sort="Mark-down"><span class="chip chip-warn">Mark-down</span></td>
           <td class="num" data-sort="33.88">$33.88</td>
           <td class="num" data-sort="104.0">104.0%</td>
-          <td data-sort="Neutral / Transition Zone"><span class="chip chip-none">Neutral / Transition Zone</span></td>
-          <td data-sort="Mark-down"><span class="chip chip-warn">Mark-down</span></td>
+          <td data-sort="57.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 64 22" width="64" height="22"><rect class="bar-flat" x="0" y="9.0" width="6" height="13.0" rx="1"/><rect class="bar-flat" x="8" y="9.0" width="6" height="13.0" rx="1"/><rect class="bar-flat" x="16" y="9.0" width="6" height="13.0" rx="1"/><rect class="bar-up" x="24" y="8.8" width="6" height="13.2" rx="1"/><rect class="bar-down" x="32" y="9.9" width="6" height="12.1" rx="1"/><rect class="bar-down" x="40" y="10.6" width="6" height="11.4" rx="1"/><rect class="bar-down" x="48" y="11.2" width="6" height="10.8" rx="1"/><rect class="bar-up" x="56" y="9.5" width="6" height="12.5" rx="1"/></svg></div><div class="iv-last bar-up">57</div></div></td>
+          <td data-sort="0"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-flat">&#9632;</span><span class="gex-up">&#9650;</span><span class="gex-up">&#9650;</span><span class="gex-down">&#9660;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-up">&#9650;</span><span class="gex-down">&#9660;</span><span class="gex-down">&#9660;</span></div><span class="chip chip-warn">WEAKENING</span></div></td>
+          <td data-sort="Neutral / Transition Zone">Neutral / Transition Zone</td>
+          <td data-sort="1"><span class="chip chip-none">Neutral</span></td>
           <td data-sort="Strong downtrend">Strong downtrend</td>
           <td class="num" data-sort="8">8</td>
           <td data-sort="Bullish"><span class="chip chip-bull">Bullish</span></td>
           <td class="driver" data-sort="&quot;Tipping point,&quot; Benchmark buy ratings, stock jumped">&quot;Tipping point,&quot; Benchmark buy ratings, stock jumped</td>
         </tr>
         <tr>
-          <td data-sort="Technology">Technology</td>
           <td class="ticker" data-sort="CSCO">CSCO</td>
+          <td class="sector" data-sort="Technology">Technology</td>
+          <td data-sort="Mark-up"><span class="chip chip-bull">Mark-up</span></td>
           <td class="num" data-sort="116.62">$116.62</td>
           <td class="num" data-sort="51.5">51.5%</td>
-          <td data-sort="Neutral / Transition Zone"><span class="chip chip-none">Neutral / Transition Zone</span></td>
-          <td data-sort="Mark-up"><span class="chip chip-bull">Mark-up</span></td>
+          <td data-sort="95.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 72 22" width="72" height="22"><rect class="bar-flat" x="0" y="0.0" width="6" height="22.0" rx="1"/><rect class="bar-flat" x="8" y="0.0" width="6" height="22.0" rx="1"/><rect class="bar-flat" x="16" y="0.0" width="6" height="22.0" rx="1"/><rect class="bar-down" x="24" y="0.4" width="6" height="21.6" rx="1"/><rect class="bar-down" x="32" y="2.2" width="6" height="19.8" rx="1"/><rect class="bar-up" x="40" y="1.5" width="6" height="20.5" rx="1"/><rect class="bar-flat" x="48" y="1.5" width="6" height="20.5" rx="1"/><rect class="bar-up" x="56" y="0.9" width="6" height="21.1" rx="1"/><rect class="bar-down" x="64" y="1.1" width="6" height="20.9" rx="1"/></svg></div><div class="iv-last bar-down">95</div></div></td>
+          <td data-sort="2"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-flat">&#9632;</span><span class="gex-down">&#9660;</span><span class="gex-up">&#9650;</span><span class="gex-down">&#9660;</span><span class="gex-up">&#9650;</span><span class="gex-flat">&#9632;</span><span class="gex-down">&#9660;</span><span class="gex-up">&#9650;</span><span class="gex-up">&#9650;</span></div><span class="chip chip-bull">IMPROVING</span></div></td>
+          <td data-sort="Neutral / Transition Zone">Neutral / Transition Zone</td>
+          <td data-sort="1"><span class="chip chip-none">Neutral</span></td>
           <td data-sort="Uptrend continuation">Uptrend continuation</td>
           <td class="num" data-sort="8">8</td>
           <td data-sort="Bullish"><span class="chip chip-bull">Bullish</span></td>
           <td class="driver" data-sort="Record highs, beat guidance">Record highs, beat guidance</td>
         </tr>
         <tr>
-          <td data-sort="Technology">Technology</td>
           <td class="ticker" data-sort="TSM">TSM</td>
+          <td class="sector" data-sort="Technology">Technology</td>
+          <td data-sort="Mark-down"><span class="chip chip-warn">Mark-down</span></td>
           <td class="num" data-sort="395.49">$395.49</td>
           <td class="num" data-sort="49.4">49.4%</td>
-          <td data-sort="Moderate Negative Gamma"><span class="chip chip-warn">Moderate Negative Gamma</span></td>
-          <td data-sort="Mark-down"><span class="chip chip-warn">Mark-down</span></td>
+          <td data-sort="74.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 72 22" width="72" height="22"><rect class="bar-flat" x="0" y="2.4" width="6" height="19.6" rx="1"/><rect class="bar-flat" x="8" y="2.4" width="6" height="19.6" rx="1"/><rect class="bar-down" x="16" y="2.6" width="6" height="19.4" rx="1"/><rect class="bar-down" x="24" y="4.2" width="6" height="17.8" rx="1"/><rect class="bar-down" x="32" y="4.6" width="6" height="17.4" rx="1"/><rect class="bar-down" x="40" y="5.1" width="6" height="16.9" rx="1"/><rect class="bar-down" x="48" y="5.5" width="6" height="16.5" rx="1"/><rect class="bar-up" x="56" y="5.3" width="6" height="16.7" rx="1"/><rect class="bar-down" x="64" y="5.7" width="6" height="16.3" rx="1"/></svg></div><div class="iv-last bar-down">74</div></div></td>
+          <td data-sort="0"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-up">&#9650;</span><span class="gex-down">&#9660;</span><span class="gex-flat">&#9632;</span></div><span class="chip chip-warn">WEAKENING</span></div></td>
+          <td data-sort="Moderate Negative Gamma">Moderate Negative Gamma</td>
+          <td data-sort="1"><span class="chip chip-none">Neutral</span></td>
           <td data-sort="Strong downtrend">Strong downtrend</td>
           <td class="num" data-sort="8">8</td>
           <td data-sort="Bullish"><span class="chip chip-bull">Bullish</span></td>
           <td class="driver" data-sort="Record results, raised guidance, AI demand surge">Record results, raised guidance, AI demand surge</td>
         </tr>
         <tr>
-          <td data-sort="Technology">Technology</td>
           <td class="ticker" data-sort="RGTI">RGTI</td>
+          <td class="sector" data-sort="Technology">Technology</td>
+          <td data-sort="Mark-down"><span class="chip chip-warn">Mark-down</span></td>
           <td class="num" data-sort="14.53">$14.53</td>
           <td class="num" data-sort="99.2">99.2%</td>
-          <td data-sort="Neutral / Transition Zone"><span class="chip chip-none">Neutral / Transition Zone</span></td>
-          <td data-sort="Mark-down"><span class="chip chip-warn">Mark-down</span></td>
+          <td data-sort="28.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 64 22" width="64" height="22"><rect class="bar-flat" x="0" y="15.6" width="6" height="6.4" rx="1"/><rect class="bar-up" x="8" y="14.7" width="6" height="7.3" rx="1"/><rect class="bar-down" x="16" y="16.3" width="6" height="5.7" rx="1"/><rect class="bar-up" x="24" y="15.0" width="6" height="7.0" rx="1"/><rect class="bar-down" x="32" y="16.1" width="6" height="5.9" rx="1"/><rect class="bar-down" x="40" y="16.3" width="6" height="5.7" rx="1"/><rect class="bar-up" x="48" y="15.4" width="6" height="6.6" rx="1"/><rect class="bar-down" x="56" y="15.8" width="6" height="6.2" rx="1"/></svg></div><div class="iv-last bar-down">28</div></div></td>
+          <td data-sort="2"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-flat">&#9632;</span><span class="gex-up">&#9650;</span><span class="gex-up">&#9650;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-down">&#9660;</span><span class="gex-up">&#9650;</span><span class="gex-flat">&#9632;</span></div><span class="chip chip-bull">IMPROVING</span></div></td>
+          <td data-sort="Neutral / Transition Zone">Neutral / Transition Zone</td>
+          <td data-sort="1"><span class="chip chip-none">Neutral</span></td>
           <td data-sort="Strong downtrend">Strong downtrend</td>
           <td class="num" data-sort="7">7</td>
           <td data-sort="Bullish"><span class="chip chip-bull">Bullish</span></td>
           <td class="driver" data-sort="+10.5%, $100M CHIPS Act LOI, Buy ratings">+10.5%, $100M CHIPS Act LOI, Buy ratings</td>
         </tr>
         <tr>
-          <td data-sort="Technology">Technology</td>
           <td class="ticker" data-sort="CRM">CRM</td>
+          <td class="sector" data-sort="Technology">Technology</td>
+          <td data-sort="Mark-up"><span class="chip chip-bull">Mark-up</span></td>
           <td class="num" data-sort="180.51">$180.51</td>
           <td class="num" data-sort="47.8">47.8%</td>
-          <td data-sort="Moderate Positive Gamma"><span class="chip chip-bull">Moderate Positive Gamma</span></td>
-          <td data-sort="Mark-up"><span class="chip chip-bull">Mark-up</span></td>
+          <td data-sort="68.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 72 22" width="72" height="22"><rect class="bar-flat" x="0" y="7.9" width="6" height="14.1" rx="1"/><rect class="bar-flat" x="8" y="7.9" width="6" height="14.1" rx="1"/><rect class="bar-up" x="16" y="7.5" width="6" height="14.5" rx="1"/><rect class="bar-up" x="24" y="6.6" width="6" height="15.4" rx="1"/><rect class="bar-down" x="32" y="7.7" width="6" height="14.3" rx="1"/><rect class="bar-down" x="40" y="8.1" width="6" height="13.9" rx="1"/><rect class="bar-up" x="48" y="6.2" width="6" height="15.8" rx="1"/><rect class="bar-down" x="56" y="6.4" width="6" height="15.6" rx="1"/><rect class="bar-down" x="64" y="7.0" width="6" height="15.0" rx="1"/></svg></div><div class="iv-last bar-down">68</div></div></td>
+          <td data-sort="2"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-down">&#9660;</span><span class="gex-up">&#9650;</span><span class="gex-down">&#9660;</span><span class="gex-flat">&#9632;</span><span class="gex-up">&#9650;</span></div><span class="chip chip-bull">IMPROVING</span></div></td>
+          <td data-sort="Moderate Positive Gamma">Moderate Positive Gamma</td>
+          <td data-sort="1"><span class="chip chip-none">Neutral</span></td>
           <td data-sort="Strong uptrend">Strong uptrend</td>
           <td class="num" data-sort="7">7</td>
           <td data-sort="Bullish"><span class="chip chip-bull">Bullish</span></td>
           <td class="driver" data-sort="+5.9%/+4.51% moves, surging Monday">+5.9%/+4.51% moves, surging Monday</td>
         </tr>
         <tr>
-          <td data-sort="Technology">Technology</td>
           <td class="ticker" data-sort="MSFT">MSFT</td>
+          <td class="sector" data-sort="Technology">Technology</td>
+          <td data-sort="Mark-down"><span class="chip chip-warn">Mark-down</span></td>
           <td class="num" data-sort="395.01">$395.01</td>
           <td class="num" data-sort="43.9">43.9%</td>
-          <td data-sort="Moderate Positive Gamma"><span class="chip chip-bull">Moderate Positive Gamma</span></td>
-          <td data-sort="Mark-down"><span class="chip chip-warn">Mark-down</span></td>
+          <td data-sort="91.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 72 22" width="72" height="22"><rect class="bar-flat" x="0" y="0.4" width="6" height="21.6" rx="1"/><rect class="bar-flat" x="8" y="0.4" width="6" height="21.6" rx="1"/><rect class="bar-up" x="16" y="0.2" width="6" height="21.8" rx="1"/><rect class="bar-down" x="24" y="0.4" width="6" height="21.6" rx="1"/><rect class="bar-flat" x="32" y="0.4" width="6" height="21.6" rx="1"/><rect class="bar-down" x="40" y="1.8" width="6" height="20.2" rx="1"/><rect class="bar-down" x="48" y="2.9" width="6" height="19.1" rx="1"/><rect class="bar-up" x="56" y="2.4" width="6" height="19.6" rx="1"/><rect class="bar-up" x="64" y="2.0" width="6" height="20.0" rx="1"/></svg></div><div class="iv-last bar-up">91</div></div></td>
+          <td data-sort="2"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-down">&#9660;</span><span class="gex-up">&#9650;</span><span class="gex-up">&#9650;</span></div><span class="chip chip-bull">IMPROVING</span></div></td>
+          <td data-sort="Moderate Positive Gamma">Moderate Positive Gamma</td>
+          <td data-sort="1"><span class="chip chip-none">Neutral</span></td>
           <td data-sort="Downtrend continuation">Downtrend continuation</td>
           <td class="num" data-sort="7">7</td>
           <td data-sort="Bullish"><span class="chip chip-bull">Bullish</span></td>
           <td class="driver" data-sort="&quot;30.6% undervalued,&quot; rallies, affordable-growth framing">&quot;30.6% undervalued,&quot; rallies, affordable-growth framing</td>
         </tr>
         <tr>
-          <td data-sort="Technology">Technology</td>
           <td class="ticker" data-sort="CRWV">CRWV</td>
+          <td class="sector" data-sort="Technology">Technology</td>
+          <td data-sort="Mark-down"><span class="chip chip-warn">Mark-down</span></td>
           <td class="num" data-sort="67.50">$67.50</td>
           <td class="num" data-sort="114.4">114.4%</td>
-          <td data-sort="Neutral / Transition Zone"><span class="chip chip-none">Neutral / Transition Zone</span></td>
-          <td data-sort="Mark-down"><span class="chip chip-warn">Mark-down</span></td>
+          <td data-sort="85.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 72 22" width="72" height="22"><rect class="bar-flat" x="0" y="5.5" width="6" height="16.5" rx="1"/><rect class="bar-flat" x="8" y="5.5" width="6" height="16.5" rx="1"/><rect class="bar-up" x="16" y="5.1" width="6" height="16.9" rx="1"/><rect class="bar-flat" x="24" y="5.1" width="6" height="16.9" rx="1"/><rect class="bar-down" x="32" y="6.2" width="6" height="15.8" rx="1"/><rect class="bar-up" x="40" y="5.9" width="6" height="16.1" rx="1"/><rect class="bar-down" x="48" y="6.4" width="6" height="15.6" rx="1"/><rect class="bar-up" x="56" y="5.5" width="6" height="16.5" rx="1"/><rect class="bar-up" x="64" y="3.3" width="6" height="18.7" rx="1"/></svg></div><div class="iv-last bar-up">85</div></div></td>
+          <td data-sort="0"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-flat">&#9632;</span><span class="gex-up">&#9650;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-down">&#9660;</span><span class="gex-up">&#9650;</span><span class="gex-down">&#9660;</span><span class="gex-down">&#9660;</span></div><span class="chip chip-warn">WEAKENING</span></div></td>
+          <td data-sort="Neutral / Transition Zone">Neutral / Transition Zone</td>
+          <td data-sort="1"><span class="chip chip-none">Neutral</span></td>
           <td data-sort="Strong downtrend">Strong downtrend</td>
           <td class="num" data-sort="6">6</td>
           <td data-sort="Neutral/Mixed"><span class="chip chip-none">Neutral/Mixed</span></td>
           <td class="driver" data-sort="Nvidia/OpenAI &quot;constructive&quot; signal vs. &quot;staying away&quot; caution">Nvidia/OpenAI &quot;constructive&quot; signal vs. &quot;staying away&quot; caution</td>
         </tr>
         <tr>
-          <td data-sort="Technology">Technology</td>
           <td class="ticker" data-sort="QNT">QNT</td>
+          <td class="sector" data-sort="Technology">Technology</td>
+          <td data-sort="Mark-down"><span class="chip chip-warn">Mark-down</span></td>
           <td class="num" data-sort="49.39">$49.39</td>
           <td class="num" data-sort="113.5">113.5%</td>
-          <td data-sort="Neutral / Transition Zone"><span class="chip chip-none">Neutral / Transition Zone</span></td>
-          <td data-sort="Mark-down"><span class="chip chip-warn">Mark-down</span></td>
+          <td data-sort="76.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 64 22" width="64" height="22"><rect class="bar-flat" x="0" y="7.9" width="6" height="14.1" rx="1"/><rect class="bar-down" x="8" y="11.0" width="6" height="11.0" rx="1"/><rect class="bar-up" x="16" y="9.7" width="6" height="12.3" rx="1"/><rect class="bar-up" x="24" y="6.2" width="6" height="15.8" rx="1"/><rect class="bar-up" x="32" y="5.3" width="6" height="16.7" rx="1"/><rect class="bar-down" x="40" y="6.2" width="6" height="15.8" rx="1"/><rect class="bar-up" x="48" y="4.8" width="6" height="17.2" rx="1"/><rect class="bar-down" x="56" y="5.3" width="6" height="16.7" rx="1"/></svg></div><div class="iv-last bar-down">76</div></div></td>
+          <td data-sort="2"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-flat">&#9632;</span><span class="gex-up">&#9650;</span><span class="gex-down">&#9660;</span><span class="gex-up">&#9650;</span><span class="gex-down">&#9660;</span><span class="gex-down">&#9660;</span><span class="gex-up">&#9650;</span><span class="gex-flat">&#9632;</span></div><span class="chip chip-bull">IMPROVING</span></div></td>
+          <td data-sort="Neutral / Transition Zone">Neutral / Transition Zone</td>
+          <td data-sort="1"><span class="chip chip-none">Neutral</span></td>
           <td data-sort="Strong downtrend">Strong downtrend</td>
           <td class="num" data-sort="6">6</td>
           <td data-sort="Neutral/Mixed"><span class="chip chip-none">Neutral/Mixed</span></td>
           <td class="driver" data-sort="Rolls-Royce partnership, valuation doubts noted">Rolls-Royce partnership, valuation doubts noted</td>
         </tr>
         <tr>
-          <td data-sort="Technology">Technology</td>
           <td class="ticker" data-sort="INFQ">INFQ</td>
+          <td class="sector" data-sort="Technology">Technology</td>
+          <td data-sort="Mark-down"><span class="chip chip-warn">Mark-down</span></td>
           <td class="num" data-sort="9.58">$9.58</td>
           <td class="num" data-sort="108.0">108.0%</td>
-          <td data-sort="Neutral / Transition Zone"><span class="chip chip-none">Neutral / Transition Zone</span></td>
-          <td data-sort="Mark-down"><span class="chip chip-warn">Mark-down</span></td>
+          <td data-sort="30.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 64 22" width="64" height="22"><rect class="bar-flat" x="0" y="16.7" width="6" height="5.3" rx="1"/><rect class="bar-up" x="8" y="16.5" width="6" height="5.5" rx="1"/><rect class="bar-down" x="16" y="17.6" width="6" height="4.4" rx="1"/><rect class="bar-up" x="24" y="14.3" width="6" height="7.7" rx="1"/><rect class="bar-down" x="32" y="15.0" width="6" height="7.0" rx="1"/><rect class="bar-down" x="40" y="17.2" width="6" height="4.8" rx="1"/><rect class="bar-up" x="48" y="13.0" width="6" height="9.0" rx="1"/><rect class="bar-down" x="56" y="15.4" width="6" height="6.6" rx="1"/></svg></div><div class="iv-last bar-down">30</div></div></td>
+          <td data-sort="0"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-down">&#9660;</span><span class="gex-flat">&#9632;</span></div><span class="chip chip-warn">WEAKENING</span></div></td>
+          <td data-sort="Neutral / Transition Zone">Neutral / Transition Zone</td>
+          <td data-sort="1"><span class="chip chip-none">Neutral</span></td>
           <td data-sort="Strong downtrend">Strong downtrend</td>
           <td class="num" data-sort="6">6</td>
           <td data-sort="Neutral/Mixed"><span class="chip chip-none">Neutral/Mixed</span></td>
           <td class="driver" data-sort="Quantum-rally +$5B mkt cap vs. &quot;heavy losses&quot; note">Quantum-rally +$5B mkt cap vs. &quot;heavy losses&quot; note</td>
         </tr>
         <tr>
-          <td data-sort="Technology">Technology</td>
           <td class="ticker" data-sort="QBTS">QBTS</td>
+          <td class="sector" data-sort="Technology">Technology</td>
+          <td data-sort="Distribution"><span class="chip chip-warn">Distribution</span></td>
           <td class="num" data-sort="17.62">$17.62</td>
           <td class="num" data-sort="102.0">102.0%</td>
-          <td data-sort="Neutral / Transition Zone"><span class="chip chip-none">Neutral / Transition Zone</span></td>
-          <td data-sort="Distribution"><span class="chip chip-warn">Distribution</span></td>
+          <td data-sort="31.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 64 22" width="64" height="22"><rect class="bar-flat" x="0" y="15.4" width="6" height="6.6" rx="1"/><rect class="bar-up" x="8" y="15.2" width="6" height="6.8" rx="1"/><rect class="bar-down" x="16" y="15.6" width="6" height="6.4" rx="1"/><rect class="bar-down" x="24" y="16.1" width="6" height="5.9" rx="1"/><rect class="bar-up" x="32" y="14.7" width="6" height="7.3" rx="1"/><rect class="bar-down" x="40" y="15.4" width="6" height="6.6" rx="1"/><rect class="bar-up" x="48" y="14.5" width="6" height="7.5" rx="1"/><rect class="bar-down" x="56" y="15.2" width="6" height="6.8" rx="1"/></svg></div><div class="iv-last bar-down">31</div></div></td>
+          <td data-sort="0"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-flat">&#9632;</span><span class="gex-up">&#9650;</span><span class="gex-up">&#9650;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-down">&#9660;</span><span class="gex-up">&#9650;</span><span class="gex-down">&#9660;</span><span class="gex-flat">&#9632;</span></div><span class="chip chip-warn">WEAKENING</span></div></td>
+          <td data-sort="Neutral / Transition Zone">Neutral / Transition Zone</td>
+          <td data-sort="2"><span class="chip chip-bull">EXPANSION</span></td>
           <td data-sort="Upthrust detected">Upthrust detected</td>
           <td class="num" data-sort="6">6</td>
           <td data-sort="Neutral/Mixed"><span class="chip chip-none">Neutral/Mixed</span></td>
           <td class="driver" data-sort="AT&amp;T deal expansion vs. &quot;overvalued, lagging roadmap&quot;">AT&amp;T deal expansion vs. &quot;overvalued, lagging roadmap&quot;</td>
         </tr>
         <tr>
-          <td data-sort="Technology">Technology</td>
           <td class="ticker" data-sort="QUBT">QUBT</td>
+          <td class="sector" data-sort="Technology">Technology</td>
+          <td data-sort="Mark-down"><span class="chip chip-warn">Mark-down</span></td>
           <td class="num" data-sort="7.70">$7.70</td>
           <td class="num" data-sort="96.4">96.4%</td>
-          <td data-sort="Neutral / Transition Zone"><span class="chip chip-none">Neutral / Transition Zone</span></td>
-          <td data-sort="Mark-down"><span class="chip chip-warn">Mark-down</span></td>
+          <td data-sort="32.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 64 22" width="64" height="22"><rect class="bar-flat" x="0" y="15.6" width="6" height="6.4" rx="1"/><rect class="bar-up" x="8" y="14.7" width="6" height="7.3" rx="1"/><rect class="bar-down" x="16" y="16.5" width="6" height="5.5" rx="1"/><rect class="bar-down" x="24" y="17.6" width="6" height="4.4" rx="1"/><rect class="bar-up" x="32" y="16.1" width="6" height="5.9" rx="1"/><rect class="bar-down" x="40" y="16.3" width="6" height="5.7" rx="1"/><rect class="bar-up" x="48" y="14.7" width="6" height="7.3" rx="1"/><rect class="bar-down" x="56" y="15.0" width="6" height="7.0" rx="1"/></svg></div><div class="iv-last bar-down">32</div></div></td>
+          <td data-sort="0"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-up">&#9650;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-down">&#9660;</span><span class="gex-flat">&#9632;</span><span class="gex-down">&#9660;</span><span class="gex-flat">&#9632;</span></div><span class="chip chip-warn">WEAKENING</span></div></td>
+          <td data-sort="Neutral / Transition Zone">Neutral / Transition Zone</td>
+          <td data-sort="1"><span class="chip chip-none">Neutral</span></td>
           <td data-sort="Strong downtrend">Strong downtrend</td>
           <td class="num" data-sort="6">6</td>
           <td data-sort="Neutral/Mixed"><span class="chip chip-none">Neutral/Mixed</span></td>
           <td class="driver" data-sort="+9.3% move, mixed fair-value framing">+9.3% move, mixed fair-value framing</td>
         </tr>
         <tr>
-          <td data-sort="Technology">Technology</td>
           <td class="ticker" data-sort="CIEN">CIEN</td>
+          <td class="sector" data-sort="Technology">Technology</td>
+          <td data-sort="Mark-down"><span class="chip chip-warn">Mark-down</span></td>
           <td class="num" data-sort="352.10">$352.10</td>
           <td class="num" data-sort="92.0">92.0%</td>
-          <td data-sort="Neutral / Transition Zone"><span class="chip chip-none">Neutral / Transition Zone</span></td>
-          <td data-sort="Mark-down"><span class="chip chip-warn">Mark-down</span></td>
+          <td data-sort="75.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 64 22" width="64" height="22"><rect class="bar-flat" x="0" y="5.1" width="6" height="16.9" rx="1"/><rect class="bar-up" x="8" y="4.6" width="6" height="17.4" rx="1"/><rect class="bar-down" x="16" y="5.5" width="6" height="16.5" rx="1"/><rect class="bar-down" x="24" y="6.2" width="6" height="15.8" rx="1"/><rect class="bar-flat" x="32" y="6.2" width="6" height="15.8" rx="1"/><rect class="bar-down" x="40" y="7.0" width="6" height="15.0" rx="1"/><rect class="bar-up" x="48" y="6.2" width="6" height="15.8" rx="1"/><rect class="bar-up" x="56" y="5.5" width="6" height="16.5" rx="1"/></svg></div><div class="iv-last bar-up">75</div></div></td>
+          <td data-sort="2"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-up">&#9650;</span><span class="gex-up">&#9650;</span><span class="gex-flat">&#9632;</span></div><span class="chip chip-bull">IMPROVING</span></div></td>
+          <td data-sort="Neutral / Transition Zone">Neutral / Transition Zone</td>
+          <td data-sort="1"><span class="chip chip-none">Neutral</span></td>
           <td data-sort="Strong downtrend">Strong downtrend</td>
           <td class="num" data-sort="6">6</td>
           <td data-sort="Neutral/Mixed"><span class="chip chip-none">Neutral/Mixed</span></td>
           <td class="driver" data-sort="Institutional buy + Verizon-Google tailwind vs. overvalued note">Institutional buy + Verizon-Google tailwind vs. overvalued note</td>
         </tr>
         <tr>
-          <td data-sort="Technology">Technology</td>
           <td class="ticker" data-sort="NET">NET</td>
+          <td class="sector" data-sort="Technology">Technology</td>
+          <td data-sort="Mark-up"><span class="chip chip-bull">Mark-up</span></td>
           <td class="num" data-sort="263.00">$263.00</td>
           <td class="num" data-sort="75.6">75.6%</td>
-          <td data-sort="Neutral / Transition Zone"><span class="chip chip-none">Neutral / Transition Zone</span></td>
-          <td data-sort="Mark-up"><span class="chip chip-bull">Mark-up</span></td>
+          <td data-sort="75.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 72 22" width="72" height="22"><rect class="bar-flat" x="0" y="4.8" width="6" height="17.2" rx="1"/><rect class="bar-flat" x="8" y="4.8" width="6" height="17.2" rx="1"/><rect class="bar-down" x="16" y="5.5" width="6" height="16.5" rx="1"/><rect class="bar-up" x="24" y="5.3" width="6" height="16.7" rx="1"/><rect class="bar-flat" x="32" y="5.3" width="6" height="16.7" rx="1"/><rect class="bar-down" x="40" y="6.2" width="6" height="15.8" rx="1"/><rect class="bar-down" x="48" y="6.8" width="6" height="15.2" rx="1"/><rect class="bar-up" x="56" y="5.7" width="6" height="16.3" rx="1"/><rect class="bar-up" x="64" y="5.5" width="6" height="16.5" rx="1"/></svg></div><div class="iv-last bar-up">75</div></div></td>
+          <td data-sort="0"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-up">&#9650;</span><span class="gex-down">&#9660;</span><span class="gex-flat">&#9632;</span></div><span class="chip chip-warn">WEAKENING</span></div></td>
+          <td data-sort="Neutral / Transition Zone">Neutral / Transition Zone</td>
+          <td data-sort="1"><span class="chip chip-none">Neutral</span></td>
           <td data-sort="Uptrend continuation">Uptrend continuation</td>
           <td class="num" data-sort="6">6</td>
           <td data-sort="Neutral/Mixed"><span class="chip chip-none">Neutral/Mixed</span></td>
           <td class="driver" data-sort="Thin real coverage (&quot;laps the market&quot; mild positive)">Thin real coverage (&quot;laps the market&quot; mild positive)</td>
         </tr>
         <tr>
-          <td data-sort="Technology">Technology</td>
           <td class="ticker" data-sort="QCOM">QCOM</td>
+          <td class="sector" data-sort="Technology">Technology</td>
+          <td data-sort="Mark-down"><span class="chip chip-warn">Mark-down</span></td>
           <td class="num" data-sort="164.78">$164.78</td>
           <td class="num" data-sort="69.5">69.5%</td>
-          <td data-sort="Neutral / Transition Zone"><span class="chip chip-none">Neutral / Transition Zone</span></td>
-          <td data-sort="Mark-down"><span class="chip chip-warn">Mark-down</span></td>
+          <td data-sort="66.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 72 22" width="72" height="22"><rect class="bar-flat" x="0" y="6.2" width="6" height="15.8" rx="1"/><rect class="bar-flat" x="8" y="6.2" width="6" height="15.8" rx="1"/><rect class="bar-up" x="16" y="5.5" width="6" height="16.5" rx="1"/><rect class="bar-down" x="24" y="6.8" width="6" height="15.2" rx="1"/><rect class="bar-up" x="32" y="6.6" width="6" height="15.4" rx="1"/><rect class="bar-down" x="40" y="7.5" width="6" height="14.5" rx="1"/><rect class="bar-down" x="48" y="8.4" width="6" height="13.6" rx="1"/><rect class="bar-up" x="56" y="7.9" width="6" height="14.1" rx="1"/><rect class="bar-up" x="64" y="7.5" width="6" height="14.5" rx="1"/></svg></div><div class="iv-last bar-up">66</div></div></td>
+          <td data-sort="0"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-flat">&#9632;</span><span class="gex-up">&#9650;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-down">&#9660;</span><span class="gex-flat">&#9632;</span><span class="gex-down">&#9660;</span></div><span class="chip chip-warn">WEAKENING</span></div></td>
+          <td data-sort="Neutral / Transition Zone">Neutral / Transition Zone</td>
+          <td data-sort="1"><span class="chip chip-none">Neutral</span></td>
           <td data-sort="Strong downtrend">Strong downtrend</td>
           <td class="num" data-sort="6">6</td>
           <td data-sort="Neutral/Mixed"><span class="chip chip-none">Neutral/Mixed</span></td>
           <td class="driver" data-sort="Pullback framed as buying opportunity into earnings">Pullback framed as buying opportunity into earnings</td>
         </tr>
         <tr>
-          <td data-sort="Technology">Technology</td>
           <td class="ticker" data-sort="NOW">NOW</td>
+          <td class="sector" data-sort="Technology">Technology</td>
+          <td data-sort="Accumulation"><span class="chip chip-bull">Accumulation</span></td>
           <td class="num" data-sort="110.25">$110.25</td>
           <td class="num" data-sort="59.1">59.1%</td>
-          <td data-sort="Moderate Positive Gamma"><span class="chip chip-bull">Moderate Positive Gamma</span></td>
-          <td data-sort="Accumulation"><span class="chip chip-bull">Accumulation</span></td>
+          <td data-sort="63.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 72 22" width="72" height="22"><rect class="bar-flat" x="0" y="0.7" width="6" height="21.3" rx="1"/><rect class="bar-flat" x="8" y="0.7" width="6" height="21.3" rx="1"/><rect class="bar-up" x="16" y="0.0" width="6" height="22.0" rx="1"/><rect class="bar-flat" x="24" y="0.0" width="6" height="22.0" rx="1"/><rect class="bar-down" x="32" y="0.7" width="6" height="21.3" rx="1"/><rect class="bar-down" x="40" y="8.4" width="6" height="13.6" rx="1"/><rect class="bar-down" x="48" y="8.8" width="6" height="13.2" rx="1"/><rect class="bar-up" x="56" y="8.6" width="6" height="13.4" rx="1"/><rect class="bar-up" x="64" y="8.1" width="6" height="13.9" rx="1"/></svg></div><div class="iv-last bar-up">63</div></div></td>
+          <td data-sort="2"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-down">&#9660;</span><span class="gex-flat">&#9632;</span><span class="gex-up">&#9650;</span><span class="gex-flat">&#9632;</span><span class="gex-up">&#9650;</span><span class="gex-up">&#9650;</span></div><span class="chip chip-bull">IMPROVING</span></div></td>
+          <td data-sort="Moderate Positive Gamma">Moderate Positive Gamma</td>
+          <td data-sort="2"><span class="chip chip-bull">EXPANSION</span></td>
           <td data-sort="Spring detected">Spring detected</td>
           <td class="num" data-sort="6">6</td>
           <td data-sort="Neutral/Mixed"><span class="chip chip-none">Neutral/Mixed</span></td>
           <td class="driver" data-sort="+4.7%, fund adds shares">+4.7%, fund adds shares</td>
         </tr>
         <tr>
-          <td data-sort="Technology">Technology</td>
           <td class="ticker" data-sort="SNPS">SNPS</td>
+          <td class="sector" data-sort="Technology">Technology</td>
+          <td data-sort="Mark-down"><span class="chip chip-warn">Mark-down</span></td>
           <td class="num" data-sort="385.49">$385.49</td>
           <td class="num" data-sort="58.6">58.6%</td>
-          <td data-sort="Neutral / Transition Zone"><span class="chip chip-none">Neutral / Transition Zone</span></td>
-          <td data-sort="Mark-down"><span class="chip chip-warn">Mark-down</span></td>
+          <td data-sort="93.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 48 22" width="48" height="22"><rect class="bar-flat" x="0" y="3.3" width="6" height="18.7" rx="1"/><rect class="bar-down" x="8" y="3.7" width="6" height="18.3" rx="1"/><rect class="bar-down" x="16" y="4.2" width="6" height="17.8" rx="1"/><rect class="bar-down" x="24" y="5.3" width="6" height="16.7" rx="1"/><rect class="bar-up" x="32" y="1.1" width="6" height="20.9" rx="1"/><rect class="bar-down" x="40" y="1.5" width="6" height="20.5" rx="1"/></svg></div><div class="iv-last bar-down">93</div></div></td>
+          <td data-sort="0"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-up">&#9650;</span><span class="gex-down">&#9660;</span><span class="gex-flat">&#9632;</span></div><span class="chip chip-warn">WEAKENING</span></div></td>
+          <td data-sort="Neutral / Transition Zone">Neutral / Transition Zone</td>
+          <td data-sort="1"><span class="chip chip-none">Neutral</span></td>
           <td data-sort="Strong downtrend">Strong downtrend</td>
           <td class="num" data-sort="6">6</td>
           <td data-sort="Neutral/Mixed"><span class="chip chip-none">Neutral/Mixed</span></td>
           <td class="driver" data-sort="Up today, AI/Ansys growth story">Up today, AI/Ansys growth story</td>
         </tr>
         <tr>
-          <td data-sort="Technology">Technology</td>
           <td class="ticker" data-sort="CDNS">CDNS</td>
+          <td class="sector" data-sort="Technology">Technology</td>
+          <td data-sort="Distribution"><span class="chip chip-warn">Distribution</span></td>
           <td class="num" data-sort="347.62">$347.62</td>
           <td class="num" data-sort="49.2">49.2%</td>
-          <td data-sort="Neutral / Transition Zone"><span class="chip chip-none">Neutral / Transition Zone</span></td>
-          <td data-sort="Distribution"><span class="chip chip-warn">Distribution</span></td>
+          <td data-sort="68.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 8 22" width="8" height="22"><rect class="bar-flat" x="0" y="7.0" width="6" height="15.0" rx="1"/></svg></div><div class="iv-last bar-flat">68</div></div></td>
+          <td data-sort="2"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-up">&#9650;</span><span class="gex-up">&#9650;</span><span class="gex-up">&#9650;</span></div><span class="chip chip-bull">IMPROVING</span></div></td>
+          <td data-sort="Neutral / Transition Zone">Neutral / Transition Zone</td>
+          <td data-sort="1"><span class="chip chip-none">Neutral</span></td>
           <td data-sort="Upthrust detected">Upthrust detected</td>
           <td class="num" data-sort="6">6</td>
           <td data-sort="Neutral/Mixed"><span class="chip chip-none">Neutral/Mixed</span></td>
           <td class="driver" data-sort="Up today, positive Rosenblatt forecast vs. &quot;expensive&quot; note">Up today, positive Rosenblatt forecast vs. &quot;expensive&quot; note</td>
         </tr>
         <tr>
-          <td data-sort="Technology">Technology</td>
           <td class="ticker" data-sort="UBER">UBER</td>
+          <td class="sector" data-sort="Technology">Technology</td>
+          <td data-sort="Mark-down"><span class="chip chip-warn">Mark-down</span></td>
           <td class="num" data-sort="70.40">$70.40</td>
           <td class="num" data-sort="47.3">47.3%</td>
-          <td data-sort="Neutral / Transition Zone"><span class="chip chip-none">Neutral / Transition Zone</span></td>
-          <td data-sort="Mark-down"><span class="chip chip-warn">Mark-down</span></td>
+          <td data-sort="80.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 72 22" width="72" height="22"><rect class="bar-flat" x="0" y="4.0" width="6" height="18.0" rx="1"/><rect class="bar-flat" x="8" y="4.0" width="6" height="18.0" rx="1"/><rect class="bar-down" x="16" y="4.2" width="6" height="17.8" rx="1"/><rect class="bar-down" x="24" y="5.1" width="6" height="16.9" rx="1"/><rect class="bar-down" x="32" y="5.5" width="6" height="16.5" rx="1"/><rect class="bar-up" x="40" y="4.8" width="6" height="17.2" rx="1"/><rect class="bar-up" x="48" y="3.3" width="6" height="18.7" rx="1"/><rect class="bar-down" x="56" y="4.8" width="6" height="17.2" rx="1"/><rect class="bar-up" x="64" y="4.4" width="6" height="17.6" rx="1"/></svg></div><div class="iv-last bar-up">80</div></div></td>
+          <td data-sort="0"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-flat">&#9632;</span><span class="gex-down">&#9660;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-up">&#9650;</span><span class="gex-down">&#9660;</span><span class="gex-flat">&#9632;</span></div><span class="chip chip-warn">WEAKENING</span></div></td>
+          <td data-sort="Neutral / Transition Zone">Neutral / Transition Zone</td>
+          <td data-sort="1"><span class="chip chip-none">Neutral</span></td>
           <td data-sort="Downtrend continuation">Downtrend continuation</td>
           <td class="num" data-sort="6">6</td>
           <td data-sort="Neutral/Mixed"><span class="chip chip-none">Neutral/Mixed</span></td>
           <td class="driver" data-sort="Unusual options imply upside vs. Waymo exclusivity-loss headline">Unusual options imply upside vs. Waymo exclusivity-loss headline</td>
         </tr>
         <tr>
-          <td data-sort="Technology">Technology</td>
           <td class="ticker" data-sort="SAP">SAP</td>
+          <td class="sector" data-sort="Technology">Technology</td>
+          <td data-sort="Accumulation"><span class="chip chip-bull">Accumulation</span></td>
           <td class="num" data-sort="176.90">$176.90</td>
           <td class="num" data-sort="43.5">43.5%</td>
-          <td data-sort="Neutral / Transition Zone"><span class="chip chip-none">Neutral / Transition Zone</span></td>
-          <td data-sort="Accumulation"><span class="chip chip-bull">Accumulation</span></td>
+          <td data-sort="63.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 16 22" width="16" height="22"><rect class="bar-flat" x="0" y="8.4" width="6" height="13.6" rx="1"/><rect class="bar-up" x="8" y="8.1" width="6" height="13.9" rx="1"/></svg></div><div class="iv-last bar-up">63</div></div></td>
+          <td data-sort="2"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-flat">&#9632;</span><span class="gex-up">&#9650;</span><span class="gex-up">&#9650;</span></div><span class="chip chip-bull">IMPROVING</span></div></td>
+          <td data-sort="Neutral / Transition Zone">Neutral / Transition Zone</td>
+          <td data-sort="1"><span class="chip chip-none">Neutral</span></td>
           <td data-sort="Spring detected">Spring detected</td>
           <td class="num" data-sort="6">6</td>
           <td data-sort="Neutral/Mixed"><span class="chip chip-none">Neutral/Mixed</span></td>
           <td class="driver" data-sort="Surging today, undervalued framing">Surging today, undervalued framing</td>
         </tr>
         <tr>
-          <td data-sort="Technology">Technology</td>
           <td class="ticker" data-sort="ARQQ">ARQQ</td>
+          <td class="sector" data-sort="Technology">Technology</td>
+          <td data-sort="Mark-down"><span class="chip chip-warn">Mark-down</span></td>
           <td class="num" data-sort="17.29">$17.29</td>
           <td class="num" data-sort="117.2">117.2%</td>
-          <td data-sort="Neutral / Transition Zone"><span class="chip chip-none">Neutral / Transition Zone</span></td>
-          <td data-sort="Mark-down"><span class="chip chip-warn">Mark-down</span></td>
+          <td data-sort="38.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 64 22" width="64" height="22"><rect class="bar-flat" x="0" y="11.2" width="6" height="10.8" rx="1"/><rect class="bar-up" x="8" y="9.9" width="6" height="12.1" rx="1"/><rect class="bar-down" x="16" y="16.1" width="6" height="5.9" rx="1"/><rect class="bar-up" x="24" y="12.3" width="6" height="9.7" rx="1"/><rect class="bar-up" x="32" y="11.7" width="6" height="10.3" rx="1"/><rect class="bar-down" x="40" y="17.4" width="6" height="4.6" rx="1"/><rect class="bar-up" x="48" y="13.4" width="6" height="8.6" rx="1"/><rect class="bar-down" x="56" y="13.6" width="6" height="8.4" rx="1"/></svg></div><div class="iv-last bar-down">38</div></div></td>
+          <td data-sort="0"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-down">&#9660;</span><span class="gex-flat">&#9632;</span></div><span class="chip chip-warn">WEAKENING</span></div></td>
+          <td data-sort="Neutral / Transition Zone">Neutral / Transition Zone</td>
+          <td data-sort="1"><span class="chip chip-none">Neutral</span></td>
           <td data-sort="Strong downtrend">Strong downtrend</td>
           <td class="num" data-sort="5">5</td>
           <td data-sort="Neutral/Mixed"><span class="chip chip-none">Neutral/Mixed</span></td>
           <td class="driver" data-sort="Thin (1 hit, widened), stale/neutral dividend note">Thin (1 hit, widened), stale/neutral dividend note</td>
         </tr>
         <tr>
-          <td data-sort="Technology">Technology</td>
           <td class="ticker" data-sort="ARM">ARM</td>
+          <td class="sector" data-sort="Technology">Technology</td>
+          <td data-sort="Mark-down"><span class="chip chip-warn">Mark-down</span></td>
           <td class="num" data-sort="247.84">$247.84</td>
           <td class="num" data-sort="100.1">100.1%</td>
-          <td data-sort="Neutral / Transition Zone"><span class="chip chip-none">Neutral / Transition Zone</span></td>
-          <td data-sort="Mark-down"><span class="chip chip-warn">Mark-down</span></td>
+          <td data-sort="83.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 72 22" width="72" height="22"><rect class="bar-flat" x="0" y="0.4" width="6" height="21.6" rx="1"/><rect class="bar-flat" x="8" y="0.4" width="6" height="21.6" rx="1"/><rect class="bar-up" x="16" y="0.0" width="6" height="22.0" rx="1"/><rect class="bar-down" x="24" y="0.4" width="6" height="21.6" rx="1"/><rect class="bar-flat" x="32" y="0.4" width="6" height="21.6" rx="1"/><rect class="bar-down" x="40" y="2.4" width="6" height="19.6" rx="1"/><rect class="bar-down" x="48" y="3.1" width="6" height="18.9" rx="1"/><rect class="bar-up" x="56" y="2.9" width="6" height="19.1" rx="1"/><rect class="bar-down" x="64" y="3.7" width="6" height="18.3" rx="1"/></svg></div><div class="iv-last bar-down">83</div></div></td>
+          <td data-sort="0"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-flat">&#9632;</span><span class="gex-down">&#9660;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-up">&#9650;</span><span class="gex-down">&#9660;</span><span class="gex-flat">&#9632;</span></div><span class="chip chip-warn">WEAKENING</span></div></td>
+          <td data-sort="Neutral / Transition Zone">Neutral / Transition Zone</td>
+          <td data-sort="1"><span class="chip chip-none">Neutral</span></td>
           <td data-sort="Strong downtrend">Strong downtrend</td>
           <td class="num" data-sort="5">5</td>
           <td data-sort="Neutral/Mixed"><span class="chip chip-none">Neutral/Mixed</span></td>
           <td class="driver" data-sort="Pre-earnings, China supply-chain concerns vs. soaring potential">Pre-earnings, China supply-chain concerns vs. soaring potential</td>
         </tr>
         <tr>
-          <td data-sort="Technology">Technology</td>
           <td class="ticker" data-sort="HPE">HPE</td>
+          <td class="sector" data-sort="Technology">Technology</td>
+          <td data-sort="Mark-up"><span class="chip chip-bull">Mark-up</span></td>
           <td class="num" data-sort="45.52">$45.52</td>
           <td class="num" data-sort="74.4">74.4%</td>
-          <td data-sort="Neutral / Transition Zone"><span class="chip chip-none">Neutral / Transition Zone</span></td>
-          <td data-sort="Mark-up"><span class="chip chip-bull">Mark-up</span></td>
+          <td data-sort="47.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 72 22" width="72" height="22"><rect class="bar-flat" x="0" y="11.4" width="6" height="10.6" rx="1"/><rect class="bar-flat" x="8" y="11.4" width="6" height="10.6" rx="1"/><rect class="bar-up" x="16" y="11.2" width="6" height="10.8" rx="1"/><rect class="bar-down" x="24" y="11.7" width="6" height="10.3" rx="1"/><rect class="bar-up" x="32" y="11.4" width="6" height="10.6" rx="1"/><rect class="bar-down" x="40" y="12.5" width="6" height="9.5" rx="1"/><rect class="bar-up" x="48" y="11.9" width="6" height="10.1" rx="1"/><rect class="bar-up" x="56" y="11.2" width="6" height="10.8" rx="1"/><rect class="bar-down" x="64" y="11.7" width="6" height="10.3" rx="1"/></svg></div><div class="iv-last bar-down">47</div></div></td>
+          <td data-sort="2"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-down">&#9660;</span><span class="gex-up">&#9650;</span><span class="gex-flat">&#9632;</span></div><span class="chip chip-bull">IMPROVING</span></div></td>
+          <td data-sort="Neutral / Transition Zone">Neutral / Transition Zone</td>
+          <td data-sort="1"><span class="chip chip-none">Neutral</span></td>
           <td data-sort="Uptrend continuation">Uptrend continuation</td>
           <td class="num" data-sort="5">5</td>
           <td data-sort="Neutral/Mixed"><span class="chip chip-none">Neutral/Mixed</span></td>
           <td class="driver" data-sort="Record high on new AI server vs. tumbling/overvalued notes">Record high on new AI server vs. tumbling/overvalued notes</td>
         </tr>
         <tr>
-          <td data-sort="Technology">Technology</td>
           <td class="ticker" data-sort="ORCL">ORCL</td>
+          <td class="sector" data-sort="Technology">Technology</td>
+          <td data-sort="Mark-down"><span class="chip chip-warn">Mark-down</span></td>
           <td class="num" data-sort="120.08">$120.08</td>
           <td class="num" data-sort="65.5">65.5%</td>
-          <td data-sort="Neutral / Transition Zone"><span class="chip chip-none">Neutral / Transition Zone</span></td>
-          <td data-sort="Mark-down"><span class="chip chip-warn">Mark-down</span></td>
+          <td data-sort="61.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 72 22" width="72" height="22"><rect class="bar-flat" x="0" y="8.8" width="6" height="13.2" rx="1"/><rect class="bar-flat" x="8" y="8.8" width="6" height="13.2" rx="1"/><rect class="bar-up" x="16" y="7.7" width="6" height="14.3" rx="1"/><rect class="bar-flat" x="24" y="7.7" width="6" height="14.3" rx="1"/><rect class="bar-up" x="32" y="7.5" width="6" height="14.5" rx="1"/><rect class="bar-flat" x="40" y="7.5" width="6" height="14.5" rx="1"/><rect class="bar-down" x="48" y="7.7" width="6" height="14.3" rx="1"/><rect class="bar-down" x="56" y="8.4" width="6" height="13.6" rx="1"/><rect class="bar-down" x="64" y="8.6" width="6" height="13.4" rx="1"/></svg></div><div class="iv-last bar-down">61</div></div></td>
+          <td data-sort="2"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-flat">&#9632;</span><span class="gex-up">&#9650;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-down">&#9660;</span><span class="gex-flat">&#9632;</span><span class="gex-up">&#9650;</span><span class="gex-up">&#9650;</span><span class="gex-flat">&#9632;</span></div><span class="chip chip-bull">IMPROVING</span></div></td>
+          <td data-sort="Neutral / Transition Zone">Neutral / Transition Zone</td>
+          <td data-sort="1"><span class="chip chip-none">Neutral</span></td>
           <td data-sort="Strong downtrend">Strong downtrend</td>
           <td class="num" data-sort="5">5</td>
           <td data-sort="Neutral/Mixed"><span class="chip chip-none">Neutral/Mixed</span></td>
           <td class="driver" data-sort="Beaten-down stock, mixed buy-the-dip framing">Beaten-down stock, mixed buy-the-dip framing</td>
         </tr>
         <tr>
-          <td data-sort="Technology">Technology</td>
           <td class="ticker" data-sort="ADBE">ADBE</td>
+          <td class="sector" data-sort="Technology">Technology</td>
+          <td data-sort="Mark-up"><span class="chip chip-bull">Mark-up</span></td>
           <td class="num" data-sort="248.00">$248.00</td>
           <td class="num" data-sort="47.2">47.2%</td>
-          <td data-sort="Moderate Positive Gamma"><span class="chip chip-bull">Moderate Positive Gamma</span></td>
-          <td data-sort="Mark-up"><span class="chip chip-bull">Mark-up</span></td>
+          <td data-sort="61.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 72 22" width="72" height="22"><rect class="bar-flat" x="0" y="8.4" width="6" height="13.6" rx="1"/><rect class="bar-flat" x="8" y="8.4" width="6" height="13.6" rx="1"/><rect class="bar-up" x="16" y="7.5" width="6" height="14.5" rx="1"/><rect class="bar-flat" x="24" y="7.5" width="6" height="14.5" rx="1"/><rect class="bar-down" x="32" y="7.7" width="6" height="14.3" rx="1"/><rect class="bar-down" x="40" y="9.2" width="6" height="12.8" rx="1"/><rect class="bar-up" x="48" y="9.0" width="6" height="13.0" rx="1"/><rect class="bar-up" x="56" y="7.5" width="6" height="14.5" rx="1"/><rect class="bar-down" x="64" y="8.6" width="6" height="13.4" rx="1"/></svg></div><div class="iv-last bar-down">61</div></div></td>
+          <td data-sort="2"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-down">&#9660;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-up">&#9650;</span><span class="gex-up">&#9650;</span><span class="gex-flat">&#9632;</span></div><span class="chip chip-bull">IMPROVING</span></div></td>
+          <td data-sort="Moderate Positive Gamma">Moderate Positive Gamma</td>
+          <td data-sort="1"><span class="chip chip-none">Neutral</span></td>
           <td data-sort="Strong uptrend">Strong uptrend</td>
           <td class="num" data-sort="5">5</td>
           <td data-sort="Neutral/Mixed"><span class="chip chip-none">Neutral/Mixed</span></td>
           <td class="driver" data-sort="Mixed: climbs post-IBM warning vs. &quot;lagged the market&quot;">Mixed: climbs post-IBM warning vs. &quot;lagged the market&quot;</td>
         </tr>
         <tr>
-          <td data-sort="Utilities">Utilities</td>
           <td class="ticker" data-sort="TLN">TLN</td>
+          <td class="sector" data-sort="Utilities">Utilities</td>
+          <td data-sort="Mark-down"><span class="chip chip-warn">Mark-down</span></td>
           <td class="num" data-sort="330.48">$330.48</td>
           <td class="num" data-sort="67.6">67.6%</td>
-          <td data-sort="Neutral / Transition Zone"><span class="chip chip-none">Neutral / Transition Zone</span></td>
-          <td data-sort="Mark-down"><span class="chip chip-warn">Mark-down</span></td>
+          <td data-sort="97.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 48 22" width="48" height="22"><rect class="bar-flat" x="0" y="1.1" width="6" height="20.9" rx="1"/><rect class="bar-down" x="8" y="1.3" width="6" height="20.7" rx="1"/><rect class="bar-flat" x="16" y="1.3" width="6" height="20.7" rx="1"/><rect class="bar-down" x="24" y="3.5" width="6" height="18.5" rx="1"/><rect class="bar-up" x="32" y="1.3" width="6" height="20.7" rx="1"/><rect class="bar-up" x="40" y="0.7" width="6" height="21.3" rx="1"/></svg></div><div class="iv-last bar-up">97</div></div></td>
+          <td data-sort="0"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-up">&#9650;</span><span class="gex-down">&#9660;</span><span class="gex-flat">&#9632;</span></div><span class="chip chip-warn">WEAKENING</span></div></td>
+          <td data-sort="Neutral / Transition Zone">Neutral / Transition Zone</td>
+          <td data-sort="1"><span class="chip chip-none">Neutral</span></td>
           <td data-sort="Strong downtrend">Strong downtrend</td>
           <td class="num" data-sort="6">6</td>
           <td data-sort="Neutral/Mixed"><span class="chip chip-none">Neutral/Mixed</span></td>
           <td class="driver" data-sort="PT raised to $482 vs. pre-earnings rally cooling">PT raised to $482 vs. pre-earnings rally cooling</td>
         </tr>
         <tr>
-          <td data-sort="Utilities">Utilities</td>
           <td class="ticker" data-sort="NRG">NRG</td>
+          <td class="sector" data-sort="Utilities">Utilities</td>
+          <td data-sort="Mark-down"><span class="chip chip-warn">Mark-down</span></td>
           <td class="num" data-sort="127.56">$127.56</td>
           <td class="num" data-sort="57.2">57.2%</td>
-          <td data-sort="Neutral / Transition Zone"><span class="chip chip-none">Neutral / Transition Zone</span></td>
-          <td data-sort="Mark-down"><span class="chip chip-warn">Mark-down</span></td>
+          <td data-sort="97.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 72 22" width="72" height="22"><rect class="bar-flat" x="0" y="2.2" width="6" height="19.8" rx="1"/><rect class="bar-flat" x="8" y="2.2" width="6" height="19.8" rx="1"/><rect class="bar-up" x="16" y="1.8" width="6" height="20.2" rx="1"/><rect class="bar-up" x="24" y="0.9" width="6" height="21.1" rx="1"/><rect class="bar-down" x="32" y="2.0" width="6" height="20.0" rx="1"/><rect class="bar-up" x="40" y="0.0" width="6" height="22.0" rx="1"/><rect class="bar-down" x="48" y="0.4" width="6" height="21.6" rx="1"/><rect class="bar-down" x="56" y="1.8" width="6" height="20.2" rx="1"/><rect class="bar-up" x="64" y="0.7" width="6" height="21.3" rx="1"/></svg></div><div class="iv-last bar-up">97</div></div></td>
+          <td data-sort="0"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-flat">&#9632;</span><span class="gex-up">&#9650;</span><span class="gex-up">&#9650;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-down">&#9660;</span><span class="gex-down">&#9660;</span><span class="gex-down">&#9660;</span></div><span class="chip chip-warn">WEAKENING</span></div></td>
+          <td data-sort="Neutral / Transition Zone">Neutral / Transition Zone</td>
+          <td data-sort="1"><span class="chip chip-none">Neutral</span></td>
           <td data-sort="Strong downtrend">Strong downtrend</td>
           <td class="num" data-sort="6">6</td>
           <td data-sort="Neutral/Mixed"><span class="chip chip-none">Neutral/Mixed</span></td>
@@ -582,8 +714,11 @@
     <div class="legend-card">
       <b>Screen criteria:</b> IV Implied &ge;40%, price &lt;$500 (from latest IV_*.csv), then senti-scored 1-10 against the latest news bulletin, filtered to Score &ge;5.<br>
       <b>Senti Score:</b> 1-2 Strongly Bearish &middot; 3-4 Bearish &middot; 5-6 Neutral/Mixed &middot; 7-8 Bullish &middot; 9-10 Strongly Bullish — judged on financial materiality/direction of recent headlines, weighted toward the most recent news.<br>
-      <b>GEX Rating:</b> dealer gamma positioning classification from the latest stock_analysis snapshot (Positive = dealers long gamma/stabilizing, Negative = dealers short gamma/amplifying, Neutral = transition zone).<br>
-      <b>Wyckoff Phase:</b> Accumulation &middot; Mark-up &middot; Distribution &middot; Mark-down, with specific pattern (Spring, SOS, Upthrust, SOW, trend continuation) from Wyckoff technical analysis.<br>
+      <b>IV Rank Trend:</b> one bar per trading day (0&ndash;100 scale, up to last 9 sessions) — <span class="iv-last bar-up">green</span> = higher than the prior day, <span class="iv-last bar-down">red</span> = lower, grey = first day/unchanged. Bold number is the latest IV Rank.<br>
+      <b>GEX Trend:</b> one glyph per day-over-day change in GEX Scale — <span class="gex-up">&#9650;</span> Up (dealer positioning strengthening) · <span class="gex-down">&#9660;</span> Down (weakening) · <span class="gex-flat">&#9632;</span> Unchanged — with a recency chip (IMPROVING/WEAKENING/STABLE over the last 2 days).<br>
+      <b>GEX Rating:</b> current dealer gamma positioning classification from the latest stock_analysis snapshot.<br>
+      <b>Vol Read:</b> EXPANSION = last-2-day avg Volume Ratio &ge;1.3&times; the prior average · CONTRACTION = &le;0.7&times; · Neutral = in between.<br>
+      <b>Wyckoff Phase/Pattern:</b> Accumulation &middot; Mark-up &middot; Distribution &middot; Mark-down, with specific pattern (Spring, SOS, Upthrust, SOW, trend continuation).<br>
       <b>Sorting:</b> click any column header to sort by that column; click again to reverse.
     </div>
   </div>
