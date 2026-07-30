@@ -3,835 +3,519 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Oil Market Brief — 29 Jul 2026 | Platts Multi-Report Review</title>
+<title>Oil Brief | 28 Jul 2026 — Dashboard + Deep Dive</title>
 <style>
-  :root {
-    --bg: #0d1117;
-    --surface: #161b22;
-    --surface2: #1c2330;
-    --border: #30363d;
-    --text: #e6edf3;
-    --muted: #8b949e;
-    --bull: #3fb950;
-    --bull-bg: rgba(63,185,80,0.12);
-    --bear: #f85149;
-    --bear-bg: rgba(248,81,73,0.12);
-    --neutral: #d29922;
-    --neutral-bg: rgba(210,153,34,0.12);
-    --info: #58a6ff;
-    --info-bg: rgba(88,166,255,0.12);
-    --critical: #ff7b72;
-    --critical-bg: rgba(255,123,114,0.12);
-    --accent: #79c0ff;
-  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0d1117; color: #c9d1d9; font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif; font-size: 13px; line-height: 1.6; }
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+  .header { background: linear-gradient(135deg, #161b22 0%, #0d1117 100%); border-bottom: 1px solid #30363d; padding: 18px 28px 14px; }
+  .header-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; flex-wrap: wrap; gap: 10px; }
+  .header-title { font-size: 19px; font-weight: 700; color: #f0f6fc; letter-spacing: -0.3px; }
+  .header-subtitle { font-size: 11px; color: #8b949e; margin-top: 3px; }
+  .header-meta { text-align: right; }
+  .header-date { font-size: 13px; color: #58a6ff; font-weight: 600; }
+  .header-sources { font-size: 10px; color: #8b949e; margin-top: 3px; line-height: 1.6; }
 
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    font-size: 13px;
-    line-height: 1.5;
-  }
+  .macro-strip { background: #161b22; border-bottom: 1px solid #30363d; padding: 9px 28px; font-size: 11.5px; color: #f0d78c; }
+  .macro-strip b { color: #ffe9a8; }
 
-  .header {
-    background: linear-gradient(135deg, #161b22 0%, #1c2330 100%);
-    border-bottom: 1px solid var(--border);
-    padding: 20px 28px 16px;
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 12px;
-  }
-  .header-left h1 { font-size: 20px; font-weight: 700; color: var(--text); letter-spacing: -0.3px; }
-  .header-left .sub { font-size: 12px; color: var(--muted); margin-top: 3px; }
-  .header-right { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
-  .badge-source {
-    background: var(--info-bg); color: var(--info); border: 1px solid rgba(88,166,255,0.3);
-    padding: 2px 10px; border-radius: 20px; font-size: 11px; font-weight: 600;
-  }
-  .badge-date { font-size: 11px; color: var(--muted); }
+  .main { padding: 18px 28px; max-width: 1220px; margin: 0 auto; }
+  .section-title { font-size: 11px; font-weight: 700; color: #8b949e; text-transform: uppercase; letter-spacing: 1px; margin: 26px 0 10px; padding-bottom: 5px; border-bottom: 1px solid #21262d; }
 
-  .macro-banner {
-    margin: 16px 28px; background: var(--critical-bg); border: 1px solid rgba(255,123,114,0.35);
-    border-left: 4px solid var(--critical); border-radius: 8px; padding: 14px 18px;
-  }
-  .macro-banner h2 {
-    font-size: 12px; font-weight: 700; color: var(--critical); text-transform: uppercase;
-    letter-spacing: 0.8px; margin-bottom: 6px;
-  }
-  .macro-banner p { font-size: 12.5px; color: #cdd9e5; line-height: 1.6; }
-  .macro-banner p + p { margin-top: 8px; }
-  .macro-banner .macro-flags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
-  .macro-flag {
-    background: rgba(255,123,114,0.15); border: 1px solid rgba(255,123,114,0.3); color: #ff9492;
-    padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 600;
-  }
+  .badge { display: inline-block; padding: 2px 9px; border-radius: 4px; font-size: 11.5px; font-weight: 700; white-space: nowrap; margin-left: 8px; vertical-align: middle; }
+  .badge-sbull { background: #1a3a1a; color: #3fb950; border: 1px solid #3fb95066; }
+  .badge-bull { background: #1a3a2a; color: #56d364; border: 1px solid #56d36444; }
+  .badge-neutral { background: #21262d; color: #8b949e; border: 1px solid #30363d; }
+  .badge-bear { background: #3a1a1a; color: #f85149; border: 1px solid #f8514966; }
+  .badge-sbear { background: #4a0d0d; color: #ff7b72; border: 1px solid #ff7b7266; }
 
-  .prior-banner {
-    margin: 0 28px 16px; background: var(--info-bg); border: 1px solid rgba(88,166,255,0.3);
-    border-radius: 8px; padding: 12px 18px; font-size: 12px; color: #cdd9e5;
-  }
-  .prior-banner strong { color: var(--accent); }
-  .prior-chip { display: inline-block; padding: 2px 9px; border-radius: 10px; font-size: 10.5px; font-weight: 700; margin: 2px 3px; }
-  .prior-chip.bull { background: var(--bull-bg); color: var(--bull); }
-  .prior-chip.bear { background: var(--bear-bg); color: var(--bear); }
-  .prior-chip.neutral { background: var(--neutral-bg); color: var(--neutral); }
+  /* Dashboard table */
+  .tbl-wrap { overflow-x: auto; border: 1px solid #30363d; border-radius: 8px; background: #161b22; }
+  table.dash { border-collapse: collapse; width: 100%; min-width: 1100px; font-size: 11.5px; }
+  table.dash th { background: #0d1117; color: #8b949e; text-transform: uppercase; letter-spacing: 0.5px; font-size: 10px; padding: 9px 10px; text-align: left; border-bottom: 1px solid #30363d; position: sticky; top: 0; }
+  table.dash td { padding: 9px 10px; border-bottom: 1px solid #21262d; vertical-align: top; color: #c9d1d9; }
+  table.dash tr:last-child td { border-bottom: none; }
+  table.dash td.prod { font-weight: 700; color: #f0f6fc; white-space: nowrap; }
 
-  .bench-strip { margin: 0 28px 16px; display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 8px; }
-  .bench-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; }
-  .bench-card .label { font-size: 10px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.6px; }
-  .bench-card .price { font-size: 16px; font-weight: 700; margin-top: 2px; }
-  .bench-card .delta { font-size: 11px; margin-top: 1px; }
-  .bench-card .prev { font-size: 10px; color: var(--muted); margin-top: 1px; }
-  .up { color: var(--bull); }
-  .dn { color: var(--bear); }
-  .flat { color: var(--neutral); }
+  .card { background: #161b22; border: 1px solid #30363d; border-radius: 8px; margin-bottom: 18px; overflow: hidden; }
+  .card-head { padding: 12px 18px; border-bottom: 1px solid #21262d; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px; }
+  .card-title { font-size: 15px; font-weight: 700; color: #f0f6fc; }
+  .card-body { padding: 14px 18px 16px; }
 
-  .section-header { padding: 0 28px; margin: 20px 0 10px; display: flex; align-items: center; gap: 10px; }
-  .section-header h2 { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); }
-  .section-header::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .subgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 12px; }
+  @media (max-width: 900px) { .subgrid { grid-template-columns: 1fr; } }
 
-  .dashboard-grid { padding: 0 28px 28px; display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 12px; }
-  .product-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; }
-  .card-header { padding: 12px 16px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border); }
-  .card-header-left { display: flex; align-items: center; gap: 10px; }
-  .product-name { font-size: 13px; font-weight: 700; color: var(--text); }
-  .product-price { font-size: 11px; color: var(--muted); margin-top: 1px; }
+  .block { background: #0d1117; border: 1px solid #21262d; border-radius: 6px; padding: 10px 12px; }
+  .block-label { font-size: 10px; font-weight: 700; color: #58a6ff; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 5px; }
+  .block p { font-size: 12px; color: #c9d1d9; }
 
-  .verdict { display: flex; flex-direction: column; align-items: flex-end; gap: 3px; }
-  .verdict-badge { padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.3px; }
-  .verdict-badge.bull { background: var(--bull-bg); color: var(--bull); border: 1px solid rgba(63,185,80,0.3); }
-  .verdict-badge.xbull { background: rgba(63,185,80,0.22); color: var(--bull); border: 1px solid rgba(63,185,80,0.55); }
-  .verdict-badge.bear { background: var(--bear-bg); color: var(--bear); border: 1px solid rgba(248,81,73,0.3); }
-  .verdict-badge.neutral { background: var(--neutral-bg); color: var(--neutral); border: 1px solid rgba(210,153,34,0.3); }
-  .verdict-badge.nodata { background: var(--surface2); color: var(--muted); border: 1px solid var(--border); }
-  .conviction { font-size: 10px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+  .geo-split { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 12px; }
+  @media (max-width: 900px) { .geo-split { grid-template-columns: 1fr; } }
+  .geo-block { border-radius: 6px; padding: 10px 12px; border: 1px solid; }
+  .geo-ru { background: #1a1420; border-color: #3d2a54; }
+  .geo-ru .block-label { color: #bc8cff; }
+  .geo-ir { background: #1c1610; border-color: #4a3418; }
+  .geo-ir .block-label { color: #e3b341; }
 
-  .card-body { padding: 12px 16px; flex: 1; display: flex; flex-direction: column; gap: 10px; }
-  .pillar { display: flex; flex-direction: column; gap: 4px; }
-  .pillar-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.7px; color: var(--muted); }
-  .pillar-text { font-size: 12px; color: #cdd9e5; line-height: 1.5; }
+  .factors { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 12px; }
+  @media (max-width: 900px) { .factors { grid-template-columns: 1fr; } }
+  .fx-bull, .fx-bear { border-radius: 6px; padding: 10px 12px; border: 1px solid; }
+  .fx-bull { background: #10230f; border-color: #23422a; }
+  .fx-bear { background: #22110f; border-color: #45241f; }
+  .fx-bull .block-label { color: #56d364; }
+  .fx-bear .block-label { color: #ff7b72; }
+  ul.flist { list-style: none; padding: 0; margin: 0; }
+  ul.flist li { font-size: 12px; padding: 2px 0 2px 14px; position: relative; }
+  ul.flist li::before { content: "•"; position: absolute; left: 0; }
 
-  .signals-row { display: flex; gap: 6px; flex-wrap: wrap; }
-  .signal-chip { padding: 2px 8px; border-radius: 10px; font-size: 10px; font-weight: 600; }
-  .signal-chip.bull { background: var(--bull-bg); color: var(--bull); }
-  .signal-chip.bear { background: var(--bear-bg); color: var(--bear); }
-  .signal-chip.warn { background: rgba(210,153,34,0.15); color: var(--neutral); }
-  .signal-chip.info { background: var(--info-bg); color: var(--info); }
+  .divergence { background: #3a2a00; border: 1px solid #e3b341; border-radius: 6px; padding: 10px 12px; margin-bottom: 12px; font-size: 12px; color: #f0d78c; }
+  .divergence b { color: #ffe9a8; }
 
-  .divider { height: 1px; background: var(--border); }
-  .rationale-box { background: var(--surface2); border-radius: 6px; padding: 8px 10px; font-size: 11.5px; color: #adbac7; line-height: 1.55; }
-  .rationale-box em { color: var(--accent); font-style: normal; font-weight: 600; }
+  .databox { background: #10151c; border: 1px solid #21262d; border-radius: 6px; padding: 10px 12px; margin-bottom: 12px; font-size: 12px; color: #8b949e; }
+  .databox b { color: #c9d1d9; }
 
-  .risk-section { padding: 0 28px 20px; }
-  .risk-table { width: 100%; border-collapse: collapse; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
-  .risk-table th { background: var(--surface2); padding: 9px 14px; text-align: left; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.7px; color: var(--muted); border-bottom: 1px solid var(--border); }
-  .risk-table td { padding: 9px 14px; font-size: 12px; color: #cdd9e5; border-bottom: 1px solid var(--border); vertical-align: top; }
-  .risk-table tr:last-child td { border-bottom: none; }
-  .risk-table tr:hover td { background: var(--surface2); }
-  .sev-critical { color: #ff7b72; font-weight: 700; }
-  .sev-high { color: #ffa657; font-weight: 700; }
-  .sev-mod { color: var(--neutral); font-weight: 700; }
+  .rationale { background: #0d1117; border-left: 3px solid #58a6ff; border-radius: 0 6px 6px 0; padding: 10px 14px; font-size: 12.5px; color: #d9e3ee; font-style: italic; }
 
-  .summary-section { padding: 0 28px 20px; }
-  .summary-table { width: 100%; border-collapse: collapse; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
-  .summary-table th { background: var(--surface2); padding: 9px 14px; text-align: left; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.7px; color: var(--muted); border-bottom: 1px solid var(--border); }
-  .summary-table td { padding: 9px 14px; font-size: 12px; color: #cdd9e5; border-bottom: 1px solid var(--border); vertical-align: middle; }
-  .summary-table tr:last-child td { border-bottom: none; }
-  .summary-table tr:hover td { background: var(--surface2); }
-  .td-product { font-weight: 700; color: var(--text); }
-  .td-driver { color: var(--muted); font-size: 11px; }
-  .conf-high { color: var(--bull); font-weight: 700; font-size: 11px; }
-  .conf-med { color: var(--neutral); font-weight: 700; font-size: 11px; }
-  .conf-low { color: var(--muted); font-weight: 700; font-size: 11px; }
-  .td-move { font-size: 11px; font-weight: 700; }
+  .cross-notes { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 14px 18px; margin: 22px 0; }
+  .cross-notes ul { list-style: none; padding: 0; }
+  .cross-notes li { font-size: 12.5px; padding: 4px 0 4px 16px; position: relative; }
+  .cross-notes li::before { content: "▸"; position: absolute; left: 0; color: #58a6ff; }
 
-  .info-grid { padding: 0 28px 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-  @media (max-width: 700px) { .info-grid { grid-template-columns: 1fr; } }
-  .info-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; }
-  .info-card h3 { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.7px; color: var(--muted); margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
-  .info-card .stat-row { display: flex; justify-content: space-between; align-items: center; padding: 5px 0; border-bottom: 1px solid var(--border); font-size: 12px; }
-  .info-card .stat-row:last-child { border-bottom: none; }
-  .stat-label { color: var(--muted); }
-  .stat-val { font-weight: 600; color: var(--text); }
-  .stat-val.up { color: var(--bull); }
-  .stat-val.dn { color: var(--bear); }
-  .stat-val.warn { color: var(--neutral); }
+  .toc { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 4px; }
+  .toc a { font-size: 11px; color: #58a6ff; text-decoration: none; background: #161b22; border: 1px solid #30363d; padding: 4px 10px; border-radius: 12px; }
+  .toc a:hover { background: #21262d; }
 
-  .footer { padding: 14px 28px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
-  .footer-text { font-size: 11px; color: var(--muted); }
-  .footer-disclaimer { font-size: 10px; color: #484f58; max-width: 500px; }
+  .foot { padding: 14px 28px 24px; font-size: 10.5px; color: #6e7681; border-top: 1px solid #21262d; margin-top: 10px; max-width: 1220px; margin-left: auto; margin-right: auto; }
 </style>
 </head>
 <body>
 
 <div class="header">
-  <div class="header-left">
-    <h1>Oil Market Brief</h1>
-    <div class="sub">Platts Oilgram News + Asia-Pacific/Arab Gulf Marketscan + LPGaswire + Bunkerwire — Analyst Synthesis | July 29, 2026</div>
-  </div>
-  <div class="header-right">
-    <span class="badge-source">Sources: Oilgram News · APAC/AG Marketscan · LPGaswire · Bunkerwire — 29 Jul 2026</span>
-    <span class="badge-date">Generated: 30 Jul 2026 09:10</span>
+  <div class="header-top">
+    <div>
+      <div class="header-title">Oil Market Daily Brief — Dashboard + Deep Dive</div>
+      <div class="header-subtitle">Part A: Cross-product dashboard · Part B: MOC Activity, Tenders, Refinery Outages, Geopolitics (Russia/Ukraine &amp; US/Iran) — product-by-product</div>
+    </div>
+    <div class="header-meta">
+      <div class="header-date">28 July 2026</div>
+      <div class="header-sources">Sources: Oilgram News · Asia-Pacific/Arab Gulf Marketscan · Bunkerwire · LPGaswire (28 Jul 2026)<br>Vortexa flow CSV present but not additionally mined beyond structure check — CAS (Commodities at Sea) flow data embedded in Oilgram used as ground truth instead</div>
+    </div>
   </div>
 </div>
 
-<div class="macro-banner">
-  <h2>🚨 Crude Spikes Anew — Iran Fires Ballistic Missiles Directly at US Bases (First Since the Pause), WTI +6.6%, Brent +7.3% — Fujairah Stocks Crash Hardest Since 2022, US Commercial Crude at an 11-Year Low</h2>
-  <p>
-    Five sessions on from our last update (24 Jul), crude has round-tripped hard: the post-Houthi-attack spike we flagged then fully unwound over the following days (Sept Dubai traded as low as <strong>$79.50-79.90/b</strong> this week) before a fresh escalation reignited the complex. Iran's Islamic Revolutionary Guard Corps launched multiple ballistic missiles at US bases in the Middle East at 5:45pm ET July 28 — an attempted surprise attack, with every missile intercepted, US Central Command said — while US and Saudi forces struck Iran-backed militants in Iraq after more than 30 IRGC-directed drone attacks on US bases and Saudi energy infrastructure over the prior three days. Houthi militants separately claimed a fresh strike on a Saudi tanker July 28, and satellite imagery from July 26 shows a probable fire at Saudi Aramco's Jazan refinery after Houthis claimed a strike on "sensitive Aramco-affiliated facilities" — a rare direct hit on downstream infrastructure rather than shipping. NYMEX September WTI settled <span class="up">$84.46/b (+$5.20, +6.6%)</span> and ICE September Brent settled <span class="up">$88.09/b (+$6.01, +7.3%)</span>. Underneath the geopolitical shock, the physical data is now genuinely tight: US commercial crude stocks fell to an <strong>11-year low</strong> of 404.51mn barrels (Cushing at its lowest since April 2014, the SPR at its lowest since March 1983), while Fujairah's oil product stockpile suffered its steepest weekly drop since February 2022 — down 23%, led by a 41% collapse in heavy distillates. Houthi militants have also reinstated a naval blockade on Saudi-linked shipping (in force since July 20), forcing Chinese state-owned VLCC operators Cosco and China Merchants to quietly avoid Yanbu liftings even after successfully transiting the Red Sea, pushing some barrels toward the Sidi Kerir/Sumed route instead.
-  </p>
-  <div class="macro-flags">
-    <span class="macro-flag">💥 Iran Fires Missiles Directly at US Bases — First Since the Pause, All Intercepted</span>
-    <span class="macro-flag">📈 WTI +6.6% to $84.46/b, Brent +7.3% to $88.09/b</span>
-    <span class="macro-flag">🇺🇸 US Commercial Crude 11-Year Low; SPR Lowest Since 1983</span>
-    <span class="macro-flag">📉 Fujairah Stocks -23% WoW, Heaviest Drop Since Feb 2022</span>
-    <span class="macro-flag">🚢 Chinese VLCC Majors (Cosco, China Merchants) Quietly Avoid Yanbu Despite Successful Transits</span>
-    <span class="macro-flag">🔥 Probable Fire at Saudi Aramco's Jazan Refinery — Direct Infrastructure Hit</span>
-  </div>
+<div class="macro-strip">
+  <b>Macro anchor:</b> ICE Sept Brent fell from ~$90/b to $84.21–85.29/b through the session (~-$4.16 to -$4.89/b, roughly -4.6% to -5.4% — an <b>extreme</b> (&gt;3.5%) move) and NYMEX Sept WTI settled $79.26/b (-$3.35/b), as the US-Iran strike pause held for a third consecutive day and Iran said "please stop, let's meet." This is a genuine de-escalation-driven selloff, but physical dislocation (Houthi Red Sea blockade, Yanbu-to-Far East freight, Hormuz traffic reduction, 47m bbl of Iranian crude stranded on tankers) has NOT reversed — flagged throughout as an unresolved tail risk that could snap back if talks collapse (Trump: strikes could resume "if ceasefire talks fail").
 </div>
 
-<div class="prior-banner">
-  <strong>Vs. our last cycle (24 Jul) conviction calls:</strong> five sessions have passed without a fresh brief — crude fully unwound its 24 Jul reversal-lower call over the intervening days (Sept Dubai troughed near $79.50-79.90/b this week) before today's missile attack reignited the whole complex. Reading through to today's calls directly rather than a stale day-by-day chain:
-  Crude <span class="prior-chip bull">was Bullish (24 Jul)</span> → <span class="prior-chip bull">re-upgraded to Extremely Bullish</span> (a direct Iran-US missile exchange, an 11-year low in US commercial stocks, a 23% Fujairah stock crash and a reinstated Houthi naval blockade all converge on a single session — the highest-conviction setup since the original Houthi attack) &nbsp;|&nbsp;
-  Gasoil <span class="prior-chip bull">was Bullish</span> → <span class="prior-chip bull">re-upgraded to Extremely Bullish</span> (Aug-Sep swap spread jumped to $9.15/b from $8.20/b intraday, cash differential rose 83 cents to $6.54/b, Fujairah middle distillates hit a two-week low, and a probable refinery fire at Jazan adds a fresh, direct supply-side shock) &nbsp;|&nbsp;
-  HSFO <span class="prior-chip neutral">was Neutral</span> → <span class="prior-chip bull">upgraded to Bullish</span> (Fujairah heavy distillates — the HSFO/LSFO storage category — crashed 41% WoW to a six-week low, directly resolving the spot-vs-structure split that held this at Neutral last cycle; North Asian bunker hubs from Tokyo Bay to Zhoushan all report tightening into August) &nbsp;|&nbsp;
-  LSFO <span class="prior-chip neutral">was Neutral</span> → <span class="prior-chip bull">upgraded to Bullish</span> (same Fujairah heavy-distillate collapse, plus the Singapore 0.5%S swap backwardation widened further to $42.75/mt and the cash premium extended its rise) &nbsp;|&nbsp;
-  Gasoline <span class="prior-chip bear">was Bearish</span> → <span class="prior-chip neutral">upgraded to Neutral</span> (the complex "strengthened" on consistent Indonesian demand and observed spot tightness, and the RBOB-Brent crack widened further, but South Korea's gasoline stocks rose 3.8% MoM and Fujairah light distillates rebounded 41% off a record low — a genuine two-sided read) &nbsp;|&nbsp;
-  Naphtha <span class="prior-chip bull">was Bullish</span> → <span class="prior-chip bull">held at Bullish</span> (IOC canceled a 210,000mt sell tender and South Korean inventories fell 14.2% MoM, but the Aug-Sep MOPJ swap spread narrowed to $39/mt from $41/mt and the market traded rangebound) &nbsp;|&nbsp;
-  Jet Kero <span class="prior-chip bull">was Bullish</span> → <span class="prior-chip bull">held at Bullish</span> (South Korea's jet exports were the only product line with a YoY increase, +4.1% to 9.65mn barrels in June, and the cash differential widened further, even as the physical MOC has seen no bids since July 6) &nbsp;|&nbsp;
-  LPG <span class="prior-chip neutral">was Neutral</span> → <span class="prior-chip bull">reverted to Bullish, crude-led</span> (CFR North Asia propane jumped $19/mt tracking Brent's spike, snapping three straight down sessions, though US propane stocks built to a fresh 2026 high) &nbsp;|&nbsp;
-  SAF <span class="prior-chip neutral">was Neutral, watch flagged</span> → <span class="prior-chip neutral">held at Neutral</span> (the tentative premium-widening flagged last cycle reversed — the premium over jet compressed $20.25/mt this session — so the compression trend from two cycles ago resumes; no sustained reversal confirmed)
-</div>
+<div class="main">
 
-<div class="section-header"><h2>Benchmark Prices — 29 Jul 2026</h2></div>
-<div class="bench-strip">
-  <div class="bench-card">
-    <div class="label">ICE Sep Brent</div>
-    <div class="price up">$88.09/b</div>
-    <div class="delta up">▲ +$6.01 (+7.3%)</div>
-    <div class="prev">Troughed ~$81/b earlier this week</div>
-  </div>
-  <div class="bench-card">
-    <div class="label">NYMEX Sep WTI</div>
-    <div class="price up">$84.46/b</div>
-    <div class="delta up">▲ +$5.20 (+6.6%)</div>
-    <div class="prev">Iran missile attack on US bases, all intercepted</div>
-  </div>
-  <div class="bench-card">
-    <div class="label">Sept Cash Dubai (MOC)</div>
-    <div class="price up">~$79.90/b</div>
-    <div class="delta up">Convergence trade, Vitol declares Oman cargo</div>
-    <div class="prev">Traded as low as $79.50/b this week</div>
-  </div>
-  <div class="bench-card">
-    <div class="label">US Commercial Crude Stocks</div>
-    <div class="price dn">404.51mn bbl</div>
-    <div class="delta dn">-7.17mn bbl WoW</div>
-    <div class="prev">11-year low; SPR lowest since Mar 1983</div>
-  </div>
-  <div class="bench-card">
-    <div class="label">FOB Sing Naphtha</div>
-    <div class="price up">$95.73/b</div>
-    <div class="delta up">+$2.46 d/d</div>
-    <div class="prev">IOC canceled 210kmt sell tender</div>
-  </div>
-  <div class="bench-card">
-    <div class="label">FOB Sing Gasoil 10ppm</div>
-    <div class="price up">$158.32/b</div>
-    <div class="delta up">+$4.16 d/d</div>
-    <div class="prev">Swap spread jumped to $9.15/b</div>
-  </div>
-  <div class="bench-card">
-    <div class="label">FOB Sing Jet Kero</div>
-    <div class="price up">$150.85/b</div>
-    <div class="delta up">+$3.78 d/d</div>
-    <div class="prev">S.Korea exports only product +YoY</div>
-  </div>
-  <div class="bench-card">
-    <div class="label">FOB Sing 92 RON Gasoline</div>
-    <div class="price up">$115.13/b</div>
-    <div class="delta up">+$1.38 d/d</div>
-    <div class="prev">RBOB-Brent crack widened to $54.11/b</div>
-  </div>
-  <div class="bench-card">
-    <div class="label">Marine Fuel 0.5% FOB Sing</div>
-    <div class="price up">$711.72/mt</div>
-    <div class="delta up">+$17.34 d/d</div>
-    <div class="prev">Fujairah heavy distillates -41% WoW</div>
-  </div>
-  <div class="bench-card">
-    <div class="label">HSFO 380cst FOB Sing</div>
-    <div class="price up">$531.47/mt</div>
-    <div class="delta up">+$11.73 d/d</div>
-    <div class="prev">North Asia bunker hubs tightening</div>
-  </div>
-  <div class="bench-card">
-    <div class="label">CFR N.Asia Propane</div>
-    <div class="price up">$734/mt</div>
-    <div class="delta up">+$19 d/d</div>
-    <div class="prev">First rise after 3 straight down sessions</div>
-  </div>
-  <div class="bench-card">
-    <div class="label">SAF FOB Straits</div>
-    <div class="price up">$2,540/mt</div>
-    <div class="delta up">+$10 d/d, premium -$20.25/mt</div>
-    <div class="prev">Compression trend resumes</div>
-  </div>
-</div>
-
-<div class="section-header"><h2>Product Analysis</h2></div>
-<div class="dashboard-grid">
-
-  <div class="product-card" style="border-color: rgba(63,185,80,0.55);">
-    <div class="card-header" style="background: rgba(63,185,80,0.1);">
-      <div class="card-header-left">
-        <div>
-          <div class="product-name">Crude Oil ✅ Re-upgraded</div>
-          <div class="product-price">Brent $88.09/b · WTI $84.46/b · Sept Cash Dubai ~$79.90/b</div>
-        </div>
-      </div>
-      <div class="verdict">
-        <span class="verdict-badge xbull">Extremely Bullish</span>
-        <span class="conviction">Conviction: Very High</span>
-      </div>
-    </div>
-    <div class="card-body">
-      <div class="pillar">
-        <div class="pillar-label">Escalation — A Direct State-on-State Attack</div>
-        <div class="pillar-text">Iran's IRGC launched multiple ballistic missiles directly at US bases at 5:45pm ET July 28 — an attempted surprise attack, with every missile intercepted per US Central Command — the first such direct attack since a multi-day pause. The US and Saudi Arabia responded with strikes on Iran-backed militants in Iraq after more than 30 IRGC-directed drone attacks on US bases and Saudi energy infrastructure over the prior three days. This is qualitatively different from shipping harassment: it is a direct military exchange between Iran and the US.</div>
-      </div>
-      <div class="divider"></div>
-      <div class="pillar">
-        <div class="pillar-label">Fundamentals — Genuinely Tight Physical Market</div>
-        <div class="pillar-text">US commercial crude stocks fell 7.17mn barrels to 404.51mn barrels, an 11-year low, with Cushing at its lowest since April 2014 and the Strategic Petroleum Reserve at its lowest since March 1983 (down 107.79mn barrels since late March). Refinery utilization hit 97.2% (highest since Dec 2018) on record product cracks. This is a market drawing down inventory at multiple levels simultaneously, not just a price shock.</div>
-      </div>
-      <div class="divider"></div>
-      <div class="pillar">
-        <div class="pillar-label">Structure — Blockade Reinstated, Chinese Majors Quietly Reroute</div>
-        <div class="pillar-text">Houthi militants' naval blockade on Saudi-linked shipping (in force since July 20) saw only 25 ships transit the line July 28 — the lowest daily count since reinstatement. Chinese state-owned VLCC operators Cosco Shipping and China Merchants are avoiding Yanbu liftings even after successfully transiting the Red Sea July 23-26 — quiet capitulation to the risk rather than a policy statement, but a genuine behavioral shift. Yanbu-Far East VLCC freight jumped over 30% day-over-day to $66.87/mt (+83.6% from $38.62/mt a week earlier).</div>
-      </div>
-      <div class="signals-row">
-        <span class="signal-chip bear">Iran Fires Missiles Directly at US Bases — First Since Pause</span>
-        <span class="signal-chip bear">US Crude Stocks 11-Yr Low; SPR Lowest Since 1983</span>
-        <span class="signal-chip bear">Houthi Naval Blockade — Lowest Transit Count Since Reinstatement</span>
-        <span class="signal-chip warn">Chinese VLCC Majors Quietly Avoid Yanbu</span>
-        <span class="signal-chip warn">Probable Fire at Jazan Refinery — Direct Infrastructure Hit</span>
-      </div>
-      <div class="rationale-box">
-        <em>Re-upgraded from Bullish to Extremely Bullish.</em> Escalation (a direct missile exchange), Fundamentals (an 11-year US stock low) and Structure (the reinstated blockade, rerouting Chinese VLCCs) all converge and clear the threshold simultaneously — the same three-pillar alignment that produced the original Houthi-attack extreme call, now reinforced by genuinely tighter physical stock data than existed then.
-      </div>
-    </div>
-  </div>
-
-  <div class="product-card" style="border-color: rgba(63,185,80,0.55);">
-    <div class="card-header" style="background: rgba(63,185,80,0.1);">
-      <div class="card-header-left">
-        <div>
-          <div class="product-name">Gasoil / Diesel ✅ Re-upgraded</div>
-          <div class="product-price">FOB Sing 10ppm $158.32/b (+$4.16) · Swap spread $9.15/b</div>
-        </div>
-      </div>
-      <div class="verdict">
-        <span class="verdict-badge xbull">Extremely Bullish</span>
-        <span class="conviction">Conviction: Very High</span>
-      </div>
-    </div>
-    <div class="card-body">
-      <div class="pillar">
-        <div class="pillar-label">Structure — Swap Spread Jumps Intraday</div>
-        <div class="pillar-text">The Aug-Sep Singapore gasoil swap time spread strengthened to $9.15/b in midafternoon trading July 29, up sharply from $8.20/b at the July 28 Asian close — a real-time repricing on the day's escalation. The cash differential for FOB Singapore 10ppm gasoil separately recovered 83 cents/b to $6.54/b on July 28, already trending up before today's fresh spike.</div>
-      </div>
-      <div class="divider"></div>
-      <div class="pillar">
-        <div class="pillar-label">Supply — A Direct Hit on Refining Infrastructure</div>
-        <div class="pillar-text">Satellite imagery from July 26 shows a major smoke plume and probable fire at Saudi Aramco's Jazan refinery after Houthis claimed a strike on "sensitive Aramco-affiliated facilities" — a materially different risk category from tanker harassment, since it threatens actual distillate production capacity rather than just transport. Fujairah's middle-distillate stocks (jet fuel and diesel) slipped to a two-week low.</div>
-      </div>
-      <div class="divider"></div>
-      <div class="pillar">
-        <div class="pillar-label">Fundamentals — Genuine US Refining Strength Underneath</div>
-        <div class="pillar-text">The USGC ULSD crack vs WTI MEH averaged $82.83/b for the week (July-to-date average $78.67/b, vs a June average of just $57.58/b) — a structural, not just a today's-headline, tightening. US distillate stocks did build 1.06mn barrels but remain 8.7% below normal for the season, so the build isn't loosening the underlying scarcity.</div>
-      </div>
-      <div class="signals-row">
-        <span class="signal-chip bull">Swap Spread Jumped to $9.15/b Intraday, From $8.20/b</span>
-        <span class="signal-chip bull">Probable Fire at Jazan Refinery — Direct Supply Threat</span>
-        <span class="signal-chip bull">USGC ULSD Crack Avg $78.67/b MTD vs June $57.58/b</span>
-        <span class="signal-chip warn">Fujairah Middle Distillates 2-Wk Low</span>
-      </div>
-      <div class="rationale-box">
-        <em>Re-upgraded from Bullish to Extremely Bullish.</em> Structure (the intraday swap-spread jump) and Supply (the Jazan refinery fire, a genuine escalation in target type) both clear the threshold, reinforced by USGC crack strength that predates today's headlines — a market with structural tightness now compounding a fresh supply shock rather than one being driven by the news cycle alone.
-      </div>
-    </div>
-  </div>
-
-  <div class="product-card" style="border-color: rgba(63,185,80,0.4);">
-    <div class="card-header" style="background: rgba(63,185,80,0.06);">
-      <div class="card-header-left">
-        <div>
-          <div class="product-name">HSFO 380cst ✅ Upgraded</div>
-          <div class="product-price">FOB Sing $531.47/mt (+$11.73) · Swap spread $22/mt</div>
-        </div>
-      </div>
-      <div class="verdict">
-        <span class="verdict-badge bull">Bullish</span>
-        <span class="conviction">Conviction: Medium-High</span>
-      </div>
-    </div>
-    <div class="card-body">
-      <div class="pillar">
-        <div class="pillar-label">Supply — Fujairah Heavy Distillates Crash 41%</div>
-        <div class="pillar-text">Fujairah's heavy-distillate stockpile (the storage category covering both HSFO and LSFO) fell to 3.488mn barrels, a six-week low, as part of the terminal's 23% total-stock decline — the sharpest since February 2022. This resolves last cycle's spot-vs-structure split decisively toward the bullish side: physical barrels are now genuinely scarce, not just the paper curve.</div>
-      </div>
-      <div class="divider"></div>
-      <div class="pillar">
-        <div class="pillar-label">Structure — Backwardation Widening Across North Asia</div>
-        <div class="pillar-text">The Singapore 380cst swap spread widened to $22/mt backwardation intraday (from $20.45/mt at the July 28 close), while regional bunker hubs from Tokyo Bay ($600/mt, +$13/mt) to Busan ($680/mt, +$17/mt) to Zhoushan ($638/mt, +$28/mt) all report tightening HSFO stocks persisting into mid-to-late August.</div>
-      </div>
-      <div class="divider"></div>
-      <div class="pillar">
-        <div class="pillar-label">Caveat — Cash Differential Actually Eased</div>
-        <div class="pillar-text">The Singapore 380cst cash differential to MOPS was assessed at a premium of $10.33/mt at the July 28 close, down $1.84/mt day-over-day — a genuine counter-signal that keeps this at Bullish rather than a full re-upgrade to Extreme, since the immediate cargo market hasn't fully caught up to the storage-tightness story yet.</div>
-      </div>
-      <div class="signals-row">
-        <span class="signal-chip bull">Fujairah Heavy Distillates -41% WoW, 6-Wk Low</span>
-        <span class="signal-chip bull">North Asia Bunker Hubs Tightening Into August</span>
-        <span class="signal-chip bull">Swap Backwardation Widened to $22/mt</span>
-        <span class="signal-chip warn">Cash Differential Eased $1.84/mt</span>
-      </div>
-      <div class="rationale-box">
-        <em>Upgraded from Neutral to Bullish.</em> Supply (the Fujairah heavy-distillate crash) directly resolves last cycle's uncertainty, and Structure (widening backwardation, regional bunker tightness) reinforces it. Not upgraded further because the cash cargo differential itself eased, suggesting the physical scarcity hasn't fully repriced the spot market yet.
-      </div>
-    </div>
-  </div>
-
-  <div class="product-card" style="border-color: rgba(63,185,80,0.4);">
-    <div class="card-header" style="background: rgba(63,185,80,0.06);">
-      <div class="card-header-left">
-        <div>
-          <div class="product-name">LSFO / Marine 0.5% ✅ Upgraded</div>
-          <div class="product-price">FOB Sing $711.72/mt (+$17.34) · Swap spread $42.75/mt</div>
-        </div>
-      </div>
-      <div class="verdict">
-        <span class="verdict-badge bull">Bullish</span>
-        <span class="conviction">Conviction: Medium-High</span>
-      </div>
-    </div>
-    <div class="card-body">
-      <div class="pillar">
-        <div class="pillar-label">Supply — Same Fujairah Collapse, Plus Bunker-Specific Tightness</div>
-        <div class="pillar-text">The 41% Fujairah heavy-distillate crash covers marine fuel/LSFO alongside HSFO. Separately, Singapore's marine fuel 0.5% cargo cash differential rebounded 23 cents/mt to a premium of $37.25/mt at the July 28 close — smaller than HSFO's move but still directionally supportive, and Petronas' Petco offered 500,000 barrels of straight-run LSFO ex-Pengerang for Aug 6-7, a potential relief valve for the Singapore blending market that traders say is still "close to finished grade."</div>
-      </div>
-      <div class="divider"></div>
-      <div class="pillar">
-        <div class="pillar-label">Structure — Backwardation Widened Further</div>
-        <div class="pillar-text">The Singapore 0.5%S marine fuel Aug-Sep swap spread was pegged at $42.75/mt backwardation midmorning July 29, up $1.80/mt from the July 28 Asian close — a genuine, still-building forward-curve signal layered on top of the physical scarcity.</div>
-      </div>
-      <div class="divider"></div>
-      <div class="pillar">
-        <div class="pillar-label">Demand — Regional Bunker Squeeze Persists</div>
-        <div class="pillar-text">Tokyo Bay, Busan, Hong Kong and Zhoushan all report tight LSFO/VLSFO availability continuing into August, with Hong Kong traders saying the situation "will only improve after Aug 12." This is a genuine, multi-port demand-side squeeze rather than an isolated Singapore data point.</div>
-      </div>
-      <div class="signals-row">
-        <span class="signal-chip bull">Fujairah Heavy Distillates -41% WoW</span>
-        <span class="signal-chip bull">Swap Backwardation Widened to $42.75/mt</span>
-        <span class="signal-chip bull">Regional Bunker Tightness — Tokyo, Busan, HK, Zhoushan</span>
-        <span class="signal-chip warn">Petco Straight-Run LSFO Tender — Potential Relief Valve</span>
-      </div>
-      <div class="rationale-box">
-        <em>Upgraded from Neutral to Bullish.</em> Same pattern as HSFO — the Fujairah stock collapse and widening backwardation both clear the threshold, reinforced by genuine multi-port bunker tightness. The Petco straight-run tender is a bull counter-note (a potential supply release) that keeps this from a deeper upgrade.
-      </div>
-    </div>
-  </div>
-
-  <div class="product-card" style="border-color: rgba(210,153,34,0.4);">
-    <div class="card-header" style="background: rgba(210,153,34,0.06);">
-      <div class="card-header-left">
-        <div>
-          <div class="product-name">Gasoline / RBOB ✅ Upgraded</div>
-          <div class="product-price">FOB Sing 92 RON $115.13/b (+$1.38) · Swap crack $27.70-27.75/b</div>
-        </div>
-      </div>
-      <div class="verdict">
-        <span class="verdict-badge neutral">Neutral</span>
-        <span class="conviction">Conviction: Medium</span>
-      </div>
-    </div>
-    <div class="card-body">
-      <div class="pillar">
-        <div class="pillar-label">Demand — Consistent Indonesian Buying, Spot Tightness Observed</div>
-        <div class="pillar-text">The Asian gasoline complex "strengthened" July 29, with Indonesian demand heard consistent and market participants observing tightness in the spot market. "The problem is in the prompt, whether or not you can actually get the cargo," one Asia-based participant said — a genuine physical-liquidity signal, not just a price move.</div>
-      </div>
-      <div class="divider"></div>
-      <div class="pillar">
-        <div class="pillar-label">Structure — Crack Widening Again</div>
-        <div class="pillar-text">The front-month FOB Singapore 92 RON swap crack vs Brent widened to $27.70-27.75/b (from $26.57/b at the July 28 close), and the US RBOB-Brent crack rose to $54.11/b (from $53.89/b) — both moving the opposite direction from the crack-compression story that drove the Bearish call two cycles ago.</div>
-      </div>
-      <div class="divider"></div>
-      <div class="pillar">
-        <div class="pillar-label">Counter-Signal — South Korea Data and Fujairah Light Distillates</div>
-        <div class="pillar-text">South Korea's June gasoline stocks rose 3.8% MoM to 6.098mn barrels even as exports fell (-2.6% MoM/-29.8% YoY), a genuine loosening data point. Separately, Fujairah's light distillates (gasoline/naphtha) rebounded 41% off a record low — a supply-side easing signal that offsets the "tight" spot commentary.</div>
-      </div>
-      <div class="signals-row">
-        <span class="signal-chip bull">Consistent Indonesian Demand, Spot Tightness Observed</span>
-        <span class="signal-chip bull">Cracks Widening Again — Swap and RBOB Both Up</span>
-        <span class="signal-chip bear">South Korea Stocks +3.8% MoM Amid Weaker Exports</span>
-        <span class="signal-chip bear">Fujairah Light Distillates Rebounded 41% Off Record Low</span>
-      </div>
-      <div class="rationale-box">
-        <em>Upgraded from Bearish to Neutral.</em> Demand (consistent Indonesian buying, observed spot tightness) and Structure (widening cracks) now lean bullish, directly reversing the drivers of the prior Bearish call, but South Korea's stock build and Fujairah's light-distillate rebound are genuine counter-signals that keep this at Neutral rather than a full flip to Bullish.
-      </div>
-    </div>
-  </div>
-
-  <div class="product-card" style="border-color: rgba(63,185,80,0.4);">
-    <div class="card-header" style="background: rgba(63,185,80,0.06);">
-      <div class="card-header-left">
-        <div>
-          <div class="product-name">Naphtha — Held</div>
-          <div class="product-price">FOB Sing $95.73/b (+$2.46) · MOPJ swap spread $39/mt</div>
-        </div>
-      </div>
-      <div class="verdict">
-        <span class="verdict-badge bull">Bullish</span>
-        <span class="conviction">Conviction: Medium</span>
-      </div>
-    </div>
-    <div class="card-body">
-      <div class="pillar">
-        <div class="pillar-label">Supply — Tender Cancellation, Inventory Draw</div>
-        <div class="pillar-text">Indian Oil Corp. canceled a 210,000mt naphtha sell tender for October 2026-March 2027 loading — a genuine bullish supply signal from a major regional seller. South Korea's naphtha inventories fell 14.2% MoM and 3.7% YoY to 16.20mn barrels in June, driven by both falling imports (-27.2% MoM) and rising demand (+10.5% MoM).</div>
-      </div>
-      <div class="divider"></div>
-      <div class="pillar">
-        <div class="pillar-label">Structure — Swap Spread Actually Narrowed</div>
-        <div class="pillar-text">The Aug-Sep MOPJ swap time spread was pegged at $39/mt midmorning July 29, down from $41/mt at the July 28 close — a genuine counter-signal to the supply-tightening story, and consistent with the market being described as "rangebound" while participants monitor the Middle East situation rather than actively bidding up naphtha specifically.</div>
-      </div>
-      <div class="divider"></div>
-      <div class="pillar">
-        <div class="pillar-label">Demand — Diplomacy Signal Worth Watching</div>
-        <div class="pillar-text">Iran's ambassador to China hinted Beijing could play a key role in advancing regional peace efforts and reiterated Tehran's willingness to negotiate, even while warning of a response to further US strikes — a genuine, if fragile, diplomatic thread running in parallel with today's military escalation that could matter more for the crude-coupled naphtha complex than any product-specific driver.</div>
-      </div>
-      <div class="signals-row">
-        <span class="signal-chip bull">IOC Cancels 210kmt Naphtha Sell Tender</span>
-        <span class="signal-chip bull">S.Korea Inventories -14.2% MoM to 16.20mn bbl</span>
-        <span class="signal-chip warn">MOPJ Swap Spread Narrowed $41→$39/mt</span>
-        <span class="signal-chip info">China Hints at Peace-Effort Role — Fragile Counter-Thread</span>
-      </div>
-      <div class="rationale-box">
-        <em>Held at Bullish.</em> Supply (the tender cancellation, the South Korean inventory draw) clears the threshold on its own, but the narrowing swap spread and today's "rangebound" physical characterization argue against upgrading further — a genuine but not accelerating bullish case.
-      </div>
-    </div>
-  </div>
-
-  <div class="product-card" style="border-color: rgba(63,185,80,0.4);">
-    <div class="card-header" style="background: rgba(63,185,80,0.06);">
-      <div class="card-header-left">
-        <div>
-          <div class="product-name">Jet Kerosene — Held</div>
-          <div class="product-price">FOB Sing $150.85/b (+$3.78) · Swap spread $3.90/b</div>
-        </div>
-      </div>
-      <div class="verdict">
-        <span class="verdict-badge bull">Bullish</span>
-        <span class="conviction">Conviction: Medium</span>
-      </div>
-    </div>
-    <div class="card-body">
-      <div class="pillar">
-        <div class="pillar-label">Demand — Only Product With a YoY Export Increase</div>
-        <div class="pillar-text">South Korea's jet fuel exports climbed 10.8% MoM and 4.1% YoY to 9.65mn barrels in June — the only oil product to post a year-over-year export increase both in June and over the first half of 2026, since jet A-1 remains exempt from the export caps imposed on gasoline, diesel and kerosene since March. Over January-June, exports rose 12.3% YoY to 48.11mn barrels.</div>
-      </div>
-      <div class="divider"></div>
-      <div class="pillar">
-        <div class="pillar-label">Structure — Cash Differential Widening, Swap Cooling Slightly</div>
-        <div class="pillar-text">The FOB Singapore cash differential widened 23 cents/b day-over-day to a premium of $1.74/b on July 28, while the Aug-Sep swap spread eased to $3.90/b midmorning July 29 (from $4.11/b at the July 28 close) — a modest cooling in the forward curve even as the immediate cash market firms.</div>
-      </div>
-      <div class="divider"></div>
-      <div class="pillar">
-        <div class="pillar-label">Watch Item — Physical Cargo Bids Absent Since July 6</div>
-        <div class="pillar-text">Bids for physical jet fuel/kerosene cargoes loading from Singapore have been absent since July 6, potentially reflecting a near-term cargo overhang — a genuine caution flag even as demand data (South Korea's exports, the widening cash differential) stays constructive. Australia is separately funding a A$4mn pre-feasibility study into a potential third domestic refinery (Perdaman, Western Australia) — a long-run supply-security signal, not a near-term price driver.</div>
-      </div>
-      <div class="signals-row">
-        <span class="signal-chip bull">S.Korea Jet Exports Only Product +YoY, +4.1% to 9.65mn bbl</span>
-        <span class="signal-chip bull">Cash Differential Widened 23c to $1.74/b</span>
-        <span class="signal-chip warn">Swap Spread Eased to $3.90/b</span>
-        <span class="signal-chip warn">No Physical Bids Since Jul 6 — Cargo Overhang Risk</span>
-      </div>
-      <div class="rationale-box">
-        <em>Held at Bullish.</em> Demand (South Korea's export strength, the only YoY gainer among refined products) and the firming cash differential both clear the threshold, but the absent physical bids since July 6 and the slightly cooling swap spread argue against upgrading to Extreme this cycle.
-      </div>
-    </div>
-  </div>
-
-  <div class="product-card" style="border-color: rgba(63,185,80,0.35);">
-    <div class="card-header" style="background: rgba(63,185,80,0.05);">
-      <div class="card-header-left">
-        <div>
-          <div class="product-name">LPG / Propane ✅ Reverted to Bullish</div>
-          <div class="product-price">CFR N.Asia Propane $734/mt (+$19) · AG Propane $605/mt (+$3)</div>
-        </div>
-      </div>
-      <div class="verdict">
-        <span class="verdict-badge bull">Bullish</span>
-        <span class="conviction">Conviction: Medium</span>
-      </div>
-    </div>
-    <div class="card-body">
-      <div class="pillar">
-        <div class="pillar-label">Structure — Crude-Tracking Rebound, First Rise in Three Sessions</div>
-        <div class="pillar-text">CFR North Asia propane/butane rose $19-29/mt, tracking the $13.12/mt jump in front-month Brent after three consecutive sessions of declines. This is the same crude/freight-led character flagged repeatedly in prior cycles — LPG moves with crude, not against it, and today confirms that pattern holding in both directions.</div>
-      </div>
-      <div class="divider"></div>
-      <div class="pillar">
-        <div class="pillar-label">Demand — Genuinely Mixed</div>
-        <div class="pillar-text">Formosa Ningbo issued a fresh 46,000mt propane tender for September delivery (bullish demand signal), and Pertamina bought an evenly split LPG cargo at a premium in the $200s/mt to Saudi CP for early-August Arun delivery. But US propane/propylene stocks built 2.51mn barrels to 102.286mn barrels — a fresh 2026 high, the highest since late November 2025 — even as exports rebounded 34% WoW.</div>
-      </div>
-      <div class="divider"></div>
-      <div class="pillar">
-        <div class="pillar-label">Counter-Signal — PG-Japan Freight Fell</div>
-        <div class="pillar-text">The Persian Gulf-Japan VLGC freight rate fell to $218/mt (from $238.50/mt) even as crude and LPG prices rose — a genuine divergence worth watching, since freight typically tracks the same war-risk premium driving the crude complex higher.</div>
-      </div>
-      <div class="signals-row">
-        <span class="signal-chip bull">First N.Asia Rise After 3 Down Sessions, Tracking Crude</span>
-        <span class="signal-chip bull">Formosa Ningbo Issues Fresh 46kt Propane Tender</span>
-        <span class="signal-chip bear">US Stocks Fresh 2026 High</span>
-        <span class="signal-chip warn">PG-Japan VLGC Freight Fell Despite Crude Rally</span>
-      </div>
-      <div class="rationale-box">
-        <em>Reverted from Neutral to Bullish.</em> Structure (the crude-tracking rebound) clears the threshold on its own given the magnitude of today's move, reinforced by fresh tender demand (Formosa Ningbo, Pertamina). The US stock build and falling PG-Japan freight are genuine counter-notes that keep this from an Extreme call — this remains a crude/freight-led move, not a standalone LPG demand story.
-      </div>
-    </div>
-  </div>
-
-  <div class="product-card" style="border-color: rgba(210,153,34,0.35);">
-    <div class="card-header" style="background: rgba(210,153,34,0.05);">
-      <div class="card-header-left">
-        <div>
-          <div class="product-name">SAF — Held</div>
-          <div class="product-price">FOB Straits $2,540/mt (+$10) · Premium over jet -$20.25/mt d/d</div>
-        </div>
-      </div>
-      <div class="verdict">
-        <span class="verdict-badge neutral">Neutral</span>
-        <span class="conviction">Conviction: Low-Medium</span>
-      </div>
-    </div>
-    <div class="card-body">
-      <div class="pillar">
-        <div class="pillar-label">Structure — Premium Compression Resumes</div>
-        <div class="pillar-text">FOB Straits SAF (HEFA-SPK) rose $10/mt in outright terms, tracking the broader jet/crude complex higher, but the premium over the jet forward curve compressed $20.25/mt day-over-day — reversing the tentative widening flagged as a watch item last cycle. FOB China SAF moved identically. The multi-week compression trend from two cycles ago appears to be the more durable pattern.</div>
-      </div>
-      <div class="divider"></div>
-      <div class="pillar">
-        <div class="pillar-label">Demand — No Fresh Commentary Either Way</div>
-        <div class="pillar-text">None of today's four reports carried SAF-specific demand commentary — the underlying "EU buying dried up" theme from three cycles ago remains neither confirmed nor refuted this session.</div>
-      </div>
-      <div class="divider"></div>
-      <div class="pillar">
-        <div class="pillar-label">Read-Through</div>
-        <div class="pillar-text">The single-session reversal we flagged as a possible turning point last cycle did not extend into a second confirming session — treated as noise within the broader compression trend rather than a genuine directional change.</div>
-      </div>
-      <div class="signals-row">
-        <span class="signal-chip bear">Premium Compressed $20.25/mt — Watch Item Resolved Bearish</span>
-        <span class="signal-chip info">No Fresh Demand Commentary</span>
-        <span class="signal-chip warn">One-Session Reversal Did Not Extend</span>
-      </div>
-      <div class="rationale-box">
-        <em>Held at Neutral.</em> The premium-widening flagged as a watch item last cycle failed to extend into a second session and reversed instead — the underlying multi-week compression trend resumes, without new confirming demand data either way to justify a directional call.
-      </div>
-    </div>
-  </div>
-
-</div>
-
-<div class="section-header"><h2>Key Story Details</h2></div>
-<div class="info-grid">
-  <div class="info-card">
-    <h3>💥 Escalation &amp; Diplomacy (29 Jul)</h3>
-    <div class="stat-row"><span class="stat-label">Iran missile attack on US bases</span><span class="stat-val dn">5:45pm ET Jul28 — multiple ballistic missiles, all intercepted</span></div>
-    <div class="stat-row"><span class="stat-label">Prior 3 days</span><span class="stat-val dn">30+ IRGC drone attacks on US bases &amp; Saudi energy infrastructure</span></div>
-    <div class="stat-row"><span class="stat-label">US/Saudi response</span><span class="stat-val warn">Struck Iran-backed militants in Iraq</span></div>
-    <div class="stat-row"><span class="stat-label">Houthi claim</span><span class="stat-val dn">Fresh attack on a Saudi tanker, Jul28</span></div>
-    <div class="stat-row"><span class="stat-label">Jazan refinery</span><span class="stat-val dn">Probable fire per Jul26 satellite imagery, Houthi-claimed strike</span></div>
-    <div class="stat-row"><span class="stat-label">Iran-China diplomatic thread</span><span class="stat-val up">Iran's China ambassador hints Beijing could aid peace efforts</span></div>
-    <div class="stat-row"><span class="stat-label">Hormuz/Bab al-Mandab transits (Jul28)</span><span class="stat-val">16 (up from 15) / 34 (up from 32)</span></div>
-    <div class="stat-row"><span class="stat-label">Houthi naval blockade line (Jul28)</span><span class="stat-val dn">25 ships — lowest since reinstatement Jul14</span></div>
-  </div>
-
-  <div class="info-card">
-    <h3>🇺🇸 US Stocks &amp; Refining (wk ending Jul24)</h3>
-    <div class="stat-row"><span class="stat-label">Commercial crude stocks</span><span class="stat-val dn">404.51mn bbl, -7.17mn WoW — 11-year low</span></div>
-    <div class="stat-row"><span class="stat-label">Cushing stocks</span><span class="stat-val dn">18.6mn bbl, -770kb — lowest since Apr 2014</span></div>
-    <div class="stat-row"><span class="stat-label">SPR</span><span class="stat-val dn">307.65mn bbl, -3.8mn WoW — lowest since Mar 1983</span></div>
-    <div class="stat-row"><span class="stat-label">Refinery utilization</span><span class="stat-val up">97.2%, +1.1pp — highest since Dec 2018</span></div>
-    <div class="stat-row"><span class="stat-label">Net crude inputs</span><span class="stat-val up">17.34mn b/d — highest since Sep 2019</span></div>
-    <div class="stat-row"><span class="stat-label">USGC ULSD crack vs WTI MEH</span><span class="stat-val up">$82.83/b wk; MTD avg $78.67/b vs June $57.58/b</span></div>
-    <div class="stat-row"><span class="stat-label">US crude exports</span><span class="stat-val up">3.47mn b/d, up from 3.35mn b/d prior wk</span></div>
-  </div>
-
-  <div class="info-card">
-    <h3>🌊 Fujairah &amp; Red Sea Reroute (wk ending Jul27)</h3>
-    <div class="stat-row"><span class="stat-label">Total oil product stocks</span><span class="stat-val dn">6.511mn bbl, -23% WoW — heaviest drop since Feb 2022</span></div>
-    <div class="stat-row"><span class="stat-label">Heavy distillates (HSFO/LSFO)</span><span class="stat-val dn">3.488mn bbl, -41% — 6-wk low</span></div>
-    <div class="stat-row"><span class="stat-label">Light distillates</span><span class="stat-val up">1.581mn bbl, +41% — rebound off record low</span></div>
-    <div class="stat-row"><span class="stat-label">Middle distillates</span><span class="stat-val dn">1.442mn bbl, -4.2% — 2-wk low</span></div>
-    <div class="stat-row"><span class="stat-label">Chinese VLCC majors</span><span class="stat-val warn">Cosco, China Merchants quietly avoid Yanbu despite successful transits</span></div>
-    <div class="stat-row"><span class="stat-label">Sidi Kerir loadings (Jul)</span><span class="stat-val">809,300 b/d, up from 758,400 Jun — still far below Yanbu's 3.61mn b/d</span></div>
-    <div class="stat-row"><span class="stat-label">Yanbu-Far East VLCC freight</span><span class="stat-val dn">$66.87/mt, +83.6% WoW from $38.62/mt</span></div>
-  </div>
-
-  <div class="info-card">
-    <h3>🏭 Company, Trading &amp; Region Wrap</h3>
-    <div class="stat-row"><span class="stat-label">Glencore</span><span class="stat-val up">Expects 2nd-highest H1 earnings ever, $3.3bn marketing segment (+14%)</span></div>
-    <div class="stat-row"><span class="stat-label">Trafigura</span><span class="stat-val up">H1 net profit $4.1bn (+52% vs FY2025), SPR-release beneficiary</span></div>
-    <div class="stat-row"><span class="stat-label">Eni</span><span class="stat-val up">Raises 2026 oil/gas growth target to 5% (from 3-4%); Q2 output +11% YoY</span></div>
-    <div class="stat-row"><span class="stat-label">Cenovus</span><span class="stat-val up">First month &gt;1mn boe/d in July; Christina Lake at all-time high 372kb/d</span></div>
-    <div class="stat-row"><span class="stat-label">Black Sea / CPC</span><span class="stat-val warn">Only 6 vessels lifted in 9 days since Jul20 restart vs 2-3/day normal; war-risk premium +80%</span></div>
-    <div class="stat-row"><span class="stat-label">Chinese independent refiners</span><span class="stat-val">Reselling Upper Zakum/regular ME crudes to buy Iranian Light at $6/b discount to Brent</span></div>
-    <div class="stat-row"><span class="stat-label">Jones Act waivers</span><span class="stat-val warn">195 total since Mar17; Kirby execs say &gt;85% "nothing to do with national security"</span></div>
-    <div class="stat-row"><span class="stat-label">Danube water levels</span><span class="stat-val warn">30-40% of normal barge capacity in Serbian stretches; less severe than Rhine</span></div>
-  </div>
-</div>
-
-<div class="section-header"><h2>Critical Watch Items — Jul 30+</h2></div>
-<div class="risk-section">
-  <table class="risk-table">
-    <thead>
-      <tr>
-        <th>Severity</th>
-        <th>Risk Event</th>
-        <th>Products Affected</th>
-        <th>Timeline</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="sev-critical">🚨 CRITICAL</span></td>
-        <td>Confirm whether Iran follows the intercepted missile attack with further direct strikes, or whether the fragile diplomatic thread (Iran's China ambassador hinting at a Beijing-brokered path, reiterated willingness to negotiate) gains traction — the single biggest swing factor for whether today's spike holds, extends, or unwinds again as it did over the past five sessions.</td>
-        <td>Crude, all products, freight, insurance</td>
-        <td>Immediate</td>
-      </tr>
-      <tr>
-        <td><span class="sev-critical">🚨 CRITICAL</span></td>
-        <td>Confirm the extent of damage at Saudi Aramco's Jazan refinery — a confirmed, sustained outage at an actual refining asset (rather than a tanker or port) would mark a genuine escalation in target type and could justify moving Gasoil/Crude further toward the top of the conviction scale.</td>
-        <td>Crude, Gasoil, regional refining capacity</td>
-        <td>1-3 sessions</td>
-      </tr>
-      <tr>
-        <td><span class="sev-high">🔴 HIGH</span></td>
-        <td>Watch whether Fujairah's heavy-distillate stocks continue drawing down toward multi-year lows or begin rebuilding — the 41% collapse is the single strongest data point behind this cycle's HSFO/LSFO upgrades, and a rebuild would argue for reverting toward Neutral.</td>
-        <td>HSFO 380cst, LSFO / Marine Fuel 0.5%</td>
-        <td>1 week</td>
-      </tr>
-      <tr>
-        <td><span class="sev-high">🔴 HIGH</span></td>
-        <td>Confirm whether the Houthi naval blockade on Saudi-linked shipping continues suppressing transit counts (25 ships Jul28, the lowest since reinstatement) or traffic recovers — and whether Chinese VLCC majors' quiet avoidance of Yanbu solidifies into a lasting reroute toward Sidi Kerir/Sumed.</td>
-        <td>Crude, freight, VLCC rates</td>
-        <td>1-2 weeks</td>
-      </tr>
-      <tr>
-        <td><span class="sev-mod">🟡 MODERATE</span></td>
-        <td>Gasoline's upgrade to Neutral hinges on a genuine two-sided read (spot tightness vs a South Korean stock build and Fujairah light-distillate rebound) — confirm which side wins out over the next few sessions as the key swing factor for a directional call.</td>
-        <td>Gasoline / RBOB</td>
-        <td>1-2 sessions</td>
-      </tr>
-      <tr>
-        <td><span class="sev-mod">🟡 MODERATE</span></td>
-        <td>Watch whether Black Sea/CPC tanker loadings normalize beyond the current 6-vessels-in-9-days pace, or whether the 80% war-risk-premium jump keeps owners away from the route despite the terminal's restart — a genuine test of whether the Kazakh supply chain is actually back online or only nominally so.</td>
-        <td>Crude (CPC Blend, European refiners)</td>
-        <td>1-2 weeks</td>
-      </tr>
-    </tbody>
+  <div class="section-title">Part A — Daily Dashboard</div>
+  <div class="tbl-wrap">
+  <table class="dash">
+    <tr>
+      <th>Product</th><th>Platts Window</th><th>Tender Signal</th><th>Outages</th><th>Geo/Policy Factor</th><th>Flows</th><th>View</th><th>Conviction</th>
+    </tr>
+    <tr>
+      <td class="prod">Crude</td>
+      <td>No physical MOC block published for crude; futures-driven session — Sept Brent -$4.16/-4.89/b, WTI -$3.35/b on 3rd-day US-Iran strike pause.</td>
+      <td>None today.</td>
+      <td>Libya NOC El Feel (90kb/d) + Wafa halted then <b>resumed same day</b> after Mellitah protest; Iraq Basra refinery cut to ~250kb/d (heat); Jazan fire unconfirmed by Aramco.</td>
+      <td>Houthi blockade forcing Cape-of-Good-Hope reroutes; Hormuz traffic 15 ships (from 17); 47m bbl Iranian crude stranded on tankers (up from &lt;30m).</td>
+      <td>CAS: Yanbu Q2 loadings 3.9m b/d (80% East of Suez); 74 VLCCs only on ballast West of Suez.</td>
+      <td>Bearish (fragile)</td>
+      <td><span class="badge badge-bear">Bearish</span></td>
+    </tr>
+    <tr>
+      <td class="prod">LPG</td>
+      <td>Asia CFR propane -$7/mt (3rd straight down session); Europe cargo/coaster MOCs: no bids/offers/trades, assessed on sentiment.</td>
+      <td>Tianjin Bohai, Jinneng Chemical China buy tenders active; broader tender log shows a rising rate of "Canceled" China buy tenders in recent months — buyer caution.</td>
+      <td>None specific to LPG; Jazan fire noted in LPGaswire commentary as regional risk.</td>
+      <td>US-Iran pause easing Hormuz risk premium — pressuring US/Asia propane together with crude.</td>
+      <td>ARA propane stocks building (Rhine barge restrictions trapping supply); US Gulf propane loadings pace down m/m.</td>
+      <td>Bearish</td>
+      <td><span class="badge badge-bear">Bearish</span></td>
+    </tr>
+    <tr>
+      <td class="prod">Naphtha</td>
+      <td>FOB Fujairah: no bids/offers/trades. Asian complex "rangebound to softer"; Aug-Sep swap spread narrowed to $46.75/mt from $47.50/mt.</td>
+      <td>Indian seller offering up to 210,000mt for Oct26-Mar27 — large-volume AG/India sell tender = bearish counter-signal per weighting rules.</td>
+      <td>None direct; Iraq Basra refinery importing gasoline (not naphtha) due to unit outage.</td>
+      <td>US-Iran pause background; concern China/Korea could tighten naphtha export quotas if refineries cut runs (unconfirmed, forward-looking).</td>
+      <td>Thai naphtha exports +76.6% MoM/YoY to Singapore &amp; Malaysia — added regional supply.</td>
+      <td>Bearish (buyer-absence modifier)</td>
+      <td><span class="badge badge-bear">Bearish</span></td>
+    </tr>
+    <tr>
+      <td class="prod">Gasoline</td>
+      <td>Notional MOC (no bids/offers/trades) but FOB Spore 92 RON crack vs Brent surged to $28.15-28.20/b (from $25.58) and vs Dubai to a 4-yr high $33.47/b.</td>
+      <td>None named today (no Pertamina buy / no Taiwan-Korea sell).</td>
+      <td>Iraq Basra refinery cut to 250kb/d + importing gasoline due to unit shutdown — regional tightness.</td>
+      <td>US summer driving demand widening RBOB-Brent crack to $52.28/b; de-escalation lowering outright price without denting crack.</td>
+      <td>US gasoline stocks +400kb w/w to 211.7m bbl (bearish inventory, doesn't dent crack strength).</td>
+      <td>Bullish</td>
+      <td><span class="badge badge-bull">Bullish</span></td>
+    </tr>
+    <tr>
+      <td class="prod">Gasoil</td>
+      <td>Singapore Straits 10ppm: multiple <b>done deals</b> at consistent MOPS+$7.00 (Trafigura/BP/Sietco), cash diff firmed +0.83 to $6.54/b into the close despite a softer early session.</td>
+      <td>None East-of-Suez buy/sell named beyond routine cargo trade; Egypt continuing high-sulfur gasoil imports for 10ppm blending.</td>
+      <td>Iraq Basra cut (250kb/d); indirectly tightens regional distillate output.</td>
+      <td><b>Russia diesel/gasoil exports -29% w/w to 155,000mt (lowest since 2016)</b>; ban open-ended ("lifts as market recovers"); pervasive non-Russian-origin GTC clauses across nearly every gasoil trade/offer today.</td>
+      <td>Med diesel benchmark $1,298.25/mt (near 5-mth high); ARA diesel crack $70.50/b (record $79/b Jul 16).</td>
+      <td>Bullish (Extreme in Europe/Med)</td>
+      <td><span class="badge badge-bull">Bullish</span></td>
+    </tr>
+    <tr>
+      <td class="prod">Jet Kero</td>
+      <td>FOB Straits offers only (Sietco, Unipec, Ampol, BP, Trafigura) — <b>no bids, no trades reported</b>; cash diff +0.23 to Sing Jet +$1.75/b; Aug-Sep backwardation widened to $4.11/b.</td>
+      <td>None named; Thailand jet exports +3.5x y/y to 30,819 b/d, mainly Vietnam.</td>
+      <td>None direct.</td>
+      <td>Russia jet export ban extended to end-Nov (already at zero exports); EU stockpile review flags jet-fuel import dependency as an exposed weakness.</td>
+      <td>Thailand jet exports rising even as domestic air traffic falls 11.4% m/m — pure export growth.</td>
+      <td>Mildly Bullish</td>
+      <td><span class="badge badge-bull">Bullish</span></td>
+    </tr>
+    <tr>
+      <td class="prod">SAF</td>
+      <td>No MOC/bid-offer-trade data published for SAF.</td>
+      <td>None.</td>
+      <td>None.</td>
+      <td>None specific; broader EU stockpile review flags future jet/SAF-adjacent stock provisions (forward, non-immediate).</td>
+      <td>None.</td>
+      <td>Insufficient data for directional call</td>
+      <td><span class="badge badge-neutral">Neutral / Data gap</span></td>
+    </tr>
+    <tr>
+      <td class="prod">LSFO</td>
+      <td>Singapore Marine Fuel 0.5%: BP/Total <b>bids</b> at +$28-29/mt vs Shell/Vitol offers at +$48-53/mt — unusually wide gap = scarcity signal; Aug-Sep backwardation widened to $42/mt.</td>
+      <td>None named; general blending-component shortage cited across Singapore, Fujairah, Tokyo, Rotterdam.</td>
+      <td>Fujairah heavy/residue stocks -1,397kb w/w (large draw).</td>
+      <td>Red Sea disruption curbing Saudi HSFO/clean-cutter feedstock flows indirectly tightens LSFO blend pool.</td>
+      <td>Tokyo Bay LSFO explicitly tight to mid-Aug; cash premium pulled back $5.11 after a 6-session uptrend (retracement, not reversal).</td>
+      <td>Bullish</td>
+      <td><span class="badge badge-bull">Bullish</span></td>
+    </tr>
+    <tr>
+      <td class="prod">HSFO</td>
+      <td>Singapore: Mercuria <b>withdrew</b> two bids, traded lower at Chimbusco+$8/mt; cash premium -$1.84 to $10.33/mt; May-Jun backwardation narrowed to $15.50/mt from $20.45/mt.</td>
+      <td>None East-of-Suez NOC sell tender today (Pakistan LSFO/fuel-oil export growth is structural, not a single tender).</td>
+      <td>Pakistan fuel oil exports +10.5% FY25/26 (structural, adds to Asia pool); Jazan fire unconfirmed.</td>
+      <td>Market explicitly "reversed gains" this week as it "priced in the de-escalation" — geo risk premium not confirmed by MOC → downgraded to background noise per validation rule.</td>
+      <td>Busan HSFO -$37/mt d/d, weak demand trend "steadily declined over past several sessions."</td>
+      <td>Bearish</td>
+      <td><span class="badge badge-bear">Bearish</span></td>
+    </tr>
   </table>
+  </div>
+
+  <div class="section-title">Part B — Product Deep Dives</div>
+  <div class="toc">
+    <a href="#crude">Crude</a><a href="#lpg">LPG</a><a href="#naphtha">Naphtha</a><a href="#gasoline">Gasoline</a>
+    <a href="#gasoil">Gasoil</a><a href="#jetkero">Jet Kero</a><a href="#saf">SAF</a><a href="#lsfo">LSFO</a><a href="#hsfo">HSFO</a><a href="#cross">Cross-product notes</a>
+  </div>
+
+  <!-- CRUDE -->
+  <div class="card" id="crude">
+    <div class="card-head"><div class="card-title">Crude — Brent / Dubai / WTI</div><span class="badge badge-bear">Bearish</span></div>
+    <div class="card-body">
+      <div class="subgrid">
+        <div class="block"><div class="block-label">MOC Window (last 30 min)</div><p>No dedicated crude physical MOC block is published in today's set (Marketscan's Asia-Pac crude assessments page carries only outright/differential levels, not a bid/offer/trade log). The governing signal is the futures settle itself: Bunkerwire's Asian bunker MOC captured Sept ICE Brent at $85.29/b (-$4.89/b day over day, -$2.49/mt bunker-equivalent) during the Asia close, and a later Med bunker report shows prompt-month Brent falling a further $4.16/b to $84.21/b. NYMEX Sept WTI (per LPGaswire) settled $3.35/b lower at $79.26/b. This is a broad, one-directional session-long decline (not a two-sided, contested MOC) — a clean bearish tell with no counter-bid support visible anywhere in the data.</p></div>
+        <div class="block"><div class="block-label">Tender Activity</div><p>No term or spot crude tenders reported closing today. Indian refiners are described as having "secured crude through September" and are "racing to finalize" Q4 procurement — a demand-side signal of proactive buying rather than panic, consistent with resilience rather than distress buying.</p></div>
+      </div>
+      <div class="subgrid">
+        <div class="block"><div class="block-label">Refinery / Cracker Outages</div><p><b>Unplanned:</b> Libya's NOC halted El Feel (90kb/d, JV with Eni) and trimmed Wafa (~50kb/d oil-equivalent) production the morning of Jul 28 after protesters stormed the Mellitah complex amid power-outage/heat protests — then <b>resumed the same afternoon</b> once the Tripoli government "fully secured" the site. Light sweet Mellitah crude is popular with Spanish/French/Dutch refiners; the disruption was too brief to register as a supply shock, but the pattern (repeated protest target since 2011) is a standing tail risk. <b>Unplanned (weather):</b> Iraq's Basra refinery cut rates to ~250kb/d on high summer temperatures, per South Refineries Co. via Iraqi News Agency — reduces regional crude runs marginally and forced the refiner to import gasoline. <b>Unconfirmed:</b> satellite imagery (Jul 26) showed smoke over Saudi Aramco's 400kb/d Jazan refinery after Houthis claimed a strike on "sensitive Aramco-affiliated facilities" — neither Aramco nor the Saudi energy ministry has confirmed; treated as background risk, not priced.</p></div>
+        <div class="block"><div class="block-label">Infrastructure / Execution Risk</div><p>Yanbu-to-Far-East freight has already jumped from $32/mt in early May to $66.87/mt on Jul 28, with Gibson flagging a further move to mid-to-high $9/b-equivalent if diversions persist — and Peninsula warns Cape diversions could require ~1,500mt extra bunker fuel per voyage and more than double tanker operating costs. West-of-Suez ballaster availability is just 74 VLCCs (~10% of the mainstream fleet). This is a graduated, execution-constrained cost shock to logistics, not an instantaneous supply loss — the barrels are still moving, just slower and costlier, which caps (rather than removes) the bullish read from the blockade.</p></div>
+      </div>
+      <div class="geo-split">
+        <div class="geo-block geo-ir"><div class="block-label">🇮🇷 Geopolitics — US/Iran</div><p>Trump confirmed the US halted strikes on Iran after Tehran said "please stop, let's meet," now in its third consecutive day (per LPGaswire) — but warned attacks could resume if ceasefire talks fail. Iran's FM spokesperson Baqaei explicitly denied direct US talks, saying Tehran is "only engaged in talks with Oman regarding the Strait of Hormuz" — a narrower, more fragile process than the market's price reaction implies. A same-day WebSearch check confirms the pause was holding as of Jul 27 with Hormuz traffic still "well below prewar levels" and Oman-mediated Hormuz talks ongoing but unresolved — i.e., the situation had not moved to a firmer resolution as of the most recent external confirmation available. Physical data has not validated the price move: Hormuz traffic fell to 15 ships (from 17) — well below the ~135 ships/day pre-war average — while Bab al-Mandab held at 32 ships, ~75% of pre-conflict levels. <b>47 million barrels of Iranian crude are now stranded on tankers in the Persian Gulf, up from under 30 million barrels in mid-July</b> — a genuine, growing supply overhang that the price collapse has not reflected. Per the geo-validation rule, this is a case where the MOC/futures reaction (bearish) and physical flow data (still-disrupted, still-bullish-leaning) diverge — the price move should not be read as confirmation the underlying risk has cleared.</p></div>
+        <div class="geo-block geo-ru"><div class="block-label">🇷🇺 Geopolitics — Russia/Ukraine</div><p>Limited direct crude-specific news today (the Russia narrative concentrates in gasoil/products — see below), but Sakhalin Blend, ESPO M1/M2 and Sokol all traded in today's Asia-Pac crude table at steep discounts to Dubai (ESPO M1 -$0.30/b diff, -2.30 change) alongside the broader crude selloff — no independent Russian-crude-specific signal distinct from the general de-escalation move.</p></div>
+      </div>
+      <div class="divergence"><b>⚠️ DIVERGENCE WARNING (geo-validation):</b> Futures collapsed on de-escalation optics, but Hormuz/Bab al-Mandab traffic remains suppressed and Iranian floating storage is still building (47m bbl, up from &lt;30m) — physical flows have not confirmed the "resolution" the price implies. Per the rule, this is not treated as full resolution; hold conviction at Bearish rather than Extremely Bearish, and flag reversal risk explicitly.</div>
+      <div class="factors">
+        <div class="fx-bull"><div class="block-label">Bullish Factors</div><ul class="flist">
+          <li>47m bbl Iranian crude stranded on tankers, rising — real supply withheld from market</li>
+          <li>Hormuz traffic still well below pre-war average; Bab al-Mandab at ~75% of pre-conflict levels</li>
+          <li>Freight/insurance cost shock (Yanbu-Far East more than doubled since May) raises effective landed cost</li>
+          <li>Iraq Basra refinery cut trims regional crude demand only marginally, but signals summer operational strain</li>
+        </ul></div>
+        <div class="fx-bear"><div class="block-label">Bearish Factors</div><ul class="flist">
+          <li>Extreme one-day/multi-day futures collapse (-4.6% to -5.4% Brent) on 3rd-day strike pause</li>
+          <li>Libya El Feel/Wafa disruption resolved within hours — no lasting supply loss</li>
+          <li>Indian refiners show resilience, not distress-buying — demand-side calm</li>
+          <li>Iran denies direct US talks — the underlying process is thinner than the price reaction assumes, which cuts both ways but currently favors sellers pressing the de-escalation trade</li>
+        </ul></div>
+      </div>
+      <div class="rationale">Market Structure (broad futures selloff, no counter-bid) and Supply (Libya resolved quickly, Iraq cut is marginal) both lean bearish for the tape today, but the Geopolitics pillar has not confirmed via physical flows — Hormuz/Bab al-Mandab traffic and stranded Iranian barrels argue the underlying risk premium hasn't actually cleared. Calling <b>Bearish</b>, not Extremely Bearish: this is a fragile, de-escalation-driven single-session move set against a real, unresolved physical disruption that could snap back hard if the Oman-mediated Hormuz talks fail.</div>
+    </div>
+  </div>
+
+  <!-- LPG -->
+  <div class="card" id="lpg">
+    <div class="card-head"><div class="card-title">LPG</div><span class="badge badge-bear">Bearish</span></div>
+    <div class="card-body">
+      <div class="subgrid">
+        <div class="block"><div class="block-label">MOC Window</div><p>CFR North Asia propane fell for a <b>third straight session</b>, down $7/mt to $715/mt; butane rose $3/mt to $730/mt (divergent within the complex). FOB Arab Gulf propane/butane both firmed $9-11/mt on stronger front-month swaps, a paper-led move disconnected from the softer physical CFR read. In Europe: CIF propane cargo, CIF butane cargo, propane coaster and butane coaster MOCs all saw <b>zero bids, offers or trades</b> — assessed purely on trader sentiment across the board, an unusually thin session. No high-weight North Asian buyer (SK, Hanwha, Lotte) is named transacting at the close itself.</p></div>
+        <div class="block"><div class="block-label">Tender Activity</div><p>Active buy interest from China's Tianjin Bohai and Jinneng (per the Asian LPG commentary, "evidenced by tenders"), but the fuller East-of-Suez tender log shows a marked rise in <b>Canceled</b> Chinese buy tenders through May-July (Ningbo Kingfa, Dongguan Grand Resource, Huayi Group, Formosa Ningbo, Jinneng Aug-Dec cargo) versus the January-April period when most tenders closed with concluded premiums ($30s-$200s/mt over index). This is a genuine buyer-participation shift — not price-sensitive demand-down, but demand delayed/absent, per the tender weighting rules; treat as a friction modifier rather than a fresh bearish pillar on its own.</p></div>
+      </div>
+      <div class="subgrid">
+        <div class="block"><div class="block-label">Refinery / Cracker Outages</div><p>None specific to LPG production; the Jazan refinery smoke (unconfirmed) is noted in passing in LPGaswire's commentary as a regional watch item but carries no confirmed capacity impact.</p></div>
+        <div class="block"><div class="block-label">Infrastructure / Execution Risk</div><p>ARA propane stocks are building as Rhine water levels (30cm at Kaub, forecast to fall further) restrict barge loads to ~300mt versus a normal ~1,000mt — supply is trapped in the hub rather than genuinely oversupplied at the source, but the practical effect (prices pressured, "north is long") is the same as a glut. Panama Canal auction costs remain a live friction for US-Asia VLGC routing, with ~45% of USGC-Japan cargoes using Panama and the rest via Cape of Good Hope even absent Houthi-related diversions specific to LPG.</p></div>
+      </div>
+      <div class="geo-split">
+        <div class="geo-block geo-ir"><div class="block-label">🇮🇷 Geopolitics — US/Iran</div><p>The North Asia LPG complex explicitly cited "a diplomatic push" easing Hormuz supply concerns as the reason for Brent's $28.72/mt (~$3.9/b) drop feeding into propane weakness. US Gulf Coast propane fell to its lowest level since February on the same crude-driven move. The pause is treated by the LPG market as a genuine risk-off signal (unlike crude's own unconfirmed-by-flows caveat above) — LPG has no equivalent to the Hormuz-vessel-count cross-check, so this is taken more directly at face value here.</p></div>
+        <div class="geo-block geo-ru"><div class="block-label">🇷🇺 Geopolitics — Russia/Ukraine</div><p>No direct LPG-specific Russia/Ukraine signal in today's reports; the Russian export-ban narrative is concentrated in diesel/gasoil/gasoline/jet, not LPG.</p></div>
+      </div>
+      <div class="factors">
+        <div class="fx-bull"><div class="block-label">Bullish Factors</div><ul class="flist">
+          <li>Chinese import tenders (Tianjin Bohai, Jinneng) still active</li>
+          <li>US-Far East arb widened to &gt;$40/mt — Asia pull still evident vs US barrels</li>
+          <li>FOB Arab Gulf swaps firming even as CFR physical softens</li>
+        </ul></div>
+        <div class="fx-bear"><div class="block-label">Bearish Factors</div><ul class="flist">
+          <li>CFR North Asia propane down 3 straight sessions</li>
+          <li>Rising rate of canceled Chinese buy tenders — buyer-absence signal</li>
+          <li>European propane/butane MOCs entirely bid/offer/trade-less — thin, sentiment-only pricing</li>
+          <li>ARA stock build on Rhine-trapped barge supply; European buyers explicitly "wait-and-see"</li>
+          <li>US propane at lowest since February, tracking crude's de-escalation selloff</li>
+        </ul></div>
+      </div>
+      <div class="rationale">Market Structure (3rd-session CFR decline, empty European MOCs) and Demand (rising tender cancellations, "wait-and-see" buyers) both lean bearish; Supply is neutral-to-mixed (ARA stocks technically trapped rather than newly produced). Calling <b>Bearish</b>, with a modifier: the buyer-absence pattern in China tenders should soften and extend the timeline of any further downside rather than implying a clean linear glut.</div>
+    </div>
+  </div>
+
+  <!-- NAPHTHA -->
+  <div class="card" id="naphtha">
+    <div class="card-head"><div class="card-title">Naphtha</div><span class="badge badge-bear">Bearish</span></div>
+    <div class="card-body">
+      <div class="subgrid">
+        <div class="block"><div class="block-label">MOC Window</div><p>FOB Fujairah naphtha: <b>no bids, no offers, no trades</b> in the MOC process — assessed via strip/differential calculation only. FOB Singapore naphtha fell $2.45/b to $93.27/b, C+F Japan cargo fell $22.50/mt to $825/mt. The Aug-Sep MOPJ swap time spread narrowed to $46.75/mt from $47.50/mt at the prior close — a small softening of the near-term backwardation structure. No high-weight buyer (JX, Cosmo, SK, Lotte, Hanwha) is named active in any window today — an absence that, combined with the empty Fujairah MOC, reads as demand-side friction rather than aggressive selling.</p></div>
+        <div class="block"><div class="block-label">Tender Activity</div><p>An Indian seller was heard offering up to <b>210,000mt</b> of naphtha for loading October 2026-March 2027 — a large-volume, multi-month term sell offer from an AG/India-adjacent supplier, which per the naphtha weighting rules is an explicit bearish counter-signal that offsets any residual bullish tone in the complex. No Japanese/Korean high-weight buy tenders reported today.</p></div>
+      </div>
+      <div class="subgrid">
+        <div class="block"><div class="block-label">Refinery / Cracker Outages</div><p>None reported directly against naphtha production. Indirectly, Iraq's Basra refinery rate cut (250kb/d) forced gasoline imports rather than naphtha; not a naphtha-specific supply event.</p></div>
+        <div class="block"><div class="block-label">Seasonality / Flow Context</div><p>Thai naphtha exports surged 76.6% both month-over-month and year-over-year in June to 49,191 b/d, overwhelmingly to Singapore and Malaysia — a genuine, confirmed increase in regional supply reaching the Singapore trading hub. H1 2026 Thai exports are up 59.2% y/y. The market is separately watching whether South Korea or China tighten naphtha export flows if refineries cut runs in response to crude-supply uncertainty — this is speculative and forward-looking, not yet materialized, so carries no current weight.</p></div>
+      </div>
+      <div class="geo-split">
+        <div class="geo-block geo-ir"><div class="block-label">🇮🇷 Geopolitics — US/Iran</div><p>The naphtha market was explicitly described as "rangebound to softer... as the US and Iran continued their pause on hostilities" — i.e., de-escalation is read as removing upside risk premium rather than adding any bullish tightness. No naphtha-specific Hormuz/Red Sea flow disruption was cited.</p></div>
+        <div class="geo-block geo-ru"><div class="block-label">🇷🇺 Geopolitics — Russia/Ukraine</div><p>No naphtha-specific Russia/Ukraine signal in today's reports.</p></div>
+      </div>
+      <div class="factors">
+        <div class="fx-bull"><div class="block-label">Bullish Factors</div><ul class="flist">
+          <li>Speculative concern over Korea/China export tightening if refinery runs are cut (forward-looking, unconfirmed)</li>
+        </ul></div>
+        <div class="fx-bear"><div class="block-label">Bearish Factors</div><ul class="flist">
+          <li>Large 210,000mt Indian term sell offer — explicit bearish counter-signal per weighting rules</li>
+          <li>Thai exports +76.6% m/m and y/y, adding confirmed supply to Singapore/Malaysia</li>
+          <li>Empty Fujairah MOC + no high-weight (JX/Cosmo/SK/Lotte/Hanwha) buyer activity — demand-side friction</li>
+          <li>Aug-Sep time spread narrowing — softer near-term structure</li>
+          <li>Outright prices down across Singapore/Japan/Fujairah</li>
+        </ul></div>
+      </div>
+      <div class="rationale">Supply (large Indian sell offer + Thai export surge) and Market Structure (narrowing backwardation, no MOC participation) both point bearish, satisfying the 2-pillar threshold. Calling <b>Bearish</b>, with the buyer-absence pattern (no high-weight Asian buyer activity, empty Fujairah MOC) applied as a modifier that should soften the pace of any further slide rather than implying acute demand destruction — this looks like a quiet, low-conviction market rather than a panicked one.</div>
+    </div>
+  </div>
+
+  <!-- GASOLINE -->
+  <div class="card" id="gasoline">
+    <div class="card-head"><div class="card-title">Gasoline</div><span class="badge badge-bull">Bullish</span></div>
+    <div class="card-body">
+      <div class="subgrid">
+        <div class="block"><div class="block-label">MOC Window</div><p>"No market data was excluded from the Asian gasoline Platts MOC assessment process July 28" and "no market data was excluded from the Asian gasoline derivative MOC process" — but the underlying rationale notes explicitly say all three cargo grades (92/95/97 RON FOB Singapore, 92 RON FOB Arab Gulf) were assessed "in the absence of demonstrable bids, offers and trades," i.e., a genuinely one-sided/notional close with no physical prints either way. Despite that, the derivative/crack complex moved hard: FOB Singapore 92 RON gasoline crack vs front-month ICE Brent swaps surged to $28.15-28.20/b (from a $25.58/b Jul 27 close), and vs Dubai swaps hit an over-4-year high of $33.47/b at the Jul 27 close. The US RBOB-Brent crack widened to $52.28/b from $47.35/b.</p></div>
+        <div class="block"><div class="block-label">Tender Activity</div><p>No Pertamina buy tender (the high-weight bullish signal) reported today, and no Taiwan/Korea sell tenders or China export-quota news (the bearish signals) either — tender activity is thin/absent for gasoline in today's reports specifically.</p></div>
+      </div>
+      <div class="subgrid">
+        <div class="block"><div class="block-label">Refinery / Cracker Outages</div><p><b>Unplanned (weather):</b> Iraq's Basra refinery cut operating rates to ~250kb/d on high summer temperatures and, notably, "reportedly imported quantities of gasoline recently due to the shutdown of one production unit and the resulting decline in inventories" — direct evidence a Middle East refiner has flipped from self-sufficient to a gasoline importer, a genuine regional tightening signal. <b>Unconfirmed:</b> Jazan refinery fire (satellite smoke, no Aramco confirmation) — if real, would remove gasoline-yielding capacity from the 400kb/d unit.</p></div>
+        <div class="block"><div class="block-label">Seasonality / Weather</div><p>US summer driving season continues to support RBOB demand even as US gasoline stocks were seen up 400,000 barrels w/w to ~211.7m barrels (a bearish inventory data point per the analyst survey, with EIA's own release due Jul 29) — the crack widening despite a stock build indicates the strength is coming from real-time demand/margin pull, not a stock-driven scarcity read; flagged as a case where a weekly inventory build should not be read as automatically bearish given the crack didn't follow it down.</p></div>
+      </div>
+      <div class="geo-split">
+        <div class="geo-block geo-ir"><div class="block-label">🇮🇷 Geopolitics — US/Iran</div><p>The Asian gasoline complex strengthened "amid persistent supply concerns" even as the broader crude complex sold off on the US-Iran de-escalation — i.e., gasoline's crack strength is running counter to (or independent of) the crude-driven de-escalation narrative, reinforcing that this is a genuine product-specific tightness signal rather than a geo risk premium that would unwind if talks succeed.</p></div>
+        <div class="geo-block geo-ru"><div class="block-label">🇷🇺 Geopolitics — Russia/Ukraine</div><p>Russia's gasoline export ban (already in place) was extended by Novak to end-2026 (from the original Jul 31 expiry) — a structural, dated extension of Russian supply withdrawal from the export market. The odd India-to-Russia gasoline transshipment (Garnet loaded from Agni near Egypt, arriving Vitino ~Jun 25) shows Russia importing gasoline via a workaround — confirming Russia's own domestic gasoline balance is strained, not a bearish signal for the international market but a marker of how tight Russian supply has become internally.</p></div>
+      </div>
+      <div class="factors">
+        <div class="fx-bull"><div class="block-label">Bullish Factors</div><ul class="flist">
+          <li>FOB Singapore 92 RON crack vs Dubai at a 4-year high ($33.47/b)</li>
+          <li>US RBOB-Brent crack widened to $52.28/b on summer driving demand</li>
+          <li>Iraq Basra refinery cut + gasoline import need — regional tightening</li>
+          <li>Russia's gasoline export ban extended to end-2026 — removes a swing supplier for longer</li>
+          <li>Crack strength holding despite a bearish US stock build — a genuine demand signal</li>
+        </ul></div>
+        <div class="fx-bear"><div class="block-label">Bearish Factors</div><ul class="flist">
+          <li>US gasoline stocks +400kb w/w (bearish inventory backdrop, EIA data due Jul 29)</li>
+          <li>No physical bids/offers/trades in Asian MOC — crack strength is a derivative/notional read, not yet confirmed by a physical print</li>
+          <li>No Pertamina buy tender to add a hard demand data point</li>
+        </ul></div>
+      </div>
+      <div class="rationale">Market Structure (multi-year-high cracks, both vs Dubai and vs Brent/RBOB) and Supply (Iraq Basra cut/import need, extended Russian export ban) converge bullish — satisfying the 2-pillar threshold with a strong structural signal. Calling <b>Bullish</b> rather than Extremely Bullish: the crack move is a one-day jump in this snapshot with no confirming physical MOC print (no bids/offers/trades), so per the 7-day consistency rule this reads as a setup that needs one more session of confirmation before upgrading further.</div>
+    </div>
+  </div>
+
+  <!-- GASOIL -->
+  <div class="card" id="gasoil">
+    <div class="card-head"><div class="card-title">Gasoil / Diesel</div><span class="badge badge-bull">Bullish</span></div>
+    <div class="card-body">
+      <div class="subgrid">
+        <div class="block"><div class="block-label">MOC Window (last 30 min)</div><p>A genuinely active, two-sided FOB Straits 10ppm gasoil window: Trafigura bid MOPS+6.00 (Aug 12-16/15-19/23-27, 150-175kb, various INCO/deemed terms); Vitol and Unipec offered +7.00 to +8.50 across similar windows. Multiple <b>done deals</b> concluded at a consistent <b>MOPS+$7.00</b> level: Trafigura bought from BP (Aug 17-21, 150kb), BP sold to Sietco (Aug 17-21, 250kb), Trafigura bought from BP again (Aug 14-18, 150kb), and BP sold to Trafigura (Aug 15-19, 160kb) — repeated trades clustering at the same premium is a strong demand-confirmation signal, stronger than bids/offers alone per the MOC rules. The benchmark 10ppm cash differential firmed +$0.83 to $6.54/b into the close even though the intraday commentary (referencing the Jul 27 close) had described the market as "softening" — a clear case of the early session diverging from a firmer MOC close; per the rules, the close governs. <b>🔍 Note:</b> BP and Trafigura are repeat counterparties across multiple prints in the same session (not yet 2+ consecutive days), so this stops short of a full market-play flag but is worth watching into tomorrow's session.</p></div>
+        <div class="block"><div class="block-label">Tender Activity</div><p>No formal East-of-Suez gasoil buy/sell tender closed today, but regional colour is telling: a ULSD MR cargo ex-Sikka (India) for Aug 10-11 loading was heard sold at a rich premium of $14/b to the August MOPAG whole-month average — a strong bullish India netback (Indonesia/Vietnam-style buy-side strength, per the product's bullish weighting factors). Against that, a Kuwait-loaded ULSD MR cargo for Aug 5-10 delivery was heard at a $20/b discount to MOPAG — a bearish counter-print, though unconfirmed. Egypt continues buying high-sulfur gasoil to process into 10ppm diesel, road fuel or power generation — a standing structural demand outlet.</p></div>
+      </div>
+      <div class="subgrid">
+        <div class="block"><div class="block-label">Refinery / Cracker Outages</div><p>Iraq's Basra refinery cut to ~250kb/d (unplanned, weather-driven) trims regional distillate output at the margin. No dedicated gasoil-unit outage reported elsewhere today.</p></div>
+        <div class="block"><div class="block-label">Non-Russian-Origin GTC Language — pervasive today</div><p>Nearly every gasoil bid, offer and trade logged in the Singapore Straits MOC today carries explicit "seller represents and warrants... not of Russian Federation origin, nor blended with any RF product, nor transiting RF" language (Trafigura, BP, Shell GTC clauses repeated across multiple prints) — direct, granular evidence that the Russian export ban has structurally reshaped how every physical distillate cargo is contracted, not just a macro data point. This same clause pattern recurs in Jet Kero and Marine Fuel/HSFO trades today (see below) — a genuinely cross-product signal.</p></div>
+      </div>
+      <div class="geo-split">
+        <div class="geo-block geo-ru"><div class="block-label">🇷🇺 Geopolitics — Russia/Ukraine (primary driver)</div><p><b>Russia's diesel/gasoil exports fell to 155,000mt in the week ended Jul 23, down 29% w/w from 217,000mt, and the lowest level since at least 2016</b> — against a Jan-May weekly average of ~784,000mt, i.e., exports are running at ~20% of the pre-ban norm. The Jul 9 export ban lifts only "as the market recovers" (Novak) — no date, extending the effective duration of the supply removal indefinitely. The gasoline export ban was separately extended to end-2026 and jet fuel restrictions remain to end-November, showing Russia widening rather than narrowing its export restrictions. Turkey- and Egypt-bound Russian diesel/gasoil loadings both nearly halved week-on-week (Turkey to 137,000mt-equivalent pace, Egypt from zero to 30,000mt) even as the odd India-to-Russia gasoline transshipment (Garnet/Agni via Egypt) shows sanctions-evasion logistics growing more baroque. Ukrainian attacks on Russian oil/marine infrastructure continue to cause domestic fuel shortages — Novak says "some" refineries have returned from maintenance but gave no numbers, i.e., the supply-side stress is ongoing and only partially and vaguely addressed. <b>Ties directly to price:</b> the Mediterranean diesel cargo benchmark hit $1,298.25/mt on Jul 24 — the second-highest since May 1 and nearly double the end-February level (average $992.65 in June, $1,184.40 in May) — and the physical ARA diesel crack was $70.50/b on Jul 24, having spiked to a <b>record $79/b on Jul 16</b>. Europe has imported no Russian oil products since 2023, so it isn't directly hit by the ban, but its options for global replacement barrels have narrowed sharply — a structural, not cyclical, tightening of the ARA distillate pool that underwrites today's Singapore MOC firmness via the broader global diesel balance.</p></div>
+        <div class="geo-block geo-ir"><div class="block-label">🇮🇷 Geopolitics — US/Iran</div><p>Asian ULSD softened intraday "amid muted spot activity" as the US held off further action against Iran — the de-escalation is a mild drag on the Asian prompt structure (Aug-Sep swap spread narrowed to $8.30/b from $8.69/b) even as the Russian-driven global tightness dominates the broader picture. Middle East gasoil activity was "similarly limited" both within and outside the Strait of Hormuz, with traders explicitly waiting to see whether a ceasefire materializes and Hormuz reopens before committing to fresh cargoes — a wait-and-see posture rather than a directional Iran-driven price signal for gasoil specifically.</p></div>
+      </div>
+      <div class="databox"><b>EU policy watch (30-day catalyst):</b> the EU's stockpile-policy review is unlikely to raise the 90-day mandate but is expected to reweight reserve composition toward refined products and add jet fuel/military-fuel-specific provisions later this year — a slow-moving structural tailwind for middle distillates, flagged here as a forward catalyst rather than a today-signal.</div>
+      <div class="factors">
+        <div class="fx-bull"><div class="block-label">Bullish Factors</div><ul class="flist">
+          <li>Russian diesel/gasoil exports at a decade-plus low, -29% w/w, open-ended ban</li>
+          <li>Multiple done deals at a consistent MOPS+$7.00 premium in the Singapore MOC close</li>
+          <li>Cash differential firmed into the close despite a softer intraday tone (MOC governs)</li>
+          <li>ARA diesel crack near record ($70.50/b, vs $79/b peak Jul 16); Med benchmark near 5-month high</li>
+          <li>Sikka (India) cargo sold at a rich $14/b premium — strong netback demand</li>
+          <li>Pervasive non-Russian-origin GTC language confirms structural compliance-driven scarcity, not just a headline</li>
+        </ul></div>
+        <div class="fx-bear"><div class="block-label">Bearish Factors</div><ul class="flist">
+          <li>Asian Aug-Sep backwardation narrowed slightly (softer near-term structure)</li>
+          <li>Muted Asian spot activity as traders wait for Hormuz ceasefire clarity</li>
+          <li>Kuwait-loaded cargo reportedly discounted $20/b (unconfirmed) — a bearish counter-print</li>
+        </ul></div>
+      </div>
+      <div class="rationale">All three pillars converge: <b>Supply</b> (Russian export collapse, open-ended ban, Ukraine attacks sustaining domestic Russian strain), <b>Market Structure</b> (done deals at a consistent premium, cash diff firming into the close, record/near-record ARA crack and Med benchmark), and <b>Demand</b> (Egypt's structural high-sulfur gasoil buying, India's rich Sikka premium, universal non-Russian-origin contract language reflecting genuine scarcity of compliant barrels). This is not a single-day setup — the Med benchmark and ARA crack trends cited span late June through Jul 24, and the Russian export data covers a full week — so the 7-day consistency bar is satisfied by the report's own multi-week references. Calling <b>Bullish</b> for the Asia-Pacific benchmark (with the European/Med complex arguably <b>Extremely Bullish</b> on its own, given the record crack and all-3-pillar convergence there specifically) — held one notch below Extremely Bullish for the Asia read because the Singapore prompt structure itself narrowed slightly and Asian spot activity stayed muted pending Hormuz clarity.</div>
+    </div>
+  </div>
+
+  <!-- JET KERO -->
+  <div class="card" id="jetkero">
+    <div class="card-head"><div class="card-title">Jet Kero</div><span class="badge badge-bull">Bullish (modest)</span></div>
+    <div class="card-body">
+      <div class="subgrid">
+        <div class="block"><div class="block-label">MOC Window</div><p>FOB Straits jet: a run of <b>offers only</b> — Sietco MOPS+4.50 (Aug 12-16, 100kb), Unipec +5.00 (Aug 12-16, 100kb), Ampol +7.50 (Aug 13-17, 100kb), BP +5.00 (Aug 23-27, 100kb), Trafigura +5.00 (Aug 23-27, 100kb) — with explicit "no bids reported" and "no trades reported." This is a one-sided, offer-heavy window with zero confirmed demand-side participation in the close itself — a caution flag against reading too much into the day's structural firmness. Away from the MOC, the cash differential rose 23c/b to Sing Jet/Kero +$1.75/b and the Aug-Sep swap time spread widened 45c/b to +$4.11/b (deepening backwardation) — both bullish, but derivative/paper-side rather than physically confirmed.</p></div>
+        <div class="block"><div class="block-label">Tender Activity</div><p>No term or spot jet tenders reported closing today. Thailand's jet fuel exports rose 3.5x y/y and 9x m/m to 30,819 b/d in June, mainly to Vietnam — a genuine supply increase reaching the regional market even as Thailand's own aircraft traffic fell 11.4% m/m and passenger traffic fell 7.44% y/y (soft domestic demand, but export volumes rising regardless).</p></div>
+      </div>
+      <div class="subgrid">
+        <div class="block"><div class="block-label">Refinery / Cracker Outages</div><p>None reported directly against jet-producing units today.</p></div>
+        <div class="block"><div class="block-label">7-Day Consistency</div><p>The crack against front-month Dubai narrowed 63c/b day-over-day but widened 34c/b week-over-week to $67.25/b (Jul 27) — a case where the daily snapshot (narrowing) would mislead if read alone; the weekly trend is actually firming. Flagged explicitly per the mid-week-reversal rule.</p></div>
+      </div>
+      <div class="geo-split">
+        <div class="geo-block geo-ru"><div class="block-label">🇷🇺 Geopolitics — Russia/Ukraine</div><p>Russia's jet fuel export restrictions remain in place to end-November (already confirmed at zero exports in the week ended Jul 23, per CAS) — a known, dated, and already-priced supply removal rather than a fresh catalyst today. The EU's oil-stocks policy review explicitly singled out jet fuel import dependency as a "concrete operational failure" exposed by the Middle East conflict, and is expected to consider jet-fuel-specific stock provisions in its review later this year — a genuine forward catalyst, non-immediate, flagged for the 30-day-and-beyond horizon.</p></div>
+        <div class="geo-block geo-ir"><div class="block-label">🇮🇷 Geopolitics — US/Iran</div><p>No jet-specific Hormuz/Red Sea flow disruption cited today; the broader Indian-refiner resilience narrative (crude secured through September) indirectly supports continued jet/kero production runs in India.</p></div>
+      </div>
+      <div class="factors">
+        <div class="fx-bull"><div class="block-label">Bullish Factors</div><ul class="flist">
+          <li>Aug-Sep backwardation widened to $4.11/b; cash diff firmed 23c/b</li>
+          <li>Week-over-week crack vs Dubai actually widened (34c/b) despite a same-day narrowing</li>
+          <li>Russia jet export ban runs to end-November — known, sustained supply removal</li>
+          <li>EU policy review flags jet fuel as a specific future stock-mandate candidate</li>
+        </ul></div>
+        <div class="fx-bear"><div class="block-label">Bearish Factors</div><ul class="flist">
+          <li>MOC was offers-only — zero bids, zero trades confirmed in the window</li>
+          <li>Thailand jet exports up 3.5x y/y — genuine added regional supply</li>
+          <li>Day-over-day crack vs Dubai narrowed</li>
+        </ul></div>
+      </div>
+      <div class="rationale">Market Structure (widening backwardation, firmer cash diff, confirmed weekly crack strength) supports a bullish tilt, and Supply/Policy (Russia's ongoing ban, EU's forward stock-mandate signal) adds a second pillar — but Demand confirmation is weak (offers-only MOC, no bids or trades) and Thai export growth is a live bearish supply counterweight. Calling a modest <b>Bullish</b>, held back from a stronger conviction specifically because today's MOC window showed no buy-side participation at all.</div>
+    </div>
+  </div>
+
+  <!-- SAF -->
+  <div class="card" id="saf">
+    <div class="card-head"><div class="card-title">SAF (Sustainable Aviation Fuel)</div><span class="badge badge-neutral">Neutral / Insufficient Data</span></div>
+    <div class="card-body">
+      <div class="subgrid">
+        <div class="block"><div class="block-label">MOC Window</div><p>No bid/offer/trade log is published for SAF in any of today's four reports — only price-level assessments (cost of production, cost of abatement, CIF/FOB premiums by region).</p></div>
+        <div class="block"><div class="block-label">Tender Activity</div><p>None reported.</p></div>
+      </div>
+      <div class="databox"><b>Price levels moved broadly higher today</b> — NWE SAF (H-S) CIF premium +$33.25/mt to $1,601.50/mt; FOB Straits premium +$20.75 to $1,382/mt; FOB China premium +$20.75 to $1,362/mt; Americas SAF (H-S) w/o credits USWC +$38.035; SAF ETJ w/o credits USGC +$14.59; SAF CA/IL credit-determined premiums also up modestly — but these are cost-of-production/carbon-cost mechanics (RD/UCO feedstock costs actually fell) rather than a market-driven demand or supply signal. Without any MOC bid/offer/trade activity, tender data, refinery outage linkage, or explicit geopolitical driver specific to SAF, this does not clear the 2-of-3-pillar minimum threshold for a directional call.</div>
+      <div class="rationale">Per the integrity rule: <b>insufficient data to form a directional view</b> on SAF today beyond noting the broad-based premium increases across NWE, Asia and the Americas. No MOC, tender, outage or geopolitical pillar data is available to support Bullish/Bearish/Neutral scoring beyond a flat "Neutral."</div>
+    </div>
+  </div>
+
+  <!-- LSFO -->
+  <div class="card" id="lsfo">
+    <div class="card-head"><div class="card-title">LSFO (0.5% Marine / Low Sulfur Fuel Oil)</div><span class="badge badge-bull">Bullish</span></div>
+    <div class="card-body">
+      <div class="subgrid">
+        <div class="block"><div class="block-label">MOC Window (last 30 min)</div><p>Singapore Marine Fuel 0.5% FOB Straits: <b>BP bid MOPS+28.00</b> across three windows (Aug 13-17, 18-22, 23-27, 40kt OR each) and <b>Total bid +29.00</b> (Aug 12-16, 17-21) and +28.00 (Aug 22-26) — multiple bids, no counter-offers reported anywhere near those levels; the only offers seen were Shell (+53.00, +48.00, +48.00 across three windows) and Vitol (+50.00) — a roughly <b>$20-25/mt gap</b> between where buyers are bidding and where sellers are offering, with "No trade" reported in the MOC log itself. This unusually wide bid-offer spread, alongside explicit commentary that on-spec LSFO inventories in Singapore are constrained until mid-August due to a shortage of suitable low-pour-point blending components, reads as a genuine scarcity signal rather than a demand failure — sellers are holding out, not buyers giving up. The Aug-Sep swap time spread widened to a $42/mt backwardation from $40.50/mt at the prior close.</p></div>
+        <div class="block"><div class="block-label">Tender Activity</div><p>No LSFO-specific NOC tenders reported today (the bearish NOC-tender rule for fuel oil did not fire for LSFO specifically). Separately, Pakistan's LSFO exports rose 31% y/y in FY2025-26 to 180,469mt — a structural, gradual supply addition to the Asian pool, not a today-event.</p></div>
+      </div>
+      <div class="subgrid">
+        <div class="block"><div class="block-label">Refinery / Cracker Outages</div><p>None specific; Fujairah's heavy distillates and residues stock fell sharply, -1,397 (thousand barrels) week-over-week to 5,865 — a large draw consistent with genuine regional tightening rather than a build.</p></div>
+        <div class="block"><div class="block-label">Regional Divergence</div><p>Tokyo Bay: LSFO "very tight... until mid-August," premiums supported by tightening inventories and rising buying interest — assessed +$6/mt d/d to $751/mt. Rotterdam/Hamburg: MGO/VLSFO tight on quality issues, with suppliers flagging circulating "off-spec" volumes and a lack of good blending components. This is a genuinely multi-hub (Singapore, Fujairah/Tokyo, ARA) confirmation of the same underlying blending-component scarcity story.</p></div>
+      </div>
+      <div class="geo-split">
+        <div class="geo-block geo-ir"><div class="block-label">🇮🇷 Geopolitics — US/Iran</div><p>Red Sea/Houthi disruption to Saudi HSFO/clean-cutter outflows indirectly tightens the LSFO blend-component pool (sulfur cutters are partly Saudi-sourced), reinforcing rather than contradicting today's scarcity read, even though the broader crude complex sold off on the same de-escalation news.</p></div>
+        <div class="geo-block geo-ru"><div class="block-label">🇷🇺 Geopolitics — Russia/Ukraine</div><p>No direct LSFO-specific Russia/Ukraine signal in today's reports (Russia's export bans concentrate on diesel/gasoline/jet, not fuel oil).</p></div>
+      </div>
+      <div class="factors">
+        <div class="fx-bull"><div class="block-label">Bullish Factors</div><ul class="flist">
+          <li>Wide bid-offer gap in Singapore MOC ($20-25/mt) signalling genuine blending-component scarcity</li>
+          <li>Aug-Sep backwardation deepened to $42/mt</li>
+          <li>Fujairah heavy-distillate stocks drew sharply, -1,397kb w/w</li>
+          <li>Tokyo Bay explicitly tight to mid-August; ARA MGO/VLSFO also tight on quality/component shortages</li>
+        </ul></div>
+        <div class="fx-bear"><div class="block-label">Bearish Factors</div><ul class="flist">
+          <li>Cash premium retraced $5.11/mt off a 6-session uptrend (partial pullback, not a reversal)</li>
+          <li>Busan LSFO outright fell sharply ($780/mt, -$56/mt d/d) — regional softness within the same complex</li>
+          <li>Pakistan LSFO export growth adds structural Asian supply over time</li>
+        </ul></div>
+      </div>
+      <div class="rationale">Supply (multi-hub blending-component shortage: Singapore, Tokyo Bay, ARA all independently confirming) and Market Structure (widening backwardation, unusually wide bid-offer gap, Fujairah stock draw) converge bullish. Calling <b>Bullish</b>, not Extremely: today's cash-premium pullback is read as a retracement within a confirmed 6-session uptrend (per the 7-day consistency check) rather than a trend reversal, but the Busan softness is a genuine geographic counterweight worth tracking.</div>
+    </div>
+  </div>
+
+  <!-- HSFO -->
+  <div class="card" id="hsfo">
+    <div class="card-head"><div class="card-title">HSFO (380cst High Sulphur Fuel Oil)</div><span class="badge badge-bear">Bearish</span></div>
+    <div class="card-body">
+      <div class="subgrid">
+        <div class="block"><div class="block-label">MOC Window (last 30 min)</div><p>Singapore 380cst HSFO: <b>Mercuria withdrew two bids</b> (MOPS+10.00 Aug 19-23 20kt, +11.00 Aug 23-27 20kt) rather than pressing them, while Vitol bid +10.00 (Aug 23-27, 20kt) remained outstanding; a trade was concluded with Chimbusco selling to Mercuria at only <b>+$8.00/mt</b> for an Aug 12-16 cargo — i.e., the one confirmed trade printed below the withdrawn bid levels. The 180cst window saw SA Oceania (Trafigura) offering across three windows (+15, +16, +18) with no matching bids logged. Cash premium fell $1.84/mt to $10.33/mt (380cst) and $3.01/mt to $8.41/mt (180cst); the May-June swap time spread narrowed sharply to a $15.50/mt backwardation from $20.45/mt at the Jul 27 close — a real, same-day loosening of the prompt structure. Explicit trader commentary: the market "reversed gains recorded so far this week... as the market seemed to already be pricing in the de-escalation."</p></div>
+        <div class="block"><div class="block-label">Tender Activity</div><p>No KPC/ADNOC/ATC/QP/IOC NOC sell tender reported specifically today. Pakistan's total fuel oil exports rose 10.5% y/y in FY2025-26 to 1.436m mt (domestic furnace-oil demand down 26% y/y on tax/fuel-mix shifts) — a structural, gradual addition to the Asian HSFO/fuel-oil pool, with July exports estimated at ~200,000mt across four refiners (Pakistan Refinery, National Refinery, Cnergyico, Pak-Arab).</p></div>
+      </div>
+      <div class="subgrid">
+        <div class="block"><div class="block-label">Refinery / Cracker Outages</div><p>Jazan refinery fire remains unconfirmed by Aramco/Saudi energy ministry (satellite smoke only, Jul 26) — carried as background risk, not priced. If confirmed, would remove HSFO-relevant capacity at the 400kb/d complex.</p></div>
+        <div class="block"><div class="block-label">Regional Divergence</div><p>Busan HSFO fell $37/mt d/d to $633/mt, with the premium down $14.63/mt to $143.26/mt — explicitly described as having "steadily declined over the past several sessions owing to weak demand out of the port," a multi-day (not just today) bearish trend. A trader separately flagged that HSFO cargo availabilities are "tight" but downstream premiums are "not strongly reflecting" that, because "cheap cargoes might have slipped through" — a signal that the tightness narrative is not translating cleanly into price, undercutting the bullish Red Sea/Houthi supply story.</p></div>
+      </div>
+      <div class="geo-split">
+        <div class="geo-block geo-ir"><div class="block-label">🇮🇷 Geopolitics — US/Iran</div><p>This is the clearest geo-validation case in today's set: despite ongoing Red Sea/Houthi risk that would normally limit Saudi high-sulfur barrel outflows, the HSFO market gave back the week's gains specifically because the market is "already pricing in" the US-Iran de-escalation. Per the validation rule, since the MOC/structure did not sustain the widening (backwardation narrowed, cash premium fell, a bid was withdrawn), the Red Sea supply-risk factor is downgraded to background noise for HSFO today, notwithstanding the physical blockade still being in effect.</p></div>
+        <div class="geo-block geo-ru"><div class="block-label">🇷🇺 Geopolitics — Russia/Ukraine</div><p>No direct HSFO-specific Russia/Ukraine signal; non-Russian-origin GTC language appears throughout today's HSFO/Marine Fuel offers (Chimbusco, AramcoSG) exactly as in gasoil and jet, confirming the same compliance-driven contracting norm has spread across the heavy-ends complex too, though without an HSFO-specific supply shock tied to it today.</p></div>
+      </div>
+      <div class="factors">
+        <div class="fx-bull"><div class="block-label">Bullish Factors</div><ul class="flist">
+          <li>Red Sea/Houthi disruption still physically limiting Saudi HSFO outflows (unconfirmed by price action)</li>
+          <li>Jazan fire risk, if confirmed, would remove HSFO-relevant capacity</li>
+          <li>Cargo availabilities described as genuinely "tight" by traders</li>
+        </ul></div>
+        <div class="fx-bear"><div class="block-label">Bearish Factors</div><ul class="flist">
+          <li>Mercuria withdrew two bids; sole confirmed trade printed below withdrawn levels</li>
+          <li>May-June backwardation narrowed sharply ($20.45/mt to $15.50/mt)</li>
+          <li>Cash premiums fell on both 380cst and 180cst grades</li>
+          <li>Busan HSFO in a multi-session weak-demand downtrend</li>
+          <li>Trader-flagged "cheap cargoes slipping through" undercutting the tightness narrative</li>
+          <li>Pakistan fuel-oil exports +10.5% y/y — structural added Asian supply</li>
+        </ul></div>
+      </div>
+      <div class="rationale">Market Structure (narrowing backwardation, withdrawn bid, declining cash premiums) and Demand (Busan's confirmed multi-session weak-demand trend, "cheap cargoes slipping through") both lean bearish, clearing the 2-pillar threshold. Calling <b>Bearish</b>: the underlying Red Sea physical disruption is real but, per the geo-validation rule, has not been confirmed by this week's MOC/price action — so it is treated as background risk rather than a bullish offset, while flagging explicitly that renewed Houthi escalation could reverse this quickly.</div>
+    </div>
+  </div>
+
+  <div class="cross-notes" id="cross">
+    <div class="section-title" style="margin-top:0;">Cross-Product Notes</div>
+    <ul>
+      <li><b>Coupling flag:</b> the >$5/b one-day-equivalent Brent move (>3.5% threshold, extreme) is a coupling trigger per the constraint reminders — Crude, LPG and Naphtha (all outright-priced off the same crude complex) inherited the de-escalation-driven selloff directly, while Gasoline, Gasoil, Jet Kero and LSFO showed genuine product-specific tightness that ran counter to or independent of the crude move — a real divergence between the crude tape and the refined-product complex today.</li>
+      <li><b>Non-Russian-origin GTC language</b> now appears as standard boilerplate across Gasoil, Jet Kero and HSFO/Marine Fuel physical offers and trades in the same session — the clearest granular, contract-level evidence available that the Russian export restrictions have structurally reshaped how every compliant physical cargo in Asia is being contracted, not just a macro-level export-volume statistic.</li>
+      <li><b>Geo-validation divergence:</b> Crude and HSFO are the two clearest cases today where the physical/geopolitical risk (Houthi Red Sea blockade, Iranian floating storage build) is NOT confirmed by the MOC/futures price action (both sold off / reversed gains) — flagged in both cards as a reason to hold conviction below "Extreme" and to watch for a snap-back if the Oman-mediated Hormuz talks fail.</li>
+      <li><b>Iraq's Basra refinery cut (~250kb/d, unplanned/weather)</b> is the one outage with a genuinely cross-product footprint today — it curbed regional crude runs (mild crude-bearish), forced a gasoline import need (gasoline-bullish, regional), and trimmed distillate output at the margin (gasoil-supportive) — a single unplanned event rippling across three products simultaneously.</li>
+      <li><b>Libya's El Feel/Wafa halt-and-resume (same day)</b> and the still-unconfirmed Jazan fire are both flagged at full transparency: the former resolved too quickly to register as a supply shock; the latter remains unconfirmed by Aramco and is carried as background risk only, per the integrity rule against treating unverified reports as priced fact.</li>
+      <li><b>HF Sinclair's proposed Rockies-to-West-Coast pipeline FID</b> was not found referenced in today's four Platts reports (Oilgram's Americas/Canada infrastructure coverage today centred on Gibson Energy's Alberta-Texas FID timeline instead) — flagged explicitly as a data gap against the brief's request rather than fabricated.</li>
+      <li><b>Vortexa flow file:</b> the raw Vortexa CSV (May 2023-Jul 2026, ~36MB) was checked for structure only; given its size and the fact that today's Oilgram already embeds detailed S&P Global Commodities at Sea (CAS) flow data covering the exact themes requested (Hormuz/Bab al-Mandab vessel counts, Yanbu loadings, Russian diesel/gasoil port-by-port loadings), CAS data as reported in Oilgram was used as the ground-truth flow source for this brief rather than re-deriving the same figures from the raw file.</li>
+    </ul>
+  </div>
+
 </div>
 
-<div class="section-header"><h2>Conviction Summary — 29 Jul vs 24 Jul</h2></div>
-<div class="summary-section">
-  <table class="summary-table">
-    <thead>
-      <tr>
-        <th>Product</th>
-        <th>24 Jul View</th>
-        <th>29 Jul View</th>
-        <th>Conviction</th>
-        <th>Key Driver of Change</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr style="background: rgba(63,185,80,0.06);">
-        <td class="td-product">Crude (Brent/Dubai/WTI)</td>
-        <td class="td-move">Bullish</td>
-        <td><span class="verdict-badge xbull" style="display:inline-block;padding:2px 8px;font-size:11px;">Extremely Bullish ✅ — Re-upgraded</span></td>
-        <td><span class="conf-high">VERY HIGH</span></td>
-        <td class="td-driver">Direct Iran missile attack on US bases + US crude at 11-yr low + Fujairah stock crash + reinstated Houthi blockade, after fully unwinding the 24 Jul reversal in between</td>
-      </tr>
-      <tr style="background: rgba(63,185,80,0.06);">
-        <td class="td-product">Gasoil / Diesel</td>
-        <td class="td-move">Bullish</td>
-        <td><span class="verdict-badge xbull" style="display:inline-block;padding:2px 8px;font-size:11px;">Extremely Bullish ✅ — Re-upgraded</span></td>
-        <td><span class="conf-high">VERY HIGH</span></td>
-        <td class="td-driver">Swap spread jumped intraday to $9.15/b; probable fire at Jazan refinery marks a new escalation in target type</td>
-      </tr>
-      <tr style="background: rgba(63,185,80,0.06);">
-        <td class="td-product">HSFO 380cst</td>
-        <td class="td-move">Neutral</td>
-        <td><span class="verdict-badge bull" style="display:inline-block;padding:2px 8px;font-size:11px;">Bullish ✅ — Upgraded</span></td>
-        <td><span class="conf-med">MEDIUM-HIGH</span></td>
-        <td class="td-driver">Fujairah heavy distillates crashed 41% WoW, resolving the prior spot-vs-structure split toward the bullish side</td>
-      </tr>
-      <tr style="background: rgba(63,185,80,0.06);">
-        <td class="td-product">LSFO / Marine 0.5%</td>
-        <td class="td-move">Neutral</td>
-        <td><span class="verdict-badge bull" style="display:inline-block;padding:2px 8px;font-size:11px;">Bullish ✅ — Upgraded</span></td>
-        <td><span class="conf-med">MEDIUM-HIGH</span></td>
-        <td class="td-driver">Same Fujairah collapse plus widening Singapore backwardation and persistent multi-port bunker tightness</td>
-      </tr>
-      <tr style="background: rgba(210,153,34,0.06);">
-        <td class="td-product">Gasoline / RBOB</td>
-        <td class="td-move">Bearish</td>
-        <td><span class="verdict-badge neutral" style="display:inline-block;padding:2px 8px;font-size:11px;">Neutral ✅ — Upgraded</span></td>
-        <td><span class="conf-med">MEDIUM</span></td>
-        <td class="td-driver">Consistent Indonesian demand and widening cracks vs a South Korean stock build and Fujairah light-distillate rebound</td>
-      </tr>
-      <tr>
-        <td class="td-product">Naphtha</td>
-        <td class="td-move">Bullish</td>
-        <td><span class="verdict-badge bull" style="display:inline-block;padding:2px 8px;font-size:11px;">Bullish —</span></td>
-        <td><span class="conf-med">MEDIUM</span></td>
-        <td class="td-driver">Unchanged — IOC tender cancellation and S.Korea inventory draw offset by a narrowing MOPJ swap spread</td>
-      </tr>
-      <tr>
-        <td class="td-product">Jet Kerosene</td>
-        <td class="td-move">Bullish</td>
-        <td><span class="verdict-badge bull" style="display:inline-block;padding:2px 8px;font-size:11px;">Bullish —</span></td>
-        <td><span class="conf-med">MEDIUM</span></td>
-        <td class="td-driver">Unchanged — S.Korea exports the only YoY gainer among refined products; physical bids still absent since Jul6</td>
-      </tr>
-      <tr style="background: rgba(63,185,80,0.06);">
-        <td class="td-product">LPG / Propane</td>
-        <td class="td-move">Neutral</td>
-        <td><span class="verdict-badge bull" style="display:inline-block;padding:2px 8px;font-size:11px;">Bullish ✅ — Reverted</span></td>
-        <td><span class="conf-med">MEDIUM</span></td>
-        <td class="td-driver">Crude-tracking rebound snapped 3 straight down sessions; US stock build to a 2026 high is the main counter-note</td>
-      </tr>
-      <tr style="background: rgba(210,153,34,0.06);">
-        <td class="td-product">SAF</td>
-        <td class="td-move">Neutral, watch flagged</td>
-        <td><span class="verdict-badge neutral" style="display:inline-block;padding:2px 8px;font-size:11px;">Neutral — Held</span></td>
-        <td><span class="conf-low">LOW-MEDIUM</span></td>
-        <td class="td-driver">The premium-widening flagged as a watch item reversed; the underlying multi-week compression trend resumes</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
-<div class="footer">
-  <div class="footer-text">Oil Market Brief · Sources: Platts Oilgram News · Platts Asia-Pacific/Arab Gulf Marketscan · Platts LPGaswire · Platts Bunkerwire · July 29, 2026 · Analyst Review generated July 30, 2026</div>
-  <div class="footer-disclaimer">Analysis synthesized by the oil-analyst agent from condensed excerpts of four source PDFs (not full raw MOC bid/offer feeds). Five sessions elapsed since the prior (24 Jul) edition; conviction-change language reads through to that cycle directly rather than an unbroken daily chain. Window direction inferred from settlement prices, spread movements, tender activity and source commentary. This is an analytical synthesis only, not a trading recommendation.</div>
+<div class="foot">
+  Generated from Platts Oilgram News, Asia-Pacific/Arab Gulf Marketscan, Bunkerwire and LPGaswire (all dated 28 Jul 2026). Conviction calls follow the standard 3-pillar (Supply / Demand / Market Structure) minimum-signal threshold, with Refiner Participation, Execution Risk and Policy Friction applied only as magnitude/timeline modifiers, never as standalone directional drivers. No figures in this brief were fabricated; data gaps (SAF pillars, HF Sinclair pipeline FID, deeper Vortexa mining) are flagged explicitly rather than padded.
 </div>
 
 </body>
