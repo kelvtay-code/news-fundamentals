@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Bull Screener — Bullish Ticker Funnel — Thursday, 30 July 2026 (08:45)</title>
+<title>Bull Screener — Bullish Ticker Funnel — Friday, 31 July 2026 (04:16)</title>
 <style>
 :root {
   --ft-salmon:   #FFF1E0;
@@ -139,18 +139,18 @@ footer { background: var(--ft-navy); color: #888; font-family: Arial, sans-serif
   <div class="masthead-inner">
     <div class="masthead-eyebrow">Optionx Intelligence — Experimental Funnel</div>
     <div class="masthead-title">Bull <span>Screener</span> — Bullish Ticker Funnel</div>
-    <div class="masthead-date">Data: stock_analysis_300726.0845.csv &nbsp;&middot;&nbsp; IV_300726_0851.csv &nbsp;&middot;&nbsp; business_overview_300726_0845.csv</div>
+    <div class="masthead-date">Data: stock_analysis_310726.0416.csv &nbsp;&middot;&nbsp; IV_310726_0407.csv &nbsp;&middot;&nbsp; business_overview_310726_0416.csv</div>
     <div class="masthead-tagline">"Sequential funnel — a ticker that fails a gate is dropped, not carried forward."</div>
   </div>
 </div>
 <div class="stats-banner"><div class="stats-inner">
-  <div class="stat-item">Step 1 Wyckoff Uptrend/Spring <strong>35</strong></div><span class="stat-sep">&rarr;</span>
+  <div class="stat-item">Step 1 Wyckoff Uptrend/Spring <strong>43</strong></div><span class="stat-sep">&rarr;</span>
   <div class="stat-item">Step 2 top7 bull-confirm <strong>2</strong></div><span class="stat-sep">&rarr;</span>
-  <div class="stat-item">Step 3 ivchk IV/trend gate <strong>0</strong></div><span class="stat-sep">&rarr;</span>
+  <div class="stat-item">Step 3 ivchk IV/trend gate <strong>1</strong></div><span class="stat-sep">&rarr;</span>
   <div class="stat-item">Step 4 Positive-GEX final <strong>0</strong></div>
   <span class="stat-sep">|</span>
   <div class="stat-item">Final List <strong>0</strong> tickers</div>
-  <div class="stat-item">Divergence-flagged <strong>0</strong>/0</div>
+  <div class="stat-item">Divergence-flagged <strong>1</strong>/1</div>
 </div></div>
 <div class="search-bar">
   <div class="search-inner">
@@ -170,7 +170,7 @@ footer { background: var(--ft-navy); color: #888; font-family: Arial, sans-serif
 
 <div class="content">
   <div class="empty-banner">
-    Zero survivors this run. Step 2 (top7 bull-confirm) passed only DUK and JPM (both BULL SETUP, Reinforced recency) out of 35 Wyckoff Uptrend/Spring candidates — every other candidate was REJECT or ABORT on the 7-Day Verdict, mostly on insufficient GEX&ge;+4 day-count or a gamma-flip disqualifier. Both Step 2 survivors then failed Step 3's ivchk IV Rank &gt;38 gate: JPM read IV Rank 25 (&le;38, rejected); DUK is not carried in the latest IV_*.csv options-scanner universe at all, so its IV Rank threshold pass could not be verified and it was rejected rather than assumed. Candidate List 3 is therefore empty, so no positive-GEX filter, PEG/Earnings enrichment, or news check had a candidate to run against.
+    Zero survivors this run. Step 2 (top7 bull-confirm) passed only DUK and JNJ (both BULL SETUP, Reinforced recency) out of 43 Wyckoff Uptrend/Spring candidates — every other candidate was REJECT or ABORT on the 7-Day Verdict, mostly on insufficient GEX&ge;+4 day-count (typically 0-4/7 days vs the 5/7 required) or a gamma-flip disqualifier (CRWD, MS, PANW, SE, UNH all ABORT on a +GEX&rarr;-GEX flip with a same-day price drop). DUK was then dropped at Step 3: it is not carried in the latest IV_*.csv options-scanner universe (150 of 191 watchlist tickers covered) at all, so its IV Rank &gt;38 threshold could not be verified and it was rejected rather than assumed. JNJ cleared Step 3 in full — IV Rank 70 (&gt;38), 👓 Second Test trend flag (price above SMA50/SMA200 but just under EMA21 at $255.82 vs $256.09) — but carries a &#9888;&#65039; IV Expansion / Price Drop divergence flag (IV Rank 68&rarr;70&rarr;70 over the last 3 days while price fell $268.76&rarr;$260.61&rarr;$255.82). News check on JNJ surfaced real negative flow (pending $5.5B talc settlement, a cut to 2026 adjusted EPS guidance on Firefly/Sail deal dilution, an adverse Illinois appellate talc verdict, and a GuruFocus overvaluation flag) — informational only, not a rejection driver. JNJ was ultimately cut at Step 4: its most recent-day GEX Scale is -2.0 (Neutral/Transition Zone), failing the positive-GEX (Long/Very Long) requirement. Final List is therefore empty — no candidate reached PEG/Earnings enrichment.
   </div>
   <div class="table-card">
     <div class="table-hdr">
@@ -192,7 +192,7 @@ footer { background: var(--ft-navy); color: #888; font-family: Arial, sans-serif
 </div>
 
 <footer>
-  Bull Screener (experimental funnel) &middot; Step 1 Wyckoff Uptrend/Spring (35) &rarr; Step 2 top7 bull-confirm + recency (2: DUK, JPM) &rarr; Step 3 ivchk IV Rank&gt;38 + bullish trend flag (0) &rarr; Step 4 positive-GEX final filter (0) &middot; PEG Ratio/Earnings enrichment from business_overview_300726_0845.csv / IV_300726_0851.csv not reached &middot; distinct workflow from opt_strategist.
+  Bull Screener (experimental funnel) &middot; Step 1 Wyckoff Uptrend/Spring (43) &rarr; Step 2 top7 bull-confirm + recency (2: DUK, JNJ) &rarr; Step 3 ivchk IV Rank&gt;38 + bullish trend flag (1: JNJ, DUK dropped — no IV coverage) &rarr; Step 4 positive-GEX final filter (0: JNJ dropped — GEX Scale -2.0 Neutral) &middot; PEG Ratio/Earnings enrichment from business_overview_310726_0416.csv / IV_310726_0407.csv not reached &middot; distinct workflow from opt_strategist.
 </footer>
 
 <script>
