@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Bull Screener — Bullish Ticker Funnel — Tuesday, 28 July 2026 (12:25)</title>
+<title>Bull Screener — Bullish Ticker Funnel — Thursday, 30 July 2026 (08:45)</title>
 <style>
 :root {
   --ft-salmon:   #FFF1E0;
@@ -65,6 +65,8 @@ body {
 .content { max-width: 1600px; margin: 0 auto; padding: 24px 40px 40px; }
 
 .note-banner { max-width: 1600px; margin: 16px auto 0; padding: 0 40px; font-family: Arial, sans-serif; font-size: 11.5px; color: var(--ft-muted); }
+
+.empty-banner { max-width: 1600px; margin: 0 auto 16px; padding: 14px 20px; background: var(--warn-soft); border: 1px solid var(--ft-card-bdr); font-family: Arial, sans-serif; font-size: 13px; color: var(--warn); }
 
 /* TABLE CARD (styled as a sector-block) */
 .table-card { border: 1px solid var(--ft-border); background: var(--ft-salmon); }
@@ -137,18 +139,18 @@ footer { background: var(--ft-navy); color: #888; font-family: Arial, sans-serif
   <div class="masthead-inner">
     <div class="masthead-eyebrow">Optionx Intelligence — Experimental Funnel</div>
     <div class="masthead-title">Bull <span>Screener</span> — Bullish Ticker Funnel</div>
-    <div class="masthead-date">Data: stock_analysis_280726.1225.csv &nbsp;&middot;&nbsp; IV_280726_0702.csv &nbsp;&middot;&nbsp; business_overview_280726_0705.csv</div>
+    <div class="masthead-date">Data: stock_analysis_300726.0845.csv &nbsp;&middot;&nbsp; IV_300726_0851.csv &nbsp;&middot;&nbsp; business_overview_300726_0845.csv</div>
     <div class="masthead-tagline">"Sequential funnel — a ticker that fails a gate is dropped, not carried forward."</div>
   </div>
 </div>
 <div class="stats-banner"><div class="stats-inner">
-  <div class="stat-item">Step 1 Wyckoff Uptrend/Spring <strong>47</strong></div><span class="stat-sep">&rarr;</span>
-  <div class="stat-item">Step 2 top7 bull-confirm <strong>17</strong></div><span class="stat-sep">&rarr;</span>
-  <div class="stat-item">Step 3 ivchk IV/trend gate <strong>11</strong></div><span class="stat-sep">&rarr;</span>
-  <div class="stat-item">Step 4 Positive-GEX final <strong>8</strong></div>
+  <div class="stat-item">Step 1 Wyckoff Uptrend/Spring <strong>35</strong></div><span class="stat-sep">&rarr;</span>
+  <div class="stat-item">Step 2 top7 bull-confirm <strong>2</strong></div><span class="stat-sep">&rarr;</span>
+  <div class="stat-item">Step 3 ivchk IV/trend gate <strong>0</strong></div><span class="stat-sep">&rarr;</span>
+  <div class="stat-item">Step 4 Positive-GEX final <strong>0</strong></div>
   <span class="stat-sep">|</span>
-  <div class="stat-item">Final List <strong>8</strong> tickers</div>
-  <div class="stat-item">Divergence-flagged <strong>1</strong>/8</div>
+  <div class="stat-item">Final List <strong>0</strong> tickers</div>
+  <div class="stat-item">Divergence-flagged <strong>0</strong>/0</div>
 </div></div>
 <div class="search-bar">
   <div class="search-inner">
@@ -167,10 +169,13 @@ footer { background: var(--ft-navy); color: #888; font-family: Arial, sans-serif
 </div>
 
 <div class="content">
+  <div class="empty-banner">
+    Zero survivors this run. Step 2 (top7 bull-confirm) passed only DUK and JPM (both BULL SETUP, Reinforced recency) out of 35 Wyckoff Uptrend/Spring candidates — every other candidate was REJECT or ABORT on the 7-Day Verdict, mostly on insufficient GEX&ge;+4 day-count or a gamma-flip disqualifier. Both Step 2 survivors then failed Step 3's ivchk IV Rank &gt;38 gate: JPM read IV Rank 25 (&le;38, rejected); DUK is not carried in the latest IV_*.csv options-scanner universe at all, so its IV Rank threshold pass could not be verified and it was rejected rather than assumed. Candidate List 3 is therefore empty, so no positive-GEX filter, PEG/Earnings enrichment, or news check had a candidate to run against.
+  </div>
   <div class="table-card">
     <div class="table-hdr">
       <span class="table-hdr-name">Final List — Positive-GEX Bullish Survivors</span>
-      <span class="table-hdr-count">8 tickers</span>
+      <span class="table-hdr-count">0 tickers</span>
     </div>
     <div class="table-scroll">
       <table id="mainTable">
@@ -180,14 +185,6 @@ footer { background: var(--ft-navy); color: #888; font-family: Arial, sans-serif
           </tr>
         </thead>
         <tbody id="mainBody">
-<tr data-sector="Consumer Cyclical"><td class="rank">1</td><td class="ticker">CMG</td><td>Consumer Cyclical</td><td class="num">$33.35</td><td><span class="chip chip-bull">KIV</span></td><td><span class="chip chip-bull">Reinforced</span></td><td class="num">85</td><td>First Test</td><td><span class="chip-none">&mdash;</span></td><td><span class="chip chip-gex">+1 Mildly Long</span></td><td class="num">$40</td><td class="num">$35</td><td class="num">1.71</td><td>29/07/2026</td><td class="newscell">Down ~4% YTD vs S&amp;P +10%; negative comps, falling traffic, margin compression through 2025; Pershing Square/Viking Global fully exited. 2026 guided roughly flat comps &mdash; little cushion into July 29 earnings.</td></tr>
-<tr data-sector="Consumer Defensive"><td class="rank">2</td><td class="ticker">PG</td><td>Consumer Defensive</td><td class="num">$148.81</td><td><span class="chip chip-bull">BULL SETUP</span></td><td><span class="chip chip-bull">Reinforced</span></td><td class="num">79</td><td>BULLISH</td><td><span class="chip-none">&mdash;</span></td><td><span class="chip chip-gex">+3 Mildly Long</span></td><td class="num">$155</td><td class="num">$149</td><td class="num">4.14</td><td>29/07/2026</td><td class="newscell">Q3 gross margin missed (49.5% vs 51.1% est.) on tariffs/commodity costs; stock down ~7% over the past year vs S&amp;P +16% on strained-consumer worries; Q4 EPS seen down 4.7% y/y.</td></tr>
-<tr data-sector="Consumer Defensive"><td class="rank">3</td><td class="ticker">CL</td><td>Consumer Defensive</td><td class="num">$91.98</td><td><span class="chip chip-bull">BULL SETUP</span></td><td><span class="chip chip-bull">Reinforced</span></td><td class="num">79</td><td>BULLISH</td><td><span class="chip-none">&mdash;</span></td><td><span class="chip chip-gex">+1 Mildly Long</span></td><td class="num">$98</td><td class="num">$91</td><td class="num">1.62</td><td>31/07/2026</td><td class="newscell">Q1 EPS fell 6% on weak 2.9% organic growth and North America share loss; cut to Hold (PT $96&rarr;$85) on unabsorbed resin costs and a $300M Mideast-conflict impact; 14 analysts cut estimates.</td></tr>
-<tr data-sector="Energy"><td class="rank">4</td><td class="ticker">EOG</td><td>Energy</td><td class="num">$140.31</td><td><span class="chip chip-bull">BULL SETUP</span></td><td><span class="chip chip-bull">Reinforced</span></td><td class="num">73</td><td>BULLISH</td><td><span class="chip chip-warn">IV Expansion / Price Drop</span></td><td><span class="chip chip-gex">+1 Mildly Long</span></td><td class="num">$139</td><td class="num">$132</td><td class="num">1.17</td><td>04/08/2026</td><td class="newscell">Shares fell 4.4% post-Q1 despite beating estimates &mdash; flat Q2 production guide, weaker NGL pricing outlook, unchanged $6.5B capex disappointed; broader OPEC+ supply increases pressuring crude sentiment.</td></tr>
-<tr data-sector="Energy"><td class="rank">5</td><td class="ticker">COP</td><td>Energy</td><td class="num">$116.56</td><td><span class="chip chip-bull">BULL SETUP</span></td><td><span class="chip chip-bull">Reinforced</span></td><td class="num">69</td><td>BULLISH</td><td><span class="chip-none">&mdash;</span></td><td><span class="chip chip-gex">+2 Mildly Long</span></td><td class="num">$114</td><td class="num">$116 &#9888;</td><td class="num">1.02</td><td>06/08/2026</td><td class="newscell">2026 production outlook cut (2.295&ndash;2.325 MMBOED) after a Q4 miss; Q1 net income fell to $2.18B from $2.85B y/y; high ~$53 WTI breakeven vs peers; institutional selling amid OPEC+ supply-driven crude weakness.</td></tr>
-<tr data-sector="Healthcare"><td class="rank">6</td><td class="ticker">CVS</td><td>Healthcare</td><td class="num">$107.07</td><td><span class="chip chip-bull">BULL SETUP</span></td><td><span class="chip chip-bull">Reinforced</span></td><td class="num">70</td><td>BULLISH</td><td><span class="chip-none">&mdash;</span></td><td><span class="chip chip-gex">+1 Mildly Long</span></td><td class="num">$103</td><td class="num">$114 &#9888;</td><td class="num">0.30</td><td>05/08/2026</td><td class="newscell">Bearish technicals (MACD turned negative, RSI exited overbought July 22&ndash;23); early-2026 selloff on Medicare Advantage rate concerns and thin margins &mdash; though S&amp;P revised outlook to Stable and Q1 beat/raised guidance since.</td></tr>
-<tr data-sector="Technology"><td class="rank">7</td><td class="ticker">NOW</td><td>Technology</td><td class="num">$105.48</td><td><span class="chip chip-bull">KIV</span></td><td><span class="chip chip-bull">Reinforced</span></td><td class="num">61</td><td>Greenshoots</td><td><span class="chip-none">&mdash;</span></td><td><span class="chip chip-gex">+5 Very Long</span></td><td class="num">$105</td><td class="num">$100</td><td class="num">0.87</td><td>04/11/2026</td><td class="newscell">Stock down ~36&ndash;40% in 2026 on AI-disruption fears to its core business; decelerating cRPO growth, margin pressure (FY26 op-margin guided down to 31.5%), softer H2 forecast. Note: 7-day gamma flip (23 Jul) is 3 days stale &mdash; GEX has rebuilt to +5 with price rising since.</td></tr>
-<tr data-sector="Utilities"><td class="rank">8</td><td class="ticker">SO</td><td>Utilities</td><td class="num">$96.48</td><td><span class="chip chip-bull">BULL SETUP</span></td><td><span class="chip chip-bull">Reinforced</span></td><td class="num">87</td><td>BULLISH</td><td><span class="chip-none">&mdash;</span></td><td><span class="chip chip-gex">+1 Mildly Long</span></td><td class="num">$102</td><td class="num">$97</td><td class="num">2.61</td><td>30/07/2026</td><td class="newscell">Shares down 3.29% recently, trading below several moving averages on some reads; Q4 EPS ($0.55) missed; below-peer dividend growth (~2.5% vs ~5.5%); flagged need for ongoing equity funding atop high debt/negative FCF (dilution risk).</td></tr>
 </tbody>
       </table>
     </div>
@@ -195,7 +192,7 @@ footer { background: var(--ft-navy); color: #888; font-family: Arial, sans-serif
 </div>
 
 <footer>
-  Bull Screener (experimental funnel) &middot; Step 1 Wyckoff Uptrend/Spring (47) &rarr; Step 2 top7 bull-confirm + recency (17) &rarr; Step 3 ivchk IV Rank&gt;38 + bullish trend flag (11) &rarr; Step 4 positive-GEX final filter (8) &middot; PEG Ratio/Earnings enriched from business_overview_280726_0705.csv / IV_280726_0702.csv &middot; distinct workflow from opt_strategist.
+  Bull Screener (experimental funnel) &middot; Step 1 Wyckoff Uptrend/Spring (35) &rarr; Step 2 top7 bull-confirm + recency (2: DUK, JPM) &rarr; Step 3 ivchk IV Rank&gt;38 + bullish trend flag (0) &rarr; Step 4 positive-GEX final filter (0) &middot; PEG Ratio/Earnings enrichment from business_overview_300726_0845.csv / IV_300726_0851.csv not reached &middot; distinct workflow from opt_strategist.
 </footer>
 
 <script>
@@ -225,7 +222,7 @@ function applyFilters() {
     r.style.display = show ? '' : 'none';
     if (show) count++;
   });
-  document.getElementById('searchCount').textContent = count + ' of 8 shown';
+  document.getElementById('searchCount').textContent = count + ' of 0 shown';
 }
 applyFilters();
 
