@@ -78,6 +78,19 @@ def latest_news_bulletin():
     return dt, path
 
 
+def cache_bust(dt):
+    """Version token for iframe/link URLs.
+
+    GitHub Pages serves Cache-Control: max-age=600, and the hub is a PWA whose
+    service-worker fetch can still be satisfied from the browser's HTTP cache.
+    Without a token, a freshly published tab can keep rendering the previous
+    file for up to 10 minutes (longer if the SW falls back to its cache).
+    Keying off the source mtime means the URL only changes when the underlying
+    dashboard actually changes, so normal caching still works.
+    """
+    return dt.strftime("%Y%m%d%H%M") if dt else "0"
+
+
 def latest_oil_brief():
     candidates = []
     seen = set()
@@ -396,11 +409,12 @@ def build():
     oil_dt, oil_path = latest_oil_brief()
     if oil_path:
         shutil.copyfile(oil_path, SITE_DIR / "oil-brief.html")
+        oil_v = cache_bust(oil_dt)
         oil_frame = (
             '<div class="news-toolbar">'
-            '<a class="open-full" href="oil-brief.html" target="_blank" rel="noopener">'
+            f'<a class="open-full" href="oil-brief.html?v={oil_v}" target="_blank" rel="noopener">'
             'Open full oil brief in new tab &#8599;</a></div>'
-            '<iframe src="oil-brief.html" title="Oil Brief"></iframe>'
+            f'<iframe src="oil-brief.html?v={oil_v}" title="Oil Brief"></iframe>'
         )
     else:
         oil_frame = "<p class='empty'>No oil brief file found.</p>"
@@ -414,11 +428,12 @@ def build():
     sector_dt, sector_path = latest_sector_scan()
     if sector_path:
         shutil.copyfile(sector_path, SITE_DIR / "sector-scan.html")
+        sector_v = cache_bust(sector_dt)
         sector_frame = (
             '<div class="news-toolbar">'
-            '<a class="open-full" href="sector-scan.html" target="_blank" rel="noopener">'
+            f'<a class="open-full" href="sector-scan.html?v={sector_v}" target="_blank" rel="noopener">'
             'Open full sector scan in new tab &#8599;</a></div>'
-            '<iframe src="sector-scan.html" title="Sector Scan"></iframe>'
+            f'<iframe src="sector-scan.html?v={sector_v}" title="Sector Scan"></iframe>'
         )
     else:
         sector_frame = "<p class='empty'>No sector scan file found.</p>"
@@ -434,11 +449,12 @@ def build():
     iv_dt, iv_path = latest_iv_screen()
     if iv_path:
         shutil.copyfile(iv_path, SITE_DIR / "iv-screen.html")
+        iv_v = cache_bust(iv_dt)
         iv_frame = (
             '<div class="news-toolbar">'
-            '<a class="open-full" href="iv-screen.html" target="_blank" rel="noopener">'
+            f'<a class="open-full" href="iv-screen.html?v={iv_v}" target="_blank" rel="noopener">'
             'Open full IV screen in new tab &#8599;</a></div>'
-            '<iframe src="iv-screen.html" title="IV Screen"></iframe>'
+            f'<iframe src="iv-screen.html?v={iv_v}" title="IV Screen"></iframe>'
         )
     else:
         iv_frame = "<p class='empty'>No IV screen file found.</p>"
