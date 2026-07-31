@@ -24,6 +24,7 @@ BULL_SCREENER_PATTERN = re.compile(r"bull_screener_(\d{6})_(\d{4})\.html$")
 SECTOR_SCAN_PATTERN = re.compile(r"sector_scan_(\d{6})_(\d{4})\.html$")
 REBOUND_PATTERN = re.compile(r"Rebound_candidate_(\d{6})_(\d{4})\.html$")
 IV_SCREEN_PATTERN = re.compile(r"iv40_top7_gex_(\d{6})_(\d{4})\.html$")
+STRATEGIST_PATTERN = re.compile(r"opt_strategist_(\d{6})_(\d{4})\.html$")
 BULL_TABLE_RE = re.compile(r'<table id="mainTable">.*?</table>', re.DOTALL)
 BULL_SORT_ATTR_RE = re.compile(r'\s*onclick="sortTable\(\d+\)"')
 
@@ -155,6 +156,21 @@ def latest_iv_screen():
     candidates = []
     for f in DASHBOARD_DIR.glob("iv40_top7_gex_*.html"):
         m = IV_SCREEN_PATTERN.match(f.name)
+        if not m:
+            continue
+        date_str, time_str = m.groups()
+        dt = datetime.strptime(date_str + time_str, "%d%m%y%H%M")
+        candidates.append((dt, f))
+    if not candidates:
+        return None, None
+    dt, path = max(candidates, key=lambda x: x[0])
+    return dt, path
+
+
+def latest_opt_strategist():
+    candidates = []
+    for f in DASHBOARD_DIR.glob("opt_strategist_*.html"):
+        m = STRATEGIST_PATTERN.match(f.name)
         if not m:
             continue
         date_str, time_str = m.groups()
@@ -459,6 +475,19 @@ def build():
     else:
         iv_frame = "<p class='empty'>No IV screen file found.</p>"
 
+    strat_dt, strat_path = latest_opt_strategist()
+    if strat_path:
+        shutil.copyfile(strat_path, SITE_DIR / "strategist.html")
+        strat_v = cache_bust(strat_dt)
+        strat_frame = (
+            '<div class="news-toolbar">'
+            f'<a class="open-full" href="strategist.html?v={strat_v}" target="_blank" rel="noopener">'
+            'Open full strategist board in new tab &#8599;</a></div>'
+            f'<iframe src="strategist.html?v={strat_v}" title="Strategist"></iframe>'
+        )
+    else:
+        strat_frame = "<p class='empty'>No opt strategist file found.</p>"
+
     generated_at = datetime.now()
     sidebar_html = render_freshness_sidebar([
         ("Page generated", generated_at),
@@ -467,6 +496,7 @@ def build():
         ("Sector scan", sector_dt),
         ("Rebounder", rebound_dt),
         ("IV screen", iv_dt),
+        ("Strategist", strat_dt),
     ])
 
     page = f"""<!doctype html>
@@ -597,6 +627,7 @@ def build():
     <button data-target="sectorscan">Sector Scan</button>
     <button data-target="rebounder">Rebounder</button>
     <button data-target="ivscreen">IV Screen</button>
+    <button data-target="strategist">Strategist</button>
   </div>
 </nav>
 <main>
@@ -624,6 +655,10 @@ def build():
   <section id="ivscreen">
     <h2>IV Screen</h2>
     {iv_frame}
+  </section>
+  <section id="strategist">
+    <h2>Strategist</h2>
+    {strat_frame}
   </section>
 </main>
 <footer>Optionx Hub &middot; static, offline-capable &middot; regenerate after each pipeline run</footer>
