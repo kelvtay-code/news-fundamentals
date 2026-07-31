@@ -389,6 +389,29 @@ def render_bull_screener_table(path, sector_map=None):
     return f'{masthead_html}{stats_html}<div class="table-wrap">{table_html}</div>'
 
 
+# The strategist dashboard ships its own search/sort script keyed off generic
+# element ids that also exist in the natively-rendered bull screener table.
+# Embedding it (rather than iframing) therefore needs those ids namespaced,
+# in both the scoped CSS and the body/script, or its JS grabs the wrong table.
+STRATEGIST_IDS = ["mainTable", "mainBody", "tickerSearch", "sectorFilter",
+                  "riskFilter", "searchCount"]
+
+
+def render_strategist_embed(path):
+    """Embed the opt_strategist dashboard inline (same treatment as the
+    Rebounder tab) so it scales with the page instead of scrolling inside an
+    iframe. Returns (scoped_css, body_html)."""
+    scoped_css, body_html = render_embedded_dashboard(path, "stratEmbed")
+    if body_html is None:
+        return "", None
+    for old in STRATEGIST_IDS:
+        pattern = re.compile(r"\b%s\b" % re.escape(old))
+        new = "strat" + old[0].upper() + old[1:]
+        scoped_css = pattern.sub(new, scoped_css)
+        body_html = pattern.sub(new, body_html)
+    return scoped_css, body_html
+
+
 def render_freshness_sidebar(sources):
     """sources: list of (label, dt) tuples."""
     items = []
@@ -478,15 +501,10 @@ def build():
     strat_dt, strat_path = latest_opt_strategist()
     if strat_path:
         shutil.copyfile(strat_path, SITE_DIR / "strategist.html")
-        strat_v = cache_bust(strat_dt)
-        strat_frame = (
-            '<div class="news-toolbar">'
-            f'<a class="open-full" href="strategist.html?v={strat_v}" target="_blank" rel="noopener">'
-            'Open full strategist board in new tab &#8599;</a></div>'
-            f'<iframe src="strategist.html?v={strat_v}" title="Strategist"></iframe>'
-        )
-    else:
+    strat_css, strat_frame = render_strategist_embed(strat_path)
+    if strat_frame is None:
         strat_frame = "<p class='empty'>No opt strategist file found.</p>"
+        strat_css = ""
 
     generated_at = datetime.now()
     sidebar_html = render_freshness_sidebar([
@@ -604,6 +622,8 @@ def build():
   {bulletin_css}
   #reboundEmbed {{ overflow-x:hidden; }}
   {rebound_css}
+  #stratEmbed {{ overflow-x:hidden; }}
+  {strat_css}
 </style>
 </head>
 <body>
@@ -657,7 +677,6 @@ def build():
     {iv_frame}
   </section>
   <section id="strategist">
-    <h2>Strategist</h2>
     {strat_frame}
   </section>
 </main>
