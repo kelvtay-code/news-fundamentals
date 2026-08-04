@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Bull Screener — Bullish Ticker Funnel — Saturday, 1 August 2026 (04:15)</title>
+<title>Bull Screener — Bullish Ticker Funnel — Tuesday, 4 August 2026 (07:34)</title>
 <style>
 :root {
   --ft-salmon:   #FFF1E0;
@@ -137,18 +137,18 @@ footer { background: var(--ft-navy); color: #888; font-family: Arial, sans-serif
   <div class="masthead-inner">
     <div class="masthead-eyebrow">Optionx Intelligence — Experimental Funnel</div>
     <div class="masthead-title">Bull <span>Screener</span> — Bullish Ticker Funnel</div>
-    <div class="masthead-date">Data: stock_analysis_010826.0415.csv &nbsp;&middot;&nbsp; IV_010826_0505.csv &nbsp;&middot;&nbsp; business_overview_010826_0416.csv</div>
+    <div class="masthead-date">Data: stock_analysis_040826.0734.csv &nbsp;&middot;&nbsp; IV_040826_0848.csv &nbsp;&middot;&nbsp; business_overview_040826_0734.csv</div>
     <div class="masthead-tagline">"Sequential funnel — a ticker that fails a gate is dropped, not carried forward."</div>
   </div>
 </div>
 <div class="stats-banner"><div class="stats-inner">
-  <div class="stat-item">Step 1 Wyckoff Uptrend/Spring <strong>45</strong></div><span class="stat-sep">&rarr;</span>
-  <div class="stat-item">Step 2 top7 bull-confirm <strong>4</strong></div><span class="stat-sep">&rarr;</span>
-  <div class="stat-item">Step 3 ivchk IV/trend gate <strong>3</strong></div><span class="stat-sep">&rarr;</span>
-  <div class="stat-item">Step 4 Positive-GEX final <strong>2</strong></div>
+  <div class="stat-item">Step 1 Wyckoff Uptrend/Spring <strong>44</strong></div><span class="stat-sep">&rarr;</span>
+  <div class="stat-item">Step 2 top7 bull-confirm <strong>2</strong></div><span class="stat-sep">&rarr;</span>
+  <div class="stat-item">Step 3 ivchk IV/trend gate <strong>1</strong></div><span class="stat-sep">&rarr;</span>
+  <div class="stat-item">Step 4 Positive-GEX final <strong>1</strong></div>
   <span class="stat-sep">|</span>
-  <div class="stat-item">Final List <strong>2</strong> tickers</div>
-  <div class="stat-item">Divergence-flagged <strong>0</strong>/2</div>
+  <div class="stat-item">Final List <strong>1</strong> ticker</div>
+  <div class="stat-item">Divergence-flagged <strong>0</strong>/1</div>
 </div></div>
 <div class="search-bar">
   <div class="search-inner">
@@ -166,13 +166,13 @@ footer { background: var(--ft-navy); color: #888; font-family: Arial, sans-serif
   </div>
 </div>
 
-<div class="note-banner">Note: Step 1 flagged 45 Wyckoff Uptrend/Spring candidates. Step 2 top7 gate passed only 4 on the 7-Day Verdict (DUK, JNJ, KO, SYK — all BULL SETUP, all Reinforced recency); everything else was REJECT (insufficient GEX&ge;+4 day-count, typically 0-3/7 vs the 5/7 required) or ABORT (MS, PANW, UNH — gamma-flip disqualifier: +GEX&rarr;-GEX with a same-day price drop). DUK was dropped at Step 3 — not present in the latest IV_*.csv options-scanner universe, so its IV Rank &gt;38 threshold could not be verified. JNJ, KO, SYK all cleared Step 3 (IV Rank 70/60/60, all &gt;38; trend flags BULLISH/BULLISH/First Test) with no IV-expansion/price-drop divergence on any of them. JNJ was then cut at Step 4: most-recent-day GEX Scale is +3.0 but that still sits inside the Neutral/Transition Zone (classification requires &ge;+4 to register as Long/Very Long) — GEX not genuinely positive by classification. KO (+6, Moderate Positive Gamma / Long) and SYK (+4, Moderate Positive Gamma / Long) both cleared to the Final List.</div>
+<div class="note-banner">Note: Step 1 flagged 44 unique Wyckoff Uptrend/Spring candidates (45 raw rows, VST duplicated identically in source and deduped) out of 204 watchlist tickers. Step 2 top7 gate passed only 2 on the 7-Day Verdict &mdash; SYK (BULL SETUP, bullish phase 7/7, GEX&ge;+4 on 6/7 days) and DIA (BULL SETUP 7-day, upgraded to BULL CONFIRM on recency) &mdash; everything else REJECTed on insufficient GEX&ge;+4 day-count (most names ran 7/7 bullish Wyckoff phase but only 0-4/7 days of GEX&ge;+4, short of the 5/7 threshold), and SBUX hit ABORT on a gamma-flip disqualifier. Step 3 ivchk cut DIA: IV Rank 16, below the &gt;38 threshold (ETF, thin options premium). SYK cleared Step 3 clean &mdash; IV Rank 63, Greenshoots trend flag (price above EMA21 &amp; SMA50, just under SMA200), and no IV-expansion/price-drop divergence over the last 3 days (IV Rank 60&rarr;66&rarr;63 alongside price 324.69&rarr;334.51&rarr;341.20, both up together). News check on SYK surfaced routine noise, not disqualifying: post-Q2 pullback despite a beat, a Piper Sandler PT trim to $390, an FDA Class I recall tag on a knee-surgery device, and a June Neptune docking-station recall &mdash; offset by a UBS upgrade to Buy ($400 PT). Step 4 confirmed SYK's positive GEX (+6.0, Moderate Positive Gamma / Long), clearing it to the Final List.</div>
 
 <div class="content">
   <div class="table-card">
     <div class="table-hdr">
       <span class="table-hdr-name">Final List — Positive-GEX Bullish Survivors</span>
-      <span class="table-hdr-count">2 tickers</span>
+      <span class="table-hdr-count">1 ticker</span>
     </div>
     <div class="table-scroll">
       <table id="mainTable">
@@ -182,8 +182,7 @@ footer { background: var(--ft-navy); color: #888; font-family: Arial, sans-serif
           </tr>
         </thead>
         <tbody id="mainBody">
-<tr data-sector="Medical Devices / Orthopedics"><td class="rank">1</td><td class="ticker">SYK</td><td>Medical Devices / Orthopedics</td><td class="num">$324.69</td><td><span class="chip chip-bull">BULL SETUP</span></td><td><span class="chip chip-bull">Reinforced</span></td><td class="num">60</td><td>First Test</td><td><span class="chip-none">&mdash;</span></td><td><span class="chip chip-gex">+4 Long</span></td><td class="num">$330</td><td class="num">$320</td><td class="num">1.68</td><td>29/10/2026</td><td class="newscell">Fell ~6.1% Jul 14 on cyberattack-recovery caution ahead of earnings; Jul 30 Q2 beat estimates but shares still fell on a "narrow" FY guide and 2H execution-risk flag [as of 1 Aug]</td></tr>
-<tr data-sector="Soft Drinks &amp; Beverages"><td class="rank">2</td><td class="ticker">KO</td><td>Soft Drinks &amp; Beverages</td><td class="num">$87.72</td><td><span class="chip chip-bull">BULL SETUP</span></td><td><span class="chip chip-bull">Reinforced</span></td><td class="num">60</td><td>BULLISH</td><td><span class="chip-none">&mdash;</span></td><td><span class="chip chip-gex">+6 Long</span></td><td class="num">$90</td><td class="num">$88</td><td class="num">4.36</td><td>20/10/2026</td><td class="newscell">Clean — Jul 28 Q2 beat (EPS $0.97 vs $0.93 est), 6% organic revenue growth, raised FY guidance, multiple analyst PT hikes (RBC, UBS, JPMorgan, Piper Sandler) [as of 1 Aug]</td></tr>
+<tr data-sector="Medical Devices / Orthopedics"><td class="rank">1</td><td class="ticker">SYK</td><td>Medical Devices / Orthopedics</td><td class="num">$341.20</td><td><span class="chip chip-bull">BULL SETUP</span></td><td><span class="chip chip-bull">Reinforced</span></td><td class="num">63</td><td>Greenshoots</td><td><span class="chip-none">&mdash;</span></td><td><span class="chip chip-gex">+6 Long</span></td><td class="num">$360</td><td class="num">$320</td><td class="num">1.55</td><td>29/10/2026</td><td class="newscell">Post-Q2 pullback ~6.4% despite beat; Piper Sandler cut PT to $390 (Overweight); FDA Class I recall on a knee-surgery device; Jun Neptune docking-station recall (shock risk); ongoing implant litigation. UBS upgraded to Buy, $400 PT [as of 4 Aug]</td></tr>
 </tbody>
       </table>
     </div>
@@ -191,7 +190,7 @@ footer { background: var(--ft-navy); color: #888; font-family: Arial, sans-serif
 </div>
 
 <footer>
-  Bull Screener (experimental funnel) &middot; Step 1 Wyckoff Uptrend/Spring (45) &rarr; Step 2 top7 bull-confirm + recency (4: DUK, JNJ, KO, SYK) &rarr; Step 3 ivchk IV Rank&gt;38 + bullish trend flag (3: JNJ, KO, SYK — DUK dropped, no IV coverage) &rarr; Step 4 positive-GEX final filter (2: KO, SYK — JNJ dropped, GEX +3.0 still inside Neutral zone) &middot; PEG Ratio/Earnings enriched from business_overview_010826_0416.csv / IV_010826_0505.csv &middot; distinct workflow from opt_strategist.
+  Bull Screener (experimental funnel) &middot; Step 1 Wyckoff Uptrend/Spring (44) &rarr; Step 2 top7 bull-confirm + recency (2: SYK, DIA) &rarr; Step 3 ivchk IV Rank&gt;38 + bullish trend flag (1: SYK &mdash; DIA dropped, IV Rank 16) &rarr; Step 4 positive-GEX final filter (1: SYK, +6.0 Moderate Positive Gamma / Long) &middot; PEG Ratio/Earnings enriched from business_overview_040826_0734.csv / IV_040826_0848.csv &middot; distinct workflow from opt_strategist.
 </footer>
 
 <script>
@@ -221,7 +220,7 @@ function applyFilters() {
     r.style.display = show ? '' : 'none';
     if (show) count++;
   });
-  document.getElementById('searchCount').textContent = count + ' of 2 shown';
+  document.getElementById('searchCount').textContent = count + ' of 1 shown';
 }
 applyFilters();
 
