@@ -1,0 +1,22 @@
+﻿Sector,Sector Rank,Ticker,Price,IV Implied,IV First->Last,IV Slope,IV Rank,GEX First->Last,GEX Slope,GEX Sign Flip,Wyckoff,GEX Classification,Badge,Caveat
+Technology,1,MRVL,215.71,105.2,98.1 -> 105.2,0.665,92.0,-4 -> 6,0.313,YES,Mark-down,Moderate Positive Gamma,◎ NEUTRAL,
+Technology,2,CIEN,408.6,96.4,94.1 -> 96.4,0.426,81.0,-4 -> -1,0.279,,Mark-down,Neutral / Transition Zone,📉 DOWNTREND,
+Technology,3,NET,299.5,76.3,75.5 -> 76.3,0.016,76.0,-4 -> 0,0.242,,Mark-up,Neutral / Transition Zone,📈 UPTREND,
+Technology,4,CRWD,212.25,67.8,66.0 -> 67.8,0.416,87.0,4 -> 9,0.19,,Mark-up,Extreme Positive Gamma,◉ PINNED,
+Technology,5,ASML,1580.99,60.9,57.2 -> 60.9,0.935,82.0,-4 -> 2,0.224,YES,Mark-down,Neutral / Transition Zone,◎ NEUTRAL,
+Technology,6,SNPS,404.0,56.5,55.9 -> 56.5,0.172,86.0,-4 -> -1,0.249,,Mark-down,Neutral / Transition Zone,📉 DOWNTREND,
+Technology,7,APH,171.15,53.6,49.8 -> 53.6,0.764,64.0,4 -> 9,0.164,,Accumulation,Extreme Positive Gamma,✓ BULL SETUP,
+Technology,8,CRM,190.55,53.5,47.0 -> 53.5,0.352,85.0,4 -> 3,0.047,,Mark-up,Neutral / Transition Zone,📈 UPTREND,
+Technology,9,ADBE,258.0,52.4,49.4 -> 52.4,0.169,74.0,4 -> 3,0.277,,Mark-up,Neutral / Transition Zone,📈 UPTREND,
+Technology,10,SAP,195.49,44.3,43.3 -> 44.3,0.268,65.0,-2 -> 0,0.138,,Mark-up,Neutral / Transition Zone,📈 UPTREND,
+Technology,11,NVDA,212.51,44.2,39.7 -> 44.2,0.489,56.0,-4 -> 10,0.394,YES,Mark-up,Extreme Positive Gamma,◉ PINNED,
+Consumer Cyclical,1,MOD,201.71,86.1,86.1 -> 86.1,0.0,76.0,0 -> 1,0.5,,Mark-down,Neutral / Transition Zone,◎ NEUTRAL,flat
+Utilities,1,TLN,338.0,72.6,67.2 -> 72.6,0.362,100.0,-4 -> 1,0.341,YES,Mark-down,Neutral / Transition Zone,◎ NEUTRAL,
+Consumer Defensive,1,TGT,148.85,43.9,42.3 -> 43.9,0.01,62.0,4 -> 5,0.096,,Mark-up,Moderate Positive Gamma,📈 UPTREND,
+Consumer Defensive,2,WMT,112.42,32.7,30.9 -> 32.7,0.099,73.0,-4 -> 1,0.448,YES,Mark-down,Neutral / Transition Zone,◎ NEUTRAL,
+Consumer Defensive,3,PEP,139.67,26.5,24.4 -> 26.5,0.363,69.0,4 -> 5,0.126,,Mark-down,Moderate Positive Gamma,◎ NEUTRAL,
+Consumer Defensive,4,COST,949.19,24.3,23.4 -> 24.3,0.108,54.0,4 -> 3,0.576,,Mark-down,Neutral / Transition Zone,◎ NEUTRAL,
+Healthcare,1,ISRG,370.03,39.5,37.1 -> 39.5,0.06,62.0,-4 -> -1,0.36,,Mark-down,Neutral / Transition Zone,📉 DOWNTREND,
+Healthcare,2,VRTX,479.27,36.8,38.2 -> 36.8,0.187,59.0,-1 -> -1,0.075,,Mark-up,Neutral / Transition Zone,◎ NEUTRAL,fade
+Communication Services,1,NFLX,73.9,37.1,35.2 -> 37.1,0.125,45.0,-4 -> 8,0.66,YES,Mark-down,Extreme Positive Gamma,◉ PINNED,
+Industrials,1,GE,376.31,32.5,33.4 -> 32.5,0.021,35.0,-4 -> 3,0.36,YES,Mark-up,Neutral / Transition Zone,📈 UPTREND,fade

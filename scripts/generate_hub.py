@@ -23,7 +23,7 @@ BULLETIN_PATTERN = re.compile(r"news_bulletin_(\d{8})_(\d{4})\.html$")
 BULL_SCREENER_PATTERN = re.compile(r"bull_screener_(\d{6})_(\d{4})\.html$")
 SECTOR_SCAN_PATTERN = re.compile(r"sector_scan_(\d{6})_(\d{4})\.html$")
 REBOUND_PATTERN = re.compile(r"Rebound_candidate_(\d{6})_(\d{4})\.html$")
-IV_SCREEN_PATTERN = re.compile(r"iv40_top7_gex_(\d{6})_(\d{4})\.html$")
+DUAL_X_PATTERN = re.compile(r"Dual_X_(\d{6})_(\d{4})\.html$")
 STRATEGIST_PATTERN = re.compile(r"opt_strategist_(\d{6})_(\d{4})\.html$")
 BULL_TABLE_RE = re.compile(r'<table id="mainTable">.*?</table>', re.DOTALL)
 BULL_SORT_ATTR_RE = re.compile(r'\s*onclick="sortTable\(\d+\)"')
@@ -152,10 +152,10 @@ def latest_rebound_candidate():
     return dt, path
 
 
-def latest_iv_screen():
+def latest_dual_x():
     candidates = []
-    for f in DASHBOARD_DIR.glob("iv40_top7_gex_*.html"):
-        m = IV_SCREEN_PATTERN.match(f.name)
+    for f in DASHBOARD_DIR.glob("Dual_X_*.html"):
+        m = DUAL_X_PATTERN.match(f.name)
         if not m:
             continue
         date_str, time_str = m.groups()
@@ -485,18 +485,22 @@ def build():
         rebound_frame = "<p class='empty'>No rebound candidate file found.</p>"
         rebound_css = ""
 
-    iv_dt, iv_path = latest_iv_screen()
-    if iv_path:
-        shutil.copyfile(iv_path, SITE_DIR / "iv-screen.html")
-        iv_v = cache_bust(iv_dt)
-        iv_frame = (
+    dualx_dt, dualx_path = latest_dual_x()
+    if dualx_path:
+        shutil.copyfile(dualx_path, SITE_DIR / "dual-x.html")
+        # the screen's CSV export rides along next to the page as a download
+        grid_csv = dualx_path.with_name(dualx_path.stem + "_grid.csv")
+        if grid_csv.exists():
+            shutil.copyfile(grid_csv, SITE_DIR / "dual-x-grid.csv")
+        dualx_v = cache_bust(dualx_dt)
+        dualx_frame = (
             '<div class="news-toolbar">'
-            f'<a class="open-full" href="iv-screen.html?v={iv_v}" target="_blank" rel="noopener">'
-            'Open full IV screen in new tab &#8599;</a></div>'
-            f'<iframe src="iv-screen.html?v={iv_v}" title="IV Screen"></iframe>'
+            f'<a class="open-full" href="dual-x.html?v={dualx_v}" target="_blank" rel="noopener">'
+            'Open full Dual_X screen in new tab &#8599;</a></div>'
+            f'<iframe src="dual-x.html?v={dualx_v}" title="Dual_X"></iframe>'
         )
     else:
-        iv_frame = "<p class='empty'>No IV screen file found.</p>"
+        dualx_frame = "<p class='empty'>No Dual_X file found.</p>"
 
     strat_dt, strat_path = latest_opt_strategist()
     if strat_path:
@@ -513,7 +517,7 @@ def build():
         ("Bull screener", bull_dt),
         ("Sector scan", sector_dt),
         ("Rebounder", rebound_dt),
-        ("IV screen", iv_dt),
+        ("Dual_X", dualx_dt),
         ("Strategist", strat_dt),
     ])
 
@@ -578,7 +582,7 @@ def build():
   .news-toolbar {{ margin-bottom:8px; font-family: Arial, sans-serif; }}
   .open-full {{ font-size:0.82rem; color:var(--ft-blue); text-decoration:none; font-weight:600; }}
   .open-full:hover {{ text-decoration:underline; }}
-  #oil iframe, #sectorscan iframe, #ivscreen iframe {{ width:100%; height:calc(100vh - 220px); min-height:600px; border:1px solid var(--ft-border); background:#fff; }}
+  #oil iframe, #sectorscan iframe, #dualx iframe {{ width:100%; height:calc(100vh - 220px); min-height:600px; border:1px solid var(--ft-border); background:#fff; }}
   .empty {{ color:var(--ft-mid); font-style:italic; font-family: Arial, sans-serif; }}
 
   #bullscreener .chip {{ display:inline-block; font-family: Arial, sans-serif; font-size:10.5px; font-weight:700; padding:2px 8px; border-radius:2px; white-space:normal; letter-spacing:0.02em; }}
@@ -646,7 +650,7 @@ def build():
     <button data-target="bullscreener">Bull Screener</button>
     <button data-target="sectorscan">Sector Scan</button>
     <button data-target="rebounder">Rebounder</button>
-    <button data-target="ivscreen">IV Screen</button>
+    <button data-target="dualx">Dual_X</button>
     <button data-target="strategist">Strategist</button>
   </div>
 </nav>
@@ -672,9 +676,9 @@ def build():
   <section id="rebounder">
     {rebound_frame}
   </section>
-  <section id="ivscreen">
-    <h2>IV Screen</h2>
-    {iv_frame}
+  <section id="dualx">
+    <h2>Dual_X</h2>
+    {dualx_frame}
   </section>
   <section id="strategist">
     {strat_frame}
@@ -724,7 +728,7 @@ def build():
         f"bull screener: {bull_path.name if bull_path else 'none'}, "
         f"sector scan: {sector_path.name if sector_path else 'none'}, "
         f"rebounder: {rebound_path.name if rebound_path else 'none'}, "
-        f"iv screen: {iv_path.name if iv_path else 'none'})"
+        f"dual_x: {dualx_path.name if dualx_path else 'none'})"
     )
 
 
