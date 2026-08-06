@@ -445,10 +445,20 @@ def build():
         bulletin_frame = "<p class='empty'>No news bulletin file found.</p>"
         bulletin_css = ""
 
+    # oil-brief.html is frequently hand-authored straight into docs/ (bypassing
+    # the Dashboard folder entirely), so it can easily be newer than anything
+    # latest_oil_brief() finds there. Never let an older Dashboard-folder file
+    # clobber a hand-published copy that's already ahead of it.
+    oil_dest = SITE_DIR / "oil-brief.html"
     oil_dt, oil_path = latest_oil_brief()
-    if oil_path:
-        shutil.copyfile(oil_path, SITE_DIR / "oil-brief.html")
-        oil_v = cache_bust(oil_dt)
+    if oil_path and (
+        not oil_dest.exists()
+        or datetime.fromtimestamp(oil_path.stat().st_mtime)
+        > datetime.fromtimestamp(oil_dest.stat().st_mtime)
+    ):
+        shutil.copyfile(oil_path, oil_dest)
+    if oil_dest.exists():
+        oil_v = cache_bust(datetime.fromtimestamp(oil_dest.stat().st_mtime))
         oil_frame = (
             '<div class="news-toolbar">'
             f'<a class="open-full" href="oil-brief.html?v={oil_v}" target="_blank" rel="noopener">'
