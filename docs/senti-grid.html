@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Senti Grid &mdash; Highest News-Sentiment Ratings &mdash; Optionx</title>
+<style>
+:root {
+  --ft-salmon:#FFF1E0; --ft-red:#990F3D; --ft-blue:#0F5499; --ft-navy:#262A33;
+  --ft-warm-blk:#33302E; --ft-border:#CCB799; --ft-mid:#8D775F; --ft-muted:#66605A;
+  --ft-card-bg:#FFFAF4; --ft-card-bdr:#D4A96A; --ft-gold:#F0A500;
+  --green:#4B7F3D; --red2:#d03b3b; --teal:#0D7680; --orange:#B5651D;
+}
+* { box-sizing:border-box; margin:0; padding:0; }
+body { background:var(--ft-salmon); color:var(--ft-warm-blk); font-family:Arial,sans-serif; font-size:14px; line-height:1.5; }
+a { color:var(--ft-red); text-decoration:none; } a:hover { color:var(--ft-blue); text-decoration:underline; }
+.masthead { background:var(--ft-navy); color:#fff; padding:22px 40px 18px; border-bottom:4px solid var(--ft-red); }
+.masthead-eyebrow { font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:#AAA; margin-bottom:6px; }
+.masthead-title { font-family:Georgia,'Times New Roman',serif; font-size:2.4rem; font-weight:700; letter-spacing:-.01em; }
+.masthead-title span { color:var(--ft-gold); }
+.masthead-date { font-size:12px; color:#ccc; margin-top:8px; }
+.stats-banner { background:var(--ft-red); padding:10px 40px; }
+.stats-inner { display:flex; align-items:center; gap:14px; flex-wrap:wrap; }
+.stat-item { font-size:12px; color:#fff; display:flex; align-items:center; gap:6px; }
+.stat-item strong { font-weight:700; }
+.stat-sep { color:rgba(255,255,255,.4); }
+.wrap { padding:26px 40px 60px; max-width:1400px; }
+h2 { font-family:Georgia,serif; font-size:1.4rem; margin:26px 0 4px; padding-bottom:6px; border-bottom:2px solid var(--ft-red); }
+.lede { color:var(--ft-muted); font-size:13px; margin:8px 0 16px; max-width:900px; }
+.table-wrap { overflow-x:auto; border:1px solid var(--ft-border); background:var(--ft-card-bg); }
+table { border-collapse:collapse; width:100%; min-width:900px; }
+th { background:var(--ft-navy); color:#fff; font-size:11px; letter-spacing:.06em; text-transform:uppercase;
+     padding:9px 10px; text-align:left; white-space:nowrap; }
+td { padding:9px 10px; border-bottom:1px solid #EADFCF; font-size:13px; vertical-align:top; }
+tr:nth-child(even) td { background:rgba(0,0,0,.015); }
+.tk { font-weight:700; font-size:14px; color:var(--ft-navy); white-space:nowrap; }
+.senti { font-weight:700; text-align:center; width:64px; white-space:nowrap; }
+.s9 { color:#fff; background:var(--green); } .s8 { color:#fff; background:#5E9150; }
+.s7 { color:#fff; background:#7BA36B; } .s6 { color:var(--ft-warm-blk); background:#D9D2A8; }
+.sector { white-space:nowrap; font-size:12px; }
+.pill { display:inline-block; padding:2px 8px; border-radius:2px; font-size:11px; letter-spacing:.03em;
+        border:1px solid var(--ft-card-bdr); background:#fff; }
+.brief { color:var(--ft-warm-blk); }
+.flag { color:var(--orange); font-size:11px; display:block; margin-top:3px; }
+.callout { background:var(--ft-card-bg); border-left:4px solid var(--ft-red); padding:14px 18px; margin:22px 0; max-width:1000px; }
+.callout h3 { font-family:Georgia,serif; font-size:1.05rem; margin-bottom:6px; }
+.rej { font-size:12px; }
+.rej td { color:var(--ft-muted); }
+footer { margin-top:36px; padding-top:14px; border-top:1px solid var(--ft-border); font-size:11px; color:var(--ft-mid); }
+@media (max-width:720px){ .masthead,.stats-banner,.wrap{padding-left:18px;padding-right:18px;} .masthead-title{font-size:1.6rem;} }
+</style>
+</head>
+<body>
+<div class="masthead">
+  <div class="masthead-eyebrow">Optionx &middot; News Sentiment</div>
+  <div class="masthead-title">Senti <span>Grid</span></div>
+  <div class="masthead-date">Highest news-sentiment ratings across the watchlist &middot; 7 August 2026, 03:34 SGT</div>
+</div>
+<div class="stats-banner"><div class="stats-inner">
+  <span class="stat-item"><strong>158</strong> watchlist tickers scored</span><span class="stat-sep">&#124;</span>
+  <span class="stat-item"><strong>13</strong> hand-verified entries</span><span class="stat-sep">&#124;</span>
+  <span class="stat-item"><strong>8</strong> false matches rejected</span><span class="stat-sep">&#124;</span>
+  <span class="stat-item">Source: <strong>news_bulletin_20260807_0322</strong></span>
+</div></div>
+
+<div class="wrap">
+  <h2>Top-Rated Tickers</h2>
+  <p class="lede">Scored 1&ndash;10 on the financial materiality and direction of each ticker&rsquo;s headlines in the latest news bulletin.
+     Candidates were surfaced by an automated pass, then every entry below was read and scored by hand &mdash; the bulletin&rsquo;s
+     ticker matcher is too loose to trust unchecked. <a href="senti-grid.csv">Download CSV &#8595;</a></p>
+
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>#</th><th>Ticker</th><th>Senti</th><th>Sector</th><th>News Brief</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td class="tk">CEG</td><td class="senti s9">9</td><td class="sector"><span class="pill">Utilities</span></td><td class="brief">Q2 earnings <em>and</em> revenue both beat estimates; stock gaining Thursday. Four-for-four positive coverage with no bear item &mdash; the cleanest sheet on the watchlist.</td></tr>
+      <tr><td>2</td><td class="tk">BKNG</td><td class="senti s9">9</td><td class="sector"><span class="pill">Consumer Cyclical</span></td><td class="brief">&ldquo;Rocketing higher today&rdquo;; jumped as &ldquo;resilient&rdquo; travel demand powered an earnings beat. Analysts bullish on a stock still down 20%.</td></tr>
+      <tr><td>3</td><td class="tk">GLW</td><td class="senti s8">8</td><td class="sector"><span class="pill">Technology</span></td><td class="brief">Surged 10% on a multibillion-dollar Amazon deal, plus a jump after Nvidia&rsquo;s CEO called for &ldquo;optics where you must.&rdquo;<span class="flag">Reverses its prior-run score of 5, when soft Q3 guidance dominated &mdash; the Amazon deal is new and material.</span></td></tr>
+      <tr><td>4</td><td class="tk">PANW</td><td class="senti s8">8</td><td class="sector"><span class="pill">Technology</span></td><td class="brief">Holding near record highs despite a fresh China security review that mirrors the Micron case. Resilience through a negative is the signal.</td></tr>
+      <tr><td>5</td><td class="tk">JBL</td><td class="senti s8">8</td><td class="sector"><span class="pill">Technology</span></td><td class="brief">Up 6.8%; surged 31.6% over six months; a director bought 500 shares on the open market. GF Value calls it overvalued.</td></tr>
+      <tr><td>6</td><td class="tk">F</td><td class="senti s8">8</td><td class="sector"><span class="pill">Consumer Cyclical</span></td><td class="brief">Jumped 8% after-hours on a Q2 earnings beat and raised its 2026 profit outlook.<span class="flag">Thin coverage &mdash; its other three &ldquo;hits&rdquo; are false matches on Series F preferred and Canadian tickers.</span></td></tr>
+      <tr><td>7</td><td class="tk">AVGO</td><td class="senti s7">7</td><td class="sector"><span class="pill">Technology</span></td><td class="brief">A Seeking Alpha upgrade on optical advantage, and Baillie Gifford opened a new $513M position &mdash; against an above-fair-value flag.</td></tr>
+      <tr><td>8</td><td class="tk">QCOM</td><td class="senti s7">7</td><td class="sector"><span class="pill">Technology</span></td><td class="brief">Record highs on a &ldquo;super rally,&rdquo; up 7.3% and still called undervalued; gave back 3.31% on Aug 5.</td></tr>
+      <tr><td>9</td><td class="tk">COHR</td><td class="senti s7">7</td><td class="sector"><span class="pill">Technology</span></td><td class="brief">Climbed 48% on a five-day streak and surged on the Nvidia optics call &mdash; but slides as new China data-centre curbs come into view.</td></tr>
+      <tr><td>10</td><td class="tk">MDT</td><td class="senti s7">7</td><td class="sector"><span class="pill">Healthcare</span></td><td class="brief">&ldquo;I&rsquo;m calling it: Medtronic will soar 40% by the end of 2026,&rdquo; alongside Sphere-9 clinical progress.</td></tr>
+      <tr><td>11</td><td class="tk">AES</td><td class="senti s6">6</td><td class="sector"><span class="pill">Utilities</span></td><td class="brief">Beat estimates by $0.15 EPS with revenue growth &mdash; but the profit rebound &ldquo;meets dividend and debt strain,&rdquo; and it pushed out Citi/SMBC credit lines.</td></tr>
+      <tr><td>12</td><td class="tk">SOFI</td><td class="senti s6">6</td><td class="sector"><span class="pill">Financial Services</span></td><td class="brief">&ldquo;Time to buy the dip&rdquo;; price doubled in 2025 &mdash; offset by price-target cuts after Q2.</td></tr>
+      <tr><td>13</td><td class="tk">UPS</td><td class="senti s6">6</td><td class="sector"><span class="pill">Industrials</span></td><td class="brief">10.8% undervalued with a 6.09% dividend yield and West Coast port-surge exposure; slips on soft near-term package trends.</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="callout">
+    <h3>Sector concentration at the top</h3>
+    <p>Technology takes <strong>six of the top ten</strong> &mdash; and five of those (GLW, COHR, AVGO, with PANW and QCOM adjacent)
+       are optical/networking and semis riding the <strong>same Nvidia &ldquo;optics where you must&rdquo; catalyst</strong>.
+       That is one theme, not six independent signals.</p>
+    <p style="margin-top:8px;">The genuinely uncorrelated names at the top are <strong>CEG (Utilities)</strong> and <strong>BKNG (Consumer Cyclical)</strong>,
+       both scoring on their own earnings beats rather than a shared narrative.</p>
+  </div>
+
+  <h2>Rejected &mdash; False Ticker Matches</h2>
+  <p class="lede">The bulletin splits its ticker field loosely, so these scored highly on headlines belonging to other companies.
+     All were removed by hand before ranking.</p>
+  <div class="table-wrap">
+  <table class="rej">
+    <thead><tr><th>Ticker</th><th>Auto Score</th><th>Reason Rejected</th></tr></thead>
+    <tbody>
+      <tr><td class="tk">ONTO</td><td>9</td><td>Headline was Creative Medical Technology Holdings, not Onto Innovation</td></tr>
+      <tr><td class="tk">NOK</td><td>9</td><td>Matched &ldquo;27% AI-fuelled&rdquo; &mdash; the headline actually reads &ldquo;Rally Fizzles &mdash; Stock Drops Premarket&rdquo;</td></tr>
+      <tr><td class="tk">DRAM</td><td>9</td><td>Micron news tagged to a DRAM fund</td></tr>
+      <tr><td class="tk">HAL</td><td>7</td><td>&ldquo;HAL Share Price Jumps 6%&rdquo; is Hindustan Aeronautics (India), not Halliburton</td></tr>
+      <tr><td class="tk">D</td><td>7</td><td>Matched D-Wave Quantum headlines</td></tr>
+      <tr><td class="tk">CL</td><td>7</td><td>Matched &ldquo;Dell Technologies Inc. Cl C&rdquo;</td></tr>
+      <tr><td class="tk">COST</td><td>7</td><td>All hits were a spirits maker, ATS and ETSY &mdash; no genuine Costco coverage</td></tr>
+      <tr><td class="tk">SPY</td><td>7</td><td>Generic mega-cap quant-rating filler</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <footer>
+    Senti Grid &middot; scored from <strong>news_bulletin_20260807_0322.html</strong> &middot;
+    sectors from <strong>business_overview_060826_0509.csv</strong> &middot;
+    158 watchlist tickers scored, top candidates hand-verified &middot; Optionx
+  </footer>
+</div>
+</body>
+</html>

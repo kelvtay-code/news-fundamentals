@@ -1,0 +1,30 @@
+﻿Rank,Ticker,Senti,Sector,News Brief,Verification
+1,CEG,9,Utilities,"Q2 earnings AND revenue both beat estimates; stock gaining Thursday. Four-for-four positive coverage, no bear item.",Verified
+2,BKNG,9,Consumer Cyclical,'Rocketing higher today'; jumped as resilient travel demand powered an earnings beat. Analysts bullish on a stock still down 20%.,Verified
+3,GLW,8,Technology,"Surged 10% on a multibillion-dollar Amazon deal, plus a jump after Nvidia CEO called for 'optics where you must'. Reverses prior-run score of 5 (soft Q3 guidance).",Verified
+4,PANW,8,Technology,Holding near record highs despite a fresh China security review mirroring the Micron case. Resilience through a negative.,Verified
+5,JBL,8,Technology,Up 6.8%; surged 31.6% over six months; director bought 500 shares on the open market. GF Value calls it overvalued.,Verified
+6,F,8,Consumer Cyclical,Jumped 8% after-hours on a Q2 earnings beat and raised 2026 profit outlook.,"Verified - THIN COVERAGE: other 3 hits are false matches (Series F preferred, Canadian tickers)"
+7,AVGO,7,Technology,Seeking Alpha upgrade on optical advantage; Baillie Gifford opened a new $513M position. Offset by an above-fair-value flag.,Verified
+8,QCOM,7,Technology,"Record highs on a 'super rally', up 7.3% and still called undervalued; gave back 3.31% on Aug 5.",Verified
+9,COHR,7,Technology,Climbed 48% on a five-day streak; surged on the Nvidia optics call. Slides as new China data-centre curbs come into view.,Verified
+10,MDT,7,Healthcare,"'I'm calling it: Medtronic will soar 40% by end of 2026', alongside Sphere-9 clinical progress.",Verified
+11,AES,6,Utilities,"Beat estimates by $0.15 EPS with revenue growth, but profit rebound 'meets dividend and debt strain'; pushed out Citi/SMBC credit lines.",Verified
+12,SOFI,6,Financial Services,'Time to buy the dip'; price doubled in 2025. Offset by price-target cuts after Q2.,Verified
+13,UPS,6,Industrials,"10.8% undervalued, 6.09% dividend yield, West Coast port-surge exposure; slips on soft near-term package trends.",Verified
+
+REJECTED - FALSE TICKER MATCHES,,,,,
+Ticker,Auto Score,Reason Rejected,,,
+ONTO,Auto-scored 9 - REJECTED,"Headline was Creative Medical Technology Holdings, not Onto Innovation",,,
+HAL,Auto-scored 7 - REJECTED,"'HAL Share Price Jumps 6%' is Hindustan Aeronautics (India), not Halliburton",,,
+D,Auto-scored 7 - REJECTED,Matched D-Wave Quantum headlines,,,
+CL,Auto-scored 7 - REJECTED,Matched 'Dell Technologies Inc. Cl C',,,
+NOK,Auto-scored 9 - REJECTED,Matched '27% AI-fuelled' but headline reads 'Rally Fizzles - Stock Drops Premarket',,,
+COST,Auto-scored 7 - REJECTED,"All hits were a spirits maker, ATS and ETSY - no genuine Costco coverage",,,
+DRAM,Auto-scored 9 - REJECTED,Micron news tagged to a DRAM fund,,,
+SPY,Auto-scored 7 - REJECTED,Generic mega-cap quant-rating filler,,,
+
+Source bulletin,news_bulletin_20260807_0322.html,,,,
+Watchlist tickers scored,158,,,,
+Sector source,business_overview_060826_0509.csv,,,,
+Generated,2026-08-07 03:34,,,,
