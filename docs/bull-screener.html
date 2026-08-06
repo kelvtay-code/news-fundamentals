@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Bull Screener — Bullish Ticker Funnel — Wednesday, 5 August 2026 (05:09)</title>
+<title>Bull Screener — Bullish Ticker Funnel — Thursday, 6 August 2026 (05:09)</title>
 <style>
 :root {
   --ft-salmon:   #FFF1E0;
@@ -65,6 +65,8 @@ body {
 .content { max-width: 1600px; margin: 0 auto; padding: 24px 40px 40px; }
 
 .note-banner { max-width: 1600px; margin: 16px auto 0; padding: 0 40px; font-family: Arial, sans-serif; font-size: 11.5px; color: var(--ft-muted); }
+
+.empty-banner { max-width: 1600px; margin: 0 auto 16px; padding: 14px 20px; background: var(--warn-soft); border: 1px solid var(--ft-card-bdr); font-family: Arial, sans-serif; font-size: 13px; color: var(--warn); }
 
 /* TABLE CARD (styled as a sector-block) */
 .table-card { border: 1px solid var(--ft-border); background: var(--ft-salmon); }
@@ -137,18 +139,18 @@ footer { background: var(--ft-navy); color: #888; font-family: Arial, sans-serif
   <div class="masthead-inner">
     <div class="masthead-eyebrow">Optionx Intelligence — Experimental Funnel</div>
     <div class="masthead-title">Bull <span>Screener</span> — Bullish Ticker Funnel</div>
-    <div class="masthead-date">Data: stock_analysis_050826.0509.csv &nbsp;&middot;&nbsp; IV_050826_0501.csv &nbsp;&middot;&nbsp; business_overview_050826_0509.csv</div>
+    <div class="masthead-date">Data: stock_analysis_060826.0509.csv &nbsp;&middot;&nbsp; IV_060826_0826.csv &nbsp;&middot;&nbsp; business_overview_060826_0509.csv</div>
     <div class="masthead-tagline">"Sequential funnel — a ticker that fails a gate is dropped, not carried forward."</div>
   </div>
 </div>
 <div class="stats-banner"><div class="stats-inner">
-  <div class="stat-item">Step 1 Wyckoff Uptrend/Spring <strong>45</strong></div><span class="stat-sep">&rarr;</span>
-  <div class="stat-item">Step 2 top7 bull-confirm <strong>3</strong></div><span class="stat-sep">&rarr;</span>
+  <div class="stat-item">Step 1 Wyckoff Uptrend/Spring <strong>48</strong></div><span class="stat-sep">&rarr;</span>
+  <div class="stat-item">Step 2 top7 bull-confirm <strong>2</strong></div><span class="stat-sep">&rarr;</span>
   <div class="stat-item">Step 3 ivchk IV/trend gate <strong>2</strong></div><span class="stat-sep">&rarr;</span>
-  <div class="stat-item">Step 4 Positive-GEX final <strong>2</strong></div>
+  <div class="stat-item">Step 4 Positive-GEX final <strong>1</strong></div>
   <span class="stat-sep">|</span>
-  <div class="stat-item">Final List <strong>2</strong> tickers</div>
-  <div class="stat-item">Divergence-flagged <strong>0</strong>/2</div>
+  <div class="stat-item">Final List <strong>1</strong> ticker</div>
+  <div class="stat-item">Divergence-flagged <strong>0</strong>/1</div>
 </div></div>
 <div class="search-bar">
   <div class="search-inner">
@@ -166,13 +168,14 @@ footer { background: var(--ft-navy); color: #888; font-family: Arial, sans-serif
   </div>
 </div>
 
-<div class="note-banner">Note: Step 1 flagged 45 unique Wyckoff Uptrend/Spring candidates out of 204 watchlist tickers, no duplicates. Step 2 top7 gate (7-day window 25 Jul&ndash;5 Aug) passed only 3 on the 7-Day Verdict &mdash; BA (KIV, GEX&ge;+4 on 6/7 days, Spring/SOS on 2 days, upgraded to BULL CONFIRM on last-2-day recency), SYK (BULL SETUP, bullish phase 7/7, GEX&ge;+4 on 6/7 days, Reinforced) and DIA (BULL SETUP 7-day, upgraded to BULL CONFIRM on recency) &mdash; everything else REJECTed on insufficient GEX&ge;+4 day-count against the 5/7 threshold, and SBUX/TEVA hit ABORT on vol-divergence disqualifiers. Step 3 ivchk cut DIA: IV Rank 22, below the &gt;38 threshold (ETF, thin options premium). BA (IV Rank 49, BULLISH trend &mdash; price above EMA21/SMA50/SMA200) and SYK (IV Rank 70, Greenshoots &mdash; price above EMA21/SMA50, just under SMA200) cleared Step 3 clean, with no IV-expansion/price-drop divergence over the last 3 days for either (BA: IVR 52&rarr;47&rarr;49 vs price 226.67&rarr;233.70&rarr;236.74, both directions aligned; SYK: IVR 66&rarr;63&rarr;70 vs price 334.51&rarr;341.20&rarr;335.96, price net up over the window). News check: BA clean &mdash; strongly positive tape (BNP Paribas double-upgrade, JPMorgan/Goldman/RBC target hikes, 737 MAX 7 FAA certification, Q2 beat); SYK carries a post-earnings selloff (Jul 31 guidance trim, margin pressure, peripheral-vascular supply disruption, lingering March cyberattack costs) partially offset by a +4.4% bounce by Aug 3 &mdash; informational only, not a rejection. Step 4 confirmed both tickers' positive GEX &mdash; BA +9.0 Extreme Positive Gamma / Very Long, SYK +5.0 Moderate Positive Gamma / Long &mdash; clearing both to the Final List.</div>
-
 <div class="content">
+  <div class="empty-banner" style="color:var(--ft-warm-blk); background:var(--ft-card-bg);">
+    Standard methodology (GEX&ge;+4 on &ge;5/7 days). Step 1 Wyckoff Uptrend/Spring filter passed 48 of 205 watchlist tickers off stock_analysis_060826.0509.csv. Step 2's top7 gate (7-day GEX&ge;+4 consistency + bullish-phase count + Spring/SOS&ge;85% + no gamma flip, layered with the mandatory last-2-days recency overlay) let through only MSFT (BULL SETUP, 6/7 days GEX&ge;+4, 6/7 bullish phase, Recency: Reinforced) and SYK (BULL SETUP, 6/7 days GEX&ge;+4, 7/7 bullish phase, Recency: Upgraded to BULL CONFIRM on the last 2 days' Spring 85% + rising price) — every other candidate (AAPL, AMZN, DIS, QQQ, ETN, XLB, DD, PLXS, XLK and the rest) spent most of the 7-day window in Mark-down/Neutral-GEX territory and only flipped to Accumulation/Spring on Aug 5&ndash;6, too late to clear the 5/7-day bar; none hit KIV either. Step 3 (ivchk) cleared both survivors: MSFT IV Rank 39 (just above the &gt;38 floor) with a &#128640; BULLISH trend flag (price above EMA21/SMA50/SMA200); SYK IV Rank 61 with a &#127793; Greenshoots flag (above EMA21/SMA50, below SMA200) &mdash; neither shows the 3-day IV-expansion/price-drop divergence pattern. News check surfaced fresh (&le;2wk) negative flow on both: MSFT carries a UBS price-target cut, an Aug 11 securities-fraud lawsuit deadline over Copilot/Azure adoption claims, and -15&ndash;17% YTD from AI-capex margin pressure; SYK missed Q2 revenue estimates on Jul 30 (shares -9% AH, -6.58% Jul 31 close) on a muted guidance raise despite an EPS beat &mdash; informational only, not a rejection driver. Step 4's positive-GEX final filter then cut MSFT (latest-day GEX Scale 1.0, Neutral/Transition Zone &mdash; the Aug 6 Spring day's gamma reading fell back inside the -3..+3 band), leaving SYK as the sole Final List survivor on GEX Scale +6.0 (Moderate Positive Gamma).
+  </div>
   <div class="table-card">
     <div class="table-hdr">
       <span class="table-hdr-name">Final List — Positive-GEX Bullish Survivors</span>
-      <span class="table-hdr-count">2 tickers</span>
+      <span class="table-hdr-count">1 ticker</span>
     </div>
     <div class="table-scroll">
       <table id="mainTable">
@@ -182,8 +185,23 @@ footer { background: var(--ft-navy); color: #888; font-family: Arial, sans-serif
           </tr>
         </thead>
         <tbody id="mainBody">
-<tr data-sector="Aerospace &amp; Defense"><td class="rank">1</td><td class="ticker">BA</td><td>Aerospace &amp; Defense</td><td class="num">$236.74</td><td><span class="chip chip-bull">KIV</span></td><td><span class="chip chip-bull">Upgraded</span></td><td class="num">49</td><td>BULLISH</td><td><span class="chip-none">&mdash;</span></td><td><span class="chip chip-gex">+9 Very Long</span></td><td class="num">$240</td><td class="num">$230</td><td class="num">25.04</td><td>4/11/2026</td><td class="newscell">Clean &mdash; BNP Paribas double-upgrade + JPMorgan/Goldman/RBC target hikes drove ~7% pop (Aug 3&ndash;4); FAA certified 737 MAX 7; Q2 beat with narrowing losses, highest delivery count since 2018</td></tr>
-<tr data-sector="Medical Devices / Orthopedics"><td class="rank">2</td><td class="ticker">SYK</td><td>Medical Devices / Orthopedics</td><td class="num">$335.96</td><td><span class="chip chip-bull">BULL SETUP</span></td><td><span class="chip chip-bull">Reinforced</span></td><td class="num">70</td><td>Greenshoots</td><td><span class="chip-none">&mdash;</span></td><td><span class="chip chip-gex">+5 Long</span></td><td class="num">$360</td><td class="num">$320</td><td class="num">1.55</td><td>29/10/2026</td><td class="newscell">Shares fell 6.6&ndash;7.6% Jul 31 on soft guidance tightening &amp; margin pressure; peripheral-vascular supply disruption; lingering Mar cyberattack costs; partial rebound +4.4% by Aug 3</td></tr>
+<tr data-sector="Healthcare">
+  <td class="rank">1</td>
+  <td class="ticker">SYK</td>
+  <td>Healthcare</td>
+  <td class="num">$337.50</td>
+  <td><span class="chip chip-bull">BULL SETUP</span></td>
+  <td>Upgraded</td>
+  <td class="num">61</td>
+  <td>&#127793; Greenshoots</td>
+  <td><span class="chip-none">&mdash;</span></td>
+  <td><span class="chip chip-gex">+6 Moderate Positive Gamma</span></td>
+  <td class="num">$360</td>
+  <td class="num">$320</td>
+  <td class="num">1.55</td>
+  <td>29/10/2026</td>
+  <td class="newscell">Q2 revenue missed est. ($6.59B vs $6.65B) Jul 30 despite EPS beat, shares -9% AH; closed -6.58% Jul 31 on muted guidance raise; BTIG trimmed PT to $358 from $371 (kept Buy).</td>
+</tr>
 </tbody>
       </table>
     </div>
@@ -191,7 +209,7 @@ footer { background: var(--ft-navy); color: #888; font-family: Arial, sans-serif
 </div>
 
 <footer>
-  Bull Screener (experimental funnel) &middot; Step 1 Wyckoff Uptrend/Spring (45) &rarr; Step 2 top7 bull-confirm + recency (3: BA, SYK, DIA) &rarr; Step 3 ivchk IV Rank&gt;38 + bullish trend flag (2: BA, SYK &mdash; DIA dropped, IV Rank 22) &rarr; Step 4 positive-GEX final filter (2: BA +9.0 Extreme Positive Gamma / Very Long, SYK +5.0 Moderate Positive Gamma / Long) &middot; PEG Ratio/Earnings enriched from business_overview_050826_0509.csv / IV_050826_0501.csv &middot; distinct workflow from opt_strategist.
+  Bull Screener (experimental funnel) &middot; Step 1 Wyckoff Uptrend/Spring (48) &rarr; Step 2 top7 bull-confirm + recency, GEX&ge;+4 on &ge;5/7 days (2: MSFT, SYK) &rarr; Step 3 ivchk IV Rank&gt;38 + bullish trend flag (2: MSFT, SYK &mdash; no divergence flags) &rarr; Step 4 positive-GEX final filter (1: SYK &mdash; MSFT dropped, latest GEX Scale 1.0 Neutral/Transition Zone) &middot; PEG Ratio/Earnings enrichment from business_overview_060826_0509.csv / IV_060826_0826.csv &middot; distinct workflow from opt_strategist &middot; AAPL/TSLA excluded upstream at Step 1 (AAPL: no IV data since Aug 3, gap not fabricated; TSLA: no Uptrend/Spring setup this snapshot).
 </footer>
 
 <script>
@@ -221,7 +239,7 @@ function applyFilters() {
     r.style.display = show ? '' : 'none';
     if (show) count++;
   });
-  document.getElementById('searchCount').textContent = count + ' of 2 shown';
+  document.getElementById('searchCount').textContent = count + ' of 1 shown';
 }
 applyFilters();
 
