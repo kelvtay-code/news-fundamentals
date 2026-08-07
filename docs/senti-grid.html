@@ -28,19 +28,19 @@ a { color:var(--ft-red); text-decoration:none; } a:hover { color:var(--ft-blue);
 h2 { font-family:Georgia,serif; font-size:1.4rem; margin:26px 0 4px; padding-bottom:6px; border-bottom:2px solid var(--ft-red); }
 .lede { color:var(--ft-muted); font-size:13px; margin:8px 0 16px; max-width:900px; }
 .table-wrap { overflow-x:auto; border:1px solid var(--ft-border); background:var(--ft-card-bg); }
-table { border-collapse:collapse; width:100%; min-width:900px; }
+table { border-collapse:collapse; width:100%; min-width:960px; }
 th { background:var(--ft-navy); color:#fff; font-size:11px; letter-spacing:.06em; text-transform:uppercase;
      padding:9px 10px; text-align:left; white-space:nowrap; }
 td { padding:9px 10px; border-bottom:1px solid #EADFCF; font-size:13px; vertical-align:top; }
 tr:nth-child(even) td { background:rgba(0,0,0,.015); }
 .tk { font-weight:700; font-size:14px; color:var(--ft-navy); white-space:nowrap; }
-.senti { font-weight:700; text-align:center; width:64px; white-space:nowrap; }
+.senti { font-weight:700; text-align:center; width:56px; white-space:nowrap; }
 .s9 { color:#fff; background:var(--green); } .s8 { color:#fff; background:#5E9150; }
-.s7 { color:#fff; background:#7BA36B; } .s6 { color:var(--ft-warm-blk); background:#D9D2A8; }
 .sector { white-space:nowrap; font-size:12px; }
+.px { text-align:right; white-space:nowrap; font-variant-numeric:tabular-nums; font-weight:700; color:var(--ft-navy); }
 .pill { display:inline-block; padding:2px 8px; border-radius:2px; font-size:11px; letter-spacing:.03em;
         border:1px solid var(--ft-card-bdr); background:#fff; }
-.brief { color:var(--ft-warm-blk); }
+.brief { color:var(--ft-warm-blk); min-width:340px; }
 .flag { color:var(--orange); font-size:11px; display:block; margin-top:3px; }
 .callout { background:var(--ft-card-bg); border-left:4px solid var(--ft-red); padding:14px 18px; margin:22px 0; max-width:1000px; }
 .callout h3 { font-family:Georgia,serif; font-size:1.05rem; margin-bottom:6px; }
@@ -54,49 +54,74 @@ footer { margin-top:36px; padding-top:14px; border-top:1px solid var(--ft-border
 <div class="masthead">
   <div class="masthead-eyebrow">Optionx &middot; News Sentiment</div>
   <div class="masthead-title">Senti <span>Grid</span></div>
-  <div class="masthead-date">Highest news-sentiment ratings across the watchlist &middot; 7 August 2026, 03:34 SGT</div>
+  <div class="masthead-date">Every watchlist ticker scored &mdash; showing those rated above 7 &middot; 8 August 2026, 05:10 SGT</div>
 </div>
 <div class="stats-banner"><div class="stats-inner">
-  <span class="stat-item"><strong>158</strong> watchlist tickers scored</span><span class="stat-sep">&#124;</span>
-  <span class="stat-item"><strong>13</strong> hand-verified entries</span><span class="stat-sep">&#124;</span>
-  <span class="stat-item"><strong>8</strong> false matches rejected</span><span class="stat-sep">&#124;</span>
-  <span class="stat-item">Source: <strong>news_bulletin_20260807_0322</strong></span>
+  <span class="stat-item"><strong>196</strong> tickers with coverage scored</span><span class="stat-sep">&#124;</span>
+  <span class="stat-item"><strong>36</strong> rated above 7</span><span class="stat-sep">&#124;</span>
+  <span class="stat-item"><strong>13</strong> at 9/10</span><span class="stat-sep">&#124;</span>
+  <span class="stat-item"><strong>7</strong> false matches rejected</span><span class="stat-sep">&#124;</span>
+  <span class="stat-item">Source: <strong>news_bulletin_20260808_0510</strong></span>
 </div></div>
 
 <div class="wrap">
-  <h2>Top-Rated Tickers</h2>
-  <p class="lede">Scored 1&ndash;10 on the financial materiality and direction of each ticker&rsquo;s headlines in the latest news bulletin.
-     Candidates were surfaced by an automated pass, then every entry below was read and scored by hand &mdash; the bulletin&rsquo;s
-     ticker matcher is too loose to trust unchecked. <a href="senti-grid.csv">Download CSV &#8595;</a></p>
+  <h2>Rated Above 7</h2>
+  <p class="lede">Every ticker appearing in the latest bulletin was scored 1&ndash;10 on the financial materiality and direction of
+     its headlines, weighting the most recent items more heavily. The 36 names below cleared a score of 7. Sectors and prices
+     come from the 8 Aug business-overview snapshot. <a href="senti-grid.csv">Download CSV &#8595;</a></p>
 
   <div class="table-wrap">
   <table>
-    <thead><tr><th>#</th><th>Ticker</th><th>Senti</th><th>Sector</th><th>News Brief</th></tr></thead>
+    <thead><tr><th>#</th><th>Ticker</th><th>Senti</th><th>Sector</th><th>Price</th><th>News Brief</th></tr></thead>
     <tbody>
-      <tr><td>1</td><td class="tk">CEG</td><td class="senti s9">9</td><td class="sector"><span class="pill">Utilities</span></td><td class="brief">Q2 earnings <em>and</em> revenue both beat estimates; stock gaining Thursday. Four-for-four positive coverage with no bear item &mdash; the cleanest sheet on the watchlist.</td></tr>
-      <tr><td>2</td><td class="tk">BKNG</td><td class="senti s9">9</td><td class="sector"><span class="pill">Consumer Cyclical</span></td><td class="brief">&ldquo;Rocketing higher today&rdquo;; jumped as &ldquo;resilient&rdquo; travel demand powered an earnings beat. Analysts bullish on a stock still down 20%.</td></tr>
-      <tr><td>3</td><td class="tk">GLW</td><td class="senti s8">8</td><td class="sector"><span class="pill">Technology</span></td><td class="brief">Surged 10% on a multibillion-dollar Amazon deal, plus a jump after Nvidia&rsquo;s CEO called for &ldquo;optics where you must.&rdquo;<span class="flag">Reverses its prior-run score of 5, when soft Q3 guidance dominated &mdash; the Amazon deal is new and material.</span></td></tr>
-      <tr><td>4</td><td class="tk">PANW</td><td class="senti s8">8</td><td class="sector"><span class="pill">Technology</span></td><td class="brief">Holding near record highs despite a fresh China security review that mirrors the Micron case. Resilience through a negative is the signal.</td></tr>
-      <tr><td>5</td><td class="tk">JBL</td><td class="senti s8">8</td><td class="sector"><span class="pill">Technology</span></td><td class="brief">Up 6.8%; surged 31.6% over six months; a director bought 500 shares on the open market. GF Value calls it overvalued.</td></tr>
-      <tr><td>6</td><td class="tk">F</td><td class="senti s8">8</td><td class="sector"><span class="pill">Consumer Cyclical</span></td><td class="brief">Jumped 8% after-hours on a Q2 earnings beat and raised its 2026 profit outlook.<span class="flag">Thin coverage &mdash; its other three &ldquo;hits&rdquo; are false matches on Series F preferred and Canadian tickers.</span></td></tr>
-      <tr><td>7</td><td class="tk">AVGO</td><td class="senti s7">7</td><td class="sector"><span class="pill">Technology</span></td><td class="brief">A Seeking Alpha upgrade on optical advantage, and Baillie Gifford opened a new $513M position &mdash; against an above-fair-value flag.</td></tr>
-      <tr><td>8</td><td class="tk">QCOM</td><td class="senti s7">7</td><td class="sector"><span class="pill">Technology</span></td><td class="brief">Record highs on a &ldquo;super rally,&rdquo; up 7.3% and still called undervalued; gave back 3.31% on Aug 5.</td></tr>
-      <tr><td>9</td><td class="tk">COHR</td><td class="senti s7">7</td><td class="sector"><span class="pill">Technology</span></td><td class="brief">Climbed 48% on a five-day streak and surged on the Nvidia optics call &mdash; but slides as new China data-centre curbs come into view.</td></tr>
-      <tr><td>10</td><td class="tk">MDT</td><td class="senti s7">7</td><td class="sector"><span class="pill">Healthcare</span></td><td class="brief">&ldquo;I&rsquo;m calling it: Medtronic will soar 40% by the end of 2026,&rdquo; alongside Sphere-9 clinical progress.</td></tr>
-      <tr><td>11</td><td class="tk">AES</td><td class="senti s6">6</td><td class="sector"><span class="pill">Utilities</span></td><td class="brief">Beat estimates by $0.15 EPS with revenue growth &mdash; but the profit rebound &ldquo;meets dividend and debt strain,&rdquo; and it pushed out Citi/SMBC credit lines.</td></tr>
-      <tr><td>12</td><td class="tk">SOFI</td><td class="senti s6">6</td><td class="sector"><span class="pill">Financial Services</span></td><td class="brief">&ldquo;Time to buy the dip&rdquo;; price doubled in 2025 &mdash; offset by price-target cuts after Q2.</td></tr>
-      <tr><td>13</td><td class="tk">UPS</td><td class="senti s6">6</td><td class="sector"><span class="pill">Industrials</span></td><td class="brief">10.8% undervalued with a 6.09% dividend yield and West Coast port-surge exposure; slips on soft near-term package trends.</td></tr>
+      <tr><td>1</td><td class="tk">APH</td><td class="senti s9">9</td><td class="sector"><span class="pill">Technology</span></td><td class="px">$169.18</td><td class="brief">Up 14.6% on an AI-fuelled sales beat plus a stock split <em>and</em> a dividend hike; +20% over a six-day winning streak. No bear item in the file.</td></tr>
+      <tr><td>2</td><td class="tk">CEG</td><td class="senti s9">9</td><td class="sector"><span class="pill">Utilities</span></td><td class="px">$269.89</td><td class="brief">Q2 topped estimates on the Calpine contribution with guidance raised; signed 920MW of new power deals including a Walmart PPA.</td></tr>
+      <tr><td>3</td><td class="tk">COHR</td><td class="senti s9">9</td><td class="sector"><span class="pill">Technology</span></td><td class="px">$379.13</td><td class="brief">Climbed 51% on a six-day streak and +12.93% on Aug 7 as Trump&rsquo;s reported China ban on data-centre import parts lifted the optical complex.</td></tr>
+      <tr><td>4</td><td class="tk">CSCO</td><td class="senti s9">9</td><td class="sector"><span class="pill">Technology</span></td><td class="px">$121.43</td><td class="brief">Best week in nearly 25 years; HSBC sees 19% upside. SG Americas opened a new $1.5B position and State Street disclosed a 5% stake.</td></tr>
+      <tr><td>5</td><td class="tk">HPE</td><td class="senti s9">9</td><td class="sector"><span class="pill">Technology</span></td><td class="px">$53.22</td><td class="brief">Soared after-hours on an expectation-beating sales forecast driven by AI demand; hit a 52-week high after a 20% five-day run.</td></tr>
+      <tr><td>6</td><td class="tk">MCHP</td><td class="senti s9">9</td><td class="sector"><span class="pill">Technology</span></td><td class="px">$84.69</td><td class="brief">Jumped on an earnings beat and strong Q2 outlook, leading the SOX index higher. Surging premarket and held it through the session.</td></tr>
+      <tr><td>7</td><td class="tk">MRVL</td><td class="senti s9">9</td><td class="sector"><span class="pill">Technology</span></td><td class="px">$218.72</td><td class="brief">Jumped after-hours on S&amp;P 500 inclusion, +4% on a key trading signal, with new AI memory products drawing trader focus.</td></tr>
+      <tr><td>8</td><td class="tk">NET</td><td class="senti s9">9</td><td class="sector"><span class="pill">Technology</span></td><td class="px">$300.27</td><td class="brief">A beat-and-raise Q2 sent shares skyrocketing toward an all-time high; Wall Street calls Cloudflare a &ldquo;compelling picks-and-shovels play&rdquo; on AI.</td></tr>
+      <tr><td>9</td><td class="tk">ONTO</td><td class="senti s9">9</td><td class="sector"><span class="pill">Technology</span></td><td class="px">$308.30</td><td class="brief">Q2 earnings and revenue both beat; 12-month target raised to $373.45, implying 39% upside, alongside a new $86.3M institutional position.<span class="flag">Reverses last run&rsquo;s rejection &mdash; that was a false match; this week&rsquo;s coverage is genuinely Onto Innovation.</span></td></tr>
+      <tr><td>10</td><td class="tk">PLTR</td><td class="senti s9">9</td><td class="sector"><span class="pill">Technology</span></td><td class="px">$172.01</td><td class="brief">Skyrocketed again on Friday; a 30% surge has left short sellers with $3B of losses. The only caveat raised is volatility, not direction.</td></tr>
+      <tr><td>11</td><td class="tk">TEAM</td><td class="senti s9">9</td><td class="sector"><span class="pill">Technology</span></td><td class="px">$149.07</td><td class="brief">Rocketed after-hours on an earnings beat and an AI Jira push; BofA calls Atlassian &ldquo;an AI beneficiary rather than an AI victim.&rdquo;</td></tr>
+      <tr><td>12</td><td class="tk">TTWO</td><td class="senti s9">9</td><td class="sector"><span class="pill">Communication Services</span></td><td class="px">$246.50</td><td class="brief">GTA 6 dated for Nov 19 with full-year outlook reaffirmed at $8.0&ndash;8.2B; stock +5% to its highest level in over three months on preorders.</td></tr>
+      <tr><td>13</td><td class="tk">UNH</td><td class="senti s9">9</td><td class="sector"><span class="pill">Healthcare</span></td><td class="px">$407.08</td><td class="brief">Rallied 21% on raised 2026 guidance after a Q2 beat, becoming the Dow&rsquo;s single biggest driver back toward 50,000.</td></tr>
+      <tr><td>14</td><td class="tk">AAPL</td><td class="senti s8">8</td><td class="sector"><span class="pill">Technology</span></td><td class="px">$313.33</td><td class="brief">Surged on an upgrade cycle its own reports flagged early; gained again on reported foldable iPhone and camera-equipped AirPods launches for 2027.</td></tr>
+      <tr><td>15</td><td class="tk">AMGN</td><td class="senti s8">8</td><td class="sector"><span class="pill">Healthcare</span></td><td class="px">$410.94</td><td class="brief">Jumped on raised guidance, with Seeking Alpha arguing the market is underestimating its next growth phase. Mounting-risk caveat is secondary.</td></tr>
+      <tr><td>16</td><td class="tk">ARM</td><td class="senti s8">8</td><td class="sector"><span class="pill">Technology</span></td><td class="px">$282.57</td><td class="brief">Mizuho raised its price target on the AI growth outlook; opened up 3.95% on Aug 7 with an earnings surge called &ldquo;on the horizon.&rdquo;</td></tr>
+      <tr><td>17</td><td class="tk">ASML</td><td class="senti s8">8</td><td class="sector"><span class="pill">Technology</span></td><td class="px">$1,740.99</td><td class="brief">Surging on an AI litho-density supercycle thesis with strong returns &mdash; tempered by a &ldquo;fully priced, rich earnings&rdquo; valuation flag.</td></tr>
+      <tr><td>18</td><td class="tk">BA</td><td class="senti s8">8</td><td class="sector"><span class="pill">Industrials</span></td><td class="px">$234.42</td><td class="brief">MAX 7 wins certification with the stock called 41% undervalued; Tigress issued a positive forecast and IMC-Chicago opened a $65.1M position.</td></tr>
+      <tr><td>19</td><td class="tk">BKNG</td><td class="senti s8">8</td><td class="sector"><span class="pill">Consumer Cyclical</span></td><td class="px">$214.42</td><td class="brief">Rocketing higher, +3.44% on Aug 7, and framed as a buying opportunity as AI fears weigh on the name. Institutions adding.</td></tr>
+      <tr><td>20</td><td class="tk">CIEN</td><td class="senti s8">8</td><td class="sector"><span class="pill">Technology</span></td><td class="px">$412.39</td><td class="brief">The Trump administration handed Ciena a &ldquo;huge boost&rdquo;; stock +5.2% with FMR disclosing 13.5% ownership. GF Value flags overvalued.<span class="flag">Widened to the last 2 bulletin dates &mdash; thin same-day coverage.</span></td></tr>
+      <tr><td>21</td><td class="tk">COP</td><td class="senti s8">8</td><td class="sector"><span class="pill">Energy</span></td><td class="px">$117.61</td><td class="brief">Beat Q2 earnings and revenue estimates with $3.9B of profit, and doubled Q2 share repurchases to $2B.</td></tr>
+      <tr><td>22</td><td class="tk">CRWD</td><td class="senti s8">8</td><td class="sector"><span class="pill">Technology</span></td><td class="px">$214.42</td><td class="brief">Up 106% in six months and 83% in 2026; +3.52% on Aug 7 with the XM Cyber deal seen adding growth. One director sale against it.</td></tr>
+      <tr><td>23</td><td class="tk">DCO</td><td class="senti s8">8</td><td class="sector"><span class="pill">Industrials</span></td><td class="px">$197.07</td><td class="brief">Record Q2 revenue up 12% to $224.5M, shares +5.1%, an RBC positive forecast and a State Street 6.3% beneficial stake.</td></tr>
+      <tr><td>24</td><td class="tk">ETN</td><td class="senti s8">8</td><td class="sector"><span class="pill">Industrials</span></td><td class="px">$448.68</td><td class="brief">Up 24% on a five-day winning streak, with its Quantum grid-security project adding to the data-centre narrative.</td></tr>
+      <tr><td>25</td><td class="tk">F</td><td class="senti s8">8</td><td class="sector"><span class="pill">Consumer Cyclical</span></td><td class="px">$13.98</td><td class="brief">Headed toward its best week in nearly six years on energy-storage momentum and hit a 52-week high; execution and scaling flagged as the risk.<span class="flag">Thin &mdash; two of its four hits are false matches on a German-listed line and a Canadian debenture.</span></td></tr>
+      <tr><td>26</td><td class="tk">FCX</td><td class="senti s8">8</td><td class="sector"><span class="pill">Basic Materials</span></td><td class="px">$69.62</td><td class="brief">Flashed a buy signal that is fuelling copper and rare-earth names; shares +5.8% with a GF Score of 88. Trades at a premium after an 89% return.<span class="flag">Widened to the last 2 bulletin dates.</span></td></tr>
+      <tr><td>27</td><td class="tk">FN</td><td class="senti s8">8</td><td class="sector"><span class="pill">Technology</span></td><td class="px">$562.38</td><td class="brief">Up 16.5% with a GF Score of 98; shares gapped up and are still called a buy ahead of 2026 earnings. GF Value says overvalued.<span class="flag">Widened to the last 2 bulletin dates.</span></td></tr>
+      <tr><td>28</td><td class="tk">GLW</td><td class="senti s8">8</td><td class="sector"><span class="pill">Technology</span></td><td class="px">$165.68</td><td class="brief">Surged 10% on a multibillion-dollar Amazon deal, popped again on proposed solar tariffs, and rose as the AI-optics story regained momentum.</td></tr>
+      <tr><td>29</td><td class="tk">INFQ</td><td class="senti s8">8</td><td class="sector"><span class="pill">Technology</span></td><td class="px">$11.91</td><td class="brief">At near five-month highs on UK expansion, Russell 3000 inclusion and broad quantum optimism; led gains alongside IonQ.</td></tr>
+      <tr><td>30</td><td class="tk">JBL</td><td class="senti s8">8</td><td class="sector"><span class="pill">Technology</span></td><td class="px">$341.22</td><td class="brief">Up 6.8% and 31.6% over six months, with a director buying 500 shares on the open market. GF Value calls it overvalued.<span class="flag">Widened to the last 2 bulletin dates.</span></td></tr>
+      <tr><td>31</td><td class="tk">JPM</td><td class="senti s8">8</td><td class="sector"><span class="pill">Financial Services</span></td><td class="px">$357.52</td><td class="brief">Hit a 52-week high and reported $5 trillion of assets in its Q2 filing; IMC-Chicago opened a new $91.5M position.</td></tr>
+      <tr><td>32</td><td class="tk">NOW</td><td class="senti s8">8</td><td class="sector"><span class="pill">Technology</span></td><td class="px">$124.88</td><td class="brief">Up 6.27% for its best day in a year as SaaS rebounded &mdash; cutting directly against the week&rsquo;s software-multiple selloff.<span class="flag">Two of its four hits are generic market filler, not ServiceNow coverage.</span></td></tr>
+      <tr><td>33</td><td class="tk">NVDA</td><td class="senti s8">8</td><td class="sector"><span class="pill">Technology</span></td><td class="px">$223.96</td><td class="brief">Biggest weekly surge in more than a year on recent AI wins and the SpaceX partnership, despite one flat session ending a five-day streak.</td></tr>
+      <tr><td>34</td><td class="tk">QNT</td><td class="senti s8">8</td><td class="sector"><span class="pill">Technology</span></td><td class="px">$58.71</td><td class="brief">Surged to a 52-week high around its first earnings since IPO, with Wall Street seeing triple-digit upside on the quantum theme.</td></tr>
+      <tr><td>35</td><td class="tk">SAP</td><td class="senti s8">8</td><td class="sector"><span class="pill">Technology</span></td><td class="px">$206.16</td><td class="brief">Up 9.7% after deepening AI integration across its cloud ecosystem, and +3.66% on Aug 7 against an otherwise weak software tape.</td></tr>
+      <tr><td>36</td><td class="tk">VRT</td><td class="senti s8">8</td><td class="sector"><span class="pill">Industrials</span></td><td class="px">$272.40</td><td class="brief">Climbed 25% on a five-day winning streak on data-centre demand; simplywall.st calls it fairly valued with strong cash flow.</td></tr>
     </tbody>
   </table>
   </div>
 
   <div class="callout">
-    <h3>Sector concentration at the top</h3>
-    <p>Technology takes <strong>six of the top ten</strong> &mdash; and five of those (GLW, COHR, AVGO, with PANW and QCOM adjacent)
-       are optical/networking and semis riding the <strong>same Nvidia &ldquo;optics where you must&rdquo; catalyst</strong>.
-       That is one theme, not six independent signals.</p>
-    <p style="margin-top:8px;">The genuinely uncorrelated names at the top are <strong>CEG (Utilities)</strong> and <strong>BKNG (Consumer Cyclical)</strong>,
-       both scoring on their own earnings beats rather than a shared narrative.</p>
+    <h3>One theme is doing most of the work</h3>
+    <p><strong>Technology accounts for 22 of the 36 names</strong>, and a large slice of those &mdash; COHR, CIEN, GLW, FN, MRVL, plus
+       adjacent CSCO and NET &mdash; are optical/networking and AI-infrastructure plays riding the <strong>same reported China
+       data-centre import ban and AI capex cycle</strong>. Treat that as one signal repeated, not seven independent ones.</p>
+    <p style="margin-top:8px;">The genuinely uncorrelated top scores are <strong>CEG (Utilities)</strong>, <strong>UNH (Healthcare)</strong>,
+       <strong>TTWO (Communication Services)</strong>, <strong>COP (Energy)</strong> and <strong>FCX (Basic Materials)</strong> &mdash;
+       each scoring on its own catalyst rather than a shared narrative.</p>
   </div>
 
   <h2>Rejected &mdash; False Ticker Matches</h2>
@@ -106,22 +131,21 @@ footer { margin-top:36px; padding-top:14px; border-top:1px solid var(--ft-border
   <table class="rej">
     <thead><tr><th>Ticker</th><th>Auto Score</th><th>Reason Rejected</th></tr></thead>
     <tbody>
-      <tr><td class="tk">ONTO</td><td>9</td><td>Headline was Creative Medical Technology Holdings, not Onto Innovation</td></tr>
-      <tr><td class="tk">NOK</td><td>9</td><td>Matched &ldquo;27% AI-fuelled&rdquo; &mdash; the headline actually reads &ldquo;Rally Fizzles &mdash; Stock Drops Premarket&rdquo;</td></tr>
-      <tr><td class="tk">DRAM</td><td>9</td><td>Micron news tagged to a DRAM fund</td></tr>
-      <tr><td class="tk">HAL</td><td>7</td><td>&ldquo;HAL Share Price Jumps 6%&rdquo; is Hindustan Aeronautics (India), not Halliburton</td></tr>
-      <tr><td class="tk">D</td><td>7</td><td>Matched D-Wave Quantum headlines</td></tr>
-      <tr><td class="tk">CL</td><td>7</td><td>Matched &ldquo;Dell Technologies Inc. Cl C&rdquo;</td></tr>
-      <tr><td class="tk">COST</td><td>7</td><td>All hits were a spirits maker, ATS and ETSY &mdash; no genuine Costco coverage</td></tr>
-      <tr><td class="tk">SPY</td><td>7</td><td>Generic mega-cap quant-rating filler</td></tr>
+      <tr><td class="tk">HAL</td><td>8</td><td>&ldquo;HAL Share Price Jumps 6%&rdquo; is Hindustan Aeronautics (India), not Halliburton</td></tr>
+      <tr><td class="tk">D</td><td>7</td><td>All six hits are D-Wave Quantum headlines, not Dominion Energy</td></tr>
+      <tr><td class="tk">SE</td><td>7</td><td>Four of seven hits are &ldquo;SAP <em>SE</em>&rdquo; and Delivery Hero SE, not Sea Ltd</td></tr>
+      <tr><td class="tk">SO</td><td>7</td><td>Matched Atlassian&rsquo;s &ldquo;So Much for the Software Slump&rdquo; and SpaceX &ldquo;So Why Isn&rsquo;t&hellip;&rdquo;, not Southern Co</td></tr>
+      <tr><td class="tk">DRAM</td><td>7</td><td>Memory-sector relief rally tagged to a DRAM fund; the rest is options-chain filler</td></tr>
+      <tr><td class="tk">GRID</td><td>7</td><td>Two hits are duplicate GEV headlines; one is Tantalus Systems (TSX:GRID)</td></tr>
+      <tr><td class="tk">C</td><td>7</td><td>Half the hits are CNN &ldquo;symbol__&rdquo; placeholders and a TPG Series C preferred</td></tr>
     </tbody>
   </table>
   </div>
 
   <footer>
-    Senti Grid &middot; scored from <strong>news_bulletin_20260807_0322.html</strong> &middot;
-    sectors from <strong>business_overview_060826_0509.csv</strong> &middot;
-    158 watchlist tickers scored, top candidates hand-verified &middot; Optionx
+    Senti Grid &middot; scored from <strong>news_bulletin_20260808_0510.html</strong> &middot;
+    sectors and prices from <strong>business_overview_080826_0508.csv</strong> &middot;
+    196 tickers with coverage scored, 36 rated above 7, top candidates hand-verified &middot; Optionx
   </footer>
 </div>
 </body>

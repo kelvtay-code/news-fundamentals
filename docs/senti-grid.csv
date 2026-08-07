@@ -1,30 +1,37 @@
-﻿Rank,Ticker,Senti,Sector,News Brief,Verification
-1,CEG,9,Utilities,"Q2 earnings AND revenue both beat estimates; stock gaining Thursday. Four-for-four positive coverage, no bear item.",Verified
-2,BKNG,9,Consumer Cyclical,'Rocketing higher today'; jumped as resilient travel demand powered an earnings beat. Analysts bullish on a stock still down 20%.,Verified
-3,GLW,8,Technology,"Surged 10% on a multibillion-dollar Amazon deal, plus a jump after Nvidia CEO called for 'optics where you must'. Reverses prior-run score of 5 (soft Q3 guidance).",Verified
-4,PANW,8,Technology,Holding near record highs despite a fresh China security review mirroring the Micron case. Resilience through a negative.,Verified
-5,JBL,8,Technology,Up 6.8%; surged 31.6% over six months; director bought 500 shares on the open market. GF Value calls it overvalued.,Verified
-6,F,8,Consumer Cyclical,Jumped 8% after-hours on a Q2 earnings beat and raised 2026 profit outlook.,"Verified - THIN COVERAGE: other 3 hits are false matches (Series F preferred, Canadian tickers)"
-7,AVGO,7,Technology,Seeking Alpha upgrade on optical advantage; Baillie Gifford opened a new $513M position. Offset by an above-fair-value flag.,Verified
-8,QCOM,7,Technology,"Record highs on a 'super rally', up 7.3% and still called undervalued; gave back 3.31% on Aug 5.",Verified
-9,COHR,7,Technology,Climbed 48% on a five-day streak; surged on the Nvidia optics call. Slides as new China data-centre curbs come into view.,Verified
-10,MDT,7,Healthcare,"'I'm calling it: Medtronic will soar 40% by end of 2026', alongside Sphere-9 clinical progress.",Verified
-11,AES,6,Utilities,"Beat estimates by $0.15 EPS with revenue growth, but profit rebound 'meets dividend and debt strain'; pushed out Citi/SMBC credit lines.",Verified
-12,SOFI,6,Financial Services,'Time to buy the dip'; price doubled in 2025. Offset by price-target cuts after Q2.,Verified
-13,UPS,6,Industrials,"10.8% undervalued, 6.09% dividend yield, West Coast port-surge exposure; slips on soft near-term package trends.",Verified
-
-REJECTED - FALSE TICKER MATCHES,,,,,
-Ticker,Auto Score,Reason Rejected,,,
-ONTO,Auto-scored 9 - REJECTED,"Headline was Creative Medical Technology Holdings, not Onto Innovation",,,
-HAL,Auto-scored 7 - REJECTED,"'HAL Share Price Jumps 6%' is Hindustan Aeronautics (India), not Halliburton",,,
-D,Auto-scored 7 - REJECTED,Matched D-Wave Quantum headlines,,,
-CL,Auto-scored 7 - REJECTED,Matched 'Dell Technologies Inc. Cl C',,,
-NOK,Auto-scored 9 - REJECTED,Matched '27% AI-fuelled' but headline reads 'Rally Fizzles - Stock Drops Premarket',,,
-COST,Auto-scored 7 - REJECTED,"All hits were a spirits maker, ATS and ETSY - no genuine Costco coverage",,,
-DRAM,Auto-scored 9 - REJECTED,Micron news tagged to a DRAM fund,,,
-SPY,Auto-scored 7 - REJECTED,Generic mega-cap quant-rating filler,,,
-
-Source bulletin,news_bulletin_20260807_0322.html,,,,
-Watchlist tickers scored,158,,,,
-Sector source,business_overview_060826_0509.csv,,,,
-Generated,2026-08-07 03:34,,,,
+Rank,Ticker,Senti,Sector,Price,News Brief
+1,APH,9,Technology,169.18,"Up 14.6% on an AI-fuelled sales beat plus a stock split and dividend hike; +20% over a six-day winning streak. No bear item."
+2,CEG,9,Utilities,269.89,"Q2 beat on Calpine contribution with guidance raised; signed 920MW of new power deals including a Walmart PPA."
+3,COHR,9,Technology,379.13,"Climbed 51% on a six-day streak and +12.93% on Aug 7 as Trump's reported China ban on data-centre import parts drove optical names higher."
+4,CSCO,9,Technology,121.43,"Best week in nearly 25 years; HSBC sees 19% upside. SG Americas opened a new $1.5B position and State Street disclosed a 5% stake."
+5,HPE,9,Technology,53.22,"Soared after-hours on an expectation-beating sales forecast driven by AI demand; hit a 52-week high after a 20% five-day run."
+6,MCHP,9,Technology,84.69,"Jumped on an earnings beat and strong Q2 outlook, leading the SOX index higher. Surging premarket and through the session."
+7,MRVL,9,Technology,218.72,"Jumped after-hours on S&P 500 inclusion, +4% on a key trading signal, with new AI memory products drawing trader focus."
+8,NET,9,Technology,300.27,"Beat-and-raise Q2 sent shares skyrocketing toward an all-time high; Wall Street calls Cloudflare a compelling picks-and-shovels AI play."
+9,ONTO,9,Technology,308.30,"Q2 earnings and revenue beat; 12-month target raised to $373.45 implying 39% upside, with a new $86.3M institutional position."
+10,PLTR,9,Technology,172.01,"Skyrocketed again on Friday; a 30% surge has left short sellers with $3B of losses. Only caveat is volatility, not direction."
+11,TEAM,9,Technology,149.07,"Rocketed after-hours on an earnings beat and AI Jira push; BofA calls Atlassian an AI beneficiary rather than an AI victim."
+12,TTWO,9,Communication Services,246.50,"GTA 6 dated for Nov 19 with full-year outlook reaffirmed at $8.0-8.2B; stock +5% to its highest level in over three months on preorders."
+13,UNH,9,Healthcare,407.08,"Rallied 21% on raised 2026 guidance after a Q2 beat; became the Dow's biggest driver back toward 50,000."
+14,AAPL,8,Technology,313.33,"Surged on an upgrade cycle its own reports flagged early; gains on reported foldable iPhone and camera-equipped AirPods for 2027."
+15,AMGN,8,Healthcare,410.94,"Jumped on raised guidance; Seeking Alpha argues the market is underestimating its next growth phase. Mounting-risk caveat is secondary."
+16,ARM,8,Technology,282.57,"Mizuho raised its price target on the AI growth outlook; opened up 3.95% on Aug 7 with an earnings surge called on the horizon."
+17,ASML,8,Technology,1740.99,"Surging on an AI litho-density supercycle thesis with strong returns, tempered by a fully-priced/rich-earnings valuation flag."
+18,BA,8,Industrials,234.42,"MAX 7 wins certification with the stock called 41% undervalued; Tigress issued a positive forecast and IMC-Chicago opened a $65.1M position."
+19,BKNG,8,Consumer Cyclical,214.42,"Rocketing higher, +3.44% on Aug 7; framed as a buying opportunity as AI fears weigh, with institutions adding."
+20,CIEN,8,Technology,412.39,"The Trump administration handed Ciena a huge policy boost; stock +5.2% with FMR disclosing 13.5% ownership. GF Value flags overvalued."
+21,COP,8,Energy,117.61,"Beat Q2 earnings and revenue with $3.9B of profit, and doubled Q2 share repurchases to $2B."
+22,CRWD,8,Technology,214.42,"Up 106% in six months and 83% in 2026; +3.52% on Aug 7 with the XM Cyber deal seen adding growth. One director sale."
+23,DCO,8,Industrials,197.07,"Record Q2 revenue up 12% to $224.5M, shares +5.1%, RBC issued a positive forecast and State Street disclosed a 6.3% stake."
+24,ETN,8,Industrials,448.68,"Up 24% on a five-day winning streak, with its Quantum grid-security project adding to the data-centre narrative."
+25,F,8,Consumer Cyclical,13.98,"Headed toward its best week in nearly six years on energy-storage momentum and hit a 52-week high; execution and scaling flagged as the risk."
+26,FCX,8,Basic Materials,69.62,"Flashed a buy signal fuelling copper and rare-earth names, shares +5.8% with a GF Score of 88. Trades at a premium after an 89% return."
+27,FN,8,Technology,562.38,"Up 16.5% with a GF Score of 98; shares gapped up and are still called a buy ahead of 2026 earnings. GF Value says overvalued."
+28,GLW,8,Technology,165.68,"Surged 10% on a multibillion-dollar Amazon deal, popped again on proposed solar tariffs, and rose as the AI-optics story regained momentum."
+29,INFQ,8,Technology,11.91,"At near five-month highs on UK expansion, Russell 3000 inclusion and broad quantum optimism; led gains alongside IonQ."
+30,JBL,8,Technology,341.22,"Up 6.8% and 31.6% over six months, with a director buying 500 shares on the open market. GF Value calls it overvalued."
+31,JPM,8,Financial Services,357.52,"Hit a 52-week high and reported $5 trillion of assets in its Q2 filing; IMC-Chicago opened a new $91.5M position."
+32,NOW,8,Technology,124.88,"Up 6.27% for its best day in a year as SaaS rebounded, cutting against the week's software-multiple selloff."
+33,NVDA,8,Technology,223.96,"Biggest weekly surge in more than a year on recent AI wins and the SpaceX partnership, despite one flat session ending a five-day streak."
+34,QNT,8,Technology,58.71,"Surged to a 52-week high in its first earnings after IPO, with Wall Street seeing triple-digit upside on the quantum theme."
+35,SAP,8,Technology,206.16,"Up 9.7% after deepening AI integration across its cloud ecosystem, and +3.66% on Aug 7 against a weak software tape."
+36,VRT,8,Industrials,272.40,"Climbed 25% on a five-day winning streak on data-centre demand; simplywall.st calls it fairly valued with strong cash flow."
