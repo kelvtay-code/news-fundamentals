@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Bull Screener — Bullish Ticker Funnel — Thursday, 6 August 2026 (05:09)</title>
+<title>Bull Screener — Bullish Ticker Funnel — Friday, 7 August 2026 (05:08)</title>
 <style>
 :root {
   --ft-salmon:   #FFF1E0;
@@ -64,7 +64,7 @@ body {
 
 .content { max-width: 1600px; margin: 0 auto; padding: 24px 40px 40px; }
 
-.note-banner { max-width: 1600px; margin: 16px auto 0; padding: 0 40px; font-family: Arial, sans-serif; font-size: 11.5px; color: var(--ft-muted); }
+.note-banner { max-width: 1600px; margin: 16px auto 0; padding: 0 40px 16px; font-family: Arial, sans-serif; font-size: 11.5px; color: var(--ft-muted); }
 
 .empty-banner { max-width: 1600px; margin: 0 auto 16px; padding: 14px 20px; background: var(--warn-soft); border: 1px solid var(--ft-card-bdr); font-family: Arial, sans-serif; font-size: 13px; color: var(--warn); }
 
@@ -139,14 +139,14 @@ footer { background: var(--ft-navy); color: #888; font-family: Arial, sans-serif
   <div class="masthead-inner">
     <div class="masthead-eyebrow">Optionx Intelligence — Experimental Funnel</div>
     <div class="masthead-title">Bull <span>Screener</span> — Bullish Ticker Funnel</div>
-    <div class="masthead-date">Data: stock_analysis_060826.0509.csv &nbsp;&middot;&nbsp; IV_060826_0826.csv &nbsp;&middot;&nbsp; business_overview_060826_0509.csv</div>
+    <div class="masthead-date">Data: stock_analysis_070826.0508.csv &nbsp;&middot;&nbsp; IV_070826_0842.csv &nbsp;&middot;&nbsp; business_overview_310726_0416.csv (newest available &mdash; ~1 week stale, no newer business_overview export found in Dashboard or Watchlist)</div>
     <div class="masthead-tagline">"Sequential funnel — a ticker that fails a gate is dropped, not carried forward."</div>
   </div>
 </div>
 <div class="stats-banner"><div class="stats-inner">
-  <div class="stat-item">Step 1 Wyckoff Uptrend/Spring <strong>48</strong></div><span class="stat-sep">&rarr;</span>
-  <div class="stat-item">Step 2 top7 bull-confirm <strong>2</strong></div><span class="stat-sep">&rarr;</span>
-  <div class="stat-item">Step 3 ivchk IV/trend gate <strong>2</strong></div><span class="stat-sep">&rarr;</span>
+  <div class="stat-item">Step 1 Wyckoff Uptrend/Spring <strong>45</strong></div><span class="stat-sep">&rarr;</span>
+  <div class="stat-item">Step 2 top7 bull-confirm <strong>1</strong></div><span class="stat-sep">&rarr;</span>
+  <div class="stat-item">Step 3 ivchk IV/trend gate <strong>1</strong></div><span class="stat-sep">&rarr;</span>
   <div class="stat-item">Step 4 Positive-GEX final <strong>1</strong></div>
   <span class="stat-sep">|</span>
   <div class="stat-item">Final List <strong>1</strong> ticker</div>
@@ -169,8 +169,8 @@ footer { background: var(--ft-navy); color: #888; font-family: Arial, sans-serif
 </div>
 
 <div class="content">
-  <div class="empty-banner" style="color:var(--ft-warm-blk); background:var(--ft-card-bg);">
-    Standard methodology (GEX&ge;+4 on &ge;5/7 days). Step 1 Wyckoff Uptrend/Spring filter passed 48 of 205 watchlist tickers off stock_analysis_060826.0509.csv. Step 2's top7 gate (7-day GEX&ge;+4 consistency + bullish-phase count + Spring/SOS&ge;85% + no gamma flip, layered with the mandatory last-2-days recency overlay) let through only MSFT (BULL SETUP, 6/7 days GEX&ge;+4, 6/7 bullish phase, Recency: Reinforced) and SYK (BULL SETUP, 6/7 days GEX&ge;+4, 7/7 bullish phase, Recency: Upgraded to BULL CONFIRM on the last 2 days' Spring 85% + rising price) — every other candidate (AAPL, AMZN, DIS, QQQ, ETN, XLB, DD, PLXS, XLK and the rest) spent most of the 7-day window in Mark-down/Neutral-GEX territory and only flipped to Accumulation/Spring on Aug 5&ndash;6, too late to clear the 5/7-day bar; none hit KIV either. Step 3 (ivchk) cleared both survivors: MSFT IV Rank 39 (just above the &gt;38 floor) with a &#128640; BULLISH trend flag (price above EMA21/SMA50/SMA200); SYK IV Rank 61 with a &#127793; Greenshoots flag (above EMA21/SMA50, below SMA200) &mdash; neither shows the 3-day IV-expansion/price-drop divergence pattern. News check surfaced fresh (&le;2wk) negative flow on both: MSFT carries a UBS price-target cut, an Aug 11 securities-fraud lawsuit deadline over Copilot/Azure adoption claims, and -15&ndash;17% YTD from AI-capex margin pressure; SYK missed Q2 revenue estimates on Jul 30 (shares -9% AH, -6.58% Jul 31 close) on a muted guidance raise despite an EPS beat &mdash; informational only, not a rejection driver. Step 4's positive-GEX final filter then cut MSFT (latest-day GEX Scale 1.0, Neutral/Transition Zone &mdash; the Aug 6 Spring day's gamma reading fell back inside the -3..+3 band), leaving SYK as the sole Final List survivor on GEX Scale +6.0 (Moderate Positive Gamma).
+  <div class="note-banner">
+    Re-run against the current 7 Aug 2026 snapshot (superseding the 31 Jul run — see <code>bull_screener_310726_0416.html</code>) using a 7-day top7 lookback window of Jul 28&ndash;Aug 7 (Aug 2 excluded, weekend). Step 1 passed 45 Wyckoff Uptrend/Spring candidates (dedupe applied to a duplicate NET row appearing under two sector labels in the source snapshot). Step 2 (top7) passed only <strong>SYK</strong> — 7-Day Verdict &#128200; BULL SETUP (bullish phase 7/7 days, GEX&ge;+4 on 6/7 days, no gamma flip), Recency &#128269; BULL CONFIRM / Upgraded (last 2 days both Accumulation phase with Spring 85% confidence, GEX +6, price stable/rising). AAPL and PG both showed a bullish recency read but were dropped because their 7-Day Verdict was REJECT — per the funnel rule a 7-day REJECT/ABORT is dropped regardless of recency. SBUX hit an explicit 7-day ABORT (vol divergence on 2+ days). Step 3 (ivchk): SYK clears — IV Rank 57 (&gt;38), &#127793; Greenshoots trend flag (price $337.43 above EMA21 $330.38 and SMA50 $317.59, just under SMA200 $343.03); no IV-expansion/price-drop divergence (IV Rank actually fell 70&rarr;61&rarr;57 over the last 3 days while price held flat/up, the opposite pattern). News check surfaced real negative flow — a post-earnings valuation-reset sell-off (~7.6&ndash;9% despite an EPS/revenue beat and raised FY26 guidance), BTIG/Truist price-target cuts, ongoing cyberattack remediation costs, a Jun 2026 Neptune Smart Docking Station recall, and ongoing Cartiva/Rejuvenate hip-implant litigation — informational only, not a rejection driver. Step 4 (positive-GEX filter): SYK's most recent-day GEX Scale is +6.0 (Moderate Positive Gamma) — clears. Final List: 1 ticker. PEG Ratio (1.60) and Earnings Date (29/10/2026) pulled per the sourcing note above.
   </div>
   <div class="table-card">
     <div class="table-hdr">
@@ -185,23 +185,23 @@ footer { background: var(--ft-navy); color: #888; font-family: Arial, sans-serif
           </tr>
         </thead>
         <tbody id="mainBody">
-<tr data-sector="Healthcare">
-  <td class="rank">1</td>
-  <td class="ticker">SYK</td>
-  <td>Healthcare</td>
-  <td class="num">$337.50</td>
-  <td><span class="chip chip-bull">BULL SETUP</span></td>
-  <td>Upgraded</td>
-  <td class="num">61</td>
-  <td>&#127793; Greenshoots</td>
-  <td><span class="chip-none">&mdash;</span></td>
-  <td><span class="chip chip-gex">+6 Moderate Positive Gamma</span></td>
-  <td class="num">$360</td>
-  <td class="num">$320</td>
-  <td class="num">1.55</td>
-  <td>29/10/2026</td>
-  <td class="newscell">Q2 revenue missed est. ($6.59B vs $6.65B) Jul 30 despite EPS beat, shares -9% AH; closed -6.58% Jul 31 on muted guidance raise; BTIG trimmed PT to $358 from $371 (kept Buy).</td>
-</tr>
+          <tr data-sector="Medical Devices / Orthopedics">
+            <td class="rank">1</td>
+            <td class="ticker">SYK</td>
+            <td>Medical Devices / Orthopedics</td>
+            <td class="num">$337.43</td>
+            <td><span class="chip chip-bull">&#128200; BULL SETUP</span></td>
+            <td><span class="chip chip-bull">Upgraded</span></td>
+            <td class="num">57</td>
+            <td>&#127793; Greenshoots</td>
+            <td><span class="chip-none">&mdash;</span></td>
+            <td><span class="chip chip-gex">+6 Moderate Positive Gamma</span></td>
+            <td class="num">$340</td>
+            <td class="num">$320</td>
+            <td class="num">1.60</td>
+            <td>29/10/2026</td>
+            <td class="newscell">Post-earnings valuation-reset sell-off (~7.6&ndash;9%) despite EPS/revenue beat &amp; raised FY26 guidance; BTIG/Truist cut price targets; ongoing cyberattack remediation costs; Jun 2026 Neptune Smart Docking Station recall (FDA safety-testing flag); Cartiva/Rejuvenate hip-implant litigation overhang.</td>
+          </tr>
 </tbody>
       </table>
     </div>
@@ -209,7 +209,7 @@ footer { background: var(--ft-navy); color: #888; font-family: Arial, sans-serif
 </div>
 
 <footer>
-  Bull Screener (experimental funnel) &middot; Step 1 Wyckoff Uptrend/Spring (48) &rarr; Step 2 top7 bull-confirm + recency, GEX&ge;+4 on &ge;5/7 days (2: MSFT, SYK) &rarr; Step 3 ivchk IV Rank&gt;38 + bullish trend flag (2: MSFT, SYK &mdash; no divergence flags) &rarr; Step 4 positive-GEX final filter (1: SYK &mdash; MSFT dropped, latest GEX Scale 1.0 Neutral/Transition Zone) &middot; PEG Ratio/Earnings enrichment from business_overview_060826_0509.csv / IV_060826_0826.csv &middot; distinct workflow from opt_strategist &middot; AAPL/TSLA excluded upstream at Step 1 (AAPL: no IV data since Aug 3, gap not fabricated; TSLA: no Uptrend/Spring setup this snapshot).
+  Bull Screener (experimental funnel) &middot; Step 1 Wyckoff Uptrend/Spring (45) &rarr; Step 2 top7 bull-confirm + recency (1: SYK) &rarr; Step 3 ivchk IV Rank&gt;38 + bullish trend flag (1: SYK) &rarr; Step 4 positive-GEX final filter (1: SYK, GEX +6.0 Moderate Positive Gamma) &middot; PEG Ratio/Earnings enrichment from business_overview_310726_0416.csv (newest available, ~1wk stale) / IV_070826_0842.csv &middot; distinct workflow from opt_strategist.
 </footer>
 
 <script>
