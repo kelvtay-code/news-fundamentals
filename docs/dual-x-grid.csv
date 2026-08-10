@@ -1,15 +1,15 @@
 ﻿Sector,Sector Rank,Ticker,Price,IV Implied,IV First->Last,IV Slope,IV Rank,GEX First->Last,GEX Slope,GEX Sign Flip,Wyckoff,GEX Classification,Badge,Caveat
-Technology,1,CIEN,412.39,91.9,89.3 -> 91.9,0.632,75.0,-4 -> 1,0.213,YES,Mark-down,Neutral / Transition Zone,◎ NEUTRAL,
-Technology,2,MRVL,218.0,91.5,92.5 -> 91.5,0.097,72.0,4 -> 10,0.592,,Mark-down,Extreme Positive Gamma,◉ PINNED,fade
-Technology,3,CRWD,214.42,62.8,60.7 -> 62.8,0.331,75.0,-4 -> 10,0.876,YES,Mark-up,Extreme Positive Gamma,◉ PINNED,
-Technology,4,ASML,1580.99,60.9,57.2 -> 60.9,0.935,82.0,-4 -> 10,0.709,YES,Mark-up,Extreme Positive Gamma,◉ PINNED,
-Technology,5,AVGO,425.5,51.7,50.7 -> 51.7,0.447,51.0,4 -> 6,0.199,,Mark-up,Moderate Positive Gamma,📈 UPTREND,
-Technology,6,CRM,192.01,51.4,45.8 -> 51.4,0.464,79.0,-4 -> 5,0.159,YES,Mark-up,Moderate Positive Gamma,📈 UPTREND,
-Technology,7,ADBE,264.4,48.6,46.3 -> 48.6,0.224,64.0,-4 -> 6,0.368,YES,Mark-up,Moderate Positive Gamma,📈 UPTREND,
-Basic Materials,1,DOW,29.34,41.2,43.6 -> 41.2,0.083,13.0,4 -> 1,0.042,,Mark-down,Neutral / Transition Zone,◎ NEUTRAL,fade
-Consumer Cyclical,1,HD,354.8,33.0,33.5 -> 33.0,0.025,85.0,-4 -> 10,0.365,YES,Mark-up,Extreme Positive Gamma,◉ PINNED,
-Communication Services,1,NFLX,74.18,32.7,33.7 -> 32.7,0.068,29.0,4 -> 10,0.402,,Mark-down,Extreme Positive Gamma,◉ PINNED,fade
-Communication Services,2,GOOGL,354.6,29.2,32.1 -> 29.2,0.037,21.0,-4 -> 10,0.238,YES,Mark-down,Extreme Positive Gamma,◉ PINNED,fade
-Consumer Defensive,1,WMT,111.8,31.1,31.3 -> 31.1,0.054,65.0,-4 -> 2,0.211,YES,Mark-down,Neutral / Transition Zone,◎ NEUTRAL,flat
-Consumer Defensive,2,PEP,139.18,23.3,24.4 -> 23.3,0.103,47.0,-3 -> 7,0.213,YES,Mark-down,Moderate Positive Gamma,◎ NEUTRAL,fade
-Consumer Defensive,3,COST,946.99,21.3,22.2 -> 21.3,0.057,31.0,-4 -> 6,0.158,YES,Mark-down,Moderate Positive Gamma,◎ NEUTRAL,fade
+Technology,1,CIEN,412.39,91.9,89.3 -> 91.9,0.632,75,-4 -> 1,0.213,YES,Mark-down,Neutral / Transition Zone,◎ NEUTRAL,
+Technology,2,MRVL,218,91.5,92.5 -> 91.5,0.097,72,4 -> 10,0.592,,Mark-down,Extreme Positive Gamma,◉ PINNED,fade
+Technology,3,CRWD,214.42,62.8,60.7 -> 62.8,0.331,75,-4 -> 10,0.876,YES,Mark-up,Extreme Positive Gamma,◉ PINNED,
+Technology,4,ASML,1580.99,60.9,57.2 -> 60.9,0.935,82,-4 -> 10,0.709,YES,Mark-up,Extreme Positive Gamma,◉ PINNED,
+Technology,5,AVGO,425.5,51.7,50.7 -> 51.7,0.447,51,4 -> 6,0.199,,Mark-up,Moderate Positive Gamma,📈 UPTREND,
+Technology,6,CRM,192.01,51.4,45.8 -> 51.4,0.464,79,-4 -> 5,0.159,YES,Mark-up,Moderate Positive Gamma,📈 UPTREND,
+Technology,7,ADBE,264.4,48.6,46.3 -> 48.6,0.224,64,-4 -> 6,0.368,YES,Mark-up,Moderate Positive Gamma,📈 UPTREND,
+Basic Materials,1,DOW,29.34,41.2,43.6 -> 41.2,0.083,13,4 -> 1,0.042,,Mark-down,Neutral / Transition Zone,◎ NEUTRAL,fade
+Consumer Cyclical,1,HD,354.8,33,33.5 -> 33.0,0.025,85,-4 -> 10,0.365,YES,Mark-up,Extreme Positive Gamma,◉ PINNED,
+Communication Services,1,NFLX,74.18,32.7,33.7 -> 32.7,0.068,29,4 -> 10,0.402,,Mark-down,Extreme Positive Gamma,◉ PINNED,fade
+Communication Services,2,GOOGL,354.6,29.2,32.1 -> 29.2,0.037,21,-4 -> 10,0.238,YES,Mark-down,Extreme Positive Gamma,◉ PINNED,fade
+Consumer Defensive,1,WMT,111.8,31.1,31.3 -> 31.1,0.054,65,-4 -> 2,0.211,YES,Mark-down,Neutral / Transition Zone,◎ NEUTRAL,flat
+Consumer Defensive,2,PEP,139.18,23.3,24.4 -> 23.3,0.103,47,-3 -> 7,0.213,YES,Mark-down,Moderate Positive Gamma,◎ NEUTRAL,fade
+Consumer Defensive,3,COST,946.99,21.3,22.2 -> 21.3,0.057,31,-4 -> 6,0.158,YES,Mark-down,Moderate Positive Gamma,◎ NEUTRAL,fade
