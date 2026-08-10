@@ -84,20 +84,20 @@
 <div class="masthead">
   <div class="masthead-eyebrow">Optionx &middot; Volatility &amp; Dealer Positioning</div>
   <div class="masthead-title">Dual<span>_X</span> &mdash; Co-Expansion Screen</div>
-  <div class="masthead-date">Saturday, 08 August 2026 &middot; 15-day lookback</div>
+  <div class="masthead-date">Tuesday, 11 August 2026 &middot; 15-day lookback</div>
   <div class="masthead-tagline">Tickers whose implied volatility and dealer gamma are both
     expanding &mdash; premium building while positioning builds with it.</div>
 </div>
 <div class="stats-banner"><div class="stats-inner">
-  <div class="stat-item"><strong>14</strong> survivors</div><span class="stat-sep">|</span>
-  <div class="stat-item"><strong>6</strong> prime</div><span class="stat-sep">|</span>
-  <div class="stat-item"><strong>10</strong> gamma sign-flips</div><span class="stat-sep">|</span>
-  <div class="stat-item"><strong>5</strong> sectors</div><span class="stat-sep">|</span>
+  <div class="stat-item"><strong>9</strong> survivors</div><span class="stat-sep">|</span>
+  <div class="stat-item"><strong>4</strong> prime</div><span class="stat-sep">|</span>
+  <div class="stat-item"><strong>3</strong> gamma sign-flips</div><span class="stat-sep">|</span>
+  <div class="stat-item"><strong>3</strong> sectors</div><span class="stat-sep">|</span>
   <div class="stat-item">ETFs excluded</div>
 </div></div>
 <main>
   <h2>Signal Quality</h2>
-  <div class="tiles"><div class="tile t-prime"><div class="tile-n">6</div><div class="tile-l">PRIME</div><div class="tile-w">Both legs real, constructive phase, positive gamma</div></div><div class="tile t-solid"><div class="tile-n">1</div><div class="tile-l">SOLID</div><div class="tile-w">Both legs real, positive gamma, weak phase</div></div><div class="tile t-watch"><div class="tile-n">0</div><div class="tile-l">WATCH</div><div class="tile-w">Both legs real, gamma still negative</div></div><div class="tile t-weak"><div class="tile-n">7</div><div class="tile-l">WEAK</div><div class="tile-w">One leg is noise — IV flat or fading</div></div></div>
+  <div class="tiles"><div class="tile t-prime"><div class="tile-n">4</div><div class="tile-l">PRIME</div><div class="tile-w">Both legs real, constructive phase, positive gamma</div></div><div class="tile t-solid"><div class="tile-n">3</div><div class="tile-l">SOLID</div><div class="tile-w">Both legs real, positive gamma, weak phase</div></div><div class="tile t-watch"><div class="tile-n">0</div><div class="tile-l">WATCH</div><div class="tile-w">Both legs real, gamma still negative</div></div><div class="tile t-weak"><div class="tile-n">2</div><div class="tile-l">WEAK</div><div class="tile-w">One leg is noise — IV flat or fading</div></div></div>
 
   <h2>Survivors by Sector</h2>
   <div class="table-wrap"><table>
@@ -106,202 +106,132 @@
       <th>IVR</th><th>GEX first &rarr; last</th><th>GEX slope</th><th>Wyckoff</th>
       <th>GEX Class</th><th>Badge</th><th>Grade</th><th>Flags</th>
     </tr></thead>
-    <tbody><tr class="sector-row"><td colspan="12">Technology <span class="sector-count">7 names</span></td></tr><tr>
-  <td class="tk">CIEN</td>
-  <td class="num">412.39</td>
-  <td class="num">89.3 &rarr; <strong>91.9</strong>
-      <span class="delta up">+2.6</span></td>
-  <td class="num">0.63</td>
-  <td class="num ivr">75</td>
-  <td class="num">-4 &rarr; <strong>1</strong></td>
-  <td class="num">0.21</td>
-  <td>Mark-down</td>
+    <tbody><tr class="sector-row"><td colspan="12">Technology <span class="sector-count">6 names</span></td></tr><tr>
+  <td class="tk">AAOI</td>
+  <td class="num">93.41</td>
+  <td class="num">140.6 &rarr; <strong>143.0</strong>
+      <span class="delta up">+2.4</span></td>
+  <td class="num">0.12</td>
+  <td class="num ivr">74</td>
+  <td class="num">-2 &rarr; <strong>1</strong></td>
+  <td class="num">0.20</td>
+  <td>Distribution</td>
   <td class="sm">Neutral / Transition Zone</td>
   <td class="sm">◎ NEUTRAL</td>
   <td><span class="grade g-solid">SOLID</span></td>
   <td class="flags"><span class="chip chip-flip">GEX FLIP</span></td>
 </tr><tr>
-  <td class="tk">MRVL</td>
-  <td class="num">218.00</td>
-  <td class="num">92.5 &rarr; <strong>91.5</strong>
-      <span class="delta dn">-1.0</span></td>
-  <td class="num">0.10</td>
-  <td class="num ivr">72</td>
-  <td class="num">4 &rarr; <strong>10</strong></td>
+  <td class="tk">CIEN</td>
+  <td class="num">387.00</td>
+  <td class="num">89.8 &rarr; <strong>87.7</strong>
+      <span class="delta dn">-2.1</span></td>
+  <td class="num">0.17</td>
+  <td class="num ivr">73</td>
+  <td class="num">-2 &rarr; <strong>-3</strong></td>
+  <td class="num">0.14</td>
+  <td>Mark-down</td>
+  <td class="sm">Neutral / Transition Zone</td>
+  <td class="sm">📉 DOWNTREND</td>
+  <td><span class="grade g-weak">WEAK</span></td>
+  <td class="flags"><span class="chip chip-bad">IV FADING</span></td>
+</tr><tr>
+  <td class="tk">HPE</td>
+  <td class="num">54.50</td>
+  <td class="num">75.7 &rarr; <strong>80.9</strong>
+      <span class="delta up">+5.2</span></td>
+  <td class="num">0.56</td>
+  <td class="num ivr">55</td>
+  <td class="num">-2 &rarr; <strong>6</strong></td>
+  <td class="num">0.19</td>
+  <td>Mark-up</td>
+  <td class="sm">Moderate Positive Gamma</td>
+  <td class="sm">📈 UPTREND</td>
+  <td><span class="grade g-prime">PRIME</span></td>
+  <td class="flags"><span class="chip chip-flip">GEX FLIP</span></td>
+</tr><tr>
+  <td class="tk">ORCL</td>
+  <td class="num">150.74</td>
+  <td class="num">65.5 &rarr; <strong>70.6</strong>
+      <span class="delta up">+5.1</span></td>
+  <td class="num">0.04</td>
+  <td class="num ivr">69</td>
+  <td class="num">-2 &rarr; <strong>10</strong></td>
   <td class="num">0.59</td>
   <td>Mark-down</td>
   <td class="sm">Extreme Positive Gamma</td>
   <td class="sm">◉ PINNED</td>
-  <td><span class="grade g-weak">WEAK</span></td>
-  <td class="flags"><span class="chip chip-bad">IV FADING</span></td>
+  <td><span class="grade g-solid">SOLID</span></td>
+  <td class="flags"><span class="chip chip-flip">GEX FLIP</span></td>
 </tr><tr>
-  <td class="tk">CRWD</td>
-  <td class="num">214.42</td>
-  <td class="num">60.7 &rarr; <strong>62.8</strong>
-      <span class="delta up">+2.1</span></td>
-  <td class="num">0.33</td>
-  <td class="num ivr">75</td>
-  <td class="num">-4 &rarr; <strong>10</strong></td>
-  <td class="num">0.88</td>
+  <td class="tk">ADBE</td>
+  <td class="num">272.69</td>
+  <td class="num">49.2 &rarr; <strong>52.0</strong>
+      <span class="delta up">+2.8</span></td>
+  <td class="num">0.16</td>
+  <td class="num ivr">73</td>
+  <td class="num">3 &rarr; <strong>10</strong></td>
+  <td class="num">0.01</td>
   <td>Mark-up</td>
   <td class="sm">Extreme Positive Gamma</td>
   <td class="sm">◉ PINNED</td>
-  <td><span class="grade g-prime">PRIME</span></td>
-  <td class="flags"><span class="chip chip-flip">GEX FLIP</span></td>
-</tr><tr>
-  <td class="tk">ASML</td>
-  <td class="num">1,580.99</td>
-  <td class="num">57.2 &rarr; <strong>60.9</strong>
-      <span class="delta up">+3.7</span></td>
-  <td class="num">0.93</td>
-  <td class="num ivr">82</td>
-  <td class="num">-4 &rarr; <strong>10</strong></td>
-  <td class="num">0.71</td>
-  <td>Mark-up</td>
-  <td class="sm">Extreme Positive Gamma</td>
-  <td class="sm">◉ PINNED</td>
-  <td><span class="grade g-prime">PRIME</span></td>
-  <td class="flags"><span class="chip chip-flip">GEX FLIP</span></td>
-</tr><tr>
-  <td class="tk">AVGO</td>
-  <td class="num">425.50</td>
-  <td class="num">50.7 &rarr; <strong>51.7</strong>
-      <span class="delta up">+1.0</span></td>
-  <td class="num">0.45</td>
-  <td class="num ivr">51</td>
-  <td class="num">4 &rarr; <strong>6</strong></td>
-  <td class="num">0.20</td>
-  <td>Mark-up</td>
-  <td class="sm">Moderate Positive Gamma</td>
-  <td class="sm">📈 UPTREND</td>
   <td><span class="grade g-prime">PRIME</span></td>
   <td class="flags"></td>
 </tr><tr>
   <td class="tk">CRM</td>
-  <td class="num">192.01</td>
-  <td class="num">45.8 &rarr; <strong>51.4</strong>
-      <span class="delta up">+5.6</span></td>
-  <td class="num">0.46</td>
-  <td class="num ivr">79</td>
-  <td class="num">-4 &rarr; <strong>5</strong></td>
-  <td class="num">0.16</td>
-  <td>Mark-up</td>
-  <td class="sm">Moderate Positive Gamma</td>
-  <td class="sm">📈 UPTREND</td>
-  <td><span class="grade g-prime">PRIME</span></td>
-  <td class="flags"><span class="chip chip-flip">GEX FLIP</span></td>
-</tr><tr>
-  <td class="tk">ADBE</td>
-  <td class="num">264.40</td>
-  <td class="num">46.3 &rarr; <strong>48.6</strong>
-      <span class="delta up">+2.3</span></td>
-  <td class="num">0.22</td>
-  <td class="num ivr">64</td>
-  <td class="num">-4 &rarr; <strong>6</strong></td>
-  <td class="num">0.37</td>
-  <td>Mark-up</td>
-  <td class="sm">Moderate Positive Gamma</td>
-  <td class="sm">📈 UPTREND</td>
-  <td><span class="grade g-prime">PRIME</span></td>
-  <td class="flags"><span class="chip chip-flip">GEX FLIP</span></td>
-</tr><tr class="sector-row"><td colspan="12">Basic Materials <span class="sector-count">1 name</span></td></tr><tr>
-  <td class="tk">DOW</td>
-  <td class="num">29.34</td>
-  <td class="num">43.6 &rarr; <strong>41.2</strong>
-      <span class="delta dn">-2.4</span></td>
+  <td class="num">195.60</td>
+  <td class="num">48.8 &rarr; <strong>50.6</strong>
+      <span class="delta up">+1.8</span></td>
+  <td class="num">0.35</td>
+  <td class="num ivr">77</td>
+  <td class="num">2 &rarr; <strong>10</strong></td>
   <td class="num">0.08</td>
-  <td class="num ivr">13</td>
-  <td class="num">4 &rarr; <strong>1</strong></td>
-  <td class="num">0.04</td>
-  <td>Mark-down</td>
-  <td class="sm">Neutral / Transition Zone</td>
-  <td class="sm">◎ NEUTRAL</td>
-  <td><span class="grade g-weak">WEAK</span></td>
-  <td class="flags"><span class="chip chip-bad">IV FADING</span></td>
-</tr><tr class="sector-row"><td colspan="12">Consumer Cyclical <span class="sector-count">1 name</span></td></tr><tr>
-  <td class="tk">HD</td>
-  <td class="num">354.80</td>
-  <td class="num">33.5 &rarr; <strong>33.0</strong>
-      <span class="delta dn">-0.5</span></td>
-  <td class="num">0.02</td>
-  <td class="num ivr">85</td>
-  <td class="num">-4 &rarr; <strong>10</strong></td>
-  <td class="num">0.37</td>
   <td>Mark-up</td>
   <td class="sm">Extreme Positive Gamma</td>
   <td class="sm">◉ PINNED</td>
   <td><span class="grade g-prime">PRIME</span></td>
-  <td class="flags"><span class="chip chip-flip">GEX FLIP</span></td>
-</tr><tr class="sector-row"><td colspan="12">Communication Services <span class="sector-count">2 names</span></td></tr><tr>
-  <td class="tk">NFLX</td>
-  <td class="num">74.18</td>
-  <td class="num">33.7 &rarr; <strong>32.7</strong>
-      <span class="delta dn">-1.0</span></td>
-  <td class="num">0.07</td>
-  <td class="num ivr">29</td>
-  <td class="num">4 &rarr; <strong>10</strong></td>
-  <td class="num">0.40</td>
-  <td>Mark-down</td>
-  <td class="sm">Extreme Positive Gamma</td>
-  <td class="sm">◉ PINNED</td>
-  <td><span class="grade g-weak">WEAK</span></td>
-  <td class="flags"><span class="chip chip-bad">IV FADING</span></td>
-</tr><tr>
-  <td class="tk">GOOGL</td>
-  <td class="num">354.60</td>
-  <td class="num">32.1 &rarr; <strong>29.2</strong>
-      <span class="delta dn">-2.9</span></td>
-  <td class="num">0.04</td>
-  <td class="num ivr">21</td>
-  <td class="num">-4 &rarr; <strong>10</strong></td>
-  <td class="num">0.24</td>
-  <td>Mark-down</td>
-  <td class="sm">Extreme Positive Gamma</td>
-  <td class="sm">◉ PINNED</td>
-  <td><span class="grade g-weak">WEAK</span></td>
-  <td class="flags"><span class="chip chip-flip">GEX FLIP</span><span class="chip chip-bad">IV FADING</span></td>
-</tr><tr class="sector-row"><td colspan="12">Consumer Defensive <span class="sector-count">3 names</span></td></tr><tr>
-  <td class="tk">WMT</td>
-  <td class="num">111.80</td>
-  <td class="num">31.3 &rarr; <strong>31.1</strong>
-      <span class="delta dn">-0.2</span></td>
-  <td class="num">0.05</td>
-  <td class="num ivr">65</td>
-  <td class="num">-4 &rarr; <strong>2</strong></td>
-  <td class="num">0.21</td>
+  <td class="flags"></td>
+</tr><tr class="sector-row"><td colspan="12">Basic Materials <span class="sector-count">2 names</span></td></tr><tr>
+  <td class="tk">DOW</td>
+  <td class="num">30.58</td>
+  <td class="num">43.8 &rarr; <strong>44.3</strong>
+      <span class="delta up">+0.5</span></td>
+  <td class="num">0.18</td>
+  <td class="num ivr">14</td>
+  <td class="num">2 &rarr; <strong>1</strong></td>
+  <td class="num">0.02</td>
   <td>Mark-down</td>
   <td class="sm">Neutral / Transition Zone</td>
   <td class="sm">◎ NEUTRAL</td>
-  <td><span class="grade g-weak">WEAK</span></td>
-  <td class="flags"><span class="chip chip-flip">GEX FLIP</span><span class="chip chip-warn">FLAT IV</span></td>
+  <td><span class="grade g-solid">SOLID</span></td>
+  <td class="flags"></td>
 </tr><tr>
-  <td class="tk">PEP</td>
-  <td class="num">139.18</td>
-  <td class="num">24.4 &rarr; <strong>23.3</strong>
-      <span class="delta dn">-1.1</span></td>
-  <td class="num">0.10</td>
-  <td class="num ivr">47</td>
-  <td class="num">-3 &rarr; <strong>7</strong></td>
-  <td class="num">0.21</td>
-  <td>Mark-down</td>
-  <td class="sm">Moderate Positive Gamma</td>
-  <td class="sm">◎ NEUTRAL</td>
+  <td class="tk">NEM</td>
+  <td class="num">117.11</td>
+  <td class="num">43.7 &rarr; <strong>43.7</strong>
+      <span class="delta dn">+0.0</span></td>
+  <td class="num">0.00</td>
+  <td class="num ivr">44</td>
+  <td class="num">0 &rarr; <strong>10</strong></td>
+  <td class="num">0.42</td>
+  <td>Mark-up</td>
+  <td class="sm">Extreme Positive Gamma</td>
+  <td class="sm">◉ PINNED</td>
   <td><span class="grade g-weak">WEAK</span></td>
-  <td class="flags"><span class="chip chip-flip">GEX FLIP</span><span class="chip chip-bad">IV FADING</span></td>
-</tr><tr>
-  <td class="tk">COST</td>
-  <td class="num">946.99</td>
-  <td class="num">22.2 &rarr; <strong>21.3</strong>
-      <span class="delta dn">-0.9</span></td>
-  <td class="num">0.06</td>
-  <td class="num ivr">31</td>
-  <td class="num">-4 &rarr; <strong>6</strong></td>
-  <td class="num">0.16</td>
-  <td>Mark-down</td>
-  <td class="sm">Moderate Positive Gamma</td>
-  <td class="sm">◎ NEUTRAL</td>
-  <td><span class="grade g-weak">WEAK</span></td>
-  <td class="flags"><span class="chip chip-flip">GEX FLIP</span><span class="chip chip-bad">IV FADING</span></td>
+  <td class="flags"><span class="chip chip-warn">FLAT IV</span></td>
+</tr><tr class="sector-row"><td colspan="12">Healthcare <span class="sector-count">1 name</span></td></tr><tr>
+  <td class="tk">MDT</td>
+  <td class="num">89.41</td>
+  <td class="num">27.0 &rarr; <strong>29.3</strong>
+      <span class="delta up">+2.3</span></td>
+  <td class="num">0.33</td>
+  <td class="num ivr">71</td>
+  <td class="num">3 &rarr; <strong>10</strong></td>
+  <td class="num">0.03</td>
+  <td>Mark-up</td>
+  <td class="sm">Extreme Positive Gamma</td>
+  <td class="sm">◉ PINNED</td>
+  <td><span class="grade g-prime">PRIME</span></td>
+  <td class="flags"></td>
 </tr></tbody>
   </table></div>
 
@@ -317,14 +247,14 @@
     <p><strong>Phase decides the meaning.</strong> Rising IV in Mark-up with gamma building is a
     premium build on a healthy tape. The same numbers in Mark-down are fear repricing &mdash; the
     opposite trade. Grade encodes this; sort order does not.</p>
-    <p>Prime names: <strong>HD, ASML, CRM, CRWD, ADBE, AVGO</strong>. Gamma sign-flips:
-    <strong>HD, ASML, CRM, CIEN, CRWD, WMT, ADBE, PEP, COST, GOOGL</strong>.</p>
+    <p>Prime names: <strong>CRM, ADBE, MDT, HPE</strong>. Gamma sign-flips:
+    <strong>AAOI, ORCL, HPE</strong>.</p>
     <p>Candidate generator, not a trade gate &mdash; run <code>thesis TICKER</code> or
     <code>voltbuster</code> before acting on any row.</p>
     <p><a href="dual-x-grid.csv" download>Download this table as CSV &darr;</a></p>
   </div>
 </main>
-<footer>Optionx &middot; Dual_X &middot; generated 08 Aug 2026 06:52 from IV_*.csv and
+<footer>Optionx &middot; Dual_X &middot; generated 11 Aug 2026 04:43 from IV_*.csv and
   stock_analysis_*.csv snapshots</footer>
 </body>
 </html>
