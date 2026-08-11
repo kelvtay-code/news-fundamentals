@@ -1,10 +1,9 @@
 ﻿Sector,Sector Rank,Ticker,Price,IV Implied,IV First->Last,IV Slope,IV Rank,GEX First->Last,GEX Slope,GEX Sign Flip,Wyckoff,GEX Classification,Badge,Caveat
-Technology,1,AAOI,93.41,143.0,140.6 -> 143.0,0.12,74.0,-2 -> 1,0.199,YES,Distribution,Neutral / Transition Zone,◎ NEUTRAL,
-Technology,2,CIEN,387.0,87.7,89.8 -> 87.7,0.175,73.0,-2 -> -3,0.136,,Mark-down,Neutral / Transition Zone,📉 DOWNTREND,fade
-Technology,3,HPE,54.5,80.9,75.7 -> 80.9,0.557,55.0,-2 -> 6,0.187,YES,Mark-up,Moderate Positive Gamma,📈 UPTREND,
-Technology,4,ORCL,150.74,70.6,65.5 -> 70.6,0.044,69.0,-2 -> 10,0.59,YES,Mark-down,Extreme Positive Gamma,◉ PINNED,
-Technology,5,ADBE,272.69,52.0,49.2 -> 52.0,0.159,73.0,3 -> 10,0.011,,Mark-up,Extreme Positive Gamma,◉ PINNED,
-Technology,6,CRM,195.6,50.6,48.8 -> 50.6,0.349,77.0,2 -> 10,0.075,,Mark-up,Extreme Positive Gamma,◉ PINNED,
-Basic Materials,1,DOW,30.58,44.3,43.8 -> 44.3,0.183,14.0,2 -> 1,0.017,,Mark-down,Neutral / Transition Zone,◎ NEUTRAL,
-Basic Materials,2,NEM,117.11,43.7,43.7 -> 43.7,0.004,44.0,0 -> 10,0.417,,Mark-up,Extreme Positive Gamma,◉ PINNED,flat
-Healthcare,1,MDT,89.41,29.3,27.0 -> 29.3,0.332,71.0,3 -> 10,0.034,,Mark-up,Extreme Positive Gamma,◉ PINNED,
+Technology,1,AAOI,93.41,143.0,140.6 -> 143.0,0.12,74.0,-1 -> 1,0.147,YES,Distribution,Neutral / Transition Zone,◎ NEUTRAL,
+Technology,2,HPE,55.46,79.6,75.7 -> 79.6,0.421,53.0,1 -> 5,0.19,,Mark-up,Moderate Positive Gamma,📈 UPTREND,
+Technology,3,ORCL,145.43,68.7,65.5 -> 68.7,0.134,66.0,1 -> 10,0.458,,Mark-down,Extreme Positive Gamma,◉ PINNED,
+Technology,4,ADBE,263.71,49.7,49.2 -> 49.7,0.117,73.0,5 -> 10,0.105,,Mark-up,Extreme Positive Gamma,◉ PINNED,
+Technology,5,CRM,197.47,48.9,48.8 -> 48.9,0.202,73.0,2 -> 10,0.185,,Mark-up,Extreme Positive Gamma,◉ PINNED,flat
+Basic Materials,1,NEM,117.21,43.3,43.7 -> 43.3,0.023,41.0,0 -> 10,0.555,,Mark-up,Extreme Positive Gamma,◉ PINNED,flat
+Basic Materials,2,DOW,31.26,40.9,43.8 -> 40.9,0.083,7.0,0 -> 2,0.086,,Mark-down,Neutral / Transition Zone,◎ NEUTRAL,fade
+Healthcare,1,MDT,90.68,31.6,27.0 -> 31.6,0.296,81.0,3 -> 10,0.226,,Mark-up,Extreme Positive Gamma,◉ PINNED,
