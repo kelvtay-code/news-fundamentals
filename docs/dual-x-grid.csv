@@ -1,9 +1,7 @@
 ﻿Sector,Sector Rank,Ticker,Price,IV Implied,IV First->Last,IV Slope,IV Rank,GEX First->Last,GEX Slope,GEX Sign Flip,Wyckoff,GEX Classification,Badge,Caveat
-Technology,1,AAOI,93.41,143.0,140.6 -> 143.0,0.12,74.0,-1 -> 1,0.147,YES,Distribution,Neutral / Transition Zone,◎ NEUTRAL,
-Technology,2,HPE,55.46,79.6,75.7 -> 79.6,0.421,53.0,1 -> 5,0.19,,Mark-up,Moderate Positive Gamma,📈 UPTREND,
-Technology,3,ORCL,145.43,68.7,65.5 -> 68.7,0.134,66.0,1 -> 10,0.458,,Mark-down,Extreme Positive Gamma,◉ PINNED,
-Technology,4,ADBE,263.71,49.7,49.2 -> 49.7,0.117,73.0,5 -> 10,0.105,,Mark-up,Extreme Positive Gamma,◉ PINNED,
-Technology,5,CRM,197.47,48.9,48.8 -> 48.9,0.202,73.0,2 -> 10,0.185,,Mark-up,Extreme Positive Gamma,◉ PINNED,flat
-Basic Materials,1,NEM,117.21,43.3,43.7 -> 43.3,0.023,41.0,0 -> 10,0.555,,Mark-up,Extreme Positive Gamma,◉ PINNED,flat
-Basic Materials,2,DOW,31.26,40.9,43.8 -> 40.9,0.083,7.0,0 -> 2,0.086,,Mark-down,Neutral / Transition Zone,◎ NEUTRAL,fade
-Healthcare,1,MDT,90.68,31.6,27.0 -> 31.6,0.296,81.0,3 -> 10,0.226,,Mark-up,Extreme Positive Gamma,◉ PINNED,
+Technology,1,HPE,58.38,80.5,74.4 -> 80.5,0.325,54.0,1 -> 6,0.271,,Mark-up,Moderate Positive Gamma,📈 UPTREND,
+Technology,2,ORCL,153.0,71.3,65.5 -> 71.3,0.276,69.0,1 -> 10,0.368,,Mark-down,Extreme Positive Gamma,◉ PINNED,
+Technology,3,CRM,193.48,50.4,47.8 -> 50.4,0.129,76.0,4 -> 10,0.261,,Mark-up,Extreme Positive Gamma,◉ PINNED,
+Technology,4,ADBE,258.09,49.5,47.2 -> 49.5,0.088,66.0,5 -> 10,0.223,,Mark-up,Extreme Positive Gamma,◉ PINNED,
+Basic Materials,1,NEM,117.76,42.3,42.7 -> 42.3,0.039,38.0,0 -> 10,0.628,,Mark-up,Extreme Positive Gamma,◉ PINNED,flat
+Healthcare,1,MDT,90.99,31.6,26.8 -> 31.6,0.236,83.0,3 -> 10,0.387,,Mark-up,Extreme Positive Gamma,◉ PINNED,
