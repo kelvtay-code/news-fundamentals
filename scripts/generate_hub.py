@@ -512,6 +512,25 @@ def build():
     else:
         dualx_frame = "<p class='empty'>No Dual_X file found.</p>"
 
+    # senti-grid.html is hand-authored straight into docs/ by the senti skill
+    # (it never lands in the Dashboard folder), so there is nothing to copy in --
+    # just pick it up in place and cache-bust off its own mtime. Keeping this
+    # block here is what stops an "Auto-update hub data" run from silently
+    # dropping the Senti tab, which is exactly what happened on 14 Aug 2026.
+    senti_dest = SITE_DIR / "senti-grid.html"
+    if senti_dest.exists():
+        senti_dt = datetime.fromtimestamp(senti_dest.stat().st_mtime)
+        senti_v = cache_bust(senti_dt)
+        senti_frame = (
+            '<div class="news-toolbar">'
+            f'<a class="open-full" href="senti-grid.html?v={senti_v}" target="_blank" rel="noopener">'
+            'Open full Senti Grid in new tab &#8599;</a></div>'
+            f'<iframe src="senti-grid.html?v={senti_v}" title="Senti Grid"></iframe>'
+        )
+    else:
+        senti_dt = None
+        senti_frame = "<p class='empty'>No Senti Grid file found.</p>"
+
     strat_dt, strat_path = latest_opt_strategist()
     if strat_path:
         shutil.copyfile(strat_path, SITE_DIR / "strategist.html")
@@ -528,6 +547,7 @@ def build():
         ("Sector scan", sector_dt),
         ("Rebounder", rebound_dt),
         ("Dual_X", dualx_dt),
+        ("Senti", senti_dt),
         ("Strategist", strat_dt),
     ])
 
@@ -592,7 +612,7 @@ def build():
   .news-toolbar {{ margin-bottom:8px; font-family: Arial, sans-serif; }}
   .open-full {{ font-size:0.82rem; color:var(--ft-blue); text-decoration:none; font-weight:600; }}
   .open-full:hover {{ text-decoration:underline; }}
-  #oil iframe, #sectorscan iframe, #dualx iframe {{ width:100%; height:calc(100vh - 220px); min-height:600px; border:1px solid var(--ft-border); background:#fff; }}
+  #oil iframe, #sectorscan iframe, #dualx iframe, #senti iframe {{ width:100%; height:calc(100vh - 220px); min-height:600px; border:1px solid var(--ft-border); background:#fff; }}
   .empty {{ color:var(--ft-mid); font-style:italic; font-family: Arial, sans-serif; }}
 
   #bullscreener .chip {{ display:inline-block; font-family: Arial, sans-serif; font-size:10.5px; font-weight:700; padding:2px 8px; border-radius:2px; white-space:normal; letter-spacing:0.02em; }}
@@ -661,6 +681,7 @@ def build():
     <button data-target="sectorscan">Sector Scan</button>
     <button data-target="rebounder">Rebounder</button>
     <button data-target="dualx">Dual_X</button>
+    <button data-target="senti">Senti</button>
     <button data-target="strategist">Strategist</button>
   </div>
 </nav>
@@ -689,6 +710,9 @@ def build():
   <section id="dualx">
     <h2>Dual_X</h2>
     {dualx_frame}
+  </section>
+  <section id="senti">
+    {senti_frame}
   </section>
   <section id="strategist">
     {strat_frame}
