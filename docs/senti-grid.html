@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Senti Grid &mdash; Bullish on the Headlines &mdash; Optionx</title>
+<title>Senti Grid &mdash; Tracked List &mdash; Optionx</title>
 <style>
 :root {
   --ft-salmon:#FFF1E0; --ft-red:#990F3D; --ft-blue:#0F5499; --ft-navy:#262A33;
   --ft-warm-blk:#33302E; --ft-border:#CCB799; --ft-mid:#8D775F; --ft-muted:#66605A;
   --ft-card-bg:#FFFAF4; --ft-card-bdr:#D4A96A; --ft-gold:#F0A500;
-  --green:#4B7F3D; --red2:#d03b3b; --teal:#0D7680; --orange:#B5651D;
+  --green:#4B7F3D; --red2:#d03b3b; --teal:#0D7680; --orange:#B5651D; --amber:#C08A2E;
 }
 * { box-sizing:border-box; margin:0; padding:0; }
 body { background:var(--ft-salmon); color:var(--ft-warm-blk); font-family:Arial,sans-serif; font-size:14px; line-height:1.5; }
@@ -37,17 +37,19 @@ tr:nth-child(even) td { background:rgba(0,0,0,.015); }
 .tk { font-weight:700; font-size:14px; color:var(--ft-navy); white-space:nowrap; width:78px; }
 .senti { font-weight:700; text-align:center; width:52px; white-space:nowrap; }
 .s9 { color:#fff; background:var(--green); } .s8 { color:#fff; background:#5E9150; } .s7 { color:#fff; background:#7BA36B; }
+.s6 { color:var(--ft-warm-blk); background:#E8DCC2; } .s5 { color:var(--ft-warm-blk); background:#E0CFAE; }
+.s4 { color:#fff; background:#C1663F; } .s3 { color:#fff; background:var(--red2); }
 .px { text-align:right; white-space:nowrap; font-variant-numeric:tabular-nums; font-weight:700; color:var(--ft-navy); width:96px; }
-.chg { text-align:center; width:60px; font-size:11px; white-space:nowrap; font-weight:700; }
-.up { color:var(--green); } .down { color:var(--red2); } .flat { color:var(--ft-mid); font-weight:400; }
+.chg { text-align:center; width:74px; font-size:11px; white-space:nowrap; font-weight:700; }
+.up { color:var(--green); } .down { color:var(--red2); } .flat { color:var(--amber); }
 .new { color:var(--teal); }
 .brief { color:var(--ft-warm-blk); min-width:380px; }
 .flag { color:var(--orange); font-size:11px; display:block; margin-top:3px; }
 .callout { background:var(--ft-card-bg); border-left:4px solid var(--ft-red); padding:14px 18px; margin:24px 0; max-width:1020px; }
 .callout h3 { font-family:Georgia,serif; font-size:1.05rem; margin-bottom:6px; }
+.callout p { font-size:13px; color:var(--ft-muted); }
+.callout p + p { margin-top:8px; }
 .warn { border-left-color:var(--orange); }
-.rej { font-size:12px; }
-.rej td { color:var(--ft-muted); }
 footer { margin-top:36px; padding-top:14px; border-top:1px solid var(--ft-border); font-size:11px; color:var(--ft-mid); }
 @media (max-width:720px){ .masthead,.stats-banner,.wrap{padding-left:18px;padding-right:18px;} .masthead-title{font-size:1.6rem;} }
 </style>
@@ -56,182 +58,129 @@ footer { margin-top:36px; padding-top:14px; border-top:1px solid var(--ft-border
 <div class="masthead">
   <div class="masthead-eyebrow">Optionx &middot; News Sentiment</div>
   <div class="masthead-title">Senti <span>Grid</span></div>
-  <div class="masthead-date">Bullish on the headlines &mdash; catalyst-driven names rated above 6 &middot; 15 August 2026, 13:09 SGT</div>
+  <div class="masthead-date">Tracked list &mdash; 26 names scored on the headlines &middot; 17 August 2026, 15:59 SGT</div>
 </div>
 <div class="stats-banner"><div class="stats-inner">
-  <span class="stat-item"><strong>643</strong> ticker articles scanned</span><span class="stat-sep">&#124;</span>
-  <span class="stat-item"><strong>69</strong> names rated above 6</span><span class="stat-sep">&#124;</span>
-  <span class="stat-item"><strong>2</strong> at 9/10</span><span class="stat-sep">&#124;</span>
-  <span class="stat-item"><strong>13</strong> at 8/10</span><span class="stat-sep">&#124;</span>
-  <span class="stat-item"><strong>39</strong> new entries</span><span class="stat-sep">&#124;</span>
-  <span class="stat-item"><strong>9</strong> sectors represented</span><span class="stat-sep">&#124;</span>
-  <span class="stat-item">Source: <strong>news_bulletin_20260815_1309</strong></span>
+  <span class="stat-item"><strong>607</strong> ticker articles scanned</span><span class="stat-sep">&#124;</span>
+  <span class="stat-item"><strong>26</strong> tracked names</span><span class="stat-sep">&#124;</span>
+  <span class="stat-item"><strong>5</strong> at 8/10</span><span class="stat-sep">&#124;</span>
+  <span class="stat-item"><strong>6</strong> at 7/10</span><span class="stat-sep">&#124;</span>
+  <span class="stat-item"><strong>2</strong> up &middot; <strong>7</strong> down &middot; <strong>3</strong> unchanged</span><span class="stat-sep">&#124;</span>
+  <span class="stat-item"><strong>7</strong> sectors</span><span class="stat-sep">&#124;</span>
+  <span class="stat-item">Source: <strong>news_bulletin_20260817_1559</strong></span>
 </div></div>
 
 <div class="wrap">
-  <p class="lede">Every ticker-tagged article in the latest 48-hour bulletin was scored 1&ndash;10 on the financial
-     materiality and direction of its headlines, weighting the most recent items more heavily and discounting routine
-     13F filing padding. This cut keeps only the <strong>69 names rated above 6 whose score is driven by an
-     identifiable catalyst</strong> &mdash; a beat, an upgrade, a contract, a deal, a breakout &mdash; not by tape drift
-     alone. The <strong>&Delta;</strong> column compares against the 14 Aug 23:39 bulletin scored the previous evening.
-     Grouped by sector, largest first. <strong>Close</strong> is the 14 Aug session close from the 15 Aug 04:14
-     business-overview snapshot. <a href="senti-grid.csv">Download CSV &#8595;</a></p>
+  <p class="lede">This edition scores a <strong>fixed tracked list of 26 names</strong> rather than the whole watchlist, so
+     the same tickers can be followed edition to edition regardless of whether the score is bullish. Every ticker-tagged
+     article in the fresh 48-hour bulletin was rated 1&ndash;10 on the financial materiality and direction of its
+     headlines, weighting the most recent items more heavily and discounting routine 13F-filing padding and
+     non-financial keyword false-matches. The <strong>&Delta;</strong> column compares against the 15 Aug 13:09 edition
+     &mdash; <span class="new">NEW</span> means the name was not in that edition's published cut, which only carried
+     names rated above 6, so it does not imply a rise. <strong>Close</strong> is the 14 Aug session close from the
+     15 Aug 04:14 business-overview snapshot, the most recent one available.
+     <a href="senti-grid.csv">Download CSV &#8595;</a></p>
 
-  <h2>Technology <span class="cnt">&mdash; 31 names</span></h2>
+  <h2>Technology <span class="cnt">&mdash; 14 names</span></h2>
   <div class="table-wrap"><table>
     <thead><tr><th>Ticker</th><th>Senti</th><th>&Delta;</th><th>Close</th><th>News Brief</th></tr></thead>
     <tbody>
-      <tr><td class="tk">AMD</td><td class="senti s8">8</td><td class="chg new">NEW</td><td class="px">$514.39</td><td class="brief">Climbed 4% on Baird's $1,250 call and Druckenmiller loaded up in Q2 while dumping other chipmakers; named among the day's top AI movers.</td></tr>
-      <tr><td class="tk">COHR</td><td class="senti s8">8</td><td class="chg flat">&mdash;</td><td class="px">$325.93</td><td class="brief">Stock rocketed higher on the AI-optics read-through and kept popping into the close; Cramer weighed in constructively post-earnings.</td></tr>
-      <tr><td class="tk">ONTO</td><td class="senti s8">8</td><td class="chg new">NEW</td><td class="px">$331.71</td><td class="brief">Up 7.6% after raising both Q3 revenue and earnings guidance — a clean, self-generated catalyst.<span class="flag">Caveat: Bank of America sold 40,024 shares.</span></td></tr>
-      <tr><td class="tk">AAOI</td><td class="senti s7">7</td><td class="chg new">NEW</td><td class="px">$150.28</td><td class="brief">Record revenue is fuelling the AI growth story and the Amazon deal lifted revenue hopes; business updates due next week.<span class="flag">Caveat: GF Value calls it 492% overvalued, and a second note flags 93% overvaluation.</span></td></tr>
-      <tr><td class="tk">AMAT</td><td class="senti s7">7</td><td class="chg new">NEW</td><td class="px">$507.18</td><td class="brief">Record Q3 results made it a top AI pick, and Seeking Alpha argues the selloff is ignoring the AI equipment boom.<span class="flag">Caveat: Shares fell 5.1% and Tudor exited the position in Q2.</span></td></tr>
-      <tr><td class="tk">APH</td><td class="senti s7">7</td><td class="chg flat">&mdash;</td><td class="px">$167.00</td><td class="brief">The AI interconnect opportunity is broadening, and the stock rebounded as investors looked past copper displacement fears.</td></tr>
-      <tr><td class="tk">ARM</td><td class="senti s7">7</td><td class="chg down">&#9660; 8</td><td class="px">$279.44</td><td class="brief">12-month price target raised to $290.52, and ChartMill flags strong growth with a defined technical breakout setup.</td></tr>
-      <tr><td class="tk">ASML</td><td class="senti s7">7</td><td class="chg new">NEW</td><td class="px">$1,844.08</td><td class="brief">Holding above recent highs as guidance and AI demand keep momentum intact.<span class="flag">Caveat: Simply Wall St says the stock may be pricey after a 193% run.</span></td></tr>
-      <tr><td class="tk">CDNS</td><td class="senti s7">7</td><td class="chg new">NEW</td><td class="px">$324.82</td><td class="brief">Fair value bumped as analysts lifted targets following Q2.<span class="flag">Caveat: Two separate notes ask whether it is now priced for perfection and too rich to stay reasonable.</span></td></tr>
-      <tr><td class="tk">GLW</td><td class="senti s7">7</td><td class="chg new">NEW</td><td class="px">$165.99</td><td class="brief">Corning rose 3.73% as investors revisited AI fiber demand after the post-earnings selloff, popping alongside Lumentum into the week's close.</td></tr>
-      <tr><td class="tk">INTC</td><td class="senti s7">7</td><td class="chg down">&#9660; 8</td><td class="px">$102.50</td><td class="brief">CEO bought 105,263 shares outright — real insider conviction — and the buyback history is drawing fresh investor attention.<span class="flag">Caveat: Shares still slipped 2% on the session.</span></td></tr>
-      <tr><td class="tk">INTU</td><td class="senti s7">7</td><td class="chg flat">&mdash;</td><td class="px">$345.66</td><td class="brief">Options are pricing a floor below anything the stock has touched in a year, and Tudor Investment added the name in Q2.</td></tr>
-      <tr><td class="tk">IONQ</td><td class="senti s7">7</td><td class="chg new">NEW</td><td class="px">$46.26</td><td class="brief">Up 3% and still rated a buy, leading three quantum names backed by government demand.<span class="flag">Caveat: Sector-wide earnings delivered a reality check.</span></td></tr>
-      <tr><td class="tk">KEYS</td><td class="senti s7">7</td><td class="chg new">NEW</td><td class="px">$357.82</td><td class="brief">Third Point opened a new $204.8M position and T. Rowe staked 5.6%; a separate read sees it 8% undervalued after the OCP APAC summit.<span class="flag">Caveat: One note calls it fully valued after a 136% run.</span></td></tr>
-      <tr><td class="tk">LITE</td><td class="senti s7">7</td><td class="chg down">&#9660; 8</td><td class="px">$926.14</td><td class="brief">Closed up 5.18% and popped again to end the week on AI-optics demand, with Cramer weighing in post-earnings.</td></tr>
-      <tr><td class="tk">LRCX</td><td class="senti s7">7</td><td class="chg flat">&mdash;</td><td class="px">$332.36</td><td class="brief">Betting $3 billion on speed over size, with the etch moat framed as the most profitable lever in next-gen manufacturing; became one portfolio's top performer.</td></tr>
-      <tr><td class="tk">MCHP</td><td class="senti s7">7</td><td class="chg flat">&mdash;</td><td class="px">$79.17</td><td class="brief">Unveiled a space atomic clock that keeps satellites synchronised without GNSS, and Ethic acquired 62,938 shares on AI-led growth.<span class="flag">Caveat: One note asks whether it is now fully valued.</span></td></tr>
-      <tr><td class="tk">MRVL</td><td class="senti s7">7</td><td class="chg down">&#9660; 8</td><td class="px">$222.02</td><td class="brief">NVIDIA invested $2 billion — a hard strategic endorsement — and shares skyrocketed alongside the memory complex.<span class="flag">Caveat: Analysis notes the year was made in interconnect, not yet in custom silicon.</span></td></tr>
-      <tr><td class="tk">MSFT</td><td class="senti s7">7</td><td class="chg flat">&mdash;</td><td class="px">$495.40</td><td class="brief">JPMorgan set a serious 2027 price target, and Pershing Square's revamped portfolio makes it one of three biggest bets.</td></tr>
-      <tr><td class="tk">MU</td><td class="senti s7">7</td><td class="chg down">&#9660; 8</td><td class="px">$971.66</td><td class="brief">Closing back in on $1,000 per Barron's as the whole memory complex rallies.<span class="flag">Caveat: Duquesne exited Micron in Q2 and Burry's short remains on.</span></td></tr>
-      <tr><td class="tk">NOK</td><td class="senti s7">7</td><td class="chg down">&#9660; 9</td><td class="px">$10.77</td><td class="brief">Seen undervalued even through a 201% three-year run, rallying on strong returns.<span class="flag">Caveat: Seeking Alpha cautions the optical story is possible but not certain.</span></td></tr>
-      <tr><td class="tk">PLTR</td><td class="senti s7">7</td><td class="chg new">NEW</td><td class="px">$174.04</td><td class="brief">Chamath backs it as model-agnostic AI platforms gain ground, Cramer says it deserves more love, and it jumped 31.53% in a month.<span class="flag">Caveat: Shares slipped 2.8% on the session.</span></td></tr>
-      <tr><td class="tk">QCOM</td><td class="senti s7">7</td><td class="chg new">NEW</td><td class="px">$165.79</td><td class="brief">Framed as a cash gusher at a marked-down price — a value case rather than a momentum one.</td></tr>
-      <tr><td class="tk">QNT</td><td class="senti s7">7</td><td class="chg down">&#9660; 8</td><td class="px">$63.59</td><td class="brief">Up 8.3% on the Oracle Cloud deal and raised 2026 guidance.<span class="flag">Caveat: Seeking Alpha counters that now is not the right time to buy.</span></td></tr>
-      <tr><td class="tk">QUBT</td><td class="senti s7">7</td><td class="chg new">NEW</td><td class="px">$9.01</td><td class="brief">Holds a $1.3 billion cash position despite heavy acquisition spending, retaining flexibility as government quantum contracts expand.</td></tr>
-      <tr><td class="tk">SANM</td><td class="senti s7">7</td><td class="chg new">NEW</td><td class="px">$210.84</td><td class="brief">Wall Street analysts model 25.25% upside from here.<span class="flag">Caveat: Thin coverage — a single directional item.</span></td></tr>
-      <tr><td class="tk">SMCI</td><td class="senti s7">7</td><td class="chg down">&#9660; 8</td><td class="px">$39.84</td><td class="brief">Fair value boosted after analysts lifted targets, and shares rose as a $68.5 billion forecast offset margin scrutiny.<span class="flag">Caveat: Hit with DDR5 patent cases at the ITC and federal court; 19% gross margin under question.</span></td></tr>
-      <tr><td class="tk">TTMI</td><td class="senti s7">7</td><td class="chg new">NEW</td><td class="px">$140.00</td><td class="brief">Just broke $1 billion in revenue, with analysts modelling a 50.49% rally from here.</td></tr>
-      <tr><td class="tk">UBER</td><td class="senti s7">7</td><td class="chg flat">&mdash;</td><td class="px">$75.95</td><td class="brief">Pershing Square's revamped portfolio makes it one of the biggest bets, and Barron's argues the stock looks cheap.<span class="flag">Caveat: Pony AI's 2,000-robotaxi Europe/Middle East push is an ambiguous read — threat or channel.</span></td></tr>
-      <tr><td class="tk">WDAY</td><td class="senti s7">7</td><td class="chg down">&#9660; 8</td><td class="px">$198.68</td><td class="brief">The buyout story is doing the work: analysts say a Workday deal may restore confidence in battered software valuations, with GF Value calling it 37.9% undervalued amid acquisition buzz.<span class="flag">Caveat: Shares fell 4.6% on the session.</span></td></tr>
-      <tr><td class="tk">WDC</td><td class="senti s7">7</td><td class="chg down">&#9660; 8</td><td class="px">$508.80</td><td class="brief">Shares skyrocketed with the rest of the memory/storage complex and still screen cheap on strong returns.<span class="flag">Caveat: Simply Wall St flags margin risk.</span></td></tr>
+      <tr><td class="tk">CRM</td><td class="senti s8">8</td><td class="chg new">NEW</td><td class="px">$196.19</td><td class="brief">Seeking Alpha upgraded the rating outright, calling the selloff overdone and a contrarian buy, and Salesforce made the week's notable-analyst-calls list on JPMorgan's AI optimism.<span class="flag">Caveat: Cramer flagged possible disruption to the Dreamforce conference.</span></td></tr>
+      <tr><td class="tk">LITE</td><td class="senti s8">8</td><td class="chg up">&#9650; 7</td><td class="px">$926.14</td><td class="brief">Analysts are lifting price targets, a second read still calls it a bargain on strong AI demand, and the stock added 4% on the week as Nvidia moves deeper into the optics layer.</td></tr>
+      <tr><td class="tk">ARM</td><td class="senti s7">7</td><td class="chg flat">&mdash;</td><td class="px">$279.44</td><td class="brief">Druckenmiller opened a new stake, and the stock soared on an Nvidia catalyst with analysts raising targets on agentic-AI demand; $2bn of orders it cannot yet fill shows demand outrunning capacity.<span class="flag">Caveat: A filing shows Nvidia itself completely exited its Arm position.</span></td></tr>
+      <tr><td class="tk">COHR</td><td class="senti s7">7</td><td class="chg down">&#9660; 8</td><td class="px">$325.93</td><td class="brief">AI-optics margins are strengthening and the Q2 deep dive puts data-centre demand and capacity expansion at the centre of the outlook; coverage has cooled from last week's post-earnings pop to a "buy the dip" framing.</td></tr>
+      <tr><td class="tk">INTC</td><td class="senti s7">7</td><td class="chg flat">&mdash;</td><td class="px">$102.50</td><td class="brief">Dan Niles named Intel his favourite chip bet and sees at least another year in the AI infrastructure rally, and the name is back in the spotlight on the AI money-moves rotation.</td></tr>
+      <tr><td class="tk">MRVL</td><td class="senti s7">7</td><td class="chg flat">&mdash;</td><td class="px">$222.02</td><td class="brief">Four straight guidance raises plus a $1bn AI capacity commitment is the standout claim in the window.<span class="flag">Caveat: One adviser trimmed its holding over the period.</span></td></tr>
+      <tr><td class="tk">AAPL</td><td class="senti s6">6</td><td class="chg new">NEW</td><td class="px">$305.93</td><td class="brief">Ross Gerber says now is the time to buy the iPhone 17 ahead of a potential price hike on the next model &mdash; a pricing-power read. Otherwise the window is institutional position filings, two adding and one trimming.</td></tr>
+      <tr><td class="tk">ADBE</td><td class="senti s6">6</td><td class="chg new">NEW</td><td class="px">$264.02</td><td class="brief">The only material item asks whether 10 times next year's earnings finally makes it a buy &mdash; a value framing that also concedes a depressed multiple. The rest of the window is syndicated filler.</td></tr>
+      <tr><td class="tk">NVDA</td><td class="senti s6">6</td><td class="chg new">NEW</td><td class="px">$225.16</td><td class="brief">No catalyst headline in the window at all &mdash; coverage is three separate institutional accumulation filings. Mild positive drift, nothing to trade off.</td></tr>
+      <tr><td class="tk">CIEN</td><td class="senti s5">5</td><td class="chg new">NEW</td><td class="px">$428.68</td><td class="brief">The one directional headline asks why the stock is falling, offset only by an ETF manager's purchase. Latest coverage is generic wire filler.</td></tr>
+      <tr><td class="tk">HPE</td><td class="senti s5">5</td><td class="chg new">NEW</td><td class="px">$58.70</td><td class="brief">Genuinely split: the stock printed a 52-week high alongside other surging names, but a second piece argues it may crash after earnings and an adviser sold 227,103 shares.</td></tr>
+      <tr><td class="tk">ORCL</td><td class="senti s5">5</td><td class="chg new">NEW</td><td class="px">$150.32</td><td class="brief">Named in the week's AI money-moves spotlight, but the substantive piece notes the stock has lost over a third of its value in a year despite record RPO growth.</td></tr>
+      <tr><td class="tk">UBER</td><td class="senti s5">5</td><td class="chg down">&#9660; 7</td><td class="px">$75.95</td><td class="brief">Sold its Serve Robotics stake in a way that caught the partner off guard on "differing views", and declined while peers rallied. The Pony.ai autonomy tie-up is the offsetting positive.</td></tr>
+      <tr><td class="tk">GLW</td><td class="senti s4">4</td><td class="chg down">&#9660; 7</td><td class="px">$165.99</td><td class="brief">Every headline in the window is a valuation warning: success already priced in, overvalued after a 4.5x three-year gain, and fresh questions raised by Apple's glass shift. The AI growth story is intact but nobody is underwriting the price.</td></tr>
     </tbody>
   </table></div>
 
-  <h2>Healthcare <span class="cnt">&mdash; 8 names</span></h2>
+  <h2>Energy <span class="cnt">&mdash; 4 names</span></h2>
   <div class="table-wrap"><table>
     <thead><tr><th>Ticker</th><th>Senti</th><th>&Delta;</th><th>Close</th><th>News Brief</th></tr></thead>
     <tbody>
-      <tr><td class="tk">VRTX</td><td class="senti s9">9</td><td class="chg new">NEW</td><td class="px">$505.75</td><td class="brief">Hit an all-time high with analysts arguing it could soar further, and Seeking Alpha published a rating upgrade admitting it was wrong on near-term prospects. The AbCellera TCE deal adds pipeline optionality.</td></tr>
-      <tr><td class="tk">GILD</td><td class="senti s8">8</td><td class="chg new">NEW</td><td class="px">$138.36</td><td class="brief">Won an appeals court ruling against overseas drug imports — a real pricing-protection win — while the $10M MacroGenics milestone opens a pipeline catalyst.</td></tr>
-      <tr><td class="tk">ABT</td><td class="senti s7">7</td><td class="chg new">NEW</td><td class="px">$111.25</td><td class="brief">The Lingo partnership with Alphabet opens an AI-powered health angle, on top of a published strong buy case.<span class="flag">Caveat: Toth Financial trimmed its holding.</span></td></tr>
-      <tr><td class="tk">AMGN</td><td class="senti s7">7</td><td class="chg new">NEW</td><td class="px">$415.21</td><td class="brief">Screens undervalued on a 37% fair value gap, and surging GLP-1 demand puts it among the named beneficiaries outside Lilly and Novo.</td></tr>
-      <tr><td class="tk">BMY</td><td class="senti s7">7</td><td class="chg flat">&mdash;</td><td class="px">$63.84</td><td class="brief">Won FDA approval for its first CELMoD, with coverage asking how far that supports the growth strategy.<span class="flag">Caveat: A follow-up piece asks whether the stock is already fully priced.</span></td></tr>
-      <tr><td class="tk">CVS</td><td class="senti s7">7</td><td class="chg new">NEW</td><td class="px">$97.17</td><td class="brief">Raised earnings guidance anchors the 2026 recovery, the stock outperformed competitors on a strong day, and the consumer-health tech push adds a structural angle.<span class="flag">Caveat: Glenview trimmed its position in Q2.</span></td></tr>
-      <tr><td class="tk">JNJ</td><td class="senti s7">7</td><td class="chg flat">&mdash;</td><td class="px">$260.35</td><td class="brief">Posted record quarterly results as a Dividend Aristocrat and screens cheap on cash flow.<span class="flag">Caveat: Rich on earnings, and Gateway Investment Advisers cut its holding.</span></td></tr>
-      <tr><td class="tk">SYK</td><td class="senti s7">7</td><td class="chg flat">&mdash;</td><td class="px">$339.21</td><td class="brief">Gained 3.8% since March-end with ChartMill calling it a quality long-term investment.<span class="flag">Caveat: Costs are still pressuring earnings.</span></td></tr>
+      <tr><td class="tk">EOG</td><td class="senti s8">8</td><td class="chg new">NEW</td><td class="px">$142.61</td><td class="brief">Up 5.8% on strong Q2 earnings and a production jump, prompting a fresh look at the bull case, with two institutions opening or adding positions behind it.</td></tr>
+      <tr><td class="tk">CVX</td><td class="senti s6">6</td><td class="chg new">NEW</td><td class="px">$200.01</td><td class="brief">Three institutional buys and no operating news at all &mdash; steady accumulation, no catalyst either way.</td></tr>
+      <tr><td class="tk">XOM</td><td class="senti s6">6</td><td class="chg down">&#9660; 7</td><td class="px">$160.09</td><td class="brief">One $71.9m position build is the only real item; the rest of the window is tokenised-stock listing pages, not news. Coverage quality fell rather than sentiment turning.</td></tr>
+      <tr><td class="tk">COP</td><td class="senti s5">5</td><td class="chg down">&#9660; 7</td><td class="px">$126.78</td><td class="brief">Purely mechanical window &mdash; one buy, one sell, one raise, plus a recap of analyst questions from the Q2 call. Last week's catalyst has washed out.</td></tr>
     </tbody>
   </table></div>
 
-  <h2>Financials <span class="cnt">&mdash; 5 names</span></h2>
+  <h2>Healthcare <span class="cnt">&mdash; 3 names</span></h2>
   <div class="table-wrap"><table>
     <thead><tr><th>Ticker</th><th>Senti</th><th>&Delta;</th><th>Close</th><th>News Brief</th></tr></thead>
     <tbody>
-      <tr><td class="tk">PYPL</td><td class="senti s9">9</td><td class="chg new">NEW</td><td class="px">$61.66</td><td class="brief">In acquisition talks at $53 billion, with Stripe and Advent buyout discussions heating up and the stock rising on the report — the single hardest catalyst in the bulletin.</td></tr>
-      <tr><td class="tk">MA</td><td class="senti s7">7</td><td class="chg new">NEW</td><td class="px">$569.29</td><td class="brief">Making a big push into stablecoins and offering services to compensate firms over a bank collapse; Seeking Alpha calls it a rare growth stock worth buying at 28.5x.</td></tr>
-      <tr><td class="tk">SCHW</td><td class="senti s7">7</td><td class="chg new">NEW</td><td class="px">$111.09</td><td class="brief">Core net new assets rose 24% year-over-year to $58.1 billion in July — clean operating momentum.</td></tr>
-      <tr><td class="tk">SOFI</td><td class="senti s7">7</td><td class="chg new">NEW</td><td class="px">$18.29</td><td class="brief">Rolled out three new private market funds, reframing its retail investment-platform ambitions.<span class="flag">Caveat: Seeking Alpha holds back from a strong buy on one weak segment.</span></td></tr>
-      <tr><td class="tk">V</td><td class="senti s7">7</td><td class="chg new">NEW</td><td class="px">$364.15</td><td class="brief">Bill Ackman bought Visa stock, with options data pointing to what could come next.</td></tr>
+      <tr><td class="tk">ABBV</td><td class="senti s8">8</td><td class="chg new">NEW</td><td class="px">$249.56</td><td class="brief">Two hard catalysts: FDA approval for a rare blood cancer drug lifted the stock, and management now guides neuroscience to $12.7bn of sales this year.<span class="flag">Caveat: One note argues it trades at a premium even allowing for the cash flow upside.</span></td></tr>
+      <tr><td class="tk">GILD</td><td class="senti s7">7</td><td class="chg down">&#9660; 8</td><td class="px">$138.36</td><td class="brief">Won an appeals court ruling against overseas drug imports and still screens cheap on sales despite a 127% run, with a MacroGenics milestone as a pipeline kicker. Post-earnings coverage has turned to "buy, sell or hold" indecision.<span class="flag">Thin same-day coverage &mdash; scored across the 17 and 15 Aug bulletins.</span></td></tr>
+      <tr><td class="tk">CVS</td><td class="senti s6">6</td><td class="chg down">&#9660; 7</td><td class="px">$97.17</td><td class="brief">Carried along as a Q2 outperformer in two health-insurance and provider round-ups and holds a Moderate Buy consensus, but nothing company-specific drove it this window.</td></tr>
     </tbody>
   </table></div>
 
-  <h2>Industrials <span class="cnt">&mdash; 8 names</span></h2>
+  <h2>Consumer Defensive <span class="cnt">&mdash; 2 names</span></h2>
   <div class="table-wrap"><table>
     <thead><tr><th>Ticker</th><th>Senti</th><th>&Delta;</th><th>Close</th><th>News Brief</th></tr></thead>
     <tbody>
-      <tr><td class="tk">BA</td><td class="senti s8">8</td><td class="chg flat">&mdash;</td><td class="px">$231.71</td><td class="brief">737-7 FAA approval plus a new tech trial has changed the investment story, and Boeing won a $636M Army deal for Apache support work.</td></tr>
-      <tr><td class="tk">ETN</td><td class="senti s8">8</td><td class="chg new">NEW</td><td class="px">$451.51</td><td class="brief">Jumped on record sales and a raised 2026 outlook, with two director purchases following and the data-centre PDU market forecast at $14B+.</td></tr>
-      <tr><td class="tk">SPCX</td><td class="senti s8">8</td><td class="chg up">&#9650; 7</td><td class="px">$140.00</td><td class="brief">NVIDIA disclosed a $21B stake making SpaceX its No. 2 holding, Third Point added, and the $60B Cursor acquisition closed.<span class="flag">Caveat: Private-market pricing — treat the $172 forecast as indicative.</span></td></tr>
-      <tr><td class="tk">GE</td><td class="senti s7">7</td><td class="chg flat">&mdash;</td><td class="px">$368.38</td><td class="brief">GE Aerospace outperformed competitors on a strong trading day and is named among the best aerospace stocks to own.</td></tr>
-      <tr><td class="tk">GEV</td><td class="senti s7">7</td><td class="chg flat">&mdash;</td><td class="px">$1,063.25</td><td class="brief">Emerging as an AI power winner as data-centre demand reprices the electrification trade; shares up 1.3%.<span class="flag">Caveat: Ibex Wealth lessened its holding.</span></td></tr>
-      <tr><td class="tk">HON</td><td class="senti s7">7</td><td class="chg new">NEW</td><td class="px">$233.96</td><td class="brief">The AI-focused automation and software pivot could change the bull case, and the stock screens below fair value after a 40% fall; Franklin opened a new $1.5B position.</td></tr>
-      <tr><td class="tk">RTX</td><td class="senti s7">7</td><td class="chg flat">&mdash;</td><td class="px">$222.97</td><td class="brief">Missile defence contracts are bolstering the cash flow outlook, with shares up 1.1% and still rated a buy.</td></tr>
-      <tr><td class="tk">VRT</td><td class="senti s7">7</td><td class="chg flat">&mdash;</td><td class="px">$293.84</td><td class="brief">Up 2.6% as AI infrastructure coverage argues there are billions of reasons to stay bullish.</td></tr>
+      <tr><td class="tk">PEP</td><td class="senti s6">6</td><td class="chg new">NEW</td><td class="px">$140.79</td><td class="brief">Rebounding off 52-week lows with the question being whether Q2 earnings can extend it; institutional flow is split, one reducing and one adding.</td></tr>
+      <tr><td class="tk">PG</td><td class="senti s4">4</td><td class="chg new">NEW</td><td class="px">$144.55</td><td class="brief">Named among three out-of-favour stocks flagged as risky, against nothing more than routine position filings on the other side.<span class="flag">One matched headline was PG Electroplast, an unrelated Indian listing &mdash; excluded from the score.</span></td></tr>
     </tbody>
   </table></div>
 
-  <h2>Energy <span class="cnt">&mdash; 6 names</span></h2>
+  <h2>Communication Services <span class="cnt">&mdash; 1 name</span></h2>
   <div class="table-wrap"><table>
     <thead><tr><th>Ticker</th><th>Senti</th><th>&Delta;</th><th>Close</th><th>News Brief</th></tr></thead>
     <tbody>
-      <tr><td class="tk">PSX</td><td class="senti s8">8</td><td class="chg up">&#9650; 7</td><td class="px">$233.61</td><td class="brief">Shares approached an all-time high after refiners posted their biggest profit since 2022, surpassing analyst estimates.<span class="flag">Caveat: Several 'PSX' headlines in the feed refer to the Pakistan Stock Exchange, not Phillips 66 — those were excluded.</span></td></tr>
-      <tr><td class="tk">SLB</td><td class="senti s8">8</td><td class="chg new">NEW</td><td class="px">$53.77</td><td class="brief">Outperformed competitors and climbed as oil-services stocks rallied on strong quarterly results; trades at a cash-flow discount.</td></tr>
-      <tr><td class="tk">VLO</td><td class="senti s8">8</td><td class="chg new">NEW</td><td class="px">$341.67</td><td class="brief">Popped to a record high and leads a group of 14 onto best-stock lists as refiners book record profits.</td></tr>
-      <tr><td class="tk">COP</td><td class="senti s7">7</td><td class="chg new">NEW</td><td class="px">$126.78</td><td class="brief">Traders bought a high volume of call options and Wall Street sees more upside despite the leadership shakeup.</td></tr>
-      <tr><td class="tk">OXY</td><td class="senti s7">7</td><td class="chg new">NEW</td><td class="px">$58.36</td><td class="brief">Analysts are openly bullish, with a constructive read from the Q2 earnings call.</td></tr>
-      <tr><td class="tk">XOM</td><td class="senti s7">7</td><td class="chg new">NEW</td><td class="px">$160.09</td><td class="brief">Gained as Brent climbed 6% on Hormuz tensions and the Iran threat lifted crude.<span class="flag">Caveat: One piece lays out two reasons XOM is risky and names an alternative.</span></td></tr>
+      <tr><td class="tk">GOOGL</td><td class="senti s6">6</td><td class="chg new">NEW</td><td class="px">$345.90</td><td class="brief">Strategists argue Big Tech's AI spending is now feeding earnings, but the window's actual news is funding-side: banks hired for a debut Australian dollar bond after already borrowing billions for AI.</td></tr>
     </tbody>
   </table></div>
 
-  <h2>Utilities <span class="cnt">&mdash; 3 names</span></h2>
+  <h2>Utilities <span class="cnt">&mdash; 1 name</span></h2>
   <div class="table-wrap"><table>
     <thead><tr><th>Ticker</th><th>Senti</th><th>&Delta;</th><th>Close</th><th>News Brief</th></tr></thead>
     <tbody>
-      <tr><td class="tk">NRG</td><td class="senti s8">8</td><td class="chg new">NEW</td><td class="px">$126.24</td><td class="brief">Gained as investors revisited the data-centre power pipeline and the reaffirmed 2026 outlook, outperforming competitors on the day.</td></tr>
-      <tr><td class="tk">CEG</td><td class="senti s7">7</td><td class="chg new">NEW</td><td class="px">$282.50</td><td class="brief">The Trump administration's delay of two Pennsylvania plant closures lifted shares premarket, and director Roger Crandall bought 1,500 shares (~$418K) at ~$279.<span class="flag">Caveat: No coverage in this bulletin — scored off the 14 Aug window.</span></td></tr>
-      <tr><td class="tk">VST</td><td class="senti s7">7</td><td class="chg new">NEW</td><td class="px">$148.13</td><td class="brief">Reframed as an AI infrastructure bet rather than just a power producer; up 1.3% with Corvex adding in Q2.</td></tr>
+      <tr><td class="tk">CEG</td><td class="senti s8">8</td><td class="chg up">&#9650; 7</td><td class="px">$282.50</td><td class="brief">Rose premarket after the administration delayed closure of two Pennsylvania plants &mdash; a direct policy win &mdash; and features in two separate nuclear-renaissance growth pieces.</td></tr>
     </tbody>
   </table></div>
 
-  <h2>Consumer <span class="cnt">&mdash; 4 names</span></h2>
+  <h2>ETF / Fund <span class="cnt">&mdash; 1 name</span></h2>
   <div class="table-wrap"><table>
     <thead><tr><th>Ticker</th><th>Senti</th><th>&Delta;</th><th>Close</th><th>News Brief</th></tr></thead>
     <tbody>
-      <tr><td class="tk">GM</td><td class="senti s7">7</td><td class="chg new">NEW</td><td class="px">$86.77</td><td class="brief">Restarted Ohio battery production after a seven-month shutdown, with two institutional buyers adding.</td></tr>
-      <tr><td class="tk">SE</td><td class="senti s7">7</td><td class="chg new">NEW</td><td class="px">$121.94</td><td class="brief">Q2 deep dive shows e-commerce, fintech and gaming diversification all driving top-line growth.</td></tr>
-      <tr><td class="tk">TGT</td><td class="senti s7">7</td><td class="chg new">NEW</td><td class="px">$154.48</td><td class="brief">Picked up a Buy from RBC Capital, overtook Nike in market value, and restructured $4.0B of credit capacity into a new five-year facility.</td></tr>
-      <tr><td class="tk">TSLA</td><td class="senti s7">7</td><td class="chg new">NEW</td><td class="px">$342.27</td><td class="brief">Gained on a TD Cowen Buy reiteration with a $460 target, and one fund manager pivoted from 'math won't pass muster' to full expectation on the SPCX deal.<span class="flag">Caveat: Waymo scaling toward 1M weekly rides is a live competitive threat.</span></td></tr>
-    </tbody>
-  </table></div>
-
-  <h2>Materials <span class="cnt">&mdash; 2 names</span></h2>
-  <div class="table-wrap"><table>
-    <thead><tr><th>Ticker</th><th>Senti</th><th>&Delta;</th><th>Close</th><th>News Brief</th></tr></thead>
-    <tbody>
-      <tr><td class="tk">NEM</td><td class="senti s8">8</td><td class="chg flat">&mdash;</td><td class="px">$117.76</td><td class="brief">Screens 19% undervalued following new Nevada gold deals, moved up 3.20%, and signed a Jupiter project earn-in with Headwater Gold.</td></tr>
-      <tr><td class="tk">APD</td><td class="senti s7">7</td><td class="chg new">NEW</td><td class="px">$308.87</td><td class="brief">Rating upgrade to Buy, with the European liquid hydrogen market forecast at $13.1 billion through 2035.</td></tr>
-    </tbody>
-  </table></div>
-
-  <h2>Communication Services <span class="cnt">&mdash; 2 names</span></h2>
-  <div class="table-wrap"><table>
-    <thead><tr><th>Ticker</th><th>Senti</th><th>&Delta;</th><th>Close</th><th>News Brief</th></tr></thead>
-    <tbody>
-      <tr><td class="tk">NBIS</td><td class="senti s8">8</td><td class="chg up">&#9650; 7</td><td class="px">$277.68</td><td class="brief">Shares surged 8.9% past analyst consensus at a $75 billion valuation, with Seeking Alpha calling the AI infrastructure bottleneck a profit engine; among the week's most-buzzed names.</td></tr>
-      <tr><td class="tk">TTWO</td><td class="senti s7">7</td><td class="chg flat">&mdash;</td><td class="px">$246.95</td><td class="brief">Jumped in premarket, with GTA 6 now discussed as a candidate to unseat Minecraft as the top-selling game of all time.</td></tr>
+      <tr><td class="tk">DRAM</td><td class="senti s7">7</td><td class="chg new">NEW</td><td class="px">$57.32</td><td class="brief">Memory complex is rallying &mdash; Micron, SK Hynix and SanDisk together &mdash; putting DRAM exposure back in the buy conversation.<span class="flag">Two matched headlines were unrelated keyword noise on "dram" &mdash; excluded from the score.</span></td></tr>
     </tbody>
   </table></div>
 
   <div class="callout">
-    <h3>What moved the tape</h3>
-    <p>Two hard deal catalysts lead the board: <strong>PYPL</strong> confirmed in acquisition talks at $53 billion with
-       Stripe and Advent, and <strong>VRTX</strong> at an all-time high on a rare analyst mea-culpa upgrade. Refining is
-       the standout sector trade &mdash; <strong>VLO</strong>, <strong>PSX</strong> and <strong>SLB</strong> all rate 8
-       on record refiner profits and the Hormuz crude bid. The memory and optics complex (<strong>MU</strong>,
-       <strong>WDC</strong>, <strong>MRVL</strong>, <strong>COHR</strong>, <strong>LITE</strong>, <strong>GLW</strong>)
-       kept skyrocketing into the weekly close.</p>
+    <h3>What moved</h3>
+    <p><strong>Two names improved.</strong> LITE (7&rarr;8) on target raises and a fourth consecutive week of AI-optics
+       demand headlines; CEG (7&rarr;8) on the Pennsylvania plant-closure delay, which is a policy catalyst rather than
+       sentiment drift.</p>
+    <p><strong>Seven fell, and the reason matters.</strong> GLW is the only genuine turn &mdash; 7&rarr;4, with every
+       headline in the window now a valuation warning rather than a growth one. COHR, GILD and UBER cooled on real but
+       softer coverage. COP, XOM and CVS fell because their catalysts washed out and the window filled with 13F padding,
+       tokenised-stock listing pages and sector round-ups &mdash; a coverage-quality drop, not a bearish turn.</p>
   </div>
 
   <div class="callout warn">
-    <h3>Notable exclusions</h3>
-    <p><strong>ORCL</strong> scored 2 &mdash; down 3.8% as the $40 billion funding plan tested the AI backlog narrative,
-       compounded by a six-month gas pipeline delay at its New Mexico AI data centre. <strong>NVDA</strong> and
-       <strong>AAPL</strong> both fell to the neutral band on 13F-filing and legal-procedural coverage with no fresh
-       catalyst. <strong>NET</strong> drew a Seeking Alpha upgrade and downgrade on the same day, which cancel.
-       <strong>CRWV</strong>, <strong>CLS</strong> and <strong>TEAM</strong> were dropped on heavy insider selling.</p>
+    <h3>Read this before trading off it</h3>
+    <p>A senti score reads the headlines, nothing else. It is not a Wyckoff phase, a GEX read or a risk gate, and a
+       score of 8 says a catalyst exists, not that the structure supports an entry. Run it through
+       <strong>voltbuster</strong> and <strong>riskcheck</strong> before it becomes a position.</p>
+    <p>Two names in this edition are scored on coverage that is genuinely thin: NVDA and CVX have no catalyst headline
+       at all in the window, only institutional filings, and both sit at 6 by default rather than by evidence.</p>
   </div>
 
   <footer>
-    Scored from <strong>news_bulletin_20260815_1309.html</strong> &middot; prices from business_overview_150826_0414.csv
-    &middot; sentiment is a reading of news tone only &mdash; not a trade signal, and no substitute for the
-    Wyckoff/GEX structural gates. For informational purposes only. Not financial advice.
+    Optionx Senti Grid &middot; generated 17 August 2026 from <strong>news_bulletin_20260817_1559</strong> (607 unique
+    ticker articles, 48-hour lookback, 202-ticker watchlist). Tracked list is fixed at 26 names; all are scored and
+    published regardless of score, so the &Delta; column stays continuous edition to edition. Prior editions scored the
+    full watchlist and published only names rated above 6 &mdash; those are retained in the repository history.
   </footer>
 </div>
 </body>
