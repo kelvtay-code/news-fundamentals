@@ -1,4 +1,2 @@
 ﻿Sector,Sector Rank,Ticker,Price,IV Implied,IV First->Last,IV Slope,IV Rank,GEX First->Last,GEX Slope,GEX Sign Flip,Wyckoff,GEX Classification,Badge,Caveat
-Technology,1,ORCL,150.85,67.9,66.5 -> 67.9,0.457,61.0,6 -> 10,0.029,,Mark-down,Extreme Positive Gamma,◉ PINNED,
-Technology,2,ADBE,264.0,48.8,49.8 -> 48.8,0.075,65.0,6 -> 10,0.469,,Mark-up,Extreme Positive Gamma,◉ PINNED,fade
-Healthcare,1,MDT,91.27,30.2,27.2 -> 30.2,0.092,76.0,3 -> 10,0.674,,Mark-up,Extreme Positive Gamma,◉ PINNED,
+Technology,1,ADBE,253.9,53.1,49.7 -> 53.1,0.146,75.0,0 -> 1,0.217,,Mark-up,Neutral / Transition Zone,📈 UPTREND,
