@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Bull Screener — Bullish Ticker Funnel — Wednesday, 12 August 2026 (04:14)</title>
+<title>Bull Screener — Bullish Ticker Funnel — Wednesday, 19 August 2026 (04:13)</title>
 <style>
 :root {
   --ft-salmon:   #FFF1E0;
@@ -139,14 +139,14 @@ footer { background: var(--ft-navy); color: #888; font-family: Arial, sans-serif
   <div class="masthead-inner">
     <div class="masthead-eyebrow">Optionx Intelligence — Experimental Funnel</div>
     <div class="masthead-title">Bull <span>Screener</span> — Bullish Ticker Funnel</div>
-    <div class="masthead-date">Data: stock_analysis_120826.0414.csv &nbsp;&middot;&nbsp; IV_120826_0412.csv &nbsp;&middot;&nbsp; business_overview_120826_0414.csv</div>
+    <div class="masthead-date">Data: stock_analysis_190826.0413.csv &nbsp;&middot;&nbsp; IV_190826_0453.csv &nbsp;&middot;&nbsp; business_overview_190826_0413.csv</div>
     <div class="masthead-tagline">"Sequential funnel — a ticker that fails a gate is dropped, not carried forward."</div>
   </div>
 </div>
 <div class="stats-banner"><div class="stats-inner">
-  <div class="stat-item">Step 1 Wyckoff Uptrend/Spring <strong>33</strong></div><span class="stat-sep">&rarr;</span>
-  <div class="stat-item">Step 2 top7 bull-confirm <strong>3</strong></div><span class="stat-sep">&rarr;</span>
-  <div class="stat-item">Step 3 ivchk IV/trend gate <strong>0</strong></div><span class="stat-sep">&rarr;</span>
+  <div class="stat-item">Step 1 Wyckoff Uptrend/Spring <strong>43</strong></div><span class="stat-sep">&rarr;</span>
+  <div class="stat-item">Step 2 top7 bull-confirm <strong>11</strong></div><span class="stat-sep">&rarr;</span>
+  <div class="stat-item">Step 3 ivchk IV/trend gate <strong>2</strong></div><span class="stat-sep">&rarr;</span>
   <div class="stat-item">Step 4 Positive-GEX final <strong>0</strong></div>
   <span class="stat-sep">|</span>
   <div class="stat-item">Final List <strong>0</strong> tickers</div>
@@ -170,10 +170,10 @@ footer { background: var(--ft-navy); color: #888; font-family: Arial, sans-serif
 
 <div class="content">
   <div class="note-banner">
-    Full-watchlist run against the 12 Aug 2026 04:14 snapshot, using a 7-day top7 lookback window of Aug 4&ndash;12 (Aug 2, 3 and 9 excluded — weekends/no snapshot; Aug 10 excluded as a duplicate-price day for most tickers). Step 1 (Wyckoff Specific Setup contains UPTREND or SPRING) passed 34 rows across the 206-ticker watchlist, deduped to <strong>33 unique tickers</strong> (NET appeared twice under two different sector labels in the source snapshot; first occurrence kept). Step 2 (top7 7-day + recency bull-confirm gate) reduced this to <strong>3 tickers</strong> — <strong>BRK-B</strong> (7-Day &#128200; BULL SETUP: Mark-up phase 7/7 days, GEX&ge;+4 on 7/7 days, no gamma flip; Recency Reinforced &mdash; last 2 days mixed on price direction but no flip/divergence), <strong>DIS</strong> (7-Day &#128200; BULL SETUP: bullish phase 5/7, GEX&ge;+4 on 5/7, Spring 85% on 2 days but no vol-contraction-on-pullback so capped at BULL SETUP not BULL CONFIRM; Recency Upgraded to &#127775; BULL CONFIRM &mdash; last 2 days both bullish phase, GEX +10, price rising, Spring 85% present on the latest day), and <strong>V</strong> (7-Day &#128200; BULL SETUP: Mark-up 7/7, GEX&ge;+4 on 7/7; Recency Reinforced). All other 30 Step-1 candidates were dropped at Step 2 for a 7-Day REJECT (GEX Scale sat below the +4 threshold on fewer than 5 of the 7 days for most names, despite several &mdash; ABBV, DIS-adjacent names, GILD, SBUX, UBER &mdash; showing strong Extreme Positive Gamma only in the most recent 1&ndash;2 days, which the equal-weighted 7-day rule does not credit as a pass; recency alone cannot promote a 7-day REJECT per the funnel's stated precedence). Step 3 (ivchk IV Rank &gt;38 + bullish trend flag) then dropped all three remaining candidates: BRK-B (as "BRKB" in the IV snapshot) IV Rank 17, DIS IV Rank 8 &mdash; both &le;38; V was not present at all in the latest IV_120826_0412.csv export (164-ticker universe skews mega-cap/high-liquidity options names and does not currently carry Visa), so it cannot be confirmed &gt;38 and is dropped rather than assumed to pass. Candidate List 3 = 0, so the IV-expansion/price-drop divergence check and the news_investigator negative-news pass were not run (nothing to check). Step 4 (positive-GEX final filter) and the PEG Ratio/Earnings enrichment are therefore trivially empty. Final List: 0 tickers.
+    Full-watchlist run against the 19 Aug 2026 04:13 snapshot, using a 7-day top7 lookback window of Aug 12&ndash;19 (Aug 9 and 16 excluded — weekend/no snapshot). Step 1 (Wyckoff Specific Setup contains UPTREND or SPRING) passed 44 rows across the 207-ticker watchlist, deduped to <strong>43 unique tickers</strong> (NET appeared twice under two different sector labels in the source snapshot; the "Cybersecurity / Cloud Infrastructure" sector label kept as the more accurate one). Step 2 (top7 7-day + recency bull-confirm gate) reduced this to <strong>11 tickers</strong>, all landing at 7-Day &#128200; BULL SETUP with Recency Reinforced and no gamma-flip/divergence override: <strong>APH, FDX, NBIS, SBUX, SE, SMCI, STX, SYK, TTWO, V, WFC</strong>. No ticker reached BULL CONFIRM (Spring/SOS &ge;85% present on fewer than 5/7 days for all names) and none qualified as KIV. The other 32 Step-1 candidates were dropped at Step 2 for a 7-Day REJECT or ABORT (COST and DIA both showed a gamma-flip pattern; the rest sat below the GEX&ge;+4-on-&ge;5/7-days and/or bullish-phase-on-&ge;5/7-days thresholds). Step 3 (ivchk IV Rank &gt;38 + bullish trend flag, 3-day IV/price divergence check) first hit a data gap: <strong>SMCI, TTWO and V were not present at all</strong> in the latest IV_190826_0453.csv export (167-row universe skews mega-cap/high-liquidity options names) &mdash; these three are dropped rather than assumed to pass, since IV Rank cannot be confirmed. Of the remaining 8, IV Rank &gt;38 eliminated APH (32), FDX (22), NBIS (28), SBUX (5), SE (25) and WFC (8), leaving <strong>STX (IV Rank 50, &#128640; BULLISH trend flag)</strong> and <strong>SYK (IV Rank 40, &#128269; First Test trend flag)</strong> as Candidate List 3. Both cleared the bullish-trend-flag gate. The 3-day IV-expansion/price-drop divergence check flagged <strong>STX</strong> (IV Rank rose 47&rarr;47&rarr;50 over Aug 15/18/19 while price fell $973.16&rarr;$998.00&rarr;$903.00 net down over the window) with &#9888;&#65039; IV Expansion / Price Drop &mdash; a flag, not a rejection. SYK showed no divergence (IV Rank 41&rarr;43&rarr;40, price drifting from $339.21 to $331.37). news_investigator was run on both STX and SYK for a negative-news check (informational only, does not gate): STX carries 4 risk-flagged items (stretched ~69-70x trailing valuation after a 600%+ 1yr rally, an unresolved $175M Huawei-export-control settlement with final hearing Nov 17 2026, peer-contagion pullback risk tied to Western Digital's hyperscale-customer-concentration warning, and structural SSD-substitution risk to nearline HDD) &mdash; not a clean read. SYK reads Clean (no negative news in the last 2 weeks; only a soft insider-selling mention alongside an undervaluation call). Step 4 (positive-GEX final filter) then dropped <strong>both</strong> remaining candidates: on the latest (Aug 19) snapshot, STX's GEX Classification reads Neutral / Transition Zone (GEX Scale &minus;1) and SYK's also reads Neutral / Transition Zone (GEX Scale +2, inside the -3..+3 neutral band despite the nominally positive number) &mdash; neither qualifies as the Moderate/Extreme Positive Gamma tier this dataset uses in place of "Long/Very Long." Final List: 0 tickers.
   </div>
   <div class="empty-banner">
-    No tickers survived the full funnel on this run. Three names cleared Steps 1&ndash;2 (BRK-B, DIS, V) but all three failed Step 3's IV Rank &gt;38 gate (BRK-B: 17, DIS: 8, V: not found in the latest IV snapshot). Re-run once IV Ranks recover or a broader IV export is available.
+    No tickers survived the full funnel on this run. Two names cleared Steps 1&ndash;3 (STX, SYK) but both failed Step 4's positive-GEX gate &mdash; both sat in the Neutral / Transition Zone GEX classification on the latest snapshot rather than Moderate/Extreme Positive Gamma. Re-run once dealer gamma positioning turns more decisively positive on these or other Step-3 survivors.
   </div>
   <div class="table-card">
     <div class="table-hdr">
@@ -195,7 +195,7 @@ footer { background: var(--ft-navy); color: #888; font-family: Arial, sans-serif
 </div>
 
 <footer>
-  Bull Screener (experimental funnel) &middot; Step 1 Wyckoff Uptrend/Spring (33) &rarr; Step 2 top7 bull-confirm + recency (3: BRK-B, DIS, V) &rarr; Step 3 ivchk IV Rank&gt;38 + bullish trend flag (0 &mdash; all three dropped on IV Rank) &rarr; Step 4 positive-GEX final filter (0) &middot; PEG Ratio/Earnings enrichment n/a (empty Final List) &middot; distinct workflow from opt_strategist.
+  Bull Screener (experimental funnel) &middot; Step 1 Wyckoff Uptrend/Spring (43) &rarr; Step 2 top7 bull-confirm + recency (11: APH, FDX, NBIS, SBUX, SE, SMCI, STX, SYK, TTWO, V, WFC) &rarr; Step 3 ivchk IV Rank&gt;38 + bullish trend flag (2: STX, SYK &mdash; SMCI/TTWO/V dropped, not found in IV export) &rarr; Step 4 positive-GEX final filter (0 &mdash; both remaining candidates sat in Neutral GEX zone) &middot; PEG Ratio/Earnings enrichment n/a (empty Final List) &middot; distinct workflow from opt_strategist.
 </footer>
 
 <script>
