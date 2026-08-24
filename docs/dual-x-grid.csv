@@ -1,2 +1,6 @@
 ﻿Sector,Sector Rank,Ticker,Price,IV Implied,IV First->Last,IV Slope,IV Rank,GEX First->Last,GEX Slope,GEX Sign Flip,Wyckoff,GEX Classification,Badge,Caveat
-Technology,1,ADBE,253.9,53.1,49.7 -> 53.1,0.146,75.0,0 -> 1,0.217,,Mark-up,Neutral / Transition Zone,📈 UPTREND,
+Consumer Defensive,1,CELH,33.38,53.9,51.0 -> 53.9,0.253,30.0,-1 -> 1,0.041,YES,Accumulation,Neutral / Transition Zone,◎ NEUTRAL,
+Consumer Defensive,2,KO,90.99,17.2,18.6 -> 17.2,0.016,35.0,1 -> 10,0.047,,Mark-up,Extreme Positive Gamma,◉ PINNED,fade
+Energy,1,PSX,242.29,36.1,33.9 -> 36.1,0.242,68.0,1 -> 3,0.034,,Mark-up,Neutral / Transition Zone,📈 UPTREND,
+Technology,1,AAPL,309.69,24.3,24.9 -> 24.3,0.04,43.0,10 -> 10,0.251,,Mark-up,Extreme Positive Gamma,◉ PINNED,fade
+-,1,GRID,181.3,21.4,22.1 -> 21.4,0.009,38.0,1 -> 1,0.023,,Distribution,Neutral / Transition Zone,◎ NEUTRAL,fade
