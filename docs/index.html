@@ -59,7 +59,7 @@
   .news-toolbar { margin-bottom:8px; font-family: Arial, sans-serif; }
   .open-full { font-size:0.82rem; color:var(--ft-blue); text-decoration:none; font-weight:600; }
   .open-full:hover { text-decoration:underline; }
-  #oil iframe, #sectorscan iframe, #dualx iframe, #senti iframe { width:100%; height:calc(100vh - 220px); min-height:600px; border:1px solid var(--ft-border); background:#fff; }
+  #oil iframe, #sectorscan iframe, #dualx iframe, #senti iframe, #thegrid iframe { width:100%; height:calc(100vh - 220px); min-height:600px; border:1px solid var(--ft-border); background:#fff; }
   .empty { color:var(--ft-mid); font-style:italic; font-family: Arial, sans-serif; }
 
   #bullscreener .chip { display:inline-block; font-family: Arial, sans-serif; font-size:10.5px; font-weight:700; padding:2px 8px; border-radius:2px; white-space:normal; letter-spacing:0.02em; }
@@ -361,6 +361,7 @@
     <button data-target="dualx">Dual_X</button>
     <button data-target="senti">Senti</button>
     <button data-target="strategist">Strategist</button>
+    <button data-target="thegrid">THE_GRID</button>
   </div>
 </nav>
 <main>
@@ -891,6 +892,10 @@ function render(){
 render();
 </script>
 </div>
+  </section>
+  <section id="thegrid">
+    <h2>THE_GRID</h2>
+    <div class="news-toolbar"><a class="open-full" href="the-grid.html?v=202608261445" target="_blank" rel="noopener">Open full THE_GRID in new tab &#8599;</a></div><iframe src="the-grid.html?v=202608261445" title="THE_GRID &mdash; Watchlist Volatility Grid"></iframe>
   </section>
 </main>
 <footer>Optionx Hub &middot; static, offline-capable &middot; regenerate after each pipeline run</footer>
