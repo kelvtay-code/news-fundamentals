@@ -22,6 +22,23 @@ own three-stage chain rather than a single bull/skeptic debate.
 
 If a source file is missing, say so explicitly in the report instead of inventing rows.
 
+## Pre-flight: freshness check and once-a-day guard
+
+Run this before Stage 1, every time — don't skip it because a run "feels" recent.
+
+1. **Freshness.** For each of the three sources, find the latest file by its own
+   `DDMMYY_HHMM` / `YYYYMMDD_HHMM` timestamp (not by Drive's modified-time, which can lag or
+   reorder) and compare its date to today's date. If any source's latest file is **not from
+   today**, say so explicitly before running anything else (name the source and the stale
+   date) and ask whether to proceed on the stale snapshot or wait for a fresh one — don't run
+   silently on yesterday's business overview, Dual_X, or bulletin.
+2. **Once a day.** Before generating a new report, check the Dashboard folder for an existing
+   `research_team_DDMMYY_*.html` whose date is today. If one already exists, don't regenerate —
+   tell the user a report already exists for today (name it, with its time), and only produce
+   a new one if they explicitly ask to rerun anyway (e.g. because a source refreshed since that
+   run). This keeps the pipeline to one run per calendar day even if the skill is invoked
+   several times.
+
 ## Stage 1 — Agent: Fundalist
 
 Read the latest `business_overview_*.csv` in full (every ticker, not a pre-filtered subset).
