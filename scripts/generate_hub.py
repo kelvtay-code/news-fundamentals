@@ -25,6 +25,7 @@ SECTOR_SCAN_PATTERN = re.compile(r"sector_scan_(\d{6})_(\d{4})\.html$")
 REBOUND_PATTERN = re.compile(r"Rebound_candidate_(\d{6})_(\d{4})\.html$")
 DUAL_X_PATTERN = re.compile(r"Dual_X_(\d{6})_(\d{4})\.html$")
 STRATEGIST_PATTERN = re.compile(r"opt_strategist_(\d{6})_(\d{4})\.html$")
+RESEARCH_TEAM_PATTERN = re.compile(r"research_team_(\d{6})_(\d{4})\.html$")
 BULL_TABLE_RE = re.compile(r'<table id="mainTable">.*?</table>', re.DOTALL)
 BULL_SORT_ATTR_RE = re.compile(r'\s*onclick="sortTable\(\d+\)"')
 
@@ -171,6 +172,21 @@ def latest_opt_strategist():
     candidates = []
     for f in DASHBOARD_DIR.glob("opt_strategist_*.html"):
         m = STRATEGIST_PATTERN.match(f.name)
+        if not m:
+            continue
+        date_str, time_str = m.groups()
+        dt = datetime.strptime(date_str + time_str, "%d%m%y%H%M")
+        candidates.append((dt, f))
+    if not candidates:
+        return None, None
+    dt, path = max(candidates, key=lambda x: x[0])
+    return dt, path
+
+
+def latest_research_team():
+    candidates = []
+    for f in DASHBOARD_DIR.glob("research_team_*.html"):
+        m = RESEARCH_TEAM_PATTERN.match(f.name)
         if not m:
             continue
         date_str, time_str = m.groups()
@@ -539,6 +555,14 @@ def build():
         strat_frame = "<p class='empty'>No opt strategist file found.</p>"
         strat_css = ""
 
+    research_dt, research_path = latest_research_team()
+    if research_path:
+        shutil.copyfile(research_path, SITE_DIR / "research-team.html")
+    research_css, research_frame = render_embedded_dashboard(research_path, "researchTeamEmbed")
+    if research_frame is None:
+        research_frame = "<p class='empty'>No research team report found.</p>"
+        research_css = ""
+
     generated_at = datetime.now()
     sidebar_html = render_freshness_sidebar([
         ("Page generated", generated_at),
@@ -549,6 +573,7 @@ def build():
         ("Dual_X", dualx_dt),
         ("Senti", senti_dt),
         ("Strategist", strat_dt),
+        ("Research Team", research_dt),
     ])
 
     page = f"""<!doctype html>
@@ -658,6 +683,8 @@ def build():
   {rebound_css}
   #stratEmbed {{ overflow-x:hidden; }}
   {strat_css}
+  #researchTeamEmbed {{ overflow-x:hidden; }}
+  {research_css}
 </style>
 </head>
 <body>
@@ -683,6 +710,7 @@ def build():
     <button data-target="dualx">Dual_X</button>
     <button data-target="senti">Senti</button>
     <button data-target="strategist">Strategist</button>
+    <button data-target="researchteam">Research Team</button>
   </div>
 </nav>
 <main>
@@ -716,6 +744,9 @@ def build():
   </section>
   <section id="strategist">
     {strat_frame}
+  </section>
+  <section id="researchteam">
+    {research_frame}
   </section>
 </main>
 <footer>Optionx Hub &middot; static, offline-capable &middot; regenerate after each pipeline run</footer>
@@ -762,7 +793,8 @@ def build():
         f"bull screener: {bull_path.name if bull_path else 'none'}, "
         f"sector scan: {sector_path.name if sector_path else 'none'}, "
         f"rebounder: {rebound_path.name if rebound_path else 'none'}, "
-        f"dual_x: {dualx_path.name if dualx_path else 'none'})"
+        f"dual_x: {dualx_path.name if dualx_path else 'none'}, "
+        f"research team: {research_path.name if research_path else 'none'})"
     )
 
 
