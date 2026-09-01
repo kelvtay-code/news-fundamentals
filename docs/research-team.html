@@ -1,0 +1,658 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Research Team &mdash; Fundalist &rarr; Technicalist &rarr; Sentilist</title>
+<style>
+  :root {
+    --ft-salmon:#FFF1E0; --ft-red:#990F3D; --ft-blue:#0F5499; --ft-navy:#262A33;
+    --ft-warm-blk:#33302E; --ft-border:#CCB799; --ft-mid:#8D775F; --ft-muted:#66605A;
+    --ft-card-bg:#FFFAF4; --ft-gold:#F0A500;
+    --green:#0ca30c; --orange:#c2570a; --red:#990F3D;
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:Georgia,'Times New Roman',serif; background:var(--ft-salmon);
+         color:var(--ft-warm-blk); font-size:14px; line-height:1.5; }
+  .masthead { background:var(--ft-navy); color:#fff; border-bottom:4px solid var(--ft-red);
+              border-radius:4px; padding:18px 20px 14px; margin:20px 20px 0; }
+  .masthead-eyebrow { font-family:Arial,sans-serif; font-size:10px; letter-spacing:0.12em;
+                      text-transform:uppercase; color:#AAA; margin-bottom:6px; }
+  .masthead-title { font-size:1.7rem; font-weight:700; letter-spacing:-0.01em; }
+  .masthead-title span { color:var(--ft-gold); }
+  .masthead-date { font-family:Arial,sans-serif; font-size:11px; color:#AAA; margin-top:6px; }
+  .masthead-tagline { font-style:italic; font-size:12px; color:#CCC;
+                      border-top:1px solid #44495A; padding-top:8px; margin-top:8px; }
+  .stats-banner { background:var(--ft-red); padding:8px 20px; margin:0 20px; }
+  .stats-inner { display:flex; align-items:center; gap:20px; flex-wrap:wrap;
+                 max-width:1320px; margin:0 auto; }
+  .stat-item { font-family:Arial,sans-serif; font-size:12px; color:#fff;
+               display:flex; align-items:center; gap:6px; }
+  .stat-sep { color:rgba(255,255,255,0.4); }
+  main { max-width:1100px; margin:0 auto; padding:20px; }
+  h2 { font-family:Arial,sans-serif; font-size:11px; font-weight:700; text-transform:uppercase;
+       letter-spacing:0.1em; color:var(--ft-mid); margin:26px 0 12px; }
+  .lead { font-size:12.5px; color:var(--ft-muted); margin:-4px 0 12px; max-width:78ch; }
+
+  .rt-card { background:var(--ft-card-bg); border:1px solid var(--ft-border); border-left:4px solid var(--ft-blue);
+              padding:14px 16px; margin-bottom:14px; }
+  .rt-card.tier2 { border-left-color:var(--ft-gold); }
+  .rt-hdr { display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:8px; }
+  .tk { font-family:Arial,sans-serif; font-weight:700; font-size:1.15rem; color:var(--ft-red); }
+  .sector-tag { font-family:Arial,sans-serif; font-size:10px; text-transform:uppercase; letter-spacing:0.06em; color:var(--ft-mid); }
+  .scores { margin-left:auto; display:flex; gap:6px; }
+  .chip { display:inline-block; padding:2px 7px; font-size:10px; font-weight:700; border-radius:2px;
+          font-family:Arial,sans-serif; border:1px solid; }
+  .chip-f { color:var(--ft-blue); border-color:var(--ft-blue); background:rgba(15,84,153,0.08); }
+  .chip-t { color:#4B7F3D; border-color:#4B7F3D; background:rgba(75,127,61,0.08); }
+  .chip-s { color:var(--ft-gold); border-color:var(--ft-gold); background:rgba(240,165,0,0.1); }
+  .chip-na { color:var(--ft-mid); border-color:var(--ft-border); }
+  .chip-flip { color:var(--green); border-color:var(--green); background:rgba(12,163,12,0.08); margin-left:4px; }
+  .chip-warn { color:var(--orange); border-color:var(--orange); background:rgba(194,87,10,0.08); }
+  .note-row, .trade-row { display:flex; gap:10px; font-size:12.5px; margin-bottom:6px; align-items:baseline; }
+  .note-lbl { font-family:Arial,sans-serif; font-size:9.5px; font-weight:700; text-transform:uppercase;
+              letter-spacing:0.08em; color:var(--ft-mid); width:78px; flex:none; padding-top:2px; }
+  .note-sub { font-size:11.5px; color:var(--ft-muted); margin-top:3px; }
+  .trade-row { border-top:1px dashed var(--ft-border); padding-top:8px; margin-top:8px; }
+  .size-tag { font-family:Arial,sans-serif; font-size:10px; color:var(--ft-mid); margin-left:6px; }
+  .conflict { background:#F7E3CE; border-left:3px solid var(--orange); padding:7px 10px; margin-top:8px; font-size:11.5px; color:var(--ft-warm-blk); }
+  .ph { font-size:9px; margin-right:4px; }
+  .ph.bull { color:var(--green); } .ph.bear { color:var(--red); }
+
+  .dropped { background:var(--ft-card-bg); border:1px solid var(--ft-border); padding:12px 16px; font-size:12px; color:var(--ft-muted); }
+  .dropped li { margin:4px 0 4px 16px; }
+
+  .note { background:var(--ft-card-bg); border:1px solid var(--ft-border);
+           border-left:4px solid var(--ft-blue); padding:14px 16px; margin-top:24px; font-size:12.5px; }
+  .note h3 { font-family:Arial,sans-serif; font-size:10px; text-transform:uppercase;
+              letter-spacing:0.1em; color:var(--ft-mid); margin:0 0 8px; }
+  .note p { margin:0 0 8px; } .note p:last-child { margin-bottom:0; }
+  .note code { background:#EFE3D0; padding:1px 5px; font-size:11px; }
+  footer { background:var(--ft-navy); color:#888; font-family:Arial,sans-serif; font-size:11px;
+            text-align:center; padding:16px 40px; margin-top:20px; border-top:3px solid var(--ft-red); }
+  @media (max-width:700px) { .masthead,.stats-banner { margin-left:10px; margin-right:10px; }
+                              main { padding:14px 10px; } }
+</style>
+</head>
+<body>
+<div class="masthead">
+  <div class="masthead-eyebrow">Optionx &middot; Research Team</div>
+  <div class="masthead-title">Fundalist &rarr; Technicalist &rarr; <span>Sentilist</span></div>
+  <div class="masthead-date">Tuesday, 1 September 2026 &middot; run against the 07:41 SGT Dual_X / 04:19 SGT business overview / 04:23 SGT news bulletin snapshots</div>
+  <div class="masthead-tagline">Three agents, one chain: fundamentals screen the universe, technicals confirm dual IV+GEX
+    expansion, sentiment rates the news -- plus an independent 7+ catch-all for tickers the funnel never saw.</div>
+</div>
+<div class="stats-banner"><div class="stats-inner">
+  <div class="stat-item"><strong>204</strong> tickers screened (Fundalist)</div><span class="stat-sep">|</span>
+  <div class="stat-item"><strong>17</strong> cleared Dual_X co-expansion (Technicalist)</div><span class="stat-sep">|</span>
+  <div class="stat-item"><strong>8</strong> full-chain confirmed</div><span class="stat-sep">|</span>
+  <div class="stat-item"><strong>10</strong> sentiment catch-alls (7+)</div><span class="stat-sep">|</span>
+  <div class="stat-item"><strong>7</strong> sectors</div>
+</div></div>
+<main>
+  <h2>Tier 1 &mdash; Full Chain Confirmed</h2>
+  <p class="lead">Cleared all three gates: Fundalist &ge;5, Technicalist &ge;5 (already inside the Dual_X 17-name
+    co-expansion screen), Sentilist &ge;6. Ranked by the average of the three scores.</p>
+  
+    <div class="rt-card tier1">
+      <div class="rt-hdr">
+        <span class="tk">D</span>
+        <span class="sector-tag">Utilities</span>
+        <span class="scores">
+          <span class="chip chip-f">F 8.2</span>
+          <span class="chip chip-t">T 7</span>
+          <span class="chip chip-s">S 9</span>
+        </span>
+      </div>
+      <div class="note-row"><span class="note-lbl">Fundamental</span><div>Hold consensus; 9% upside to target; PEG 2.83 (rich); revenue +18% YoY</div></div>
+      
+        <div class="note-row"><span class="note-lbl">Technical</span><div>
+          <span class="ph bear">&#9660;</span><strong>Mark-down</strong> &middot; Neutral / Transition Zone 
+          &middot; GEX 0 -&gt; 2 &middot; IV 17.9 -&gt; 19.4 (IVR 31.0)
+          &middot; Put/Call wall <strong>67.5 / 67.5</strong>
+           (pinned)
+          &middot; Volume 1.23x (Good)
+          <div class="note-sub">volume surge 1.23x (confirming); pinned between walls</div>
+        </div></div>
+      <div class="note-row"><span class="note-lbl">Sentiment</span><div>
+        <span class="ph bull">&#9650;</span><strong>9/10</strong> (bull) &middot; MASSIVE catch: Dominion is merging with NextEra Energy -- stock +14% and its best day in 6 years (30 Aug), confirmed by two Stocktwits/Google News wires. The headlines were tagged under NEE, not D, in this bulletin -- missed on the first pass over D&#x27;s own tag, caught by the wider catch-all scan.
+      </div></div>
+      <div class="trade-row"><span class="note-lbl">Trade</span><div>
+        <strong>No fresh directional bet -- the catalyst already fired (+14%, best day in 6 years on 30 Aug). If anything, a tight iron condor around the 67.5 pin to harvest post-deal vol crush.</strong> <span class="size-tag">Size: Small (merger-arb, not a fresh entry)</span>
+      </div></div>
+      <div class="conflict"><strong>Conflict:</strong> This is exactly the freshness gap the pre-flight check exists for: the merger news broke 30 Aug but was tagged under NEE, not D, so it never showed up scanning D&#x27;s own headlines -- only the wider catch-all scan caught it. Walls are literally pinned (67.5/67.5), consistent with a stock trading at deal-implied value.</div>
+    </div>
+
+    <div class="rt-card tier1">
+      <div class="rt-hdr">
+        <span class="tk">AMZN</span>
+        <span class="sector-tag">Consumer Cyclical</span>
+        <span class="scores">
+          <span class="chip chip-f">F 10</span>
+          <span class="chip chip-t">T 6.2</span>
+          <span class="chip chip-s">S 8</span>
+        </span>
+      </div>
+      <div class="note-row"><span class="note-lbl">Fundamental</span><div>Strong Buy consensus; 26% upside to target; revenue +20% YoY</div></div>
+      
+        <div class="note-row"><span class="note-lbl">Technical</span><div>
+          <span class="ph bull">&#9650;</span><strong>Mark-up</strong> &middot; Neutral / Transition Zone <span class="chip chip-flip">GEX FLIP</span>
+          &middot; GEX -1 -&gt; 1 &middot; IV 28.2 -&gt; 28.7 (IVR 20.0)
+          &middot; Put/Call wall <strong>260.0 / 265.0</strong>
+          
+          &middot; Volume 0.72x (Contraction)
+          <div class="note-sub">GEX sign-flip (genuine dealer regime change); GEX slope 0.30; volume surge 0.72x (contracting -- fading interest)</div>
+        </div></div>
+      <div class="note-row"><span class="note-lbl">Sentiment</span><div>
+        <span class="ph bear">&#9660;</span><strong>8/10</strong> (bear) &middot; FTC and 22 states sued Amazon over an alleged secret ad-surcharge scheme -- confirmed by GuruFocus and Yahoo Finance, stock on track for its worst day in over a month same-day.
+      </div></div>
+      <div class="trade-row"><span class="note-lbl">Trade</span><div>
+        <strong>Small put debit spread as a tactical hedge against the litigation overhang -- not a bet against the underlying bullish setup.</strong> <span class="size-tag">Size: Small</span>
+      </div></div>
+      <div class="conflict"><strong>Conflict:</strong> Technicals (Mark-up phase, GEX sign-flip building) and fundamentals are bullish, but a same-day FTC antitrust suit (&quot;worst day in over a month&quot;) is a real, fresh, negative catalyst that dominates near-term price action. Direction follows the news, not the setup, until it clears.</div>
+    </div>
+
+    <div class="rt-card tier1">
+      <div class="rt-hdr">
+        <span class="tk">BAC</span>
+        <span class="sector-tag">Financial Services</span>
+        <span class="scores">
+          <span class="chip chip-f">F 10</span>
+          <span class="chip chip-t">T 6.8</span>
+          <span class="chip chip-s">S 6</span>
+        </span>
+      </div>
+      <div class="note-row"><span class="note-lbl">Fundamental</span><div>no analyst coverage; 11% upside to target; revenue +17% YoY; 30% profit margin</div></div>
+      
+        <div class="note-row"><span class="note-lbl">Technical</span><div>
+          <span class="ph bull">&#9650;</span><strong>Accumulation</strong> &middot; Neutral / Transition Zone 
+          &middot; GEX 0 -&gt; 2 &middot; IV 19.6 -&gt; 20.2 (IVR 9.0)
+          &middot; Put/Call wall <strong>62.0 / 62.0</strong>
+           (pinned)
+          &middot; Volume 1.07x (Normal)
+          <div class="note-sub">volume surge 1.07x (in line); pinned between walls; IV Rank 9 (cheap entry for the vol building)</div>
+        </div></div>
+      <div class="note-row"><span class="note-lbl">Sentiment</span><div>
+        <span class="ph bull">&#9650;</span><strong>6/10</strong> (bull) &middot; 9% YoY net-interest-income growth in 1H26 is a real, quantified banking metric -- contested same-day by a separate &quot;3 Reasons BAC Is Risky&quot; piece, so real but not a clean consensus read.
+      </div></div>
+      <div class="trade-row"><span class="note-lbl">Trade</span><div>
+        <strong>Call debit spread above the 62 pin (e.g. 62/65)</strong> <span class="size-tag">Size: Small-to-moderate</span>
+      </div></div>
+      <div class="conflict"><strong>Conflict:</strong> Real NII growth is contested same-day by a &quot;3 Reasons BAC Is Risky&quot; piece -- not a clean consensus read.</div>
+    </div>
+
+    <div class="rt-card tier1">
+      <div class="rt-hdr">
+        <span class="tk">GM</span>
+        <span class="sector-tag">Consumer Cyclical</span>
+        <span class="scores">
+          <span class="chip chip-f">F 10</span>
+          <span class="chip chip-t">T 5.5</span>
+          <span class="chip chip-s">S 7</span>
+        </span>
+      </div>
+      <div class="note-row"><span class="note-lbl">Fundamental</span><div>Buy consensus; 17% upside to target; PEG 0.34 (cheap vs growth)</div></div>
+      
+        <div class="note-row"><span class="note-lbl">Technical</span><div>
+          <span class="ph bull">&#9650;</span><strong>Mark-up</strong> &middot; Neutral / Transition Zone 
+          &middot; GEX 1 -&gt; 0 &middot; IV 30.5 -&gt; 30.1 (IVR 27.0)
+          &middot; Put/Call wall <strong>85.0 / 87.0</strong>
+          
+          &middot; Volume 0.92x (Normal)
+          <div class="note-sub">volume surge 0.92x (in line)</div>
+        </div></div>
+      <div class="note-row"><span class="note-lbl">Sentiment</span><div>
+        <span class="ph bull">&#9650;</span><strong>7/10</strong> (bull) &middot; C$1B+ Canadian investment pledge -- confirmed by Yahoo Finance and TradingView, a real and specific capital-allocation catalyst.
+      </div></div>
+      <div class="trade-row"><span class="note-lbl">Trade</span><div>
+        <strong>Call debit spread, 87/91 (targeting a breakout above the 87 call wall)</strong> <span class="size-tag">Size: Moderate</span>
+      </div></div>
+      
+    </div>
+
+    <div class="rt-card tier1">
+      <div class="rt-hdr">
+        <span class="tk">SYK</span>
+        <span class="sector-tag">Healthcare</span>
+        <span class="scores">
+          <span class="chip chip-f">F 10</span>
+          <span class="chip chip-t">T 5</span>
+          <span class="chip chip-s">S 7</span>
+        </span>
+      </div>
+      <div class="note-row"><span class="note-lbl">Fundamental</span><div>Buy consensus; 18% upside to target; revenue +9% YoY</div></div>
+      
+        <div class="note-row"><span class="note-lbl">Technical</span><div>
+          <span class="ph bear">&#9660;</span><strong>Mark-down</strong> &middot; Moderate Positive Gamma 
+          &middot; GEX 5 -&gt; 4 &middot; IV 27.5 -&gt; 28.1 (IVR 46.0)
+          &middot; Put/Call wall <strong>330.0 / 340.0</strong>
+           (below put)
+          &middot; Volume 0.86x (Normal)
+          <div class="note-sub">volume surge 0.86x (contracting -- fading interest); price already through the wall (below put) -- breakout, not pin</div>
+        </div></div>
+      <div class="note-row"><span class="note-lbl">Sentiment</span><div>
+        <span class="ph bull">&#9650;</span><strong>7/10</strong> (bull) &middot; Signed a definitive agreement to acquire ZuriMED to strengthen its shoulder/rotator-cuff offering -- confirmed across two releases same day.
+      </div></div>
+      <div class="trade-row"><span class="note-lbl">Trade</span><div>
+        <strong>Small call debit spread, 330/340 -- wait for a reclaim of 330 before adding size</strong> <span class="size-tag">Size: Small</span>
+      </div></div>
+      <div class="conflict"><strong>Conflict:</strong> Price already broke below the 330 put wall (a bearish structural signal) the same week the ZuriMED acquisition turned sentiment bullish -- technicals and news disagree.</div>
+    </div>
+
+    <div class="rt-card tier1">
+      <div class="rt-hdr">
+        <span class="tk">CVS</span>
+        <span class="sector-tag">Healthcare</span>
+        <span class="scores">
+          <span class="chip chip-f">F 10</span>
+          <span class="chip chip-t">T 5</span>
+          <span class="chip chip-s">S 6</span>
+        </span>
+      </div>
+      <div class="note-row"><span class="note-lbl">Fundamental</span><div>Strong Buy consensus; 24% upside to target; PEG 0.25 (cheap vs growth)</div></div>
+      
+        <div class="note-row"><span class="note-lbl">Technical</span><div>
+          <span class="ph bear">&#9660;</span><strong>Mark-down</strong> &middot; Neutral / Transition Zone 
+          &middot; GEX 0 -&gt; 1 &middot; IV 25.8 -&gt; 26.9 (IVR 13.0)
+          &middot; Put/Call wall <strong>90.0 / 94.0</strong>
+          
+          &middot; Volume 0.83x (Normal)
+          <div class="note-sub">volume surge 0.83x (contracting -- fading interest); IV Rank 13 (cheap entry for the vol building)</div>
+        </div></div>
+      <div class="note-row"><span class="note-lbl">Sentiment</span><div>
+        <span class="ph bull">&#9650;</span><strong>6/10</strong> (bull) &middot; 200,000 Medicare users rushing to CVS/Walgreens for $50 obesity drugs is a real, quantified demand story, offset same-day by a &quot;18.1% overvalued&quot; GuruFocus flag.
+      </div></div>
+      <div class="trade-row"><span class="note-lbl">Trade</span><div>
+        <strong>Small call debit spread only if price clears 94 (the call wall); otherwise watch</strong> <span class="size-tag">Size: Small</span>
+      </div></div>
+      <div class="conflict"><strong>Conflict:</strong> Mark-down phase and only a 6/10 (contested) sentiment read -- not enough conviction to lead with size.</div>
+    </div>
+
+    <div class="rt-card tier1">
+      <div class="rt-hdr">
+        <span class="tk">PLTR</span>
+        <span class="sector-tag">Technology</span>
+        <span class="scores">
+          <span class="chip chip-f">F 9</span>
+          <span class="chip chip-t">T 5</span>
+          <span class="chip chip-s">S 7</span>
+        </span>
+      </div>
+      <div class="note-row"><span class="note-lbl">Fundamental</span><div>Buy consensus; Fwd P/E 80x (expensive); revenue +93% YoY; 49% profit margin</div></div>
+      
+        <div class="note-row"><span class="note-lbl">Technical</span><div>
+          <span class="ph bull">&#9650;</span><strong>Mark-up</strong> &middot; Extreme Positive Gamma 
+          &middot; GEX 1 -&gt; 9 &middot; IV 44.3 -&gt; 45.3 (IVR 14.0)
+          &middot; Put/Call wall <strong>175.0 / 200.0</strong>
+          
+          &middot; Volume 0.74x (Contraction)
+          <div class="note-sub">volume surge 0.74x (contracting -- fading interest); IV Rank 14 (cheap entry for the vol building); Extreme Positive Gamma (dealer-pinned, low realized-vol regime)</div>
+        </div></div>
+      <div class="note-row"><span class="note-lbl">Sentiment</span><div>
+        <span class="ph bull">&#9650;</span><strong>7/10</strong> (bull) &middot; AI-platform demand &quot;broadening,&quot; Baird staying bullish despite the $448B valuation, and continued Magnificent-Seven-alternative framing -- consistent bullish theme across multiple outlets, though more narrative than a single hard catalyst.
+      </div></div>
+      <div class="trade-row"><span class="note-lbl">Trade</span><div>
+        <strong>Bull put spread below 175 (collect premium inside the pin) rather than a long call spread</strong> <span class="size-tag">Size: Moderate</span>
+      </div></div>
+      <div class="conflict"><strong>Conflict:</strong> Extreme Positive Gamma + a wide 175/200 pin + contracting volume (0.74x) argue for range-bound premium selling despite the bullish narrative -- not a breakout bet yet.</div>
+    </div>
+
+    <div class="rt-card tier1">
+      <div class="rt-hdr">
+        <span class="tk">NET</span>
+        <span class="sector-tag">Technology</span>
+        <span class="scores">
+          <span class="chip chip-f">F 6.7</span>
+          <span class="chip chip-t">T 5</span>
+          <span class="chip chip-s">S 8</span>
+        </span>
+      </div>
+      <div class="note-row"><span class="note-lbl">Fundamental</span><div>Buy consensus; 9% upside to target; Fwd P/E 183x (expensive); revenue +36% YoY; -8% margin (loss-making)</div></div>
+      
+        <div class="note-row"><span class="note-lbl">Technical</span><div>
+          <span class="ph bull">&#9650;</span><strong>Mark-up</strong> &middot; Neutral / Transition Zone 
+          &middot; GEX 0 -&gt; 1 &middot; IV 51.1 -&gt; 54.0 (IVR 30.0)
+          &middot; Put/Call wall <strong>307.5 / 320.0</strong>
+           (below put)
+          &middot; Volume 0.83x (Normal)
+          <div class="note-sub">volume surge 0.83x (contracting -- fading interest); price already through the wall (below put) -- breakout, not pin</div>
+        </div></div>
+      <div class="note-row"><span class="note-lbl">Sentiment</span><div>
+        <span class="ph bull">&#9650;</span><strong>8/10</strong> (bull) &middot; Cloudflare launched a genuine new product -- &quot;Adaptive Intelligence&quot; AI-driven bot defense trained on 1 trillion+ daily web visits -- confirmed across three outlets same day.
+      </div></div>
+      <div class="trade-row"><span class="note-lbl">Trade</span><div>
+        <strong>Call debit spread, 320/340 (targeting the call wall)</strong> <span class="size-tag">Size: Moderate</span>
+      </div></div>
+      <div class="conflict"><strong>Conflict:</strong> Genuine new-product news and a steep IV slope (0.209) support this, but volume hasn&#x27;t confirmed yet (0.83x, contracting) and price sits almost exactly on the put wall -- size moderate, not full, until volume catches up.</div>
+    </div>
+
+  <h2>Considered, Dropped at Sentilist</h2>
+  <div class="dropped"><ul><li><strong>NKE</strong> (news 4/10) -- mixed/soft -- a CCO role reinstatement and vague &quot;AI disruption in footwear recycling&quot; framing, undercut by &quot;eyes red week&quot; bearish Stocktwits coverage. No fresh hard catalyst.</li><li><strong>PINS</strong> (news 3/10) -- DATA QUALITY: every headline tagged &quot;PINS&quot; in this bulletin is actually about Meta (&quot;Meta Stock Gives You More Of The Market&quot;) -- a ticker-tag collision, not real Pinterest coverage.</li><li><strong>SOFI</strong> (news 4/10) -- mostly sector-wide macro weakness (&quot;geopolitical tensions... hit fintech&quot;) and a speculative &quot;is the flywheel gaining traction?&quot; framing -- no confirmed SOFI-specific catalyst.</li><li><strong>CVX</strong> (news 4/10) -- coverage is all market/sector-wide noise (Dow levels, oil-ETF mechanics, a Trump-oil-executives meeting) -- no CVX-specific catalyst found.</li></ul></div>
+
+  <h2>Tier 2 &mdash; Sentiment Catch-All (7+)</h2>
+  <p class="lead">Found by scanning the full 192-ticker / 752-headline bulletin independently of the Fundalist/
+    Technicalist funnel. None of these cleared the Dual_X co-expansion screen -- fundamental score and broad
+    Wyckoff/GEX context are shown for reference where available, but treat every trade here as smaller and
+    defined-risk only.</p>
+  
+    <div class="rt-card tier2">
+      <div class="rt-hdr">
+        <span class="tk">GSK</span>
+        <span class="sector-tag">Healthcare</span>
+        <span class="scores">
+          <span class="chip chip-f">F 7.6</span>
+          <span class="chip chip-na">T —</span>
+          <span class="chip chip-s">S 8</span>
+        </span>
+      </div>
+      <div class="note-row"><span class="note-lbl">Fundamental</span><div>Hold consensus; 17% upside to target; PEG 100.21 (very rich)</div></div>
+      
+        <div class="note-row"><span class="note-lbl">Technical</span><div>
+          <span class="chip chip-warn">NO DUAL-EXPANSION CONFIRMATION</span>
+          <span class="ph bear">&#9660;</span>Mark-down &middot; Neutral / Transition Zone
+          &middot; Put/Call wall 52.0 / 52.0
+          &middot; Volume 0.63x (Contraction)
+          <div class="note-sub">Context from the broader watchlist screen only -- this ticker never cleared the Dual_X IV+GEX co-expansion test.</div>
+        </div></div>
+      <div class="note-row"><span class="note-lbl">Sentiment</span><div>
+        <span class="ph bull">&#9650;</span><strong>8/10</strong> (bull) &middot; GSK is acquiring Nuvalent (NUVL) in oncology -- NUVL surged 39% premarket on the announcement, a clear real deal premium.
+      </div></div>
+      <div class="trade-row"><span class="note-lbl">Trade</span><div>
+        <strong>Small call debit spread</strong> <span class="size-tag">Size: Small</span>
+      </div></div>
+      <div class="conflict"><strong>Conflict:</strong> Mark-down phase plus contracting volume (0.63x) against a real acquisition catalyst.</div>
+    </div>
+
+    <div class="rt-card tier2">
+      <div class="rt-hdr">
+        <span class="tk">NEE</span>
+        <span class="sector-tag">Utilities</span>
+        <span class="scores">
+          <span class="chip chip-f">F 10</span>
+          <span class="chip chip-na">T —</span>
+          <span class="chip chip-s">S 7</span>
+        </span>
+      </div>
+      <div class="note-row"><span class="note-lbl">Fundamental</span><div>Buy consensus; 19% upside to target; revenue +12% YoY; 32% profit margin</div></div>
+      
+        <div class="note-row"><span class="note-lbl">Technical</span><div>
+          <span class="chip chip-warn">NO DUAL-EXPANSION CONFIRMATION</span>
+          <span class="ph bear">&#9660;</span>Mark-down &middot; Neutral / Transition Zone
+          &middot; Put/Call wall 80.0 / 83.0
+          &middot; Volume 0.83x (Normal)
+          <div class="note-sub">Context from the broader watchlist screen only -- this ticker never cleared the Dual_X IV+GEX co-expansion test.</div>
+        </div></div>
+      <div class="note-row"><span class="note-lbl">Sentiment</span><div>
+        <span class="ph bull">&#9650;</span><strong>7/10</strong> (bull) &middot; The acquirer side of the Dominion (D) merger -- CEO says &quot;scale matters more than ever.&quot; Real, but the tradeable edge from this story sits with D (Tier 1), not NEE itself -- treat this as context, not a fresh NEE catalyst.
+      </div></div>
+      <div class="trade-row"><span class="note-lbl">Trade</span><div>
+        <strong>Watch only -- no new position (the tradeable edge from this story is on D, in Tier 1)</strong> <span class="size-tag">Size: n/a</span>
+      </div></div>
+      
+    </div>
+
+    <div class="rt-card tier2">
+      <div class="rt-hdr">
+        <span class="tk">MRVL</span>
+        <span class="sector-tag">Technology</span>
+        <span class="scores">
+          <span class="chip chip-f">F 10</span>
+          <span class="chip chip-na">T —</span>
+          <span class="chip chip-s">S 7</span>
+        </span>
+      </div>
+      <div class="note-row"><span class="note-lbl">Fundamental</span><div>Strong Buy consensus; 32% upside to target; revenue +36% YoY; 28% profit margin</div></div>
+      
+        <div class="note-row"><span class="note-lbl">Technical</span><div>
+          <span class="chip chip-warn">NO DUAL-EXPANSION CONFIRMATION</span>
+          <span class="ph bear">&#9660;</span>Distribution &middot; Neutral / Transition Zone
+          &middot; Put/Call wall 220.0 / 240.0
+          &middot; Volume 1.04x (Normal)
+          <div class="note-sub">Context from the broader watchlist screen only -- this ticker never cleared the Dual_X IV+GEX co-expansion test.</div>
+        </div></div>
+      <div class="note-row"><span class="note-lbl">Sentiment</span><div>
+        <span class="ph bull">&#9650;</span><strong>7/10</strong> (bull) &middot; Direct analyst rating upgrade with an explicit &quot;ready for another leg higher&quot; call.
+      </div></div>
+      <div class="trade-row"><span class="note-lbl">Trade</span><div>
+        <strong>Small call debit spread</strong> <span class="size-tag">Size: Smallest</span>
+      </div></div>
+      <div class="conflict"><strong>Conflict:</strong> Wyckoff reads Distribution while the analyst upgrade is bullish.</div>
+    </div>
+
+    <div class="rt-card tier2">
+      <div class="rt-hdr">
+        <span class="tk">SANM</span>
+        <span class="sector-tag">Technology</span>
+        <span class="scores">
+          <span class="chip chip-f">F 10</span>
+          <span class="chip chip-na">T —</span>
+          <span class="chip chip-s">S 7</span>
+        </span>
+      </div>
+      <div class="note-row"><span class="note-lbl">Fundamental</span><div>no analyst coverage; 32% upside to target; PEG 0.70 (cheap vs growth); revenue +70% YoY</div></div>
+      
+        <div class="note-row"><span class="note-lbl">Technical</span><div>
+          <span class="chip chip-warn">NO DUAL-EXPANSION CONFIRMATION</span>
+          <span class="ph bear">&#9660;</span>Mark-down &middot; Neutral / Transition Zone
+          &middot; Put/Call wall 180.0 / 210.0
+          &middot; Volume 0.88x (Normal)
+          <div class="note-sub">Context from the broader watchlist screen only -- this ticker never cleared the Dual_X IV+GEX co-expansion test.</div>
+        </div></div>
+      <div class="note-row"><span class="note-lbl">Sentiment</span><div>
+        <span class="ph bull">&#9650;</span><strong>7/10</strong> (bull) &middot; Direct rating upgrade to Strong Buy -- specific and actionable.
+      </div></div>
+      <div class="trade-row"><span class="note-lbl">Trade</span><div>
+        <strong>Small call debit spread</strong> <span class="size-tag">Size: Smallest</span>
+      </div></div>
+      <div class="conflict"><strong>Conflict:</strong> Wyckoff reads Mark-down while the Strong Buy upgrade is bullish.</div>
+    </div>
+
+    <div class="rt-card tier2">
+      <div class="rt-hdr">
+        <span class="tk">NBIS</span>
+        <span class="sector-tag">Communication Services</span>
+        <span class="scores">
+          <span class="chip chip-f">F 10</span>
+          <span class="chip chip-na">T —</span>
+          <span class="chip chip-s">S 7</span>
+        </span>
+      </div>
+      <div class="note-row"><span class="note-lbl">Fundamental</span><div>Strong Buy consensus; 39% upside to target; PEG 0.63 (cheap vs growth); negative forward P/E; revenue +454% YoY</div></div>
+      
+        <div class="note-row"><span class="note-lbl">Technical</span><div>
+          <span class="chip chip-warn">NO DUAL-EXPANSION CONFIRMATION</span>
+          <span class="ph bear">&#9660;</span>Mark-down &middot; Neutral / Transition Zone
+          &middot; Put/Call wall 210.0 / 225.0
+          &middot; Volume 0.54x (Dry-up)
+          <div class="note-sub">Context from the broader watchlist screen only -- this ticker never cleared the Dual_X IV+GEX co-expansion test.</div>
+        </div></div>
+      <div class="note-row"><span class="note-lbl">Sentiment</span><div>
+        <span class="ph bear">&#9660;</span><strong>7/10</strong> (bear) &middot; Direct rating downgrade (&quot;deserves a pause after rally&quot;) -- specific and actionable.
+      </div></div>
+      <div class="trade-row"><span class="note-lbl">Trade</span><div>
+        <strong>Small put debit spread</strong> <span class="size-tag">Size: Small</span>
+      </div></div>
+      <div class="conflict"><strong>Conflict:</strong> Directionally aligned (Mark-down + the downgrade), but volume is very dry (0.54x) -- thin conviction either way.</div>
+    </div>
+
+    <div class="rt-card tier2">
+      <div class="rt-hdr">
+        <span class="tk">WDAY</span>
+        <span class="sector-tag">Technology</span>
+        <span class="scores">
+          <span class="chip chip-f">F 10</span>
+          <span class="chip chip-na">T —</span>
+          <span class="chip chip-s">S 7</span>
+        </span>
+      </div>
+      <div class="note-row"><span class="note-lbl">Fundamental</span><div>Buy consensus; PEG 0.76 (cheap vs growth); revenue +13% YoY</div></div>
+      
+        <div class="note-row"><span class="note-lbl">Technical</span><div>
+          <span class="chip chip-warn">NO DUAL-EXPANSION CONFIRMATION</span>
+          <span class="ph bull">&#9650;</span>Mark-up &middot; Neutral / Transition Zone
+          &middot; Put/Call wall 195.0 / 190.0
+          &middot; Volume 0.92x (Normal)
+          <div class="note-sub">Context from the broader watchlist screen only -- this ticker never cleared the Dual_X IV+GEX co-expansion test.</div>
+        </div></div>
+      <div class="note-row"><span class="note-lbl">Sentiment</span><div>
+        <span class="ph bear">&#9660;</span><strong>7/10</strong> (bear) &middot; Downgraded despite a Q2 beat, with analysts explicitly flagging risk of another guide-down -- a real, specific bearish signal layered on top of a beat.
+      </div></div>
+      <div class="trade-row"><span class="note-lbl">Trade</span><div>
+        <strong>Watch only -- no new position</strong> <span class="size-tag">Size: n/a</span>
+      </div></div>
+      <div class="conflict"><strong>Conflict:</strong> Mark-up phase vs. a bearish downgrade with an explicit guide-down risk flag -- a genuine conflict, skip until it resolves.</div>
+    </div>
+
+    <div class="rt-card tier2">
+      <div class="rt-hdr">
+        <span class="tk">TEVA</span>
+        <span class="sector-tag">Healthcare</span>
+        <span class="scores">
+          <span class="chip chip-f">F 10</span>
+          <span class="chip chip-na">T —</span>
+          <span class="chip chip-s">S 7</span>
+        </span>
+      </div>
+      <div class="note-row"><span class="note-lbl">Fundamental</span><div>Strong Buy consensus; 15% upside to target; revenue -1% YoY (declining)</div></div>
+      
+        <div class="note-row"><span class="note-lbl">Technical</span><div>
+          <span class="chip chip-warn">NO DUAL-EXPANSION CONFIRMATION</span>
+          <span class="ph bull">&#9650;</span>Mark-up &middot; Neutral / Transition Zone
+          &middot; Put/Call wall 37.0 / 37.0
+          &middot; Volume 0.85x (Normal)
+          <div class="note-sub">Context from the broader watchlist screen only -- this ticker never cleared the Dual_X IV+GEX co-expansion test.</div>
+        </div></div>
+      <div class="note-row"><span class="note-lbl">Sentiment</span><div>
+        <span class="ph bull">&#9650;</span><strong>7/10</strong> (bull) &middot; Agreed to acquire BioXcel&#x27;s Igalmi assets for up to $125m -- a real, quantified bolt-on acquisition.
+      </div></div>
+      <div class="trade-row"><span class="note-lbl">Trade</span><div>
+        <strong>Small call debit spread</strong> <span class="size-tag">Size: Small</span>
+      </div></div>
+      
+    </div>
+
+    <div class="rt-card tier2">
+      <div class="rt-hdr">
+        <span class="tk">VRTX</span>
+        <span class="sector-tag">Healthcare</span>
+        <span class="scores">
+          <span class="chip chip-f">F 9.7</span>
+          <span class="chip chip-na">T —</span>
+          <span class="chip chip-s">S 7</span>
+        </span>
+      </div>
+      <div class="note-row"><span class="note-lbl">Fundamental</span><div>Buy consensus; revenue +12% YoY; 35% profit margin</div></div>
+      
+        <div class="note-row"><span class="note-lbl">Technical</span><div>
+          <span class="chip chip-warn">NO DUAL-EXPANSION CONFIRMATION</span>
+          <span class="ph bull">&#9650;</span>Mark-up &middot; Neutral / Transition Zone
+          &middot; Put/Call wall 520.0 / 550.0
+          &middot; Volume 0.70x (Contraction)
+          <div class="note-sub">Context from the broader watchlist screen only -- this ticker never cleared the Dual_X IV+GEX co-expansion test.</div>
+        </div></div>
+      <div class="note-row"><span class="note-lbl">Sentiment</span><div>
+        <span class="ph bull">&#9650;</span><strong>7/10</strong> (bull) &middot; Crinetics acquisition creates a &quot;fifth commercial pillar&quot; per an analyst who sees 24% upside -- a real, specific M&amp;A-plus-target-price story.
+      </div></div>
+      <div class="trade-row"><span class="note-lbl">Trade</span><div>
+        <strong>Small call debit spread</strong> <span class="size-tag">Size: Small</span>
+      </div></div>
+      
+    </div>
+
+    <div class="rt-card tier2">
+      <div class="rt-hdr">
+        <span class="tk">HD</span>
+        <span class="sector-tag">Consumer Cyclical</span>
+        <span class="scores">
+          <span class="chip chip-f">F 9.3</span>
+          <span class="chip chip-na">T —</span>
+          <span class="chip chip-s">S 7</span>
+        </span>
+      </div>
+      <div class="note-row"><span class="note-lbl">Fundamental</span><div>Buy consensus; 15% upside to target</div></div>
+      
+        <div class="note-row"><span class="note-lbl">Technical</span><div>
+          <span class="chip chip-warn">NO DUAL-EXPANSION CONFIRMATION</span>
+          <span class="ph bear">&#9660;</span>Mark-down &middot; Neutral / Transition Zone
+          &middot; Put/Call wall 330.0 / 350.0
+          &middot; Volume 0.89x (Normal)
+          <div class="note-sub">Context from the broader watchlist screen only -- this ticker never cleared the Dual_X IV+GEX co-expansion test.</div>
+        </div></div>
+      <div class="note-row"><span class="note-lbl">Sentiment</span><div>
+        <span class="ph bull">&#9650;</span><strong>7/10</strong> (bull) &middot; Q2 beat with guidance reaffirmed; CFO says tariff refunds help &quot;maintain value&quot; -- a real, confirmed earnings catalyst.
+      </div></div>
+      <div class="trade-row"><span class="note-lbl">Trade</span><div>
+        <strong>Small call debit spread</strong> <span class="size-tag">Size: Smallest</span>
+      </div></div>
+      <div class="conflict"><strong>Conflict:</strong> Wyckoff reads Mark-down while the Q2 beat + reaffirmed guidance is bullish.</div>
+    </div>
+
+    <div class="rt-card tier2">
+      <div class="rt-hdr">
+        <span class="tk">WMT</span>
+        <span class="sector-tag">Consumer Defensive</span>
+        <span class="scores">
+          <span class="chip chip-f">F 7.6</span>
+          <span class="chip chip-na">T —</span>
+          <span class="chip chip-s">S 7</span>
+        </span>
+      </div>
+      <div class="note-row"><span class="note-lbl">Fundamental</span><div>Buy consensus; 22% upside to target; PEG 3.91 (rich)</div></div>
+      
+        <div class="note-row"><span class="note-lbl">Technical</span><div>
+          <span class="chip chip-warn">NO DUAL-EXPANSION CONFIRMATION</span>
+          <span class="ph bear">&#9660;</span>Mark-down &middot; Extreme Positive Gamma
+          &middot; Put/Call wall 100.0 / 103.0
+          &middot; Volume 1.18x (Normal)
+          <div class="note-sub">Context from the broader watchlist screen only -- this ticker never cleared the Dual_X IV+GEX co-expansion test.</div>
+        </div></div>
+      <div class="note-row"><span class="note-lbl">Sentiment</span><div>
+        <span class="ph bull">&#9650;</span><strong>7/10</strong> (bull) &middot; Settled one of its uglier lawsuits for just 0.4% of six-month profit -- a real overhang removed cheaply.
+      </div></div>
+      <div class="trade-row"><span class="note-lbl">Trade</span><div>
+        <strong>Call debit spread, 100/103 (targeting the call wall)</strong> <span class="size-tag">Size: Small-to-moderate (best-supported catch-all case: Extreme Positive Gamma + confirming 1.18x volume + a resolved legal overhang)</span>
+      </div></div>
+      
+    </div>
+
+  <div class="note">
+    <h3>How to read this</h3>
+    <p><strong>Fundalist</strong> scored all 204 tickers in the latest <code>business_overview_*.csv</code> on a
+    deterministic 1-10 formula (analyst rating, upside to target, PEG, forward P/E, revenue growth, profit margin)
+    and passed forward 174 names scoring &ge;5 -- not shown in full here, only the ones that matter to the funnel below.</p>
+    <p><strong>Technicalist</strong> worked only the 17 names in the latest Dual_X co-expansion screen (both IV
+    slope and GEX slope positive over the snapshot window -- this <em>is</em> the "dual expand"), cross-checked
+    against the broader watchlist screen for a live volume-surge ratio (the closest available proxy to a 5-day vs
+    30-day volume read; no snapshot carries a literal 5d/30d average). 12 of 15 fundalist-passed names cleared
+    &ge;5 (APH, AAPL and MOD did not); <strong>SMR</strong>, <strong>XLY</strong> and <strong>XLB</strong> were
+    already out at Fundalist (4.8, 3.7, 3.7).</p>
+    <p><strong>Sentilist</strong> read the actual headlines for each surviving ticker from the latest news bulletin
+    and rated <em>trade conviction</em> 1-10 -- how real and specific the catalyst is, not just its tone. A strong,
+    specific <em>negative</em> catalyst (a downgrade, a safety probe) scores as high as a strong positive one; the
+    arrow (&#9650;/&#9660;) next to the score carries the direction, and the trade proposal follows the arrow, not
+    just the score.</p>
+    <p><strong>The 7+ catch-all</strong> is mandatory and independent of the funnel: it scanned all 752 headline
+    cards across all 192 covered tickers using a catalyst-keyword pre-filter (earnings beats/misses, upgrades/
+    downgrades, FDA approvals, M&amp;A, guidance changes, etc.), then read the ~48 flagged candidates directly to
+    rate the 10 that were both genuinely ticker-specific and rated 7 or higher. <strong>This same scan is what
+    caught the D/NextEra merger</strong> (see Tier 1) -- proof this pass earns its keep, not just a formality.
+    This is a pre-filtered scan, not an exhaustive hand-read of all 192 tickers -- a real catalyst below the
+    keyword net could exist but wasn't caught.</p>
+    <p><strong>Conflicts are flagged, not hidden.</strong> Where Wyckoff phase, GEX regime, or wall position disagree
+    with the news direction (<strong>AMZN</strong>, <strong>SYK</strong>, <strong>CVS</strong>, <strong>PLTR</strong>,
+    <strong>NET</strong>, <strong>HD</strong>, <strong>MRVL</strong>, <strong>SANM</strong>, <strong>WDAY</strong>),
+    the trade is sized down or dropped to a watch-only call rather than forced -- see each card's amber conflict note.</p>
+    <p><strong>Data quality flag:</strong> two ticker-tag collisions this run. Every "PINS" headline was actually
+    about Meta, not Pinterest -- PINS was dropped rather than scored on bad data. And the Dominion/NextEra merger
+    story ran entirely under the "NEE" tag, never under "D" -- caught only by the wider catch-all scan, which is
+    exactly what that scan is for.</p>
+    <p>GEX and Wyckoff phase source: Dual_X co-expansion screen (<code>Dual_X_010926_0741.html</code>) and the
+    watchlist confluence screen (<code>stock_analysis_010926.0418.csv</code>). News source:
+    <code>news_bulletin_20260901_0423.html</code> (752 articles, 192 tickers, last 48h). Fundamentals source:
+    <code>business_overview_010926_0419.csv</code>.</p>
+  </div>
+</main>
+<footer>Optionx &middot; Research Team &middot; generated 1 Sep 2026 from the Dashboard/Watchlist Google Drive
+  snapshots &middot; candidate generator, not a trade gate -- confirm size and strikes before acting on any card.</footer>
+</body>
+</html>

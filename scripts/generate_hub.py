@@ -573,7 +573,7 @@ def build():
         ("Dual_X", dualx_dt),
         ("Senti", senti_dt),
         ("Strategist", strat_dt),
-        ("Research Team", research_dt),
+        ("Research", research_dt),
     ])
 
     page = f"""<!doctype html>
@@ -710,7 +710,7 @@ def build():
     <button data-target="dualx">Dual_X</button>
     <button data-target="senti">Senti</button>
     <button data-target="strategist">Strategist</button>
-    <button data-target="researchteam">Research Team</button>
+    <button data-target="researchteam">Research</button>
   </div>
 </nav>
 <main>
