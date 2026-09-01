@@ -7,6 +7,7 @@ A minimal installable PWA (Progressive Web App) dashboard for the Optionx pipeli
 - **News Bulletin** — latest news headlines per ticker (from `News/*_news_*.txt`)
 - **Oil Brief** — latest daily oil market dashboard/brief from the `oil-analyst` agent (most recently modified `Oil_brief_*.html` / `oilbrief_*.html` / `oil_dashboard_*.html` in Dashboard; `oil_trades_*` is excluded since it holds actual positions)
 - **Bull Screener** — latest bullish-ticker funnel dashboard from the `bull_screener` agent (most recent `bull_screener_*.html` in Dashboard, matched by timestamp in the filename)
+- **Research** — latest three-agent report (`research_team_*.html` in Dashboard) chaining fundalist (business overview) → technicalist (Dual_X, GEX, IV, 5d/30d volume expansion) → sentilist (news bulletin rating, plus a 7+ catch-all for tickers the first two agents missed), synthesized into one report with proposed trades and GEX/put-wall/call-wall commentary. See `.claude/skills/research-team/SKILL.md` for the pipeline spec.
 
 ## Regenerating
 ```
