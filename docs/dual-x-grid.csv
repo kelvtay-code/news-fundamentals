@@ -1,19 +1,20 @@
 ﻿Sector,Sector Rank,Ticker,Price,IV Implied,IV First->Last,IV Slope,IV Rank,GEX First->Last,GEX Slope,GEX Sign Flip,Put Wall,Call Wall,Wall Position %,Wall Note,Wyckoff,GEX Classification,Badge,Caveat
-Technology,1,NET,306.83,54.0,51.1 -> 54.0,0.209,30.0,0 -> 1,0.095,,307.5,320.0,-5.36,below put,Mark-up,Neutral / Transition Zone,📈 UPTREND,
-Technology,2,PLTR,185.9,45.3,44.3 -> 45.3,0.066,14.0,1 -> 9,0.15,,175.0,200.0,43.6,,Mark-up,Extreme Positive Gamma,◉ PINNED,
-Technology,3,APH,158.55,39.6,39.7 -> 39.6,0.008,28.0,0 -> 4,0.227,,140.0,170.0,61.833,,Mark-down,Moderate Positive Gamma,◎ NEUTRAL,flat
-Technology,4,AAPL,316.86,24.5,23.5 -> 24.5,0.007,44.0,3 -> 10,0.146,,315.0,320.0,37.2,,Mark-up,Extreme Positive Gamma,◉ PINNED,
-Communication Services,1,PINS,21.72,40.0,40.1 -> 40.0,0.05,16.0,0 -> 0,0.072,,21.0,21.5,144.0,above call,Mark-down,Neutral / Transition Zone,📉 DOWNTREND,flat
-Consumer Cyclical,1,MOD,178.43,67.9,70.3 -> 67.9,0.015,41.0,4 -> 2,0.007,,160.0,200.0,46.075,,Mark-down,Neutral / Transition Zone,◎ NEUTRAL,fade
-Consumer Cyclical,2,NKE,39.15,41.4,33.3 -> 41.4,0.43,52.0,-1 -> 2,0.463,YES,38.0,40.0,57.5,,Mark-down,Neutral / Transition Zone,◎ NEUTRAL,
-Consumer Cyclical,3,GM,86.43,30.1,30.5 -> 30.1,0.03,27.0,1 -> 0,0.242,,85.0,87.0,71.5,,Mark-up,Neutral / Transition Zone,📈 UPTREND,flat
-Consumer Cyclical,4,AMZN,260.32,28.7,28.2 -> 28.7,0.001,20.0,-1 -> 1,0.301,YES,260.0,265.0,6.4,,Mark-up,Neutral / Transition Zone,📈 UPTREND,
-Industrials,1,SMR,9.26,76.0,77.9 -> 76.0,0.167,2.0,0 -> 0,0.05,,9.0,10.0,26.0,,Distribution,Neutral / Transition Zone,◎ NEUTRAL,fade
-Financial Services,1,SOFI,17.91,46.6,46.5 -> 46.6,0.169,6.0,-1 -> 1,0.143,YES,17.0,19.0,45.5,,Mark-up,Neutral / Transition Zone,📈 UPTREND,flat
-Financial Services,2,BAC,62.06,20.2,19.6 -> 20.2,0.033,9.0,0 -> 2,0.141,,62.0,62.0,,pinned,Accumulation,Neutral / Transition Zone,◎ NEUTRAL,
-Healthcare,1,SYK,325.89,28.1,27.5 -> 28.1,0.051,46.0,5 -> 4,0.128,,330.0,340.0,-41.1,below put,Mark-down,Moderate Positive Gamma,◎ NEUTRAL,
-Healthcare,2,CVS,93.91,26.9,25.8 -> 26.9,0.055,13.0,0 -> 1,0.037,,90.0,94.0,97.75,,Mark-down,Neutral / Transition Zone,◎ NEUTRAL,
-Utilities,1,D,66.01,19.4,17.9 -> 19.4,0.101,31.0,0 -> 2,0.197,,67.5,67.5,,pinned,Mark-down,Neutral / Transition Zone,◎ NEUTRAL,
-Energy,1,CVX,206.66,25.6,25.3 -> 25.6,0.045,50.0,0 -> 10,0.099,,205.0,215.0,16.6,,Mark-up,Extreme Positive Gamma,◉ PINNED,flat
--,1,XLY,116.59,18.7,16.9 -> 18.7,0.01,19.0,1 -> 0,0.01,,113.0,116.5,102.571,above call,Mark-up,Neutral / Transition Zone,📈 UPTREND,
--,2,XLB,52.65,18.3,17.8 -> 18.3,0.046,40.0,1 -> 0,0.06,,53.0,53.0,,pinned,Mark-up,Neutral / Transition Zone,📈 UPTREND,
+Technology,1,NET,284.78,54.8,51.1 -> 54.8,0.238,32.0,1 -> -1,0.01,,255.0,295.0,74.45,,Mark-up,Neutral / Transition Zone,◎ NEUTRAL,
+Technology,2,AVGO,371.28,50.5,49.9 -> 50.5,0.007,48.0,-4 -> 1,0.44,YES,360.0,370.0,112.8,above call,Mark-down,Neutral / Transition Zone,◎ NEUTRAL,
+Technology,3,APH,163.49,41.8,39.7 -> 41.8,0.036,33.0,4 -> 7,0.249,,140.0,170.0,78.3,,Mark-up,Moderate Positive Gamma,📈 UPTREND,
+Technology,4,CDNS,314.0,37.4,35.2 -> 37.4,0.126,30.0,-2 -> -1,0.262,,332.5,335.0,-740.0,below put,Mark-down,Neutral / Transition Zone,📉 DOWNTREND,
+Technology,5,AAPL,325.14,25.0,23.5 -> 25.0,0.023,47.0,9 -> 10,0.042,,315.0,330.0,67.6,,Mark-up,Extreme Positive Gamma,◉ PINNED,
+Communication Services,1,PINS,21.25,42.0,40.1 -> 42.0,0.088,20.0,-1 -> -1,0.059,,22.0,22.0,,pinned,Mark-down,Neutral / Transition Zone,📉 DOWNTREND,
+Communication Services,2,SE,112.66,42.0,39.8 -> 42.0,0.036,21.0,1 -> 2,0.037,,115.0,120.0,-46.8,below put,Mark-up,Neutral / Transition Zone,📈 UPTREND,
+Consumer Cyclical,1,NKE,38.16,43.8,33.3 -> 43.8,0.595,59.0,-5 -> -1,0.369,,38.0,39.0,16.0,,Mark-down,Neutral / Transition Zone,📉 DOWNTREND,
+Consumer Cyclical,2,GM,85.6,30.7,30.5 -> 30.7,0.03,30.0,1 -> 1,0.091,,85.0,87.0,30.0,,Mark-up,Neutral / Transition Zone,📈 UPTREND,flat
+Consumer Cyclical,3,AMZN,255.1,28.9,28.2 -> 28.9,0.004,20.0,1 -> 1,0.044,,260.0,257.5,,inverted,Mark-up,Neutral / Transition Zone,📈 UPTREND,
+Consumer Cyclical,4,SBUX,106.02,26.2,24.5 -> 26.2,0.085,10.0,2 -> 1,0.003,,107.0,110.0,-32.667,below put,Mark-up,Neutral / Transition Zone,📈 UPTREND,
+Industrials,1,SMR,9.2,78.1,77.9 -> 78.1,0.115,6.0,0 -> 0,0.033,,9.0,10.0,20.0,,Distribution,Neutral / Transition Zone,◎ NEUTRAL,flat
+Financial Services,1,BAC,61.99,21.2,19.6 -> 21.2,0.054,13.0,4 -> 2,0.042,,62.0,62.0,,pinned,Accumulation,Neutral / Transition Zone,◎ NEUTRAL,
+Healthcare,1,CVS,97.46,28.1,25.8 -> 28.1,0.089,19.0,0 -> 1,0.098,,87.0,96.0,116.222,above call,Mark-down,Neutral / Transition Zone,◎ NEUTRAL,
+Healthcare,2,SYK,317.4,27.4,27.5 -> 27.4,0.038,42.0,3 -> 3,0.148,,330.0,340.0,-126.0,below put,Mark-down,Neutral / Transition Zone,◎ NEUTRAL,flat
+Utilities,1,D,66.38,20.2,17.9 -> 20.2,0.113,38.0,2 -> 3,0.175,,67.5,67.5,,pinned,Mark-down,Neutral / Transition Zone,◎ NEUTRAL,
+Utilities,2,FE,46.16,19.7,20.7 -> 19.7,0.01,39.0,3 -> 3,0.017,,45.0,47.0,58.0,,Mark-down,Neutral / Transition Zone,◎ NEUTRAL,fade
+Energy,1,VLO,362.55,43.6,40.2 -> 43.6,0.028,68.0,-1 -> 1,0.186,YES,335.0,380.0,61.222,,Mark-up,Neutral / Transition Zone,📈 UPTREND,
+Energy,2,CVX,211.25,27.9,25.3 -> 27.9,0.118,65.0,5 -> 10,0.089,,205.0,215.0,62.5,,Mark-up,Extreme Positive Gamma,◉ PINNED,
