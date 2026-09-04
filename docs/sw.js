@@ -1,4 +1,4 @@
-const CACHE = "optionx-hub-v1";
+const CACHE = "optionx-hub-20260904";
 const ASSETS = ["./", "./index.html", "./manifest.json", "./icons/icon-192.png", "./icons/icon-512.png"];
 
 self.addEventListener("install", (event) => {
