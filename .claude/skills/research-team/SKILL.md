@@ -19,6 +19,7 @@ own three-stage chain rather than a single bull/skeptic debate.
 | Latest `Dual_X_*.html` (or its `_grid.csv` sidecar) | Technicalist | Ticker, IV Implied, IV Slope, IV Rank, GEX First→Last, GEX Slope, GEX Sign Flip, Put Wall, Call Wall, Wall Position %, Wall Note, Wyckoff, GEX Classification |
 | 5-day vs 30-day average volume | Technicalist | Not in any snapshot file — pull live per ticker with the `finfetch` skill (or equivalent quote source) |
 | Latest `news_bulletin_*.html` (fallback: `News/*_news_*.txt`) | Sentilist | Ticker, headline/brief text, date |
+| `research_team_ledger.csv` (Dashboard folder) | Synthesis (write), self-check (read) | Append-only log of every recommendation ever made — see "Performance ledger and self-check" below |
 
 If a source file is missing, say so explicitly in the report instead of inventing rows.
 
@@ -57,8 +58,18 @@ Input: the Fundalist list (ticker only — re-derive everything else fresh).
 For each ticker, pull from the latest Dual_X snapshot:
 - **Dual expansion** — does it clear the Dual_X co-expansion screen (IV Slope and GEX Slope
   both positive over the snapshot's lookback)? This *is* the "dual expand" the user means.
-- **GEX** — sign, First→Last trend, GEX Sign Flip (a negative→positive flip is a real dealer
-  regime change, weight it above drift inside one sign).
+- **GEX** — sign, First→Last trend, GEX Sign Flip. A flip is a *candidate* regime change, not a
+  confirmed one on the day it first appears — a 5 Sep 2026 performance review of 66 graded
+  recommendations found same-session sign-flip trades went 0-for-3. Score a fresh (first-seen)
+  flip modestly; do not let it alone justify a directional trade in the synthesis step (see
+  below) — treat it as confirmed only once it has held for a second consecutive session.
+- **GEX Classification** — read "Extreme Positive Gamma" / "Moderate Positive Gamma" literally:
+  these describe a *dealer-pinned, low-realized-vol regime*, i.e. price compression, not license
+  for a directional continuation bet. The same review found Tier-1 calls built on this
+  classification alone went 0-for-8; the failure mode was recommending a directional call
+  spread on the strength of the classification's bullish-sounding name while its own plain-English
+  meaning ("pinned," "low vol") pointed to a range-bound structure instead. See the synthesis
+  rules for the corrected mapping.
 - **Implied IV** — level and IV Rank (a rising IV against a low IV Rank is a cheaper entry than
   the same slope against a high one).
 - **Put Wall / Call Wall** — levels and Wall Position % (price's position between the two:
@@ -67,6 +78,11 @@ For each ticker, pull from the latest Dual_X snapshot:
 - **Volume expansion, 5-day vs 30-day** — fetch current average volume for both windows
   (finfetch or equivalent) and compute the ratio. Ratio ≥ 1.2 is confirming; below 1.0 is
   fading interest and should pull the score down even if IV/GEX look constructive.
+- **Wyckoff phase** — treat as a lagging confirmation, not a leading signal, over a 1–2 session
+  hold: the same review found Tier-1 bull calls made while a ticker's own phase read "Mark-up"
+  won only 13.3% (2 of 15) — worse than calls with no phase alignment at all. Don't let a
+  Mark-up/Accumulation tag alone upgrade a trade's size; require it alongside a wall/volume
+  signal that agrees.
 
 Score each ticker 1–10 on technical strength (dual expansion + GEX regime + wall proximity +
 volume ratio + Wyckoff phase). Drop tickers Dual_X doesn't cover at all (no options-chain
@@ -103,17 +119,31 @@ scores it actually has (blank/"—" for sentiment-only rows, not zero). For ever
    plus the volume 5d/30d ratio and Wyckoff phase.
 3. **Sentiment note** — the news brief that drove the rating, plus the rating itself and
    whether it came through the funnel or the 7+ catch-all.
-4. **Proposed trade** — pick a structure the GEX/wall read actually supports:
-   - Positive gamma, price pinned between walls, fading conviction → iron condor / calendar,
-     small size.
-   - Positive gamma + GEX sign-flip + bullish Wyckoff phase + wall room to the call wall →
-     call spread targeting the call wall.
-   - Negative gamma, IV rising in a Mark-down/Distribution phase (fear repricing, not a premium
-     build) → put spread / defined-risk bearish, not a long-vol bet.
-   - Price already through a wall with volume confirming → directional debit spread in the
-     breakout direction, stop past the wall that failed to hold.
-   - Sentiment-only rows → smallest size, defined-risk only (debit spread, not naked), and say
-     so explicitly.
+4. **Proposed trade** — pick a structure the GEX/wall read actually supports. Work this as an
+   ordered decision list, top to bottom — stop at the first row that matches, don't cherry-pick
+   a later one because it produces a more excited-sounding trade:
+   1. **Conflict check first.** If Technicalist's regime read (Wyckoff phase, GEX
+      classification, wall position) disagrees with Sentilist's direction, this is a
+      **conflict** — flag it explicitly in the card. A 5 Sep 2026 review of 66 graded
+      recommendations found conflicted Tier-1 setups won **13.3%** (2 of 15) vs. **55.6%**
+      (5 of 9) when nothing was flagged. Sizing down is not enough on its own: a conflicted
+      ticker caps at **watch-only, no position** unless the sentiment side is exceptional
+      (rated 9–10, multi-source-confirmed, quantified) — in that one case, smallest defined-risk
+      size only, and say explicitly that it's a size-down-for-conflict, not a size-down-for-caution.
+   2. **"Extreme/Moderate Positive Gamma" without a sign-flip that's held ≥2 sessions** → this
+      describes a pinned, low-vol regime — trade it as **iron condor / calendar, small size**,
+      *not* a directional debit spread, even if Wyckoff phase and wall room both look bullish.
+      (This was the specific, repeated failure mode in the review: CVX was recommended as a
+      directional call spread on this exact classification three sessions running and lost each
+      time — the note said "dealer-pinned, low realized-vol" and the trade ignored it.)
+   3. **Positive gamma + a GEX sign-flip confirmed over ≥2 sessions + bullish Wyckoff phase +
+      wall room to the call wall** → call spread targeting the call wall.
+   4. **Negative gamma, IV rising in a Mark-down/Distribution phase** (fear repricing, not a
+      premium build) → put spread / defined-risk bearish, not a long-vol bet.
+   5. **Price already through a wall with volume confirming** → directional debit spread in the
+      breakout direction, stop past the wall that failed to hold.
+   6. **Sentiment-only catch-all rows** → smallest size, defined-risk only (debit spread, not
+      naked), and say so explicitly.
 
 Order the report: fully-confirmed tickers (all three scores) first, ranked by combined
 conviction; then partial (two of three); then sentiment-only catch-alls last, clearly marked.
@@ -128,3 +158,28 @@ inventing new styling) and save it to the Dashboard folder as
 `bull_screener_*.html`). `scripts/generate_hub.py` already knows how to find the latest one of
 these and publish it as the hub's "Research Team" tab — just run
 `python scripts/generate_hub.py` (or `publish_hub.py` to also commit+push) afterward.
+
+## Performance ledger and self-check (mandatory, every run)
+
+Keep the pipeline honest against its own track record instead of re-deriving it from scratch
+each time someone asks:
+
+1. **Log every recommendation.** After building the day's final ticker list (Tier 1 + catch-all),
+   append one row per ticker to `research_team_ledger.csv` in the Dashboard folder (create it if
+   missing) with columns: `date, ticker, tier, direction (bull/bear), rec_price, trade,
+   conflict_flag (y/n), gex_classification, gex_sign_flip, wyckoff_phase`. `rec_price` is that
+   day's Current Price from the Watchlist snapshot. This makes a future scorecard a straight
+   join against later snapshots' prices instead of a manual re-read of old reports.
+2. **Grade on a rolling basis.** When asked to review performance (or roughly weekly if running
+   unattended), compare each ledger row at least 2 trading sessions old against the latest
+   Current Price: bull wins if price is ≥0.5% higher, bear wins if ≥0.5% lower, else flat.
+   Break the result out by conflict-flag (y/n), by GEX classification, by tier, and by whether a
+   sign-flip was fresh (first-seen) vs. confirmed (≥2 sessions) — these are exactly the splits
+   that surfaced real, actionable problems the first time this review ran (5 Sep 2026: conflict-
+   flagged Tier 1 at 13.3% vs. 55.6% clean; Extreme/Moderate Positive Gamma at 0-for-8; same-day
+   sign-flips at 0-for-3).
+3. **Feed findings back into this file.** If a rolling review turns up a new, repeated failure
+   mode with a clear mechanism (not just a losing streak on one ticker), add it to this SKILL.md
+   as a numbered rule the same way the three above were added — cite the date and the sample
+   size so a future reviewer can tell a well-evidenced rule from a thin one, and revisit/relax a
+   rule if a larger sample later contradicts it.
