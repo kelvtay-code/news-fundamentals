@@ -159,27 +159,39 @@ inventing new styling) and save it to the Dashboard folder as
 these and publish it as the hub's "Research Team" tab — just run
 `python scripts/generate_hub.py` (or `publish_hub.py` to also commit+push) afterward.
 
-## Performance ledger and self-check (mandatory, every run)
+## Performance ledger and self-check (mandatory, every run — not just "when asked")
 
-Keep the pipeline honest against its own track record instead of re-deriving it from scratch
-each time someone asks:
+This is not an optional add-on the user has to separately request — it runs as part of every
+single invocation of this skill, right after the day's report is generated, with no extra
+prompting needed. The goal is a pipeline that keeps correcting itself every time it's kicked off.
 
 1. **Log every recommendation.** After building the day's final ticker list (Tier 1 + catch-all),
    append one row per ticker to `research_team_ledger.csv` in the Dashboard folder (create it if
    missing) with columns: `date, ticker, tier, direction (bull/bear), rec_price, trade,
    conflict_flag (y/n), gex_classification, gex_sign_flip, wyckoff_phase`. `rec_price` is that
-   day's Current Price from the Watchlist snapshot. This makes a future scorecard a straight
-   join against later snapshots' prices instead of a manual re-read of old reports.
-2. **Grade on a rolling basis.** When asked to review performance (or roughly weekly if running
-   unattended), compare each ledger row at least 2 trading sessions old against the latest
-   Current Price: bull wins if price is ≥0.5% higher, bear wins if ≥0.5% lower, else flat.
-   Break the result out by conflict-flag (y/n), by GEX classification, by tier, and by whether a
-   sign-flip was fresh (first-seen) vs. confirmed (≥2 sessions) — these are exactly the splits
-   that surfaced real, actionable problems the first time this review ran (5 Sep 2026: conflict-
-   flagged Tier 1 at 13.3% vs. 55.6% clean; Extreme/Moderate Positive Gamma at 0-for-8; same-day
-   sign-flips at 0-for-3).
-3. **Feed findings back into this file.** If a rolling review turns up a new, repeated failure
-   mode with a clear mechanism (not just a losing streak on one ticker), add it to this SKILL.md
-   as a numbered rule the same way the three above were added — cite the date and the sample
-   size so a future reviewer can tell a well-evidenced rule from a thin one, and revisit/relax a
-   rule if a larger sample later contradicts it.
+   day's Current Price from the Watchlist snapshot. This makes grading a straight join against
+   later snapshots' prices instead of a manual re-read of old reports.
+2. **Grade the ledger automatically, every run.** Immediately after logging today's rows, pull
+   every ledger row that is ≥2 trading sessions old (by its `date` vs. today, on the same
+   `DDMMYY` scheme used everywhere else in this skill) and compare it to today's Current Price:
+   bull wins if price is ≥0.5% higher, bear wins if ≥0.5% lower, else flat. Break the result out
+   by conflict-flag (y/n), by GEX classification, by tier, and by whether a sign-flip was fresh
+   (first-seen) vs. confirmed (≥2 sessions) — these are exactly the splits that surfaced real,
+   actionable problems the first time this review ran (5 Sep 2026: conflict-flagged Tier 1 at
+   13.3% vs. 55.6% clean; Extreme/Moderate Positive Gamma at 0-for-8; same-day sign-flips at
+   0-for-3). This is a cheap CSV computation — do it every time, not just when someone asks.
+3. **Surface it without being asked.** Add one compact line to the day's report itself (in the
+   stats banner or the "how to read this" note) giving the current rolling win rate and sample
+   size, e.g. "Rolling track record: 41% (27/66 decided) since 29 Aug." Say the same line back to
+   the user in the chat summary after the run. The user should never have to separately request
+   a scorecard to know whether the pipeline is working.
+4. **Update this file automatically when the evidence crosses a real threshold.** If any split in
+   step 2 reaches **≥8 decided outcomes** (wins+losses, flats excluded) with a **≥70/30 skew**
+   either direction, and the mechanism is a categorical read (conflict-flag, GEX classification,
+   sign-flip freshness, Wyckoff phase) rather than one ticker's idiosyncratic run — edit the
+   relevant rule in this SKILL.md in the same run, the same way the existing rules were written:
+   cite the date and the exact sample (`n`W/`n`L). If a rule already has a citation, only rewrite
+   it when the new sample would flip its conclusion or move the split by >15 points — don't
+   re-word the same paragraph every day chasing a slightly different percentage. Mention any such
+   edit in the chat summary so it's never a silent change. If no split crosses the threshold,
+   don't touch this file — a quiet, on-track pipeline is not a signal to invent a new rule.
