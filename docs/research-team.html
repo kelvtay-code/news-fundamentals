@@ -40,6 +40,7 @@
   .rt-hdr { display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:8px; }
   .tk { font-family:Arial,sans-serif; font-weight:700; font-size:1.15rem; color:var(--ft-red); }
   .sector-tag { font-family:Arial,sans-serif; font-size:10px; text-transform:uppercase; letter-spacing:0.06em; color:var(--ft-mid); }
+  .price-tag { font-family:Arial,sans-serif; font-size:12px; font-weight:700; color:var(--ft-warm-blk); background:var(--ft-salmon); border:1px solid var(--ft-border); border-radius:2px; padding:1px 7px; }
   .scores { margin-left:auto; display:flex; gap:6px; }
   .chip { display:inline-block; padding:2px 7px; font-size:10px; font-weight:700; border-radius:2px;
           font-family:Arial,sans-serif; border:1px solid; }
@@ -78,7 +79,7 @@
 <div class="masthead">
   <div class="masthead-eyebrow">Optionx &middot; Research Team</div>
   <div class="masthead-title">Fundalist &rarr; Technicalist &rarr; <span>Sentilist</span></div>
-  <div class="masthead-date">Wednesday, 9 September 2026 &middot; run against 21:08 SGT dual_expand / 04:19 SGT business overview / 04:23 SGT news bulletin snapshots</div>
+  <div class="masthead-date">Wednesday, 9 September 2026 &middot; run against 21:08 SGT dual_expand / 04:19 SGT business overview / 04:23 SGT news bulletin snapshots &middot; prices as of the 04:19 SGT business overview snapshot (not real-time)</div>
   <div class="masthead-tagline">Three agents, one chain: fundamentals screen the universe, technicals confirm dual IV+GEX
     expansion, sentiment rates the news -- plus an independent 7+ catch-all for tickers the funnel never saw.</div>
 </div>
@@ -99,13 +100,14 @@
       <div class="rt-hdr">
         <span class="tk">STX</span>
         <span class="sector-tag">Technology</span>
+        <span class="price-tag">$904.38</span>
         <span class="scores">
           <span class="chip chip-f">F 8.8</span>
           <span class="chip chip-t">T 9.3</span>
           <span class="chip chip-s">S 7.5</span>
         </span>
       </div>
-      <div class="note-row"><span class="note-lbl">Fundamental</span><div>Strong Buy consensus; PEG 0.49 (cheap vs growth); revenue +48.5% YoY; 26.1% profit margin; no analyst target price on file</div></div>
+      <div class="note-row"><span class="note-lbl">Fundamental</span><div>Strong Buy consensus; 24.4% upside to target; PEG 0.49 (cheap vs growth); revenue +48.5% YoY; 26.1% profit margin</div></div>
 
         <div class="note-row"><span class="note-lbl">Technical</span><div>
           <span class="ph bull">&#9650;</span><strong>Mark-up</strong> &middot; Extreme Positive Gamma <span class="chip chip-flip">GEX FLIP</span>
@@ -126,6 +128,7 @@
       <div class="rt-hdr">
         <span class="tk">BAC</span>
         <span class="sector-tag">Financial Services</span>
+        <span class="price-tag">$62.39</span>
         <span class="scores">
           <span class="chip chip-f">F 9.6</span>
           <span class="chip chip-t">T 9.5</span>
@@ -153,6 +156,7 @@
       <div class="rt-hdr">
         <span class="tk">ETN</span>
         <span class="sector-tag">Industrials</span>
+        <span class="price-tag">$422.13</span>
         <span class="scores">
           <span class="chip chip-f">F 6.3</span>
           <span class="chip chip-t">T 9.5</span>
@@ -180,6 +184,7 @@
       <div class="rt-hdr">
         <span class="tk">FDX</span>
         <span class="sector-tag">Industrials</span>
+        <span class="price-tag">$314.13</span>
         <span class="scores">
           <span class="chip chip-f">F 7.0</span>
           <span class="chip chip-t">T 7.7</span>
@@ -207,6 +212,7 @@
       <div class="rt-hdr">
         <span class="tk">CVS</span>
         <span class="sector-tag">Healthcare</span>
+        <span class="price-tag">$96.07</span>
         <span class="scores">
           <span class="chip chip-f">F 7.9</span>
           <span class="chip chip-t">T 8.7</span>
@@ -234,6 +240,7 @@
       <div class="rt-hdr">
         <span class="tk">NRG</span>
         <span class="sector-tag">Utilities</span>
+        <span class="price-tag">$119.64</span>
         <span class="scores">
           <span class="chip chip-f">F 8.3</span>
           <span class="chip chip-t">T 7.2</span>
@@ -261,6 +268,7 @@
       <div class="rt-hdr">
         <span class="tk">CEG</span>
         <span class="sector-tag">Utilities</span>
+        <span class="price-tag">$299.05</span>
         <span class="scores">
           <span class="chip chip-f">F 6.3</span>
           <span class="chip chip-t">T 9.5</span>
@@ -288,6 +296,7 @@
       <div class="rt-hdr">
         <span class="tk">SLB</span>
         <span class="sector-tag">Energy</span>
+        <span class="price-tag">$57.10</span>
         <span class="scores">
           <span class="chip chip-f">F 6.1</span>
           <span class="chip chip-t">T 8.5</span>
@@ -315,6 +324,7 @@
       <div class="rt-hdr">
         <span class="tk">TEVA</span>
         <span class="sector-tag">Healthcare</span>
+        <span class="price-tag">$36.76</span>
         <span class="scores">
           <span class="chip chip-f">F 6.6</span>
           <span class="chip chip-t">T 9.5</span>
@@ -342,6 +352,7 @@
       <div class="rt-hdr">
         <span class="tk">EOG</span>
         <span class="sector-tag">Energy</span>
+        <span class="price-tag">$145.36</span>
         <span class="scores">
           <span class="chip chip-f">F 8.8</span>
           <span class="chip chip-t">T 9.0</span>
@@ -369,6 +380,7 @@
       <div class="rt-hdr">
         <span class="tk">COP</span>
         <span class="sector-tag">Energy</span>
+        <span class="price-tag">$135.04</span>
         <span class="scores">
           <span class="chip chip-f">F 8.5</span>
           <span class="chip chip-t">T 7.5</span>
@@ -396,6 +408,7 @@
       <div class="rt-hdr">
         <span class="tk">UNH</span>
         <span class="sector-tag">Healthcare</span>
+        <span class="price-tag">$400.84</span>
         <span class="scores">
           <span class="chip chip-f">F 6.0</span>
           <span class="chip chip-t">T 8.2</span>
@@ -423,6 +436,7 @@
       <div class="rt-hdr">
         <span class="tk">GOOGL</span>
         <span class="sector-tag">Communication Services</span>
+        <span class="price-tag">$338.36</span>
         <span class="scores">
           <span class="chip chip-f">F 8.5</span>
           <span class="chip chip-t">T 7.2</span>
@@ -450,6 +464,7 @@
       <div class="rt-hdr">
         <span class="tk">VLO</span>
         <span class="sector-tag">Energy</span>
+        <span class="price-tag">$382.85</span>
         <span class="scores">
           <span class="chip chip-f">F 6.2</span>
           <span class="chip chip-t">T 8.0</span>
@@ -477,6 +492,7 @@
       <div class="rt-hdr">
         <span class="tk">RTX</span>
         <span class="sector-tag">Industrials</span>
+        <span class="price-tag">$198.81</span>
         <span class="scores">
           <span class="chip chip-f">F 5.4</span>
           <span class="chip chip-t">T 8.7</span>
@@ -504,6 +520,7 @@
       <div class="rt-hdr">
         <span class="tk">HAL</span>
         <span class="sector-tag">Energy</span>
+        <span class="price-tag">$36.80</span>
         <span class="scores">
           <span class="chip chip-f">F 7.9</span>
           <span class="chip chip-t">T 7.0</span>
@@ -531,6 +548,7 @@
       <div class="rt-hdr">
         <span class="tk">PFE</span>
         <span class="sector-tag">Healthcare</span>
+        <span class="price-tag">$27.79</span>
         <span class="scores">
           <span class="chip chip-f">F 5.6</span>
           <span class="chip chip-t">T 7.0</span>
@@ -558,6 +576,7 @@
       <div class="rt-hdr">
         <span class="tk">INTC</span>
         <span class="sector-tag">Technology</span>
+        <span class="price-tag">$104.47</span>
         <span class="scores">
           <span class="chip chip-f">F 5.1</span>
           <span class="chip chip-t">T 6.7</span>
@@ -606,13 +625,14 @@
       <div class="rt-hdr">
         <span class="tk">MU</span>
         <span class="sector-tag">Technology</span>
+        <span class="price-tag">$1,000.26</span>
         <span class="scores">
           <span class="chip chip-f">F 9.3</span>
           <span class="chip chip-na">T &mdash;</span>
           <span class="chip chip-s">S 7.5</span>
         </span>
       </div>
-      <div class="note-row"><span class="note-lbl">Fundamental</span><div>Strong Buy consensus; PEG 0.15 (very cheap vs growth); revenue +345.7% YoY; 55.9% margin; no target price on file</div></div>
+      <div class="note-row"><span class="note-lbl">Fundamental</span><div>Strong Buy consensus; 51.3% upside to target; PEG 0.15 (very cheap vs growth); revenue +345.7% YoY; 55.9% margin</div></div>
 
         <div class="note-row"><span class="note-lbl">Technical</span><div>
           <span class="chip chip-warn">NO DUAL-EXPANSION CONFIRMATION</span>
@@ -631,6 +651,7 @@
       <div class="rt-hdr">
         <span class="tk">D</span>
         <span class="sector-tag">Utilities</span>
+        <span class="price-tag">$66.22</span>
         <span class="scores">
           <span class="chip chip-f">F 6.8</span>
           <span class="chip chip-na">T &mdash;</span>
@@ -656,6 +677,7 @@
       <div class="rt-hdr">
         <span class="tk">WDAY</span>
         <span class="sector-tag">Technology</span>
+        <span class="price-tag">$186.28</span>
         <span class="scores">
           <span class="chip chip-f">F 8.8</span>
           <span class="chip chip-na">T &mdash;</span>
@@ -681,6 +703,7 @@
       <div class="rt-hdr">
         <span class="tk">GSK</span>
         <span class="sector-tag">Healthcare</span>
+        <span class="price-tag">$48.54</span>
         <span class="scores">
           <span class="chip chip-f">F 6.4</span>
           <span class="chip chip-na">T &mdash;</span>
@@ -706,6 +729,7 @@
       <div class="rt-hdr">
         <span class="tk">GE</span>
         <span class="sector-tag">Industrials</span>
+        <span class="price-tag">$334.91</span>
         <span class="scores">
           <span class="chip chip-f">F 5.2</span>
           <span class="chip chip-na">T &mdash;</span>
@@ -731,6 +755,7 @@
       <div class="rt-hdr">
         <span class="tk">NKE</span>
         <span class="sector-tag">Consumer Cyclical</span>
+        <span class="price-tag">$38.10</span>
         <span class="scores">
           <span class="chip chip-f">F 6.0</span>
           <span class="chip chip-na">T &mdash;</span>
@@ -756,6 +781,7 @@
       <div class="rt-hdr">
         <span class="tk">PM</span>
         <span class="sector-tag">Consumer Defensive</span>
+        <span class="price-tag">$184.73</span>
         <span class="scores">
           <span class="chip chip-f">F 6.2</span>
           <span class="chip chip-na">T &mdash;</span>
@@ -781,6 +807,7 @@
       <div class="rt-hdr">
         <span class="tk">LRCX</span>
         <span class="sector-tag">Technology</span>
+        <span class="price-tag">$320.42</span>
         <span class="scores">
           <span class="chip chip-f">F 7.7</span>
           <span class="chip chip-na">T &mdash;</span>
@@ -806,6 +833,7 @@
       <div class="rt-hdr">
         <span class="tk">CRH</span>
         <span class="sector-tag">Basic Materials</span>
+        <span class="price-tag">$90.61</span>
         <span class="scores">
           <span class="chip chip-f">F 7.3</span>
           <span class="chip chip-na">T &mdash;</span>
@@ -831,6 +859,7 @@
       <div class="rt-hdr">
         <span class="tk">SNPS</span>
         <span class="sector-tag">Technology</span>
+        <span class="price-tag">$392.03</span>
         <span class="scores">
           <span class="chip chip-f">F 7.1</span>
           <span class="chip chip-na">T &mdash;</span>
@@ -856,6 +885,7 @@
       <div class="rt-hdr">
         <span class="tk">PANW</span>
         <span class="sector-tag">Technology</span>
+        <span class="price-tag">$336.98</span>
         <span class="scores">
           <span class="chip chip-f">F 5.0</span>
           <span class="chip chip-na">T &mdash;</span>
@@ -881,6 +911,7 @@
       <div class="rt-hdr">
         <span class="tk">QNT</span>
         <span class="sector-tag">Technology</span>
+        <span class="price-tag">$17.67</span>
         <span class="scores">
           <span class="chip chip-na">F &mdash;</span>
           <span class="chip chip-na">T &mdash;</span>
@@ -906,6 +937,7 @@
       <div class="rt-hdr">
         <span class="tk">QBTS</span>
         <span class="sector-tag">Technology</span>
+        <span class="price-tag">$15.81</span>
         <span class="scores">
           <span class="chip chip-na">F &mdash;</span>
           <span class="chip chip-na">T &mdash;</span>
@@ -931,6 +963,7 @@
       <div class="rt-hdr">
         <span class="tk">RGTI</span>
         <span class="sector-tag">Technology</span>
+        <span class="price-tag">$8.22</span>
         <span class="scores">
           <span class="chip chip-na">F &mdash;</span>
           <span class="chip chip-na">T &mdash;</span>
@@ -956,6 +989,7 @@
       <div class="rt-hdr">
         <span class="tk">QUBT</span>
         <span class="sector-tag">Technology</span>
+        <span class="price-tag">$76.62</span>
         <span class="scores">
           <span class="chip chip-na">F &mdash;</span>
           <span class="chip chip-na">T &mdash;</span>
@@ -981,6 +1015,7 @@
       <div class="rt-hdr">
         <span class="tk">FCX</span>
         <span class="sector-tag">Basic Materials</span>
+        <span class="price-tag">$99.83</span>
         <span class="scores">
           <span class="chip chip-na">F &mdash;</span>
           <span class="chip chip-na">T &mdash;</span>
@@ -1006,6 +1041,7 @@
       <div class="rt-hdr">
         <span class="tk">CRWV</span>
         <span class="sector-tag">Technology</span>
+        <span class="price-tag">$102.01</span>
         <span class="scores">
           <span class="chip chip-na">F &mdash;</span>
           <span class="chip chip-na">T &mdash;</span>
@@ -1031,6 +1067,7 @@
       <div class="rt-hdr">
         <span class="tk">SBUX</span>
         <span class="sector-tag">Consumer Cyclical</span>
+        <span class="price-tag">$0.00</span>
         <span class="scores">
           <span class="chip chip-na">F &mdash;</span>
           <span class="chip chip-na">T &mdash;</span>
@@ -1097,7 +1134,10 @@
     <p>GEX, IV, and Wyckoff phase source: <code>dual_expand_090926.csv</code> (45 tickers; created 21:08 SGT, 8
     Sep). News source: <code>news_bulletin_20260909_0423.html</code> (753 article cards, 264 raw ticker tags /
     196 after collapsing multi-ticker cards, last ~48h). Fundamentals source:
-    <code>business_overview_090926_0419.csv</code> (206 tickers).</p>
+    <code>business_overview_090926_0419.csv</code> (206 tickers). <strong>Price</strong> shown next to each ticker
+    is also from that same business_overview snapshot (04:19 SGT, 9 Sep) -- the most recent price on file this run,
+    not a real-time quote (see the Technicalist note above on why a live quote source isn&#x27;t reachable this
+    session).</p>
   </div>
 </main>
 <footer>Optionx &middot; Research Team &middot; generated 9 Sep 2026 05:21 SGT from the Dashboard Google Drive
