@@ -92,21 +92,21 @@
 <div class="masthead">
   <div class="masthead-eyebrow">Optionx &middot; Volatility &amp; Dealer Positioning</div>
   <div class="masthead-title">Dual<span>_X</span> &mdash; Co-Expansion Screen</div>
-  <div class="masthead-date">Saturday, 05 September 2026 &middot; 15-day lookback</div>
+  <div class="masthead-date">Thursday, 10 September 2026 &middot; 15-day lookback</div>
   <div class="masthead-tagline">Tickers whose implied volatility and dealer gamma are both
     expanding &mdash; premium building while positioning builds with it.</div>
 </div>
 <div class="stats-banner"><div class="stats-inner">
-  <div class="stat-item"><strong>17</strong> survivors</div><span class="stat-sep">|</span>
-  <div class="stat-item"><strong>9</strong> bullish phase</div><span class="stat-sep">|</span>
-  <div class="stat-item"><strong>6</strong> prime</div><span class="stat-sep">|</span>
-  <div class="stat-item"><strong>6</strong> gamma sign-flips</div><span class="stat-sep">|</span>
-  <div class="stat-item"><strong>8</strong> sectors</div><span class="stat-sep">|</span>
+  <div class="stat-item"><strong>59</strong> survivors</div><span class="stat-sep">|</span>
+  <div class="stat-item"><strong>38</strong> bullish phase</div><span class="stat-sep">|</span>
+  <div class="stat-item"><strong>30</strong> prime</div><span class="stat-sep">|</span>
+  <div class="stat-item"><strong>14</strong> gamma sign-flips</div><span class="stat-sep">|</span>
+  <div class="stat-item"><strong>9</strong> sectors</div><span class="stat-sep">|</span>
   <div class="stat-item">ETFs excluded</div>
 </div></div>
 <main>
   <h2>Signal Quality</h2>
-  <div class="tiles"><div class="tile t-prime"><div class="tile-n">6</div><div class="tile-l">PRIME</div><div class="tile-w">Both legs real, constructive phase, positive gamma</div></div><div class="tile t-solid"><div class="tile-n">5</div><div class="tile-l">SOLID</div><div class="tile-w">Both legs real, positive gamma, weak phase</div></div><div class="tile t-watch"><div class="tile-n">2</div><div class="tile-l">WATCH</div><div class="tile-w">Both legs real, gamma still negative</div></div><div class="tile t-weak"><div class="tile-n">4</div><div class="tile-l">WEAK</div><div class="tile-w">One leg is noise — IV flat or fading</div></div></div>
+  <div class="tiles"><div class="tile t-prime"><div class="tile-n">30</div><div class="tile-l">PRIME</div><div class="tile-w">Both legs real, constructive phase, positive gamma</div></div><div class="tile t-solid"><div class="tile-n">13</div><div class="tile-l">SOLID</div><div class="tile-w">Both legs real, positive gamma, weak phase</div></div><div class="tile t-watch"><div class="tile-n">5</div><div class="tile-l">WATCH</div><div class="tile-w">Both legs real, gamma still negative</div></div><div class="tile t-weak"><div class="tile-n">11</div><div class="tile-l">WEAK</div><div class="tile-w">One leg is noise — IV flat or fading</div></div></div>
 
   <h2>Survivors by Sector &mdash; 15-Day Core</h2>
   <div class="table-wrap"><table><thead><tr>
@@ -114,243 +114,831 @@
       <th>IVR</th><th>GEX first &rarr; last</th><th>GEX slope</th><th>Put / Call wall</th><th>Wyckoff</th>
       <th>Badge</th><th>Grade</th><th>Flags</th>
     </tr></thead>
-    <tbody><tr class="sector-row"><td colspan="12">Technology <span class="sector-count">1 name &middot; 0 bullish</span></td></tr><tr>
-  <td class="tk">CDNS</td>
-  <td class="num">293.90</td>
-  <td class="num">34.8 &rarr; <strong>37.7</strong>
-      <span class="delta up">+2.9</span></td>
-  <td class="num">0.09</td>
-  <td class="num ivr">31</td>
-  <td class="num">-3 &rarr; <strong>-1</strong></td>
-  <td class="num">0.09</td>
-  <td class="num wall">300.0 / 335.0 <span class="wnote">below put</span></td>
+    <tbody><tr class="sector-row"><td colspan="12">Technology <span class="sector-count">16 names &middot; 9 bullish</span></td></tr><tr>
+  <td class="tk">CRWV</td>
+  <td class="num">92.16</td>
+  <td class="num">75.4 &rarr; <strong>76.1</strong>
+      <span class="delta up">+0.7</span></td>
+  <td class="num">0.19</td>
+  <td class="num ivr">15</td>
+  <td class="num">-1 &rarr; <strong>10</strong></td>
+  <td class="num">0.65</td>
+  <td class="num wall">90.0 / 110.0 <span class="wnote">nan</span></td>
+  <td><span class="ph bull">&#9650;</span>Mark-up</td>
+  <td class="sm">◉ PINNED</td>
+  <td><span class="grade g-prime">PRIME</span></td>
+  <td class="flags"><span class="chip chip-flip">GEX FLIP</span></td>
+</tr><tr>
+  <td class="tk">ORCL</td>
+  <td class="num">162.00</td>
+  <td class="num">69.6 &rarr; <strong>70.9</strong>
+      <span class="delta up">+1.3</span></td>
+  <td class="num">0.12</td>
+  <td class="num ivr">68</td>
+  <td class="num">5 &rarr; <strong>10</strong></td>
+  <td class="num">0.17</td>
+  <td class="num wall">150.0 / 165.0 <span class="wnote">nan</span></td>
+  <td><span class="ph bull">&#9650;</span>Mark-up</td>
+  <td class="sm">◉ PINNED</td>
+  <td><span class="grade g-prime">PRIME</span></td>
+  <td class="flags"></td>
+</tr><tr>
+  <td class="tk">WDC</td>
+  <td class="num">482.70</td>
+  <td class="num">69.2 &rarr; <strong>70.6</strong>
+      <span class="delta up">+1.4</span></td>
+  <td class="num">0.16</td>
+  <td class="num ivr">40</td>
+  <td class="num">-5 &rarr; <strong>0</strong></td>
+  <td class="num">0.33</td>
+  <td class="num wall">450.0 / 500.0 <span class="wnote">nan</span></td>
   <td><span class="ph bear">&#9660;</span>Mark-down</td>
   <td class="sm">📉 DOWNTREND</td>
   <td><span class="grade g-watch">WATCH</span></td>
   <td class="flags"></td>
-</tr><tr class="sector-row"><td colspan="12">Communication Services <span class="sector-count">1 name &middot; 0 bullish</span></td></tr><tr>
-  <td class="tk">PINS</td>
-  <td class="num">20.42</td>
-  <td class="num">41.6 &rarr; <strong>43.0</strong>
-      <span class="delta up">+1.4</span></td>
-  <td class="num">0.06</td>
-  <td class="num ivr">22</td>
-  <td class="num">-1 &rarr; <strong>1</strong></td>
+</tr><tr>
+  <td class="tk">STX</td>
+  <td class="num">887.00</td>
+  <td class="num">68.5 &rarr; <strong>70.1</strong>
+      <span class="delta up">+1.6</span></td>
+  <td class="num">0.31</td>
+  <td class="num ivr">41</td>
+  <td class="num">-3 &rarr; <strong>7</strong></td>
+  <td class="num">0.55</td>
+  <td class="num wall">860.0 / 850.0 <span class="wnote">inverted</span></td>
+  <td><span class="ph bull">&#9650;</span>Mark-up</td>
+  <td class="sm">📈 UPTREND</td>
+  <td><span class="grade g-prime">PRIME</span></td>
+  <td class="flags"><span class="chip chip-flip">GEX FLIP</span></td>
+</tr><tr>
+  <td class="tk">ARM</td>
+  <td class="num">264.52</td>
+  <td class="num">64.1 &rarr; <strong>65.7</strong>
+      <span class="delta up">+1.6</span></td>
+  <td class="num">0.03</td>
+  <td class="num ivr">34</td>
+  <td class="num">-1 &rarr; <strong>10</strong></td>
+  <td class="num">0.52</td>
+  <td class="num wall">250.0 / 280.0 <span class="wnote">nan</span></td>
+  <td><span class="ph bear">&#9660;</span>Mark-down</td>
+  <td class="sm">◉ PINNED</td>
+  <td><span class="grade g-solid">SOLID</span></td>
+  <td class="flags"><span class="chip chip-flip">GEX FLIP</span></td>
+</tr><tr>
+  <td class="tk">INTC</td>
+  <td class="num">105.65</td>
+  <td class="num">59.6 &rarr; <strong>64.5</strong>
+      <span class="delta up">+4.9</span></td>
+  <td class="num">0.42</td>
+  <td class="num ivr">39</td>
+  <td class="num">1 &rarr; <strong>3</strong></td>
+  <td class="num">0.22</td>
+  <td class="num wall">100.0 / 105.0 <span class="wnote">above call</span></td>
+  <td><span class="ph bull">&#9650;</span>Mark-up</td>
+  <td class="sm">📈 UPTREND</td>
+  <td><span class="grade g-prime">PRIME</span></td>
+  <td class="flags"></td>
+</tr><tr>
+  <td class="tk">CLS</td>
+  <td class="num">333.00</td>
+  <td class="num">61.3 &rarr; <strong>63.6</strong>
+      <span class="delta up">+2.3</span></td>
   <td class="num">0.04</td>
-  <td class="num wall">22.0 / 21.5 <span class="wnote">inverted</span></td>
+  <td class="num ivr">19</td>
+  <td class="num">-1 &rarr; <strong>10</strong></td>
+  <td class="num">0.55</td>
+  <td class="num wall">300.0 / 350.0 <span class="wnote">nan</span></td>
+  <td><span class="ph bear">&#9660;</span>Mark-down</td>
+  <td class="sm">◉ PINNED</td>
+  <td><span class="grade g-solid">SOLID</span></td>
+  <td class="flags"><span class="chip chip-flip">GEX FLIP</span></td>
+</tr><tr>
+  <td class="tk">GLW</td>
+  <td class="num">167.50</td>
+  <td class="num">59.1 &rarr; <strong>60.6</strong>
+      <span class="delta up">+1.5</span></td>
+  <td class="num">0.13</td>
+  <td class="num ivr">47</td>
+  <td class="num">-2 &rarr; <strong>7</strong></td>
+  <td class="num">0.25</td>
+  <td class="num wall">150.0 / 170.0 <span class="wnote">nan</span></td>
+  <td><span class="ph bear">&#9660;</span>Mark-down</td>
+  <td class="sm">◎ NEUTRAL</td>
+  <td><span class="grade g-solid">SOLID</span></td>
+  <td class="flags"><span class="chip chip-flip">GEX FLIP</span></td>
+</tr><tr>
+  <td class="tk">LRCX</td>
+  <td class="num">315.20</td>
+  <td class="num">59.9 &rarr; <strong>59.1</strong>
+      <span class="delta dn">-0.8</span></td>
+  <td class="num">0.01</td>
+  <td class="num ivr">36</td>
+  <td class="num">-1 &rarr; <strong>8</strong></td>
+  <td class="num">0.55</td>
+  <td class="num wall">300.0 / 330.0 <span class="wnote">nan</span></td>
+  <td><span class="ph bear">&#9660;</span>Mark-down</td>
+  <td class="sm">◉ PINNED</td>
+  <td><span class="grade g-weak">WEAK</span></td>
+  <td class="flags"><span class="chip chip-flip">GEX FLIP</span><span class="chip chip-bad">IV FADING</span></td>
+</tr><tr>
+  <td class="tk">NET</td>
+  <td class="num">313.01</td>
+  <td class="num">52.1 &rarr; <strong>58.3</strong>
+      <span class="delta up">+6.2</span></td>
+  <td class="num">0.34</td>
+  <td class="num ivr">39</td>
+  <td class="num">0 &rarr; <strong>10</strong></td>
+  <td class="num">0.31</td>
+  <td class="num wall">300.0 / 310.0 <span class="wnote">above call</span></td>
+  <td><span class="ph bull">&#9650;</span>Mark-up</td>
+  <td class="sm">◉ PINNED</td>
+  <td><span class="grade g-prime">PRIME</span></td>
+  <td class="flags"></td>
+</tr><tr>
+  <td class="tk">PLTR</td>
+  <td class="num">169.52</td>
+  <td class="num">46.5 &rarr; <strong>47.3</strong>
+      <span class="delta up">+0.8</span></td>
+  <td class="num">0.06</td>
+  <td class="num ivr">20</td>
+  <td class="num">3 &rarr; <strong>10</strong></td>
+  <td class="num">0.18</td>
+  <td class="num wall">170.0 / 170.0 <span class="wnote">pinned</span></td>
+  <td><span class="ph bull">&#9650;</span>Mark-up</td>
+  <td class="sm">◉ PINNED</td>
+  <td><span class="grade g-prime">PRIME</span></td>
+  <td class="flags"></td>
+</tr><tr>
+  <td class="tk">QCOM</td>
+  <td class="num">176.00</td>
+  <td class="num">41.2 &rarr; <strong>45.2</strong>
+      <span class="delta up">+4.0</span></td>
+  <td class="num">0.24</td>
+  <td class="num ivr">29</td>
+  <td class="num">3 &rarr; <strong>10</strong></td>
+  <td class="num">0.34</td>
+  <td class="num wall">180.0 / 180.0 <span class="wnote">pinned</span></td>
+  <td><span class="ph bull">&#9650;</span>Mark-up</td>
+  <td class="sm">◉ PINNED</td>
+  <td><span class="grade g-prime">PRIME</span></td>
+  <td class="flags"></td>
+</tr><tr>
+  <td class="tk">APH</td>
+  <td class="num">81.34</td>
+  <td class="num">39.5 &rarr; <strong>42.4</strong>
+      <span class="delta up">+2.9</span></td>
+  <td class="num">0.13</td>
+  <td class="num ivr">31</td>
+  <td class="num">4 &rarr; <strong>8</strong></td>
+  <td class="num">0.27</td>
+  <td class="num wall">80.0 / 85.0 <span class="wnote">nan</span></td>
+  <td><span class="ph bull">&#9650;</span>Mark-up</td>
+  <td class="sm">◉ PINNED</td>
+  <td><span class="grade g-prime">PRIME</span></td>
+  <td class="flags"></td>
+</tr><tr>
+  <td class="tk">SAP</td>
+  <td class="num">209.14</td>
+  <td class="num">38.0 &rarr; <strong>38.0</strong>
+      <span class="delta dn">+0.0</span></td>
+  <td class="num">0.11</td>
+  <td class="num ivr">46</td>
+  <td class="num">0 &rarr; <strong>3</strong></td>
+  <td class="num">0.17</td>
+  <td class="num wall">202.5 / 200.0 <span class="wnote">inverted</span></td>
+  <td><span class="ph bull">&#9650;</span>Mark-up</td>
+  <td class="sm">📈 UPTREND</td>
+  <td><span class="grade g-weak">WEAK</span></td>
+  <td class="flags"><span class="chip chip-warn">FLAT IV</span></td>
+</tr><tr>
+  <td class="tk">IBM</td>
+  <td class="num">238.68</td>
+  <td class="num">32.7 &rarr; <strong>35.5</strong>
+      <span class="delta up">+2.8</span></td>
+  <td class="num">0.11</td>
+  <td class="num ivr">34</td>
+  <td class="num">3 &rarr; <strong>10</strong></td>
+  <td class="num">0.28</td>
+  <td class="num wall">230.0 / 250.0 <span class="wnote">nan</span></td>
+  <td><span class="ph bear">&#9660;</span>Mark-down</td>
+  <td class="sm">◉ PINNED</td>
+  <td><span class="grade g-solid">SOLID</span></td>
+  <td class="flags"></td>
+</tr><tr>
+  <td class="tk">CSCO</td>
+  <td class="num">109.48</td>
+  <td class="num">29.2 &rarr; <strong>29.5</strong>
+      <span class="delta up">+0.3</span></td>
+  <td class="num">0.03</td>
+  <td class="num ivr">32</td>
+  <td class="num">3 &rarr; <strong>5</strong></td>
+  <td class="num">0.29</td>
+  <td class="num wall">110.0 / 115.0 <span class="wnote">below put</span></td>
+  <td><span class="ph bear">&#9660;</span>Mark-down</td>
+  <td class="sm">◎ NEUTRAL</td>
+  <td><span class="grade g-weak">WEAK</span></td>
+  <td class="flags"><span class="chip chip-warn">FLAT IV</span></td>
+</tr><tr class="sector-row"><td colspan="12">Communication Services <span class="sector-count">3 names &middot; 1 bullish</span></td></tr><tr>
+  <td class="tk">SE</td>
+  <td class="num">108.95</td>
+  <td class="num">43.1 &rarr; <strong>44.6</strong>
+      <span class="delta up">+1.5</span></td>
+  <td class="num">0.05</td>
+  <td class="num ivr">24</td>
+  <td class="num">1 &rarr; <strong>1</strong></td>
+  <td class="num">0.00</td>
+  <td class="num wall">110.0 / 110.0 <span class="wnote">pinned</span></td>
+  <td><span class="ph bull">&#9650;</span>Mark-up</td>
+  <td class="sm">📈 UPTREND</td>
+  <td><span class="grade g-prime">PRIME</span></td>
+  <td class="flags"></td>
+</tr><tr>
+  <td class="tk">PINS</td>
+  <td class="num">18.31</td>
+  <td class="num">41.8 &rarr; <strong>43.0</strong>
+      <span class="delta up">+1.2</span></td>
+  <td class="num">0.26</td>
+  <td class="num ivr">22</td>
+  <td class="num">0 &rarr; <strong>-1</strong></td>
+  <td class="num">0.03</td>
+  <td class="num wall">18.0 / 21.5 <span class="wnote">nan</span></td>
+  <td><span class="ph bear">&#9660;</span>Distribution</td>
+  <td class="sm">◎ NEUTRAL</td>
+  <td><span class="grade g-watch">WATCH</span></td>
+  <td class="flags"></td>
+</tr><tr>
+  <td class="tk">GOOGL</td>
+  <td class="num">330.89</td>
+  <td class="num">27.8 &rarr; <strong>29.6</strong>
+      <span class="delta up">+1.8</span></td>
+  <td class="num">0.14</td>
+  <td class="num ivr">23</td>
+  <td class="num">5 &rarr; <strong>4</strong></td>
+  <td class="num">0.07</td>
+  <td class="num wall">330.0 / 330.0 <span class="wnote">pinned</span></td>
+  <td><span class="ph bear">&#9660;</span>Mark-down</td>
+  <td class="sm">◎ NEUTRAL</td>
+  <td><span class="grade g-solid">SOLID</span></td>
+  <td class="flags"></td>
+</tr><tr class="sector-row"><td colspan="12">Consumer Cyclical <span class="sector-count">1 name &middot; 1 bullish</span></td></tr><tr>
+  <td class="tk">GM</td>
+  <td class="num">84.04</td>
+  <td class="num">30.8 &rarr; <strong>33.4</strong>
+      <span class="delta up">+2.6</span></td>
+  <td class="num">0.09</td>
+  <td class="num ivr">41</td>
+  <td class="num">5 &rarr; <strong>5</strong></td>
+  <td class="num">0.08</td>
+  <td class="num wall">85.0 / 90.0 <span class="wnote">below put</span></td>
+  <td><span class="ph bull">&#9650;</span>Mark-up</td>
+  <td class="sm">📈 UPTREND</td>
+  <td><span class="grade g-prime">PRIME</span></td>
+  <td class="flags"></td>
+</tr><tr class="sector-row"><td colspan="12">Industrials <span class="sector-count">6 names &middot; 2 bullish</span></td></tr><tr>
+  <td class="tk">SMR</td>
+  <td class="num">10.76</td>
+  <td class="num">82.3 &rarr; <strong>82.5</strong>
+      <span class="delta up">+0.2</span></td>
+  <td class="num">0.10</td>
+  <td class="num ivr">14</td>
+  <td class="num">0 &rarr; <strong>1</strong></td>
+  <td class="num">0.03</td>
+  <td class="num wall">11.0 / 11.0 <span class="wnote">pinned</span></td>
+  <td><span class="ph bull">&#9650;</span>Mark-up</td>
+  <td class="sm">📈 UPTREND</td>
+  <td><span class="grade g-weak">WEAK</span></td>
+  <td class="flags"><span class="chip chip-warn">FLAT IV</span></td>
+</tr><tr>
+  <td class="tk">VRT</td>
+  <td class="num">262.63</td>
+  <td class="num">55.4 &rarr; <strong>58.6</strong>
+      <span class="delta up">+3.2</span></td>
+  <td class="num">0.17</td>
+  <td class="num ivr">26</td>
+  <td class="num">1 &rarr; <strong>-3</strong></td>
+  <td class="num">0.11</td>
+  <td class="num wall">240.0 / 270.0 <span class="wnote">nan</span></td>
+  <td><span class="ph bear">&#9660;</span>Mark-down</td>
+  <td class="sm">📉 DOWNTREND</td>
+  <td><span class="grade g-watch">WATCH</span></td>
+  <td class="flags"></td>
+</tr><tr>
+  <td class="tk">ETN</td>
+  <td class="num">415.00</td>
+  <td class="num">37.5 &rarr; <strong>38.1</strong>
+      <span class="delta up">+0.6</span></td>
+  <td class="num">0.07</td>
+  <td class="num ivr">45</td>
+  <td class="num">-1 &rarr; <strong>7</strong></td>
+  <td class="num">0.49</td>
+  <td class="num wall">390.0 / 440.0 <span class="wnote">nan</span></td>
+  <td><span class="ph bull">&#9650;</span>Mark-up</td>
+  <td class="sm">📈 UPTREND</td>
+  <td><span class="grade g-prime">PRIME</span></td>
+  <td class="flags"><span class="chip chip-flip">GEX FLIP</span></td>
+</tr><tr>
+  <td class="tk">FDX</td>
+  <td class="num">309.60</td>
+  <td class="num">24.9 &rarr; <strong>27.0</strong>
+      <span class="delta up">+2.1</span></td>
+  <td class="num">0.19</td>
+  <td class="num ivr">27</td>
+  <td class="num">-1 &rarr; <strong>5</strong></td>
+  <td class="num">0.42</td>
+  <td class="num wall">320.0 / 340.0 <span class="wnote">below put</span></td>
+  <td><span class="ph bear">&#9660;</span>Mark-down</td>
+  <td class="sm">◎ NEUTRAL</td>
+  <td><span class="grade g-solid">SOLID</span></td>
+  <td class="flags"><span class="chip chip-flip">GEX FLIP</span></td>
+</tr><tr>
+  <td class="tk">RTX</td>
+  <td class="num">197.72</td>
+  <td class="num">23.0 &rarr; <strong>24.5</strong>
+      <span class="delta up">+1.5</span></td>
+  <td class="num">0.11</td>
+  <td class="num ivr">34</td>
+  <td class="num">-1 &rarr; <strong>1</strong></td>
+  <td class="num">0.12</td>
+  <td class="num wall">195.0 / 200.0 <span class="wnote">nan</span></td>
+  <td><span class="ph bear">&#9660;</span>Mark-down</td>
+  <td class="sm">◎ NEUTRAL</td>
+  <td><span class="grade g-solid">SOLID</span></td>
+  <td class="flags"><span class="chip chip-flip">GEX FLIP</span></td>
+</tr><tr>
+  <td class="tk">GD</td>
+  <td class="num">353.90</td>
+  <td class="num">19.3 &rarr; <strong>22.1</strong>
+      <span class="delta up">+2.8</span></td>
+  <td class="num">0.21</td>
+  <td class="num ivr">41</td>
+  <td class="num">0 &rarr; <strong>1</strong></td>
+  <td class="num">0.05</td>
+  <td class="num wall">330.0 / 380.0 <span class="wnote">nan</span></td>
   <td><span class="ph bear">&#9660;</span>Distribution</td>
   <td class="sm">◎ NEUTRAL</td>
   <td><span class="grade g-solid">SOLID</span></td>
-  <td class="flags"><span class="chip chip-flip">GEX FLIP</span></td>
-</tr><tr class="sector-row"><td colspan="12">Consumer Cyclical <span class="sector-count">1 name &middot; 0 bullish</span></td></tr><tr>
-  <td class="tk">NKE</td>
-  <td class="num">38.41</td>
-  <td class="num">33.3 &rarr; <strong>46.4</strong>
-      <span class="delta up">+13.1</span></td>
-  <td class="num">1.05</td>
-  <td class="num ivr">67</td>
-  <td class="num">-3 &rarr; <strong>1</strong></td>
-  <td class="num">0.10</td>
-  <td class="num wall">38.5 / 39.0 <span class="wnote">below put</span></td>
-  <td><span class="ph bear">&#9660;</span>Mark-down</td>
-  <td class="sm">◎ NEUTRAL</td>
-  <td><span class="grade g-solid">SOLID</span></td>
-  <td class="flags"><span class="chip chip-flip">GEX FLIP</span></td>
-</tr><tr class="sector-row"><td colspan="12">Financial Services <span class="sector-count">3 names &middot; 3 bullish</span></td></tr><tr>
-  <td class="tk">WFC</td>
-  <td class="num">90.09</td>
-  <td class="num">21.3 &rarr; <strong>23.5</strong>
-      <span class="delta up">+2.2</span></td>
-  <td class="num">0.10</td>
-  <td class="num ivr">12</td>
-  <td class="num">-1 &rarr; <strong>4</strong></td>
-  <td class="num">0.11</td>
-  <td class="num wall">87.0 / 90.0 <span class="wnote">above call</span></td>
-  <td><span class="ph bull">&#9650;</span>Accumulation</td>
-  <td class="sm">✓ BULL SETUP</td>
-  <td><span class="grade g-prime">PRIME</span></td>
-  <td class="flags"><span class="chip chip-flip">GEX FLIP</span></td>
-</tr><tr>
-  <td class="tk">JPM</td>
-  <td class="num">358.92</td>
-  <td class="num">20.1 &rarr; <strong>20.7</strong>
-      <span class="delta up">+0.6</span></td>
-  <td class="num">0.06</td>
-  <td class="num ivr">16</td>
-  <td class="num">-7 &rarr; <strong>10</strong></td>
-  <td class="num">0.83</td>
-  <td class="num wall">355.0 / 360.0 <span class="wnote">nan</span></td>
-  <td><span class="ph bull">&#9650;</span>Mark-up</td>
-  <td class="sm">◉ PINNED</td>
-  <td><span class="grade g-prime">PRIME</span></td>
-  <td class="flags"><span class="chip chip-flip">GEX FLIP</span></td>
-</tr><tr>
-  <td class="tk">BAC</td>
-  <td class="num">62.68</td>
-  <td class="num">20.4 &rarr; <strong>20.7</strong>
-      <span class="delta up">+0.3</span></td>
-  <td class="num">0.02</td>
-  <td class="num ivr">11</td>
-  <td class="num">4 &rarr; <strong>10</strong></td>
-  <td class="num">0.44</td>
-  <td class="num wall">62.0 / 64.0 <span class="wnote">nan</span></td>
-  <td><span class="ph bull">&#9650;</span>Mark-up</td>
-  <td class="sm">◉ PINNED</td>
-  <td><span class="grade g-weak">WEAK</span></td>
-  <td class="flags"><span class="chip chip-warn">FLAT IV</span></td>
-</tr><tr class="sector-row"><td colspan="12">Healthcare <span class="sector-count">4 names &middot; 2 bullish</span></td></tr><tr>
-  <td class="tk">NVO</td>
-  <td class="num">46.50</td>
-  <td class="num">31.4 &rarr; <strong>35.0</strong>
-      <span class="delta up">+3.6</span></td>
-  <td class="num">0.15</td>
-  <td class="num ivr">15</td>
-  <td class="num">1 &rarr; <strong>1</strong></td>
-  <td class="num">0.01</td>
-  <td class="num wall">47.0 / 47.0 <span class="wnote">pinned</span></td>
-  <td><span class="ph bear">&#9660;</span>Mark-down</td>
-  <td class="sm">◎ NEUTRAL</td>
-  <td><span class="grade g-solid">SOLID</span></td>
   <td class="flags"></td>
-</tr><tr>
-  <td class="tk">AMGN</td>
-  <td class="num">415.00</td>
-  <td class="num">30.1 &rarr; <strong>33.6</strong>
-      <span class="delta up">+3.5</span></td>
-  <td class="num">0.23</td>
-  <td class="num ivr">78</td>
-  <td class="num">2 &rarr; <strong>3</strong></td>
-  <td class="num">0.10</td>
-  <td class="num wall">435.0 / 460.0 <span class="wnote">below put</span></td>
-  <td><span class="ph bull">&#9650;</span>Mark-up</td>
-  <td class="sm">📈 UPTREND</td>
-  <td><span class="grade g-prime">PRIME</span></td>
-  <td class="flags"></td>
-</tr><tr>
-  <td class="tk">TEVA</td>
-  <td class="num">37.00</td>
-  <td class="num">30.9 &rarr; <strong>32.7</strong>
-      <span class="delta up">+1.8</span></td>
-  <td class="num">0.05</td>
-  <td class="num ivr">14</td>
-  <td class="num">1 &rarr; <strong>0</strong></td>
-  <td class="num">0.01</td>
-  <td class="num wall">37.0 / 37.0 <span class="wnote">pinned</span></td>
-  <td><span class="ph bull">&#9650;</span>Mark-up</td>
-  <td class="sm">📈 UPTREND</td>
+</tr><tr class="sector-row"><td colspan="12">Financial Services <span class="sector-count">7 names &middot; 6 bullish</span></td></tr><tr>
+  <td class="tk">PYPL</td>
+  <td class="num">52.00</td>
+  <td class="num">29.6 &rarr; <strong>40.9</strong>
+      <span class="delta up">+11.3</span></td>
+  <td class="num">0.52</td>
+  <td class="num ivr">49</td>
+  <td class="num">3 &rarr; <strong>-1</strong></td>
+  <td class="num">0.03</td>
+  <td class="num wall">50.0 / 55.0 <span class="wnote">nan</span></td>
+  <td><span class="ph bear">&#9660;</span>Mark-down</td>
+  <td class="sm">📉 DOWNTREND</td>
   <td><span class="grade g-watch">WATCH</span></td>
   <td class="flags"></td>
 </tr><tr>
-  <td class="tk">CVS</td>
-  <td class="num">96.74</td>
-  <td class="num">26.2 &rarr; <strong>28.4</strong>
+  <td class="tk">COF</td>
+  <td class="num">210.86</td>
+  <td class="num">28.8 &rarr; <strong>30.1</strong>
+      <span class="delta up">+1.3</span></td>
+  <td class="num">0.11</td>
+  <td class="num ivr">23</td>
+  <td class="num">0 &rarr; <strong>10</strong></td>
+  <td class="num">0.62</td>
+  <td class="num wall">210.0 / 210.0 <span class="wnote">pinned</span></td>
+  <td><span class="ph bull">&#9650;</span>Mark-up</td>
+  <td class="sm">◉ PINNED</td>
+  <td><span class="grade g-prime">PRIME</span></td>
+  <td class="flags"></td>
+</tr><tr>
+  <td class="tk">C</td>
+  <td class="num">137.56</td>
+  <td class="num">28.0 &rarr; <strong>28.4</strong>
+      <span class="delta up">+0.4</span></td>
+  <td class="num">0.09</td>
+  <td class="num ivr">23</td>
+  <td class="num">0 &rarr; <strong>10</strong></td>
+  <td class="num">0.69</td>
+  <td class="num wall">135.0 / 140.0 <span class="wnote">nan</span></td>
+  <td><span class="ph bull">&#9650;</span>Mark-up</td>
+  <td class="sm">◉ PINNED</td>
+  <td><span class="grade g-weak">WEAK</span></td>
+  <td class="flags"><span class="chip chip-warn">FLAT IV</span></td>
+</tr><tr>
+  <td class="tk">WFC</td>
+  <td class="num">89.65</td>
+  <td class="num">23.4 &rarr; <strong>25.0</strong>
+      <span class="delta up">+1.6</span></td>
+  <td class="num">0.16</td>
+  <td class="num ivr">19</td>
+  <td class="num">0 &rarr; <strong>10</strong></td>
+  <td class="num">0.57</td>
+  <td class="num wall">87.5 / 90.0 <span class="wnote">nan</span></td>
+  <td><span class="ph bull">&#9650;</span>Mark-up</td>
+  <td class="sm">◉ PINNED</td>
+  <td><span class="grade g-prime">PRIME</span></td>
+  <td class="flags"></td>
+</tr><tr>
+  <td class="tk">SCHW</td>
+  <td class="num">106.54</td>
+  <td class="num">23.3 &rarr; <strong>24.6</strong>
+      <span class="delta up">+1.3</span></td>
+  <td class="num">0.05</td>
+  <td class="num ivr">25</td>
+  <td class="num">2 &rarr; <strong>10</strong></td>
+  <td class="num">0.43</td>
+  <td class="num wall">105.0 / 105.0 <span class="wnote">pinned</span></td>
+  <td><span class="ph bull">&#9650;</span>Mark-up</td>
+  <td class="sm">◉ PINNED</td>
+  <td><span class="grade g-prime">PRIME</span></td>
+  <td class="flags"></td>
+</tr><tr>
+  <td class="tk">JPM</td>
+  <td class="num">354.86</td>
+  <td class="num">21.0 &rarr; <strong>23.2</strong>
       <span class="delta up">+2.2</span></td>
-  <td class="num">0.12</td>
-  <td class="num ivr">20</td>
-  <td class="num">-2 &rarr; <strong>3</strong></td>
-  <td class="num">0.28</td>
-  <td class="num wall">98.0 / 98.0 <span class="wnote">pinned</span></td>
+  <td class="num">0.15</td>
+  <td class="num ivr">29</td>
+  <td class="num">2 &rarr; <strong>10</strong></td>
+  <td class="num">0.66</td>
+  <td class="num wall">355.0 / 360.0 <span class="wnote">below put</span></td>
+  <td><span class="ph bull">&#9650;</span>Mark-up</td>
+  <td class="sm">◉ PINNED</td>
+  <td><span class="grade g-prime">PRIME</span></td>
+  <td class="flags"></td>
+</tr><tr>
+  <td class="tk">BAC</td>
+  <td class="num">62.69</td>
+  <td class="num">20.4 &rarr; <strong>22.3</strong>
+      <span class="delta up">+1.9</span></td>
+  <td class="num">0.15</td>
+  <td class="num ivr">19</td>
+  <td class="num">-1 &rarr; <strong>10</strong></td>
+  <td class="num">0.57</td>
+  <td class="num wall">62.5 / 65.0 <span class="wnote">nan</span></td>
+  <td><span class="ph bull">&#9650;</span>Mark-up</td>
+  <td class="sm">◉ PINNED</td>
+  <td><span class="grade g-prime">PRIME</span></td>
+  <td class="flags"><span class="chip chip-flip">GEX FLIP</span></td>
+</tr><tr class="sector-row"><td colspan="12">Healthcare <span class="sector-count">9 names &middot; 7 bullish</span></td></tr><tr>
+  <td class="tk">TEVA</td>
+  <td class="num">36.85</td>
+  <td class="num">30.9 &rarr; <strong>32.5</strong>
+      <span class="delta up">+1.6</span></td>
+  <td class="num">0.11</td>
+  <td class="num ivr">14</td>
+  <td class="num">0 &rarr; <strong>10</strong></td>
+  <td class="num">0.54</td>
+  <td class="num wall">36.0 / 41.0 <span class="wnote">nan</span></td>
+  <td><span class="ph bull">&#9650;</span>Mark-up</td>
+  <td class="sm">◉ PINNED</td>
+  <td><span class="grade g-prime">PRIME</span></td>
+  <td class="flags"></td>
+</tr><tr>
+  <td class="tk">UNH</td>
+  <td class="num">393.41</td>
+  <td class="num">27.5 &rarr; <strong>31.0</strong>
+      <span class="delta up">+3.5</span></td>
+  <td class="num">0.20</td>
+  <td class="num ivr">21</td>
+  <td class="num">-4 &rarr; <strong>10</strong></td>
+  <td class="num">0.95</td>
+  <td class="num wall">400.0 / 400.0 <span class="wnote">pinned</span></td>
+  <td><span class="ph bear">&#9660;</span>Distribution</td>
+  <td class="sm">◉ PINNED</td>
+  <td><span class="grade g-solid">SOLID</span></td>
+  <td class="flags"><span class="chip chip-flip">GEX FLIP</span></td>
+</tr><tr>
+  <td class="tk">CVS</td>
+  <td class="num">95.38</td>
+  <td class="num">26.5 &rarr; <strong>30.1</strong>
+      <span class="delta up">+3.6</span></td>
+  <td class="num">0.23</td>
+  <td class="num ivr">28</td>
+  <td class="num">-1 &rarr; <strong>2</strong></td>
+  <td class="num">0.27</td>
+  <td class="num wall">97.5 / 100.0 <span class="wnote">below put</span></td>
   <td><span class="ph bear">&#9660;</span>Mark-down</td>
   <td class="sm">◎ NEUTRAL</td>
   <td><span class="grade g-solid">SOLID</span></td>
   <td class="flags"><span class="chip chip-flip">GEX FLIP</span></td>
-</tr><tr class="sector-row"><td colspan="12">Utilities <span class="sector-count">2 names &middot; 0 bullish</span></td></tr><tr>
-  <td class="tk">D</td>
-  <td class="num">65.84</td>
-  <td class="num">19.2 &rarr; <strong>18.9</strong>
-      <span class="delta dn">-0.3</span></td>
-  <td class="num">0.01</td>
-  <td class="num ivr">26</td>
-  <td class="num">0 &rarr; <strong>0</strong></td>
-  <td class="num">0.12</td>
-  <td class="num wall">67.5 / 70.0 <span class="wnote">below put</span></td>
-  <td><span class="ph bear">&#9660;</span>Mark-down</td>
-  <td class="sm">📉 DOWNTREND</td>
+</tr><tr>
+  <td class="tk">VRTX</td>
+  <td class="num">521.12</td>
+  <td class="num">29.0 &rarr; <strong>29.2</strong>
+      <span class="delta up">+0.2</span></td>
+  <td class="num">0.05</td>
+  <td class="num ivr">27</td>
+  <td class="num">1 &rarr; <strong>3</strong></td>
+  <td class="num">0.19</td>
+  <td class="num wall">510.0 / 510.0 <span class="wnote">pinned</span></td>
+  <td><span class="ph bull">&#9650;</span>Mark-up</td>
+  <td class="sm">📈 UPTREND</td>
   <td><span class="grade g-weak">WEAK</span></td>
   <td class="flags"><span class="chip chip-warn">FLAT IV</span></td>
 </tr><tr>
-  <td class="tk">FE</td>
-  <td class="num">47.16</td>
-  <td class="num">20.1 &rarr; <strong>18.7</strong>
-      <span class="delta dn">-1.4</span></td>
-  <td class="num">0.03</td>
-  <td class="num ivr">32</td>
-  <td class="num">3 &rarr; <strong>3</strong></td>
-  <td class="num">0.03</td>
-  <td class="num wall">45.0 / 47.0 <span class="wnote">above call</span></td>
-  <td><span class="ph bear">&#9660;</span>Mark-down</td>
-  <td class="sm">◎ NEUTRAL</td>
+  <td class="tk">GILD</td>
+  <td class="num">145.65</td>
+  <td class="num">25.8 &rarr; <strong>27.5</strong>
+      <span class="delta up">+1.7</span></td>
+  <td class="num">0.06</td>
+  <td class="num ivr">31</td>
+  <td class="num">1 &rarr; <strong>10</strong></td>
+  <td class="num">0.58</td>
+  <td class="num wall">140.0 / 150.0 <span class="wnote">nan</span></td>
+  <td><span class="ph bull">&#9650;</span>Mark-up</td>
+  <td class="sm">◉ PINNED</td>
+  <td><span class="grade g-prime">PRIME</span></td>
+  <td class="flags"></td>
+</tr><tr>
+  <td class="tk">BMY</td>
+  <td class="num">64.70</td>
+  <td class="num">24.5 &rarr; <strong>26.3</strong>
+      <span class="delta up">+1.8</span></td>
+  <td class="num">0.10</td>
+  <td class="num ivr">26</td>
+  <td class="num">2 &rarr; <strong>10</strong></td>
+  <td class="num">0.48</td>
+  <td class="num wall">62.5 / 65.0 <span class="wnote">nan</span></td>
+  <td><span class="ph bull">&#9650;</span>Mark-up</td>
+  <td class="sm">◉ PINNED</td>
+  <td><span class="grade g-prime">PRIME</span></td>
+  <td class="flags"></td>
+</tr><tr>
+  <td class="tk">ABBV</td>
+  <td class="num">252.00</td>
+  <td class="num">25.6 &rarr; <strong>24.7</strong>
+      <span class="delta dn">-0.9</span></td>
+  <td class="num">0.06</td>
+  <td class="num ivr">33</td>
+  <td class="num">3 &rarr; <strong>10</strong></td>
+  <td class="num">0.42</td>
+  <td class="num wall">250.0 / 250.0 <span class="wnote">pinned</span></td>
+  <td><span class="ph bull">&#9650;</span>Mark-up</td>
+  <td class="sm">◉ PINNED</td>
   <td><span class="grade g-weak">WEAK</span></td>
   <td class="flags"><span class="chip chip-bad">IV FADING</span></td>
-</tr><tr class="sector-row"><td colspan="12">Energy <span class="sector-count">4 names &middot; 4 bullish</span></td></tr><tr>
-  <td class="tk">VLO</td>
-  <td class="num">370.60</td>
-  <td class="num">42.3 &rarr; <strong>44.2</strong>
-      <span class="delta up">+1.9</span></td>
-  <td class="num">0.17</td>
-  <td class="num ivr">71</td>
-  <td class="num">-3 &rarr; <strong>2</strong></td>
-  <td class="num">0.21</td>
-  <td class="num wall">342.5 / 375.0 <span class="wnote">nan</span></td>
+</tr><tr>
+  <td class="tk">JNJ</td>
+  <td class="num">267.08</td>
+  <td class="num">21.5 &rarr; <strong>24.2</strong>
+      <span class="delta up">+2.7</span></td>
+  <td class="num">0.13</td>
+  <td class="num ivr">65</td>
+  <td class="num">5 &rarr; <strong>10</strong></td>
+  <td class="num">0.54</td>
+  <td class="num wall">260.0 / 270.0 <span class="wnote">nan</span></td>
+  <td><span class="ph bull">&#9650;</span>Mark-up</td>
+  <td class="sm">◉ PINNED</td>
+  <td><span class="grade g-prime">PRIME</span></td>
+  <td class="flags"></td>
+</tr><tr>
+  <td class="tk">PFE</td>
+  <td class="num">27.81</td>
+  <td class="num">22.2 &rarr; <strong>22.1</strong>
+      <span class="delta dn">-0.1</span></td>
+  <td class="num">0.01</td>
+  <td class="num ivr">22</td>
+  <td class="num">3 &rarr; <strong>10</strong></td>
+  <td class="num">0.23</td>
+  <td class="num wall">28.0 / 28.0 <span class="wnote">pinned</span></td>
+  <td><span class="ph bull">&#9650;</span>Mark-up</td>
+  <td class="sm">◉ PINNED</td>
+  <td><span class="grade g-weak">WEAK</span></td>
+  <td class="flags"><span class="chip chip-warn">FLAT IV</span></td>
+</tr><tr class="sector-row"><td colspan="12">Consumer Defensive <span class="sector-count">4 names &middot; 2 bullish</span></td></tr><tr>
+  <td class="tk">TGT</td>
+  <td class="num">158.18</td>
+  <td class="num">30.0 &rarr; <strong>29.3</strong>
+      <span class="delta dn">-0.7</span></td>
+  <td class="num">0.01</td>
+  <td class="num ivr">7</td>
+  <td class="num">-3 &rarr; <strong>7</strong></td>
+  <td class="num">0.77</td>
+  <td class="num wall">160.0 / 155.0 <span class="wnote">inverted</span></td>
+  <td><span class="ph bull">&#9650;</span>Mark-up</td>
+  <td class="sm">📈 UPTREND</td>
+  <td><span class="grade g-weak">WEAK</span></td>
+  <td class="flags"><span class="chip chip-flip">GEX FLIP</span><span class="chip chip-bad">IV FADING</span></td>
+</tr><tr>
+  <td class="tk">WMT</td>
+  <td class="num">105.83</td>
+  <td class="num">21.6 &rarr; <strong>23.4</strong>
+      <span class="delta up">+1.8</span></td>
+  <td class="num">0.12</td>
+  <td class="num ivr">25</td>
+  <td class="num">4 &rarr; <strong>6</strong></td>
+  <td class="num">0.29</td>
+  <td class="num wall">105.0 / 105.0 <span class="wnote">pinned</span></td>
+  <td><span class="ph bear">&#9660;</span>Mark-down</td>
+  <td class="sm">◎ NEUTRAL</td>
+  <td><span class="grade g-solid">SOLID</span></td>
+  <td class="flags"></td>
+</tr><tr>
+  <td class="tk">PG</td>
+  <td class="num">142.64</td>
+  <td class="num">18.6 &rarr; <strong>19.5</strong>
+      <span class="delta up">+0.9</span></td>
+  <td class="num">0.04</td>
+  <td class="num ivr">25</td>
+  <td class="num">2 &rarr; <strong>-1</strong></td>
+  <td class="num">0.51</td>
+  <td class="num wall">140.0 / 145.0 <span class="wnote">nan</span></td>
+  <td><span class="ph bear">&#9660;</span>Mark-down</td>
+  <td class="sm">📉 DOWNTREND</td>
+  <td><span class="grade g-watch">WATCH</span></td>
+  <td class="flags"></td>
+</tr><tr>
+  <td class="tk">KO</td>
+  <td class="num">87.63</td>
+  <td class="num">17.2 &rarr; <strong>19.2</strong>
+      <span class="delta up">+2.0</span></td>
+  <td class="num">0.10</td>
+  <td class="num ivr">51</td>
+  <td class="num">3 &rarr; <strong>10</strong></td>
+  <td class="num">0.50</td>
+  <td class="num wall">85.0 / 90.0 <span class="wnote">nan</span></td>
+  <td><span class="ph bull">&#9650;</span>Mark-up</td>
+  <td class="sm">◉ PINNED</td>
+  <td><span class="grade g-prime">PRIME</span></td>
+  <td class="flags"></td>
+</tr><tr class="sector-row"><td colspan="12">Utilities <span class="sector-count">4 names &middot; 1 bullish</span></td></tr><tr>
+  <td class="tk">NRG</td>
+  <td class="num">115.54</td>
+  <td class="num">45.5 &rarr; <strong>47.8</strong>
+      <span class="delta up">+2.3</span></td>
+  <td class="num">0.24</td>
+  <td class="num ivr">52</td>
+  <td class="num">-1 &rarr; <strong>3</strong></td>
+  <td class="num">0.31</td>
+  <td class="num wall">120.0 / 120.0 <span class="wnote">pinned</span></td>
+  <td><span class="ph bear">&#9660;</span>Mark-down</td>
+  <td class="sm">◎ NEUTRAL</td>
+  <td><span class="grade g-solid">SOLID</span></td>
+  <td class="flags"><span class="chip chip-flip">GEX FLIP</span></td>
+</tr><tr>
+  <td class="tk">GEV</td>
+  <td class="num">950.00</td>
+  <td class="num">45.8 &rarr; <strong>46.0</strong>
+      <span class="delta up">+0.2</span></td>
+  <td class="num">0.06</td>
+  <td class="num ivr">14</td>
+  <td class="num">-9 &rarr; <strong>-10</strong></td>
+  <td class="num">0.23</td>
+  <td class="num wall">900.0 / 1,000.0 <span class="wnote">nan</span></td>
+  <td><span class="ph bear">&#9660;</span>Mark-down</td>
+  <td class="sm">[!] HIGH VOL RISK</td>
+  <td><span class="grade g-weak">WEAK</span></td>
+  <td class="flags"><span class="chip chip-warn">FLAT IV</span></td>
+</tr><tr>
+  <td class="tk">VST</td>
+  <td class="num">151.50</td>
+  <td class="num">42.6 &rarr; <strong>44.3</strong>
+      <span class="delta up">+1.7</span></td>
+  <td class="num">0.23</td>
+  <td class="num ivr">17</td>
+  <td class="num">1 &rarr; <strong>3</strong></td>
+  <td class="num">0.26</td>
+  <td class="num wall">150.0 / 150.0 <span class="wnote">pinned</span></td>
+  <td><span class="ph bear">&#9660;</span>Mark-down</td>
+  <td class="sm">◎ NEUTRAL</td>
+  <td><span class="grade g-solid">SOLID</span></td>
+  <td class="flags"></td>
+</tr><tr>
+  <td class="tk">CEG</td>
+  <td class="num">293.90</td>
+  <td class="num">41.6 &rarr; <strong>43.3</strong>
+      <span class="delta up">+1.7</span></td>
+  <td class="num">0.20</td>
+  <td class="num ivr">21</td>
+  <td class="num">1 &rarr; <strong>7</strong></td>
+  <td class="num">0.48</td>
+  <td class="num wall">280.0 / 280.0 <span class="wnote">pinned</span></td>
   <td><span class="ph bull">&#9650;</span>Mark-up</td>
   <td class="sm">📈 UPTREND</td>
   <td><span class="grade g-prime">PRIME</span></td>
-  <td class="flags"><span class="chip chip-flip">GEX FLIP</span></td>
+  <td class="flags"></td>
+</tr><tr class="sector-row"><td colspan="12">Energy <span class="sector-count">9 names &middot; 9 bullish</span></td></tr><tr>
+  <td class="tk">VLO</td>
+  <td class="num">390.51</td>
+  <td class="num">42.0 &rarr; <strong>47.9</strong>
+      <span class="delta up">+5.9</span></td>
+  <td class="num">0.44</td>
+  <td class="num ivr">86</td>
+  <td class="num">1 &rarr; <strong>10</strong></td>
+  <td class="num">0.59</td>
+  <td class="num wall">340.0 / 380.0 <span class="wnote">above call</span></td>
+  <td><span class="ph bull">&#9650;</span>Mark-up</td>
+  <td class="sm">◉ PINNED</td>
+  <td><span class="grade g-prime">PRIME</span></td>
+  <td class="flags"></td>
 </tr><tr>
   <td class="tk">PSX</td>
-  <td class="num">255.30</td>
-  <td class="num">35.5 &rarr; <strong>37.6</strong>
-      <span class="delta up">+2.1</span></td>
+  <td class="num">261.31</td>
+  <td class="num">36.4 &rarr; <strong>40.2</strong>
+      <span class="delta up">+3.8</span></td>
+  <td class="num">0.31</td>
+  <td class="num ivr">85</td>
+  <td class="num">0 &rarr; <strong>5</strong></td>
+  <td class="num">0.29</td>
+  <td class="num wall">245.0 / 260.0 <span class="wnote">above call</span></td>
+  <td><span class="ph bull">&#9650;</span>Mark-up</td>
+  <td class="sm">📈 UPTREND</td>
+  <td><span class="grade g-prime">PRIME</span></td>
+  <td class="flags"></td>
+</tr><tr>
+  <td class="tk">SLB</td>
+  <td class="num">57.55</td>
+  <td class="num">33.6 &rarr; <strong>36.9</strong>
+      <span class="delta up">+3.3</span></td>
+  <td class="num">0.24</td>
+  <td class="num ivr">46</td>
+  <td class="num">1 &rarr; <strong>10</strong></td>
+  <td class="num">0.54</td>
+  <td class="num wall">57.5 / 60.0 <span class="wnote">nan</span></td>
+  <td><span class="ph bull">&#9650;</span>Mark-up</td>
+  <td class="sm">◉ PINNED</td>
+  <td><span class="grade g-prime">PRIME</span></td>
+  <td class="flags"></td>
+</tr><tr>
+  <td class="tk">HAL</td>
+  <td class="num">37.13</td>
+  <td class="num">32.3 &rarr; <strong>35.6</strong>
+      <span class="delta up">+3.3</span></td>
+  <td class="num">0.19</td>
+  <td class="num ivr">33</td>
+  <td class="num">0 &rarr; <strong>6</strong></td>
+  <td class="num">0.33</td>
+  <td class="num wall">36.0 / 35.0 <span class="wnote">inverted</span></td>
+  <td><span class="ph bull">&#9650;</span>Mark-up</td>
+  <td class="sm">📈 UPTREND</td>
+  <td><span class="grade g-prime">PRIME</span></td>
+  <td class="flags"></td>
+</tr><tr>
+  <td class="tk">OXY</td>
+  <td class="num">61.50</td>
+  <td class="num">30.9 &rarr; <strong>33.2</strong>
+      <span class="delta up">+2.3</span></td>
+  <td class="num">0.07</td>
+  <td class="num ivr">38</td>
+  <td class="num">1 &rarr; <strong>10</strong></td>
+  <td class="num">0.44</td>
+  <td class="num wall">60.0 / 60.0 <span class="wnote">pinned</span></td>
+  <td><span class="ph bull">&#9650;</span>Mark-up</td>
+  <td class="sm">◉ PINNED</td>
+  <td><span class="grade g-prime">PRIME</span></td>
+  <td class="flags"></td>
+</tr><tr>
+  <td class="tk">COP</td>
+  <td class="num">137.00</td>
+  <td class="num">29.3 &rarr; <strong>32.2</strong>
+      <span class="delta up">+2.9</span></td>
   <td class="num">0.15</td>
-  <td class="num ivr">75</td>
-  <td class="num">2 &rarr; <strong>3</strong></td>
-  <td class="num">0.00</td>
-  <td class="num wall">245.0 / 257.5 <span class="wnote">nan</span></td>
-  <td><span class="ph bull">&#9650;</span>Accumulation</td>
-  <td class="sm">◎ NEUTRAL</td>
+  <td class="num ivr">54</td>
+  <td class="num">1 &rarr; <strong>10</strong></td>
+  <td class="num">0.71</td>
+  <td class="num wall">135.0 / 140.0 <span class="wnote">nan</span></td>
+  <td><span class="ph bull">&#9650;</span>Mark-up</td>
+  <td class="sm">◉ PINNED</td>
   <td><span class="grade g-prime">PRIME</span></td>
   <td class="flags"></td>
 </tr><tr>
   <td class="tk">EOG</td>
-  <td class="num">145.19</td>
-  <td class="num">28.4 &rarr; <strong>29.8</strong>
-      <span class="delta up">+1.4</span></td>
-  <td class="num">0.10</td>
-  <td class="num ivr">41</td>
-  <td class="num">1 &rarr; <strong>1</strong></td>
-  <td class="num">0.02</td>
-  <td class="num wall">140.0 / 150.0 <span class="wnote">nan</span></td>
+  <td class="num">147.31</td>
+  <td class="num">30.9 &rarr; <strong>31.9</strong>
+      <span class="delta up">+1.0</span></td>
+  <td class="num">0.07</td>
+  <td class="num ivr">54</td>
+  <td class="num">0 &rarr; <strong>10</strong></td>
+  <td class="num">0.64</td>
+  <td class="num wall">145.0 / 150.0 <span class="wnote">nan</span></td>
   <td><span class="ph bull">&#9650;</span>Mark-up</td>
-  <td class="sm">📈 UPTREND</td>
+  <td class="sm">◉ PINNED</td>
   <td><span class="grade g-prime">PRIME</span></td>
   <td class="flags"></td>
 </tr><tr>
-  <td class="tk">CVX</td>
-  <td class="num">208.60</td>
-  <td class="num">24.2 &rarr; <strong>24.1</strong>
+  <td class="tk">XOM</td>
+  <td class="num">164.90</td>
+  <td class="num">29.5 &rarr; <strong>29.4</strong>
       <span class="delta dn">-0.1</span></td>
   <td class="num">0.07</td>
-  <td class="num ivr">41</td>
-  <td class="num">10 &rarr; <strong>10</strong></td>
-  <td class="num">0.39</td>
-  <td class="num wall">207.5 / 215.0 <span class="wnote">nan</span></td>
-  <td><span class="ph bull">&#9650;</span>Accumulation</td>
-  <td class="sm">✓ BULL SETUP</td>
+  <td class="num ivr">62</td>
+  <td class="num">1 &rarr; <strong>10</strong></td>
+  <td class="num">0.68</td>
+  <td class="num wall">160.0 / 165.0 <span class="wnote">nan</span></td>
+  <td><span class="ph bull">&#9650;</span>Mark-up</td>
+  <td class="sm">◉ PINNED</td>
   <td><span class="grade g-weak">WEAK</span></td>
   <td class="flags"><span class="chip chip-warn">FLAT IV</span></td>
-</tr><tr class="sector-row"><td colspan="12">Basic Materials <span class="sector-count">1 name &middot; 0 bullish</span></td></tr><tr>
-  <td class="tk">DD</td>
-  <td class="num">131.59</td>
-  <td class="num">27.6 &rarr; <strong>28.8</strong>
-      <span class="delta up">+1.2</span></td>
-  <td class="num">0.03</td>
-  <td class="num ivr">28</td>
-  <td class="num">1 &rarr; <strong>1</strong></td>
-  <td class="num">0.00</td>
-  <td class="num wall">130.0 / 140.0 <span class="wnote">nan</span></td>
-  <td><span class="ph bear">&#9660;</span>Mark-down</td>
-  <td class="sm">◎ NEUTRAL</td>
-  <td><span class="grade g-solid">SOLID</span></td>
+</tr><tr>
+  <td class="tk">CVX</td>
+  <td class="num">214.50</td>
+  <td class="num">25.7 &rarr; <strong>26.4</strong>
+      <span class="delta up">+0.7</span></td>
+  <td class="num">0.06</td>
+  <td class="num ivr">55</td>
+  <td class="num">1 &rarr; <strong>10</strong></td>
+  <td class="num">0.58</td>
+  <td class="num wall">210.0 / 210.0 <span class="wnote">pinned</span></td>
+  <td><span class="ph bull">&#9650;</span>Mark-up</td>
+  <td class="sm">◉ PINNED</td>
+  <td><span class="grade g-prime">PRIME</span></td>
   <td class="flags"></td>
 </tr></tbody>
   </table></div>
@@ -371,15 +959,15 @@
     Mark-up or Accumulation (expansion into a constructive tape), &#9660; is anything else
     &mdash; most often Mark-down, where the same rising IV and gamma build is fear being
     repriced rather than a premium build.</p>
-    <p>Bullish-phase names in the 15-day core: <strong>JPM, WFC, BAC, AMGN, TEVA, VLO, CVX, EOG, PSX</strong>.
-    Prime names: <strong>JPM, WFC, AMGN, VLO, EOG, PSX</strong>. Gamma sign-flips:
-    <strong>PINS, NKE, JPM, WFC, CVS, VLO</strong>.</p>
+    <p>Bullish-phase names in the 15-day core: <strong>ABBV, APH, BAC, BMY, C, CEG, COF, COP, CRWV, CVX, EOG, ETN, GILD, GM, HAL, INTC, JNJ, JPM, KO, NET, ORCL, OXY, PFE, PLTR, PSX, QCOM, SAP, SCHW, SE, SLB, SMR, STX, TEVA, TGT, VLO, VRTX, WFC, XOM</strong>.
+    Prime names: <strong>APH, BAC, BMY, CEG, COF, COP, CRWV, CVX, EOG, ETN, GILD, GM, HAL, INTC, JNJ, JPM, KO, NET, ORCL, OXY, PLTR, PSX, QCOM, SCHW, SE, SLB, STX, TEVA, VLO, WFC</strong>. Gamma sign-flips:
+    <strong>ARM, BAC, CLS, CRWV, CVS, ETN, FDX, GLW, LRCX, NRG, RTX, STX, TGT, UNH</strong>.</p>
     <p>Candidate generator, not a trade gate &mdash; run <code>thesis TICKER</code> or
     <code>voltbuster</code> before acting on any row.</p>
     <p><a href="dual-x-grid.csv" download>Download this table as CSV &darr;</a></p>
   </div>
 </main>
-<footer>Optionx &middot; Dual_X &middot; generated 05 Sep 2026 08:47 from IV_*.csv and
+<footer>Optionx &middot; Dual_X &middot; generated 10 Sep 2026 11:17 from IV_*.csv and
   stock_analysis_*.csv snapshots</footer>
 </body>
 </html>
