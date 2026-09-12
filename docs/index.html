@@ -285,6 +285,10 @@
 #researchTeamEmbed footer { background:var(--ft-navy); color:#888; font-family:Arial,sans-serif; font-size:11px;
             text-align:center; padding:16px 40px; margin-top:20px; border-top:3px solid var(--ft-red); }
 @media (max-width:700px) {#researchTeamEmbed .masthead, #researchTeamEmbed .stats-banner { margin-left:10px; margin-right:10px; }#researchTeamEmbed main { padding:14px 10px; }#researchTeamEmbed .note-row, #researchTeamEmbed .trade-row { flex-direction:column; gap:2px; }#researchTeamEmbed .note-lbl { width:auto; }}
+#researchTeamEmbed .rt-card.tier2 .price-tag, #researchTeamEmbed .rt-card .price-tag { font-family:Arial,sans-serif; }
+#researchTeamEmbed .trade-spec { font-family:Arial,sans-serif; font-size:12px; color:var(--ft-muted); margin-top:4px; }
+#researchTeamEmbed .flag-thin { color:var(--ft-red); font-weight:700; }
+#researchTeamEmbed .gate { font-family:Arial,sans-serif; font-size:11px; font-weight:700; white-space:nowrap; }
 </style>
 </head>
 <body>
@@ -300,7 +304,7 @@
           <span class="fresh-dot fresh-green"></span>
           <div>
             <div class="fresh-label">Page generated</div>
-            <div class="fresh-ts">12 Sep 2026, 06:34 &middot; <strong>just now</strong></div>
+            <div class="fresh-ts">12 Sep 2026, 15:39 &middot; <strong>just now</strong></div>
           </div>
         </div>
         
@@ -309,7 +313,7 @@
           <span class="fresh-dot fresh-orange"></span>
           <div>
             <div class="fresh-label">Oil brief</div>
-            <div class="fresh-ts">11 Sep 2026, 08:59 &middot; <strong>22h ago</strong></div>
+            <div class="fresh-ts">11 Sep 2026, 08:59 &middot; <strong>1.3d ago</strong></div>
           </div>
         </div>
         
@@ -318,7 +322,7 @@
           <span class="fresh-dot fresh-red"></span>
           <div>
             <div class="fresh-label">Bull screener</div>
-            <div class="fresh-ts">29 Aug 2026, 04:19 &middot; <strong>14.1d ago</strong></div>
+            <div class="fresh-ts">29 Aug 2026, 04:19 &middot; <strong>14.5d ago</strong></div>
           </div>
         </div>
         
@@ -345,7 +349,7 @@
           <span class="fresh-dot fresh-green"></span>
           <div>
             <div class="fresh-label">Dual_X</div>
-            <div class="fresh-ts">11 Sep 2026, 20:03 &middot; <strong>11h ago</strong></div>
+            <div class="fresh-ts">12 Sep 2026, 20:10 &middot; <strong>just now</strong></div>
           </div>
         </div>
         
@@ -354,7 +358,7 @@
           <span class="fresh-dot fresh-red"></span>
           <div>
             <div class="fresh-label">Senti</div>
-            <div class="fresh-ts">17 Aug 2026, 19:25 &middot; <strong>25.5d ago</strong></div>
+            <div class="fresh-ts">17 Aug 2026, 19:25 &middot; <strong>25.8d ago</strong></div>
           </div>
         </div>
         
@@ -363,7 +367,7 @@
           <span class="fresh-dot fresh-red"></span>
           <div>
             <div class="fresh-label">Strategist</div>
-            <div class="fresh-ts">29 Aug 2026, 04:19 &middot; <strong>14.1d ago</strong></div>
+            <div class="fresh-ts">29 Aug 2026, 04:19 &middot; <strong>14.5d ago</strong></div>
           </div>
         </div>
         
@@ -372,7 +376,7 @@
           <span class="fresh-dot fresh-green"></span>
           <div>
             <div class="fresh-label">Research</div>
-            <div class="fresh-ts">11 Sep 2026, 20:20 &middot; <strong>10h ago</strong></div>
+            <div class="fresh-ts">12 Sep 2026, 13:23 &middot; <strong>2h ago</strong></div>
           </div>
         </div>
         
@@ -581,7 +585,7 @@
   </section>
   <section id="dualx">
     <h2>Dual_X</h2>
-    <div class="news-toolbar"><a class="open-full" href="dual-x.html?v=202609112003" target="_blank" rel="noopener">Open full Dual_X screen in new tab &#8599;</a></div><iframe src="dual-x.html?v=202609112003" title="Dual_X"></iframe>
+    <div class="news-toolbar"><a class="open-full" href="dual-x.html?v=202609122010" target="_blank" rel="noopener">Open full Dual_X screen in new tab &#8599;</a></div><iframe src="dual-x.html?v=202609122010" title="Dual_X"></iframe>
   </section>
   <section id="senti">
     <div class="news-toolbar"><a class="open-full" href="senti-grid.html?v=202608171925" target="_blank" rel="noopener">Open full Senti Grid in new tab &#8599;</a></div><iframe src="senti-grid.html?v=202608171925" title="Senti Grid"></iframe>
@@ -832,1494 +836,360 @@ applyFilters();
 </div>
   </section>
   <section id="researchteam">
-    <div id="researchTeamEmbed">
+    <div id="researchTeamEmbed"><style>
+  :root {
+    --ft-salmon:#FFF1E0; --ft-red:#990F3D; --ft-blue:#0F5499; --ft-navy:#262A33;
+    --ft-warm-blk:#33302E; --ft-border:#CCB799; --ft-mid:#8D775F; --ft-muted:#66605A;
+    --ft-card-bg:#FFFAF4; --ft-gold:#F0A500;
+    --green:#0ca30c; --orange:#c2570a; --red:#990F3D;
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:Georgia,'Times New Roman',serif; background:var(--ft-salmon);
+         color:var(--ft-warm-blk); font-size:14px; line-height:1.5; }
+  .masthead { background:var(--ft-navy); color:#fff; border-bottom:4px solid var(--ft-red);
+              border-radius:4px; padding:18px 20px 14px; margin:20px 20px 0; }
+  .masthead-eyebrow { font-family:Arial,sans-serif; font-size:10px; letter-spacing:0.12em;
+                      text-transform:uppercase; color:#AAA; margin-bottom:6px; }
+  .masthead-title { font-size:1.7rem; font-weight:700; letter-spacing:-0.01em; }
+  .masthead-title span { color:var(--ft-gold); }
+  .masthead-date { font-family:Arial,sans-serif; font-size:11px; color:#AAA; margin-top:6px; }
+  .masthead-tagline { font-style:italic; font-size:12px; color:#CCC;
+                      border-top:1px solid #44495A; padding-top:8px; margin-top:8px; }
+  .stats-banner { background:var(--ft-red); padding:8px 20px; margin:0 20px; }
+  .stats-inner { display:flex; align-items:center; gap:20px; flex-wrap:wrap;
+                 max-width:1320px; margin:0 auto; }
+  .stat-item { font-family:Arial,sans-serif; font-size:12px; color:#fff;
+               display:flex; align-items:center; gap:6px; }
+  .stat-sep { color:rgba(255,255,255,0.4); }
+  main { max-width:1180px; margin:0 auto; padding:20px; }
+  h2 { font-family:Arial,sans-serif; font-size:11px; font-weight:700; text-transform:uppercase;
+       letter-spacing:0.1em; color:var(--ft-mid); margin:26px 0 12px; }
+  .lead { font-size:12.5px; color:var(--ft-muted); margin:-4px 0 12px; max-width:82ch; }
 
+  .rt-card { background:var(--ft-card-bg); border:1px solid var(--ft-border); border-left:4px solid var(--ft-blue);
+              padding:14px 16px; margin-bottom:14px; }
+  .rt-card.tier2b { border-left-color:var(--ft-gold); }
+  .rt-card.tier3 { border-left-color:var(--ft-mid); }
+  .rt-hdr { display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:8px; }
+  .tk { font-family:Arial,sans-serif; font-weight:700; font-size:1.15rem; color:var(--ft-red); }
+  .sector-tag { font-family:Arial,sans-serif; font-size:10px; text-transform:uppercase; letter-spacing:0.06em; color:var(--ft-mid); }
+  .price-tag { font-family:Arial,sans-serif; font-size:12px; font-weight:700; color:var(--ft-warm-blk); background:var(--ft-salmon); border:1px solid var(--ft-border); border-radius:2px; padding:1px 7px; }
+  .scores { margin-left:auto; display:flex; gap:6px; }
+  .chip { display:inline-block; padding:2px 7px; font-size:10px; font-weight:700; border-radius:2px;
+          font-family:Arial,sans-serif; border:1px solid; white-space:nowrap; }
+  .chip.small { padding:1px 5px; font-size:9px; }
+  .chip-f { color:var(--ft-blue); border-color:var(--ft-blue); background:rgba(15,84,153,0.08); }
+  .chip-t { color:#4B7F3D; border-color:#4B7F3D; background:rgba(75,127,61,0.08); }
+  .chip-s { color:var(--ft-gold); border-color:var(--ft-gold); background:rgba(240,165,0,0.1); }
+  .chip-na { color:var(--ft-mid); border-color:var(--ft-border); }
+  .chip-flip { color:var(--green); border-color:var(--green); background:rgba(12,163,12,0.08); margin-left:4px; }
+  .note-row, .trade-row { display:flex; gap:10px; font-size:12.5px; margin-bottom:6px; align-items:baseline; }
+  .note-lbl { font-family:Arial,sans-serif; font-size:9.5px; font-weight:700; text-transform:uppercase;
+              letter-spacing:0.08em; color:var(--ft-mid); width:78px; flex:none; padding-top:2px; }
+  .note-sub { font-size:11.5px; color:var(--ft-muted); margin-top:3px; }
+  .trade-row { border-top:1px dashed var(--ft-border); padding-top:8px; margin-top:8px; }
+  .size-tag { font-family:Arial,sans-serif; font-size:10px; color:var(--ft-mid); margin-left:6px; }
+  .conflict { background:#F7E3CE; border-left:3px solid var(--orange); padding:7px 10px; margin-top:8px; font-size:11.5px; color:var(--ft-warm-blk); }
+  .ph { font-size:9px; margin-right:4px; }
+  .ph.bull { color:var(--green); } .ph.bear { color:var(--red); }
+
+  .table-wrap { overflow-x:auto; border:1px solid var(--ft-border); background:var(--ft-card-bg); margin-bottom:8px; }
+  table.compact { border-collapse:collapse; width:100%; font-size:11.5px; font-family:Arial,sans-serif; }
+  table.compact th, table.compact td { padding:6px 8px; text-align:left; border-bottom:1px solid var(--ft-border); vertical-align:top; }
+  table.compact th { position:sticky; top:0; background:var(--ft-navy); color:#fff; font-size:9.5px; text-transform:uppercase; letter-spacing:0.05em; white-space:nowrap; }
+  table.compact tbody tr:nth-child(even) td { background:#FFF6EB; }
+  table.compact .tkcell { font-weight:700; color:var(--ft-red); white-space:nowrap; }
+  table.compact .sectorcell { color:var(--ft-mid); white-space:nowrap; }
+  table.compact td.num { white-space:nowrap; text-align:right; font-variant-numeric:tabular-nums; }
+
+  .note { background:var(--ft-card-bg); border:1px solid var(--ft-border);
+           border-left:4px solid var(--ft-blue); padding:14px 16px; margin-top:24px; font-size:12.5px; }
+  .note h3 { font-family:Arial,sans-serif; font-size:10px; text-transform:uppercase;
+              letter-spacing:0.1em; color:var(--ft-mid); margin:0 0 8px; }
+  .note p { margin:0 0 8px; } .note p:last-child { margin-bottom:0; }
+  .note code { background:#EFE3D0; padding:1px 5px; font-size:11px; }
+  footer { background:var(--ft-navy); color:#888; font-family:Arial,sans-serif; font-size:11px;
+            text-align:center; padding:16px 40px; margin-top:20px; border-top:3px solid var(--ft-red); }
+  @media (max-width:700px) { .masthead,.stats-banner { margin-left:10px; margin-right:10px; }
+                              main { padding:14px 10px; }
+                              .note-row, .trade-row { flex-direction:column; gap:2px; }
+                              .note-lbl { width:auto; } }
+
+  .rt-card.tier2 .price-tag, .rt-card .price-tag { font-family:Arial,sans-serif; }
+  .trade-spec { font-family:Arial,sans-serif; font-size:12px; color:var(--ft-muted); margin-top:4px; }
+  .flag-thin { color:var(--ft-red); font-weight:700; }
+  .gate { font-family:Arial,sans-serif; font-size:11px; font-weight:700; white-space:nowrap; }
+</style>
 <div class="masthead">
-  <div class="masthead-eyebrow">Optionx &middot; Research Team</div>
+  <div class="masthead-eyebrow">Optionx &middot; Research Team &middot; Rules v2</div>
   <div class="masthead-title">Fundalist &rarr; Technicalist &rarr; <span>Sentilist</span></div>
-  <div class="masthead-date">Friday, 11 September 2026 &middot; run against the 20:03 SGT Dual_X / 04:20 SGT business overview / 04:24 SGT news bulletin snapshots &middot; prices as of the 04:20 SGT business overview snapshot (not real-time)</div>
-  <div class="masthead-tagline">Three agents, one chain: fundamentals screen the universe, technicals confirm dual IV+GEX
-    expansion, sentiment rates the news &mdash; plus an independent 7+ catch-all for tickers the funnel never saw. Live 5-day
-    vs 30-day volume data was unavailable from this session's network (outbound access to market-data providers is blocked
-    here), so the volume-confirmation leg of the Technicalist screen is omitted this run &mdash; flagged wherever a trade
-    idea would normally lean on it.</div>
+  <div class="masthead-date">Saturday, 12 September 2026 &middot; rules-v2 rerun 13:23 SGT &middot; sources: business_overview_120926_0630.csv, Dual_X_120926_2010_grid.csv, news_bulletin_20260912_0634.html, IV_120926_0634.csv &middot; prices as of those snapshots (not real-time)</div>
+  <div class="masthead-tagline">Same three-agent chain, now with six pre-trade gates drawn from the 29/08&ndash;11/09 review and credit spreads
+    as the default structure: the short strike sits at the dealer wall, so the trade only needs price to stay on the right side of it.
+    Rules are frozen until ~26/09 so the next review measures them out of sample.</div>
 </div>
-
-
 <div class="stats-banner"><div class="stats-inner">
-  <div class="stat-item"><strong>207</strong> tickers screened (Fundalist)</div><span class="stat-sep">|</span>
-  <div class="stat-item"><strong>199</strong> passed Fundalist &ge;5</div><span class="stat-sep">|</span>
-  <div class="stat-item"><strong>72</strong> also cleared Technicalist &ge;5 (inside today's 75-name Dual_X screen)</div><span class="stat-sep">|</span>
-  <div class="stat-item"><strong>25</strong> full-chain confirmed</div><span class="stat-sep">|</span>
-  <div class="stat-item"><strong>61</strong> partial (two of three gates)</div><span class="stat-sep">|</span>
-  <div class="stat-item"><strong>2</strong> sentiment catch-alls (7+)</div><span class="stat-sep">|</span>
-  <div class="stat-item"><strong>10</strong> sectors represented</div>
+  <div class="stat-item"><strong>10</strong> trades (10 full F+T+S, 0 F+T no news)</div><span class="stat-sep">|</span>
+  <div class="stat-item"><strong>45</strong> watch list</div><span class="stat-sep">|</span>
+  <div class="stat-item"><strong>28</strong> filtered by rules v2</div><span class="stat-sep">|</span>
+  <div class="stat-item"><strong>7</strong> Healthcare excluded</div><span class="stat-sep">|</span>
+  <div class="stat-item">Trades by sector: Technology 6, Financial Services 2, Energy 2</div>
 </div></div>
-
 <main>
-  <h2>Tier 1 &mdash; Full Chain Confirmed</h2>
-  <p class="lead">Cleared all three gates: Fundalist &ge;5, Technicalist &ge;5 (inside the dual_expand co-expansion
-    screen), Sentilist &ge;6. Ranked by ticker; every row cleared every gate. F/T/S chips show the three scores.</p>
-
+  <h2>1 &mdash; Trades (cleared every gate)</h2>
+  <p class="lead">Full-chain names first (ranked by the average of F/T/S), then F+T rows with no news coverage at small size.
+    Strikes sit at the listed dealer wall; confirm the strike exists and the credit clears &#8531; of the width before entering.</p>
+  
     <div class="rt-card tier1">
       <div class="rt-hdr">
-        <span class="tk">CRWV</span>
+        <span class="tk">LITE</span>
         <span class="sector-tag">Technology</span>
-        <span class="price-tag">$89.12</span>
-        <span class="scores">
-          <span class="chip chip-f">F 7.2</span>
-          <span class="chip chip-t">T 9.3</span>
-          <span class="chip chip-s">S 6</span>
-        </span>
+        <span class="price-tag">$927.50</span>
+        <span class="scores"><span class="chip chip-f">F 9</span> <span class="chip chip-t">T 7</span> <span class="chip chip-s">S 7</span></span>
       </div>
-      <div class="note-row"><span class="note-lbl">Fundamental</span><div>Buy consensus; +62.1% upside to target; PEG n/a; revenue +112.5% YoY; negative 25.4% margin</div></div>
-      <div class="note-row"><span class="note-lbl">Technical</span><div><span class="ph bear">&#9660;</span><strong>Distribution</strong> &middot; Neutral / Transition Zone &middot; GEX -2 -&gt; -3 &middot; IV 77.2 (slope 0.393, IVR 17) &middot; Put/Call wall <strong>90.0/110.0</strong>
-        <div class="note-sub">price below the 90.0 put wall (breakdown structure); IVR 17 (cheap entry); caveat: flat</div>
-      </div></div>
-      <div class="note-row"><span class="note-lbl">Sentiment</span><div>
-        <span class="ph bear">&#9660;</span><strong>6/10</strong> (bear) &middot; Confirmed -5% move &quot;despite&quot; a physical-AI service launch and Michael Burry covering his AI short -- a real, quantified negative reaction that shrugged off two would-be positive catalysts.
-      </div></div>
+      <div class="note-row"><span class="note-lbl">Fundamental</span><div>Strong Buy; +23.9% to target; PEG 0.63; rev +109.3%; margin -230.1% (adj +1: rev growth 109% offsets negative margin -230.1%)</div></div>
+      <div class="note-row"><span class="note-lbl">Technical</span><div><span class="ph bull">&#9650;</span><strong>Mark-up</strong> &middot; GEX 10.0 -&gt; 8.0, Extreme Positive Gamma &middot; IVR 26.0 &middot; Put/Call wall <strong>850/980</strong> &middot; volume 5v30 0.98x
+        <div class="note-sub">GEX 10.0 -&gt; 8.0, Extreme Positive Gamma; walls put wall $850.0 (+9.1%), call wall $980.0 (-5.4%); IV 70.8% IVR 26.0; volume 0.98x 5v30; Wyckoff Mark-up.</div></div></div>
+      <div class="note-row"><span class="note-lbl">Sentiment</span><div><span class="ph bull">&#9650;</span><strong>7/10</strong> (bull, funnel) &middot; &#x27;Top Funds Bet Billions As This AI Stock Lights Up A Buy Zone&#x27; (11 Sep) outweighs a minor officer stock-sale plan. Mild bullish.</div></div>
       <div class="trade-row"><span class="note-lbl">Trade</span><div>
-        <strong>Put debit spread continuing the breakdown below the 90 put wall (target the 80/70 zone), stop back above 90</strong> <span class="size-tag">Size: Small-moderate</span>
+        <strong>Bull put credit spread 850/830, 16 Oct 2026 (34 DTE)</strong> <span class="size-tag">Size: Full</span>
+        <div class="trade-spec">Width 20 &middot; cushion 8.4% vs 7-day implied 6.4% &middot; check the chain for a credit of at least $6.67 (⅓ width) or skip &mdash; never move the short strike closer to price &middot; exit: close if price closes below 850</div>
       </div></div>
-      
     </div>
-
     <div class="rt-card tier1">
       <div class="rt-hdr">
-        <span class="tk">GE</span>
-        <span class="sector-tag">Industrials</span>
-        <span class="price-tag">$324.15</span>
-        <span class="scores">
-          <span class="chip chip-f">F 7.3</span>
-          <span class="chip chip-t">T 9.3</span>
-          <span class="chip chip-s">S 6</span>
-        </span>
-      </div>
-      <div class="note-row"><span class="note-lbl">Fundamental</span><div>Strong Buy consensus; +24.9% upside to target; PEG 4.31 (richer); revenue +21.1% YoY; 17.7% profit margin</div></div>
-      <div class="note-row"><span class="note-lbl">Technical</span><div><span class="ph bear">&#9660;</span><strong>Mark-down</strong> &middot; Moderate Positive Gamma <span class="chip chip-flip">GEX FLIP</span> &middot; GEX -7 -&gt; 5 &middot; IV 30.8 (slope 0.05, IVR 25) &middot; Put/Call wall <strong>330.0/330.0</strong>
-        <div class="note-sub">GEX sign-flip negative&rarr;positive (genuine dealer regime change); price pinned between the 330.0/330.0 walls; IVR 25 (cheap entry)</div>
-      </div></div>
-      <div class="note-row"><span class="note-lbl">Sentiment</span><div>
-        <span class="ph bull">&#9650;</span><strong>6/10</strong> (bull) &middot; &quot;Strong Orders Drive GE Aerospace Defense &amp; Propulsion&quot; plus a Polish maintenance-hub exploration for FA-50 engines -- real order-flow and partnership news, not just comparison pieces.
-      </div></div>
-      <div class="trade-row"><span class="note-lbl">Trade</span><div>
-        <strong>Small call debit spread on the GEX-flip/order-momentum thesis, tight stop below 330</strong> <span class="size-tag">Size: Small</span>
-      </div></div>
-      <div class="conflict"><strong>Conflict:</strong> Wyckoff still tags Mark-down even though GEX just flipped bullish and orders/partnership news is constructive -- treat as an emerging reversal, not a confirmed one.</div>
-    </div>
-
-    <div class="rt-card tier1">
-      <div class="rt-hdr">
-        <span class="tk">UNH</span>
-        <span class="sector-tag">Healthcare</span>
-        <span class="price-tag">$388.28</span>
-        <span class="scores">
-          <span class="chip chip-f">F 6.4</span>
-          <span class="chip chip-t">T 9.3</span>
-          <span class="chip chip-s">S 6</span>
-        </span>
-      </div>
-      <div class="note-row"><span class="note-lbl">Fundamental</span><div>Buy consensus; +22.4% upside to target; PEG 1.08 (cheap vs growth); revenue +0.4% YoY; thin 3.1% profit margin</div></div>
-      <div class="note-row"><span class="note-lbl">Technical</span><div><span class="ph bear">&#9660;</span><strong>Distribution</strong> &middot; Moderate Positive Gamma <span class="chip chip-flip">GEX FLIP</span> &middot; GEX -2 -&gt; 5 &middot; IV 31.9 (slope 0.297, IVR 24) &middot; Put/Call wall <strong>390.0/390.0</strong>
-        <div class="note-sub">GEX sign-flip negative&rarr;positive (genuine dealer regime change); price pinned between the 390.0/390.0 walls; IVR 24 (cheap entry)</div>
-      </div></div>
-      <div class="note-row"><span class="note-lbl">Sentiment</span><div>
-        <span class="ph bull">&#9650;</span><strong>6/10</strong> (bull) &middot; &quot;UnitedHealth Reshapes Florida WellMed Operations With TPG Deal&quot; is a concrete, dated corporate restructuring/divestiture action.
-      </div></div>
-      <div class="trade-row"><span class="note-lbl">Trade</span><div>
-        <strong>Small call debit spread on the GEX-flip/TPG-deal thesis toward 390+</strong> <span class="size-tag">Size: Small</span>
-      </div></div>
-      <div class="conflict"><strong>Conflict:</strong> Wyckoff still tags Distribution even though GEX just flipped bullish and the WellMed/TPG restructuring is a real corporate action -- an emerging reversal, not yet confirmed.</div>
-    </div>
-
-    <div class="rt-card tier1">
-      <div class="rt-hdr">
-        <span class="tk">OKLO</span>
-        <span class="sector-tag">Utilities</span>
-        <span class="price-tag">$39.88</span>
-        <span class="scores">
-          <span class="chip chip-f">F 5.8</span>
-          <span class="chip chip-t">T 9.3</span>
-          <span class="chip chip-s">S 7</span>
-        </span>
-      </div>
-      <div class="note-row"><span class="note-lbl">Fundamental</span><div>No analyst rating on file; +100.3% upside to target; PEG n/a; revenue growth n/a; thin 0.0% profit margin</div></div>
-      <div class="note-row"><span class="note-lbl">Technical</span><div><span class="ph bear">&#9660;</span><strong>Mark-down</strong> &middot; Neutral / Transition Zone &middot; GEX 0 -&gt; -1 &middot; IV 75.1 (slope 0.118, IVR 8) &middot; Put/Call wall <strong>40.0/45.0</strong>
-        <div class="note-sub">price below the 40.0 put wall (breakdown structure); IVR 8 (cheap entry); caveat: fade</div>
-      </div></div>
-      <div class="note-row"><span class="note-lbl">Sentiment</span><div>
-        <span class="ph bear">&#9660;</span><strong>7/10</strong> (bear) &middot; Piper Sandler&#x27;s sector-split call drove a confirmed -5% move across Oklo/NuScale/X-Energy, repeated across five separate outlets, plus a standalone &quot;4 Reasons to Sell OKLO&quot; piece -- a real, well-corroborated bearish catalyst.
-      </div></div>
-      <div class="trade-row"><span class="note-lbl">Trade</span><div>
-        <strong>Put debit spread continuing the breakdown below the 40 put wall, target the mid-30s, stop back above 40/45</strong> <span class="size-tag">Size: Small-moderate (best-aligned bearish confluence with INTC/CSCO)</span>
-      </div></div>
-      
-    </div>
-
-    <div class="rt-card tier1">
-      <div class="rt-hdr">
-        <span class="tk">COP</span>
-        <span class="sector-tag">Energy</span>
-        <span class="price-tag">$137.04</span>
-        <span class="scores">
-          <span class="chip chip-f">F 8.1</span>
-          <span class="chip chip-t">T 9.0</span>
-          <span class="chip chip-s">S 6</span>
-        </span>
-      </div>
-      <div class="note-row"><span class="note-lbl">Fundamental</span><div>Buy consensus; +6.0% upside to target; PEG 1.21 (fairly valued); revenue +35.5% YoY; 14.4% profit margin</div></div>
-      <div class="note-row"><span class="note-lbl">Technical</span><div><span class="ph bull">&#9650;</span><strong>Mark-up</strong> &middot; Extreme Positive Gamma <span class="chip chip-flip">GEX FLIP</span> &middot; GEX -1 -&gt; 10 &middot; IV 31.3 (slope 0.195, IVR 48) &middot; Put/Call wall <strong>135.0/140.0</strong>
-        <div class="note-sub">GEX sign-flip negative&rarr;positive (genuine dealer regime change)</div>
-      </div></div>
-      <div class="note-row"><span class="note-lbl">Sentiment</span><div>
-        <span class="ph bull">&#9650;</span><strong>6/10</strong> (bull) &middot; &quot;Why Did CVX, COP, VLO Stocks Jump To 52-Week Highs?&quot; is a confirmed, quantified move, even if oil-macro-driven rather than COP-specific.
-      </div></div>
-      <div class="trade-row"><span class="note-lbl">Trade</span><div>
-        <strong>Small call debit spread toward the 140 call wall, or a call calendar given the pin</strong> <span class="size-tag">Size: Small-moderate (Extreme Positive Gamma caps near-term upside)</span>
-      </div></div>
-      
-    </div>
-
-    <div class="rt-card tier1">
-      <div class="rt-hdr">
-        <span class="tk">SLB</span>
-        <span class="sector-tag">Energy</span>
-        <span class="price-tag">$56.01</span>
-        <span class="scores">
-          <span class="chip chip-f">F 6.3</span>
-          <span class="chip chip-t">T 8.5</span>
-          <span class="chip chip-s">S 6</span>
-        </span>
-      </div>
-      <div class="note-row"><span class="note-lbl">Fundamental</span><div>Buy consensus; +11.1% upside to target; PEG 1.52 (fairly valued); revenue +5.0% YoY; 8.5% profit margin</div></div>
-      <div class="note-row"><span class="note-lbl">Technical</span><div><span class="ph bull">&#9650;</span><strong>Mark-up</strong> &middot; Extreme Positive Gamma &middot; GEX 1 -&gt; 10 &middot; IV 36.2 (slope 0.247, IVR 42) &middot; Put/Call wall <strong>57.5/60.0</strong>
-        <div class="note-sub">price below the 57.5 put wall (breakdown structure)</div>
-      </div></div>
-      <div class="note-row"><span class="note-lbl">Sentiment</span><div>
-        <span class="ph ">&#9679;</span><strong>6/10</strong> (mixed) &middot; A confirmed CalSTRS stake increase and &quot;solid quarterly figures&quot; lifted the stock even as a separate wire reported &quot;Quarterly Profit Slips as Iran War Dents Middle East Activity&quot; -- two real, contradictory, same-day items.
-      </div></div>
-      <div class="trade-row"><span class="note-lbl">Trade</span><div>
-        <strong>Small call debit spread toward the 60 call wall on the Mark-up phase and broader energy strength</strong> <span class="size-tag">Size: Small (the &#x27;below put&#x27; wall note is a modest pin-risk caution, not a breakdown)</span>
-      </div></div>
-      
-    </div>
-
-    <div class="rt-card tier1">
-      <div class="rt-hdr">
-        <span class="tk">CVX</span>
-        <span class="sector-tag">Energy</span>
-        <span class="price-tag">$212.76</span>
-        <span class="scores">
-          <span class="chip chip-f">F 7.9</span>
-          <span class="chip chip-t">T 8.5</span>
-          <span class="chip chip-s">S 6</span>
-        </span>
-      </div>
-      <div class="note-row"><span class="note-lbl">Fundamental</span><div>Buy consensus; +4.0% upside to target; PEG 0.92 (cheap vs growth); revenue +53.5% YoY; 9.8% profit margin</div></div>
-      <div class="note-row"><span class="note-lbl">Technical</span><div><span class="ph bull">&#9650;</span><strong>Mark-up</strong> &middot; Extreme Positive Gamma <span class="chip chip-flip">GEX FLIP</span> &middot; GEX -2 -&gt; 10 &middot; IV 26.3 (slope 0.078, IVR 55) &middot; Put/Call wall <strong>210.0/210.0</strong>
-        <div class="note-sub">GEX sign-flip negative&rarr;positive (genuine dealer regime change); price pinned between the 210.0/210.0 walls</div>
-      </div></div>
-      <div class="note-row"><span class="note-lbl">Sentiment</span><div>
-        <span class="ph bull">&#9650;</span><strong>6/10</strong> (bull) &middot; Confirmed 52-week-high move alongside CVX/COP/VLO, oil-macro-driven but real and quantified.
-      </div></div>
-      <div class="trade-row"><span class="note-lbl">Trade</span><div>
-        <strong>Call calendar / small call debit spread anticipating a push through the tightly pinned 210 level</strong> <span class="size-tag">Size: Small (put and call walls have converged at 210 -- a hard pin, not a breakout setup yet)</span>
-      </div></div>
-      
-    </div>
-
-    <div class="rt-card tier1">
-      <div class="rt-hdr">
-        <span class="tk">QNT</span>
+        <span class="tk">NOW</span>
         <span class="sector-tag">Technology</span>
-        <span class="price-tag">$48.67</span>
-        <span class="scores">
-          <span class="chip chip-f">F 7.1</span>
-          <span class="chip chip-t">T 8.1</span>
-          <span class="chip chip-s">S 6</span>
-        </span>
+        <span class="price-tag">$132.53</span>
+        <span class="scores"><span class="chip chip-f">F 8</span> <span class="chip chip-t">T 8.5</span> <span class="chip chip-s">S 6</span></span>
       </div>
-      <div class="note-row"><span class="note-lbl">Fundamental</span><div>No analyst rating on file; +99.7% upside to target; PEG n/a; revenue +279.4% YoY; thin 0.0% profit margin</div></div>
-      <div class="note-row"><span class="note-lbl">Technical</span><div><span class="ph bear">&#9660;</span><strong>Distribution</strong> &middot; Neutral / Transition Zone &middot; GEX -1 -&gt; -1 &middot; IV 83.6 (slope 0.356, IVR 17) &middot; Put/Call wall <strong>50.0/55.0</strong>
-        <div class="note-sub">price below the 50.0 put wall (breakdown structure); IVR 17 (cheap entry)</div>
-      </div></div>
-      <div class="note-row"><span class="note-lbl">Sentiment</span><div>
-        <span class="ph bull">&#9650;</span><strong>6/10</strong> (bull) &middot; BofA&#x27;s &quot;quantum is the next Fire Moment&quot; call plus a $300M federal quantum-funding item are real, dated, sector-wide bullish catalysts, even if not QNT-specific.
-      </div></div>
+      <div class="note-row"><span class="note-lbl">Fundamental</span><div>Strong Buy; +7.9% to target; PEG 0.94; rev +24.0%; margin 11.3%</div></div>
+      <div class="note-row"><span class="note-lbl">Technical</span><div><span class="ph bull">&#9650;</span><strong>Mark-up</strong> &middot; GEX 6.0 -&gt; 10.0, Extreme Positive Gamma &middot; IVR 47.0 &middot; Put/Call wall <strong>130/140</strong> &middot; volume 5v30 0.71x
+        <div class="note-sub">GEX 6.0 -&gt; 10.0, Extreme Positive Gamma; walls put wall $130.0 (+1.9%), call wall $140.0 (-5.3%); IV 51.5% IVR 47.0; volume 0.71x 5v30; Wyckoff Mark-up.</div></div></div>
+      <div class="note-row"><span class="note-lbl">Sentiment</span><div><span class="ph ">&#9679;</span><strong>6/10</strong> (neutral, funnel) &middot; ServiceNow (11 Sep) outperforms broader market but no fresh catalyst; coverage otherwise generic software-sector chatter.</div></div>
       <div class="trade-row"><span class="note-lbl">Trade</span><div>
-        <strong>Small call debit spread on the sector-wide quantum-tailwind thesis only</strong> <span class="size-tag">Size: Smallest-small</span>
+        <strong>Bull put credit spread 130/125, 16 Oct 2026 (34 DTE)</strong> <span class="size-tag">Size: Small</span>
+        <div class="trade-spec">Width 5 &middot; cushion 1.9% vs 7-day implied 4.6% &middot; <span class="flag-thin">THIN CUSHION</span> &middot; check the chain for a credit of at least $1.67 (⅓ width) or skip &mdash; never move the short strike closer to price &middot; exit: close if price closes below 130</div>
       </div></div>
-      <div class="conflict"><strong>Conflict:</strong> Technical structure is Distribution with price below its own put wall (no dual expansion), directly at odds with the strongly bullish BofA/federal-funding sentiment -- sentiment-led, not technically confirmed.</div>
     </div>
-
     <div class="rt-card tier1">
       <div class="rt-hdr">
-        <span class="tk">INFQ</span>
-        <span class="sector-tag">Technology</span>
-        <span class="price-tag">$12.96</span>
-        <span class="scores">
-          <span class="chip chip-f">F 7.5</span>
-          <span class="chip chip-t">T 8.0</span>
-          <span class="chip chip-s">S 8</span>
-        </span>
-      </div>
-      <div class="note-row"><span class="note-lbl">Fundamental</span><div>Strong Buy consensus; +64.6% upside to target; PEG n/a; revenue +156.5% YoY; negative 167.8% margin</div></div>
-      <div class="note-row"><span class="note-lbl">Technical</span><div><span class="ph bull">&#9650;</span><strong>Mark-up</strong> &middot; Neutral / Transition Zone &middot; GEX 1 -&gt; 1 &middot; IV 87.8 (slope 0.181, IVR 8) &middot; Put/Call wall <strong>12.5/12.5</strong>
-        <div class="note-sub">price pinned between the 12.5/12.5 walls; IVR 8 (cheap entry); caveat: fade</div>
-      </div></div>
-      <div class="note-row"><span class="note-lbl">Sentiment</span><div>
-        <span class="ph bull">&#9650;</span><strong>8/10</strong> (bull) &middot; Three independent, dated, concrete items same-day: a new Cisco quantum-networking partnership, a $3.71M Wellington Management position, and a Canaccord note citing &quot;scarcity value&quot; with 70% upside.
-      </div></div>
-      <div class="trade-row"><span class="note-lbl">Trade</span><div>
-        <strong>Small-moderate call debit spread just above the 12.5 pin, on the Cisco partnership / institutional buying / Canaccord upside call</strong> <span class="size-tag">Size: Small (respect the &#x27;fade&#x27; caveat -- defined-risk only)</span>
-      </div></div>
-      
-    </div>
-
-    <div class="rt-card tier1">
-      <div class="rt-hdr">
-        <span class="tk">TSM</span>
-        <span class="sector-tag">Technology</span>
-        <span class="price-tag">$428.03</span>
-        <span class="scores">
-          <span class="chip chip-f">F 9.6</span>
-          <span class="chip chip-t">T 8.0</span>
-          <span class="chip chip-s">S 7</span>
-        </span>
-      </div>
-      <div class="note-row"><span class="note-lbl">Fundamental</span><div>Strong Buy consensus; +29.1% upside to target; PEG 0.81 (cheap vs growth); revenue +36.0% YoY; 49.9% profit margin</div></div>
-      <div class="note-row"><span class="note-lbl">Technical</span><div><span class="ph bull">&#9650;</span><strong>Mark-up</strong> &middot; Extreme Positive Gamma &middot; GEX 10 -&gt; 10 &middot; IV 33.1 (slope 0.087, IVR 11) &middot; Put/Call wall <strong>440.0/430.0</strong>
-        <div class="note-sub">put/call walls have inverted (crossed) -- treat as noise; IVR 11 (cheap entry); caveat: flat</div>
-      </div></div>
-      <div class="note-row"><span class="note-lbl">Sentiment</span><div>
-        <span class="ph ">&#9679;</span><strong>7/10</strong> (mixed) &middot; September revenue surged a confirmed 53% YoY -- a hard, verified beat -- yet the stock fell on the news (&quot;can&#x27;t keep up with demand&quot; framing); a real, high-magnitude, priced-in-vs-not tension.
-      </div></div>
-      <div class="trade-row"><span class="note-lbl">Trade</span><div>
-        <strong>Call debit spread on the confirmed 53% revenue-beat re-rating thesis</strong> <span class="size-tag">Size: Moderate (put/call walls have inverted -- treat exact strikes as noise, size off the fundamentals+news instead)</span>
-      </div></div>
-      
-    </div>
-
-    <div class="rt-card tier1">
-      <div class="rt-hdr">
-        <span class="tk">JPM</span>
+        <span class="tk">BAC</span>
         <span class="sector-tag">Financial Services</span>
-        <span class="price-tag">$353.56</span>
-        <span class="scores">
-          <span class="chip chip-f">F 7.9</span>
-          <span class="chip chip-t">T 8.0</span>
-          <span class="chip chip-s">S 6</span>
-        </span>
+        <span class="price-tag">$62.67</span>
+        <span class="scores"><span class="chip chip-f">F 8.5</span> <span class="chip chip-t">T 7.75</span> <span class="chip chip-s">S 6</span></span>
       </div>
-      <div class="note-row"><span class="note-lbl">Fundamental</span><div>Buy consensus; +6.4% upside to target; PEG 1.67 (fairly valued); revenue +30.4% YoY; 34.9% profit margin</div></div>
-      <div class="note-row"><span class="note-lbl">Technical</span><div><span class="ph bull">&#9650;</span><strong>Mark-up</strong> &middot; Extreme Positive Gamma &middot; GEX 1 -&gt; 10 &middot; IV 22.8 (slope 0.185, IVR 27) &middot; Put/Call wall <strong>355.0/350.0</strong>
-        <div class="note-sub">put/call walls have inverted (crossed) -- treat as noise; IVR 27 (cheap entry)</div>
-      </div></div>
-      <div class="note-row"><span class="note-lbl">Sentiment</span><div>
-        <span class="ph bull">&#9650;</span><strong>6/10</strong> (bull) &middot; &quot;JPMorgan Is About to Become the First $1 Trillion Bank&quot; is a genuine market-milestone story getting outsized same-day attention.
-      </div></div>
+      <div class="note-row"><span class="note-lbl">Fundamental</span><div>Buy; +10.1% to target; PEG 0.95; rev +16.8%; margin 29.5%</div></div>
+      <div class="note-row"><span class="note-lbl">Technical</span><div><span class="ph bull">&#9650;</span><strong>Mark-up</strong> &middot; GEX 7.0 -&gt; 10.0, Extreme Positive Gamma &middot; IVR 20.0 &middot; Put/Call wall <strong>62.5/65</strong> &middot; volume 5v30 1.03x
+        <div class="note-sub">GEX 7.0 -&gt; 10.0, Extreme Positive Gamma; walls put wall $62.5 (+0.3%), call wall $65.0 (-3.6%); IV 22.6% IVR 20.0; volume 1.03x 5v30; Wyckoff Mark-up.</div></div></div>
+      <div class="note-row"><span class="note-lbl">Sentiment</span><div><span class="ph ">&#9679;</span><strong>6/10</strong> (neutral, funnel) &middot; BAC called &#x27;still a bargain after a 130% run&#x27; (11 Sep); Goldman/BofA also chasing Anthropic wealth-management mandate. Mild positive, no strong catalyst.</div></div>
       <div class="trade-row"><span class="note-lbl">Trade</span><div>
-        <strong>Small call debit spread on the &#x27;$1T bank&#x27; narrative and fresh GEX flip</strong> <span class="size-tag">Size: Small-moderate (put/call walls have inverted -- treat exact strikes as noise)</span>
+        <strong>Bull put credit spread 62.5/60, 09 Oct 2026 (27 DTE)</strong> <span class="size-tag">Size: Small</span>
+        <div class="trade-spec">Width 2.5 &middot; cushion 0.3% vs 7-day implied 2.1% &middot; <span class="flag-thin">THIN CUSHION</span> &middot; check the chain for a credit of at least $0.83 (⅓ width) or skip &mdash; never move the short strike closer to price &middot; exit: close if price closes below 62.5 (earnings 14/10 before Oct monthly)</div>
       </div></div>
-      
     </div>
-
     <div class="rt-card tier1">
       <div class="rt-hdr">
-        <span class="tk">TEVA</span>
-        <span class="sector-tag">Healthcare</span>
-        <span class="price-tag">$36.35</span>
-        <span class="scores">
-          <span class="chip chip-f">F 6.3</span>
-          <span class="chip chip-t">T 8.0</span>
-          <span class="chip chip-s">S 6</span>
-        </span>
-      </div>
-      <div class="note-row"><span class="note-lbl">Fundamental</span><div>Strong Buy consensus; +14.4% upside to target; PEG 0.67 (cheap vs growth); revenue -0.8% YoY; thin 4.1% profit margin</div></div>
-      <div class="note-row"><span class="note-lbl">Technical</span><div><span class="ph bull">&#9650;</span><strong>Mark-up</strong> &middot; Extreme Positive Gamma &middot; GEX 1 -&gt; 9 &middot; IV 32.4 (slope 0.082, IVR 14) &middot; Put/Call wall <strong>36.0/37.0</strong>
-        <div class="note-sub">IVR 14 (cheap entry); caveat: flat</div>
-      </div></div>
-      <div class="note-row"><span class="note-lbl">Sentiment</span><div>
-        <span class="ph bull">&#9650;</span><strong>6/10</strong> (bull) &middot; A confirmed $4.9B senior-notes pricing to refinance higher-cost debt -- a real, concrete capital-markets action.
-      </div></div>
-      <div class="trade-row"><span class="note-lbl">Trade</span><div>
-        <strong>Small call debit spread toward the 37 call wall</strong> <span class="size-tag">Size: Small (the &#x27;flat&#x27; caveat and tight pin limit the edge)</span>
-      </div></div>
-      
-    </div>
-
-    <div class="rt-card tier1">
-      <div class="rt-hdr">
-        <span class="tk">GILD</span>
-        <span class="sector-tag">Healthcare</span>
-        <span class="price-tag">$144.81</span>
-        <span class="scores">
-          <span class="chip chip-f">F 5.7</span>
-          <span class="chip chip-t">T 8.0</span>
-          <span class="chip chip-s">S 6</span>
-        </span>
-      </div>
-      <div class="note-row"><span class="note-lbl">Fundamental</span><div>Buy consensus; +8.7% upside to target; PEG 2.02 (richer); revenue +10.2% YoY; negative 10.6% margin</div></div>
-      <div class="note-row"><span class="note-lbl">Technical</span><div><span class="ph bull">&#9650;</span><strong>Mark-up</strong> &middot; Extreme Positive Gamma &middot; GEX 1 -&gt; 10 &middot; IV 26.6 (slope 0.051, IVR 26) &middot; Put/Call wall <strong>140.0/150.0</strong>
-        <div class="note-sub">IVR 26 (cheap entry); caveat: fade</div>
-      </div></div>
-      <div class="note-row"><span class="note-lbl">Sentiment</span><div>
-        <span class="ph bull">&#9650;</span><strong>6/10</strong> (bull) &middot; &quot;Sunlenca Launch Fueling Long-Term HIV Growth&quot; plus an HSBC positive-forecast note -- a real product-launch and analyst-upgrade combination.
-      </div></div>
-      <div class="trade-row"><span class="note-lbl">Trade</span><div>
-        <strong>Small-moderate call debit spread toward the 150 call wall on the Sunlenca launch and HSBC upgrade</strong> <span class="size-tag">Size: Small-moderate (respect the &#x27;fade&#x27; caveat)</span>
-      </div></div>
-      
-    </div>
-
-    <div class="rt-card tier1">
-      <div class="rt-hdr">
-        <span class="tk">CEG</span>
-        <span class="sector-tag">Utilities</span>
-        <span class="price-tag">$285.97</span>
-        <span class="scores">
-          <span class="chip chip-f">F 7.0</span>
-          <span class="chip chip-t">T 8.0</span>
-          <span class="chip chip-s">S 7</span>
-        </span>
-      </div>
-      <div class="note-row"><span class="note-lbl">Fundamental</span><div>Buy consensus; +21.8% upside to target; PEG 3.74 (richer); revenue +23.0% YoY; 11.1% profit margin</div></div>
-      <div class="note-row"><span class="note-lbl">Technical</span><div><span class="ph bull">&#9650;</span><strong>Mark-up</strong> &middot; Neutral / Transition Zone &middot; GEX 1 -&gt; 2 &middot; IV 43.0 (slope 0.259, IVR 20) &middot; Put/Call wall <strong>280.0/280.0</strong>
-        <div class="note-sub">price pinned between the 280.0/280.0 walls; IVR 20 (cheap entry)</div>
-      </div></div>
-      <div class="note-row"><span class="note-lbl">Sentiment</span><div>
-        <span class="ph bull">&#9650;</span><strong>7/10</strong> (bull) &middot; Shell agreed to sell Constellation the Rhode Island State Energy Center for $715M -- a concrete, dated, quantified M&amp;A/asset acquisition.
-      </div></div>
-      <div class="trade-row"><span class="note-lbl">Trade</span><div>
-        <strong>Call debit spread on the confirmed Shell/Constellation $715M asset-sale catalyst, continuing the uptrend</strong> <span class="size-tag">Size: Moderate (best trend+catalyst alignment among the utilities names)</span>
-      </div></div>
-      
-    </div>
-
-    <div class="rt-card tier1">
-      <div class="rt-hdr">
-        <span class="tk">VLO</span>
+        <span class="tk">OXY</span>
         <span class="sector-tag">Energy</span>
-        <span class="price-tag">$385.43</span>
-        <span class="scores">
-          <span class="chip chip-f">F 5.5</span>
-          <span class="chip chip-t">T 8.0</span>
-          <span class="chip chip-s">S 6</span>
-        </span>
+        <span class="price-tag">$61.45</span>
+        <span class="scores"><span class="chip chip-f">F 7.5</span> <span class="chip chip-t">T 7.75</span> <span class="chip chip-s">S 7</span></span>
       </div>
-      <div class="note-row"><span class="note-lbl">Fundamental</span><div>Buy consensus; -14.3% upside to target; PEG 4.08 (richer); revenue +51.7% YoY; 5.4% profit margin</div></div>
-      <div class="note-row"><span class="note-lbl">Technical</span><div><span class="ph bull">&#9650;</span><strong>Mark-up</strong> &middot; Extreme Positive Gamma &middot; GEX 1 -&gt; 10 &middot; IV 47.1 (slope 0.484, IVR 83) &middot; Put/Call wall <strong>340.0/380.0</strong>
-        <div class="note-sub">price already through the 380.0 call wall (breakout); IVR 83 (elevated)</div>
-      </div></div>
-      <div class="note-row"><span class="note-lbl">Sentiment</span><div>
-        <span class="ph bull">&#9650;</span><strong>6/10</strong> (bull) &middot; Confirmed &quot;+12% on an 8-day winning streak&quot; -- a real, quantified momentum move.
-      </div></div>
+      <div class="note-row"><span class="note-lbl">Fundamental</span><div>Buy; +9.2% to target; PEG 1.23; rev +53.4%; margin 30.3%</div></div>
+      <div class="note-row"><span class="note-lbl">Technical</span><div><span class="ph bull">&#9650;</span><strong>Mark-up</strong> &middot; GEX 1.0 -&gt; 10.0, Extreme Positive Gamma &middot; IVR 36.0 &middot; Put/Call wall <strong>60/60</strong> &middot; volume 5v30 1.01x
+        <div class="note-sub">GEX 1.0 -&gt; 10.0, Extreme Positive Gamma; walls put wall $60.0 (+2.4%), call wall $60.0 (+2.4%); IV 32.8% IVR 36.0; volume 1.01x 5v30; Wyckoff Mark-up.</div></div></div>
+      <div class="note-row"><span class="note-lbl">Sentiment</span><div><span class="ph bull">&#9650;</span><strong>7/10</strong> (bull, funnel) &middot; &#x27;I&#x27;m Buying Occidental on This Dip&#x27; and &#x27;Stock Is Up 45% This Year... 13x Forward P/E&#x27; (11 Sep) both frame OXY as undervalued after its rally. Mild bullish.</div></div>
       <div class="trade-row"><span class="note-lbl">Trade</span><div>
-        <strong>Call debit spread continuing the breakout above the 380 call wall, stop back below it</strong> <span class="size-tag">Size: Moderate (breakout + momentum + aligned bullish news, but volume confirmation unavailable this run)</span>
+        <strong>Bull put credit spread 60/57.5, 16 Oct 2026 (34 DTE)</strong> <span class="size-tag">Size: Small</span>
+        <div class="trade-spec">Width 2.5 &middot; cushion 2.4% vs 7-day implied 2.7% &middot; <span class="flag-thin">THIN CUSHION</span> &middot; check the chain for a credit of at least $0.83 (⅓ width) or skip &mdash; never move the short strike closer to price &middot; exit: close if price closes below 60</div>
       </div></div>
-      
     </div>
-
     <div class="rt-card tier1">
       <div class="rt-hdr">
-        <span class="tk">CSCO</span>
-        <span class="sector-tag">Technology</span>
-        <span class="price-tag">$107.44</span>
-        <span class="scores">
-          <span class="chip chip-f">F 8.8</span>
-          <span class="chip chip-t">T 7.8</span>
-          <span class="chip chip-s">S 6</span>
-        </span>
+        <span class="tk">EOG</span>
+        <span class="sector-tag">Energy</span>
+        <span class="price-tag">$147.36</span>
+        <span class="scores"><span class="chip chip-f">F 7.5</span> <span class="chip chip-t">T 8.5</span> <span class="chip chip-s">S 6</span></span>
       </div>
-      <div class="note-row"><span class="note-lbl">Fundamental</span><div>Buy consensus; +28.1% upside to target; PEG 1.01 (cheap vs growth); revenue +17.6% YoY; 21.0% profit margin</div></div>
-      <div class="note-row"><span class="note-lbl">Technical</span><div><span class="ph bear">&#9660;</span><strong>Mark-down</strong> &middot; Neutral / Transition Zone &middot; GEX 4 -&gt; 1 &middot; IV 28.7 (slope 0.044, IVR 30) &middot; Put/Call wall <strong>105.0/110.0</strong>
-        <div class="note-sub">IVR 30 (cheap entry); caveat: flat</div>
-      </div></div>
-      <div class="note-row"><span class="note-lbl">Sentiment</span><div>
-        <span class="ph bear">&#9660;</span><strong>6/10</strong> (bear) &middot; &quot;Cisco Slips as Huawei Source-Code Claims Reach Trial&quot; is a real, dated legal/competitive risk item, reinforced by a GuruFocus &quot;46.7% overvalued&quot; call.
-      </div></div>
+      <div class="note-row"><span class="note-lbl">Fundamental</span><div>Buy; +8.5% to target; PEG 1.38; rev +58.7%; margin 25.7%</div></div>
+      <div class="note-row"><span class="note-lbl">Technical</span><div><span class="ph bull">&#9650;</span><strong>Mark-up</strong> &middot; GEX 0.0 -&gt; 10.0, Extreme Positive Gamma &middot; IVR 57.0 &middot; Put/Call wall <strong>145/150</strong> &middot; volume 5v30 0.99x
+        <div class="note-sub">GEX 0.0 -&gt; 10.0, Extreme Positive Gamma; walls put wall $145.0 (+1.6%), call wall $150.0 (-1.8%); IV 32.4% IVR 57.0; volume 0.99x 5v30; Wyckoff Mark-up.</div></div></div>
+      <div class="note-row"><span class="note-lbl">Sentiment</span><div><span class="ph ">&#9679;</span><strong>6/10</strong> (neutral, funnel) &middot; EOG gains (11 Sep) on a Stephens price-target hike and solid dividend yield, offset by an officer&#x27;s 2026 stock-sale plan. Mild positive.</div></div>
       <div class="trade-row"><span class="note-lbl">Trade</span><div>
-        <strong>Put debit spread toward the 105 put wall on the Huawei source-code litigation overhang</strong> <span class="size-tag">Size: Small-moderate</span>
+        <strong>Bull put credit spread 145/140, 16 Oct 2026 (34 DTE)</strong> <span class="size-tag">Size: Small</span>
+        <div class="trade-spec">Width 5 &middot; cushion 1.6% vs 7-day implied 2.8% &middot; <span class="flag-thin">THIN CUSHION</span> &middot; check the chain for a credit of at least $1.67 (⅓ width) or skip &mdash; never move the short strike closer to price &middot; exit: close if price closes below 145</div>
       </div></div>
-      
     </div>
-
-    <div class="rt-card tier1">
-      <div class="rt-hdr">
-        <span class="tk">PLTR</span>
-        <span class="sector-tag">Technology</span>
-        <span class="price-tag">$165.86</span>
-        <span class="scores">
-          <span class="chip chip-f">F 8.3</span>
-          <span class="chip chip-t">T 7.5</span>
-          <span class="chip chip-s">S 6</span>
-        </span>
-      </div>
-      <div class="note-row"><span class="note-lbl">Fundamental</span><div>Buy consensus; +16.9% upside to target; PEG 1.68 (fairly valued); revenue +92.8% YoY; 49.0% profit margin</div></div>
-      <div class="note-row"><span class="note-lbl">Technical</span><div><span class="ph bull">&#9650;</span><strong>Mark-up</strong> &middot; Extreme Positive Gamma &middot; GEX 10 -&gt; 10 &middot; IV 47.8 (slope 0.093, IVR 21) &middot; Put/Call wall <strong>170.0/170.0</strong>
-        <div class="note-sub">price pinned between the 170.0/170.0 walls; IVR 21 (cheap entry); caveat: flat</div>
-      </div></div>
-      <div class="note-row"><span class="note-lbl">Sentiment</span><div>
-        <span class="ph ">&#9679;</span><strong>6/10</strong> (mixed) &middot; Michael Burry closing his NVDA/PLTR put position is a real, dated, notable de-risking signal, but it&#x27;s set against &quot;Palantir Slides as Nvidia Deal Meets a 55x Sales Price&quot; valuation pushback.
-      </div></div>
-      <div class="trade-row"><span class="note-lbl">Trade</span><div>
-        <strong>Iron condor / calendar between the 170 walls (dealer positioning suppresses range)</strong> <span class="size-tag">Size: Small (Extreme Positive Gamma + pin + genuinely mixed conviction -- textbook pin-risk setup)</span>
-      </div></div>
-      
-    </div>
-
-    <div class="rt-card tier1">
-      <div class="rt-hdr">
-        <span class="tk">SAP</span>
-        <span class="sector-tag">Technology</span>
-        <span class="price-tag">$205.95</span>
-        <span class="scores">
-          <span class="chip chip-f">F 7.3</span>
-          <span class="chip chip-t">T 7.5</span>
-          <span class="chip chip-s">S 7</span>
-        </span>
-      </div>
-      <div class="note-row"><span class="note-lbl">Fundamental</span><div>Buy consensus; +20.1% upside to target; PEG 1.63 (fairly valued); revenue +9.4% YoY; 20.4% profit margin</div></div>
-      <div class="note-row"><span class="note-lbl">Technical</span><div><span class="ph bull">&#9650;</span><strong>Mark-up</strong> &middot; Neutral / Transition Zone &middot; GEX 0 -&gt; 3 &middot; IV 38.1 (slope 0.195, IVR 47) &middot; Put/Call wall <strong>202.5/200.0</strong>
-        <div class="note-sub">put/call walls have inverted (crossed) -- treat as noise</div>
-      </div></div>
-      <div class="note-row"><span class="note-lbl">Sentiment</span><div>
-        <span class="ph bear">&#9660;</span><strong>7/10</strong> (bear) &middot; A maximum-severity (CVSS 10.0) security flaw drove a confirmed stock drop, reinforced by a separate piece citing the stock &quot;drifting 26% below&quot; its high -- a real, concrete negative catalyst.
-      </div></div>
-      <div class="trade-row"><span class="note-lbl">Trade</span><div>
-        <strong>Small put debit spread on the CVSS 10.0 security-flaw overhang, or stand aside until price confirms the break</strong> <span class="size-tag">Size: Small</span>
-      </div></div>
-      <div class="conflict"><strong>Conflict:</strong> Wyckoff/GEX read Mark-up/uptrend, but a same-day maximum-severity security flaw is a real, concrete negative catalyst the technical read has not caught up to yet.</div>
-    </div>
-
     <div class="rt-card tier1">
       <div class="rt-hdr">
         <span class="tk">WDC</span>
         <span class="sector-tag">Technology</span>
-        <span class="price-tag">$460.93</span>
-        <span class="scores">
-          <span class="chip chip-f">F 9.7</span>
-          <span class="chip chip-t">T 6.8</span>
-          <span class="chip chip-s">S 6</span>
-        </span>
+        <span class="price-tag">$447.75</span>
+        <span class="scores"><span class="chip chip-f">F 9.5</span> <span class="chip chip-t">T 6</span> <span class="chip chip-s">S 6</span></span>
       </div>
-      <div class="note-row"><span class="note-lbl">Fundamental</span><div>Buy consensus; +44.3% upside to target; PEG 0.89 (cheap vs growth); revenue +43.8% YoY; 72.9% profit margin</div></div>
-      <div class="note-row"><span class="note-lbl">Technical</span><div><span class="ph bear">&#9660;</span><strong>Mark-down</strong> &middot; Moderate Negative Gamma &middot; GEX -4 -&gt; -4 &middot; IV 67.3 (slope 0.167, IVR 35) &middot; Put/Call wall <strong>450.0/470.0</strong>
-        <div class="note-sub">caveat: fade</div>
-      </div></div>
-      <div class="note-row"><span class="note-lbl">Sentiment</span><div>
-        <span class="ph bear">&#9660;</span><strong>6/10</strong> (bear) &middot; Confirmed -3% to -4.8% moves across WDC/storage peers on a &quot;broader tech selloff&quot; plus a specific JPMorgan Overweight-call fade -- real, quantified, and aligned bearish.
-      </div></div>
+      <div class="note-row"><span class="note-lbl">Fundamental</span><div>Buy; +48.7% to target; PEG 0.92; rev +43.8%; margin 72.9%</div></div>
+      <div class="note-row"><span class="note-lbl">Technical</span><div><span class="ph bear">&#9660;</span><strong>Mark-down</strong> &middot; GEX -4.0 -&gt; -8.0, Extreme Negative Gamma &middot; IVR 27.0 &middot; Put/Call wall <strong>450/470</strong> &middot; volume 5v30 0.73x
+        <div class="note-sub">GEX -4.0 -&gt; -8.0, Extreme Negative Gamma; walls put wall $450.0 (-0.5%), call wall $470.0 (-4.7%); IV 61.3% IVR 27.0; volume 0.73x 5v30; Wyckoff Mark-down.</div></div></div>
+      <div class="note-row"><span class="note-lbl">Sentiment</span><div><span class="ph ">&#9679;</span><strong>6/10</strong> (neutral, funnel) &middot; &#x27;The Correction Priced Out The Froth, Not The Compounding&#x27; offsets a &#x27;Stock Slips Friday&#x27; headline (11 Sep). Roughly neutral/mixed vs. WDC&#x27;s bear technical read.</div></div>
       <div class="trade-row"><span class="note-lbl">Trade</span><div>
-        <strong>Put debit spread continuing the downtrend toward the 450 put wall</strong> <span class="size-tag">Size: Small-moderate (Moderate Negative Gamma amplifies downside; aligned bearish across tech and sentiment)</span>
+        <strong>Bear call credit spread 470/480, 16 Oct 2026 (34 DTE)</strong> <span class="size-tag">Size: Small</span>
+        <div class="trade-spec">Width 10 &middot; cushion 5.0% vs 7-day implied 5.6% &middot; <span class="flag-thin">THIN CUSHION</span> &middot; check the chain for a credit of at least $3.33 (⅓ width) or skip &mdash; never move the short strike closer to price &middot; exit: close if price closes above 470</div>
       </div></div>
-      
     </div>
-
+    <div class="rt-card tier1">
+      <div class="rt-hdr">
+        <span class="tk">CRM</span>
+        <span class="sector-tag">Technology</span>
+        <span class="price-tag">$247.72</span>
+        <span class="scores"><span class="chip chip-f">F 7.5</span> <span class="chip chip-t">T 7.5</span> <span class="chip chip-s">S 6</span></span>
+      </div>
+      <div class="note-row"><span class="note-lbl">Fundamental</span><div>Buy; +10.4% to target; PEG 0.90; rev +10.8%; margin 22.0%</div></div>
+      <div class="note-row"><span class="note-lbl">Technical</span><div><span class="ph bull">&#9650;</span><strong>Mark-up</strong> &middot; GEX 6.0 -&gt; 10.0, Extreme Positive Gamma &middot; IVR 42.0 &middot; Put/Call wall <strong>240/250</strong> &middot; volume 5v30 0.81x
+        <div class="note-sub">GEX 6.0 -&gt; 10.0, Extreme Positive Gamma; walls put wall $240.0 (+3.2%), call wall $250.0 (-0.9%); IV 38.6% IVR 42.0; volume 0.81x 5v30; Wyckoff Mark-up.</div></div></div>
+      <div class="note-row"><span class="note-lbl">Sentiment</span><div><span class="ph ">&#9679;</span><strong>6/10</strong> (neutral, funnel) &middot; Salesforce jumps 2.4% on a Slack/dashboards feature (11 Sep) but a &#x27;Running into Trouble on the Charts&#x27; piece offsets it. Mixed/neutral.</div></div>
+      <div class="trade-row"><span class="note-lbl">Trade</span><div>
+        <strong>Bull put credit spread 240/235, 16 Oct 2026 (34 DTE)</strong> <span class="size-tag">Size: Small</span>
+        <div class="trade-spec">Width 5 &middot; cushion 3.1% vs 7-day implied 3.9% &middot; <span class="flag-thin">THIN CUSHION</span> &middot; check the chain for a credit of at least $1.67 (⅓ width) or skip &mdash; never move the short strike closer to price &middot; exit: close if price closes below 240</div>
+      </div></div>
+    </div>
+    <div class="rt-card tier1">
+      <div class="rt-hdr">
+        <span class="tk">MS</span>
+        <span class="sector-tag">Financial Services</span>
+        <span class="price-tag">$214.38</span>
+        <span class="scores"><span class="chip chip-f">F 7.5</span> <span class="chip chip-t">T 5.5</span> <span class="chip chip-s">S 6</span></span>
+      </div>
+      <div class="note-row"><span class="note-lbl">Fundamental</span><div>Buy; +10.7% to target; PEG 1.89; rev +28.0%; margin 25.9%</div></div>
+      <div class="note-row"><span class="note-lbl">Technical</span><div><span class="ph bear">&#9660;</span><strong>Mark-down</strong> &middot; GEX 1.0 -&gt; 6.0, Moderate Positive Gamma &middot; IVR 53.0 &middot; Put/Call wall <strong>210/220</strong> &middot; volume 5v30 0.93x
+        <div class="note-sub">GEX 1.0 -&gt; 6.0, Moderate Positive Gamma; walls put wall $210.0 (+2.1%), call wall $220.0 (-2.6%); IV 30.2% IVR 53.0; volume 0.93x 5v30; Wyckoff Mark-down.</div></div></div>
+      <div class="note-row"><span class="note-lbl">Sentiment</span><div><span class="ph ">&#9679;</span><strong>6/10</strong> (neutral, funnel) &middot; &#x27;Morgan Stanley Gains After Helping Build Wall Street&#x27;s New ChatGPT&#x27; (11 Sep) offset by an Oracle-related &#x27;needing more visibility&#x27; caution. Neutral.</div></div>
+      <div class="trade-row"><span class="note-lbl">Trade</span><div>
+        <strong>Bear call credit spread 220/225, 09 Oct 2026 (27 DTE)</strong> <span class="size-tag">Size: Full</span>
+        <div class="trade-spec">Width 5 &middot; cushion 2.6% vs 7-day implied 2.6% &middot; check the chain for a credit of at least $1.67 (⅓ width) or skip &mdash; never move the short strike closer to price &middot; exit: close if price closes above 220 (earnings 14/10 before Oct monthly)</div>
+      </div></div>
+    </div>
+    <div class="rt-card tier1">
+      <div class="rt-hdr">
+        <span class="tk">INTU</span>
+        <span class="sector-tag">Technology</span>
+        <span class="price-tag">$321.55</span>
+        <span class="scores"><span class="chip chip-f">F 7.5</span> <span class="chip chip-t">T 5</span> <span class="chip chip-s">S 6</span></span>
+      </div>
+      <div class="note-row"><span class="note-lbl">Fundamental</span><div>Buy; +26.1% to target; PEG 1.00; rev +13.7%; margin 21.3%</div></div>
+      <div class="note-row"><span class="note-lbl">Technical</span><div><span class="ph bull">&#9650;</span><strong>Mark-up</strong> &middot; GEX -8.0 -&gt; -2.0, Neutral / Transition Zone &middot; IVR 44.0 &middot; Put/Call wall <strong>320/310</strong> &middot; volume 5v30 0.82x
+        <div class="note-sub">GEX -8.0 -&gt; -2.0, Neutral / Transition Zone; walls put wall $320.0 (+0.5%), call wall $310.0 (+3.7%); IV 44.6% IVR 44.0; volume 0.82x 5v30; Wyckoff Mark-up.</div></div></div>
+      <div class="note-row"><span class="note-lbl">Sentiment</span><div><span class="ph ">&#9679;</span><strong>6/10</strong> (neutral, funnel) &middot; Intuit &#x27;Hold Steady&#x27; amid Adobe&#x27;s soft guidance (11 Sep); CFO comments on an &#x27;end-to-end consumer platform&#x27; are mildly positive but not a hard catalyst.</div></div>
+      <div class="trade-row"><span class="note-lbl">Trade</span><div>
+        <strong>Bull put credit spread 320/310, 16 Oct 2026 (34 DTE)</strong> <span class="size-tag">Size: Small</span>
+        <div class="trade-spec">Width 10 &middot; cushion 0.5% vs 7-day implied 4.2% &middot; <span class="flag-thin">THIN CUSHION</span> &middot; check the chain for a credit of at least $3.33 (⅓ width) or skip &mdash; never move the short strike closer to price &middot; exit: close if price closes below 320</div>
+      </div></div>
+    </div>
     <div class="rt-card tier1">
       <div class="rt-hdr">
         <span class="tk">ARM</span>
         <span class="sector-tag">Technology</span>
-        <span class="price-tag">$254.18</span>
-        <span class="scores">
-          <span class="chip chip-f">F 7.4</span>
-          <span class="chip chip-t">T 6.8</span>
-          <span class="chip chip-s">S 6</span>
-        </span>
+        <span class="price-tag">$264.77</span>
+        <span class="scores"><span class="chip chip-f">F 6.5</span> <span class="chip chip-t">T 5.5</span> <span class="chip chip-s">S 6</span></span>
       </div>
-      <div class="note-row"><span class="note-lbl">Fundamental</span><div>Buy consensus; +13.5% upside to target; PEG 2.07 (richer); revenue +22.4% YoY; 20.2% profit margin</div></div>
-      <div class="note-row"><span class="note-lbl">Technical</span><div><span class="ph bear">&#9660;</span><strong>Mark-down</strong> &middot; Neutral / Transition Zone &middot; GEX 1 -&gt; 2 &middot; IV 64.4 (slope 0.137, IVR 32) &middot; Put/Call wall <strong>250.0/280.0</strong>
-        <div class="note-sub">caveat: fade</div>
-      </div></div>
-      <div class="note-row"><span class="note-lbl">Sentiment</span><div>
-        <span class="ph ">&#9679;</span><strong>6/10</strong> (mixed) &middot; SoftBank&#x27;s $25.9B move and an &quot;AI infrastructure/CPU demand drives upbeat outlook&quot; piece are real bullish items, against a confirmed -3.65% open on broader memory-sector weakness.
-      </div></div>
+      <div class="note-row"><span class="note-lbl">Fundamental</span><div>Buy; +9.2% to target; PEG 2.17; rev +22.4%; margin 20.2%</div></div>
+      <div class="note-row"><span class="note-lbl">Technical</span><div><span class="ph bear">&#9660;</span><strong>Mark-down</strong> &middot; GEX 2.0 -&gt; 10.0, Extreme Positive Gamma &middot; IVR 32.0 &middot; Put/Call wall <strong>250/280</strong> &middot; volume 5v30 0.99x
+        <div class="note-sub">GEX 2.0 -&gt; 10.0, Extreme Positive Gamma; walls put wall $250.0 (+5.9%), call wall $280.0 (-5.4%); IV 63.9% IVR 32.0; volume 0.99x 5v30; Wyckoff Mark-down.</div></div></div>
+      <div class="note-row"><span class="note-lbl">Sentiment</span><div><span class="ph ">&#9679;</span><strong>6/10</strong> (neutral, funnel) &middot; ARM &#x27;Moved Up by 4.50%&#x27; (11 Sep) reaction headline; rest is generic vs.-comparison filler. Mild positive.</div></div>
       <div class="trade-row"><span class="note-lbl">Trade</span><div>
-        <strong>Small call debit spread on the SoftBank-stake/outlook thesis only if price reclaims short-term levels</strong> <span class="size-tag">Size: Small</span>
+        <strong>Bear call credit spread 280/290, 16 Oct 2026 (34 DTE)</strong> <span class="size-tag">Size: Small</span>
+        <div class="trade-spec">Width 10 &middot; cushion 5.8% vs 7-day implied 6.1% &middot; <span class="flag-thin">THIN CUSHION</span> &middot; check the chain for a credit of at least $3.33 (⅓ width) or skip &mdash; never move the short strike closer to price &middot; exit: close if price closes above 280</div>
       </div></div>
-      <div class="conflict"><strong>Conflict:</strong> SoftBank&#x27;s $25.9B move and an upbeat CPU/AI-demand outlook are genuinely bullish, but Wyckoff still reads Mark-down/Neutral against a broader memory-sector selloff and a confirmed -3.65% open.</div>
     </div>
-
-    <div class="rt-card tier1">
-      <div class="rt-hdr">
-        <span class="tk">INTC</span>
-        <span class="sector-tag">Technology</span>
-        <span class="price-tag">$100.32</span>
-        <span class="scores">
-          <span class="chip chip-f">F 7.6</span>
-          <span class="chip chip-t">T 6.8</span>
-          <span class="chip chip-s">S 7</span>
-        </span>
-      </div>
-      <div class="note-row"><span class="note-lbl">Fundamental</span><div>Buy consensus; +15.5% upside to target; PEG 1.36 (fairly valued); revenue +25.4% YoY; negative 19.8% margin</div></div>
-      <div class="note-row"><span class="note-lbl">Technical</span><div><span class="ph bear">&#9660;</span><strong>Mark-down</strong> &middot; Neutral / Transition Zone &middot; GEX 2 -&gt; -1 &middot; IV 61.8 (slope 0.521, IVR 34) &middot; Put/Call wall <strong>100.0/95.0</strong>
-        <div class="note-sub">put/call walls have inverted (crossed) -- treat as noise</div>
-      </div></div>
-      <div class="note-row"><span class="note-lbl">Sentiment</span><div>
-        <span class="ph bear">&#9660;</span><strong>7/10</strong> (bear) &middot; Piper Sandler downgraded Intel to Neutral, driving a confirmed -4% plunge same day -- a real, dated, quantified negative catalyst.
-      </div></div>
-      <div class="trade-row"><span class="note-lbl">Trade</span><div>
-        <strong>Put debit spread continuing the downtrend on the confirmed Piper Sandler downgrade-driven plunge</strong> <span class="size-tag">Size: Moderate (best-aligned bearish confluence in the batch alongside OKLO)</span>
-      </div></div>
-      
-    </div>
-
-    <div class="rt-card tier1">
-      <div class="rt-hdr">
-        <span class="tk">ORCL</span>
-        <span class="sector-tag">Technology</span>
-        <span class="price-tag">$152.94</span>
-        <span class="scores">
-          <span class="chip chip-f">F 9.7</span>
-          <span class="chip chip-t">T 6.5</span>
-          <span class="chip chip-s">S 9</span>
-        </span>
-      </div>
-      <div class="note-row"><span class="note-lbl">Fundamental</span><div>Buy consensus; +57.9% upside to target; PEG 0.9 (cheap vs growth); revenue +20.6% YoY; 25.4% profit margin</div></div>
-      <div class="note-row"><span class="note-lbl">Technical</span><div><span class="ph bull">&#9650;</span><strong>Mark-up</strong> &middot; Extreme Positive Gamma &middot; GEX 10 -&gt; 10 &middot; IV 72.0 (slope 0.27, IVR 70) &middot; Put/Call wall <strong>150.0/160.0</strong>
-        <div class="note-sub">IVR 70 (elevated)</div>
-      </div></div>
-      <div class="note-row"><span class="note-lbl">Sentiment</span><div>
-        <span class="ph bull">&#9650;</span><strong>9/10</strong> (bull) &middot; A confirmed, hard earnings beat -- non-GAAP EPS $1.92 (beat by $0.18), revenue $19.35B (beat by $220M) -- plus $30B in new AI contract bookings and triple-digit cloud-infrastructure growth. The strongest, most concrete catalyst in the batch.
-      </div></div>
-      <div class="trade-row"><span class="note-lbl">Trade</span><div>
-        <strong>Call debit spread targeting a breakout above the 160 call wall on the confirmed EPS/revenue beat and $30B AI contract backlog</strong> <span class="size-tag">Size: Moderate-large (strongest combined conviction in the report -- solid fundamentals, dual expansion, and the single highest sentiment score, 9/10)</span>
-      </div></div>
-      
-    </div>
-
-    <div class="rt-card tier1">
-      <div class="rt-hdr">
-        <span class="tk">SPCX</span>
-        <span class="sector-tag">Industrials</span>
-        <span class="price-tag">$148.18</span>
-        <span class="scores">
-          <span class="chip chip-f">F 7.2</span>
-          <span class="chip chip-t">T 6.5</span>
-          <span class="chip chip-s">S 6</span>
-        </span>
-      </div>
-      <div class="note-row"><span class="note-lbl">Fundamental</span><div>Buy consensus; +44.8% upside to target; PEG n/a; revenue +91.9% YoY; negative 35.7% margin</div></div>
-      <div class="note-row"><span class="note-lbl">Technical</span><div><span class="ph bull">&#9650;</span><strong>Mark-up</strong> &middot; Extreme Positive Gamma &middot; GEX 10 -&gt; 10 &middot; IV 52.0 (slope 0.106, IVR 39) &middot; Put/Call wall <strong>150.0/150.0</strong>
-        <div class="note-sub">price pinned between the 150.0/150.0 walls; caveat: fade</div>
-      </div></div>
-      <div class="note-row"><span class="note-lbl">Sentiment</span><div>
-        <span class="ph ">&#9679;</span><strong>6/10</strong> (mixed) &middot; &quot;SpaceX Hits Troubling Snag in $322B AI Push&quot; (real, negative) against &quot;+1.5% before Falcon 9&#x27;s 104th launch&quot; (real, positive) -- genuinely mixed, fading-conviction setup.
-      </div></div>
-      <div class="trade-row"><span class="note-lbl">Trade</span><div>
-        <strong>Iron condor / calendar around the 150 pin (Extreme Positive Gamma, fading/mixed conviction)</strong> <span class="size-tag">Size: Small</span>
-      </div></div>
-      
-    </div>
-
-    <div class="rt-card tier1">
-      <div class="rt-hdr">
-        <span class="tk">ABBV</span>
-        <span class="sector-tag">Healthcare</span>
-        <span class="price-tag">$255.0</span>
-        <span class="scores">
-          <span class="chip chip-f">F 7.8</span>
-          <span class="chip chip-t">T 6.5</span>
-          <span class="chip chip-s">S 6</span>
-        </span>
-      </div>
-      <div class="note-row"><span class="note-lbl">Fundamental</span><div>Buy consensus; +8.5% upside to target; PEG 0.36 (very cheap vs growth); revenue +10.2% YoY; 9.8% profit margin</div></div>
-      <div class="note-row"><span class="note-lbl">Technical</span><div><span class="ph bull">&#9650;</span><strong>Mark-up</strong> &middot; Extreme Positive Gamma &middot; GEX 3 -&gt; 10 &middot; IV 25.7 (slope 0.138, IVR 39) &middot; Put/Call wall <strong>250.0/250.0</strong>
-        <div class="note-sub">price pinned between the 250.0/250.0 walls</div>
-      </div></div>
-      <div class="note-row"><span class="note-lbl">Sentiment</span><div>
-        <span class="ph bull">&#9650;</span><strong>6/10</strong> (bull) &middot; &quot;AbbVie Gains as Qulipta Opens a New Migraine Market&quot; plus trial data showing cut migraine days -- a real, concrete label-expansion/clinical catalyst.
-      </div></div>
-      <div class="trade-row"><span class="note-lbl">Trade</span><div>
-        <strong>Small-moderate call debit spread on the Qulipta label-expansion catalyst, respecting the 250 pin</strong> <span class="size-tag">Size: Small-moderate</span>
-      </div></div>
-      
-    </div>
-
-    <div class="rt-card tier1">
-      <div class="rt-hdr">
-        <span class="tk">NOK</span>
-        <span class="sector-tag">Technology</span>
-        <span class="price-tag">$10.62</span>
-        <span class="scores">
-          <span class="chip chip-f">F 7.8</span>
-          <span class="chip chip-t">T 6.3</span>
-          <span class="chip chip-s">S 6</span>
-        </span>
-      </div>
-      <div class="note-row"><span class="note-lbl">Fundamental</span><div>Buy consensus; +40.9% upside to target; PEG 0.85 (cheap vs growth); revenue +8.4% YoY; thin 3.5% profit margin</div></div>
-      <div class="note-row"><span class="note-lbl">Technical</span><div><span class="ph bear">&#9660;</span><strong>Mark-down</strong> &middot; Extreme Positive Gamma &middot; GEX 1 -&gt; 8 &middot; IV 53.5 (slope 0.024, IVR 39) &middot; Put/Call wall <strong>10.0/11.0</strong>
-        <div class="note-sub">caveat: fade</div>
-      </div></div>
-      <div class="note-row"><span class="note-lbl">Sentiment</span><div>
-        <span class="ph bull">&#9650;</span><strong>6/10</strong> (bull) &middot; Nokia rejoining the Stoxx 50 index is a real, concrete, passive-flow-driving catalyst, reinforced by two AI-edge-platform product launches.
-      </div></div>
-      <div class="trade-row"><span class="note-lbl">Trade</span><div>
-        <strong>Small call debit spread on the Stoxx 50 re-inclusion catalyst (a real passive-flow driver)</strong> <span class="size-tag">Size: Small</span>
-      </div></div>
-      <div class="conflict"><strong>Conflict:</strong> Wyckoff still tags Mark-down even though GEX is climbing toward positive and the index-inclusion catalyst is genuinely bullish -- size down for the conflict.</div>
-    </div>
-
-
-  <h2>Tier 2a &mdash; Partial: Fundamental + Technical Confirmed</h2>
-  <p class="lead">Cleared Fundalist &ge;5 and Technicalist &ge;5 (inside the dual_expand co-expansion screen), but
-    today's news either didn't clear the Sentilist &ge;6 bar or was too mixed/generic to add conviction. These are
-    genuine GEX/IV/wall setups on their own -- treat the sentiment column as color, not confirmation. Ranked by
-    Technical score.</p>
-  <div class="table-wrap">
-  <table class="compact">
-    <thead><tr><th>Ticker</th><th>Sector</th><th>Price</th><th>F</th><th>T</th><th>Technical read</th><th>Sentiment (1-10)</th><th>Trade idea</th></tr></thead>
-    <tbody>
-<tr>
-      <td class="tkcell">STX</td>
-      <td class="sectorcell">Technology</td>
-      <td class="num">$862.33</td>
-      <td class="num"><span class="chip chip-f small">F 9.0</span></td>
-      <td class="num"><span class="chip chip-t small">T 10</span></td>
-      <td><span class="ph bear">&#9660;</span>Mark-down &middot; Neutral / Transition Zone &middot; above call &middot; 780.0/850.0</td>
-      <td><span class="ph ">&#9679;</span>4/10 &mdash; &quot;Can Seagate Sustain Its Strong Revenue Growth in Fiscal 2027?&quot; question piece against a confirmed -3.95% move Sep 10 -- no single clear catalyst, just noisy AI-storage chatter.</td>
-      <td>Call debit spread continuing breakout above the call wall <span class="size-tag">Small</span></td>
-    </tr>
-<tr>
-      <td class="tkcell">CVS</td>
-      <td class="sectorcell">Healthcare</td>
-      <td class="num">$95.29</td>
-      <td class="num"><span class="chip chip-f small">F 7.7</span></td>
-      <td class="num"><span class="chip chip-t small">T 10</span></td>
-      <td><span class="ph bear">&#9660;</span>Mark-down &middot; Neutral / Transition Zone &middot; below put &middot; 97.5/100.0</td>
-      <td><span class="ph bull">&#9650;</span>5/10 &mdash; UBS cut its price target (a real, dated analyst action) even as the stock &quot;holds gains&quot; and a separate piece frames it as still undervalued after the Wells Fargo healthcare update.</td>
-      <td>Put debit spread continuing breakdown below the put wall <span class="size-tag">Small</span></td>
-    </tr>
-<tr>
-      <td class="tkcell">CLS</td>
-      <td class="sectorcell">Technology</td>
-      <td class="num">$325.22</td>
-      <td class="num"><span class="chip chip-f small">F 9.4</span></td>
-      <td class="num"><span class="chip chip-t small">T 9.3</span></td>
-      <td><span class="ph bear">&#9660;</span>Mark-down &middot; Extreme Positive Gamma &middot; -- &middot; 300.0/350.0</td>
-      <td><span class="ph ">&#9679;</span>4/10 &mdash; Only a small insider-buying note and comparative &quot;AI infrastructure&quot; pieces vs Celestica/Jabil -- no dated company-specific catalyst.</td>
-      <td>Small call debit spread on the fresh bullish GEX flip <span class="size-tag">Small</span></td>
-    </tr>
-<tr>
-      <td class="tkcell">APH</td>
-      <td class="sectorcell">Technology</td>
-      <td class="num">$80.25</td>
-      <td class="num"><span class="chip chip-f small">F 9.3</span></td>
-      <td class="num"><span class="chip chip-t small">T 9.3</span></td>
-      <td><span class="ph bear">&#9660;</span>Mark-down &middot; Moderate Positive Gamma &middot; above call &middot; 75.0/80.0</td>
-      <td><span class="ph ">&#9679;</span>4/10 &mdash; Mostly conference-transcript reposts; &quot;Amphenol Tests Key Level, Nears Pivot Amid Strong AI Datacom Sales&quot; is a real but vague technical/fundamental blend, not a hard catalyst.</td>
-      <td>Call debit spread continuing breakout above the call wall <span class="size-tag">Small</span></td>
-    </tr>
-<tr>
-      <td class="tkcell">INTU</td>
-      <td class="sectorcell">Technology</td>
-      <td class="num">$312.77</td>
-      <td class="num"><span class="chip chip-f small">F 8.3</span></td>
-      <td class="num"><span class="chip chip-t small">T 9.0</span></td>
-      <td><span class="ph bull">&#9650;</span>Mark-up &middot; Moderate Negative Gamma &middot; above call &middot; 300.0/310.0</td>
-      <td><span class="ph ">&#9679;</span>3/10 &mdash; Only routine insider-selling filings (a director, a shareholder trimming) -- no company-specific catalyst.</td>
-      <td>Call debit spread continuing breakout above the call wall <span class="size-tag">Small</span></td>
-    </tr>
-<tr>
-      <td class="tkcell">GLW</td>
-      <td class="sectorcell">Technology</td>
-      <td class="num">$163.12</td>
-      <td class="num"><span class="chip chip-f small">F 9.3</span></td>
-      <td class="num"><span class="chip chip-t small">T 8.8</span></td>
-      <td><span class="ph bear">&#9660;</span>Mark-down &middot; Neutral / Transition Zone &middot; -- &middot; 150.0/170.0</td>
-      <td><span class="ph ">&#9679;</span>4/10 &mdash; &quot;Why Is GLW Stock Falling Today?&quot; with no clear driver identified, against unrelated AI-infrastructure boom framing pieces.</td>
-      <td>Small call debit spread on the fresh bullish GEX flip <span class="size-tag">Small</span></td>
-    </tr>
-<tr>
-      <td class="tkcell">NRG</td>
-      <td class="sectorcell">Utilities</td>
-      <td class="num">$111.65</td>
-      <td class="num"><span class="chip chip-f small">F 7.8</span></td>
-      <td class="num"><span class="chip chip-t small">T 8.8</span></td>
-      <td><span class="ph bear">&#9660;</span>Mark-down &middot; Neutral / Transition Zone &middot; -- &middot; 110.0/120.0</td>
-      <td><span class="ph ">&#9679;</span>3/10 &mdash; &quot;Attracting Investor Attention&quot; is generic Zacks boilerplate -- no real catalyst today.</td>
-      <td>Small call debit spread on the fresh bullish GEX flip <span class="size-tag">Small</span></td>
-    </tr>
-<tr>
-      <td class="tkcell">NET</td>
-      <td class="sectorcell">Technology</td>
-      <td class="num">$311.17</td>
-      <td class="num"><span class="chip chip-f small">F 6.2</span></td>
-      <td class="num"><span class="chip chip-t small">T 8.5</span></td>
-      <td><span class="ph bull">&#9650;</span>Mark-up &middot; Extreme Positive Gamma &middot; above call &middot; 300.0/310.0</td>
-      <td><span class="ph ">&#9679;</span>4/10 &mdash; Cloudflare is only mentioned as &quot;holding steady&quot; inside other names&#x27; selloff stories; no NET-specific catalyst.</td>
-      <td>Call debit spread continuing breakout above the call wall <span class="size-tag">Small</span></td>
-    </tr>
-<tr>
-      <td class="tkcell">BMY</td>
-      <td class="sectorcell">Healthcare</td>
-      <td class="num">$63.75</td>
-      <td class="num"><span class="chip chip-f small">F 5.7</span></td>
-      <td class="num"><span class="chip chip-t small">T 8.5</span></td>
-      <td><span class="ph bull">&#9650;</span>Mark-up &middot; Moderate Positive Gamma &middot; -- &middot; 62.5/65.0</td>
-      <td><span class="ph ">&#9679;</span>5/10 &mdash; RBC flagged a real patent-dispute risk (Cytokinetics has the advantage) against a &quot;+19.4% YTD, buy/sell/hold&quot; recap -- a real but modest, mixed-direction item.</td>
-      <td>Small call debit spread toward call wall <span class="size-tag">Small</span></td>
-    </tr>
-<tr>
-      <td class="tkcell">XOM</td>
-      <td class="sectorcell">Energy</td>
-      <td class="num">$165.23</td>
-      <td class="num"><span class="chip chip-f small">F 7.4</span></td>
-      <td class="num"><span class="chip chip-t small">T 8.5</span></td>
-      <td><span class="ph bull">&#9650;</span>Mark-up &middot; Extreme Positive Gamma &middot; pinned &middot; 165.0/165.0</td>
-      <td><span class="ph ">&#9679;</span>5/10 &mdash; &quot;Exxon Rally Fades as Brent Crude Jumps 4% Above $105&quot; is a real, quantified move, but macro- not company-driven.</td>
-      <td>Iron condor / calendar (pin risk) <span class="size-tag">Small</span></td>
-    </tr>
-<tr>
-      <td class="tkcell">CMG</td>
-      <td class="sectorcell">Consumer Cyclical</td>
-      <td class="num">$36.13</td>
-      <td class="num"><span class="chip chip-f small">F 7.0</span></td>
-      <td class="num"><span class="chip chip-t small">T 8.0</span></td>
-      <td><span class="ph bull">&#9650;</span>Mark-up &middot; Moderate Positive Gamma &middot; pinned &middot; 35.0/35.0</td>
-      <td><span class="ph bear">&#9660;</span>5/10 &mdash; &quot;Margins Under Pressure: Can Pricing Offset Rising Costs?&quot; plus a bearish Seeking Alpha piece against one &quot;bottoming out, upgrade&quot; counter-view -- real but mixed.</td>
-      <td>Small call debit spread toward call wall <span class="size-tag">Small</span></td>
-    </tr>
-<tr>
-      <td class="tkcell">C</td>
-      <td class="sectorcell">Financial Services</td>
-      <td class="num">$138.5</td>
-      <td class="num"><span class="chip chip-f small">F 8.4</span></td>
-      <td class="num"><span class="chip chip-t small">T 8.0</span></td>
-      <td><span class="ph bull">&#9650;</span>Mark-up &middot; Extreme Positive Gamma &middot; -- &middot; 135.0/140.0</td>
-      <td><span class="ph ">&#9679;</span>4/10 &mdash; &quot;Pushes Tokenized Deposits Deeper Into Asia With Japan Expansion&quot; is a real but modest strategic-expansion item.</td>
-      <td>Small call debit spread toward call wall <span class="size-tag">Small</span></td>
-    </tr>
-<tr>
-      <td class="tkcell">WFC</td>
-      <td class="sectorcell">Financial Services</td>
-      <td class="num">$89.45</td>
-      <td class="num"><span class="chip chip-f small">F 6.9</span></td>
-      <td class="num"><span class="chip chip-t small">T 8.0</span></td>
-      <td><span class="ph bull">&#9650;</span>Mark-up &middot; Extreme Positive Gamma &middot; -- &middot; 87.5/90.0</td>
-      <td><span class="ph ">&#9679;</span>3/10 &mdash; Routine institutional-holdings filings and a sponsorship press release -- no real catalyst.</td>
-      <td>Small call debit spread toward call wall <span class="size-tag">Small</span></td>
-    </tr>
-<tr>
-      <td class="tkcell">SCHW</td>
-      <td class="sectorcell">Financial Services</td>
-      <td class="num">$107.33</td>
-      <td class="num"><span class="chip chip-f small">F 9.3</span></td>
-      <td class="num"><span class="chip chip-t small">T 8.0</span></td>
-      <td><span class="ph bull">&#9650;</span>Mark-up &middot; Extreme Positive Gamma &middot; inverted &middot; 110.0/105.0</td>
-      <td><span class="ph ">&#9679;</span>3/10 &mdash; A &quot;what happens if the idle-cash spread narrows&quot; think-piece -- speculative, no hard catalyst.</td>
-      <td>Small call debit spread toward call wall <span class="size-tag">Small</span></td>
-    </tr>
-<tr>
-      <td class="tkcell">VRTX</td>
-      <td class="sectorcell">Healthcare</td>
-      <td class="num">$514.56</td>
-      <td class="num"><span class="chip chip-f small">F 7.4</span></td>
-      <td class="num"><span class="chip chip-t small">T 8.0</span></td>
-      <td><span class="ph bull">&#9650;</span>Mark-up &middot; Neutral / Transition Zone &middot; pinned &middot; 510.0/510.0</td>
-      <td><span class="ph ">&#9679;</span>3/10 &mdash; Conference-transcript reposts and a &quot;still a bargain after 181% run&quot; piece -- no fresh catalyst.</td>
-      <td>Small call debit spread toward call wall <span class="size-tag">Small</span></td>
-    </tr>
-<tr>
-      <td class="tkcell">HAL</td>
-      <td class="sectorcell">Energy</td>
-      <td class="num">$36.07</td>
-      <td class="num"><span class="chip chip-f small">F 7.2</span></td>
-      <td class="num"><span class="chip chip-t small">T 8.0</span></td>
-      <td><span class="ph bull">&#9650;</span>Mark-up &middot; Moderate Positive Gamma &middot; pinned &middot; 35.0/35.0</td>
-      <td><span class="ph ">&#9679;</span>3/10 &mdash; A CFO share sale and generic &quot;top picks&quot; list inclusion -- no real catalyst.</td>
-      <td>Small call debit spread toward call wall <span class="size-tag">Small</span></td>
-    </tr>
-<tr>
-      <td class="tkcell">IONQ</td>
-      <td class="sectorcell">Technology</td>
-      <td class="num">$36.84</td>
-      <td class="num"><span class="chip chip-f small">F 7.8</span></td>
-      <td class="num"><span class="chip chip-t small">T 7.8</span></td>
-      <td><span class="ph bear">&#9660;</span>Distribution &middot; Neutral / Transition Zone &middot; -- &middot; 35.0/40.0</td>
-      <td><span class="ph ">&#9679;</span>5/10 &mdash; DARPA-program and &quot;next fire moment&quot; sector tailwinds vs &quot;CEO says Q-Day hits 2028, investors stopped listening&quot; -- real but genuinely mixed.</td>
-      <td>Small put debit spread toward put wall <span class="size-tag">Small</span></td>
-    </tr>
-<tr>
-      <td class="tkcell">QBTS</td>
-      <td class="sectorcell">Technology</td>
-      <td class="num">$16.66</td>
-      <td class="num"><span class="chip chip-f small">F 5.8</span></td>
-      <td class="num"><span class="chip chip-t small">T 7.8</span></td>
-      <td><span class="ph bear">&#9660;</span>Distribution &middot; Neutral / Transition Zone &middot; -- &middot; 16.0/18.0</td>
-      <td><span class="ph ">&#9679;</span>3/10 &mdash; A director share sale and a &quot;3.1% decline&quot; valuation recap -- no real catalyst; the $100M CHIPS award headline is about competitor Rigetti, not D-Wave.</td>
-      <td>Small put debit spread toward put wall <span class="size-tag">Small</span></td>
-    </tr>
-<tr>
-      <td class="tkcell">GOOGL</td>
-      <td class="sectorcell">Communication Services</td>
-      <td class="num">$332.6</td>
-      <td class="num"><span class="chip chip-f small">F 9.1</span></td>
-      <td class="num"><span class="chip chip-t small">T 7.8</span></td>
-      <td><span class="ph bear">&#9660;</span>Mark-down &middot; Moderate Positive Gamma &middot; -- &middot; 325.0/340.0</td>
-      <td><span class="ph ">&#9679;</span>4/10 &mdash; A minor Morgan State AI-campus partnership plus generic sector pieces -- no hard catalyst.</td>
-      <td>Small put debit spread toward put wall <span class="size-tag">Small</span></td>
-    </tr>
-<tr>
-      <td class="tkcell">PG</td>
-      <td class="sectorcell">Consumer Defensive</td>
-      <td class="num">$142.97</td>
-      <td class="num"><span class="chip chip-f small">F 5.1</span></td>
-      <td class="num"><span class="chip chip-t small">T 7.8</span></td>
-      <td><span class="ph bear">&#9660;</span>Mark-down &middot; Neutral / Transition Zone &middot; -- &middot; 140.0/145.0</td>
-      <td><span class="ph ">&#9679;</span>3/10 &mdash; Routine director stock-grant filings and a vague &quot;AI, supply-chain overhaul&quot; growth-rebound framing.</td>
-      <td>Small put debit spread toward put wall <span class="size-tag">Small</span></td>
-    </tr>
-<tr>
-      <td class="tkcell">VST</td>
-      <td class="sectorcell">Utilities</td>
-      <td class="num">$147.05</td>
-      <td class="num"><span class="chip chip-f small">F 7.7</span></td>
-      <td class="num"><span class="chip chip-t small">T 7.8</span></td>
-      <td><span class="ph bear">&#9660;</span>Distribution &middot; Moderate Negative Gamma &middot; pinned &middot; 150.0/150.0</td>
-      <td><span class="ph ">&#9679;</span>5/10 &mdash; A registered offering of junior subordinated notes (real capital-markets action, mildly dilutive) against a routine &quot;outperforms industry&quot; recap.</td>
-      <td>Put debit spread <span class="size-tag">Small</span></td>
-    </tr>
-<tr>
-      <td class="tkcell">QCOM</td>
-      <td class="sectorcell">Technology</td>
-      <td class="num">$176.88</td>
-      <td class="num"><span class="chip chip-f small">F 6.5</span></td>
-      <td class="num"><span class="chip chip-t small">T 7.5</span></td>
-      <td><span class="ph bull">&#9650;</span>Accumulation &middot; Extreme Positive Gamma &middot; pinned &middot; 180.0/180.0</td>
-      <td><span class="ph bull">&#9650;</span>5/10 &mdash; Piper Sandler&#x27;s sector-wide semis initiation (&quot;market is starving for compute&quot;) is real but not QCOM-specific; &quot;stock looks cheap&quot; is a valuation debate, not a catalyst.</td>
-      <td>Iron condor / calendar (pin risk) <span class="size-tag">Small</span></td>
-    </tr>
-<tr>
-      <td class="tkcell">BAC</td>
-      <td class="sectorcell">Financial Services</td>
-      <td class="num">$62.56</td>
-      <td class="num"><span class="chip chip-f small">F 8.9</span></td>
-      <td class="num"><span class="chip chip-t small">T 7.5</span></td>
-      <td><span class="ph bull">&#9650;</span>Mark-up &middot; Extreme Positive Gamma &middot; -- &middot; 62.5/65.0</td>
-      <td><span class="ph bull">&#9650;</span>5/10 &mdash; Bank of America&#x27;s own desk flagged a &quot;$163B risk hanging over stocks&quot; (macro, real) while a separate recap notes BAC hit a record high after Q2 earnings -- real but backward-looking, no fresh dated catalyst today.</td>
-      <td>Small call debit spread toward call wall <span class="size-tag">Small</span></td>
-    </tr>
-<tr>
-      <td class="tkcell">ABT</td>
-      <td class="sectorcell">Healthcare</td>
-      <td class="num">$103.36</td>
-      <td class="num"><span class="chip chip-f small">F 7.5</span></td>
-      <td class="num"><span class="chip chip-t small">T 7.5</span></td>
-      <td><span class="ph bull">&#9650;</span>Mark-up &middot; Moderate Positive Gamma &middot; -- &middot; 100.0/105.0</td>
-      <td><span class="ph ">&#9679;</span>3/10 &mdash; Generic &quot;share price today&quot; and comparative valuation pieces, plus a non-specific &quot;top research reports&quot; inclusion -- no real catalyst.</td>
-      <td>Small call debit spread toward call wall <span class="size-tag">Small</span></td>
-    </tr>
-<tr>
-      <td class="tkcell">FDX</td>
-      <td class="sectorcell">Industrials</td>
-      <td class="num">$311.8</td>
-      <td class="num"><span class="chip chip-f small">F 7.0</span></td>
-      <td class="num"><span class="chip chip-t small">T 7.3</span></td>
-      <td><span class="ph bear">&#9660;</span>Mark-down &middot; Moderate Positive Gamma &middot; pinned &middot; 320.0/320.0</td>
-      <td><span class="ph ">&#9679;</span>4/10 &mdash; &quot;FedEx Enhances Global Trade With New Digital Shipping Tools&quot; is a real but modest operational/product announcement, not a hard catalyst.</td>
-      <td>Small put debit spread toward put wall <span class="size-tag">Small</span></td>
-    </tr>
-<tr>
-      <td class="tkcell">WMT</td>
-      <td class="sectorcell">Consumer Defensive</td>
-      <td class="num">$105.73</td>
-      <td class="num"><span class="chip chip-f small">F 5.4</span></td>
-      <td class="num"><span class="chip chip-t small">T 7.3</span></td>
-      <td><span class="ph bear">&#9660;</span>Mark-down &middot; Moderate Positive Gamma &middot; pinned &middot; 105.0/105.0</td>
-      <td><span class="ph bull">&#9650;</span>5/10 &mdash; &quot;Walmart Takes Direct Aim at DoorDash and Uber&quot; (delivery-service expansion) plus a new Papa John&#x27;s delivery partnership -- real, concrete competitive-strategy moves.</td>
-      <td>Small put debit spread toward put wall <span class="size-tag">Small</span></td>
-    </tr>
-<tr>
-      <td class="tkcell">GM</td>
-      <td class="sectorcell">Consumer Cyclical</td>
-      <td class="num">$86.12</td>
-      <td class="num"><span class="chip chip-f small">F 6.9</span></td>
-      <td class="num"><span class="chip chip-t small">T 7.0</span></td>
-      <td><span class="ph bull">&#9650;</span>Mark-up &middot; Extreme Positive Gamma &middot; -- &middot; 85.0/90.0</td>
-      <td><span class="ph ">&#9679;</span>4/10 &mdash; &quot;Bull Case For GM Stock Could Change Following Unifor Labor Deal&quot; flags a real labor-cost catalyst; the Buffett-advice piece is fluff.</td>
-      <td>Small call debit spread toward call wall <span class="size-tag">Small</span></td>
-    </tr>
-<tr>
-      <td class="tkcell">JNJ</td>
-      <td class="sectorcell">Healthcare</td>
-      <td class="num">$266.35</td>
-      <td class="num"><span class="chip chip-f small">F 5.5</span></td>
-      <td class="num"><span class="chip chip-t small">T 7.0</span></td>
-      <td><span class="ph bull">&#9650;</span>Mark-up &middot; Extreme Positive Gamma &middot; -- &middot; 260.0/270.0</td>
-      <td><span class="ph ">&#9679;</span>3/10 &mdash; &quot;Is the Rally Running Out of Steam?&quot; is a valuation question piece, not a fresh catalyst.</td>
-      <td>Small call debit spread toward call wall <span class="size-tag">Small</span></td>
-    </tr>
-<tr>
-      <td class="tkcell">KO</td>
-      <td class="sectorcell">Consumer Defensive</td>
-      <td class="num">$87.83</td>
-      <td class="num"><span class="chip chip-f small">F 5.9</span></td>
-      <td class="num"><span class="chip chip-t small">T 7.0</span></td>
-      <td><span class="ph bull">&#9650;</span>Mark-up &middot; Extreme Positive Gamma &middot; -- &middot; 85.0/90.0</td>
-      <td><span class="ph ">&#9679;</span>3/10 &mdash; Dividend-yield explainer pieces and a &quot;Mr. Pibb fastest-growing soda brand&quot; note -- no real catalyst.</td>
-      <td>Small call debit spread toward call wall <span class="size-tag">Small</span></td>
-    </tr>
-<tr>
-      <td class="tkcell">PSX</td>
-      <td class="sectorcell">Energy</td>
-      <td class="num">$258.51</td>
-      <td class="num"><span class="chip chip-f small">F 6.7</span></td>
-      <td class="num"><span class="chip chip-t small">T 7.0</span></td>
-      <td><span class="ph bull">&#9650;</span>Mark-up &middot; Moderate Positive Gamma &middot; -- &middot; 245.0/260.0</td>
-      <td><span class="ph ">&#9679;</span>4/10 &mdash; &quot;Great Momentum Stock&quot; Zacks-style framing and a &quot;wrong on duration, not cycle&quot; analyst reflection -- no fresh dated catalyst.</td>
-      <td>Small call debit spread toward call wall <span class="size-tag">Small</span></td>
-    </tr>
-<tr>
-      <td class="tkcell">EOG</td>
-      <td class="sectorcell">Energy</td>
-      <td class="num">$147.46</td>
-      <td class="num"><span class="chip chip-f small">F 8.4</span></td>
-      <td class="num"><span class="chip chip-t small">T 7.0</span></td>
-      <td><span class="ph bull">&#9650;</span>Mark-up &middot; Extreme Positive Gamma &middot; -- &middot; 145.0/150.0</td>
-      <td><span class="ph bull">&#9650;</span>5/10 &mdash; Stifel initiated coverage (Hold) yet the stock gained on the news -- a real, dated analyst action, if a modestly-rated one.</td>
-      <td>Small call debit spread toward call wall <span class="size-tag">Small</span></td>
-    </tr>
-<tr>
-      <td class="tkcell">NEM</td>
-      <td class="sectorcell">Basic Materials</td>
-      <td class="num">$126.14</td>
-      <td class="num"><span class="chip chip-f small">F 7.4</span></td>
-      <td class="num"><span class="chip chip-t small">T 7.0</span></td>
-      <td><span class="ph bull">&#9650;</span>Mark-up &middot; Extreme Positive Gamma &middot; -- &middot; 125.0/130.0</td>
-      <td><span class="ph ">&#9679;</span>3/10 &mdash; &quot;Fairly Priced On Its 247% Run&quot; is background valuation color, not a fresh catalyst; the rest is unrelated peer-miner news.</td>
-      <td>Small call debit spread toward call wall <span class="size-tag">Small</span></td>
-    </tr>
-<tr>
-      <td class="tkcell">LRCX</td>
-      <td class="sectorcell">Technology</td>
-      <td class="num">$298.01</td>
-      <td class="num"><span class="chip chip-f small">F 9.1</span></td>
-      <td class="num"><span class="chip chip-t small">T 6.8</span></td>
-      <td><span class="ph bear">&#9660;</span>Mark-down &middot; Moderate Negative Gamma &middot; inverted &middot; 300.0/280.0</td>
-      <td><span class="ph ">&#9679;</span>4/10 &mdash; CEO/director share sales (routine 10b5-1 activity) against an AMAT-CEO &quot;AI boom nowhere near over&quot; sector read-through.</td>
-      <td>Put debit spread <span class="size-tag">Small</span></td>
-    </tr>
-<tr>
-      <td class="tkcell">IBM</td>
-      <td class="sectorcell">Technology</td>
-      <td class="num">$234.02</td>
-      <td class="num"><span class="chip chip-f small">F 5.2</span></td>
-      <td class="num"><span class="chip chip-t small">T 6.8</span></td>
-      <td><span class="ph bear">&#9660;</span>Mark-down &middot; Extreme Positive Gamma &middot; pinned &middot; 230.0/230.0</td>
-      <td><span class="ph ">&#9679;</span>5/10 &mdash; &quot;Is IBM Stock A Buy After Missing On Transaction Processing?&quot; implies a real segment-level earnings miss, against generic AI-quantum sector-watch pieces.</td>
-      <td>Iron condor / calendar (pin risk) <span class="size-tag">Small</span></td>
-    </tr>
-<tr>
-      <td class="tkcell">ETN</td>
-      <td class="sectorcell">Industrials</td>
-      <td class="num">$409.15</td>
-      <td class="num"><span class="chip chip-f small">F 7.5</span></td>
-      <td class="num"><span class="chip chip-t small">T 6.8</span></td>
-      <td><span class="ph bear">&#9660;</span>Mark-down &middot; Moderate Positive Gamma &middot; -- &middot; 390.0/420.0</td>
-      <td><span class="ph ">&#9679;</span>3/10 &mdash; Product/partnership announcements with Autodesk (routine, not catalytic) and a tangential Palantir customer-forum mention.</td>
-      <td>Small put debit spread toward put wall <span class="size-tag">Small</span></td>
-    </tr>
-<tr>
-      <td class="tkcell">RTX</td>
-      <td class="sectorcell">Industrials</td>
-      <td class="num">$198.12</td>
-      <td class="num"><span class="chip chip-f small">F 6.7</span></td>
-      <td class="num"><span class="chip chip-t small">T 6.8</span></td>
-      <td><span class="ph bear">&#9660;</span>Mark-down &middot; Neutral / Transition Zone &middot; -- &middot; 195.0/200.0</td>
-      <td><span class="ph ">&#9679;</span>3/10 &mdash; Generic &quot;top research reports&quot; inclusion and a GTF-aftermarket question piece -- no hard catalyst.</td>
-      <td>Small put debit spread toward put wall <span class="size-tag">Small</span></td>
-    </tr>
-<tr>
-      <td class="tkcell">GD</td>
-      <td class="sectorcell">Industrials</td>
-      <td class="num">$354.25</td>
-      <td class="num"><span class="chip chip-f small">F 6.2</span></td>
-      <td class="num"><span class="chip chip-t small">T 6.8</span></td>
-      <td><span class="ph bear">&#9660;</span>Distribution &middot; Neutral / Transition Zone &middot; -- &middot; 330.0/370.0</td>
-      <td><span class="ph ">&#9679;</span>5/10 &mdash; A UBS price-target hike (real, positive) against &quot;falls more steeply than broader market&quot; and a fund trimming its position (real, negative) -- genuinely mixed.</td>
-      <td>Small put debit spread toward put wall <span class="size-tag">Small</span></td>
-    </tr>
-<tr>
-      <td class="tkcell">MS</td>
-      <td class="sectorcell">Financial Services</td>
-      <td class="num">$212.66</td>
-      <td class="num"><span class="chip chip-f small">F 7.9</span></td>
-      <td class="num"><span class="chip chip-t small">T 6.8</span></td>
-      <td><span class="ph bear">&#9660;</span>Mark-down &middot; Moderate Positive Gamma &middot; -- &middot; 210.0/220.0</td>
-      <td><span class="ph ">&#9679;</span>3/10 &mdash; MS is mostly cited as the analyst issuing bullish calls on other names (Meta), not as the subject of its own catalyst.</td>
-      <td>Small put debit spread toward put wall <span class="size-tag">Small</span></td>
-    </tr>
-<tr>
-      <td class="tkcell">COF</td>
-      <td class="sectorcell">Financial Services</td>
-      <td class="num">$207.11</td>
-      <td class="num"><span class="chip chip-f small">F 9.3</span></td>
-      <td class="num"><span class="chip chip-t small">T 6.8</span></td>
-      <td><span class="ph bear">&#9660;</span>Mark-down &middot; Extreme Positive Gamma &middot; pinned &middot; 210.0/210.0</td>
-      <td><span class="ph ">&#9679;</span>2/10 &mdash; Only a tangential mention (added to a property-lender&#x27;s banking group) -- essentially no real news.</td>
-      <td>Iron condor / calendar (pin risk) <span class="size-tag">Small</span></td>
-    </tr>
-<tr>
-      <td class="tkcell">GEV</td>
-      <td class="sectorcell">Industrials</td>
-      <td class="num">$923.91</td>
-      <td class="num"><span class="chip chip-f small">F 7.7</span></td>
-      <td class="num"><span class="chip chip-t small">T 6.8</span></td>
-      <td><span class="ph bear">&#9660;</span>Mark-down &middot; Extreme Negative Gamma &middot; -- &middot; 900.0/950.0</td>
-      <td><span class="ph ">&#9679;</span>5/10 &mdash; &quot;Gas Turbine And Grid Backlog Powers GE Vernova&quot; (real, positive) against &quot;Suffers a Larger Drop Than the General Market&quot; (real, negative), plus sector-wide South Korea AI-energy tailwind chatter.</td>
-      <td>Put debit spread <span class="size-tag">Small</span></td>
-    </tr>
-<tr>
-      <td class="tkcell">FE</td>
-      <td class="sectorcell">Utilities</td>
-      <td class="num">$46.25</td>
-      <td class="num"><span class="chip chip-f small">F 5.8</span></td>
-      <td class="num"><span class="chip chip-t small">T 6.8</span></td>
-      <td><span class="ph bear">&#9660;</span>Mark-down &middot; Neutral / Transition Zone &middot; -- &middot; 45.0/47.0</td>
-      <td><span class="ph ">&#9679;</span>4/10 &mdash; A $52.8M Maryland rate-increase request is real but small and local -- no major catalyst.</td>
-      <td>Small put debit spread toward put wall <span class="size-tag">Small</span></td>
-    </tr>
-<tr>
-      <td class="tkcell">NOW</td>
-      <td class="sectorcell">Technology</td>
-      <td class="num">$131.17</td>
-      <td class="num"><span class="chip chip-f small">F 8.4</span></td>
-      <td class="num"><span class="chip chip-t small">T 6.5</span></td>
-      <td><span class="ph bull">&#9650;</span>Mark-up &middot; Extreme Positive Gamma &middot; pinned &middot; 130.0/130.0</td>
-      <td><span class="ph ">&#9679;</span>5/10 &mdash; &quot;Gained 23% in a month: take profits or buy more?&quot; is a real momentum recap, but paired with &quot;still looks expensive&quot; pushback -- no fresh catalyst, just a valuation debate after a real move.</td>
-      <td>Iron condor / calendar (pin risk) <span class="size-tag">Small</span></td>
-    </tr>
-<tr>
-      <td class="tkcell">MRK</td>
-      <td class="sectorcell">Healthcare</td>
-      <td class="num">$144.71</td>
-      <td class="num"><span class="chip chip-f small">F 5.1</span></td>
-      <td class="num"><span class="chip chip-t small">T 6.5</span></td>
-      <td><span class="ph bull">&#9650;</span>Mark-up &middot; Extreme Positive Gamma &middot; pinned &middot; 145.0/145.0</td>
-      <td><span class="ph ">&#9679;</span>3/10 &mdash; Generic &quot;attracting investor attention&quot; and comparative valuation pieces -- no fresh catalyst.</td>
-      <td>Iron condor / calendar (pin risk) <span class="size-tag">Small</span></td>
-    </tr>
-<tr>
-      <td class="tkcell">OXY</td>
-      <td class="sectorcell">Energy</td>
-      <td class="num">$61.16</td>
-      <td class="num"><span class="chip chip-f small">F 8.4</span></td>
-      <td class="num"><span class="chip chip-t small">T 6.5</span></td>
-      <td><span class="ph bull">&#9650;</span>Mark-up &middot; Extreme Positive Gamma &middot; pinned &middot; 60.0/60.0</td>
-      <td><span class="ph ">&#9679;</span>4/10 &mdash; &quot;Up 45% This Year. Its 13x Forward P/E Says the Rally Isn&#x27;t a Multiple Story&quot; is real background color but not a fresh, dated catalyst.</td>
-      <td>Iron condor / calendar (pin risk) <span class="size-tag">Small</span></td>
-    </tr>
-<tr>
-      <td class="tkcell">COHR</td>
-      <td class="sectorcell">Technology</td>
-      <td class="num">$293.17</td>
-      <td class="num"><span class="chip chip-f small">F 9.4</span></td>
-      <td class="num"><span class="chip chip-t small">T 6.3</span></td>
-      <td><span class="ph bear">&#9660;</span>Mark-down &middot; Neutral / Transition Zone &middot; pinned &middot; 300.0/300.0</td>
-      <td><span class="ph ">&#9679;</span>3/10 &mdash; An officer&#x27;s planned stock sale and a &quot;cheap on cash flow, pricey on earnings&quot; valuation piece -- no real catalyst; Coherent itself &quot;holds flat&quot; in the cross-asset GoPro/Lumentum story.</td>
-      <td>Small put debit spread toward put wall <span class="size-tag">Small</span></td>
-    </tr>
-<tr>
-      <td class="tkcell">CL</td>
-      <td class="sectorcell">Consumer Defensive</td>
-      <td class="num">$87.9</td>
-      <td class="num"><span class="chip chip-f small">F 5.8</span></td>
-      <td class="num"><span class="chip chip-t small">T 6.3</span></td>
-      <td><span class="ph bear">&#9660;</span>Mark-down &middot; Neutral / Transition Zone &middot; pinned &middot; 90.0/90.0</td>
-      <td><span class="ph ">&#9679;</span>2/10 &mdash; Only conference-transcript reposts and a generic value-comparison piece -- no real catalyst.</td>
-      <td>Small put debit spread toward put wall <span class="size-tag">Small</span></td>
-    </tr>
-<tr>
-      <td class="tkcell">MOH</td>
-      <td class="sectorcell">Healthcare</td>
-      <td class="num">$200.28</td>
-      <td class="num"><span class="chip chip-f small">F 5.2</span></td>
-      <td class="num"><span class="chip chip-t small">T 6.1</span></td>
-      <td><span class="ph bear">&#9660;</span>Distribution &middot; Neutral / Transition Zone &middot; pinned &middot; 195.0/195.0</td>
-      <td><span class="ph ">&#9679;</span>5/10 &mdash; &quot;Trump issuing $500 refunds to nearly one million ACA plan participants&quot; is real ACA/Medicaid-policy news relevant to Molina&#x27;s book, though the Burry headlines attached to it are about NVDA/PLTR, not MOH.</td>
-      <td>Small put debit spread toward put wall <span class="size-tag">Small</span></td>
-    </tr>
-    </tbody>
-  </table>
+  <h2>2 &mdash; Watch list (no trade yet)</h2>
+  <p class="lead">Chase names wait for a pullback to the named wall; sentiment-only catch-alls and names with no technical read have no wall to anchor a short strike; thin-premium or earnings-blocked names wait for the next cycle.</p>
+  <div class="table-wrap"><table class="compact"><thead><tr><th>Ticker</th><th>Sector</th><th>Price</th><th>Scores</th><th>Gate</th><th>Why / level to watch</th></tr></thead><tbody><tr><td class="tkcell">AMD</td><td class="sectorcell">Technology</td><td class="num">$515.40</td><td class="num"><span class="chip chip-f small">F 9</span> <span class="chip chip-t small">T 6</span> <span class="chip chip-s small">S 8</span></td><td><span class="gate">G3 chase</span></td><td>5-day run-up +8.2% in the trade&#x27;s direction — wait for a pullback toward the put wall 500 &middot; &#x27;AMD shines brightest as chip stocks lead Nasdaq&#x27;s weekly gainers&#x27; and &#x27;Trading Up 2.5% - Still a Buy?&#x27; (11 Sep). Bullish.</td></tr>
+<tr><td class="tkcell">CRWV</td><td class="sectorcell">Technology</td><td class="num">$88.97</td><td class="num"><span class="chip chip-f small">F 7.5</span> <span class="chip chip-t small">T 5.25</span> <span class="chip chip-s small">S 6</span></td><td><span class="gate">IVR &lt; 20</span></td><td>IV Rank 6 — credit too thin to sell &middot; &#x27;CoreWeave Stock May Be Undervalued Following Its 21% Slide&#x27; is mixed (reaction was a slide, but framed bullish); &#x27;Oracle&#x27;s AI Cloud Growth Lifts CoreWeave&#x27; is genuinely positive (11 Sep). Roughly neutral vs. bear technical.</td></tr>
+<tr><td class="tkcell">VRT</td><td class="sectorcell">Industrials</td><td class="num">$257.19</td><td class="num"><span class="chip chip-f small">F 10</span> <span class="chip chip-t small">T —</span> <span class="chip chip-s small">S 8</span></td><td><span class="gate">G6 no technical read</span></td><td>not in the Dual_X grid — no wall to anchor a short strike &middot; &#x27;This Underrated AI Infrastructure Stock Will Continue Soaring Despite Doubling in a Year&#x27; plus bullish industrial-goods analyst coverage (11 Sep). Bullish.</td></tr>
+<tr><td class="tkcell">AMAT</td><td class="sectorcell">Technology</td><td class="num">$457.00</td><td class="num"><span class="chip chip-f small">F 10</span> <span class="chip chip-t small">T —</span> <span class="chip chip-s small">S 7</span></td><td><span class="gate">G6 no technical read</span></td><td>not in the Dual_X grid — no wall to anchor a short strike &middot; &#x27;Stock Rating: Upgrade To Accumulate After Q3 Earnings&#x27; (11 Sep) is a genuine post-earnings upgrade. Mild bullish.</td></tr>
+<tr><td class="tkcell">KEYS</td><td class="sectorcell">Technology</td><td class="num">$338.64</td><td class="num"><span class="chip chip-f small">F 9.5</span> <span class="chip chip-t small">T —</span> <span class="chip chip-s small">S 8</span></td><td><span class="gate">G6 no technical read</span></td><td>not in the Dual_X grid — no wall to anchor a short strike &middot; &#x27;Delivers High Growth With Expanding Margins and Upward Earnings Revisions&#x27; plus &#x27;11% Undervalued After AI Vehicle Safety Tie-Up&#x27; (11 Sep). Bullish.</td></tr>
+<tr><td class="tkcell">GOOGL</td><td class="sectorcell">Communication Services</td><td class="num">$338.45</td><td class="num"><span class="chip chip-f small">F 9</span> <span class="chip chip-t small">T —</span> <span class="chip chip-s small">S 6</span></td><td><span class="gate">G6 no technical read</span></td><td>not in the Dual_X grid — no wall to anchor a short strike &middot; &#x27;Alphabet Beats Stock Market Upswing&#x27; and &#x27;GOOGL Stock Recovers as Gemini Expands Across PCs&#x27; (11 Sep). Mild positive.</td></tr>
+<tr><td class="tkcell">AMZN</td><td class="sectorcell">Consumer Cyclical</td><td class="num">$256.84</td><td class="num"><span class="chip chip-f small">F 9</span> <span class="chip chip-t small">T —</span> <span class="chip chip-s small">S 6</span></td><td><span class="gate">G6 no technical read</span></td><td>not in the Dual_X grid — no wall to anchor a short strike &middot; &#x27;Amazon Gains as S&amp;P Flags Its $100 Billion Debt Spree&#x27; and &#x27;AMZN Gains 1.9% as NTSB Details Late Go-Around&#x27; (11 Sep) offset by a &#x27;Looks 3.8% Overvalued&#x27; piece and AI-competition worry. Roughly neutral/mild positive.</td></tr>
+<tr><td class="tkcell">TXN</td><td class="sectorcell">Technology</td><td class="num">$268.70</td><td class="num"><span class="chip chip-f small">F 9</span> <span class="chip chip-t small">T —</span> <span class="chip chip-s small">S 8</span></td><td><span class="gate">G6 no technical read</span></td><td>not in the Dual_X grid — no wall to anchor a short strike &middot; &#x27;Texas Instruments Shares Surge 3.8% -- GF Score 87&#x27; and &#x27;Why TXN Stock Is Up Today&#x27; (11 Sep). Bullish.</td></tr>
+<tr><td class="tkcell">FLEX</td><td class="sectorcell">Technology</td><td class="num">$115.78</td><td class="num"><span class="chip chip-f small">F 9</span> <span class="chip chip-t small">T —</span> <span class="chip chip-s small">S 9</span></td><td><span class="gate">G6 no technical read</span></td><td>not in the Dual_X grid — no wall to anchor a short strike &middot; &#x27;Flex Rallies as Investors Revisit AI Infrastructure Expansion, Spin-Off Plan&#x27; and &#x27;FLEX Stock Jumps As $4.4B EPC Power Deal Targets AI Boom&#x27; (11 Sep) - a real contract win plus an 8% advance. Bullish.</td></tr>
+<tr><td class="tkcell">ASML</td><td class="sectorcell">Technology</td><td class="num">$1,698.30</td><td class="num"><span class="chip chip-f small">F 9</span> <span class="chip chip-t small">T —</span> <span class="chip chip-s small">S 7</span></td><td><span class="gate">G6 no technical read</span></td><td>not in the Dual_X grid — no wall to anchor a short strike &middot; &#x27;Stock Trades At A Premium After High NA EUV News&#x27; and Applied Materials CEO saying &#x27;the AI boom is nowhere near over&#x27; (10-11 Sep) support a mild bullish read.</td></tr>
+<tr><td class="tkcell">NBIS</td><td class="sectorcell">Communication Services</td><td class="num">$224.32</td><td class="num"><span class="chip chip-f small">F 8.5</span> <span class="chip chip-t small">T —</span> <span class="chip chip-s small">S 8</span></td><td><span class="gate">G6 no technical read</span></td><td>not in the Dual_X grid — no wall to anchor a short strike &middot; &#x27;Nebius Group NBIS Surges After Palantir AI Infrastructure Deal&#x27; and a &#x27;$250 Billion Capital Plan&#x27; (11 Sep) are genuine, already-realized bullish catalysts.</td></tr>
+<tr><td class="tkcell">CBRE</td><td class="sectorcell">Real Estate</td><td class="num">$140.51</td><td class="num"><span class="chip chip-f small">F 8.5</span> <span class="chip chip-t small">T —</span> <span class="chip chip-s small">S 6</span></td><td><span class="gate">G6 no technical read</span></td><td>not in the Dual_X grid — no wall to anchor a short strike &middot; &#x27;CBRE Sees AI Office Demand Strengthening Prime Space&#x27; and a $1.6B net-lease platform buy (10-11 Sep) offset by a 1.2% slide headline. Mild positive.</td></tr>
+<tr><td class="tkcell">CIEN</td><td class="sectorcell">Technology</td><td class="num">$349.54</td><td class="num"><span class="chip chip-f small">F 8.5</span> <span class="chip chip-t small">T —</span> <span class="chip chip-s small">S 7</span></td><td><span class="gate">G6 no technical read</span></td><td>not in the Dual_X grid — no wall to anchor a short strike &middot; &#x27;Ciena Climbs 5% as Post-Earnings Selloff Reverses&#x27; and &#x27;Ciena&#x27;s Q3 Delivers Textbook Buying Opportunity (Upgrade)&#x27; (11 Sep) outweigh a &#x27;Falls 15.2% in a Week&#x27; framing of the prior selloff.</td></tr>
+<tr><td class="tkcell">KLAC</td><td class="sectorcell">Technology</td><td class="num">$180.60</td><td class="num"><span class="chip chip-f small">F 8.5</span> <span class="chip chip-t small">T —</span> <span class="chip chip-s small">S 8</span></td><td><span class="gate">G6 no technical read</span></td><td>not in the Dual_X grid — no wall to anchor a short strike &middot; &#x27;JPMorgan names KLA top chip-equipment pick, lifts WFE forecasts&#x27; and &#x27;Why KLA Outpaced the Stock Market Today&#x27; (11 Sep). Bullish.</td></tr>
+<tr><td class="tkcell">MCHP</td><td class="sectorcell">Technology</td><td class="num">$74.20</td><td class="num"><span class="chip chip-f small">F 8</span> <span class="chip chip-t small">T —</span> <span class="chip chip-s small">S 6</span></td><td><span class="gate">G6 no technical read</span></td><td>not in the Dual_X grid — no wall to anchor a short strike &middot; &#x27;Applying A Cyclical Lens To A Secular Growth Story&#x27; (10 Sep) is mildly positive; no hard catalyst.</td></tr>
+<tr><td class="tkcell">SANM</td><td class="sectorcell">Technology</td><td class="num">$216.00</td><td class="num"><span class="chip chip-f small">F 8</span> <span class="chip chip-t small">T —</span> <span class="chip chip-s small">S 6</span></td><td><span class="gate">G6 no technical read</span></td><td>not in the Dual_X grid — no wall to anchor a short strike &middot; &#x27;Is Sanmina Overvalued After 6.2% Rally?&#x27; (11 Sep) - the rally itself is mildly positive, already reflected in price.</td></tr>
+<tr><td class="tkcell">JBL</td><td class="sectorcell">Technology</td><td class="num">$318.08</td><td class="num"><span class="chip chip-f small">F 8</span> <span class="chip chip-t small">T —</span> <span class="chip chip-s small">S 7</span></td><td><span class="gate">G6 no technical read</span></td><td>not in the Dual_X grid — no wall to anchor a short strike &middot; &#x27;JBL Stock Rises as Goldman Sachs Backs AI Growth Story&#x27; (11 Sep) outweighs a &#x27;Dips More Than Broader Market&#x27; item from the prior day.</td></tr>
+<tr><td class="tkcell">IONQ</td><td class="sectorcell">Technology</td><td class="num">$36.91</td><td class="num"><span class="chip chip-f small">F 8</span> <span class="chip chip-t small">T —</span> <span class="chip chip-s small">S 9</span></td><td><span class="gate">G6 no technical read</span></td><td>not in the Dual_X grid — no wall to anchor a short strike &middot; &#x27;If I Could Only Buy 1 Quantum Computing Stock, This Would Be It&#x27; (repeated) and &#x27;IonQ Gets a Buy from Northland Securities&#x27; (11 Sep) - a genuine new Buy rating plus strong bullish coverage.</td></tr>
+<tr><td class="tkcell">QNT</td><td class="sectorcell">Technology</td><td class="num">$48.80</td><td class="num"><span class="chip chip-f small">F 8</span> <span class="chip chip-t small">T —</span> <span class="chip chip-s small">S 8</span></td><td><span class="gate">G6 no technical read</span></td><td>not in the Dual_X grid — no wall to anchor a short strike &middot; &#x27;D-Wave, Rigetti, and Quantinuum Just Got $300 Million From Washington&#x27; (10 Sep) is a real government-funding catalyst.</td></tr>
+<tr><td class="tkcell">CELH</td><td class="sectorcell">Consumer Defensive</td><td class="num">$27.26</td><td class="num"><span class="chip chip-f small">F 7.5</span> <span class="chip chip-t small">T —</span> <span class="chip chip-s small">S 7</span></td><td><span class="gate">G6 no technical read</span></td><td>not in the Dual_X grid — no wall to anchor a short strike &middot; &#x27;Celsius Holdings Shares Rise 2% After CEO Buys 18,000 Shares&#x27; (11 Sep) - insider buying plus a reaction, partly tempered by a &#x27;not enough to win retail confidence&#x27; caveat.</td></tr>
+<tr><td class="tkcell">HUBB</td><td class="sectorcell">Industrials</td><td class="num">$460.40</td><td class="num"><span class="chip chip-f small">F 7.5</span> <span class="chip chip-t small">T —</span> <span class="chip chip-s small">S 7</span></td><td><span class="gate">G6 no technical read</span></td><td>not in the Dual_X grid — no wall to anchor a short strike &middot; &#x27;Hubbell: The Grid&#x27;s Small Components Can Deliver Large Returns&#x27; (11 Sep, repeated) is a genuinely bullish thesis piece with no offsetting negative.</td></tr>
+<tr><td class="tkcell">HPE</td><td class="sectorcell">Technology</td><td class="num">$62.12</td><td class="num"><span class="chip chip-f small">F 7.5</span> <span class="chip chip-t small">T —</span> <span class="chip chip-s small">S 9</span></td><td><span class="gate">G6 no technical read</span></td><td>not in the Dual_X grid — no wall to anchor a short strike &middot; &#x27;HPE Surges on AI Infrastructure Demand and Recently Raised Guidance&#x27; (11 Sep, repeated across three outlets) - a real guidance raise plus a reported surge.</td></tr>
+<tr><td class="tkcell">RGTI</td><td class="sectorcell">Technology</td><td class="num">$15.26</td><td class="num"><span class="chip chip-f small">F 7.5</span> <span class="chip chip-t small">T —</span> <span class="chip chip-s small">S 6</span></td><td><span class="gate">G6 no technical read</span></td><td>not in the Dual_X grid — no wall to anchor a short strike &middot; Mixed: fresh CHIPS Act funding vs. &#x27;Stock Looks Stretched&#x27; and a piece naming a different stock as September&#x27;s biggest quantum winner (11 Sep). Neutral.</td></tr>
+<tr><td class="tkcell">TLN</td><td class="sectorcell">Utilities</td><td class="num">$312.74</td><td class="num"><span class="chip chip-f small">F 7.5</span> <span class="chip chip-t small">T —</span> <span class="chip chip-s small">S 6</span></td><td><span class="gate">G6 no technical read</span></td><td>not in the Dual_X grid — no wall to anchor a short strike &middot; &#x27;South Korea nears over $100B U.S. energy investment to support AI buildout&#x27; and a constructive cash-flow piece on Talen&#x27;s data-center story (10-11 Sep). Mild positive, sector-driven.</td></tr>
+<tr><td class="tkcell">CRH</td><td class="sectorcell">Basic Materials</td><td class="num">$88.55</td><td class="num"><span class="chip chip-f small">F 7</span> <span class="chip chip-t small">T —</span> <span class="chip chip-s small">S 8</span></td><td><span class="gate">G6 no technical read</span></td><td>not in the Dual_X grid — no wall to anchor a short strike &middot; &#x27;Morgan Stanley resumes CRH stock coverage with an overweight rating&#x27; (11 Sep, repeated) is a genuine new rating; Arcosa shareholders also approved the $8.5B CRH deal.</td></tr>
+<tr><td class="tkcell">DVN</td><td class="sectorcell">Energy</td><td class="num">$50.23</td><td class="num"><span class="chip chip-f small">F 7</span> <span class="chip chip-t small">T —</span> <span class="chip chip-s small">S 7</span></td><td><span class="gate">G6 no technical read</span></td><td>not in the Dual_X grid — no wall to anchor a short strike &middot; &#x27;Devon Energy Ascends While Market Falls&#x27; and &#x27;DVN Stock Clocks 3 Straight Days In Green&#x27; (10-11 Sep) outweigh a mild overvaluation caveat.</td></tr>
+<tr><td class="tkcell">SOFI</td><td class="sectorcell">Financial Services</td><td class="num">$17.31</td><td class="num"><span class="chip chip-f small">F 7</span> <span class="chip chip-t small">T —</span> <span class="chip chip-s small">S 6</span></td><td><span class="gate">G6 no technical read</span></td><td>not in the Dual_X grid — no wall to anchor a short strike &middot; Mixed: &#x27;Could Be 38% Overvalued On Tokenized Equity Push&#x27; vs. Amundi boosting its stake and a &#x27;Firing On All Cylinders&#x27; piece (10-11 Sep). Neutral.</td></tr>
+<tr><td class="tkcell">GS</td><td class="sectorcell">Financial Services</td><td class="num">$1,029.18</td><td class="num"><span class="chip chip-f small">F 7</span> <span class="chip chip-t small">T —</span> <span class="chip chip-s small">S 6</span></td><td><span class="gate">G6 no technical read</span></td><td>not in the Dual_X grid — no wall to anchor a short strike &middot; &#x27;Goldman, BofA vie to manage Anthropic employee wealth post-IPO&#x27; (11 Sep) is mildly positive; a &#x27;large bank&#x27; sanction-risk headline is ambiguous/unconfirmed as GS-specific. Neutral.</td></tr>
+<tr><td class="tkcell">MA</td><td class="sectorcell">Financial Services</td><td class="num">$569.19</td><td class="num"><span class="chip chip-f small">F 7</span> <span class="chip chip-t small">T —</span> <span class="chip chip-s small">S 6</span></td><td><span class="gate">G6 no technical read</span></td><td>not in the Dual_X grid — no wall to anchor a short strike &middot; &#x27;Mastercard says 1 in 10 will shop by AI; Morgan Stanley says half&#x27; (11 Sep) is a modest positive AI-commerce narrative; no hard catalyst.</td></tr>
+<tr><td class="tkcell">V</td><td class="sectorcell">Financial Services</td><td class="num">$370.45</td><td class="num"><span class="chip chip-f small">F 7</span> <span class="chip chip-t small">T —</span> <span class="chip chip-s small">S 8</span></td><td><span class="gate">G6 no technical read</span></td><td>not in the Dual_X grid — no wall to anchor a short strike &middot; &#x27;Visa Stock Rises as AI Alliance Forms, Trades 13.06% Below GF Value&#x27; and &#x27;Positions Itself for the Next Wave of Stablecoin Payments&#x27; (11 Sep). Bullish.</td></tr>
+<tr><td class="tkcell">AAOI</td><td class="sectorcell">Technology</td><td class="num">$105.36</td><td class="num"><span class="chip chip-f small">F 7</span> <span class="chip chip-t small">T —</span> <span class="chip chip-s small">S 7</span></td><td><span class="gate">G6 no technical read</span></td><td>not in the Dual_X grid — no wall to anchor a short strike &middot; &#x27;AAOI&#x27;s Optical Networking Demand Rise&#x27; plus an HSBC 24,222-share purchase (11 Sep) support a mild-to-moderate bullish read.</td></tr>
+<tr><td class="tkcell">SMCI</td><td class="sectorcell">Technology</td><td class="num">$39.97</td><td class="num"><span class="chip chip-f small">F 7</span> <span class="chip chip-t small">T —</span> <span class="chip chip-s small">S 9</span></td><td><span class="gate">G6 no technical read</span></td><td>not in the Dual_X grid — no wall to anchor a short strike &middot; &#x27;Super Micro Computer Stock Closed Up by 7.28% on Sep 11&#x27; and &#x27;Super Micro Has $60B in Orders. What Comes Next?&#x27; - a real order backlog plus a reported gain.</td></tr>
+<tr><td class="tkcell">SNPS</td><td class="sectorcell">Technology</td><td class="num">$397.38</td><td class="num"><span class="chip chip-f small">F 7</span> <span class="chip chip-t small">T —</span> <span class="chip chip-s small">S 7</span></td><td><span class="gate">G6 no technical read</span></td><td>not in the Dual_X grid — no wall to anchor a short strike &middot; &#x27;Synopsys upgraded at Wells Fargo on improving momentum&#x27; (10 Sep) is a genuine rating upgrade.</td></tr>
+<tr><td class="tkcell">AAPL</td><td class="sectorcell">Technology</td><td class="num">$332.59</td><td class="num"><span class="chip chip-f small">F —</span> <span class="chip chip-t small">T —</span> <span class="chip chip-s small">S 8</span></td><td><span class="gate">G6 sentiment-only</span></td><td>catch-all 7+ — no fundamental/technical confirmation, no wall to anchor a short strike &middot; &#x27;Apple, Moderna Are New Buys&#x27; and &#x27;Apple Stock Recovers Toward the Highs as Foldable iPhone Brings Analyst Upgrade&#x27; (11 Sep) are genuine new-Buy/upgrade catalysts.</td></tr>
+<tr><td class="tkcell">BA</td><td class="sectorcell">Industrials</td><td class="num">$211.27</td><td class="num"><span class="chip chip-f small">F —</span> <span class="chip chip-t small">T —</span> <span class="chip chip-s small">S 8</span></td><td><span class="gate">G6 sentiment-only</span></td><td>catch-all 7+ — no fundamental/technical confirmation, no wall to anchor a short strike &middot; &#x27;Boeing wins $13.4B U.S. Air Force contract ceiling boost&#x27; and a 2.8-3% share gain (11 Sep) are a real contract win plus a reaction.</td></tr>
+<tr><td class="tkcell">DELL</td><td class="sectorcell">Technology</td><td class="num">$567.73</td><td class="num"><span class="chip chip-f small">F —</span> <span class="chip chip-t small">T —</span> <span class="chip chip-s small">S 9</span></td><td><span class="gate">G6 sentiment-only</span></td><td>catch-all 7+ — no fundamental/technical confirmation, no wall to anchor a short strike &middot; &#x27;DELL Stock Jumps As AI Boom Supercharges Guidance&#x27; and &#x27;$95B AI Backlog Drives Record Rally&#x27; (11 Sep) are strong, already-realized bullish catalysts.</td></tr>
+<tr><td class="tkcell">GE</td><td class="sectorcell">Industrials</td><td class="num">$323.91</td><td class="num"><span class="chip chip-f small">F —</span> <span class="chip chip-t small">T —</span> <span class="chip chip-s small">S 7</span></td><td><span class="gate">G6 sentiment-only</span></td><td>catch-all 7+ — no fundamental/technical confirmation, no wall to anchor a short strike &middot; &#x27;GE Is Buying Consolidated Precision Products in a Nearly $12 Billion Deal&#x27; (11 Sep) is a real acquisition catalyst.</td></tr>
+<tr><td class="tkcell">CMCSA</td><td class="sectorcell">Communication Services</td><td class="num">$25.20</td><td class="num"><span class="chip chip-f small">F —</span> <span class="chip chip-t small">T —</span> <span class="chip chip-s small">S 7</span></td><td><span class="gate">G6 sentiment-only</span></td><td>catch-all 7+ — no fundamental/technical confirmation, no wall to anchor a short strike &middot; &#x27;Comcast Eyes Media Split as Peacock Profit, Sports and YouTube Bundle Gain Momentum&#x27; (11 Sep) is a genuine positive strategic-restructuring catalyst.</td></tr>
+<tr><td class="tkcell">CRWD</td><td class="sectorcell">Technology</td><td class="num">$206.20</td><td class="num"><span class="chip chip-f small">F —</span> <span class="chip chip-t small">T —</span> <span class="chip chip-s small">S 7</span></td><td><span class="gate">G6 sentiment-only</span></td><td>catch-all 7+ — no fundamental/technical confirmation, no wall to anchor a short strike &middot; &#x27;Wedbush Names CrowdStrike and Palo Alto Networks AI Cybersecurity Winners&#x27; (11 Sep) is a real analyst-thesis catalyst.</td></tr>
+<tr><td class="tkcell">HLT</td><td class="sectorcell">Consumer Cyclical</td><td class="num">$306.19</td><td class="num"><span class="chip chip-f small">F —</span> <span class="chip chip-t small">T —</span> <span class="chip chip-s small">S 7</span></td><td><span class="gate">G6 sentiment-only</span></td><td>catch-all 7+ — no fundamental/technical confirmation, no wall to anchor a short strike &middot; &#x27;Truist Financial Forecasts Strong Price Appreciation for Hilton&#x27; (10 Sep) is a real bullish analyst call.</td></tr>
+<tr><td class="tkcell">IBM</td><td class="sectorcell">Technology</td><td class="num">$242.79</td><td class="num"><span class="chip chip-f small">F —</span> <span class="chip chip-t small">T —</span> <span class="chip chip-s small">S 7</span></td><td><span class="gate">G6 sentiment-only</span></td><td>catch-all 7+ — no fundamental/technical confirmation, no wall to anchor a short strike &middot; &#x27;IBM Gains 2% as Lunar AI Beats Mapping Methods by 23%&#x27; and &#x27;Stock Price Up 3.9% - What&#x27;s Next?&#x27; (11 Sep). Bullish.</td></tr>
+<tr><td class="tkcell">KO</td><td class="sectorcell">Consumer Defensive</td><td class="num">$88.24</td><td class="num"><span class="chip chip-f small">F —</span> <span class="chip chip-t small">T —</span> <span class="chip chip-s small">S 7</span></td><td><span class="gate">G6 sentiment-only</span></td><td>catch-all 7+ — no fundamental/technical confirmation, no wall to anchor a short strike &middot; &#x27;Coca-Cola Pulled Away and Never Looked Back&#x27; (vs. Pepsi) and &#x27;Is Coca-Cola a Buy as Wall Street Analysts Look Optimistic?&#x27; (11 Sep).</td></tr>
+<tr><td class="tkcell">PLTR</td><td class="sectorcell">Technology</td><td class="num">$167.24</td><td class="num"><span class="chip chip-f small">F —</span> <span class="chip chip-t small">T —</span> <span class="chip chip-s small">S 9</span></td><td><span class="gate">G6 sentiment-only</span></td><td>catch-all 7+ — no fundamental/technical confirmation, no wall to anchor a short strike &middot; &#x27;Palantir Stock Gets Jaw-Dropping Price Target Hike on AI Demand&#x27; and &#x27;Palantir Wants the AI Work OpenAI Cannot Touch. Nvidia Just Helped It Make the Pitch&#x27; (11 Sep). Strongly bullish.</td></tr>
+<tr><td class="tkcell">SO</td><td class="sectorcell">Utilities</td><td class="num">$87.50</td><td class="num"><span class="chip chip-f small">F —</span> <span class="chip chip-t small">T —</span> <span class="chip chip-s small">S 7</span></td><td><span class="gate">G6 sentiment-only</span></td><td>catch-all 7+ — no fundamental/technical confirmation, no wall to anchor a short strike &middot; &#x27;Southern Company: ROIC, Electricity Pricing, EV/EBITDA All Agree; Buy&#x27; (11 Sep, repeated) is a genuine bullish thesis piece.</td></tr>
+<tr><td class="tkcell">TSM</td><td class="sectorcell">Technology</td><td class="num">$432.36</td><td class="num"><span class="chip chip-f small">F —</span> <span class="chip chip-t small">T —</span> <span class="chip chip-s small">S 9</span></td><td><span class="gate">G6 sentiment-only</span></td><td>catch-all 7+ — no fundamental/technical confirmation, no wall to anchor a short strike &middot; &#x27;TSMC Rebounds as August Sales Smash NT$500 Billion&#x27; and &#x27;TSMC Revenue Jumps 53% in August, Signaling Strong AI Chip Demand&#x27; (11 Sep). Strongly bullish.</td></tr></tbody></table></div>
+  <h2>3 &mdash; Filtered by rules v2</h2>
+  <p class="lead">The first gate that failed is named. These are logged to the v2 ledger as the control group, so the next review can check whether each gate actually removed losers.</p>
+  <div class="table-wrap"><table class="compact"><thead><tr><th>Ticker</th><th>Sector</th><th>Price</th><th>Scores</th><th>Gate</th><th>Why / level to watch</th></tr></thead><tbody><tr><td class="tkcell">GM</td><td class="sectorcell">Consumer Cyclical</td><td class="num">$85.62</td><td class="num"><span class="chip chip-f small">F 5.5</span> <span class="chip chip-t small">T 9</span> <span class="chip chip-s small">S 6</span></td><td><span class="gate">G1 fundamentals floor</span></td><td>bull needs F ≥ 7 (F 5.5)</td></tr>
+<tr><td class="tkcell">COP</td><td class="sectorcell">Energy</td><td class="num">$137.35</td><td class="num"><span class="chip chip-f small">F 6.5</span> <span class="chip chip-t small">T 8.5</span> <span class="chip chip-s small">S 8</span></td><td><span class="gate">G1 fundamentals floor</span></td><td>bull needs F ≥ 7 (F 6.5)</td></tr>
+<tr><td class="tkcell">APH</td><td class="sectorcell">Technology</td><td class="num">$83.20</td><td class="num"><span class="chip chip-f small">F 9</span> <span class="chip chip-t small">T 8</span> <span class="chip chip-s small">S 8</span></td><td><span class="gate">G2 news priced in</span></td><td>headline itself reports the move</td></tr>
+<tr><td class="tkcell">QCOM</td><td class="sectorcell">Technology</td><td class="num">$182.06</td><td class="num"><span class="chip chip-f small">F 6</span> <span class="chip chip-t small">T 8</span> <span class="chip chip-s small">S 7</span></td><td><span class="gate">G1 fundamentals floor</span></td><td>bull needs F ≥ 7 (F 6.0)</td></tr>
+<tr><td class="tkcell">NOK</td><td class="sectorcell">Technology</td><td class="num">$11.14</td><td class="num"><span class="chip chip-f small">F 7.5</span> <span class="chip chip-t small">T 7.75</span> <span class="chip chip-s small">S 8</span></td><td><span class="gate">G2 news priced in</span></td><td>headline itself reports the move</td></tr>
+<tr><td class="tkcell">MRVL</td><td class="sectorcell">Technology</td><td class="num">$235.70</td><td class="num"><span class="chip chip-f small">F 9</span> <span class="chip chip-t small">T 7.5</span> <span class="chip chip-s small">S 8</span></td><td><span class="gate">G2 news priced in</span></td><td>headline itself reports the move</td></tr>
+<tr><td class="tkcell">CL</td><td class="sectorcell">Consumer Defensive</td><td class="num">$86.96</td><td class="num"><span class="chip chip-f small">F 5.5</span> <span class="chip chip-t small">T 7.25</span> <span class="chip chip-s small">S 7</span></td><td><span class="gate">G5 conflict</span></td><td>sentiment reads bull against a bear setup</td></tr>
+<tr><td class="tkcell">CVX</td><td class="sectorcell">Energy</td><td class="num">$214.10</td><td class="num"><span class="chip chip-f small">F 6.5</span> <span class="chip chip-t small">T 7</span> <span class="chip chip-s small">S 8</span></td><td><span class="gate">G1 fundamentals floor</span></td><td>bull needs F ≥ 7 (F 6.5)</td></tr>
+<tr><td class="tkcell">XOM</td><td class="sectorcell">Energy</td><td class="num">$165.99</td><td class="num"><span class="chip chip-f small">F 5.5</span> <span class="chip chip-t small">T 7</span> <span class="chip chip-s small">S 7</span></td><td><span class="gate">G1 fundamentals floor</span></td><td>bull needs F ≥ 7 (F 5.5)</td></tr>
+<tr><td class="tkcell">PSX</td><td class="sectorcell">Energy</td><td class="num">$259.50</td><td class="num"><span class="chip chip-f small">F 5.5</span> <span class="chip chip-t small">T 6.75</span> <span class="chip chip-s small">S 6</span></td><td><span class="gate">G1 fundamentals floor</span></td><td>bull needs F ≥ 7 (F 5.5)</td></tr>
+<tr><td class="tkcell">CEG</td><td class="sectorcell">Utilities</td><td class="num">$284.75</td><td class="num"><span class="chip chip-f small">F 5.5</span> <span class="chip chip-t small">T 6.75</span> <span class="chip chip-s small">S 8</span></td><td><span class="gate">G1 fundamentals floor</span></td><td>bull needs F ≥ 7 (F 5.5)</td></tr>
+<tr><td class="tkcell">WFC</td><td class="sectorcell">Financial Services</td><td class="num">$90.29</td><td class="num"><span class="chip chip-f small">F 6.5</span> <span class="chip chip-t small">T 6.5</span> <span class="chip chip-s small">S 6</span></td><td><span class="gate">G1 fundamentals floor</span></td><td>bull needs F ≥ 7 (F 6.5)</td></tr>
+<tr><td class="tkcell">LRCX</td><td class="sectorcell">Technology</td><td class="num">$299.20</td><td class="num"><span class="chip chip-f small">F 9</span> <span class="chip chip-t small">T 5.75</span> <span class="chip chip-s small">S 9</span></td><td><span class="gate">G5 conflict</span></td><td>sentiment reads bull against a bear setup</td></tr>
+<tr><td class="tkcell">CSCO</td><td class="sectorcell">Technology</td><td class="num">$112.08</td><td class="num"><span class="chip chip-f small">F 8.5</span> <span class="chip chip-t small">T 5</span> <span class="chip chip-s small">S 8</span></td><td><span class="gate">G5 conflict</span></td><td>sentiment reads bull against a bear setup</td></tr>
+<tr><td class="tkcell">INFQ</td><td class="sectorcell">Technology</td><td class="num">$13.12</td><td class="num"><span class="chip chip-f small">F 8</span> <span class="chip chip-t small">T 5</span> <span class="chip chip-s small">S 8</span></td><td><span class="gate">G2 news priced in</span></td><td>S ≥ 8 without F ≥ 8.5</td></tr>
+<tr><td class="tkcell">TSM</td><td class="sectorcell">Technology</td><td class="num">$433.24</td><td class="num"><span class="chip chip-f small">F 10</span> <span class="chip chip-t small">T 1.75</span> <span class="chip chip-s small">S —</span></td><td><span class="gate">G4 structure (technicalist)</span></td><td>bull blocked: below put wall</td></tr>
+<tr><td class="tkcell">COF</td><td class="sectorcell">Financial Services</td><td class="num">$208.30</td><td class="num"><span class="chip chip-f small">F 9.5</span> <span class="chip chip-t small">T 3</span> <span class="chip chip-s small">S —</span></td><td><span class="gate">G4 structure (technicalist)</span></td><td>bull blocked: below put wall</td></tr>
+<tr><td class="tkcell">SCHW</td><td class="sectorcell">Financial Services</td><td class="num">$107.25</td><td class="num"><span class="chip chip-f small">F 8.5</span> <span class="chip chip-t small">T 1.5</span> <span class="chip chip-s small">S —</span></td><td><span class="gate">G4 structure (technicalist)</span></td><td>bull blocked: below put wall</td></tr>
+<tr><td class="tkcell">GEV</td><td class="sectorcell">Industrials</td><td class="num">$957.27</td><td class="num"><span class="chip chip-f small">F 8.5</span> <span class="chip chip-t small">T 4.5</span> <span class="chip chip-s small">S —</span></td><td><span class="gate">G4 structure (technicalist)</span></td><td>bull blocked: below put wall</td></tr>
+<tr><td class="tkcell">COHR</td><td class="sectorcell">Technology</td><td class="num">$305.37</td><td class="num"><span class="chip chip-f small">F 8.5</span> <span class="chip chip-t small">T 3.5</span> <span class="chip chip-s small">S —</span></td><td><span class="gate">G4 structure (technicalist)</span></td><td>bull blocked: Mark-down</td></tr>
+<tr><td class="tkcell">CLS</td><td class="sectorcell">Technology</td><td class="num">$346.55</td><td class="num"><span class="chip chip-f small">F 8</span> <span class="chip chip-t small">T 1.5</span> <span class="chip chip-s small">S —</span></td><td><span class="gate">G4 structure (technicalist)</span></td><td>bull blocked: below put wall</td></tr>
+<tr><td class="tkcell">PLTR</td><td class="sectorcell">Technology</td><td class="num">$167.23</td><td class="num"><span class="chip chip-f small">F 7.5</span> <span class="chip chip-t small">T 1.5</span> <span class="chip chip-s small">S —</span></td><td><span class="gate">G4 structure (technicalist)</span></td><td>bull blocked: below put wall</td></tr>
+<tr><td class="tkcell">GE</td><td class="sectorcell">Industrials</td><td class="num">$323.66</td><td class="num"><span class="chip chip-f small">F 7</span> <span class="chip chip-t small">T 3</span> <span class="chip chip-s small">S —</span></td><td><span class="gate">G4 structure (technicalist)</span></td><td>bull blocked: below put wall</td></tr>
+<tr><td class="tkcell">SLB</td><td class="sectorcell">Energy</td><td class="num">$56.06</td><td class="num"><span class="chip chip-f small">F 5.5</span> <span class="chip chip-t small">T 3.25</span> <span class="chip chip-s small">S —</span></td><td><span class="gate">G4 structure (technicalist)</span></td><td>bull blocked: below put wall</td></tr>
+<tr><td class="tkcell">FDX</td><td class="sectorcell">Industrials</td><td class="num">$311.99</td><td class="num"><span class="chip chip-f small">F 5.5</span> <span class="chip chip-t small">T 3.5</span> <span class="chip chip-s small">S —</span></td><td><span class="gate">G4 structure (technicalist)</span></td><td>bull blocked: below put wall</td></tr>
+<tr><td class="tkcell">ETN</td><td class="sectorcell">Industrials</td><td class="num">$425.37</td><td class="num"><span class="chip chip-f small">F 5.5</span> <span class="chip chip-t small">T 3</span> <span class="chip chip-s small">S —</span></td><td><span class="gate">G4 structure (technicalist)</span></td><td>bull blocked: below put wall</td></tr>
+<tr><td class="tkcell">DCO</td><td class="sectorcell">Industrials</td><td class="num">$172.73</td><td class="num"><span class="chip chip-f small">F 5</span> <span class="chip chip-t small">T 4.25</span> <span class="chip chip-s small">S —</span></td><td><span class="gate">G4 structure (technicalist)</span></td><td>bull blocked: below put wall</td></tr>
+<tr><td class="tkcell">QBTS</td><td class="sectorcell">Technology</td><td class="num">$16.80</td><td class="num"><span class="chip chip-f small">F 5</span> <span class="chip chip-t small">T 4.75</span> <span class="chip chip-s small">S —</span></td><td><span class="gate">G4 structure (technicalist)</span></td><td>bull blocked: Distribution</td></tr></tbody></table></div>
+  <h2>How to read this</h2>
+  <div class="note">
+    <p><strong>Gates run in order and the first failure decides.</strong> Figures in brackets are the win rate of that group in the 29/08&ndash;11/09 review (169 calls, 44% overall).
+    G1 bull trades need fundamentals &ge; 7 [22%] &middot; G2 a news score of 8+ without fundamentals &ge; 8.5, or a headline that already reports the move, means the news is in the price [12%]
+    &middot; G3 more than 8% in five days in the trade's direction goes to the watch list for a pullback [29%] &middot; G4 no bull lean below the put wall or in Mark-down/Distribution [30% / 34%]
+    &middot; G5 conflicting direction, sentiment or phase is no trade, not a small one [39%] &middot; G6 sentiment-only catch-alls and names with no technical read have no wall to sell against [28%].</p>
+    <p><strong>Why credit spreads.</strong> Picking direction was close to a coin flip. Selling the wall only needs price to stay beyond it: in the review, bull calls held above the put wall 69% of the time
+    against 48% for direction, and bear calls stayed below the call wall 85% against 58% (marked at the review date, not expiry). The catch-all still scans every bulletin ticker, but a 7+ now earns a watch-list line, not a trade.</p>
+    <p><strong>Cushion</strong> is the distance from price to the short strike; <strong>THIN CUSHION</strong> means it is smaller than the 7-day implied move. Expiries default to the October monthly (16 Oct, 34 DTE) and move earlier when earnings fall inside it.
+    Candidate generator, not a trade gate &mdash; confirm strikes, credit and size against your own risk limits.</p>
   </div>
-
-
-
-  <h2>Tier 2b &mdash; Partial: Fundamental + Sentiment Confirmed (No Technical Read)</h2>
-  <p class="lead">Cleared Fundalist &ge;5 and Sentilist &ge;6, but the ticker isn't in today's 75-name Dual_X
-    co-expansion screen -- no options-chain liquidity read this run, so there is no GEX/IV/wall confirmation and no
-    options-positioning score. Sized down accordingly.</p>
-
-    <div class="rt-card tier2b">
-      <div class="rt-hdr">
-        <span class="tk">ADBE</span>
-        <span class="sector-tag">Technology</span>
-        <span class="price-tag">$248.83</span>
-        <span class="scores">
-          <span class="chip chip-f">F 8.0</span>
-          <span class="chip chip-na">T n/a</span>
-          <span class="chip chip-s">S 8</span>
-        </span>
-      </div>
-      <div class="note-row"><span class="note-lbl">Fundamental</span><div>Hold consensus; +11.3% upside to target; PEG 0.65 (cheap vs growth); revenue +12.7% YoY; 28.7% profit margin</div></div>
-      <div class="note-row"><span class="note-lbl">Technical</span><div><span class="chip chip-na small">no read</span> not in today&#39;s Dual_X co-expansion screen</div></div>
-      <div class="note-row"><span class="note-lbl">Sentiment</span><div>
-        <span class="ph bull">&#9650;</span><strong>8/10</strong> (bull) &middot; Confirmed hard beat: Q3 non-GAAP EPS $6.13 (beat by $0.04), revenue $6.76B (beat by $60M), and full-year guidance raised -- yet shares slipped on the print.
-      </div></div>
-      <div class="trade-row"><span class="note-lbl">Trade</span><div>
-        <strong>Call debit spread on the beat-and-raise, sized for the fact the stock faded the news</strong> <span class="size-tag">Size: Small-moderate (no options-positioning read -- not in today&#x27;s Dual_X screen)</span>
-      </div></div>
-    </div>
-
-    <div class="rt-card tier2b">
-      <div class="rt-hdr">
-        <span class="tk">HPE</span>
-        <span class="sector-tag">Technology</span>
-        <span class="price-tag">$55.22</span>
-        <span class="scores">
-          <span class="chip chip-f">F 8.7</span>
-          <span class="chip chip-na">T n/a</span>
-          <span class="chip chip-s">S 7</span>
-        </span>
-      </div>
-      <div class="note-row"><span class="note-lbl">Fundamental</span><div>Buy consensus; +22.1% upside to target; PEG 0.43 (very cheap vs growth); revenue +33.7% YoY; 6.7% profit margin</div></div>
-      <div class="note-row"><span class="note-lbl">Technical</span><div><span class="chip chip-na small">no read</span> not in today&#39;s Dual_X co-expansion screen</div></div>
-      <div class="note-row"><span class="note-lbl">Sentiment</span><div>
-        <span class="ph bull">&#9650;</span><strong>7/10</strong> (bull) &middot; &quot;Delivers a Blowout Quarter and Raises Guidance -- Shares Still Fall&quot; is a real beat-and-raise with a confirmed -5.18% reaction; a genuine sell-the-news divergence worth fading either direction.
-      </div></div>
-      <div class="trade-row"><span class="note-lbl">Trade</span><div>
-        <strong>Small call debit spread on the fundamentals, or a put spread fading the post-earnings drop -- pick a side only with a defined-risk structure</strong> <span class="size-tag">Size: Small (no options-positioning read)</span>
-      </div></div>
-    </div>
-
-    <div class="rt-card tier2b">
-      <div class="rt-hdr">
-        <span class="tk">DELL</span>
-        <span class="sector-tag">Technology</span>
-        <span class="price-tag">$506.62</span>
-        <span class="scores">
-          <span class="chip chip-f">F 8.3</span>
-          <span class="chip chip-na">T n/a</span>
-          <span class="chip chip-s">S 7</span>
-        </span>
-      </div>
-      <div class="note-row"><span class="note-lbl">Fundamental</span><div>Buy consensus; +11.4% upside to target; PEG 0.62 (cheap vs growth); revenue +57.7% YoY; 7.5% profit margin</div></div>
-      <div class="note-row"><span class="note-lbl">Technical</span><div><span class="chip chip-na small">no read</span> not in today&#39;s Dual_X co-expansion screen</div></div>
-      <div class="note-row"><span class="note-lbl">Sentiment</span><div>
-        <span class="ph bull">&#9650;</span><strong>7/10</strong> (bull) &middot; Confirmed $60.9B of AI server orders and a $95B backlog -- a real, quantified demand signal, tempered by a two-day AI-server-stock unwind.
-      </div></div>
-      <div class="trade-row"><span class="note-lbl">Trade</span><div>
-        <strong>Call debit spread on the backlog/order thesis</strong> <span class="size-tag">Size: Small-moderate (no options-positioning read)</span>
-      </div></div>
-    </div>
-
-    <div class="rt-card tier2b">
-      <div class="rt-hdr">
-        <span class="tk">NKE</span>
-        <span class="sector-tag">Consumer Cyclical</span>
-        <span class="price-tag">$36.62</span>
-        <span class="scores">
-          <span class="chip chip-f">F 6.2</span>
-          <span class="chip chip-na">T n/a</span>
-          <span class="chip chip-s">S 8</span>
-        </span>
-      </div>
-      <div class="note-row"><span class="note-lbl">Fundamental</span><div>Hold consensus; +36.2% upside to target; PEG 1.49 (fairly valued); revenue -1.1% YoY; 6.7% profit margin</div></div>
-      <div class="note-row"><span class="note-lbl">Technical</span><div><span class="chip chip-na small">no read</span> not in today&#39;s Dual_X co-expansion screen</div></div>
-      <div class="note-row"><span class="note-lbl">Sentiment</span><div>
-        <span class="ph bear">&#9660;</span><strong>8/10</strong> (bear) &middot; Nike was booted from the S&amp;P 100 after an 80% value loss -- a major, concrete, quantified index-removal event; the &quot;still in the S&amp;P 500&quot; memo to staff underscores how real the story is.
-      </div></div>
-      <div class="trade-row"><span class="note-lbl">Trade</span><div>
-        <strong>Put debit spread on the index-removal overhang</strong> <span class="size-tag">Size: Small (no options-positioning read; index-level event, not necessarily a fresh operating catalyst)</span>
-      </div></div>
-    </div>
-
-    <div class="rt-card tier2b">
-      <div class="rt-hdr">
-        <span class="tk">NBIS</span>
-        <span class="sector-tag">Communication Services</span>
-        <span class="price-tag">$228.11</span>
-        <span class="scores">
-          <span class="chip chip-f">F 8.4</span>
-          <span class="chip chip-na">T n/a</span>
-          <span class="chip chip-s">S 6</span>
-        </span>
-      </div>
-      <div class="note-row"><span class="note-lbl">Fundamental</span><div>Buy consensus; +25.7% upside to target; PEG 0.54 (very cheap vs growth); revenue +454.0% YoY; thin 3.1% profit margin</div></div>
-      <div class="note-row"><span class="note-lbl">Technical</span><div><span class="chip chip-na small">no read</span> not in today&#39;s Dual_X co-expansion screen</div></div>
-      <div class="note-row"><span class="note-lbl">Sentiment</span><div>
-        <span class="ph bear">&#9660;</span><strong>6/10</strong> (bear) &middot; A confirmed -5.09% close alongside a Palantir-partnership piece asking &quot;what changes for investors&quot; -- real, quantified, mixed-to-bearish.
-      </div></div>
-      <div class="trade-row"><span class="note-lbl">Trade</span><div>
-        <strong>Small put debit spread, or stand aside given the mixed partnership news</strong> <span class="size-tag">Size: Small (no options-positioning read)</span>
-      </div></div>
-    </div>
-
-    <div class="rt-card tier2b">
-      <div class="rt-hdr">
-        <span class="tk">VRT</span>
-        <span class="sector-tag">Industrials</span>
-        <span class="price-tag">$248.13</span>
-        <span class="scores">
-          <span class="chip chip-f">F 9.7</span>
-          <span class="chip chip-na">T n/a</span>
-          <span class="chip chip-s">S 6</span>
-        </span>
-      </div>
-      <div class="note-row"><span class="note-lbl">Fundamental</span><div>Strong Buy consensus; +36.3% upside to target; PEG 0.95 (cheap vs growth); revenue +24.1% YoY; 15.1% profit margin</div></div>
-      <div class="note-row"><span class="note-lbl">Technical</span><div><span class="chip chip-na small">no read</span> not in today&#39;s Dual_X co-expansion screen</div></div>
-      <div class="note-row"><span class="note-lbl">Sentiment</span><div>
-        <span class="ph bear">&#9660;</span><strong>6/10</strong> (bear) &middot; Vertiv fell a confirmed -5.43% as &quot;investors digest acquisition, insider sales, and a recent sharp pullback&quot; -- real, quantified, negative, though one analyst says buy the dip.
-      </div></div>
-      <div class="trade-row"><span class="note-lbl">Trade</span><div>
-        <strong>Small put debit spread fading the pullback, or stand aside on the insider-selling overhang</strong> <span class="size-tag">Size: Small (no options-positioning read)</span>
-      </div></div>
-    </div>
-
-    <div class="rt-card tier2b">
-      <div class="rt-hdr">
-        <span class="tk">SNPS</span>
-        <span class="sector-tag">Technology</span>
-        <span class="price-tag">$397.17</span>
-        <span class="scores">
-          <span class="chip chip-f">F 7.9</span>
-          <span class="chip chip-na">T n/a</span>
-          <span class="chip chip-s">S 6</span>
-        </span>
-      </div>
-      <div class="note-row"><span class="note-lbl">Fundamental</span><div>Buy consensus; +37.2% upside to target; PEG 2.11 (richer); revenue +42.4% YoY; 11.4% profit margin</div></div>
-      <div class="note-row"><span class="note-lbl">Technical</span><div><span class="chip chip-na small">no read</span> not in today&#39;s Dual_X co-expansion screen</div></div>
-      <div class="note-row"><span class="note-lbl">Sentiment</span><div>
-        <span class="ph bull">&#9650;</span><strong>6/10</strong> (bull) &middot; Two independent analyst upgrades same-cycle -- Wells Fargo (&quot;improving momentum&quot;) and Morgan Stanley -- a real, corroborated bullish catalyst.
-      </div></div>
-      <div class="trade-row"><span class="note-lbl">Trade</span><div>
-        <strong>Call debit spread on the dual-upgrade catalyst</strong> <span class="size-tag">Size: Small-moderate (no options-positioning read)</span>
-      </div></div>
-    </div>
-
-    <div class="rt-card tier2b">
-      <div class="rt-hdr">
-        <span class="tk">CDNS</span>
-        <span class="sector-tag">Technology</span>
-        <span class="price-tag">$284.95</span>
-        <span class="scores">
-          <span class="chip chip-f">F 8.5</span>
-          <span class="chip chip-na">T n/a</span>
-          <span class="chip chip-s">S 8</span>
-        </span>
-      </div>
-      <div class="note-row"><span class="note-lbl">Fundamental</span><div>Strong Buy consensus; +41.5% upside to target; PEG 2.21 (richer); revenue +24.2% YoY; 23.6% profit margin</div></div>
-      <div class="note-row"><span class="note-lbl">Technical</span><div><span class="chip chip-na small">no read</span> not in today&#39;s Dual_X co-expansion screen</div></div>
-      <div class="note-row"><span class="note-lbl">Sentiment</span><div>
-        <span class="ph bear">&#9660;</span><strong>8/10</strong> (bear) &middot; Cadence has slid a confirmed -18% over seven straight down days -- a severe, well-documented, multi-day decline.
-      </div></div>
-      <div class="trade-row"><span class="note-lbl">Trade</span><div>
-        <strong>Put debit spread continuing the multi-day slide, or wait for signs of stabilization before catching it</strong> <span class="size-tag">Size: Small (no options-positioning read; already a large realized move)</span>
-      </div></div>
-    </div>
-
-    <div class="rt-card tier2b">
-      <div class="rt-hdr">
-        <span class="tk">MU</span>
-        <span class="sector-tag">Technology</span>
-        <span class="price-tag">$977.41</span>
-        <span class="scores">
-          <span class="chip chip-f">F 9.0</span>
-          <span class="chip chip-na">T n/a</span>
-          <span class="chip chip-s">S 6</span>
-        </span>
-      </div>
-      <div class="note-row"><span class="note-lbl">Fundamental</span><div>Strong Buy consensus; no target on file; PEG 0.15 (very cheap vs growth); revenue +345.7% YoY; 55.9% profit margin</div></div>
-      <div class="note-row"><span class="note-lbl">Technical</span><div><span class="chip chip-na small">no read</span> not in today&#39;s Dual_X co-expansion screen</div></div>
-      <div class="note-row"><span class="note-lbl">Sentiment</span><div>
-        <span class="ph ">&#9679;</span><strong>6/10</strong> (mixed) &middot; A confirmed -4.2% drop as &quot;China&#x27;s AI chips reveal pricing power&quot; is real and negative, against a &quot;$1 Trillion Micron&quot; bull thesis and a patent dispute/Taiwan labor risk overhang -- genuinely mixed.
-      </div></div>
-      <div class="trade-row"><span class="note-lbl">Trade</span><div>
-        <strong>Small call debit spread on the long-term thesis only if the patent/labor overhangs clear</strong> <span class="size-tag">Size: Small-moderate (strongest fundamentals in this bucket, but no options-positioning read)</span>
-      </div></div>
-    </div>
-
-    <div class="rt-card tier2b">
-      <div class="rt-hdr">
-        <span class="tk">UBER</span>
-        <span class="sector-tag">Technology</span>
-        <span class="price-tag">$72.56</span>
-        <span class="scores">
-          <span class="chip chip-f">F 6.9</span>
-          <span class="chip chip-na">T n/a</span>
-          <span class="chip chip-s">S 7</span>
-        </span>
-      </div>
-      <div class="note-row"><span class="note-lbl">Fundamental</span><div>Buy consensus; +40.8% upside to target; PEG 6.42 (richer); revenue +12.2% YoY; 17.3% profit margin</div></div>
-      <div class="note-row"><span class="note-lbl">Technical</span><div><span class="chip chip-na small">no read</span> not in today&#39;s Dual_X co-expansion screen</div></div>
-      <div class="note-row"><span class="note-lbl">Sentiment</span><div>
-        <span class="ph bull">&#9650;</span><strong>7/10</strong> (bull) &middot; CEO Dara Khosrowshahi bought a confirmed $10M of UBER stock, and the stock jumped on the news -- a real, large, dated insider-buying catalyst with a confirmed price reaction.
-      </div></div>
-      <div class="trade-row"><span class="note-lbl">Trade</span><div>
-        <strong>Call debit spread on the insider-buying catalyst</strong> <span class="size-tag">Size: Small-moderate (no options-positioning read)</span>
-      </div></div>
-    </div>
-
-    <div class="rt-card tier2b">
-      <div class="rt-hdr">
-        <span class="tk">DD</span>
-        <span class="sector-tag">Basic Materials</span>
-        <span class="price-tag">$127.32</span>
-        <span class="scores">
-          <span class="chip chip-f">F 6.3</span>
-          <span class="chip chip-na">T n/a</span>
-          <span class="chip chip-s">S 7</span>
-        </span>
-      </div>
-      <div class="note-row"><span class="note-lbl">Fundamental</span><div>Buy consensus; +33.5% upside to target; PEG 1.72 (fairly valued); revenue +4.0% YoY; thin 0.8% profit margin</div></div>
-      <div class="note-row"><span class="note-lbl">Technical</span><div><span class="chip chip-na small">no read</span> not in today&#39;s Dual_X co-expansion screen</div></div>
-      <div class="note-row"><span class="note-lbl">Sentiment</span><div>
-        <span class="ph bull">&#9650;</span><strong>7/10</strong> (bull) &middot; DuPont, Chemours and Corteva reached a confirmed $455M North Carolina PFAS (&quot;forever chemicals&quot;) settlement, removing a real legal overhang (Chemours shares rose 6% on the news).
-      </div></div>
-      <div class="trade-row"><span class="note-lbl">Trade</span><div>
-        <strong>Call debit spread on the overhang-removal catalyst</strong> <span class="size-tag">Size: Small-moderate (no options-positioning read)</span>
-      </div></div>
-    </div>
-
-    <div class="rt-card tier2b">
-      <div class="rt-hdr">
-        <span class="tk">CRH</span>
-        <span class="sector-tag">Basic Materials</span>
-        <span class="price-tag">$87.66</span>
-        <span class="scores">
-          <span class="chip chip-f">F 7.4</span>
-          <span class="chip chip-na">T n/a</span>
-          <span class="chip chip-s">S 7</span>
-        </span>
-      </div>
-      <div class="note-row"><span class="note-lbl">Fundamental</span><div>Strong Buy consensus; +57.2% upside to target; PEG 1.67 (fairly valued); revenue +5.6% YoY; 9.9% profit margin</div></div>
-      <div class="note-row"><span class="note-lbl">Technical</span><div><span class="chip chip-na small">no read</span> not in today&#39;s Dual_X co-expansion screen</div></div>
-      <div class="note-row"><span class="note-lbl">Sentiment</span><div>
-        <span class="ph bull">&#9650;</span><strong>7/10</strong> (bull) &middot; Arcosa shareholders approved the $8.5B CRH deal, de-risking a Q1 2027 close -- a concrete M&amp;A milestone, even as the stock slips toward a 52-week low despite &quot;strong Q2 figures.&quot;
-      </div></div>
-      <div class="trade-row"><span class="note-lbl">Trade</span><div>
-        <strong>Call debit spread on the de-risked M&amp;A catalyst, or fade the technical weakness with a small put spread -- pick one side only</strong> <span class="size-tag">Size: Small (no options-positioning read; genuinely mixed signal)</span>
-      </div></div>
-    </div>
-
-    <div class="rt-card tier2b">
-      <div class="rt-hdr">
-        <span class="tk">META</span>
-        <span class="sector-tag">Communication Services</span>
-        <span class="price-tag">$644.38</span>
-        <span class="scores">
-          <span class="chip chip-f">F 9.6</span>
-          <span class="chip chip-na">T n/a</span>
-          <span class="chip chip-s">S 7</span>
-        </span>
-      </div>
-      <div class="note-row"><span class="note-lbl">Fundamental</span><div>Strong Buy consensus; +17.0% upside to target; PEG 0.82 (cheap vs growth); revenue +28.0% YoY; 29.8% profit margin</div></div>
-      <div class="note-row"><span class="note-lbl">Technical</span><div><span class="chip chip-na small">no read</span> not in today&#39;s Dual_X co-expansion screen</div></div>
-      <div class="note-row"><span class="note-lbl">Sentiment</span><div>
-        <span class="ph ">&#9679;</span><strong>7/10</strong> (mixed) &middot; Meta added a confirmed $100B in market cap in one day, before a &quot;350-ad scandal&quot; story broke hours later -- a huge, real, two-sided move.
-      </div></div>
-      <div class="trade-row"><span class="note-lbl">Trade</span><div>
-        <strong>Small call debit spread on the market-cap move, sized down for the same-day negative-headline risk</strong> <span class="size-tag">Size: Small (no options-positioning read)</span>
-      </div></div>
-    </div>
-
-    <div class="rt-card tier2b">
-      <div class="rt-hdr">
-        <span class="tk">PANW</span>
-        <span class="sector-tag">Technology</span>
-        <span class="price-tag">$338.49</span>
-        <span class="scores">
-          <span class="chip chip-f">F 7.4</span>
-          <span class="chip chip-na">T n/a</span>
-          <span class="chip chip-s">S 6</span>
-        </span>
-      </div>
-      <div class="note-row"><span class="note-lbl">Fundamental</span><div>Buy consensus; +15.5% upside to target; PEG 1.7 (fairly valued); revenue +34.4% YoY; thin 2.7% profit margin</div></div>
-      <div class="note-row"><span class="note-lbl">Technical</span><div><span class="chip chip-na small">no read</span> not in today&#39;s Dual_X co-expansion screen</div></div>
-      <div class="note-row"><span class="note-lbl">Sentiment</span><div>
-        <span class="ph ">&#9679;</span><strong>6/10</strong> (mixed) &middot; Palo Alto reported a confirmed 63% NGS ARR growth rate alongside a $282M GAAP net loss -- real, hard numbers pulling in opposite directions.
-      </div></div>
-      <div class="trade-row"><span class="note-lbl">Trade</span><div>
-        <strong>Small call debit spread on the ARR-growth thesis only</strong> <span class="size-tag">Size: Small (no options-positioning read; the GAAP loss caps conviction)</span>
-      </div></div>
-    </div>
-
-
-  <h2>Tier 3 &mdash; Sentiment-Only Catch-All (7+)</h2>
-  <p class="lead">The mandatory independent pass: every ticker in the news bulletin was scanned for conviction-worthy
-    news regardless of Fundalist/Technicalist outcome. Only two cleared the 7+ bar without fundamental confirmation
-    (both failed Fundalist below 5, and neither is inside today's Technicalist funnel) -- smallest size, defined-risk
-    only.</p>
-
-    <div class="rt-card tier3">
-      <div class="rt-hdr">
-        <span class="tk">FCX</span>
-        <span class="sector-tag">Basic Materials</span>
-        <span class="scores">
-          <span class="chip chip-na">F fail</span>
-          <span class="chip chip-na">T n/a</span>
-          <span class="chip chip-s">S 7</span>
-        </span>
-      </div>
-      <div class="note-row"><span class="note-lbl">Fundamental</span><div>Fundalist score 4.2 -- did not clear the funnel gate.</div></div>
-      <div class="note-row"><span class="note-lbl">Sentiment</span><div>
-        <span class="ph bear">&#9660;</span><strong>7/10</strong> (bear) &middot; Copper stocks tumbled on tariff-uncertainty reversal: FCX confirmed -8% same-day, with Goldman separately calling it &quot;attractively valued&quot; post-selloff -- a real, quantified, high-magnitude move with a credible bounce case attached.
-      </div></div>
-      <div class="trade-row"><span class="note-lbl">Trade</span><div>
-        <strong>Smallest-size put debit spread on the tariff-driven selloff, or a small call debit spread if betting on the Goldman &quot;attractively valued&quot; bounce -- pick one side only</strong> <span class="size-tag">Size: Smallest (sentiment-only -- no fundamental or technical confirmation; defined-risk only)</span>
-      </div></div>
-    </div>
-
-    <div class="rt-card tier3">
-      <div class="rt-hdr">
-        <span class="tk">SMR</span>
-        <span class="sector-tag">Industrials</span>
-        <span class="scores">
-          <span class="chip chip-na">F fail</span>
-          <span class="chip chip-na">T n/a</span>
-          <span class="chip chip-s">S 7</span>
-        </span>
-      </div>
-      <div class="note-row"><span class="note-lbl">Fundamental</span><div>Fundalist score 4.7 -- did not clear the funnel gate.</div></div>
-      <div class="note-row"><span class="note-lbl">Sentiment</span><div>
-        <span class="ph bear">&#9660;</span><strong>7/10</strong> (bear) &middot; Piper Sandler&#x27;s sector-split call drove a confirmed -5% move across SMR/Oklo/X-Energy, repeated across five separate outlets -- a real, well-corroborated bearish catalyst.
-      </div></div>
-      <div class="trade-row"><span class="note-lbl">Trade</span><div>
-        <strong>Smallest-size put debit spread on the analyst-driven selloff</strong> <span class="size-tag">Size: Smallest (sentiment-only -- no fundamental confirmation; note: SMR does appear in today&#x27;s Dual_X screen -- Mark-up/uptrend badge with an &quot;inverted,&quot; noise-flagged wall and a &quot;fade&quot; caveat -- but never reached the Technicalist stage since it failed Fundalist, so treat that context as color, not a confirmed technical score)</span>
-      </div></div>
-    </div>
-
-
-<div class="note">
-  <h3>How to read this</h3>
-  <p><strong>The funnel:</strong> Fundalist scores all 207 watchlist tickers 1-10 on valuation (PEG), growth (revenue),
-    quality (margin) and upside (analyst target/rating); 199 cleared &ge;5. Technicalist re-scores every Fundalist
-    survivor against today's Dual_X snapshot (dual IV+GEX expansion, GEX sign flips, IV Rank, put/call wall
-    proximity, Wyckoff phase) -- but Dual_X only covers 75 names with active options-chain liquidity, so 127
-    Fundalist-pass tickers got <strong>no technical read</strong> rather than being silently dropped. All 72 that
-    <em>were</em> covered cleared &ge;5. Sentilist then rates news conviction 1-10 for whichever tickers reached it;
-    only scores of 6+ count as a funnel confirmation.</p>
-  <p><strong>The 7+ catch-all</strong> is mandatory and independent of the funnel: it scanned every ticker mentioned
-    in today's news bulletin (roughly 200 names, single-name equities only -- sector ETFs and index proxies like
-    QQQ/SPY/XLK were excluded as not tradeable single-name option ideas here), including ones Fundalist or
-    Technicalist never carried forward. Two tickers -- <strong>FCX</strong> and <strong>SMR</strong> -- cleared 7+ on
-    a real, dated catalyst despite failing Fundalist; they're tagged sentiment-only and sized to the smallest bucket,
-    defined-risk only. A number of other tickers (ADBE, HPE, DELL, NKE, NBIS, VRT, SNPS, CDNS, MU, UBER, DD, CRH,
-    META, PANW) cleared 6+ on sentiment <em>and</em> had passed Fundalist, so they're reported in Tier 2b rather than
-    as pure catch-alls -- they do have fundamental backing, just no options-positioning read.</p>
-  <p><strong>Reading the trade ideas:</strong> "Extreme Positive Gamma" + "pinned" is a dealer-suppressed range --
-    favor iron condors/calendars there, not directional bets. A GEX sign-flip (especially negative&rarr;positive) is
-    weighted above simple drift within one sign, since it marks a real change in dealer positioning. A wall note of
-    "inverted" means the put and call walls have crossed -- treat exact strike levels there as noise, not signal. Every
-    "breakout"/"breakdown" call in this report is <strong>unconfirmed by volume</strong> -- this session could not
-    reach a live market-data source to compute the 5-day vs 30-day average-volume ratio the Technicalist screen
-    normally uses, so size every breakout/breakdown idea one notch smaller than you otherwise would.</p>
-  <p>This is a candidate generator, not a trade gate -- confirm size, strikes and expiries against your own risk
-    limits before acting on any card.</p>
-</div>
-
+  <h2>Healthcare &mdash; excluded from recommendations</h2>
+  <ul class="lead"><li><strong>VRTX</strong> <span class="chip chip-f small">F 6.5</span> <span class="chip chip-t small">T 6.5</span> <span class="chip chip-s small">S 9</span> &mdash; would have been filtered (G1 fundamentals floor): GEX 1.0 -&gt; 3.0, Neutral / Transition Zone; walls put wall $510.0 (+1.1%), call wall $510.0 (+1.1%); IV 28.2% IVR 23.0; volume 0.80x 5v30; Wyckoff Mark-up.</li><li><strong>TEVA</strong> <span class="chip chip-f small">F 6</span> <span class="chip chip-t small">T 6</span> <span class="chip chip-s small">S 6</span> &mdash; would have been filtered (G1 fundamentals floor): GEX 1.0 -&gt; 10.0, Extreme Positive Gamma; walls put wall $36.0 (+2.8%), call wall $37.0 (+0.0%); IV 32.2% IVR 13.0; volume 0.91x 5v30; Wyckoff Mark-up.</li><li><strong>LLY</strong> <span class="chip chip-f small">F 7.5</span> <span class="chip chip-t small">T —</span> <span class="chip chip-s small">S 8</span> &mdash; would have been watch-listed (G6 no technical read): &#x27;Eli Lilly&#x27;s Immunology Push Builds New Growth Engines Beyond GLP-1s&#x27; and completion of the &#x27;$3.8 Billion AtaiBeckley Purchase&#x27; (11 Sep), plus a Novo Nordisk do</li><li><strong>CVS</strong> <span class="chip chip-f small">F —</span> <span class="chip chip-t small">T —</span> <span class="chip chip-s small">S 7</span> &mdash; would have been watch-listed (G6 sentiment-only): &#x27;CVS Health stock gains analyst support as Overweight rating and higher targets reinforce recovery&#x27; (11 Sep) is a genuine new Overweight call.</li><li><strong>GILD</strong> <span class="chip chip-f small">F —</span> <span class="chip chip-t small">T —</span> <span class="chip chip-s small">S 7</span> &mdash; would have been watch-listed (G6 sentiment-only): &#x27;Gilead Wins Appeals Court Ruling Blocking Imported HIV Drug Sales&#x27; (11 Sep) is a genuine legal win protecting revenue.</li><li><strong>MOH</strong> <span class="chip chip-f small">F —</span> <span class="chip chip-t small">T —</span> <span class="chip chip-s small">S 7</span> &mdash; would have been watch-listed (G6 sentiment-only): &#x27;Molina Healthcare Gains as Investors Weigh Sector Relief and a Recent Guidance Lift&#x27; (10 Sep) is a genuine guidance-raise catalyst.</li><li><strong>PFE</strong> <span class="chip chip-f small">F —</span> <span class="chip chip-t small">T —</span> <span class="chip chip-s small">S 7</span> &mdash; would have been watch-listed (G6 sentiment-only): &#x27;Pfizer Stock: Firing On All Cylinders&#x27; (10 Sep, repeated) is a strongly bullish thesis piece with no offsetting negative.</li></ul>
 </main>
 
 </div>
