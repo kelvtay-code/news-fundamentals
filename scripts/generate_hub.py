@@ -4,6 +4,7 @@ Generate a static PWA hub page (docs/index.html) from:
   - latest news_bulletin_*.html      (Dashboard folder, copied in full)
   - latest oil brief html            (Dashboard folder, copied in full)
   - latest bull_screener_*.html      (Dashboard folder, copied in full)
+  - latest tradingedge_*.html        (Dashboard folder, copied in full -- the-edge)
 
 Run this after each pipeline run, then commit+push the docs/ folder
 to publish an updated version.
@@ -24,6 +25,8 @@ BULL_SCREENER_PATTERN = re.compile(r"bull_screener_(\d{6})_(\d{4})\.html$")
 SECTOR_SCAN_PATTERN = re.compile(r"sector_scan_(\d{6})_(\d{4})\.html$")
 REBOUND_PATTERN = re.compile(r"Rebound_candidate_(\d{6})_(\d{4})\.html$")
 DUAL_X_PATTERN = re.compile(r"Dual_X_(\d{6})_(\d{4})\.html$")
+# the-edge stamps YYYYMMDD_HHMMSS (flip_list convention), not the DDMMYY_HHMM the others use
+EDGE_PATTERN = re.compile(r"tradingedge_(\d{8})_(\d{6})\.html$")
 STRATEGIST_PATTERN = re.compile(r"opt_strategist_(\d{6})_(\d{4})\.html$")
 RESEARCH_TEAM_PATTERN = re.compile(r"research_team_(\d{6})_(\d{4})\.html$")
 BULL_TABLE_RE = re.compile(r'<table id="mainTable">.*?</table>', re.DOTALL)
@@ -161,6 +164,21 @@ def latest_dual_x():
             continue
         date_str, time_str = m.groups()
         dt = datetime.strptime(date_str + time_str, "%d%m%y%H%M")
+        candidates.append((dt, f))
+    if not candidates:
+        return None, None
+    dt, path = max(candidates, key=lambda x: x[0])
+    return dt, path
+
+
+def latest_edge():
+    candidates = []
+    for f in DASHBOARD_DIR.glob("tradingedge_*.html"):
+        m = EDGE_PATTERN.match(f.name)
+        if not m:
+            continue
+        date_str, time_str = m.groups()
+        dt = datetime.strptime(date_str + time_str, "%Y%m%d%H%M%S")
         candidates.append((dt, f))
     if not candidates:
         return None, None
@@ -528,6 +546,23 @@ def build():
     else:
         dualx_frame = "<p class='empty'>No Dual_X file found.</p>"
 
+    edge_dt, edge_path = latest_edge()
+    if edge_path:
+        shutil.copyfile(edge_path, SITE_DIR / "the-edge.html")
+        # the run's CSV shares its timestamp and rides along as a download
+        edge_csv = edge_path.with_suffix(".csv")
+        if edge_csv.exists():
+            shutil.copyfile(edge_csv, SITE_DIR / "the-edge.csv")
+        edge_v = cache_bust(edge_dt)
+        edge_frame = (
+            '<div class="news-toolbar">'
+            f'<a class="open-full" href="the-edge.html?v={edge_v}" target="_blank" rel="noopener">'
+            'Open full Edge report in new tab &#8599;</a></div>'
+            f'<iframe src="the-edge.html?v={edge_v}" title="The Edge"></iframe>'
+        )
+    else:
+        edge_frame = "<p class='empty'>No the-edge report found.</p>"
+
     # senti-grid.html is hand-authored straight into docs/ by the senti skill
     # (it never lands in the Dashboard folder), so there is nothing to copy in --
     # just pick it up in place and cache-bust off its own mtime. Keeping this
@@ -571,6 +606,7 @@ def build():
         ("Sector scan", sector_dt),
         ("Rebounder", rebound_dt),
         ("Dual_X", dualx_dt),
+        ("Edge", edge_dt),
         ("Senti", senti_dt),
         ("Strategist", strat_dt),
         ("Research", research_dt),
@@ -708,6 +744,7 @@ def build():
     <button data-target="sectorscan">Sector Scan</button>
     <button data-target="rebounder">Rebounder</button>
     <button data-target="dualx">Dual_X</button>
+    <button data-target="edge">Edge</button>
     <button data-target="senti">Senti</button>
     <button data-target="strategist">Strategist</button>
     <button data-target="researchteam">Research</button>
@@ -738,6 +775,10 @@ def build():
   <section id="dualx">
     <h2>Dual_X</h2>
     {dualx_frame}
+  </section>
+  <section id="edge">
+    <h2>The Edge</h2>
+    {edge_frame}
   </section>
   <section id="senti">
     {senti_frame}
@@ -794,6 +835,7 @@ def build():
         f"sector scan: {sector_path.name if sector_path else 'none'}, "
         f"rebounder: {rebound_path.name if rebound_path else 'none'}, "
         f"dual_x: {dualx_path.name if dualx_path else 'none'}, "
+        f"edge: {edge_path.name if edge_path else 'none'}, "
         f"research team: {research_path.name if research_path else 'none'})"
     )
 
