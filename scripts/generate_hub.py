@@ -582,6 +582,23 @@ def build():
         senti_dt = None
         senti_frame = "<p class='empty'>No Senti Grid file found.</p>"
 
+    # the-grid.html is written straight into docs/ by build_the_grid.py, same as
+    # senti-grid.html -- pick it up in place so a hub regen keeps the THE_GRID tab
+    # (it was silently dropped this way between 27 Aug and 19 Sep 2026).
+    grid_dest = SITE_DIR / "the-grid.html"
+    if grid_dest.exists():
+        grid_dt = datetime.fromtimestamp(grid_dest.stat().st_mtime)
+        grid_v = cache_bust(grid_dt)
+        grid_frame = (
+            '<div class="news-toolbar">'
+            f'<a class="open-full" href="the-grid.html?v={grid_v}" target="_blank" rel="noopener">'
+            'Open full THE_GRID in new tab &#8599;</a></div>'
+            f'<iframe src="the-grid.html?v={grid_v}" title="THE_GRID &mdash; Watchlist Volatility Grid"></iframe>'
+        )
+    else:
+        grid_dt = None
+        grid_frame = "<p class='empty'>No THE_GRID file found.</p>"
+
     strat_dt, strat_path = latest_opt_strategist()
     if strat_path:
         shutil.copyfile(strat_path, SITE_DIR / "strategist.html")
@@ -608,6 +625,7 @@ def build():
         ("Dual_X", dualx_dt),
         ("Edge", edge_dt),
         ("Senti", senti_dt),
+        ("THE_GRID", grid_dt),
         ("Strategist", strat_dt),
         ("Research", research_dt),
     ])
@@ -673,7 +691,7 @@ def build():
   .news-toolbar {{ margin-bottom:8px; font-family: Arial, sans-serif; }}
   .open-full {{ font-size:0.82rem; color:var(--ft-blue); text-decoration:none; font-weight:600; }}
   .open-full:hover {{ text-decoration:underline; }}
-  #oil iframe, #sectorscan iframe, #dualx iframe, #senti iframe {{ width:100%; height:calc(100vh - 220px); min-height:600px; border:1px solid var(--ft-border); background:#fff; }}
+  #oil iframe, #sectorscan iframe, #dualx iframe, #senti iframe, #thegrid iframe {{ width:100%; height:calc(100vh - 220px); min-height:600px; border:1px solid var(--ft-border); background:#fff; }}
   .empty {{ color:var(--ft-mid); font-style:italic; font-family: Arial, sans-serif; }}
 
   #bullscreener .chip {{ display:inline-block; font-family: Arial, sans-serif; font-size:10.5px; font-weight:700; padding:2px 8px; border-radius:2px; white-space:normal; letter-spacing:0.02em; }}
@@ -746,6 +764,7 @@ def build():
     <button data-target="dualx">Dual_X</button>
     <button data-target="edge">Edge</button>
     <button data-target="senti">Senti</button>
+    <button data-target="thegrid">THE_GRID</button>
     <button data-target="strategist">Strategist</button>
     <button data-target="researchteam">Research</button>
   </div>
@@ -782,6 +801,10 @@ def build():
   </section>
   <section id="senti">
     {senti_frame}
+  </section>
+  <section id="thegrid">
+    <h2>THE_GRID</h2>
+    {grid_frame}
   </section>
   <section id="strategist">
     {strat_frame}
