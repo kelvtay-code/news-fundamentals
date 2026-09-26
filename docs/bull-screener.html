@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Bull Screener — 29 Aug 2026</title>
+<title>Bull Screener — 26 Sep 2026</title>
 <style>
   :root{
     --ft-navy:#0A2240; --ft-cream:#FFF1E5; --ft-salmon:#FFF1E5;
@@ -52,27 +52,29 @@
 
 <div class="masthead">
   <h1>BULL SCREENER — Experimental Funnel</h1>
-  <div class="sub">Wyckoff Uptrend/Spring &rarr; top7 bull-confirm &rarr; ivchk IV-Rank/trend/divergence &rarr; positive-GEX filter | Data snapshot: 29 Aug 2026, 04:19 (stock_analysis) / 04:13 (IV) | Run for: September book, options premium screen</div>
+  <div class="sub">Wyckoff Uptrend/Spring &rarr; top7 bull-confirm &rarr; ivchk IV-Rank/trend/divergence &rarr; positive-GEX filter | Data snapshot: 26 Sep 2026, 04:19 (stock_analysis) / 05:49 (IV) / 04:19 (business overview) | Candidate pool: full watchlist universe</div>
 </div>
 
 <div class="stats-banner">
   <div class="stats-inner">
-    <div class="stat-item"><b>209</b>Universe (Step 0)</div>
+    <div class="stat-item"><b>212</b>Universe (Step 0)</div>
     <div class="stat-sep"></div>
     <div class="stat-item"><b>49</b>Step 1 Wyckoff Uptrend/Spring</div>
     <div class="stat-sep"></div>
-    <div class="stat-item"><b>7</b>Step 2 top7 bull-confirm</div>
+    <div class="stat-item"><b>4</b>Step 2 top7 bull-confirm</div>
     <div class="stat-sep"></div>
-    <div class="stat-item"><b>1</b>Step 3 ivchk (IV Rank &gt;38 + trend)</div>
+    <div class="stat-item"><b>0</b>Step 3 ivchk (IV Rank &gt;38 + trend)</div>
     <div class="stat-sep"></div>
-    <div class="stat-item"><b>1</b>Step 4 Final List (positive GEX)</div>
+    <div class="stat-item"><b>0</b>Step 4 Final List (positive GEX)</div>
   </div>
 </div>
 
 <main class="content">
 
   <div class="banner-note">
-    <b>Desk note:</b> Only one ticker cleared all four gates (DELL), and it is flagged, not recommended, for premium selling: its IV Rank (61) is elevated almost entirely by earnings on 01 Sep 2026 (3 calendar days out — inside the 30-day window) and it carries live negative news (Morgan Stanley downgrade to Underweight, ~$1.56B in insider selling, DRAM/NAND margin-compression risk). This is a premium-buying/earnings-play setup or a pass, not a premium-selling candidate. Zero clean survivors this cycle.
+    <b>Desk note — zero survivors this cycle:</b> All 4 tickers that cleared the top7 bull-confirm gate (AMD, ARM, NVDA, WBD) died at the IV Rank &gt;38 threshold: AMD IV Rank 20, ARM 38 (fails on the &le;38 tie), NVDA blank/no rank in the latest export, WBD not carried in IV_260926_0549.csv at all (no options coverage in this snapshot = fail, not waived). None reached the divergence/trend check or the positive-GEX filter. The Final List is empty.
+    <br><br>
+    <b>Evidence-status caveat (required):</b> this funnel's Step 1 (Uptrend/Spring) and Step 4 (positive-GEX) gates select for the same momentum/bullish-label profile the September backtests measured as <i>anti-predicting</i> — top-20% 20-day momentum was -0.74% (t -2.9), and bullish Wyckoff/GEX labels on their own were no better than the unfiltered watchlist. Nothing below is a measured edge; it is a candidate pool for further work (see Step-2 near-miss table for the run-up/IV-Rank evidence).
   </div>
 
   <div class="ft-card">
@@ -81,11 +83,10 @@
       <input type="text" id="tickerSearch" placeholder="Search ticker/sector..." onkeyup="applyFilters()">
       <select id="sectorFilter" onchange="applyFilters()">
         <option value="">All Sectors</option>
-        <option value="PC infrastructure">PC infrastructure</option>
       </select>
       <select id="riskFilter" onchange="applyFilters()">
         <option value="">All Flags</option>
-        <option value="trap">Earnings-Trap Only</option>
+        <option value="trap">Divergence Flag Only</option>
         <option value="clean">Clean Only</option>
       </select>
       <button onclick="document.getElementById('tickerSearch').value='';document.getElementById('sectorFilter').value='';document.getElementById('riskFilter').value='';applyFilters();">Reset</button>
@@ -109,32 +110,58 @@
             <th onclick="sortTable(11)">Gamma Flip</th>
             <th onclick="sortTable(12)">Earnings Date</th>
             <th onclick="sortTable(13)">PEG</th>
-            <th onclick="sortTable(14)">Trap Flag</th>
+            <th onclick="sortTable(14)">Divergence Flag</th>
             <th onclick="sortTable(15)">News</th>
           </tr>
         </thead>
         <tbody id="mainBody">
-          <tr data-sector="PC infrastructure" data-trap="trap">
-            <td class="rank">1</td>
-            <td class="ticker">DELL</td>
-            <td>PC infrastructure</td>
-            <td class="num">$455.85</td>
-            <td>Mark-up / [UPTREND] (Uptrend cont. 60%)</td>
-            <td><span class="chip chip-bull">BULL SETUP</span></td>
-            <td>Reinforced</td>
-            <td class="num"><span class="chip chip-gex">+7 Long</span></td>
-            <td class="num">61</td>
-            <td class="num">$500</td>
-            <td class="num">$400</td>
-            <td class="num">$450</td>
-            <td class="num">01/09/2026</td>
-            <td class="num">0.74</td>
-            <td><span class="chip chip-warn">&#9888; Earnings in 3d &mdash; IV-driven, not organic</span></td>
-            <td class="newscell">MS downgrade to Underweight (PT cut $144&rarr;$110) on DRAM/NAND margin risk; ~$1.56B insider selling (Silver Lake/Durban) over 3mo; GF Securities cut to Hold post +200% run; $70B late-Jun selloff on memory-cost fears.</td>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:12px;color:var(--ft-mid);margin-top:10px;">No rows — every Step 2 survivor failed the Step 3 IV Rank &gt;38 gate. See attrition detail and the near-miss table below.</p>
+  </div>
+
+  <div class="ft-card">
+    <h2>Step 2 Near-Miss Table — momentum/thin-premium evidence</h2>
+    <p style="font-size:12.5px;color:var(--ft-mid);margin-top:-4px;">These 4 tickers passed Step 1 (Wyckoff Uptrend/Spring) and Step 2 (top7 7-day + recency bull-confirm) but were rejected at Step 3 on IV Rank. 5-session run-up = price 25 Sep vs 18 Sep close (stock_analysis_190926.0419.csv &ldquo;Current Price&rdquo;). Shown to surface the momentum-chasing / thin-premium pattern the desk asked to track.</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Ticker</th><th>Sector</th><th>7-Day Verdict</th><th>Recency &Delta;</th>
+            <th>Price 18 Sep close</th><th>Price 25 Sep</th><th>5-Session Run-up</th>
+            <th>IV Rank (26 Sep)</th><th>Step 3 outcome</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="ticker">AMD</td><td>Semiconductors</td>
+            <td><span class="chip chip-bull">BULL SETUP</span></td><td>Upgraded (recency BULL CONFIRM)</td>
+            <td class="num">$559.82</td><td class="num">$629.26</td><td class="num" style="color:#B00000;font-weight:700;">+12.40%</td>
+            <td class="num">20</td><td>Reject — IV Rank 20 &le; 38</td>
+          </tr>
+          <tr>
+            <td class="ticker">ARM</td><td>Semiconductors &amp; Semiconductor IP</td>
+            <td><span class="chip chip-bull">BULL SETUP</span></td><td>Reinforced</td>
+            <td class="num">$275.61</td><td class="num">$306.34</td><td class="num" style="color:#B00000;font-weight:700;">+11.15%</td>
+            <td class="num">38</td><td>Reject — IV Rank 38, not &gt;38</td>
+          </tr>
+          <tr>
+            <td class="ticker">NVDA</td><td>Technology (Semiconductors/AI)</td>
+            <td><span class="chip chip-bull">BULL SETUP</span></td><td>Reinforced</td>
+            <td class="num">$222.27</td><td class="num">$224.58</td><td class="num">+1.04%</td>
+            <td class="num">&mdash; (blank)</td><td>Reject — no IV Rank in latest export</td>
+          </tr>
+          <tr>
+            <td class="ticker">WBD</td><td>Entertainment &amp; Media Content</td>
+            <td><span class="chip chip-bull">BULL SETUP</span></td><td>Upgraded (recency BULL CONFIRM)</td>
+            <td class="num">$27.80</td><td class="num">$30.84</td><td class="num" style="color:#B00000;font-weight:700;">+10.94%</td>
+            <td class="num">&mdash; (not in IV file)</td><td>Reject — no options coverage in IV_260926_0549.csv</td>
           </tr>
         </tbody>
       </table>
     </div>
+    <p style="font-size:12px;color:var(--ft-mid);margin-top:10px;">Pattern: 3 of 4 near-miss names ran +11&ndash;12% over the prior 5 sessions with compressed/absent IV Rank &mdash; exactly the momentum-with-thin-premium profile the evidence table above flags as anti-predicting and poor for premium capture, not a coincidence specific to this run.</p>
   </div>
 
   <div class="ft-card">
@@ -142,11 +169,11 @@
     <table>
       <thead><tr><th>Stage</th><th>In</th><th>Out</th><th>Reason for drop</th></tr></thead>
       <tbody>
-        <tr><td>Step 1 — Wyckoff Uptrend/Spring</td><td class="num">209</td><td class="num">49</td><td>No [UPTREND]/[SPRING] Specific Setup tag</td></tr>
-        <tr><td>Step 2 — top7 7-day + recency</td><td class="num">49</td><td class="num">7</td><td>7-day verdict REJECT (GEX &lt;+4 on &ge;5/7 days and/or bullish phase &lt;5/7 days); QQQ dropped on ABORT (gamma flip 29 Aug)</td></tr>
-        <tr><td>Step 3a — IV Rank &gt;38</td><td class="num">7</td><td class="num">1</td><td>AMZN (21), BRKB (20), KO (36), NVDA (7, post-earnings IV crush) all &le;38; CBRE &amp; SMCI have no IV coverage in latest IV_*.csv (no data = no pass)</td></tr>
-        <tr><td>Step 3b — Trend flag</td><td class="num">1</td><td class="num">1</td><td>DELL = &#128640; BULLISH (price &gt; EMA21/SMA50/SMA200) — passes</td></tr>
-        <tr><td>Step 4 — Positive GEX</td><td class="num">1</td><td class="num">1</td><td>DELL GEX Scale +7 (Moderate Positive Gamma) — passes</td></tr>
+        <tr><td>Step 1 — Wyckoff Uptrend/Spring</td><td class="num">212</td><td class="num">49</td><td>No [UPTREND]/[SPRING] Specific Setup tag ([MARKUP]-only, [SOS] without Uptrend/Spring, [UPTHRUST]/[DOWNTREND]/[MARKDOWN], N/A all dropped)</td></tr>
+        <tr><td>Step 2 — top7 7-day + recency</td><td class="num">49</td><td class="num">4</td><td>45 REJECT or ABORT on 7-day verdict (CVX/DVN/META/PSX/SPCX/TSLA hit live gamma-flip or vol-divergence ABORT; rest failed the &ge;5/7-day bullish-phase+GEX&ge;4 bar). Survivors: AMD, ARM, NVDA, WBD — all BULL SETUP 7-day, recency Reinforced or Upgraded, no bearish recency override</td></tr>
+        <tr><td>Step 3a — IV Rank &gt;38</td><td class="num">4</td><td class="num">0</td><td>AMD 20, ARM 38 (fails the &gt; bar), NVDA blank, WBD absent from IV_260926_0549.csv entirely &mdash; all rejected before the trend-flag/divergence checks or news_investigator ran (nothing to check)</td></tr>
+        <tr><td>Step 3b — Trend flag</td><td class="num">0</td><td class="num">0</td><td>N/A — no survivors entered this gate</td></tr>
+        <tr><td>Step 4 — Positive GEX</td><td class="num">0</td><td class="num">0</td><td>N/A — no survivors entered this gate</td></tr>
       </tbody>
     </table>
   </div>
@@ -154,7 +181,7 @@
 </main>
 
 <footer>
-  Bull Screener (experimental) — sources: stock_analysis_290826.0419.csv, IV_290826_0413.csv, business_overview_290826_0419.csv, prior daily snapshots 21&ndash;29 Aug 2026 for 7-day/3-day history. Generated for Global Head of Options Trading, September book screen.
+  Bull Screener (experimental) — sources: stock_analysis_260926.0419.csv (Wyckoff/GEX/walls), stock_analysis_180926.0420.csv through 260926.0419.csv (7-day/recency top7 history, duplicate-checked), IV_240926_0600.csv / IV_250926_0940.csv / IV_260926_0549.csv (3-day IV Rank/price trend), IV_260926_0549.csv (IV Rank/trend/earnings), business_overview_260926_0419.csv (PEG Ratio — not reached, no Final List survivors). This is an experimental funnel distinct from opt_strategist; see repo evidence-status table before treating any gate here as a proven edge.
 </footer>
 
 <script>
