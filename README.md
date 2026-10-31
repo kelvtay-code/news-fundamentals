@@ -9,6 +9,14 @@ A minimal installable PWA (Progressive Web App) dashboard for the Optionx pipeli
 - **Bull Screener** — latest bullish-ticker funnel dashboard from the `bull_screener` agent (most recent `bull_screener_*.html` in Dashboard, matched by timestamp in the filename)
 - **Research** — latest three-agent report (`research_team_*.html` in Dashboard) chaining fundalist (business overview) → technicalist (Dual_X, GEX, IV, 5d/30d volume expansion) → sentilist (news bulletin rating, plus a 7+ catch-all for tickers the first two agents missed), synthesized into one report with proposed trades and GEX/put-wall/call-wall commentary. See `.claude/skills/research-team/SKILL.md` for the pipeline spec.
 
+## Earnings Vol Optimizer
+```
+python scripts/earnings_vol.py                  # screen docs/the-edge.csv (3-35 days to earnings)
+python scripts/earnings_vol.py --move-view 1.25 # less aggressive view of the earnings move
+python scripts/earnings_vol.py --ticker NVDA --spot 205.25 --earnings 2026-11-17 --chain chain.csv  # real quotes
+```
+For each name with upcoming earnings, it prices long-volatility structures: straddle, strangles, reverse iron flies/condors, calendars, double calendars and financed strangles. It picks the **lowest-debit** one that still pays on a bigger-than-implied earnings move, plus the cheapest pre-release IV run-up play when one exists. Writes `docs/earnings-vol.html` / `docs/earnings-vol.csv`. Pure Python (no scipy/yfinance); model assumptions are in the script's docstring.
+
 ## Regenerating
 ```
 python scripts/generate_hub.py
