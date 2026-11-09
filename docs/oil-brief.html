@@ -1,841 +1,217 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Oil Brief 3 Nov 2026</title>
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Oil Brief 6 November 2026</title>
 <style>
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body { background:#0d1117; color:#c9d1d9; font-family:"Segoe UI",-apple-system,BlinkMacSystemFont,sans-serif; font-size:13px; line-height:1.5; }
-  .header { background:linear-gradient(135deg,#0a0f1a 0%,#111827 60%,#0a0f1a 100%); border-bottom:2px solid #7c3aed; padding:18px 28px 14px; }
-  .header-top { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:8px; flex-wrap:wrap; gap:10px; }
-  .header-title { font-size:20px; font-weight:700; color:#a78bfa; letter-spacing:-0.3px; }
-  .header-subtitle { font-size:11px; color:#8b949e; margin-top:3px; }
-  .header-meta { text-align:right; }
-  .header-date { font-size:13px; color:#58a6ff; font-weight:600; }
-  .header-sources { font-size:10px; color:#8b949e; margin-top:3px; line-height:1.6; }
-  .macro-strip { background:#161b22; border-bottom:1px solid #30363d; padding:9px 28px; display:flex; gap:18px; align-items:center; flex-wrap:wrap; }
-  .macro-item { display:flex; flex-direction:column; }
-  .macro-label { font-size:9px; color:#8b949e; text-transform:uppercase; letter-spacing:0.5px; }
-  .macro-value { font-size:13px; font-weight:700; color:#f0f6fc; }
-  .macro-delta { font-size:10px; }
-  .up { color:#3fb950; } .dn { color:#f85149; } .neu { color:#8b949e; } .warn { color:#e3b341; }
-  .macro-divider { width:1px; background:#30363d; height:32px; }
-  .alert-bar { background:#241a1a; border-bottom:2px solid #f85149; padding:9px 28px; display:flex; flex-direction:column; gap:6px; }
-  .alert-item { font-size:11.5px; font-weight:600; color:#ff9d9d; }
-  .alert-item2 { font-size:11.5px; font-weight:600; color:#e3b341; }
-  .alert-item3 { font-size:11.5px; font-weight:600; color:#9ee6ac; }
-  .main { padding:18px 28px 40px; }
-  .section-title { font-size:11px; font-weight:700; color:#8b949e; text-transform:uppercase; letter-spacing:1px; margin-bottom:10px; padding-bottom:5px; border-bottom:1px solid #21262d; margin-top:30px; }
-  .section-title:first-child { margin-top:0; }
-  .section-lede { font-size:12px; color:#8b949e; margin:-4px 0 12px; line-height:1.6; max-width:1150px; }
-  .dash-table { width:100%; border-collapse:collapse; margin-bottom:10px; }
-  .dash-table th { background:#161b22; color:#8b949e; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; padding:7px 10px; text-align:left; border-bottom:2px solid #30363d; white-space:nowrap; }
-  .dash-table td { padding:7px 10px; border-bottom:1px solid #21262d; vertical-align:top; font-size:12px; }
-  .dash-table td:first-child { font-weight:700; color:#f0f6fc; white-space:nowrap; }
-  .num { text-align:right; font-variant-numeric:tabular-nums; }
-  .badge { display:inline-block; padding:2px 8px; border-radius:4px; font-size:11px; font-weight:700; white-space:nowrap; }
-  .badge-xbull { background:#0f3d22; color:#7ee787; border:1px solid #56d36488; }
-  .badge-bull { background:#1a3a2a; color:#56d364; border:1px solid #56d36444; }
-  .badge-neutral { background:#21262d; color:#8b949e; border:1px solid #30363d; }
-  .badge-bear { background:#3a1a1a; color:#f85149; border:1px solid #f8514966; }
-  .badge-xbear { background:#4d1414; color:#ff7b72; border:1px solid #f8514999; }
-  .badge-warn { background:#3a2a00; color:#e3b341; border:1px solid #e3b34166; }
-  .conf-high { color:#3fb950; font-weight:700; }
-  .conf-med { color:#e3b341; font-weight:700; }
-  .conf-low { color:#8b949e; font-weight:600; }
-  .deep-card { background:#161b22; border:1px solid #30363d; border-radius:8px; overflow:hidden; margin-bottom:22px; }
-  .deep-header { padding:13px 18px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; border-bottom:1px solid #21262d; }
-  .deep-title { font-size:16px; font-weight:700; color:#f0f6fc; }
-  .deep-body { padding:16px 18px; }
-  .subsection { margin-bottom:15px; }
-  .subsection-title { font-size:10.5px; font-weight:700; text-transform:uppercase; letter-spacing:0.7px; margin-bottom:7px; color:#58a6ff; }
-  .subsection-title.tender { color:#d2a8ff; }
-  .subsection-title.moc { color:#56d364; }
-  .factor-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:13px; }
-  @media(max-width:820px){ .factor-grid{grid-template-columns:1fr;} }
-  .factor-box { border-radius:5px; padding:10px 13px; }
-  .factor-bull { background:rgba(63,185,80,0.07); border:1px solid rgba(63,185,80,0.2); }
-  .factor-bear { background:rgba(248,81,73,0.07); border:1px solid rgba(248,81,73,0.2); }
-  .factor-box h4 { font-size:10px; text-transform:uppercase; letter-spacing:0.6px; margin-bottom:7px; }
-  .factor-bull h4 { color:#3fb950; } .factor-bear h4 { color:#f85149; }
-  .factor-box ul { list-style:none; padding:0; }
-  .factor-box ul li { font-size:11.5px; padding:3px 0 3px 14px; position:relative; line-height:1.45; }
-  .factor-bull li::before { content:"\25B2"; color:#3fb950; font-size:8px; position:absolute; left:0; top:5px; }
-  .factor-bear li::before { content:"\25BC"; color:#f85149; font-size:8px; position:absolute; left:0; top:5px; }
-  .rationale-box { background:#0d1117; border-left:3px solid #58a6ff; border-radius:0 5px 5px 0; padding:10px 13px; font-size:12px; line-height:1.65; }
-  .rationale-box.yellow { border-color:#e3b341; } .rationale-box.green { border-color:#3fb950; }
-  .rationale-box.red { border-color:#f85149; } .rationale-box.purple { border-color:#a78bfa; }
-  .flag-box { background:#1a1300; border:1px solid #e3b34155; border-left:3px solid #e3b341; border-radius:0 5px 5px 0; padding:8px 12px; font-size:11.5px; color:#f0d78c; margin-bottom:8px; }
-  .flag-box.hi { border-left-color:#f85149; background:#240d0d; color:#ff9d9d; border-color:#f8514955; }
-  .flag-box.good { border-left-color:#3fb950; background:#0d1f14; color:#9ee6ac; border-color:#3fb95055; }
-  .mini-table { width:100%; border-collapse:collapse; margin:6px 0 10px; }
-  .mini-table th { background:#0d1117; color:#8b949e; font-size:9.5px; text-transform:uppercase; letter-spacing:0.5px; padding:5px 8px; text-align:left; border-bottom:1px solid #30363d; white-space:nowrap; }
-  .mini-table td { padding:5px 8px; border-bottom:1px solid #21262d; font-size:11.5px; vertical-align:top; }
-  .mini-table td:first-child { color:#f0f6fc; font-weight:600; }
-  .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
-  @media(max-width:900px){ .grid2{grid-template-columns:1fr;} }
-  .kpi-row { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:13px; }
-  .kpi { background:#0d1117; border:1px solid #30363d; border-radius:6px; padding:8px 12px; min-width:120px; }
-  .kpi-l { font-size:9px; color:#8b949e; text-transform:uppercase; letter-spacing:0.5px; }
-  .kpi-v { font-size:15px; font-weight:700; color:#f0f6fc; font-variant-numeric:tabular-nums; }
-  .kpi-d { font-size:10px; }
-  ul.plain { list-style:none; padding:0; }
-  ul.plain li { font-size:12px; padding:4px 0 4px 15px; position:relative; line-height:1.55; }
-  ul.plain li::before { content:"\2022"; color:#58a6ff; position:absolute; left:2px; top:3px; }
-  .footer { padding:16px 28px 34px; border-top:1px solid #21262d; color:#6e7681; font-size:10.5px; line-height:1.7; }
-  b.hl { color:#f0f6fc; }
-  .tag { font-size:9.5px; padding:1px 6px; border-radius:3px; background:#21262d; color:#8b949e; border:1px solid #30363d; }
-</style>
-</head><body>
-<style>
-  .chart { margin:10px 0 14px; }
-  .chart-row { display:grid; grid-template-columns:150px 1fr 90px; gap:8px; align-items:center; margin-bottom:5px; font-size:11.5px; }
-  .chart-lab { color:#c9d1d9; text-align:right; }
-  .chart-track { position:relative; height:16px; background:#0d1117; border:1px solid #21262d; border-radius:3px; }
-  .chart-zero { position:absolute; top:0; bottom:0; width:1px; background:#8b949e; }
-  .chart-bar { position:absolute; top:2px; bottom:2px; border-radius:2px; }
-  .chart-bar.pos { background:#3fb950; } .chart-bar.neg { background:#f85149; }
-  .chart-val { font-variant-numeric:tabular-nums; font-weight:700; }
-  .chart-cap { font-size:10px; color:#6e7681; margin-top:4px; }
-  .grid-moc { width:100%; border-collapse:collapse; margin:6px 0 12px; }
-  .grid-moc th { background:#0d1117; color:#8b949e; font-size:9.5px; text-transform:uppercase; letter-spacing:0.4px; padding:5px 7px; text-align:left; border-bottom:1px solid #30363d; }
-  .grid-moc td { padding:4px 7px; border-bottom:1px solid #1b2027; font-size:11px; vertical-align:top; }
-  .grid-moc td.bid { color:#7ee787; font-variant-numeric:tabular-nums; font-weight:600; }
-  .grid-moc td.ask { color:#ff9d9d; font-variant-numeric:tabular-nums; font-weight:600; }
-  .grid-moc td.co { color:#f0f6fc; font-weight:600; white-space:nowrap; }
-  .grid-moc tr.sep td { background:#161b22; color:#58a6ff; font-weight:700; font-size:10px; text-transform:uppercase; letter-spacing:0.6px; }
-</style>
+:root{--ink:#0D1A26;--paper:#FFF1E5;--card:#fff;--rule:#E0D6CC;--accent:#990F3D;
+      --up:#0F6B3D;--dn:#990F3D;--neu:#6B7C87;--warn:#B55A00;--band:#F7EDE3;}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--paper);color:var(--ink);
+     font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.62;}
+.header{background:var(--ink);color:#fff;padding:26px 34px 20px;}
+.header-top{display:flex;justify-content:space-between;align-items:flex-end;
+            border-bottom:3px solid var(--accent);padding-bottom:13px;flex-wrap:wrap;gap:10px;}
+.header-title{font-family:Georgia,'Times New Roman',serif;font-size:33px;font-weight:700;
+              letter-spacing:-.3px;margin:0;}
+.header-subtitle{font-size:13.5px;color:#C9D4DC;margin-top:5px;}
+.header-meta{text-align:right;font-size:11.5px;color:#9FB0BC;}
+.header-date{font-size:16px;color:#fff;font-weight:700;}
+.header-sources{font-size:11px;color:#8FA2AF;margin-top:11px;}
+.macro-strip{display:flex;flex-wrap:wrap;gap:0;background:#13232F;padding:13px 34px;}
+.macro-item{padding:0 19px 0 0;margin-right:19px;border-right:1px solid #2A3C4A;}
+.macro-item:last-child{border-right:none;}
+.macro-label{font-size:9.5px;text-transform:uppercase;letter-spacing:.9px;color:#8FA2AF;}
+.macro-value{font-size:19px;font-weight:700;color:#fff;font-variant-numeric:tabular-nums;}
+.macro-delta{font-size:11.5px;font-weight:700;font-variant-numeric:tabular-nums;}
+.alert-bar{background:#2B0A12;padding:11px 34px;display:flex;flex-wrap:wrap;gap:26px;}
+.alert-item,.alert-item2,.alert-item3{font-size:12px;color:#FFD9C2;}
+.alert-item b,.alert-item2 b,.alert-item3 b{color:#fff;}
+.main{padding:26px 34px 50px;max-width:1280px;}
+.section-title{font-family:Georgia,serif;font-size:21px;font-weight:700;margin:34px 0 5px;
+               padding-bottom:6px;border-bottom:2px solid var(--ink);}
+.section-title:first-child{margin-top:0;}
+.section-lede{font-size:13px;color:#4A5A66;margin:0 0 15px;}
+.subsection-title{font-size:12.5px;font-weight:700;text-transform:uppercase;
+                  letter-spacing:.8px;color:var(--accent);margin:19px 0 7px;}
+table.dash-table{border-collapse:collapse;width:100%;background:var(--card);
+                 font-size:12.5px;margin-bottom:9px;}
+.dash-table thead th{background:var(--ink);color:#fff;text-align:left;padding:7px 9px;
+                     font-size:10px;text-transform:uppercase;letter-spacing:.6px;}
+.dash-table th.r,.dash-table td.r{text-align:right;font-variant-numeric:tabular-nums;}
+.dash-table td{padding:6px 9px;border-bottom:1px solid #EDE4DA;}
+.dash-table tr.sep td{background:var(--band);font-weight:700;font-size:11px;
+                      text-transform:uppercase;letter-spacing:.6px;color:#5C4733;}
+.up{color:var(--up);font-weight:700;} .dn{color:var(--dn);font-weight:700;}
+.neu{color:var(--neu);} .warn{color:var(--warn);font-weight:700;}
+b.hl{background:#FFF3B0;padding:0 3px;}
+ul.plain{margin:7px 0 13px;padding-left:19px;} ul.plain li{margin-bottom:5px;}
+.deep-card{background:var(--card);border:1px solid var(--rule);margin-bottom:17px;
+           page-break-inside:avoid;}
+.deep-header{background:var(--band);padding:9px 13px;border-bottom:1px solid var(--rule);
+             display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;}
+.deep-title{font-family:Georgia,serif;font-size:17px;font-weight:700;}
+.deep-body{padding:13px;}
+.kpi-row{display:flex;flex-wrap:wrap;gap:0;border-bottom:1px solid var(--rule);
+         background:#FBF7F3;}
+.kpi{padding:8px 15px 8px 0;margin-right:15px;border-right:1px solid var(--rule);}
+.kpi:last-child{border-right:none;}
+.kpi-l{font-size:9.5px;text-transform:uppercase;letter-spacing:.7px;color:var(--neu);}
+.kpi-v{font-size:16px;font-weight:700;font-variant-numeric:tabular-nums;}
+.kpi-d{font-size:11px;font-weight:700;font-variant-numeric:tabular-nums;}
+.badge{display:inline-block;font-size:9.5px;font-weight:700;padding:3px 8px;
+       border-radius:2px;letter-spacing:.6px;text-transform:uppercase;color:#fff;}
+.badge-xbull{background:#0A5230;} .badge-bull{background:#0F6B3D;}
+.badge-neutral{background:#6B7C87;} .badge-warn{background:#B55A00;}
+.badge-bear{background:#990F3D;} .badge-xbear{background:#5C0A24;}
+.rationale-box{background:#FBF7F3;border-left:3px solid var(--accent);padding:9px 13px;
+               font-size:12.5px;margin:11px 0;}
+.flag-box{padding:9px 13px;font-size:12.5px;margin:11px 0;border-left:3px solid;}
+.flag-box.hi{background:#FFF6E8;border-color:var(--warn);}
+.flag-box.good{background:#EEF7F1;border-color:var(--up);}
+.flag-box.gap{background:#FBEEF2;border-color:var(--accent);}
+.factor-grid{display:flex;gap:15px;flex-wrap:wrap;}
+.factor-box{flex:1;min-width:290px;background:var(--card);border:1px solid var(--rule);padding:13px;}
+.factor-bull{border-top:3px solid var(--up);} .factor-bear{border-top:3px solid var(--dn);}
+.grid-moc{border-collapse:collapse;width:100%;font-size:12px;background:var(--card);}
+.grid-moc th{background:var(--ink);color:#fff;padding:6px 8px;font-size:10px;
+             text-transform:uppercase;letter-spacing:.6px;text-align:left;}
+.grid-moc td{padding:5px 8px;border-bottom:1px solid #EDE4DA;}
+.grid-moc td.bid{color:var(--up);font-weight:700;font-variant-numeric:tabular-nums;}
+.grid-moc td.ask{color:var(--dn);font-weight:700;font-variant-numeric:tabular-nums;}
+.grid-moc td.co{font-weight:700;}
+.grid-moc tr.sep td{background:var(--band);font-weight:700;font-size:10.5px;
+                    text-transform:uppercase;letter-spacing:.6px;color:#5C4733;}
+.chart{margin:13px 0;} .chart-row{display:flex;align-items:center;margin-bottom:5px;}
+.chart-lab{width:168px;font-size:11.5px;}
+.chart-track{flex:1;height:17px;background:#F0E7DD;position:relative;}
+.chart-zero{position:absolute;top:0;bottom:0;width:1px;background:#9A8878;}
+.chart-bar{position:absolute;top:2px;bottom:2px;}
+.chart-bar.pos{background:var(--up);} .chart-bar.neg{background:var(--dn);}
+.chart-val{width:92px;text-align:right;font-size:11.5px;font-weight:700;
+           font-variant-numeric:tabular-nums;}
+.chart-cap{font-size:11px;color:var(--neu);margin-top:5px;}
+.footer{background:var(--ink);color:#8FA2AF;padding:19px 34px;font-size:11px;}
+@media print{.deep-card,table{page-break-inside:avoid;}}
+</style></head><body>
 <div class="header">
   <div class="header-top">
-    <div>
-      <div class="header-title">Oil Brief &mdash; 3 November 2026</div>
-      <div class="header-subtitle">Platts seven-report deep dive &middot; Asia, Europe, US &middot; bull and bear factor board &middot; Asian MOC grid &middot; tenders &middot; inventories</div>
-    </div>
-    <div class="header-meta">
-      <div class="header-date">Built 4 Nov 2026 &middot; 08:32 SGT</div>
-      <div class="header-sources">APAG 45/211 &middot; Oilgram News 104/216 &middot; Crude Oil Marketwire 47/216<br>European Marketscan 58/213 &middot; US Marketscan 52/211 &middot; Bunkerwire 50/216 &middot; LPGaswire 48/216<br>Energy_Written_Content export, 34 files unioned</div>
-    </div>
+    <div><h1 class="header-title">Oil Brief</h1>
+      <div class="header-subtitle">Platts Market on Close &mdash; Asia and Arab Gulf</div></div>
+    <div class="header-meta"><div class="header-date">6 November 2026</div>
+      <div>Oil desk run 071126_0941</div></div>
   </div>
+  <div class="header-sources">Sources: APAG 45/214, BW 50/219, COM 47/219, EUM 58/216, LPG 48/219, PON 104/219, US 52/214. Licensed Platts material &mdash;
+    keep private. Do not publish to the hubs.</div>
 </div>
-
-<div class="macro-strip">
-  <div class="macro-item"><div class="macro-label">Dated Brent</div><div class="macro-value">105.195</div><div class="macro-delta dn">&minus;3.290 (printed &minus;0.030)</div></div>
-  <div class="macro-divider"></div>
-  <div class="macro-item"><div class="macro-label">Dubai Jan</div><div class="macro-value">102.160</div><div class="macro-delta dn">&minus;3.140</div></div>
-  <div class="macro-divider"></div>
-  <div class="macro-item"><div class="macro-label">Naphtha C+F prem</div><div class="macro-value">+58.00</div><div class="macro-delta neu">0.00, run ends at 11</div></div>
-  <div class="macro-divider"></div>
-  <div class="macro-item"><div class="macro-label">HSFO 380 diff</div><div class="macro-value">+32.50</div><div class="macro-delta dn">&minus;17.42</div></div>
-  <div class="macro-divider"></div>
-  <div class="macro-item"><div class="macro-label">Marine 0.5% diff</div><div class="macro-value">+29.08</div><div class="macro-delta dn">&minus;2.71</div></div>
-  <div class="macro-divider"></div>
-  <div class="macro-item"><div class="macro-label">92 RON vs naphtha</div><div class="macro-value">+10.83</div><div class="macro-delta dn">&minus;0.68</div></div>
-  <div class="macro-divider"></div>
-  <div class="macro-item"><div class="macro-label">NYMEX ULSD</div><div class="macro-value">4.5306</div><div class="macro-delta up">+10.90 cents</div></div>
-  <div class="macro-divider"></div>
-  <div class="macro-item"><div class="macro-label">CFR N Asia propane</div><div class="macro-value">1080.50</div><div class="macro-delta dn">&minus;25.50</div></div>
-</div>
-
-<div class="alert-bar">
-  <div class="alert-item">&#128721; S&amp;P Global CERA puts 47% of Russian refining offline. Four refineries damaged since 30 October.</div>
-  <div class="alert-item2">&#9888; One seafarer killed off Oman. Hormuz traffic falls 24% below its October average.</div>
-  <div class="alert-item3">&#9989; My HSFO condition is met. Two trades print after one on 2 November. The differential fell $17.42.</div>
-</div>
-
+<div class="macro-strip"><div class="macro-item"><div class="macro-label">Crude</div><div class="macro-value">96.30</div><div class="macro-delta up">+3.45</div></div><div class="macro-item"><div class="macro-label">LPG</div><div class="macro-value">1060.50</div><div class="macro-delta up">+75.00</div></div><div class="macro-item"><div class="macro-label">Naphtha</div><div class="macro-value">928.25</div><div class="macro-delta up">+32.00</div></div><div class="macro-item"><div class="macro-label">Gasoline</div><div class="macro-value">109.88</div><div class="macro-delta up">+6.99</div></div><div class="macro-item"><div class="macro-label">Gasoil</div><div class="macro-value">161.830</div><div class="macro-delta up">+6.590</div></div><div class="macro-item"><div class="macro-label">Jet Kero</div><div class="macro-value">158.550</div><div class="macro-delta up">+5.030</div></div></div>
+<div class="alert-bar"><div class="alert-item"><b>Session</b> &mdash; Asia caught up to crude on the flat price. Every product-specific measure stayed weak. The desk has no usable conviction for this session. The skeptic vetoed four calls (Crude, Gasoline, SAF, LSFO), so those are void, not assessed. It downgraded three directional views to Neutral (Gasoil from Bullish, Jet Kero and HSFO from Bearish). It passed one clean Neutral (LPG). Naphtha stayed Neutral, but the skeptic reads the product as bearish.</div><div class="alert-item2"><b>SAF</b> &mdash; Every SAF driver comes from one source family, the APAG report. No tender row and no MOC window supports it.</div><div class="alert-item3"><b>HSFO</b> &mdash; Only Platts sources support this call. No Vortexa flow data and no HSFO tender row entered it.</div><div class="alert-item4"><b>LSFO</b> &mdash; Only Platts sources support this call, plus one small 3 Nov tender. No Vortexa flow data entered it.</div></div>
 <div class="main">
-
-<div class="section-title">1. Method, corrections and my open positions</div>
-<div class="section-lede">I give the errors first. A brief that hides its own misses is worth nothing.</div>
-
-<div class="subsection-title">Corrections to my earlier editions</div>
-
-<div class="flag-box hi">
-<b>CORRECTION &mdash; I broke my own basis rule on the gasoil structure.</b> My 2 November brief said the gasoil balance-November to December spread firmed from $1.58/b to $1.80/b, and I called gasoil the only structure to firm. The $1.80/b was a <b>broker peg in midafternoon trading</b>. The $1.58/b was the <b>Asian close of 30 October</b>. Those are two different measurements, and my own rule forbids a comparison across them. The 3 November report gives the true 2 November close at <b class="hl">$1.37/b</b>. Measured close against close, the spread <b>fell 21 cents</b>. It did not widen 22 cents. The conclusion I drew from it was wrong.
-</div>
-
-<div class="flag-box hi">
-<b>CORRECTION &mdash; Platts restated the naphtha crack.</b> My 2 November brief gave the CFR Japan naphtha crack as $224.15/mt for 2 November, taken from the 2 November report. The 3 November report restates the same date as <b class="hl">$222.40/mt</b>, and keeps the same +$20.22/mt change. The level moved $1.75 and the change did not. I record both numbers and I build no series across them.
-</div>
-
-<div class="flag-box gap">
-<b>NOT new data &mdash; the ARA jet figure.</b> The 3 November European report headlines "ARA jet stocks fall to 3.03 million barrels in Oct". I already hold that October figure as 380,000 mt. At about 7.9 barrels a metric ton the two agree. This is the same measurement in a second unit. It is not a fresh print, and I do not count it as an inventory update.
-</div>
-
-<div class="flag-box hi">
-<b>The Marketwire change column fails again.</b> It printed <b class="hl">&minus;0.030</b> for Dated Brent. The real move is &minus;$3.290, from 108.485 to 105.195. My notes now record this failure on 27, 28, 29 and 30 October and on 2 November. That is five sessions in my own records. I treat the column as unusable and I difference every mark against the prior session.
-</div>
-
-<div class="flag-box good">
-<b>The commentary lag is general, not a fuel oil habit.</b> On 2 November I found that the Asian fuel oil commentary quotes the previous session's close. This session proves the same pattern in naphtha, gasoil and jet. Each one carries a 3 November narrative date and 2 November numbers. The gasoil text gives the 2 November cash differential as 65 cents, which matches my own 2 November mark exactly. The LPG commentary is the exception and quotes the same day. I now read the date of every commentary number before I read the number.
-</div>
-
-<div class="flag-box gap">
-<b>Still open from 21 to 23 October.</b> Three errors stay uncorrected in those three editions and their vault notes: the HSFO two-trade signal of 20 October, a fabricated 21 October gasoline bid detail, and a standing Trafigura gasoil bid. The corrections live only in the 26 October brief. I asked twice to reissue those editions. I have no answer, so they stay as published.
-</div>
-
-<div class="subsection-title">My signals, scored</div>
-
-<div class="flag-box good">
-<b>MET &mdash; the HSFO re-entry condition.</b> My rule needs two consecutive sessions with a physical trade. 2 November printed one trade at MOPS +$49.00. 3 November printed <b class="hl">two</b>. The counter moves from 1 of 2 to <b class="hl">2 of 2</b>. The condition is met. I said on 2 November that I must act on it in the session it fires, and not admire it.
-</div>
-
-<div class="flag-box hi">
-<b>CAUTION &mdash; the rule fired, and the rule is defective.</b> The differential fell <b class="hl">$17.42</b> in the same session the condition completed, from +$49.92 to +$32.50. The two trades printed at +$34.00 and +$33.00 against +$49.00 one session earlier. The structure weakened with them: the balance-November to December spread was pegged at $52.75/mt against a 2 November close of $62.25/mt. My rule counts trades. It carries no level test and no structure test. It was written to detect liquidity returning, and liquidity did return. It was never measured against an outcome. I record the condition as met and the rule as incomplete. I do not write an exception into it this session to avoid an entry I dislike, and I do not call an unmeasured rule an edge.
-</div>
-
-<div class="flag-box good">
-<b>The demotion holds &mdash; the propane-naphtha spread.</b> I demoted this from a signal to a measurement on 2 November. It widened to <b class="hl">$40.75/mt</b> on 3 November from $31.00/mt. Across three tests it went up to $41.00, down to $31.00, then up to $40.75. Up, down, up is noise. This session supports the demotion and not the signal. It stays a measurement until it gives five clean sessions.
-</div>
-
-<div class="flag-box good">
-<b>The 2 November gasoline contradiction resolves.</b> I left it open that brokers pegged the 92 RON crack at $13.65&ndash;13.70/b while the assessment read $11.61/b. The 3 November report gives both measures for the 2 November close: the <b>physical</b> crack at $9.92/b and the <b>swaps</b> crack at $11.28/b. A $1.36 gap sits between two Platts measures on one date. The contradiction came from the measure and not from an error. It is a further reason to never mix a peg with an assessment.
-</div>
-
-<div class="subsection-title">Position ledger</div>
-
-<table class="dash-table">
-<thead><tr><th>Position</th><th>Level today</th><th>Trigger</th><th>Distance</th><th>Status</th></tr></thead>
-<tbody>
-<tr><td>Marine 0.5% cash differential, half open</td><td>+$29.08/mt</td><td>Take profit +$35.00</td><td>$5.92 away, $2.71 further than on 2 Nov</td><td><span class="badge badge-neutral">OPEN</span></td></tr>
-<tr><td>Butane as a percentage of naphtha, half open</td><td>121.48%</td><td>Review at 120.00%</td><td>1.48 points away, 0.01 further than on 2 Nov</td><td><span class="badge badge-neutral">OPEN</span></td></tr>
-<tr><td>Naphtha premium, closed early</td><td>+$58.00/mt</td><td>Re-entry cost against the $30.00 close</td><td>$28.00 above my exit, unchanged</td><td><span class="badge badge-bear">MISSED</span></td></tr>
-<tr><td>HSFO re-entry, no position</td><td>+$32.50/mt</td><td>Two consecutive physical trades</td><td>2 of 2</td><td><span class="badge badge-warn">CONDITION MET</span></td></tr>
-<tr><td>Dirty demurrage, exited 22 Oct</td><td>No print this session</td><td>&mdash;</td><td>&mdash;</td><td><span class="badge badge-neutral">FLAT</span></td></tr>
-</tbody>
-</table>
-
-<div class="flag-box gap">
-<b>Seventeen sessions with no new entry.</b> I opened nothing and closed nothing. Both open halves sit further from their triggers than on 2 November. The Marine 0.5% half still has no second trigger. That gap is now eight sessions old, and it is my own failure and not the market's.
-</div>
-
-<div class="flag-box good">
-<b>The two-leg gasoline rule pays a fourth time.</b> A single-leg buy on 27 October at a premium of +$32.87 would sit at +$10.83 today. That is <b class="hl">$22.04 underwater</b>, against $21.36 on 2 November and $17.88 on 30 October. CAUTION: the rule has only ever run in a falling market. I will not raise its weight until it survives a market that rises.
-</div>
-
-<div class="section-title">2. Bullish and bearish factor board</div>
-<div class="section-lede">The board is the request in order. Geopolitics, unplanned outages, tenders, and the two chokepoints.</div>
-
-<div class="factor-grid">
-<div class="factor-box factor-bull">
-<h4>Bullish factors</h4>
-<ul class="plain">
-<li><b>S&amp;P Global CERA puts 47% of Russian refining offline.</b> Analyst James Bambino: "We estimate nearly 47% of Russia's more than 7 million b/d of crude and condensate refining is now offline, with nearly 17%-19% taken offline in the last few days alone."</li>
-<li><b>Four Russian refineries damaged since 30 October.</b> The most recent is Yanos. Ukraine held off between 16 and 29 October, the longest pause in more than seven months.</li>
-<li><b>Russia's Deputy Prime Minister concedes the risk.</b> Alexander Novak said the renewed attacks "could lead to a reduction in supply volumes".</li>
-<li><b>A drone hit the Samara hub on 2 November.</b> Crude flow through the Atyrau-Samara pipeline stopped after the attack, the Kazakh ministry said.</li>
-<li><b>A seafarer was killed off Oman.</b> India's Ministry of External Affairs said the support vessel Al Jusufi was attacked on 2 November. One Indian crew member died and 13 were rescued.</li>
-<li><b>UKMTO logged a further strike.</b> A ship was hit by an unknown projectile 9 nautical miles northeast of Lima, Oman, on 1 November, leaving a hole in its starboard side.</li>
-<li><b>Hormuz traffic fell 24% below its October average</b> to 19 transits on 2 November, which the report attributes to continued ship attacks.</li>
-<li><b>Asian naphtha holds a three-month high.</b> The C+F Japan differential stands at $58/mt, last higher at $65/mt on 4 August.</li>
-<li><b>Tender premiums beat the spot differential.</b> Hanwha TotalEnergies paid a low-$60s/mt premium on the same 30-day basis as the $58/mt assessment.</li>
-<li><b>US refiners run flat out.</b> Marathon ran at 100% utilization in the third quarter. Chevron and ExxonMobil said on 30 October that they were maximising output.</li>
-</ul>
-</div>
-<div class="factor-box factor-bear">
-<h4>Bearish factors</h4>
-<ul class="plain">
-<li><b>Trump played down a full return to war.</b> PRICE Futures Group's Phil Flynn said the US made "limited strikes on Iran's Qeshm Island on Monday &hellip; part of a series of quieter defensive actions even as President Trump played down the chance of a full return to war after the [US midterm elections]".</li>
-<li><b>Crude gave back an early gain.</b> Futures first rose on the Qeshm Island strikes and settled lower. NYMEX crude fell 37 cents to $96.09/b and ICE Brent fell $1.17 to $103.60/b.</li>
-<li><b>Bab al-Mandab traffic ran 24% above its October average</b> at 48 transits, close to the recent high of 49.</li>
-<li><b>Chinese export supply keeps building.</b> PetroChina sold 35,000 mt of 95 RON gasoline, and the market expects elevated November clean product exports on the new quota batch.</li>
-<li><b>Asian jet fundamentals stay weak.</b> A Singapore trader called the market "Heavy and bearish; and freight market is still high", with Chinese cargoes flooding the offers.</li>
-<li><b>Heavy fuel oil repriced hard.</b> The HSFO 380 differential fell $17.42/mt and the 380 CST crack fell from $13.92/b to $6.28/b.</li>
-<li><b>Air travel demand is shrinking.</b> IATA measured global revenue passenger kilometers down 0.5% year on year in September 2026.</li>
-<li><b>Tanker supply threatens the freight boom.</b> S&amp;P Global CERA forecasts 22.6% capacity growth over four years, to 862.98 million dwt by 2029.</li>
-<li><b>Two Indian tenders were cancelled.</b> BPCL dropped both its LPG buy tender and its naphtha sell tender.</li>
-</ul>
-</div>
-</div>
-
-<div class="flag-box hi">
-<b>CAUTION: the board split differently this session.</b> On 2 November every bearish item was a headline and every bullish item was a physical fact. That is no longer true. The bearish side now holds physical facts of its own: a $17.42 reprice in heavy fuel oil, rising Red Sea traffic and more Chinese export supply. The bullish side holds the largest physical fact on the board, which is 47% of Russian refining offline. The complex answered by splitting, and crude fell while distillates rose. I record the split and I do not resolve it.
-</div>
-<div class="section-title">3. The Asian MOC grid &mdash; who bid, who offered, what traded</div>
-<div class="section-lede">Every company and every level from the Singapore window of 3 November, book by book. A linked OR chain counts as one order. WD marks a withdrawal.</div>
-
-<table class="grid-moc">
-<thead><tr><th>Company</th><th>Side</th><th>Level</th><th>Dates / size</th><th>Note</th></tr></thead>
-<tbody>
-
-<tr class="sep"><td colspan="5">Middle East sour crude &mdash; cash Dubai partials, Jan 27 (5 clips, 125 kb)</td></tr>
-<tr><td class="co">Mercuria</td><td class="ask">SELLS</td><td class="ask">$102.20</td><td>25 kb &middot; 08:28:41</td><td>to Shell*</td></tr>
-<tr><td class="co">Mercuria</td><td class="ask">SELLS</td><td class="ask">$102.20</td><td>25 kb &middot; 08:28:50</td><td>to Shell*</td></tr>
-<tr><td class="co">Mercuria</td><td class="ask">SELLS</td><td class="ask">$102.15</td><td>25 kb &middot; 08:29:13</td><td>to Shell*</td></tr>
-<tr><td class="co">Mercuria</td><td class="ask">SELLS</td><td class="ask">$102.15</td><td>25 kb &middot; 08:29:28</td><td>to Shell*</td></tr>
-<tr><td class="co">ExxonMobil</td><td class="bid">BUYS</td><td class="bid">$102.16</td><td>25 kb &middot; 08:30:00</td><td>from Total*</td></tr>
-<tr><td class="co">Shell</td><td class="bid">BID</td><td class="bid">$102.15</td><td>25 kb</td><td>best bid</td></tr>
-<tr><td class="co">BP</td><td class="bid">BID</td><td class="bid">$102.10</td><td>25 kb</td><td></td></tr>
-<tr><td class="co">Vitol</td><td class="bid">BID</td><td class="bid">$102.00</td><td>25 kb</td><td></td></tr>
-<tr><td class="co">Centalion</td><td class="bid">BID</td><td class="bid">$102.00</td><td>25 kb</td><td></td></tr>
-<tr><td class="co">PetroChina</td><td class="bid">BID</td><td class="bid">$102.00</td><td>25 kb</td><td>WD earlier at $100.00</td></tr>
-<tr><td class="co">Phillips 66</td><td class="ask">OFFER</td><td class="ask">$102.90</td><td>25 kb</td><td>best offer</td></tr>
-<tr><td class="co">Unipec</td><td class="ask">OFFER</td><td class="ask">$102.90</td><td>25 kb</td><td></td></tr>
-<tr><td class="co">PetroChina</td><td class="ask">OFFER</td><td class="ask">$103.00</td><td>25 kb</td><td>both sides of its own book</td></tr>
-<tr><td class="co">Glencore</td><td class="ask">OFFER</td><td class="ask">$103.40</td><td>25 kb</td><td></td></tr>
-<tr><td class="co">BP</td><td class="ask">OFFER</td><td class="ask">$103.50</td><td>25 kb</td><td>both sides of its own book</td></tr>
-<tr><td class="co">ExxonMobil</td><td class="ask">OFFER</td><td class="ask">$103.50</td><td>25 kb</td><td></td></tr>
-<tr><td class="co">Vitol</td><td class="ask">OFFER</td><td class="ask">$103.50</td><td>25 kb</td><td>both sides of its own book</td></tr>
-<tr><td class="co">Total</td><td class="ask">WD</td><td class="ask">&mdash;</td><td>&mdash;</td><td>no longer offers after trade</td></tr>
-
-<tr class="sep"><td colspan="5">Singapore jet kero &mdash; no bid for a tenth session. Assessment &minus;$1.21</td></tr>
-<tr><td class="co">Unipec</td><td class="ask">OFFER</td><td class="ask">MOPS +1.50</td><td>Nov 18&ndash;22 &middot; 100 kb</td><td>deemed Nov 17&ndash;23</td></tr>
-<tr><td class="co">Glencore</td><td class="ask">OFFER</td><td class="ask">MOPS +1.00</td><td>Nov 20&ndash;24 &middot; 100 kb</td><td>deemed Nov 4&ndash;30, INCO</td></tr>
-<tr><td class="co">BP</td><td class="ask">OFFER</td><td class="ask">MOPS +0.69</td><td>Nov 23&ndash;27 &middot; 100 kb</td><td>best offer, deemed Dec 1&ndash;7</td></tr>
-<tr><td class="co">Sietco</td><td class="ask">OFFER</td><td class="ask">MOPS +1.50</td><td>Nov 23&ndash;27 &middot; 100 kb</td><td>Shell GTC</td></tr>
-
-<tr class="sep"><td colspan="5">Asia and Middle East gasoil cargo &mdash; no trade. Bids and offers sit on different grades</td></tr>
-<tr><td class="co">Vitol</td><td class="bid">BID</td><td class="bid">MOPS &minus;3.00</td><td>Nov 18&ndash;22 &middot; 150 kb</td><td>500 ppm grade, INCO</td></tr>
-<tr><td class="co">Trafigura</td><td class="bid">BID</td><td class="bid">MOPS &minus;4.50</td><td>Nov 18&ndash;22 &middot; 220 kb</td><td>2500 ppm, leg 1 of one OR order</td></tr>
-<tr><td class="co">Trafigura</td><td class="bid">BID</td><td class="bid">MOPS &minus;5.50</td><td>Nov 29&ndash;Dec 3 &middot; 220 kb</td><td>2500 ppm, leg 2, same order</td></tr>
-<tr><td class="co">Glencore</td><td class="ask">OFFER</td><td class="ask">MOPS +0.68</td><td>Nov 20&ndash;24 &middot; 150 kb</td><td>10 ppm, best offer</td></tr>
-<tr><td class="co">Chevron</td><td class="ask">OFFER</td><td class="ask">MOPS +1.50</td><td>Nov 18&ndash;22 &middot; 150 kb</td><td>10 ppm, Chevron GTC</td></tr>
-<tr><td class="co">Glencore</td><td class="ask">OFFER</td><td class="ask">MOPS +1.50</td><td>Nov 22&ndash;26 &middot; 150 kb</td><td>10 ppm</td></tr>
-<tr><td class="co">Unipec</td><td class="ask">OFFER</td><td class="ask">MOPS +2.00</td><td>Nov 18&ndash;22 &middot; 150 kb</td><td>10 ppm</td></tr>
-<tr><td class="co">Vitol</td><td class="ask">OFFER</td><td class="ask">MOPS +2.00</td><td>Nov 25&ndash;29 &middot; 150 kb</td><td>10 ppm</td></tr>
-
-<tr class="sep"><td colspan="5">FOB Singapore marine fuel 0.5% cargo &mdash; 2 trades. Assessment +$29.08</td></tr>
-<tr><td class="co">Trafigura</td><td class="ask">SELLS</td><td class="ask">MOPS +29.00</td><td>Nov 23&ndash;27 &middot; 40 kt</td><td>to BP, 4:16:28.922</td></tr>
-<tr><td class="co">Trafigura</td><td class="ask">SELLS</td><td class="ask">MOPS +30.00</td><td>40 kt</td><td>to Vitol, INCO</td></tr>
-<tr><td class="co">Vitol</td><td class="bid">BID</td><td class="bid">MOPS +30.00</td><td>Nov 18&ndash;22 &middot; 40 kt</td><td>lifted, then withdrew two legs</td></tr>
-<tr><td class="co">Vitol</td><td class="bid">WD</td><td class="bid">MOPS +29.00</td><td>Nov 22&ndash;26 &middot; 40 kt</td><td>withdrawn</td></tr>
-<tr><td class="co">Vitol</td><td class="bid">WD</td><td class="bid">MOPS +30.00</td><td>Nov 26&ndash;30 &middot; 40 kt</td><td>withdrawn</td></tr>
-<tr><td class="co">BP</td><td class="bid">BID</td><td class="bid">MOPS +29.00</td><td>Nov 23&ndash;27 &middot; 40 kt</td><td>lifted the Trafigura offer</td></tr>
-<tr><td class="co">BP</td><td class="bid">WD</td><td class="bid">MOPS +27.00</td><td>Nov 28&ndash;Dec 2 &middot; 40 kt</td><td>withdrawn</td></tr>
-<tr><td class="co">Mercuria</td><td class="bid">BID</td><td class="bid">MOPS +16.00</td><td>Nov 28&ndash;Dec 2 &middot; 40 kt</td><td>lowest bid on the board</td></tr>
-<tr><td class="co">Glencore</td><td class="ask">OFFER</td><td class="ask">MOPS +28.00</td><td>Nov 18&ndash;22</td><td>named in the rationale</td></tr>
-<tr><td class="co">Trafigura</td><td class="ask">OFFER</td><td class="ask">MOPS +31.00</td><td>Nov 18&ndash;22 &middot; 20 kt</td><td>one OR order, 3 legs</td></tr>
-<tr><td class="co">Chimbusco</td><td class="ask">OFFER</td><td class="ask">MOPS +36.00</td><td>Nov 28&ndash;Dec 2 &middot; 20 kt</td><td>one OR order, 3 legs</td></tr>
-<tr><td class="co">Glencore</td><td class="ask">OFFER</td><td class="ask">MOPS +42.00</td><td>Nov 23&ndash;27 &middot; 20 kt</td><td>one OR order, 3 legs</td></tr>
-<tr><td class="co">Shell</td><td class="ask">OFFER</td><td class="ask">not readable</td><td>&mdash;</td><td>present in the book, level cut by the column</td></tr>
-
-<tr class="sep"><td colspan="5">Singapore fuel oil, HSFO 380 CST &mdash; 2 trades. Assessment +$32.50. My condition is met here</td></tr>
-<tr><td class="co">Chimbusco</td><td class="ask">SELLS</td><td class="ask">MOPS +34.00</td><td>Nov 18&ndash;22 &middot; 40 kt</td><td>to Shell, 4:20:10.401</td></tr>
-<tr><td class="co">PetroChina</td><td class="bid">BUYS</td><td class="bid">MOPS +33.00</td><td>Nov 28&ndash;Dec 2 &middot; 40 kt</td><td>from Chimbusco, 4:29:57.203</td></tr>
-<tr><td class="co">Vitol</td><td class="bid">BID</td><td class="bid">MOPS +30.00</td><td>Nov 18&ndash;22 &middot; 40 kt</td><td>one OR order, 3 legs, best bid</td></tr>
-<tr><td class="co">Vitol</td><td class="bid">BID</td><td class="bid">MOPS +30.00</td><td>Nov 22&ndash;26 &middot; 40 kt</td><td>leg 2, same order</td></tr>
-<tr><td class="co">Mercuria</td><td class="bid">BID</td><td class="bid">MOPS +25.00</td><td>Nov 18&ndash;22 &middot; 20 kt</td><td>one OR order, 3 legs</td></tr>
-<tr><td class="co">Chimbusco</td><td class="ask">OFFER</td><td class="ask">MOPS +32.00</td><td>Nov 23&ndash;27 &middot; 40 kt</td><td>lowest differential offer</td></tr>
-<tr><td class="co">Chimbusco</td><td class="ask">WD</td><td class="ask">MOPS +33.00</td><td>Nov 28&ndash;Dec 2 &middot; 40 kt</td><td>withdrawn after the trade</td></tr>
-<tr><td class="co">Chimbusco</td><td class="ask">OFFER</td><td class="ask">$818.00</td><td>Nov 18&ndash;22 &middot; 20 kt</td><td>outright, not a differential</td></tr>
-<tr><td class="co">Chimbusco</td><td class="ask">OFFER</td><td class="ask">$808.00</td><td>Nov 23&ndash;27 &middot; 20 kt</td><td>outright</td></tr>
-<tr><td class="co">Chimbusco</td><td class="ask">OFFER</td><td class="ask">$800.00</td><td>Nov 28&ndash;Dec 2 &middot; 20 kt</td><td>outright</td></tr>
-<tr><td class="co">Glencore</td><td class="ask">OFFER</td><td class="ask">MOPS +34.00</td><td>Nov 18&ndash;22 &middot; 20 kt</td><td></td></tr>
-<tr><td class="co">Glencore</td><td class="ask">OFFER</td><td class="ask">MOPS +68.00</td><td>Nov 23&ndash;27 &middot; 20 kt</td><td></td></tr>
-<tr><td class="co">Mercuria</td><td class="ask">OFFER</td><td class="ask">MOPS +68.00</td><td>Nov 18&ndash;22 &middot; 20 kt</td><td>one OR order</td></tr>
-
-<tr class="sep"><td colspan="5">FOB Singapore gasoline cargo &mdash; 1 physical trade</td></tr>
-<tr><td class="co">PTT</td><td class="ask">SOLD</td><td class="ask">MOPS 95 +$0.22</td><td>Nov 27&ndash;Dec 1 &middot; 50 kb</td><td>to Sietco*, 8:27:49</td></tr>
-<tr><td class="co">Vitol SG</td><td class="bid">BID</td><td class="bid">MOPS 95 &minus;$0.30</td><td>Nov 29&ndash;Dec 3 &middot; 50 kb</td><td>only bid left standing</td></tr>
-<tr><td class="co">Sietco</td><td class="bid">WD</td><td class="bid">MOPS 95 +$0.22</td><td>Nov 27&ndash;Dec 1 &middot; 50 kb</td><td>no longer bids after the lift</td></tr>
-<tr><td class="co">PTT</td><td class="ask">OFFER</td><td class="ask">MOPS 95 +$0.30</td><td>Nov 24&ndash;28 &middot; 100 kb</td><td></td></tr>
-<tr><td class="co">Vitol SG</td><td class="ask">OFFER</td><td class="ask">MOPS 92 +$1.50</td><td>Nov 29&ndash;Dec 3 &middot; 100 kb</td><td>OCO with $114.20 outright</td></tr>
-<tr><td class="co">Unipec SG</td><td class="ask">OFFER</td><td class="ask">MOPS 92 +$1.60</td><td>Nov 26&ndash;30 &middot; 100 kb</td><td>OCO with $114.60 outright</td></tr>
-<tr><td class="co">PTT</td><td class="ask">WD</td><td class="ask">three offers</td><td>Nov 18&ndash;22, 19&ndash;23, 23&ndash;27</td><td>+$1.70, +$1.50, +$0.90 all pulled</td></tr>
-
-<tr class="sep"><td colspan="5">Empty books &mdash; five, plus one NIL print</td></tr>
-<tr><td class="co">FOB Fujairah naphtha</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>no bids, no offers, no trades</td></tr>
-<tr><td class="co">Fujairah marine fuel 0.5%</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>no bid, no offer, no trade</td></tr>
-<tr><td class="co">HSFO 180 CST physical</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>no bid; assessment held unchanged</td></tr>
-<tr><td class="co">Bitumen FOB Straits</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>no bids, offers or trades</td></tr>
-<tr><td class="co">Bitumen FOB South Korea</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>no bids, offers or trades</td></tr>
-<tr><td class="co">Asia light sweet crude</td><td>&mdash;</td><td>NIL</td><td>&mdash;</td><td>NIL on all three lines, third session</td></tr>
-
-</tbody>
-</table>
-
-<div class="flag-box hi">
-<b>Read the gasoil book carefully.</b> The two bids are 500 ppm and 2500 ppm cargoes. All five offers are 10 ppm. The best bid at MOPS &minus;3.00 and the best offer at MOPS +0.68 sit on <b>different sulfur grades</b>, so the book carries no quotable bid-offer gap. This is the basis trap in a new form, and it is the same error that I made on the gasoil structure in my 2 November brief.
-</div>
-
-<div class="flag-box good">
-<b>Count the orders, not the lines.</b> The marine 0.5% book shows about 12 offer lines and holds <b>four</b> independent sellers, because Trafigura, Chimbusco and Glencore each posted a three-leg OR chain. The HSFO book shows six bid lines and holds <b>two</b> independent buyers in the bid stack. The Trafigura gasoil bid shows two lines and is one order. Counting lines overstates depth by more than half in all three books.
-</div>
-
-<div class="section-title">4. The three windows &mdash; Asia, Europe, US</div>
-<div class="section-lede">Region priority runs Asia, then Europe, then the US. Window close times are 00:30 GMT in Singapore, 16:30 GMT in London and 18:30 GMT in Houston.</div>
-
-<div class="deep-card">
-<div class="deep-header"><div class="deep-title">Asia &mdash; Singapore, close 00:30 GMT</div><span class="badge badge-bear">CRUDE DOWN, HEAVY DOWN HARD</span></div>
-<div class="deep-body">
-<p>Dubai January cash fell to $102.160 from $105.300. Five partial clips traded, 125 kb in all, against four clips and 100 kb on 2 November. Mercuria sold four of the five and Shell bought all four of those. The best bid stood at $102.15 against a best offer of $102.90, a 75-cent gap on one basis and therefore a real gap.</p>
-<p>Six product books carried orders and <b class="hl">three printed</b>: marine 0.5% twice, HSFO twice, and gasoline once. That is five trades against one on 2 November. I hold no full print tally for earlier sessions, so I claim no record. Five books stood empty and Asia light sweet crude printed NIL for a third session.</p>
-<p>The heavy end repriced hardest. HSFO 380 fell $17.42 on the differential and $62.52 on the outright. Marine 0.5% fell $2.71 and $65.18. Naphtha held its premium at $58.00 while its flat price fell $39.75, so the whole move came out of crude and not out of the product.</p>
-<p><b>Weather and geopolitics:</b> market participants waited on the US midterm result of 3 November. The reports carry no Asian weather driver this session.</p>
-</div>
-</div>
-
-<div class="deep-card">
-<div class="deep-header"><div class="deep-title">Europe &mdash; London, close 16:30 GMT</div><span class="badge badge-xbull">DISTILLATES LEAD</span></div>
-<div class="deep-body">
-<p>Europe split cleanly along the barrel. Distillates rose: ULSD 10 ppm cargo +$12.75/mt to $1,413.00, ARA diesel +$9.50 to $1,424.25, gasoil 0.1% +$12.00 to $1,329.00. Everything else fell: naphtha &minus;$21.50 to $903.00, jet &minus;$0.75, fuel oil 1.0% &minus;$24.50 and 3.5% &minus;$27.75 to $520.75.</p>
-<p>The ICE LSGO November contract rose $13/mt to $1,423/mt and the November to December backwardation widened $6/mt to <b class="hl">$72.50/mt</b>. Prompt contracts rose on strong fundamentals while the far curve fell, with the April contract down $1/mt.</p>
-<p>Jet was the exception inside the distillate complex. The CIF NWE cargo differential fell $18.75/mt to a $76.25/mt premium over ICE LSGO, and FOB FARAG barges fell $14.75/mt to a $99.25/mt premium. Two named vessel cargoes appeared in the window: Gunvor offered a cargo loaded out of Oman and Vitol one out of South Korea.</p>
-<p><b>A printing error in the source.</b> The European jet commentary dates itself "Oct. 3" while every number and event in it belongs to 3 November. I read it as 3 November and I flag the typo rather than repeat it.</p>
-<p><b>A gasoline oddity I do not explain.</b> Eurobob barges fell only 25 cents to $950.75, while 98 RON gasoline fell $92.25 to $1,015.00 and reformate fell $95.25 to $1,040.25. A near-flat base grade beside a $92 fall in the high-octane grade is a very large octane-spread move. I report the prints and I do not build a story on them without a second session.</p>
-</div>
-</div>
-
-<div class="deep-card">
-<div class="deep-header"><div class="deep-title">US &mdash; Houston, close 18:30 GMT</div><span class="badge badge-bull">PRODUCTS RALLY</span></div>
-<div class="deep-body">
-<p>Products rose across the board while crude fell. NYMEX front-month ULSD rose <b class="hl">10.90 cents</b> to $4.5306/gal and RBOB rose 3.54 cents to $2.9355/gal. The December ULSD crack against WTI rose $4.95 to $94.20/b, and the December RBOB crack rose $1.86 to $27.20/b. New York Harbour jet rose 13.25 cents and ULSD 10.90 cents.</p>
-<p>Crude went the other way. NYMEX front-month fell 37 cents to $96.09/b and ICE Brent fell $1.17 to $103.60/b, after an early rise on news of US strikes on Iran's Qeshm Island.</p>
-<p>The December ULSD crack had fallen from about $108/b in mid-October to $89.84/b on 29 October, during the two weeks when Ukraine struck no Russian refinery. It has recovered $4.36/b of that since the attacks resumed.</p>
-<p>Refiners are answering the crack. Marathon ran at 100% utilization in the third quarter and guided lower for the fourth. Chevron and ExxonMobil said on 30 October that they were maximising output.</p>
-<p>One regional weak spot: Midwest diesel fell on a local stock build, and the Group 3 ULSD differential weakened 9.75 cents/gal to a 5.25-cent premium to the futures contract.</p>
-</div>
-</div>
-<div class="section-title">5. Crude</div>
-<div class="section-lede">Deep dive, with the Asian window first.</div>
-
-<div class="deep-card">
-<div class="deep-header"><div class="deep-title">The marks, and the structure underneath them</div><span class="badge badge-neutral">FELL ON DIPLOMACY</span></div>
-<div class="deep-body">
-<div class="kpi-row">
-<div class="kpi"><div class="kpi-l">Dated Brent</div><div class="kpi-v">105.195</div><div class="kpi-d dn">&minus;3.290</div></div>
-<div class="kpi"><div class="kpi-l">Dubai Jan</div><div class="kpi-v">102.160</div><div class="kpi-d dn">&minus;3.140</div></div>
-<div class="kpi"><div class="kpi-l">Brent Jan</div><div class="kpi-v">103.250</div><div class="kpi-d dn">curve backwardated</div></div>
-<div class="kpi"><div class="kpi-l">Brent/Dubai Jan</div><div class="kpi-v">4.240</div><div class="kpi-d dn">&minus;0.210</div></div>
-<div class="kpi"><div class="kpi-l">ESPO</div><div class="kpi-v">8.550</div><div class="kpi-d up">+1.350</div></div>
-<div class="kpi"><div class="kpi-l">WTI Dec</div><div class="kpi-v">96.090</div><div class="kpi-d dn">&minus;0.370</div></div>
-</div>
-<p>The complex fell for a second session on the same driver. On 2 November it fell about 9% on a weekend proposal to reopen the Strait of Hormuz. On 3 November it gave up another $3.29 on Dated Brent, on signals that the US would hold back.</p>
-<p>Phil Flynn of PRICE Futures Group named the mechanism: "On the Iran side, the diplomacy signals are mixed, but the market is taking the softer path. The US carried out limited strikes on Iran's Qeshm Island on Monday, officials said, part of a series of quieter defensive actions even as President Trump played down the chance of a full return to war after the [US midterm elections]."</p>
-<p><b>The structure disagrees with the flat price.</b> Cash Dubai against same-month Dubai futures <b class="hl">rose 62 cents to a 92-cent premium</b> at the Asian close. A rising cash premium in a falling market says the prompt barrel is still wanted. Against that, the Dubai January to February contango halved rather than ended, from $2.42 to <b class="hl">$1.15</b>. Both readings are real and they point opposite ways. I record both.</p>
-<p><b>ESPO rose $1.35 to $8.55</b> while every benchmark fell. Russian grades gained as the refinery attacks cut domestic runs and freed crude for export, while freight costs work against the economics.</p>
-</div>
-</div>
-
-<div class="deep-card">
-<div class="deep-header"><div class="deep-title">Supply, infrastructure and the forecasts</div><span class="badge badge-warn">PIPELINE WORK</span></div>
-<div class="deep-body">
-<p>Saudi Aramco is expanding its export routes away from Hormuz. CEO Amin Nasser said on the 3 November earnings call: "Preliminary engineering is underway for an expansion of the East-West pipeline." The energy minister said on 12 October that the kingdom planned to raise the line's capacity from 7 million b/d to up to 10 million b/d within two to three years. Nasser added: "We are also in the process of &mdash; we're doing the engineering, actually &mdash; other routes in addition to the current routes."</p>
-<p>The line matters because it was shut temporarily during the third quarter after aerial attacks on Saudi energy facilities, and was brought back online days after an attack. An expansion is a multi-year answer to a present risk, not a supply response this quarter.</p>
-<p>Kazakhstan resumed crude flows through the Atyrau-Samara pipeline, the ministry said, after a Ukrainian drone hit the Samara hub on 2 November and transportation stopped.</p>
-<p>Aramco's CEO also told the market that world oil demand will rebound amid lower oil stocks. CAUTION: that is a producer's statement, and I keep it out of any measured series.</p>
-<p>Venezuela's preliminary October output edged up to 1.230 million b/d. India's October crude imports hit a record high as refiners stocked up for festival demand and product exports, although analysts said the increase may partly reflect delayed cargoes arriving rather than a change in buying.</p>
-</div>
-</div>
-
-<div class="section-title">6. Naphtha</div>
-<div class="section-lede">The eleven-session run ended, and it ended flat rather than down.</div>
-
-<div class="deep-card">
-<div class="deep-header"><div class="deep-title">A three-month high that stopped rising</div><span class="badge badge-bull">PREMIUM HELD</span></div>
-<div class="deep-body">
-<div class="kpi-row">
-<div class="kpi"><div class="kpi-l">C+F Japan premium</div><div class="kpi-v">+58.00</div><div class="kpi-d neu">0.00</div></div>
-<div class="kpi"><div class="kpi-l">Naphtha min 70%</div><div class="kpi-v">1004.50</div><div class="kpi-d dn">&minus;39.75</div></div>
-<div class="kpi"><div class="kpi-l">MOPJ strip</div><div class="kpi-v">914.25</div><div class="kpi-d dn">&minus;33.25</div></div>
-<div class="kpi"><div class="kpi-l">Crack (2 Nov, restated)</div><div class="kpi-v">222.40</div><div class="kpi-d up">+20.22</div></div>
-</div>
-<p>The premium held at $58.00/mt. That ends a run of eleven consecutive rises. It ended flat and not down, and the level is a <b class="hl">three-month high</b> that was last beaten at $65/mt on 4 August.</p>
-<p>The flat price fell $39.75/mt on the same day. A held premium against a falling flat price means the product kept all of the crude fall and lost none of its own strength.</p>
-<p><b>Tender premiums now sit above the spot differential.</b> South Korea's Hanwha TotalEnergies bought grade C heavy full-range naphtha for second-half December delivery to Daesan at a premium in the <b class="hl">low $60s/mt</b> to MOPJ, CFR, priced over the 30 days before delivery. It also bought Skikda-origin material at a premium in the low $80s/mt on the same basis. The 30 October Crasus Chemical deal paid a high $50s to $60/mt premium on that same 30-day basis. Those two are comparable, and the direction is up.</p>
-<p>CAUTION: I still refuse the Formosa comparison. That deal priced off the whole-month December average, which is a different basis, and no premium series may cross the two.</p>
-<p>The balance-November to December MOPJ swap spread was pegged at $45/mt in midmorning trading on 3 November, down 50 cents from the 2 November close. CAUTION: that is a peg against a close, which is exactly the comparison that caught me on gasoil. I report both numbers and claim no move.</p>
-<p>Window participation told a weaker story than the price. The FOB Fujairah naphtha book was empty: no bids, no offers, no trades. The volume of CFR Japan naphtha swaps in the MOC process <b class="hl">nearly tripled in October</b>, up 188.24% month over month, so the paper market is active even where the physical window is not.</p>
-<p>India's BPCL cancelled its tender offering 25,000 mt of naphtha for 19&ndash;20 November loading from Mumbai.</p>
-</div>
-</div>
-
-<div class="section-title">7. Gasoline</div>
-<div class="section-lede">The weakest product in my records keeps weakening, and a trade finally printed.</div>
-
-<div class="deep-card">
-<div class="deep-header"><div class="deep-title">Four sessions, $22.04</div><span class="badge badge-xbear">WEAKEST BOOK</span></div>
-<div class="deep-body">
-<div class="kpi-row">
-<div class="kpi"><div class="kpi-l">92 RON vs naphtha</div><div class="kpi-v">+10.83</div><div class="kpi-d dn">&minus;0.68</div></div>
-<div class="kpi"><div class="kpi-l">92 RON outright</div><div class="kpi-v">114.28</div><div class="kpi-d dn">&minus;5.22</div></div>
-<div class="kpi"><div class="kpi-l">Physical crack, 2 Nov</div><div class="kpi-v">9.92</div><div class="kpi-d dn">vs swaps 11.28</div></div>
-<div class="kpi"><div class="kpi-l">Eurobob</div><div class="kpi-v">950.75</div><div class="kpi-d dn">&minus;0.25</div></div>
-</div>
-<p>The 92 RON premium to naphtha fell 68 cents to +$10.83/b. It has now fallen <b class="hl">$22.04 in four sessions</b> from +$32.87 on 27 October. That is the measured value of my two-leg rule, and it rose again this session.</p>
-<p>Chinese supply is the named cause. The market expects elevated November exports on the new fourth quota batch. PetroChina sold 35,000 mt of 95 RON gasoline for 29 November to 5 December loading at a premium of about $5/b to MOPS 95, CFR.</p>
-<p><b>The physical book printed for the first time in this run.</b> PTT sold 50 kb of 95 RON to Sietco at MOPS 95 plus 22 cents at 08:27:49. PTT then pulled three further offers at +$1.70, +$1.50 and +$0.90. One seller cleared its own best level and withdrew the rest of its book. Only one bid was left standing at the close, Vitol SG at MOPS 95 minus 30 cents.</p>
-<p>Paper told the same one-way story. Onyx sold two 25 kb December clips of 92 RON to Freept Asia at $112.40 and $112.50, and Trafigura sold a third at $112.55. Freept Asia bought all three.</p>
-<p>Singapore MOC gasoline swaps volume rose 58% month over month in October, so the weakness is not thin trading.</p>
-</div>
-</div>
-<div class="section-title">8. Gasoil and the unplanned refinery outages</div>
-<div class="section-lede">The product that the Russian refinery damage reaches first.</div>
-
-<div class="deep-card">
-<div class="deep-header"><div class="deep-title">47% of Russian refining offline</div><span class="badge badge-xbull">THE SESSION'S LARGEST FACT</span></div>
-<div class="deep-body">
-<p>S&amp;P Global Energy CERA analyst James Bambino gave the number: "The massive toll taken on Russian refining by Ukrainian drone strikes over the past few days is BULLISH for global diesel cracks. We estimate nearly 47% of Russia's more than 7 million b/d of crude and condensate refining is now offline, with nearly 17%-19% taken offline in the last few days alone."</p>
-<p>The timeline is tight. Ukraine struck no Russian refinery between 16 and 29 October, the longest strike-free period for the Russian refining system in more than seven months. Attacks resumed on 30 October and <b class="hl">four refineries</b> have been damaged since, most recently Yanos. Russia's Deputy Prime Minister Alexander Novak said the renewed attacks "could lead to a reduction in supply volumes".</p>
-<p>The export data still shows the pre-attack week. Russia exported 416,000 mt of diesel and gasoil in the week ended 29 October, up from 306,000 mt, and the highest weekly level since the week of 5 June. Primorsk loaded 216,000 mt, Ust-Luga 37,000 mt and Novorossiysk 60,000 mt. CAUTION: that week ends the day before the attacks resumed, so it measures the old regime and not the new one.</p>
-</div>
-</div>
-
-<div class="deep-card">
-<div class="deep-header"><div class="deep-title">The Asian gasoil marks</div><span class="badge badge-neutral">STRUCTURE UNRESOLVED</span></div>
-<div class="deep-body">
-<div class="kpi-row">
-<div class="kpi"><div class="kpi-l">Cash differential</div><div class="kpi-v">+0.68</div><div class="kpi-d up">+0.03</div></div>
-<div class="kpi"><div class="kpi-l">Outright</div><div class="kpi-v">166.80</div><div class="kpi-d dn">&minus;0.24</div></div>
-<div class="kpi"><div class="kpi-l">Nov/Dec, 2 Nov close</div><div class="kpi-v">1.37</div><div class="kpi-d dn">from 1.58 on 30 Oct</div></div>
-<div class="kpi"><div class="kpi-l">Nov/Dec, 3 Nov peg</div><div class="kpi-v">1.75</div><div class="kpi-d warn">different basis</div></div>
-</div>
-<p>The cash differential rose 3 cents to 68 cents. The outright barely moved, down 24 cents, against a $3.29 fall in Dated Brent. Gasoil was the strongest product in Asia on a relative basis.</p>
-<p><b>The structure is where I went wrong, so I state it precisely.</b> The 30 October close was $1.58/b. The 2 November close was $1.37/b. The 3 November midafternoon broker peg is $1.75/b. The first two are comparable and show a 21-cent fall. The third is a different measurement and I draw no move from it. My 2 November claim that the structure firmed was built on exactly that mismatch.</p>
-<p>The arbitrage to the West stays shut on freight. The front-month gasoil EFS narrowed to minus $134.05/mt against an October average of minus $154.91/mt, and a less negative EFS means a less attractive East to West flow. South Korea shipped about 29,000 mt of diesel and gasoil to Europe in October, against 9,000 mt in September. Before that the last such flow was 43,000 mt in November 2024.</p>
-<p>Volumes confirm the interest. Singapore gasoil MOC swaps rose 26.27% month over month and 47.52% year over year to 7.45 million barrels in October, a six-month high last beaten at 7.85 million barrels in April 2026.</p>
-<p>QatarEnergy offered up to 54,000 mt of gasoil for November loading, including a 14,000 mt high-sulfur parcel.</p>
-</div>
-</div>
-
-<div class="section-title">9. Jet and kerosene</div>
-<div class="section-lede">A tenth session with no Singapore bid, against a Europe that is tightening.</div>
-
-<div class="deep-card">
-<div class="deep-header"><div class="deep-title">Asia: four sellers, no buyer</div><span class="badge badge-xbear">TENTH SESSION, NO BID</span></div>
-<div class="deep-body">
-<div class="kpi-row">
-<div class="kpi"><div class="kpi-l">Cash differential</div><div class="kpi-v">&minus;1.21</div><div class="kpi-d dn">&minus;0.11</div></div>
-<div class="kpi"><div class="kpi-l">Outright</div><div class="kpi-v">164.52</div><div class="kpi-d dn">&minus;1.03</div></div>
-<div class="kpi"><div class="kpi-l">Best offer</div><div class="kpi-v">MOPS +0.69</div><div class="kpi-d warn">BP</div></div>
-<div class="kpi"><div class="kpi-l">Bids</div><div class="kpi-v">0</div><div class="kpi-d dn">tenth session</div></div>
-</div>
-<p>Four sellers posted and no buyer appeared. The assessment printed at minus $1.21, which is <b class="hl">below every one of the four offers</b>. The best offer came from BP at MOPS plus 69 cents. A differential set with no buyer in the book is a seller's number, and it can fall without a barrel changing hands.</p>
-<p>A Singapore jet trader described it in four words: "Heavy and bearish; and freight market is still high." The report attributes the heavy supply to Chinese cargoes flooding the offer side.</p>
-<p>The Platts commentary counts a different run from mine. It records the <b>seventh consecutive session of discounts</b>, meaning a negative differential. I count the <b>tenth consecutive session with no bid</b>. Both are correct and they measure different things. I keep them apart.</p>
-<p><b>One tender beat the window badly.</b> India's MRPL sold 40,000 mt of jet A-1 for 18&ndash;19 November loading at a premium in the $3/b range to the November whole-month average of MOPS jet, FOB New Mangalore. Several sources called the price above market expectations. CAUTION: that premium prices off a whole-month average, so it cannot be compared with the $3 cash differential in the window, nor with the 30-day-basis naphtha tenders.</p>
-<p>The balance November to December jet swap spread was pegged at plus 27 cents in midafternoon trading on 3 November, against a 2 November close assessment of minus 18 cents. Peg against close again, so I claim no move.</p>
-<p>Demand is the quiet problem. IATA measured global revenue passenger kilometers <b class="hl">down 0.5% year on year</b> in September 2026, on weak Middle East traffic and high jet prices. Regrade swap volume fell 72.22% from a 13-month high of 900,000 barrels in September to 250,000 barrels in October, so the market has stopped expressing a view on the jet-gasoil relationship.</p>
-</div>
-</div>
-
-<div class="deep-card">
-<div class="deep-header"><div class="deep-title">Europe: the tight region, loosening at the margin</div><span class="badge badge-bear">DIFFERENTIAL FELL HARD</span></div>
-<div class="deep-body">
-<p>The jet CIF NWE cargo differential fell $18.75/mt to a $76.25/mt premium over ICE LSGO. FOB FARAG barges fell $14.75/mt to a $99.25/mt premium. Europe still holds the highest jet premiums in the world, and both fell on the day while European diesel rose.</p>
-<p>CERA put the US to Europe jet arbitrage open at $7.90/b on 2 November, which draws Atlantic barrels toward the tight region.</p>
-<p>ARA jet stocks stand at 3.03 million barrels for October. As set out in Section 1, that is the figure I already hold as 380,000 mt, so it adds no new information.</p>
-</div>
-</div>
-
-<div class="section-title">10. Fuel oil</div>
-<div class="section-lede">The book where my re-entry condition completed, and the sharpest reprice of the session.</div>
-
-<div class="deep-card">
-<div class="deep-header"><div class="deep-title">HSFO 380 CST &mdash; two trades and a $17.42 fall</div><span class="badge badge-warn">CONDITION MET</span></div>
-<div class="deep-body">
-<div class="kpi-row">
-<div class="kpi"><div class="kpi-l">Cash differential</div><div class="kpi-v">+32.50</div><div class="kpi-d dn">&minus;17.42</div></div>
-<div class="kpi"><div class="kpi-l">Outright</div><div class="kpi-v">744.03</div><div class="kpi-d dn">&minus;62.52</div></div>
-<div class="kpi"><div class="kpi-l">Crack, 2 Nov</div><div class="kpi-v">6.28</div><div class="kpi-d dn">from 13.92</div></div>
-<div class="kpi"><div class="kpi-l">Nov/Dec peg</div><div class="kpi-v">52.75</div><div class="kpi-d dn">from 62.25 close</div></div>
-</div>
-<p>Two physical cargoes traded. Chimbusco sold a 18&ndash;22 November 40 kt cargo to Shell at MOPS plus $34.00 at 04:20:10.401. PetroChina then bought a 28 November to 2 December 40 kt cargo from Chimbusco at <b class="hl">MOPS plus $33.00</b> at 04:29:57.203. The assessment rationale names the second trade as the basis of the print, and cites Chimbusco offers at plus $33 and plus $32 for the two earlier windows.</p>
-<p>One seller cleared both cargoes. Chimbusco was the seller in each, to two different buyers, inside ten minutes at the close.</p>
-<p><b>The level collapsed as the liquidity returned.</b> The differential fell $17.42 to $32.50 and the outright fell $62.52. On 2 November the single trade printed at plus $49.00. One session later, two trades printed $15 and $16 lower. The 380 CST crack against prompt Brent fell from $13.92/b to $6.28/b, and the balance November to December spread was pegged $9.50 below its 2 November close.</p>
-<p>The bid stack shows where the buyers stop. Vitol bid plus $30.00 across a three-leg linked order and Mercuria bid plus $25.00 across another. Both sat <b>below</b> the two trades. Shell and PetroChina bought by lifting offers rather than by raising bids, so the printed trades mark the top of the market and not the middle of it.</p>
-<p>The 180 CST physical book held no bid, and its cash premium was carried unchanged at $49.92 in the absence of any competitive order. CAUTION: a carried assessment is not a market observation.</p>
-<p>October volumes were already falling before this. MOC fuel oil derivatives fell 26.8% month over month to 19.84 million barrels. HSFO swaps fell 26.8% to 17.18 million barrels, the lowest since August. Benchmark 380 CST trades fell to 12.99 million barrels from 20.16 million in September, while 180 CST rose about 7% to 1.43 million barrels. The October M1 to M2 backwardation averaged $51.05/mt against $31.27/mt in September.</p>
-</div>
-</div>
-
-<div class="deep-card">
-<div class="deep-header"><div class="deep-title">Marine fuel 0.5% &mdash; my open half, two trades, and a wider gap to my trigger</div><span class="badge badge-bear">MOVED AWAY</span></div>
-<div class="deep-body">
-<div class="kpi-row">
-<div class="kpi"><div class="kpi-l">Cash differential</div><div class="kpi-v">+29.08</div><div class="kpi-d dn">&minus;2.71</div></div>
-<div class="kpi"><div class="kpi-l">Outright</div><div class="kpi-v">831.36</div><div class="kpi-d dn">&minus;65.18</div></div>
-<div class="kpi"><div class="kpi-l">My trigger</div><div class="kpi-v">+35.00</div><div class="kpi-d dn">$5.92 away</div></div>
-<div class="kpi"><div class="kpi-l">Nov/Dec, 2 Nov close</div><div class="kpi-v">42.50</div><div class="kpi-d warn">peg 39.75</div></div>
-</div>
-<p>The book traded twice. Trafigura sold a 23&ndash;27 November cargo to BP at MOPS plus $29.00 at 04:16:28.922, and sold a second 40 kt cargo to Vitol at MOPS plus $30.00. Trafigura was the seller in both, which repeats the one-seller pattern of the HSFO book.</p>
-<p>The assessment printed at $29.08, between the two trade levels and above the Glencore offer at plus $28.00 that the rationale also names.</p>
-<p>Bid discipline broke after the trades. Vitol lifted at plus $30.00 and then withdrew two further bids at plus $29.00 and plus $30.00. BP bought at plus $29.00 and withdrew its plus $27.00 bid. Mercuria's plus $16.00 bid for late-window material was the only one left well below the market, $13 under the print.</p>
-<p>My open half moved $2.71 <b>further from</b> its take-profit at plus $35.00, and the distance is now $5.92. The commentary describes the LSFO cash differential easing from a five-week high, which is consistent.</p>
-<p>Marine 0.5% swaps volume fell 27% month over month in October to 2.67 million barrels, the lowest in four months.</p>
-<p>Fujairah told the same story without a window. The Fujairah marine 0.5% book was empty, and the assessment fell $3.00 to $146.00, while ex-wharf 380 CST fell $7.51 to $105.39. Both are freight netbacks from Singapore. India's MRPL offered 30,000 mt of VLSFO for 19&ndash;20 November loading.</p>
-<p>In Europe, fuel oil 3.5% fell $27.75/mt to $520.75 and 1.0% fell $24.50/mt to $585.25. The heavy end fell in every region.</p>
-</div>
-</div>
-
-<div class="section-title">11. LPG</div>
-<div class="section-lede">A second consecutive fall, and the spread I demoted widened again.</div>
-
-<div class="deep-card">
-<div class="deep-header"><div class="deep-title">Four bids, no trade</div><span class="badge badge-bear">SECOND FALL</span></div>
-<div class="deep-body">
-<div class="kpi-row">
-<div class="kpi"><div class="kpi-l">CFR N Asia propane</div><div class="kpi-v">1080.50</div><div class="kpi-d dn">&minus;25.50</div></div>
-<div class="kpi"><div class="kpi-l">CFR N Asia butane</div><div class="kpi-v">1170.50</div><div class="kpi-d dn">&minus;25.50</div></div>
-<div class="kpi"><div class="kpi-l">Butane % naphtha</div><div class="kpi-v">121.48</div><div class="kpi-d neu">+0.01</div></div>
-<div class="kpi"><div class="kpi-l">Propane-naphtha swap</div><div class="kpi-v">40.75</div><div class="kpi-d up">from 31.00</div></div>
-</div>
-<p>CFR North Asia propane and butane each fell $25.50/mt, a second consecutive fall, which the report attributes to an $18.96/mt decline in front-month Brent. CFR East China propane fell $28 to $1,084/mt and South China fell $28 to $1,080/mt.</p>
-<p>Four bids were heard and <b class="hl">no trade concluded</b>. The report describes low paper-market activity and cautious sentiment while the market waited on the midterm result.</p>
-<p>The propane to C+F Japan naphtha front-month swap spread widened to $40.75/mt from $31.00/mt. As Section 1 sets out, that is the third test of a signal I already demoted, and up-down-up is noise.</p>
-<p><b>My butane half barely moved.</b> Butane as a percentage of naphtha stands at 121.48%, one basis point above 2 November, while the outright fell $26 to $1,097. My review level is 120.00% and the distance is 1.48 points. The position is held by the ratio and not by the price, so a parallel fall in both legs leaves it where it was.</p>
-<p>China's MTBE plants cut output on feedstock shortages. On tenders, Kuwait Petroleum offered an evenly split LPG cargo for second-half November delivery, and India's BPCL <b>cancelled</b> its buy tender for evenly split November and December cargoes.</p>
-</div>
-</div>
-
-<div class="section-title">12. Freight</div>
-<div class="section-lede">The cost that keeps closing the arbitrage, and the supply wave coming at it.</div>
-
-<div class="deep-card">
-<div class="deep-header"><div class="deep-title">Record rates, locked in, against 22.6% more ships</div><span class="badge badge-warn">TWO-SIDED</span></div>
-<div class="deep-body">
-<p>Freight is named as the binding constraint in three separate product sections this session. The gasoil arbitrage to the West stays "closed" because freight costs remain high. The jet trader named the freight market in the same breath as the bearish supply. Chinese refiners said they would favour domestic crude to avoid high seaborne freight costs.</p>
-<p>Owners are locking the rates in. China Merchants Energy Shipping had fixed around two-thirds of its fourth-quarter tanker days, and some 2027 operating days, by 29 October at freight rates sharply above the previous levels. The company said "The freight rates locked in represented a substantial" improvement, and added that it had deployed most of its tanker capacity outside the Strait of Hormuz as ship-to-ship transfer volumes increased.</p>
-<p><b>The supply answer is already ordered.</b> S&amp;P Global Energy CERA forecasts global tanker capacity rising from 703.72 million dwt at the end of 2025 to 743.56 million dwt in 2026, 778.35 million in 2027, 830.61 million in 2028 and <b class="hl">862.98 million dwt in 2029</b>. That is cumulative growth of 22.6% over four years. Some secondhand ship values now sit above newbuilding order prices, and the analysts call the VLCC market one of the clearest inverted structures in the fleet.</p>
-<p>The efficiency loss is part of the rate. As Hormuz flows recovered unevenly, increased ship-to-ship transfers cut transportation efficiency and made the shortage of effective tanker capacity more apparent.</p>
-<p><b>No demurrage print this session,</b> in Singapore or the North Sea. My dirty demurrage position has been flat since 22 October and I carry no level forward.</p>
-</div>
-</div>
-<div class="section-title">13. The chokepoints &mdash; Hormuz and Bab al-Mandab</div>
-<div class="section-lede">The divergence of 2 November inverted. Hormuz traffic now falls and Red Sea traffic rises.</div>
-
-<div class="flag-box hi">
-<b>This is the opposite of what I reported on 2 November.</b> On 2 November Hormuz carried an October traffic high while attacks rose with it, and I called that the session's central contradiction. The daily data has now turned. Hormuz traffic has fallen <b class="hl">24% below</b> its October daily average, and Bab al-Mandab sits <b class="hl">24% above</b> its own. The monthly high and the daily fall are both true, because the month ended before the fall began.
-</div>
-
-<div class="chart">
-<div class="chart-cap">Daily vessel transits, against each strait's October daily average</div>
-<div class="chart-row"><div class="chart-lab">Hormuz, Oct average</div><div class="chart-track"><div class="chart-bar pos" style="width:50%"></div></div><div class="chart-val">25.0</div></div>
-<div class="chart-row"><div class="chart-lab">Hormuz, 1 Nov</div><div class="chart-track"><div class="chart-bar pos" style="width:42%"></div></div><div class="chart-val">21</div></div>
-<div class="chart-row"><div class="chart-lab">Hormuz, 2 Nov</div><div class="chart-track"><div class="chart-bar neg" style="width:38%"></div></div><div class="chart-val">19</div></div>
-<div class="chart-row"><div class="chart-lab">Bab al-Mandab, Oct average</div><div class="chart-track"><div class="chart-bar pos" style="width:77%"></div></div><div class="chart-val">38.6</div></div>
-<div class="chart-row"><div class="chart-lab">Bab al-Mandab, 1 Nov</div><div class="chart-track"><div class="chart-bar pos" style="width:90%"></div></div><div class="chart-val">45</div></div>
-<div class="chart-row"><div class="chart-lab">Bab al-Mandab, 2 Nov</div><div class="chart-track"><div class="chart-bar pos" style="width:96%"></div></div><div class="chart-val">48</div></div>
-<div class="chart-row"><div class="chart-lab">Bab al-Mandab, recent high</div><div class="chart-track"><div class="chart-bar pos" style="width:98%"></div></div><div class="chart-val">49</div></div>
-</div>
-
-<div class="deep-card">
-<div class="deep-header"><div class="deep-title">Strait of Hormuz</div><span class="badge badge-bull">TRAFFIC FALLING</span></div>
-<div class="deep-body">
-<p>Traffic dropped to <b class="hl">19 transits</b> on 2 November from 21 on 1 November, about 24% below October's daily average of 25. The day held 10 vessels entering the Persian Gulf and nine leaving. Tankers made up a large share: eight crude tankers and three product tankers.</p>
-<p>Named outbound crude tankers included the VLCCs Tunisia Prosperity, West Loyalty and Barbados Prosperity. The Suezmax LA, carrying Basrah Medium crude, was seen off Fujairah after leaving the strait. Inbound traffic included the Suezmax Cronus and the VLCCs Monaco Prosperity and SPM Colossus.</p>
-<p>Between 30 October and 1 November, outbound crude movements included the Bahri VLCCs Lawhah, Aslaf, Majra and Platinum Shine, the Sinokor-operated Jamaica Prosperity, Vietnam Prosperity and Colombia Prosperity, and the Suezmaxes Tilos I, Ottoman Equity and Cronus, all carrying Gulf crude to India.</p>
-<p>The October monthly total stays as I reported it: 750 transits, the highest monthly level since July, on dry bulk and LNG strength, with VLCC traffic falling to 156 from 184.</p>
-</div>
-</div>
-
-<div class="deep-card">
-<div class="deep-header"><div class="deep-title">Bab al-Mandab and the Red Sea</div><span class="badge badge-bear">TRAFFIC RISING</span></div>
-<div class="deep-body">
-<p>Bab al-Mandab recorded <b class="hl">48 transits</b> on 2 November, up from 45, and about 24% above the October daily average of 38.6. That is close to the recent high of 49 transits, set on both 16 October and 31 October.</p>
-<p>The composition was broad: 14 oil tankers, slightly above the October daily average of 13.3, plus 18 bulk carriers, 10 containerships, one LPG carrier and five vessels in other segments.</p>
-<p>A rising Red Sea count with a falling Hormuz count is consistent with cargo rerouting rather than with a general return of confidence. I state that as a reading and not as a measurement, because the reports give no origin-destination split.</p>
-</div>
-</div>
-
-<div class="deep-card">
-<div class="deep-header"><div class="deep-title">Security incidents &mdash; a death at sea</div><span class="badge badge-xbear">FATALITY</span></div>
-<div class="deep-body">
-<p><b>India's Ministry of External Affairs said the multipurpose support vessel Al Jusufi was attacked off Oman on 2 November. <b class="hl">One Indian seafarer was killed</b> and another 13 were rescued.</b> This is the first crew fatality I have recorded in this series.</p>
-<p>UKMTO reported that a ship was struck by an unknown projectile nine nautical miles northeast of Lima, Oman, on 1 November. The strike left a hole in the vessel's starboard side. No oil spill and no crew casualties were reported.</p>
-<p>These follow the seven attacks I logged between 29 October and 2 November, which included the LNG carrier Al Mayeda and the Suezmax Louise 1, struck by what Windward called the first limpet mine attack in the region since 2019.</p>
-<p>The falling Hormuz traffic and the rising attack count now point the same way, where on 2 November they pointed opposite ways. That is a more coherent picture and a worse one.</p>
-</div>
-</div>
-
-<div class="section-title">14. Inventories</div>
-<div class="section-lede">No fresh weekly data arrived, for a second session. I publish the standing figures and mark them stale.</div>
-
-<div class="flag-box gap">
-<b>Three series are stale and one is a restatement.</b> The US Marketscan still carries the DOE week to <b>23 October</b>. The Fujairah table still carries the week to <b>26 October</b>, with figures identical to the 2 November print. The ARA jet headline restates an October figure I already hold in another unit. There is no new inventory information in this set, and I will not dress an old number as a new one.
-</div>
-
-<div class="chart">
-<div class="chart-cap">US weekly stock change, week to 23 October against week to 16 October (million barrels). Unchanged for a third session.</div>
-<div class="chart-row"><div class="chart-lab">Crude</div><div class="chart-track"><div class="chart-zero" style="left:50%"></div><div class="chart-bar neg" style="width:24%;right:50%"></div></div><div class="chart-val">&minus;1.892</div></div>
-<div class="chart-row"><div class="chart-lab">Cushing</div><div class="chart-track"><div class="chart-zero" style="left:50%"></div><div class="chart-bar neg" style="width:8%;right:50%"></div></div><div class="chart-val">&minus;0.624</div></div>
-<div class="chart-row"><div class="chart-lab">Gasoline</div><div class="chart-track"><div class="chart-zero" style="left:50%"></div><div class="chart-bar pos" style="width:48%;left:50%"></div></div><div class="chart-val">+3.870</div></div>
-<div class="chart-row"><div class="chart-lab">Distillate</div><div class="chart-track"><div class="chart-zero" style="left:50%"></div><div class="chart-bar neg" style="width:18%;right:50%"></div></div><div class="chart-val">&minus;1.462</div></div>
-<div class="chart-row"><div class="chart-lab">Residual</div><div class="chart-track"><div class="chart-zero" style="left:50%"></div><div class="chart-bar neg" style="width:4%;right:50%"></div></div><div class="chart-val">&minus;0.334</div></div>
-</div>
-
-<table class="dash-table">
-<thead><tr><th>Series</th><th>Standing level</th><th>As of</th><th>Freshness</th></tr></thead>
-<tbody>
-<tr><td>US crude stocks</td><td>410.625 million barrels</td><td>Week to 23 Oct</td><td><span class="badge badge-warn">STALE, 3rd session</span></td></tr>
-<tr><td>US Cushing stocks</td><td>26.970 million barrels</td><td>Week to 23 Oct</td><td><span class="badge badge-warn">STALE</span></td></tr>
-<tr><td>US gasoline stocks</td><td>209.180 million barrels</td><td>Week to 23 Oct</td><td><span class="badge badge-warn">STALE</span></td></tr>
-<tr><td>US distillate stocks</td><td>102.824 million barrels, lowest since 2014</td><td>Week to 23 Oct</td><td><span class="badge badge-warn">STALE</span></td></tr>
-<tr><td>US refinery run rate</td><td>16.526 million b/d, 92.8% of capacity</td><td>Week to 23 Oct</td><td><span class="badge badge-warn">STALE</span></td></tr>
-<tr><td>Fujairah light distillates</td><td>1.942 million barrels, up 638,000</td><td>Week to 26 Oct</td><td><span class="badge badge-warn">UNCHANGED PRINT</span></td></tr>
-<tr><td>ARA jet</td><td>3.03 million barrels, about 380,000 mt, a 12-year low</td><td>October</td><td><span class="badge badge-neutral">RESTATED UNIT</span></td></tr>
-</tbody>
-</table>
-
-<div class="flag-box hi">
-<b>The one claim about global stocks is a producer's claim.</b> Saudi Aramco's CEO told the market that world oil demand will rebound amid lower oil stocks, and ADNOC's CEO said last week that global stocks fell about 1 billion barrels in eight months. Neither is a measured series. I keep both outside the table.
-</div>
-
-<div class="section-title">15. Tenders this session &mdash; 3 November</div>
-<div class="section-lede">Thirteen rows, split by whether the counterparty supplies the barrel or consumes it. Two cancellations.</div>
-
-<table class="dash-table">
-<thead><tr><th>Counterparty</th><th>Side</th><th>Product</th><th>Detail</th><th>Role</th></tr></thead>
-<tbody>
-<tr><td>Indonesia's Pertamina</td><td>SEEKS</td><td>Crude, condensate</td><td>Term tender, Q1 2027</td><td>End user</td></tr>
-<tr><td>Indonesia's Pertamina</td><td>SEEKS</td><td>Gasoline</td><td>9.1 million barrels of 90 RON, Jan&ndash;Mar 2027</td><td>End user</td></tr>
-<tr><td>Indonesia's Pertamina</td><td>SEEKS</td><td>Gasoline</td><td>92 RON, Jan&ndash;Mar 2027 delivery</td><td>End user</td></tr>
-<tr><td>QatarEnergy</td><td>OFFERS</td><td>Condensate</td><td>Deodorized field condensate, Nov 20&ndash;30 FOB or Nov 27&ndash;Dec 15 STS</td><td>Supplier</td></tr>
-<tr><td>QatarEnergy</td><td>OFFERS</td><td>Gasoil</td><td>Up to 54,000 mt for November loading</td><td>Supplier</td></tr>
-<tr><td>India's MRPL</td><td>OFFERS</td><td>Fuel oil</td><td>30,000 mt VLSFO, Nov 19&ndash;20 loading</td><td>Supplier</td></tr>
-<tr><td>India's MRPL</td><td>SELLS</td><td>Jet/kero</td><td>40,000 mt jet A-1, Nov 18&ndash;19, about $3/b over the Nov whole-month MOPS average</td><td>Supplier</td></tr>
-<tr><td>South Korea's S-Oil</td><td>SELLS</td><td>Gasoil</td><td>300,000 barrels, Nov 26&ndash;30 loading</td><td>Supplier</td></tr>
-<tr><td>Kuwait Petroleum</td><td>OFFERS</td><td>LPG</td><td>Evenly split cargo, H2 November delivery</td><td>Supplier</td></tr>
-<tr><td>South Korea's Hanwha TotalEnergies</td><td>BOUGHT</td><td>Naphtha</td><td>H2 Dec, low $60s/mt premium, and Skikda at low $80s/mt, both 30-day basis</td><td>End user</td></tr>
-<tr><td>China's Wanhua Chemical</td><td>SEEKS</td><td>Ethylene</td><td>Nov&ndash;Dec arrival &mdash; re-stamped from an earlier session</td><td>End user</td></tr>
-<tr><td>India's BPCL</td><td>CANCELS</td><td>LPG</td><td>Buy tender for evenly split Nov and Dec cargoes withdrawn</td><td>End user</td></tr>
-<tr><td>India's BPCL</td><td>CANCELS</td><td>Naphtha</td><td>Sell tender for 25,000 mt, Nov 19&ndash;20 from Mumbai, withdrawn</td><td>Supplier</td></tr>
-</tbody>
-</table>
-
-<div class="flag-box hi">
-<b>Pertamina's term tenders are the largest demand signal in the set.</b> A single buyer sought 9.1 million barrels of 90 RON gasoline plus a separate 92 RON parcel for the first quarter of 2027, and crude and condensate on a term basis for the same quarter. That is forward demand placed into a market that fell on near-term diplomacy. CAUTION: a term tender for Q1 2027 says nothing about this week's balance.
-</div>
-
-<div class="flag-box gap">
-<b>Both cancellations came from one company on both sides of the barrel.</b> India's BPCL dropped a buy tender for LPG and a sell tender for naphtha in the same session. A buyer and a seller pulling back together reads as a view on price direction rather than on either product.
-</div>
-
-<div class="section-title">16. Tenders across the last five sessions</div>
-<div class="section-lede">Sessions 28 October to 3 November, grouped by session date. 34 exports unioned to 385 deduplicated rows; 39 rows fall inside the window and 13 are closed results. [RESTAMP] marks a row an export re-dated from an earlier session.</div>
-
-<table class="dash-table">
-<thead><tr><th>Session</th><th>Side</th><th>Product</th><th>Detail</th></tr></thead>
-<tbody>
-<tr><td><b>3 Nov</b></td><td colspan="3">Thirteen rows, listed in full in Section 15 above. Two cancellations, both from BPCL.</td></tr>
-<tr><td>2 Nov</td><td>SELLS</td><td>Gasoil</td><td>Japan's Cosmo Oil sells 300,000 barrels, Nov 26&ndash;30 loading</td></tr>
-<tr><td>2 Nov</td><td>SEEKS</td><td>Gasoil</td><td>Sri Lanka's Ceypetco seeks 281,250 barrels, Dec 24&ndash;25 delivery</td></tr>
-<tr><td>2 Nov</td><td>OFFERS</td><td>Jet/kero</td><td>India's MRPL offers 40,000 mt jet A-1, Nov 18&ndash;19 &mdash; sold on 3 Nov</td></tr>
-<tr><td>2 Nov</td><td>OFFERS</td><td>LPG</td><td>QatarEnergy offers 26,431 mt propane, Nov 5&ndash;12 delivery</td></tr>
-<tr><td>2 Nov</td><td>SEEKS</td><td>Naphtha</td><td>South Korea's GS Caltex seeks naphtha, H2 December delivery</td></tr>
-<tr><td>30 Oct</td><td>OFFERS</td><td>Gasoil</td><td>Japan's Cosmo Oil offers 300,000 barrels, Nov 26&ndash;30 &mdash; sold on 2 Nov</td></tr>
-<tr><td>30 Oct</td><td>BOUGHT</td><td>Naphtha</td><td>Japan's Crasus Chemical buys 25,000 mt, H1 Dec, high $50s to $60/mt [RESTAMP]</td></tr>
-<tr><td>30 Oct</td><td>BOUGHT</td><td>Naphtha</td><td>Lotte Chemical Indonesia buys up to 50,000 mt, H1 Dec delivery</td></tr>
-<tr><td>30 Oct</td><td>BOUGHT</td><td>Naphtha</td><td>South Korea's LG Chem buys naphtha, H1 Dec delivery</td></tr>
-<tr><td>30 Oct</td><td>OFFERS</td><td>Other</td><td>India's MRPL offers 35,000 mt reformate, Nov 8&ndash;9 loading</td></tr>
-<tr><td>29 Oct</td><td>SEEKS</td><td>Gasoil</td><td>Indonesia's Pertamina seeks up to 3 million barrels, November delivery</td></tr>
-<tr><td>29 Oct</td><td>SEEKS</td><td>Gasoline</td><td>Indonesia's Pertamina seeks 90 RON, Nov&ndash;Dec</td></tr>
-<tr><td>29 Oct</td><td>BOUGHT</td><td>Jet/kero</td><td>Pertamina buys 200,000 barrels jet A-1, Nov 24&ndash;26 delivery</td></tr>
-<tr><td>29 Oct</td><td>SEEKS</td><td>Jet/kero</td><td>Pertamina seeks 200,000 barrels jet A-1, Nov 28&ndash;30 delivery</td></tr>
-<tr><td>29 Oct</td><td>SELLS</td><td>Jet/kero</td><td>South Korea's GS Caltex sells 300,000 barrels, Nov 12&ndash;14 loading</td></tr>
-<tr><td>29 Oct</td><td>OFFERS</td><td>LPG</td><td>QatarEnergy offers 45,000 mt propane, Nov 1&ndash;7 delivery</td></tr>
-<tr><td>29 Oct</td><td>BOUGHT</td><td>Naphtha</td><td>Japan's AMEC buys naphtha, December delivery</td></tr>
-<tr><td>29 Oct</td><td>SEEKS</td><td>Naphtha</td><td>Japan's Crasus Chemical seeks 25,000 mt, H1 Dec &mdash; bought same session</td></tr>
-<tr><td>29 Oct</td><td>SEEKS</td><td>Naphtha</td><td>Lotte Chemical Indonesia seeks up to 50,000 mt, H1 Dec</td></tr>
-<tr><td>29 Oct</td><td>SEEKS</td><td>Naphtha</td><td>South Korea's LG Chem seeks naphtha, December delivery</td></tr>
-<tr><td>29 Oct</td><td>SEEKS</td><td>Other</td><td>Taiwan's CPC seeks 5,000 mt MTBE, December delivery</td></tr>
-<tr><td>28 Oct</td><td>OFFERS</td><td>Crude</td><td>Syrian Petroleum Company offers Rumailan heavy crude, November loading</td></tr>
-<tr><td>28 Oct</td><td>OFFERS</td><td>Crude</td><td>Syrian Petroleum Company offers Syrian heavy crude blend, November loading</td></tr>
-<tr><td>28 Oct</td><td>OFFERS</td><td>Jet/kero</td><td>South Korea's GS Caltex offers 300,000 barrels, Nov 12&ndash;14 &mdash; sold on 29 Oct</td></tr>
-<tr><td>28 Oct</td><td>SEEKS</td><td>Naphtha</td><td>Japan's AMEC seeks naphtha, December delivery</td></tr>
-</tbody>
-</table>
-
-<div class="flag-box good">
-<b>What the five-session record shows.</b> Naphtha dominates with 12 of 39 rows, and all seven completed buys in the window are naphtha except one jet purchase. Gasoil and jet follow with six each. The side split runs 14 SEEKS, 12 OFFERS, 7 BOUGHT, 4 SELLS and 2 CANCELS. Petrochemical buyers kept paying rising premiums for first-half December naphtha across four of the five sessions, which is the demand behind the three-month-high differential in Section 6.
-</div>
-
-<div class="flag-box gap">
-<b>Revisions, deferrals and re-stamps in this window.</b> Two cancellations, both from BPCL on 3 November. Two re-stamps: the Crasus naphtha purchase was re-dated from 29 October onto 30 October by a later export, and the Wanhua ethylene request carries a 3 November stamp from an earlier session. No deferrals appear. Four tenders closed inside the window, each offered on one session and sold on a later one: the MRPL jet, the Cosmo gasoil, the GS Caltex jet and the Crasus naphtha.
-</div>
-<div class="section-title">17. Window play &mdash; mechanics only</div>
-<div class="section-lede">This section gives no recommendation. It names the mechanical patterns in the 3 November books and states what would change each read.</div>
-
-<div class="deep-card">
-<div class="deep-header"><div class="deep-title">Pattern 1 &mdash; one seller clears the whole book</div><span class="badge badge-warn">BOTH FUEL OIL BOOKS</span></div>
-<div class="deep-body">
-<p>Chimbusco sold both HSFO cargoes, to Shell and to PetroChina, inside ten minutes. Trafigura sold both marine 0.5% cargoes, to BP and to Vitol. In each book two trades came from one seller.</p>
-<p>Two prints from one seller confirm that seller's price. They do not confirm a price that two sellers agree on. The assessment then rests on one firm's willingness to move inventory.</p>
-<p><b>What would change this read:</b> a second independent seller printing in the same book at a comparable level.</p>
-</div>
-</div>
-
-<div class="deep-card">
-<div class="deep-header"><div class="deep-title">Pattern 2 &mdash; the trade above the bid stack</div><span class="badge badge-bear">PRINTS MARK THE TOP</span></div>
-<div class="deep-body">
-<p>HSFO traded at MOPS plus $34.00 and plus $33.00. The standing bids were Vitol at plus $30.00 and Mercuria at plus $25.00. Both buyers took an offer rather than lift a bid, so the prints sit <b>above</b> every resting bid.</p>
-<p>A trade struck on the offer tells you what a buyer would pay under time pressure. The bid stack tells you where buying stops without it. Here those two numbers are $3 to $9 apart.</p>
-<p><b>What would change this read:</b> a buyer raising a resting bid to the traded level and leaving it there to the close.</p>
-</div>
-</div>
-
-<div class="deep-card">
-<div class="deep-header"><div class="deep-title">Pattern 3 &mdash; the bid stack that empties after the print</div><span class="badge badge-warn">DEPTH IS NOT DURABLE</span></div>
-<div class="deep-body">
-<p>In marine 0.5%, Vitol bought at plus $30.00 and then withdrew two further bids at plus $29.00 and plus $30.00. BP bought at plus $29.00 and withdrew its plus $27.00 bid. In HSFO, Chimbusco withdrew its plus $33.00 offer after the trade.</p>
-<p>Buyers who fill one requirement and pull the rest were never bidding for volume. The depth that existed before the close did not exist after it.</p>
-<p><b>What would change this read:</b> bids left standing at or near the traded level once a buyer has been filled.</p>
-</div>
-</div>
-
-<div class="deep-card">
-<div class="deep-header"><div class="deep-title">Pattern 4 &mdash; the grade mismatch inside one book</div><span class="badge badge-warn">NO GAP TO QUOTE</span></div>
-<div class="deep-body">
-<p>The gasoil book shows a best bid at MOPS minus $3.00 and a best offer at MOPS plus 68 cents. The bids are for 500 ppm and 2500 ppm cargoes. Every offer is 10 ppm. The two sides price different products.</p>
-<p>This is the same family of error as a basis mismatch, and it is the error I made on the gasoil structure in my own 2 November brief. A spread needs one grade, one basis and one date range.</p>
-<p><b>What would change this read:</b> a bid and an offer on the same sulfur grade.</p>
-</div>
-</div>
-
-<div class="deep-card">
-<div class="deep-header"><div class="deep-title">Pattern 5 &mdash; the seller-only book</div><span class="badge badge-xbear">TENTH SESSION</span></div>
-<div class="deep-body">
-<p>Jet has had no Singapore bid for ten sessions. Four sellers posted on 3 November and the assessment printed below all four, at minus $1.21.</p>
-<p>A differential with no buyer in the book can fall without a barrel changing hands. The sellers set the ceiling and nothing sets the floor.</p>
-<p><b>What would change this read:</b> one bid, at any level. Any bid restores a two-sided book.</p>
-</div>
-</div>
-
-<div class="deep-card">
-<div class="deep-header"><div class="deep-title">Pattern 6 &mdash; linked legs that inflate depth</div><span class="badge badge-warn">COUNT ONCE</span></div>
-<div class="deep-body">
-<p>The marine 0.5% book shows about twelve offer lines from four independent sellers, because Trafigura, Chimbusco and Glencore each posted a three-leg OR chain. The HSFO bid side shows six lines from two buyers for the same reason. The Trafigura gasoil bid shows two lines and is one order.</p>
-<p>An OR chain fills once. Counting the lines overstates both supply and demand by more than half.</p>
-<p><b>What would change this read:</b> separate unlinked orders from one firm at different levels.</p>
-</div>
-</div>
-
-<div class="deep-card">
-<div class="deep-header"><div class="deep-title">Pattern 7 &mdash; the assessment that moves with no market</div><span class="badge badge-warn">CHECK THE SOURCE</span></div>
-<div class="deep-body">
-<p>The Fujairah marine 0.5% book was empty, and the assessment still fell $3.00 to $146.00. Ex-wharf Fujairah 380 CST fell $7.51 with no Fujairah order behind it. Both are freight netbacks from Singapore, so they report the Singapore market and the freight leg.</p>
-<p>The opposite case sat in the same report. The HSFO 180 CST cash premium was carried <b>unchanged</b> at $49.92 explicitly because no competitive bid or offer existed to show otherwise. One number moved without a market and one refused to move without a market.</p>
-<p><b>What would change this read:</b> any bid or offer inside the Fujairah or 180 CST window itself.</p>
-</div>
-</div>
-
-<div class="deep-card">
-<div class="deep-header"><div class="deep-title">Pattern 8 &mdash; one buyer takes the whole paper book</div><span class="badge badge-neutral">CONCENTRATED</span></div>
-<div class="deep-body">
-<p>In gasoline paper, Freept Asia bought all three December 92 RON clips: two from Onyx at $112.40 and $112.50, and one from Trafigura at $112.55. In marine fuel paper, Hotei sold six of the nine clips printed, to Dare, Theme, Onyx, Era and Xconnect.</p>
-<p>One name on one side of every clip means the curve moved on one book's requirement. Onyx and Dare are market makers, so part of this flow is intermediation and not a view.</p>
-<p><b>What would change this read:</b> a second buyer printing at a different level in the same tenor.</p>
-</div>
-</div>
-
-<div class="section-title">18. Watch list</div>
-<div class="section-lede">What I check first on the 4 November set.</div>
-
-<ul class="plain">
-<li>&#9201; <b>My HSFO condition is met and my rule is incomplete.</b> Two trades printed after one, so the counter reads 2 of 2. The differential fell $17.42 in the same session, the structure weakened $9.50, and both trades printed above every resting bid. The rule counts trades and tests neither level nor direction. I record it as met and I do not amend it mid-session to suit the outcome.</li>
-<li>&#128680; <b>Forty-seven percent of Russian refining is offline.</b> Four refineries since 30 October, with 17% to 19% of the system lost in the last few days alone. This is the largest physical fact on the board and the one most likely to grow. Novak has already conceded that supply volumes may fall.</li>
-<li>&#128201; <b>The midterm result was unknown at every window close.</b> The whole two-session fall rests on diplomacy signals read around a vote that had not been counted. The 4 November set is the first to price the answer.</li>
-<li>&#9888; <b>A seafarer was killed off Oman.</b> The first fatality in this series. Hormuz traffic fell 24% below its October average on the same data. Falling traffic and rising attacks now point the same way, where on 2 November they contradicted each other.</li>
-<li>&#128200; <b>The naphtha premium stopped at eleven rises, and stopped flat.</b> It holds a three-month high at $58.00, and tender premiums now print above it on a comparable 30-day basis. My early exit still costs $28.00. A fall would be the first in twelve sessions.</li>
-<li>&#128202; <b>The gasoil structure, measured properly this time.</b> Close against close, the balance-November to December spread fell from $1.58 to $1.37. The 3 November peg of $1.75 is a different measurement. I need the 4 November close to know whether the Russian damage has reached the Asian curve.</li>
-<li>&#9981; <b>My Marine 0.5% half sits $5.92 from its trigger and has no second trigger.</b> Eight sessions. The book traded twice this session and the differential still fell $2.71. This gap is mine and no market closes it for me.</li>
-<li>&#127919; <b>Jet's eleventh session without a bid.</b> Ten is already the longest run I have recorded. Europe is loosening at the margin while Asia stays oversupplied, and IATA has demand shrinking 0.5% year on year.</li>
-<li>&#128230; <b>The weekly inventory refresh, now three sessions overdue.</b> The DOE week to 23 October, the Fujairah week to 26 October and a restated ARA jet figure are all I hold. No measured series supports the low-stock story at present.</li>
-<li>&#128674; <b>The Dubai curve is sending two signals.</b> Cash Dubai against futures rose 62 cents to a 92-cent premium, while the January to February contango halved rather than ended. A wanted prompt barrel inside a contango is not a settled structure.</li>
-</ul>
-
-<div class="footer">
-Platts seven-report deep dive for the 3 November 2026 session. Sources: Asia-Pacific/Arab Gulf Marketscan 45/211, Oilgram News 104/216, Crude Oil Marketwire 47/216, European Marketscan 58/213, US Marketscan 52/211, Bunkerwire 50/216, LPGaswire 48/216, and the Energy_Written_Content tender export with 34 files unioned. All seven issue numbers advance by exactly +1 from the 2 November set. Prose follows ASD-STE100. Quotations are word for word. Licensed research: private use only, never a public hub.
-</div>
-
-</div>
+<p><b>Session:</b> Platts 20261106 (6 November 2026) <b>Oil desk run:</b> <code>071126_0941</code> <b>Calls file:</b> <code>Strategy\oil_desk\oil_calls_071126_0941.json</code> <b>Facts file:</b> <code>Strategy\oil_desk\oil_facts_071126_0941.json</code></p>
+<div class="note warn"><b>Licensed research</b> This note holds licensed Platts material. Keep it in the vault. Do not push it to the public hubs.</div>
+<h2>Session in one line</h2>
+<p>Asia caught up to crude on the flat price. Every product-specific measure stayed weak. The desk has no usable conviction for this session. The skeptic vetoed four calls (Crude, Gasoline, SAF, LSFO), so those are void, not assessed. It downgraded three directional views to Neutral (Gasoil from Bullish, Jet Kero and HSFO from Bearish). It passed one clean Neutral (LPG). Naphtha stayed Neutral, but the skeptic reads the product as bearish.</p>
+<h2>Conviction table</h2>
+<table><tr><th>Product</th><th>Conviction</th><th>Analyst</th><th>Skeptic</th><th>Headline price</th><th>Evidence</th></tr><tr><td>Crude</td><td>Neutral</td><td>Neutral</td><td>VETO</td><td>PCAAT00 96.30 (+3.45)</td><td>Unproven (oil_scorer.py: n &lt; 40)</td></tr><tr><td>LPG</td><td>Neutral</td><td>Neutral</td><td>PASS</td><td>AAVAK00 1060.50 (+75.00)</td><td>Unproven (oil_scorer.py: n &lt; 40)</td></tr><tr><td>Naphtha</td><td>Neutral</td><td>Neutral</td><td>DOWNGRADE</td><td>PAAAD00 928.25 (+32.00)</td><td>Unproven (oil_scorer.py: n &lt; 40)</td></tr><tr><td>Gasoline</td><td>Neutral</td><td>Neutral</td><td>VETO</td><td>PGAEY00 109.88 (+6.99)</td><td>Unproven (oil_scorer.py: n &lt; 40)</td></tr><tr><td>Gasoil</td><td>Neutral</td><td>Bullish</td><td>DOWNGRADE</td><td>AAOVC00 161.830 (+6.590)</td><td>Unproven (oil_scorer.py: n &lt; 40)</td></tr><tr><td>Jet Kero</td><td>Neutral</td><td>Bearish</td><td>DOWNGRADE</td><td>PJABF00 158.550 (+5.030)</td><td>Unproven (oil_scorer.py: n &lt; 40)</td></tr><tr><td>SAF</td><td>Neutral</td><td>Neutral</td><td>VETO</td><td>No headline series coded</td><td>Unproven (oil_scorer.py: n &lt; 40)</td></tr><tr><td>HSFO</td><td>Neutral</td><td>Bearish</td><td>DOWNGRADE</td><td>PPXDK00 652.43 (+23.16)</td><td>Unproven (oil_scorer.py: n &lt; 40)</td></tr><tr><td>LSFO</td><td>Neutral</td><td>Neutral</td><td>VETO</td><td>AMFSA00 788.29 (+57.99)</td><td>Unproven (oil_scorer.py: n &lt; 40)</td></tr></table>
+<p>Analyst = the product analyst conviction before the skeptic. Conviction = the coded call after the skeptic.</p>
+<h2>Bull and bear factor board</h2><p>Hormuz traffic and ship attacks stay high, and Russian refineries take new strikes. Peace hopes after the US midterm elections reduce crude prices and Asian product structure. These two forces point opposite ways.</p><div class="factor-grid"><div class="factor-box factor-bull"><div class="subsection-title" style="margin-top:0">Bullish</div><ul class="plain"><li><b>Ukraine hit the Afipsky refinery with drones on 6 November.</b> Krasnodar authorities reported a fire. Afipsky is an export-oriented plant near the Black Sea, and it already ran at reduced capacity. Four other refineries took hits in the last week. (EUM)</li><li><b>Ship attacks in Hormuz continue.</b> UKMTO verified 11 incidents between 29 October and 4 November, against three in the week before. It reported an explosion on a tanker 16 nautical miles east of Khasab, Oman, on 6 November. (PON)</li><li><b>The IRGC claimed two tankers hit mines on 6 November.</b> The IRGC said both tankers used an unauthorized route and caught fire. A products tanker, Velos Sapphire, took a hit on 4 November. One crew member died, the 25th seafarer casualty since the war started on 28 February. (PON)</li><li><b>Hormuz war risk cover stays very costly.</b> The additional war risk premium reached 12.5% of hull value in recent months. The rate is 0.5% for loadings east of Hormuz. (PON)</li><li><b>Most Hormuz ships turn off AIS.</b> 17 of the 26 vessels that moved through the strait on 5 November had interrupted or limited AIS visibility. (PON)</li><li><b>Asian buyers doubt a quick return to normal.</b> Feedstock managers said it is far too early to assume full normalization from the midterm results. NYK CEO Takaya Soga said shipping is unlikely to fully recover even with peace. (PON)</li><li><b>Concern about a US attack on Iran remains.</b> Platts said naphtha sentiment stayed cautious on concerns that the US may proceed with an attack on Iran. (APAG)</li><li><b>Dubai structure recovered above the prewar level.</b> Cash Dubai against same-month futures fell to 30 cents/b on 2 November, under the prewar February average of 92 cents/b. It then firmed for a second session on 6 November, up 27 cents to $1.73/b. Platts reports growing bullishness in the Middle East crude complex. (PON, APAG)</li><li><b>Kazakh crude to Schwedt stays off until the end of 2026.</b> The Kazakh ministry plans no exports to Germany in November or December. Russia suspended Druzhba transit at the start of May. The loss hits about 20% of the 230,000 b/d refinery. (PON)</li><li><b>Pertamina paid a premium of $400-$440s/mt for LPG.</b> It bought two evenly split cargoes for 16-31 January at that premium to Saudi Aramco contract prices. Arab Gulf LPG prices climbed $38/mt on 6 November. (LPG)</li><li><b>Asian buyers issue tenders for crude and fuels.</b> HPCL seeks 1 million barrels of sweet crudes for January. Pertamina seeks 92 RON gasoline for December. PSO seeks 55,000 mt of gasoline. EGPC seeks up to 66,000 mt of gasoil. Mitsui Chemicals seeks 25,000 mt of naphtha. (tender feed)</li><li><b>BPCL cancelled a naphtha sell tender.</b> The tender offered 25,000 mt for 19-20 November loading. The cancellation removes supply from the market. The tender feed carries headlines only, so no reason is on record. (tender feed)</li><li><b>Dangote re-tenders for December crude.</b> Platts saw eight Nigerian grade bids in the MOC. The bid level rose over $1.70/barrel on average. Spot offers were all but absent. The refinery sought 1-2 million barrel parcels. All bids were withdrawn before the London close. (COM)</li><li><b>Singapore middle distillate stocks fell to a two-month low.</b> Stocks dropped 5.55% week over week to 8.03 million barrels. Gasoil imports fell 48.49% to 43,776 mt. Singapore stays a net gasoil exporter. (PON, APAG)</li><li><b>European diesel cracks stay very high.</b> Platts assessed the ULSD 10 ppm FOB ARA barge crack at $76.94/barrel on 6 November. The gasoline crack stood at $13.38/b. (EUM)</li><li><b>Chinese gasoil exports may fall.</b> Platts reported tight domestic supply and lower domestic margins. A trader said the cause is the tight domestic market and worse export margins, not a policy change. (APAG)</li></ul></div><div class="factor-box factor-bear"><div class="subsection-title" style="margin-top:0">Bearish</div><ul class="plain"><li><b>Democrats won the US midterm elections on 3 November.</b> They took the House and the Senate. Senate minority leader Chuck Schumer and House minority leader Hakeem Jeffries then called on the administration to end the Middle East war. Crude futures weakened significantly after the result. (PON)</li><li><b>Crude fell about 5% in the week from the election.</b> NYMEX December WTI ended 6 November at $90.83/b, down nearly 5.5% from 3 November. ICE January Brent ended down 4.5% from 3 November. (COM)</li><li><b>Diesel prices stay far below the October average.</b> ICE LSGO stood at $1,364.25/mt on 6 November, against the October average of $1,469.75/mt. Platts called the market subdued. LSGO rose $3.75 on the day, and Platts linked that small move to the election. (EUM)</li><li><b>The risk premium may still fall.</b> Platts said markets reassessed the pace of that change after the election. A risk analyst said Trump keeps freedom of action, and no deal with Iran exists. (APAG, COM)</li><li><b>Iraqi exports are near the prewar level.</b> October exports rose 19% to 3.543 million b/d, 1% below the February figure of 3.57 million b/d. Ceyhan flow hit 422,000 b/d, the highest since 2022. Iran opened special routes for Iraqi ships. (PON)</li><li><b>Hormuz traffic rose to 26 transits.</b> The count was 21 the day before. Three crude tankers entered and one left. (PON)</li><li><b>Traffic at the US blockade line hit 76 vessels.</b> That is a record for the current enforcement period. The figure counts traffic at the line, so it shows flow and enforcement together. (PON)</li><li><b>Physical flows stayed stronger than expected.</b> CERA's Jan Kalfus said the strait "never really closed completely". He said "We can still get the molecules, but… we pay premiums". (PON)</li><li><b>Chinese buyers took Basrah cargoes at a $9-12/b premium to February ICE Brent.</b> Basrah Medium and Basrah Heavy for December arrival sold to two Chinese independents. Ample November-loading Basrah supply stayed on offer. Aramco set the December Arab Light OSP at a $7/b discount to Oman/Dubai. (APAG)</li><li><b>Singapore crude imports fell 39.2% week over week.</b> The figure was 402,499 mt over 29 October to 4 November. Platts gives no reason, so weaker Asian buying is an inference. (APAG)</li><li><b>Asian fuel oil premiums fell on peace hopes.</b> The 380 CST HSFO cash premium fell for a fourth straight session, to the lowest in nearly two months. Singapore fuel oil inventories rose to a six-week high. (APAG)</li><li><b>Marine fuel prices hit a two-month low.</b> The Bunkerworld 0.5% sulfur index fell to $843/mt, down $91/mt week over week. The BW380 index fell to $674/mt, down $131/mt week over week. (PON)</li><li><b>European diesel demand stays weak.</b> The 10 ppm diesel CIF Med MOC drew four bids, against an average of eight a day through September. One trader said "demand is still weak". (EUM)</li><li><b>BPCL cancelled its LPG buy tender for November and December.</b> The cancellation removes demand. The tender feed carries headlines only, so no reason is on record. (tender feed)</li><li><b>Naphtha cracks and spreads weakened.</b> The CFR Japan naphtha cash differential fell to $55/mt from $57/mt. The physical crack fell for a third straight session, to $183.15/mt from $197.525/mt on 4 November. Singapore naphtha imports rose 75.46% week over week. (APAG)</li><li><b>Maruzen shuts its Chiba cracker permanently from late November.</b> The naphtha-fed steam cracker makes 490,000 mt/year of ethylene. Lower naphtha demand is the expected result, and that is an inference. (LPG)</li><li><b>The non-G7 fleet maintains Russian crude shipments.</b> G7 tankers loaded about 906,000 b/d in October, 24.2% of total exports. The rest moves on other ships, so the supply continues. (PON)</li></ul></div></div>
+<h2>Crude</h2>
+<p><b>Analyst conviction:</b> Neutral. <b>Skeptic:</b> VETO. <b>Consistency:</b> reversal.</p>
+<p><b>Drivers</b></p>
+<ul><li>Market Structure, bull. Dubai Jan rose 3.45 to 96.30 after an 8.04 fall on 5 Nov. Partials traded at 95.50, then repeatedly at 96.30 late in the window (8 clips, 25 kb each). Mercuria sold in 6 of the 8 clips. [COM Dubai Mo01 rationale; COM Dubai Done deals table (11/6/2026 January Platts Dubai Done)]</li><li>Market Structure, bull. Brent/Dubai EFS widened 1.65 to 3.90. Dubai Jan/Feb spread is 1.12 contango (Feb 97.42, Jan 96.30). Dated Brent rose only 0.495 to 96.475, so Dubai recovered more than Brent. [COM Key benchmarks (AAJMS00, PCAAT00, PCAAU00, PCAAS00)]</li><li>Supply, bull. Tanker struck off Qatar. Iran says five tankers and a tugboat caught fire. Trump says he may have to destroy the rest of Iran. Ukraine hit the Ryazan refinery on 5 Nov. [Oil Meeting Summary 06 Nov 26 (Bullish list)]</li><li>Supply, bear. Saudi Aramco cut Dec Asia OSP differentials by $2/b across the board. More Basrah crude sold to China for December arrival. [COM Platts Middle East Sour Crude Daily Market Analysis (headline)]</li><li>Demand, bear. Markets reassess how fast the war premium unwinds after the Democratic midterm win. Officials say US leverage with Iran diminishes after the elections. [APAG naphtha commentary (crude futures, midmorning Nov 6); Oil Meeting Summary 06 Nov 26 (Neutral/Bearish list)]</li><li>Demand, bull. Open crude buy tenders: HPCL seeks 1 mil barrels of sweet crude for Jan. BPCL bought WTI Midland for Dec-Jan. [Tender: India's HPCL seeks indicative offers for 1 mil barrels of sweet crudes for Jan delivery; Tender: India's BPCL buys WTI Midland for Dec-Jan delivery]</li><li>Supply, bear. Dangote re-tenders for December arriving crude. Vietnam PV Oil offers 250,000 barrels Thang Long for Jan 15-20 loading. [Tender: Nigeria's Dangote refinery re-tenders for December arriving crude; Tender: Vietnam's PV Oil offers 250,000 barrels Thang Long crude for Jan 15-20 loading]</li></ul>
+<p><b>Analyst rationale.</b> CAUTION: the MOC read is strong, because late done deals printed at a higher level. But this is Day 1 of a bounce after three weak sessions, and Dubai fell 8.04 on 5 Nov. Dated Brent moved only 0.5 percent. The Day-1 rule holds the call one notch lower, so Neutral. Only Market Structure and Supply agree on the upside, and the Aramco $2 OSP cut offsets them. Desk trigger levels: sell stop 98.80 and long near 97.50 on Brent. No trigger fires from this data.</p>
+<p><b>Skeptic counter.</b> The skeptic vetoed the call on a wrong cited number. The done-deals table and the MOC trade log both show 8 clips of 25 kb: Mercuria sold 5, Trafigura sold 1 and TotalEnergies sold 1. The driver claim of 6 of 8 clips is wrong. The Supply-bull driver is also unsourced, because the tanker, Iran, Trump and Ryazan items appear in no Platts report and in no tender row. The skeptic verified PCAAT00 96.30 +3.45, PCAAS00 96.475 +0.495, PCAAU00 97.42, AAJMS00 3.90 +1.65, the 1.12 contango, the Aramco $2/b cut, the Basrah headline, the midterm reassessment, the "NO BIDS REPORTED" derivatives line and all four crude tender headlines. The skeptic counter: one seller supplied 5 of the 8 clips and lifted its offer mid-window, so the repeat prints show one offer ladder, not broad buying. Against that stands the $2/b Aramco cut, the only hard term-pricing signal of the session.</p>
+<p><b>Data gaps</b></p>
+<ul><li>Vortexa flow data not read for this stage.</li><li>Dubai derivatives bids, offers and trades: NO REPORTED in COM.</li><li>No 7-day Platts price series in the facts JSON beyond today and prior brief notes.</li><li>Asia close against ICE settle gap for 6 Nov not stated in the sources read.</li></ul>
+<h2>LPG</h2>
+<p><b>Analyst conviction:</b> Neutral. <b>Skeptic:</b> PASS. <b>Consistency:</b> emerging.</p>
+<p><b>Drivers</b></p>
+<ul><li>Market Structure, bull. CFR North Asia propane (H1 Dec) rose 75.00 to 1060.50 $/mt after four straight falls. Butane rose 75.00 to 1150.50. Two bids were heard; no trade concluded. [LPG Asia LPG table (AAVAK00, AAVAN00); LPG Platts Asian LPG Daily Commentary]</li><li>Supply, bull. Tight H1 Dec propane availability. Limited propane volumes head to the Far East. Loading delays and operational disruptions. [LPG Platts Asian LPG Daily Commentary (Asia-based trader and regional broker)]</li><li>Demand, bull. Winter domestic stockpiling of propane and butane. Pertamina bought LPG for Jan 16-31. PV Gas seeks term LPG for 2027. [LPG commentary; Tender: Indonesia's Pertamina buys LPG for Jan. 16-31 delivery; Tender: Vietnam's PV Gas seeks term LPG for 2027 delivery]</li><li>Market Structure, bear. The +75 move follows a 33.68 $/mt rise in front-month Brent. It is largely crude beta after four falls. No physical trade crossed. [LPG Platts Asian LPG Daily Commentary]</li><li>Demand, bear. India did not move: West Coast propane stays at 1030 and East Coast at 1050 $/mt. India priced about 30 $/mt below North Asia. BPCL cancelled a buy tender for Nov-Dec LPG on 3 Nov. [LPG Asia LPG table (LPLIA00, LPLIB00); Tender: India's BPCL cancels buy tender for evenly-split LPG cargoes for November, December]</li><li>Supply, bear. Kuwait Petroleum offered an evenly split LPG cargo for H2 Nov. QatarEnergy offered 26,431 mt propane for Nov 5-12. [Tender: Kuwait Petroleum offers evenly split LPG cargo for H2 Nov delivery; Tender: QatarEnergy offers 26,431 mt propane for Nov. 5-12 delivery]</li></ul>
+<p><b>Analyst rationale.</b> CAUTION: the bounce is Day 1 after a four-session fall, and the window held bids but no trade. All three pillars lean up, which supports a Bullish single-day read. The 7-day rule holds it one notch lower, so Neutral. The move tracks Brent, which cuts its LPG-specific value. Watch for a second session of bids and a first trade.</p>
+<p><b>Skeptic counter.</b> The skeptic passed the call, because every number checks out. Verified: AAVAK00 1060.50 +75.00, AAVAN00 1150.50 +75.00, LPLIA00 1030.00 and LPLIB00 1050.00 both unchanged, the $33.68/mt Brent rise, "four consecutive sessions of declines", "Two bids were heard", "no trades were concluded", tight H1 December availability, limited Far East volumes, winter stockpiling, loading delays and the propane-naphtha swaps headline. All five tender drivers verified. The skeptic counter: the $75/mt rise is 2.2 times the Brent move, so the call under-reads it as crude beta. Yet no physical trade crossed and India did not follow. A bid-only window without the arbitrage buyer is how a crude-led spike fails on day 2. The Neutral holds for the opposite reason the rationale gives.</p>
+<p><b>Data gaps</b></p>
+<ul><li>Vortexa LPG flows not read.</li><li>Propane-naphtha spread value not extracted into the facts JSON.</li><li>No LPG trade concluded, so no done-deal confirmation.</li></ul>
+<h2>Naphtha</h2>
+<p><b>Analyst conviction:</b> Neutral. <b>Skeptic:</b> DOWNGRADE. <b>Consistency:</b> reversal.</p>
+<p><b>Drivers</b></p>
+<ul><li>Market Structure, bull. The CFR Japan assessment took into consideration a bid for H2 January at $916/mt. Flat price rose 32.00 to 928.25. The window shows a bid and no offer. [APAG Platts Japan Naphtha Daily Rationales (PAAAD00)]</li><li>Demand, bull. Japanese and Korean buyers are active. Mitsui Chemicals seeks 25,000 mt for H2 Dec. GS Caltex bought for H2 Dec. Hanwha TotalEnergies bought for H2 Dec at a low 60s premium. [Tender: Japan's Mitsui Chemicals seeks 25,000 mt of naphtha for H2 Dec delivery; Tender: South Korea's GS Caltex buys naphtha for H2 December delivery; Tender: South Korea's Hanwha TotalEnergies buys naphtha for H2 Dec delivery]</li><li>Market Structure, bear. The CFR Japan crack against front-month Brent fell for a third straight session to $183.15/mt, from $197.525 on 4 Nov. The bid in the rationale carries a $164.43/mt crack. The C+F premium is flat at 55.00 after 57.00 on 4 Nov. [APAG Platts Asia Naphtha Daily Market Analysis (crack paragraph); APAG PAADI00 premium; Oil Brief_4 Nov 2026 (prior premium 57.00)]</li><li>Supply, bear. Kuwait Petroleum offers 50,000 mt for Nov 15-25 loading. IOCL sold 17 kt at MOPAG +220 down to +151. BPCL cancelled its naphtha sell tender on 3 Nov. [Tender: Kuwait Petroleum offers 50,000 mt of naphtha for Nov. 15-25 loading; Oil Meeting Summary 05Nov 26 (IOCL sold 17kt); Tender: India's BPCL cancels tender offering 25,000 mt of naphtha for Nov. 19-20 loading]</li><li>Supply, bear. Singapore naphtha and blendstock imports rebounded 75.46 percent week on week to 185,156 mt. [APAG Platts Asia Naphtha Daily Market Analysis]</li><li>Demand, bull. Lotte Chemical Indonesia and Singapore PCS seek term naphtha. Term buy interest is structural demand. [Oil Meeting Summary 06 Nov 26 (Platts Tender)]</li></ul>
+<p><b>Analyst rationale.</b> Neutral. Buyers in Japan and Korea plus a window bid push up. A falling crack against Brent, a flat and lower premium, and AG sell tenders push down. This is a mild divergence between tender strength and crack weakness. The flat price move of 3.6 percent is crude beta, not naphtha strength, because the crack lost value. The premium run of 11 rises ended on 4 Nov, so the 7-day trend turned.</p>
+<p><b>Skeptic counter.</b> The skeptic downgraded the call, because the signal rests on stale and crude-beta evidence. All figures verified, and the third-session crack claim is sourced, not inferred. Downgrade grounds: the Demand-bull term driver cites Lotte Chemical Indonesia and Singapore PCS tenders both dated 10/20/2026, 17 days stale; the window read says "a bid and no offer" when the book held three bids (936.00, 932.00, 916.00) and no offers; and the IOCL figure traces only to an Oil Meeting Summary with no IOCL tender row. The skeptic counter: every naphtha-specific measure fell while the flat price rose. The crack lost 14.375 $/mt over three sessions, and the premium went 57 to 55 to flat. The assessed bid at $916 carries a $164.43/mt crack, 18.72 below the assessed level, so the marginal buyer pays less for naphtha than the assessment implies. With the KPC offer and the import rebound, the product-specific read is bearish, not Neutral.</p>
+<p><b>Data gaps</b></p>
+<ul><li>Vortexa naphtha flows not read.</li><li>Mitsui Chemicals tender result not yet published.</li><li>The crack figure in the commentary quotes the prior close.</li><li>The facts JSON holds no naphtha crack series.</li></ul>
+<h2>Gasoline</h2>
+<p><b>Analyst conviction:</b> Neutral. <b>Skeptic:</b> VETO. <b>Consistency:</b> reversal.</p>
+<p><b>Drivers</b></p>
+<ul><li>Market Structure, bull. 92 RON gasoline rose 6.99 to 109.88 $/b against Naphtha FOB Singapore up 3.03 to 99.45. The 92 RON premium to naphtha is 10.43 $/b (derived), up about 3.96 on the day. Brokers put the swaps crack at 11.40-11.50 $/b against 9.96 on 5 Nov. [Facts JSON key (PGAEY00, PAAAP00); APAG Platts Asia and Middle Eastern Gasoline Daily Market Analysis]</li><li>Supply, bull. At least one Chinese exporter cut back on gasoline offers as export margins fell. [APAG Platts Asia and Middle Eastern Gasoline Daily Market Analysis (two Asia-based sources)]</li><li>Demand, bull. Pertamina seeks 92 RON for December loading. It also seeks 92 RON and 90 RON for Jan-Mar 2027 (9.1 mil barrels of 90 RON). Pakistan's PSO seeks 55,000 mt for Dec 17-20. Pertamina bought 2 mb of 90 RON at MOPS 92 +5. [Tender: Indonesia's Pertamina seeks 92 RON gasoline for December loading; Tender: Indonesia's Pertamina seeks 9.1 million barrels of 90 RON gasoline for Jan-March 2027; Tender: Pakistan's PSO seeks 55,000 mt of gasoline for Dec. 17-20 delivery; Oil Meeting Summary 06 Nov 26]</li><li>Market Structure, bear. The Platts window shows one offer only for 95 RON (Dec 1-5 at $111.20/b). It shows no bid and no trade. Fujairah 92 and 95 books had no bids, offers or trades. [APAG Gasoline Unl 95 FOB Spore Cargo (PGAEZ00) rationale; APAG FOB Fujairah gasoline rationales]</li><li>Supply, bear. Singapore gasoline exports rose 52.9 percent week on week. China may export 0.8-1 mil mt in November against an original 300,000 mt estimate. A fourth quota batch added 1.9 percent to the 2026 total. [APAG Singapore trade data paragraph; Oil Brief_4 Nov 2026; Oil Brief_30 Oct 2026 (quota batch)]</li><li>Demand, bear. The gasoline premium to naphtha fell five sessions before today, from +32.87 on 27 Oct to +10.16 on 4 Nov. Trump links gasoline prices to the Republican midterm loss. [Oil Brief_4 Nov 2026; Oil Meeting Summary 05Nov 26]</li></ul>
+<p><b>Analyst rationale.</b> Divergence warning. Tenders push up, and the crack rebounded. The Platts window read leans down. Hold at Neutral. The move is Day 1 after a long fall, so the setup is emerging, not confirmed. China export volume stays a ceiling on the crack. The 92 RON premium of 10.43 is derived from the facts JSON, not a published Platts line.</p>
+<p><b>Skeptic counter.</b> The skeptic vetoed the call on a wrong claim about the assessed symbol. The PGAEY00 rationale reads: "The FOB Singapore 92 RON gasoline assessment Nov. 6 took into consideration a trade for a cargo loading over Nov. 28-Dec. 2 at $110.20/b". The Mogas 92 book also carries a deep bid stack from 109.30 down. The call is scored on PGAEY00, so a done deal plus bids were present, and the offer-only read belongs to a different symbol. Two further drivers fail sourcing: the Demand-bear driver rests on prior briefs and an Oil Meeting Summary, and the China content traces only to the 30 Oct and 4 Nov briefs. The Pertamina 2 mb purchase appears in no text file and in no tender row. The skeptic counter: the single bear pillar inverts the tape, so the Neutral is wrong for the wrong reason, and the desk must re-derive it.</p>
+<p><b>Data gaps</b></p>
+<ul><li>Vortexa gasoline flows not read.</li><li>92 RON physical book detail not extracted into the facts JSON.</li><li>The 92 RON premium to naphtha is derived (109.88 - 99.45), not a published Platts line.</li><li>Pertamina December tender result not yet published.</li></ul>
+<h2>Gasoil</h2>
+<p><b>Analyst conviction:</b> Bullish. <b>Skeptic:</b> DOWNGRADE. <b>Consistency:</b> emerging.</p>
+<p><b>Drivers</b></p>
+<ul><li>Supply, bull. China suspended gasoil exports, and about 800,000 mt were due in November. Tight domestic supply and worse export margins cut Chinese outflow. Singapore gasoil imports fell 48.49 percent week over week. [Oil Brief_5 Nov 2026 (China halted gasoil exports); APAG Gasoil Daily Market Analysis]</li><li>Market Structure, bull. The Nov-Dec Singapore gasoil swap time spread widened to $2.02/b from $1.73/b. The cash differential AAOVD00 is +0.49 (-0.06). The Dec 10 ppm swap crack against Dubai averages $60.46/b in November, down from $63.97/b in October. [APAG Gasoil Daily Market Analysis; APAG assessments table AAOVD00]</li><li>Demand, bull. Three buy tenders in 4 sessions: Pertamina 40,000 b of 50 ppm gasoil for Dec 2-4, Petrolimex 105,000 mt for Nov-Dec, EGPC up to 66,000 mt of 0.1%S for Nov. [Tender headlines: Indonesia's Pertamina seeks 40,000 barrels of 50 ppm sulfur gasoil for Dec 2-4 delivery; Vietnam's Petrolimex seeks 105,000 mt of gasoil for Nov-Dec delivery; Egypt's EGPC seeks up to 66,000 mt 0.1%S gasoil for Nov delivery]</li><li>Market Structure, bear. The MOC window had no bid for 10 ppm and no trade. Bids covered only 500 ppm (Vitol, MOPS -1.50) and 2500 ppm (Trafigura). Offers: Glencore at MOPS +0.00 and Extap at MOPS +1.00 for 10 ppm. [APAG Platts Asia and Middle Eastern Gasoil Cargo Bids, Offers, Trades]</li><li>Supply, bear. Korean and Japanese sell tenders add supply: S-Oil 300,000 b (Nov 26-30), Cosmo 300,000 b (Nov 26-30), QatarEnergy up to 54,000 mt (Nov). [Tender headlines: South Korea's S-Oil sells 300,000 barrels of gasoil for Nov. 26-30 loading; QatarEnergy offers up to 54,000 mt of gasoil for Nov loading]</li><li>Modifier, bear. Dubai structure weakens, and Hormuz peace-deal hopes could ease crude. Treat this as a coupling risk, because the gasoil outright rose $6.59 against Dubai +$3.45. [APAG Fuel Oil Daily Market Analysis (peace deal); COM Dubai mo1 PCAAT00 +3.45]</li></ul>
+<p><b>Analyst rationale.</b> Supply, Demand and Market Structure point up, so the minimum of two pillars is met. The analyst set Bullish, not Extremely Bullish. The 10 ppm MOC had no bid and no trade. The China halt is only 2 sessions old and cites a "said to have" report, so the signal is emerging. CAUTION: the China halt rests on one report, the 5 Nov brief, and the 6 Nov Platts text does not confirm a policy change. Open trigger: a first 10 ppm bid in the MOC would confirm.</p>
+<p><b>Skeptic counter.</b> The skeptic downgraded the call to Mildly Bullish. All numbers verified, and all three tender headlines appear in the tender list, so the skeptic raised no veto. One driver is unsourced, because the China export suspension comes from the 5 Nov brief, not the 6 Nov text. The primary source refutes the load-bearing pillar. Platts quotes an Asia-based trader: exports are fewer "because of the tight domestic market and worsening of export margins, instead of a policy change". A margin-driven cut reverses once the crack recovers, and the crack already falls. The Market Structure pillar also carries two bearish numbers, because the cash differential change is -0.060 and the crack narrows. The benchmark 10 ppm book was offers only against zero bids, which is the divergence the flag exists for.</p>
+<p><b>Data gaps</b></p>
+<ul><li>No Vortexa flow data used for gasoil in this stage.</li><li>Chinese export quota text absent from the 6 Nov reports; the China halt comes from the 5 Nov brief.</li><li>No 7-day Platts price series in the facts JSON; consistency uses prior notes only.</li><li>No Singapore gasoil crack series in the JSON; the crack comes from the Platts text average.</li><li>No Japanese or Korean buy-tender names seen in the buyer participation check.</li></ul>
+<h2>Jet Kero</h2>
+<p><b>Analyst conviction:</b> Bearish, differential only. <b>Skeptic:</b> DOWNGRADE. <b>Consistency:</b> confirmed.</p>
+<p><b>Drivers</b></p>
+<ul><li>Market Structure, bear. The jet MOC had no bids and no trades. BP offered MOPS +1.50 (Nov 22-26, 100 kb) and Glencore offered MOPS +1.50 (Nov 24-28, 150 kb). The cash differential PJACU00 is -1.51 (-0.21). Platts reports the differential negative for the tenth straight session. [APAG Platts Singapore Jet Kero Bids, Offers, Trades; APAG Jet Daily Market Analysis; assessments table PJACU00]</li><li>Market Structure, bear. The Dec regrade swap fell to +65 cents/b from +$1.00. The balance Nov/Dec jet swap spread was pegged at +26 cents/b, down from +35 cents/b. [APAG Jet Daily Market Analysis]</li><li>Supply, bear. Seller tenders keep arriving: S-Oil 300,000 b of jet A-1 (Nov 22-26), GS Caltex 300,000 b (Nov 12-14), MRPL 40,000 mt (Nov 18-19) sold. Chinese jet exports continue, because the halt covers gasoil only. [Tender headlines: India's MRPL sells 40,000 mt of jet A-1 fuel for Nov. 18-19 loading; South Korea's GS Caltex sells 300,000 barrels jet A-1 fuel for Nov 12-14 loading; Oil Brief_5 Nov 2026]</li><li>Demand, bull. Pertamina seeks 600,000 b of jet A-1 for December delivery, a large spot buy. Singapore middle distillate stocks fell 5.55 percent to 8.03 million b, a two-month low. [Tender headline: Indonesia's Pertamina seeks 600,000 barrels of jet A-1 fuel for Dec; APAG Jet Daily Market Analysis (Enterprise Singapore data)]</li><li>Modifier, bull. The jet outright rose $5.03/b with crude and gasoil. The weak signal sits in the differential and the regrade, not in the flat price. [APAG assessments table PJABF00]</li></ul>
+<p><b>Analyst rationale.</b> Market Structure and Supply point down for the differential. Demand is mixed, because the Pertamina tender and the two-month low support. The bearish structure signal holds across about 10 sessions. The view applies to jet relative strength, not to the flat price, which follows crude and gasoil up. CAUTION: the earlier bidless sessions stay unaudited in this stage. The Pertamina tender result is the catalyst to watch.</p>
+<p><b>Skeptic counter.</b> The skeptic downgraded the call to Mildly Bearish, differential only. Every cited number verifies, and all four tender headlines exist. One driver is unsourced, because the Chinese jet export claim rests on the 5 Nov brief. The Demand pillar opposes the call with the largest order in the window, and the analyst still scored the call confirmed. A market that draws stocks to a two-month low with a 600,000 b buy tender open is not a confirmed bear. The Supply pillar is also stale, because two of its three sell tenders date from 23 Oct and 29 Oct. The rationale's own session count is wrong, because Platts says the tenth consecutive session.</p>
+<p><b>Data gaps</b></p>
+<ul><li>No Vortexa jet flow data used.</li><li>No jet crack series in the facts JSON.</li><li>Pertamina jet tender result not yet published.</li><li>Earlier bidless session count not audited in this stage.</li><li>The early-December Korean cargo offer stayed unconfirmed by Platts.</li></ul>
+<h2>SAF</h2>
+<p><b>Analyst conviction:</b> Neutral. <b>Skeptic:</b> VETO. <b>Consistency:</b> no data.</p>
+<div class="note warn"><b>Single-source call</b> Every SAF driver comes from one source family, the APAG report. No tender row and no MOC window supports it.</div>
+<p><b>Drivers</b></p>
+<ul><li>Demand, bear. Malaysia delays its 1 percent SAF blending mandate for international flights at Kuala Lumpur from January 2027 to 2030. The move follows jet price rises from the geopolitical conflict. [APAG Jet Daily Market Analysis ("Malaysia delays 1% SAF mandate to 2030")]</li><li>Market Structure, bear. The SAF (H-S) CIF NWE premium MIRWF00 is 968.25 $/mt (-3.75). The SAF (H-S) FOB Fargo premium SUAEB00 is 946.75 (-3.50). The outright SAF CIF NWE MIRWD00 is 2415.00, unchanged. Changes are small. [APAG Renewable fuels (PGA pages 1414, 483 and 2414): MIRWF00, SUAEB00, MIRWD00]</li></ul>
+<p><b>Analyst rationale.</b> CAUTION: SAF has only one policy event and small premium moves from one report, so the 2-pillar minimum is not met. Hold at Neutral. The Malaysia delay is a bearish demand-policy item. Premiums slipped only 3.50 to 3.75 $/mt on high levels. No SAF tender appears in the tender list.</p>
+<p><b>Skeptic counter.</b> The skeptic vetoed the call on two counts: a wrong basis, and a two-pillar call that breaks the three-pillar minimum. The three quoted prices and the Malaysia delay verify. But the report carries an Asia SAF section that the call never read. SAF (H-S) FOB Straits SFSMR00 is 2085.00 (+3.00), with its premium SFSHC00 at 820.50, minus 38.50. SAF (H-S) FOB China SFSHE00 is 2035.00 (+3.00), with premium SFSHI00 at 770.50, minus 38.50. The Asian SAF premium fell 38.50 $/mt in one session, about ten times the European move the call quoted. SAF cost of production ASFAC00 fell 44.64. Re-run SAF on SFSMR00 and SFSHC00 with a Supply pillar before the desk codes any conviction.</p>
+<p><b>Data gaps</b></p>
+<ul><li>No Asia SAF MOC window or tender data.</li><li>No Vortexa SAF flow data.</li><li>No 7-day SAF price history in the facts JSON.</li><li>The analyst used a European basis, MIRWD00, for an Asian desk.</li><li>No regulatory decision dates within 30 days beyond the Malaysia delay.</li></ul>
+<h2>HSFO</h2>
+<p><b>Analyst conviction:</b> Bearish. <b>Skeptic:</b> DOWNGRADE. <b>Consistency:</b> confirmed.</p>
+<div class="note warn"><b>Single-source call</b> Only Platts sources support this call. No Vortexa flow data and no HSFO tender row entered it.</div>
+<p><b>Drivers</b></p>
+<ul><li>Market Structure, bear. The MOC for 380 CST printed no trade. Vitol bid MOPS +21.00/+22.00, and BP bid +30.00/+28.00. Chimbusco offered MOPS +45.00 on three windows. The gap stays at 15 dollars or more. The cash differential PPXDL00 is +29.17 (+0.92), near the 7 Sep low. [APAG Platts Singapore Fuel Oil Bids Offers Trades; Marketscan Asia products table (PPXDL00)]</li><li>Market Structure, bear. Platts: "Benchmark HSFO cash premium drops to near two-month low" for a fourth straight session. The Dec swap spread traded in the close at 36.00 to 37.50, below the Nov 5 assessment of 38.50. The 380 CST crack was minus 1.75/b on Nov 5, the weakest since 21 Sep. [APAG Fuel Oil Daily Market Analysis; APAG Platts Singapore Fuel Oil Paper Trades Summary 06 Nov 26]</li><li>Supply, bear. Singapore heavy distillate stocks rose 2.4 percent week on week to 19.14 million barrels, a six-week high. Fuel oil exports fell 29 percent week on week. Shipments to China fell for a second week. [APAG Fuel Oil Daily Market Analysis (Enterprise Singapore data, week to Nov 4)]</li><li>Demand, bear. Traders expect more supply if a Middle East peace deal reinstates flows. Platts says the HSFO market cools after a rally on supply tightness. NYK expects Hormuz to stay effectively closed until March 2027, so the supply return is slow. [APAG Fuel Oil Daily Market Analysis; Oil Brief_5 Nov 2026 (NYK, Hormuz section)]</li><li>Market Structure, bull. The flat price rose 23.16 to 652.43 as Asia caught up with crude. Dubai M1 is 96.30 (+3.45). BP raised its bid to MOPS +30.00 for Nov 21-25 and set the assessment basis. BP and Vitol are present, so no buyer is absent. [APAG Marketscan Asia products table; COM Crude Marketscan table (PCAAT00); APAG PPXDK00 assessment rationale]</li></ul>
+<p><b>Analyst rationale.</b> The analyst set Bearish on two pillars plus structure. The cash premium, the swap spread and the crack all weakened, and Singapore stocks sit at a six-week high. The 6 Nov flat price rally follows crude and does not change the premium trend. No HSFO tender data arrived this session, so the call stays Bearish and not Extremely Bearish. Risk is a bounce if a crude rally holds. Triggers to watch: an offer below MOPS +40.00 or a trade above +35.00.</p>
+<p><b>Skeptic counter.</b> The skeptic downgraded the call, because the bear case is dated. Every cited number verifies, and three pillars are met. One driver is unsourced, because the NYK Hormuz claim comes from the 5 Nov brief. Driver 1 also labels PPXDL00 bear while the printed change is +0.92, so the cash differential rose on the session under analysis. The two-month-low headline, the fourth straight fall, the -1.75/b crack and the 180 CST drop are all Nov 5 assessments. On 6 Nov the differential rose to 29.17, the flat price rose 23.16, Dubai M1 rose 3.45, and BP raised its bid and set the basis. The one genuine 6 Nov bear print, a 3.25 weaker balance Nov-Dec swap spread at 36.50/mt, is not cited.</p>
+<p><b>Data gaps</b></p>
+<ul><li>No Vortexa fuel oil flow data in the facts file.</li><li>No HSFO NOC export tender in the tender list this session.</li><li>The Platts text shows Nov 5 values for the crack and the cash premium; the Nov 6 crack is absent from the facts file.</li><li>The facts JSON has no crack series for HSFO.</li></ul>
+<h2>LSFO</h2>
+<p><b>Analyst conviction:</b> Neutral. <b>Skeptic:</b> VETO. <b>Consistency:</b> emerging.</p>
+<div class="note warn"><b>Single-source call</b> Only Platts sources support this call, plus one small 3 Nov tender. No Vortexa flow data entered it.</div>
+<p><b>Drivers</b></p>
+<ul><li>Market Structure, bull. The Marine Fuel 0.5 percent premium FOFSB00 is 30.03 (+3.50). The balance Nov-Dec swap spread is a wider backwardation of 36.75, up 6.95 day on day. Platts cites this spread as the assessment basis. [APAG Marketscan Asia products table (FOFSB00); APAG Marine Fuel 0.5% cargo Daily Rationale (AMFSA00)]</li><li>Market Structure, bull. Bids hold: BP MOPS +26.00 (3 lines, 40 kt), Vitol +27.00/+28.00, Mercuria +25.00. The Hi-5 spread widened to 101.03 on Nov 5 from 88.03 as HSFO weakened. Dec marine paper traded 734.50 to 736.00 in the close, with Hotei and Centalion as buyers. [APAG Platts Singapore Marine Fuel 0.5% Cargo Bids, Offers, Trades; APAG Fuel Oil Daily Market Analysis; APAG Marine Fuel 0.5% Paper Trades Summary 06 Nov 26]</li><li>Market Structure, bear. The cargo MOC printed no trade. Trafigura, Glencore, Chimbusco and Mitsui (Kirin Star) offered at MOPS +38.00 to +40.00. The gap to the 28.00 bid is 10 to 12 dollars. The cash premium fell to 26.53 on Nov 5 on "competitive selling interest from Glencore". [APAG Platts Singapore Marine Fuel 0.5% Cargo Bids, Offers, Trades; APAG Fuel Oil Daily Market Analysis]</li><li>Supply, bear. Singapore heavy distillate stocks reached a six-week high of 19.14 million barrels. Platts headline: "LSFO market structure weakens, cash premium slips". [APAG Fuel Oil Daily Market Analysis]</li><li>Supply, bear. India's MRPL offers 30,000 mt VLSFO for Nov. 19-20 loading. This is a small sell tender, issued Nov 3. [Tender: India's MRPL offers 30,000 mt VLSFO for Nov. 19-20 loading (11/03/2026)]</li></ul>
+<p><b>Analyst rationale.</b> Neutral. Structure turned firmer on 6 Nov, but the cargo book shows no trade and a wide bid-offer gap. The stock build, the Glencore selling and the MRPL offer lean bearish. The firm 6 Nov read is Day 1 after a weak run of 2 to 5 Nov, so the setup is emerging. The 57.99 flat price jump follows the Asian crude catch-up and carries little signal. A trade above MOPS +30.00 would support Bullish.</p>
+<p><b>Skeptic counter.</b> The skeptic vetoed the call, because it breaks the three-pillar minimum. The five drivers span Market Structure and Supply only, with no Demand pillar. Every number and source verifies, so the veto is structural, not factual. The skeptic also finds the structure case split, and the bullish half a crude artefact. The premium rise and the wider backwardation are paper prints, while the physical book printed no trade with a 10 to 12 dollar gap and no convergence. The Platts 6 Nov headline reads "LSFO market structure weakens, cash premium slips". A Neutral call that leans on a Day 1 paper firming should sit Bearish.</p>
+<p><b>Data gaps</b></p>
+<ul><li>No Vortexa LSFO or bunker flow data in the facts file.</li><li>No LSFO crack series in the facts file; the Platts text gives Nov 5 values only.</li><li>Only one VLSFO tender found, and it is small and dated 3 Nov.</li><li>No marine 0.5 percent trade printed on 6 Nov, so no done deal in the window.</li></ul>
+<h2>Tenders — last five Platts sessions</h2>
+<p>Source: the tender export in <code>oil_facts_071126_0941.json</code>, 207 rows. 36 rows fall in the five sessions below.</p>
+<h3>6 November 2026</h3>
+<ul><li>India's HPCL seeks indicative offers for 1 mil barrels of sweet crudes for Jan delivery. (Crude Oil)</li><li>Vietnam's PV Gas seeks term LPG for 2027 delivery. (LPG)</li><li>Indonesia's Pertamina buys LPG for Jan. 16-31 delivery. (LPG)</li><li>Pakistan's PSO seeks 55,000 mt of gasoline for Dec. 17-20 delivery. (Gasoline)</li><li>Egypt's EGPC seeks up to 66,000 mt 0.1%S gasoil for Nov delivery. (Gasoil)</li><li>Indonesia's Pertamina seeks 92 RON gasoline for December loading. (Gasoline)</li><li>Japan's Mitsui Chemicals seeks 25,000 mt of naphtha for H2 Dec delivery. (Naphtha)</li><li>RE-TENDER: Nigeria's Dangote refinery re-tenders for December arriving crude. (Crude Oil)</li></ul>
+<h3>5 November 2026</h3>
+<ul><li>Indonesia's Pertamina seeks 600,000 barrels of jet A-1 fuel for Dec. (Jet Fuel)</li><li>Vietnam's Petrolimex seeks 105,000 mt of gasoil for Nov-Dec delivery. (Gasoil)</li><li>Indonesia's Pertamina seeks 40,000 barrels of 50 ppm sulfur gasoil for Dec 2-4 delivery. (Gasoil)</li><li>Vietnam's PV Oil offers 250,000 barrels Thang Long crude for Jan 15-20 loading. (Crude Oil)</li></ul>
+<h3>4 November 2026</h3>
+<ul><li>India's BPCL buys WTI Midland for Dec-Jan delivery. (Crude Oil)</li><li>Thailand's BST offers term MTBE for 2027. (Blendstocks)</li><li>Lanka IOC seeks combined gasoil, gasoline cargo for Dec. 17-18 delivery. (Gasoil, Gasoline)</li><li>Taiwan's FCFC and FPCC seek isomer-MX for December delivery. (Mixed Xylenes)</li><li>Kuwait Petroleum offers 50,000 mt of naphtha for Nov. 15-25 loading. (Naphtha)</li><li>South Korea's GS Caltex buys naphtha for H2 December delivery. (Naphtha)</li></ul>
+<h3>3 November 2026</h3>
+<ul><li>South Korea's Hanwha TotalEnergies buys naphtha for H2 Dec delivery. (Naphtha)</li><li>India's MRPL offers 30,000 mt VLSFO for Nov. 19-20 loading. (VLSFO)</li><li>CANCELLATION: India's BPCL cancels tender offering 25,000 mt of naphtha for Nov. 19-20 loading. (Naphtha)</li><li>Kuwait Petroleum offers evenly split LPG cargo for H2 Nov delivery. (LPG)</li><li>India's MRPL sells 40,000 mt of jet A-1 fuel for Nov. 18-19 loading. (Jet Fuel)</li><li>QatarEnergy offers up to 54,000 mt of gasoil for Nov loading. (Gasoil)</li><li>Indonesia's Pertamina seeks 9.1 million barrels of 90 RON gasoline for Jan-March 2027. (Gasoline)</li><li>CANCELLATION: India's BPCL cancels buy tender for evenly-split LPG cargoes for November, December. (LPG)</li><li>Indonesia's Pertamina seeks crude, condensate cargoes on term basis for Q1 2027. (Crude Oil, Condensate)</li><li>China's Wanhua Chemical seeks ethylene for Nov-Dec arrival. (Petrochemicals)</li><li>South Korea's S-Oil sells 300,000 barrels of gasoil for Nov. 26-30 loading. (Gasoil)</li><li>Indonesia's Pertamina seeks 92 RON gasoline for January-March 2027 delivery. (Gasoline)</li><li>QatarEnergy offers deodorized field condensate Nov. 20-30 FOB or Nov. 27-Dec. 15 STS loading. (Condensate)</li></ul>
+<h3>2 November 2026</h3>
+<ul><li>Japan's Cosmo Oil sells 300,000 barrels of gasoil for Nov. 26-30 loading. (Gasoil)</li><li>Sri Lanka's Ceypetco seeks 281,250 barrels of gasoil for Dec. 24-25 delivery. (Gasoil, Jet Fuel)</li><li>India's MRPL offers 40,000 mt of jet A-1 fuel for Nov. 18-19 loading. (Jet Fuel)</li><li>South Korea's GS Caltex seeks naphtha for H2 December delivery. (Naphtha)</li><li>QatarEnergy offers 26,431 mt propane for Nov. 5-12 delivery. (LPG, Propane)</li></ul>
+<p><b>Flags.</b> Two cancellations appear, both from India's BPCL on 3 November: the 25,000 mt naphtha sell tender, and the evenly-split LPG buy tender. One re-tender appears, from Nigeria's Dangote on 6 November, for December arriving crude. The MRPL jet A-1 cargo for Nov. 18-19 shows a two-step path: an offer on 2 November, then a sale on 3 November. No deferral appears in the five sessions.</p>
+<h2>Scorer report</h2>
+<p>Commands run:</p>
+<p>``<code> python Strategy\oil_scorer.py log 071126_0941 python Strategy\oil_scorer.py settle python Strategy\oil_scorer.py report </code>``</p>
+<p>Output:</p>
+<p>``<code> logged 9 calls for session 20261106 settled 17 horizons product        n  hit +5  status no settled calls yet - every conviction is Unproven </code>``</p>
+<p>The scorer logged all nine calls for session 20261106. It settled 17 one-session horizons for the two earlier sessions, 20261023 and 20261030. The report shows no scored call, because the scorer skips Neutral calls, and the +5 session horizon needs five later sessions in the log. Only one earlier call carried a direction, the Bearish jet call of 23 October, and it hit at +1 session. Every product therefore stays <b>Unproven</b> under the 40-call minimum.</p>
+<p>Settled moves from 30 October to 6 November, one logged session later: Crude PCAAS00 -22.285, LPG AAVAK00 -55.0, Naphtha PAAAD00 -154.0, Gasoline PGAEY00 -17.76, Gasoil AAOVC00 -8.19, Jet Kero PJABF00 -9.87, SAF SFSMR00 +23.0, LSFO AMFSA00 -144.04, HSFO PPXDK00 -189.37.</p>
+<h2>Oil desk (071126_0941)</h2>
+<p>The desk coded nine Neutral calls for the 6 November session. The skeptic vetoed four calls (Crude, Gasoline, SAF, LSFO), downgraded four (Naphtha, Gasoil, Jet Kero, HSFO) and passed one (LPG). Two structural faults repeat across the vetoes: a driver that cites a wrong number, and a driver whose only source is a prior brief or an Oil Meeting Summary. The SAF veto also found an unread Asia section, so the desk must re-run SAF on SFSMR00 and SFSHC00 with a Supply pillar. No call carries measured evidence, because the scorer holds fewer than 40 settled calls for each product.</p>
+<div class="sources">Rendered from the Oil Brief note for the Platts session of 6 November 2026.
+Conviction calls are Unproven until oil_scorer.py holds 40 or more settled calls for a
+product. Licensed Platts material: Google Drive and the Obsidian vault only.</div>
+</div></body></html>

@@ -59,6 +59,7 @@
   .chip-bull { background: #E3EEDF; color: #2F6D3F; }
   .chip-warn { background: #F7E3CE; color: #B15C1E; }
   .chip-none { background: #F0EBE2; color: var(--ft-mid); }
+  .sub { font-family: Arial, sans-serif; font-size: 10px; color: var(--ft-muted); margin-top: 2px; }
 
   .gex-glyphs { font-size: 12px; letter-spacing: 1px; }
   .gex-up { color: #2F6D3F; }
@@ -93,16 +94,16 @@
 <div class="masthead">
   <div class="masthead-eyebrow">Optionx Intelligence — Rebound Screener</div>
   <div class="masthead-title">Rebound <span>Candidate</span> Dashboard</div>
-  <div class="masthead-date">Stock Analysis window Sep 19–Oct 03, 2026 &nbsp;&middot;&nbsp; IV window Sep 17–Oct 03, 2026 &nbsp;&middot;&nbsp; Generated 03 Oct 2026, 07:40</div>
+  <div class="masthead-date">Stock Analysis window Oct 23–Nov 07, 2026 &nbsp;&middot;&nbsp; IV window Oct 23–Nov 07, 2026 &nbsp;&middot;&nbsp; Generated 08 Nov 2026, 11:05</div>
   <div class="masthead-tagline">"Distribution/Mark-down phase, pulled back &gt;15% from the 10-day high — screened for volume, IV, GEX and trend confirmation before the bounce."</div>
 </div>
 <div class="stats-banner"><div class="stats-inner">
-  <div class="stat-item">Candidates <strong>0</strong></div>
+  <div class="stat-item">Candidates <strong>54</strong></div>
   <span class="stat-sep">|</span>
-  <div class="stat-item">Vol Expansion <strong>0</strong></div>
-  <div class="stat-item">Vol Contraction <strong>0</strong></div>
+  <div class="stat-item">Vol Expansion <strong>29</strong></div>
+  <div class="stat-item">Vol Contraction <strong>2</strong></div>
   <span class="stat-sep">|</span>
-  <div class="stat-item">GEX Improving (2d) <strong>0</strong></div>
+  <div class="stat-item">GEX Improving (2d) <strong>15</strong></div>
 </div></div>
 
 <div class="rb-main">
@@ -114,10 +115,820 @@
         <tr>
           <th>Ticker</th><th>Sector</th><th>Phase</th><th class="num">Price</th><th class="num">10D Hi / Lo</th>
           <th class="num">Pullback</th><th>Range Pos</th><th>Vol Read</th><th>IV Rank 10D</th>
-          <th>GEX 10D</th><th>EMA Trend</th><th class="num">Days</th>
+          <th>GEX 10D</th><th>EMA Trend</th><th class="num">Days</th><th>Uptrend Tag</th>
         </tr>
       </thead>
       <tbody>
+        <tr>
+          <td class="ticker" data-sort="SOXX">SOXX</td>
+          <td class="sector" title="Semiconductors ETF" data-sort="Semiconductors ETF">Semiconductors ETF</td>
+          <td data-sort="Mark-down">Mark-down</td>
+          <td class="num" data-sort="136.53">$136.53</td>
+          <td class="num" data-sort="521.94">$521.94 / $131.90</td>
+          <td class="num pullback" data-sort="73.84182089895391">-73.8%</td>
+          <td data-sort="1.18705773766793"><span class="chip chip-warn">LR 1%</span></td>
+          <td data-sort="2"><span class="chip chip-bull">EXPANSION</span></td>
+          <td data-sort="79.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 78 22" width="78" height="22"><rect class="bar-flat" x="0" y="12.8" width="6" height="9.2" rx="1"/><rect class="bar-flat" x="8" y="12.8" width="6" height="9.2" rx="1"/><rect class="bar-down" x="16" y="13.6" width="6" height="8.4" rx="1"/><rect class="bar-down" x="24" y="13.9" width="6" height="8.1" rx="1"/><rect class="bar-up" x="32" y="10.8" width="6" height="11.2" rx="1"/><rect class="bar-up" x="40" y="8.4" width="6" height="13.6" rx="1"/><rect class="bar-down" x="48" y="9.0" width="6" height="13.0" rx="1"/><rect class="bar-down" x="56" y="11.2" width="6" height="10.8" rx="1"/><rect class="bar-up" x="64" y="0.4" width="6" height="21.6" rx="1"/><rect class="bar-down" x="72" y="4.6" width="6" height="17.4" rx="1"/></svg></div><div class="iv-last bar-down">79</div></div></td>
+          <td data-sort="3"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-up">&#9650;</span><span class="gex-up">&#9650;</span><span class="gex-flat">&#9632;</span><span class="gex-down">&#9660;</span><span class="gex-up">&#9650;</span><span class="gex-up">&#9650;</span><span class="gex-down">&#9660;</span><span class="gex-up">&#9650;</span><span class="gex-flat">&#9632;</span></div><span class="chip chip-bull">IMPROVING</span></div></td>
+          <td data-sort="-1">—</td>
+          <td class="num" data-sort="10">10</td>
+          <td data-sort="-67.1"><span class="chip chip-none">—</span><div class="sub">SMA200 -67.1%</div></td>
+        </tr>
+        <tr>
+          <td class="ticker" data-sort="MRVL">MRVL</td>
+          <td class="sector" title="Technology (Semiconductors)" data-sort="Technology (Semiconductors)">Technology (Semiconductors)</td>
+          <td data-sort="Distribution">Distribution</td>
+          <td class="num" data-sort="141.2">$141.20</td>
+          <td class="num" data-sort="251.65">$251.65 / $133.55</td>
+          <td class="num pullback" data-sort="43.89032386250746">-43.9%</td>
+          <td data-sort="6.4775613886536645"><span class="chip chip-warn">LR 6%</span></td>
+          <td data-sort="1"><span class="chip chip-none">Neutral</span></td>
+          <td data-sort="67.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 78 22" width="78" height="22"><rect class="bar-flat" x="0" y="14.7" width="6" height="7.3" rx="1"/><rect class="bar-flat" x="8" y="14.7" width="6" height="7.3" rx="1"/><rect class="bar-down" x="16" y="15.0" width="6" height="7.0" rx="1"/><rect class="bar-flat" x="24" y="15.0" width="6" height="7.0" rx="1"/><rect class="bar-up" x="32" y="13.4" width="6" height="8.6" rx="1"/><rect class="bar-up" x="40" y="10.6" width="6" height="11.4" rx="1"/><rect class="bar-down" x="48" y="11.0" width="6" height="11.0" rx="1"/><rect class="bar-flat" x="56" y="11.0" width="6" height="11.0" rx="1"/><rect class="bar-up" x="64" y="5.7" width="6" height="16.3" rx="1"/><rect class="bar-down" x="72" y="7.3" width="6" height="14.7" rx="1"/></svg></div><div class="iv-last bar-down">67</div></div></td>
+          <td data-sort="5"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-up">&#9650;</span><span class="gex-up">&#9650;</span><span class="gex-down">&#9660;</span><span class="gex-up">&#9650;</span><span class="gex-flat">&#9632;</span><span class="gex-up">&#9650;</span><span class="gex-flat">&#9632;</span><span class="gex-up">&#9650;</span><span class="gex-up">&#9650;</span></div><span class="chip chip-bull">IMPROVING</span></div></td>
+          <td data-sort="0">Below all MAs</td>
+          <td class="num" data-sort="10">10</td>
+          <td data-sort="-23.5"><span class="chip chip-none">—</span><div class="sub">SMA200 -23.5%</div></td>
+        </tr>
+        <tr>
+          <td class="ticker" data-sort="LITE">LITE</td>
+          <td class="sector" title="Technology (Quantum Computing)" data-sort="Technology (Quantum Computing)">Technology (Quantum Computing)</td>
+          <td data-sort="Distribution">Distribution</td>
+          <td class="num" data-sort="538.59">$538.59</td>
+          <td class="num" data-sort="919.53">$919.53 / $509.70</td>
+          <td class="num pullback" data-sort="41.427685883005445">-41.4%</td>
+          <td data-sort="7.049264329112082"><span class="chip chip-warn">LR 7%</span></td>
+          <td data-sort="1"><span class="chip chip-none">Neutral</span></td>
+          <td data-sort="34.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 78 22" width="78" height="22"><rect class="bar-flat" x="0" y="15.6" width="6" height="6.4" rx="1"/><rect class="bar-flat" x="8" y="15.6" width="6" height="6.4" rx="1"/><rect class="bar-down" x="16" y="17.6" width="6" height="4.4" rx="1"/><rect class="bar-down" x="24" y="19.1" width="6" height="2.9" rx="1"/><rect class="bar-up" x="32" y="16.7" width="6" height="5.3" rx="1"/><rect class="bar-down" x="40" y="18.0" width="6" height="4.0" rx="1"/><rect class="bar-down" x="48" y="19.1" width="6" height="2.9" rx="1"/><rect class="bar-down" x="56" y="19.4" width="6" height="2.6" rx="1"/><rect class="bar-up" x="64" y="13.6" width="6" height="8.4" rx="1"/><rect class="bar-down" x="72" y="14.5" width="6" height="7.5" rx="1"/></svg></div><div class="iv-last bar-down">34</div></div></td>
+          <td data-sort="1"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-up">&#9650;</span><span class="gex-up">&#9650;</span><span class="gex-up">&#9650;</span><span class="gex-down">&#9660;</span><span class="gex-down">&#9660;</span><span class="gex-up">&#9650;</span><span class="gex-down">&#9660;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span></div><span class="chip chip-none">STABLE</span></div></td>
+          <td data-sort="0">Below all MAs</td>
+          <td class="num" data-sort="10">10</td>
+          <td data-sort="-33.2"><span class="chip chip-none">—</span><div class="sub">SMA200 -33.2%</div></td>
+        </tr>
+        <tr>
+          <td class="ticker" data-sort="INTC">INTC</td>
+          <td class="sector" title="Technology (Semiconductors)" data-sort="Technology (Semiconductors)">Technology (Semiconductors)</td>
+          <td data-sort="Distribution">Distribution</td>
+          <td class="num" data-sort="56.28">$56.28</td>
+          <td class="num" data-sort="95.53">$95.53 / $52.25</td>
+          <td class="num pullback" data-sort="41.0865696639799">-41.1%</td>
+          <td data-sort="9.31146025878004"><span class="chip chip-warn">LR 9%</span></td>
+          <td data-sort="1"><span class="chip chip-none">Neutral</span></td>
+          <td data-sort="45.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 78 22" width="78" height="22"><rect class="bar-flat" x="0" y="14.1" width="6" height="7.9" rx="1"/><rect class="bar-down" x="8" y="14.3" width="6" height="7.7" rx="1"/><rect class="bar-down" x="16" y="15.0" width="6" height="7.0" rx="1"/><rect class="bar-flat" x="24" y="15.0" width="6" height="7.0" rx="1"/><rect class="bar-flat" x="32" y="15.0" width="6" height="7.0" rx="1"/><rect class="bar-down" x="40" y="16.7" width="6" height="5.3" rx="1"/><rect class="bar-up" x="48" y="14.3" width="6" height="7.7" rx="1"/><rect class="bar-down" x="56" y="15.2" width="6" height="6.8" rx="1"/><rect class="bar-up" x="64" y="9.2" width="6" height="12.8" rx="1"/><rect class="bar-down" x="72" y="12.1" width="6" height="9.9" rx="1"/></svg></div><div class="iv-last bar-down">45</div></div></td>
+          <td data-sort="2"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-up">&#9650;</span><span class="gex-up">&#9650;</span><span class="gex-down">&#9660;</span><span class="gex-down">&#9660;</span><span class="gex-up">&#9650;</span><span class="gex-up">&#9650;</span><span class="gex-down">&#9660;</span><span class="gex-flat">&#9632;</span><span class="gex-up">&#9650;</span></div><span class="chip chip-bull">IMPROVING</span></div></td>
+          <td data-sort="0">Below all MAs</td>
+          <td class="num" data-sort="10">10</td>
+          <td data-sort="-35.3"><span class="chip chip-none">—</span><div class="sub">SMA200 -35.3%</div></td>
+        </tr>
+        <tr>
+          <td class="ticker" data-sort="AAOI">AAOI</td>
+          <td class="sector" title="Technology (Quantum Computing)" data-sort="Technology (Quantum Computing)">Technology (Quantum Computing)</td>
+          <td data-sort="Mark-down">Mark-down</td>
+          <td class="num" data-sort="50.13">$50.13</td>
+          <td class="num" data-sort="82.22">$82.22 / $46.89</td>
+          <td class="num pullback" data-sort="39.029433227925075">-39.0%</td>
+          <td data-sort="9.170676478913112"><span class="chip chip-warn">LR 9%</span></td>
+          <td data-sort="2"><span class="chip chip-bull">EXPANSION</span></td>
+          <td data-sort="40.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 78 22" width="78" height="22"><rect class="bar-flat" x="0" y="14.1" width="6" height="7.9" rx="1"/><rect class="bar-flat" x="8" y="14.1" width="6" height="7.9" rx="1"/><rect class="bar-down" x="16" y="16.1" width="6" height="5.9" rx="1"/><rect class="bar-up" x="24" y="15.8" width="6" height="6.2" rx="1"/><rect class="bar-up" x="32" y="13.4" width="6" height="8.6" rx="1"/><rect class="bar-up" x="40" y="11.0" width="6" height="11.0" rx="1"/><rect class="bar-down" x="48" y="11.2" width="6" height="10.8" rx="1"/><rect class="bar-down" x="56" y="11.9" width="6" height="10.1" rx="1"/><rect class="bar-up" x="64" y="7.3" width="6" height="14.7" rx="1"/><rect class="bar-down" x="72" y="13.2" width="6" height="8.8" rx="1"/></svg></div><div class="iv-last bar-down">40</div></div></td>
+          <td data-sort="1"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-flat">&#9632;</span><span class="gex-up">&#9650;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-up">&#9650;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-down">&#9660;</span><span class="gex-flat">&#9632;</span></div><span class="chip chip-warn">WEAKENING</span></div></td>
+          <td data-sort="0">Below all MAs</td>
+          <td class="num" data-sort="10">10</td>
+          <td data-sort="-56.2"><span class="chip chip-none">—</span><div class="sub">SMA200 -56.2%</div></td>
+        </tr>
+        <tr>
+          <td class="ticker" data-sort="NOW">NOW</td>
+          <td class="sector" title="Systems Software" data-sort="Systems Software">Systems Software</td>
+          <td data-sort="Mark-down">Mark-down</td>
+          <td class="num" data-sort="101.97">$101.97</td>
+          <td class="num" data-sort="158.96">$158.96 / $101.97</td>
+          <td class="num pullback" data-sort="35.851786612984405">-35.9%</td>
+          <td data-sort="0.0"><span class="chip chip-warn">LR 0%</span></td>
+          <td data-sort="0"><span class="chip chip-warn">CONTRACTION</span></td>
+          <td data-sort="45.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 78 22" width="78" height="22"><rect class="bar-flat" x="0" y="6.6" width="6" height="15.4" rx="1"/><rect class="bar-down" x="8" y="6.8" width="6" height="15.2" rx="1"/><rect class="bar-up" x="16" y="5.9" width="6" height="16.1" rx="1"/><rect class="bar-flat" x="24" y="5.9" width="6" height="16.1" rx="1"/><rect class="bar-down" x="32" y="12.5" width="6" height="9.5" rx="1"/><rect class="bar-up" x="40" y="11.7" width="6" height="10.3" rx="1"/><rect class="bar-down" x="48" y="12.5" width="6" height="9.5" rx="1"/><rect class="bar-down" x="56" y="13.0" width="6" height="9.0" rx="1"/><rect class="bar-up" x="64" y="10.8" width="6" height="11.2" rx="1"/><rect class="bar-down" x="72" y="12.1" width="6" height="9.9" rx="1"/></svg></div><div class="iv-last bar-down">45</div></div></td>
+          <td data-sort="-1"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-down">&#9660;</span><span class="gex-flat">&#9632;</span><span class="gex-down">&#9660;</span><span class="gex-flat">&#9632;</span><span class="gex-up">&#9650;</span><span class="gex-up">&#9650;</span><span class="gex-flat">&#9632;</span><span class="gex-down">&#9660;</span><span class="gex-flat">&#9632;</span></div><span class="chip chip-warn">WEAKENING</span></div></td>
+          <td data-sort="0">Below all MAs</td>
+          <td class="num" data-sort="10">10</td>
+          <td data-sort="-11.1"><span class="chip chip-none">—</span><div class="sub">SMA200 -11.1%</div></td>
+        </tr>
+        <tr>
+          <td class="ticker" data-sort="DELL">DELL</td>
+          <td class="sector" title="PC infrastructure" data-sort="PC infrastructure">PC infrastructure</td>
+          <td data-sort="Mark-down">Mark-down</td>
+          <td class="num" data-sort="328.53">$328.53</td>
+          <td class="num" data-sort="501.96">$501.96 / $316.91</td>
+          <td class="num pullback" data-sort="34.55056179775281">-34.6%</td>
+          <td data-sort="6.27938395028368"><span class="chip chip-warn">LR 6%</span></td>
+          <td data-sort="2"><span class="chip chip-bull">EXPANSION</span></td>
+          <td data-sort="95.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 78 22" width="78" height="22"><rect class="bar-flat" x="0" y="10.6" width="6" height="11.4" rx="1"/><rect class="bar-up" x="8" y="9.9" width="6" height="12.1" rx="1"/><rect class="bar-flat" x="16" y="9.9" width="6" height="12.1" rx="1"/><rect class="bar-flat" x="24" y="9.9" width="6" height="12.1" rx="1"/><rect class="bar-up" x="32" y="7.5" width="6" height="14.5" rx="1"/><rect class="bar-up" x="40" y="4.8" width="6" height="17.2" rx="1"/><rect class="bar-down" x="48" y="5.3" width="6" height="16.7" rx="1"/><rect class="bar-up" x="56" y="5.1" width="6" height="16.9" rx="1"/><rect class="bar-up" x="64" y="0.0" width="6" height="22.0" rx="1"/><rect class="bar-down" x="72" y="1.1" width="6" height="20.9" rx="1"/></svg></div><div class="iv-last bar-down">95</div></div></td>
+          <td data-sort="-1"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-up">&#9650;</span><span class="gex-flat">&#9632;</span><span class="gex-down">&#9660;</span><span class="gex-down">&#9660;</span><span class="gex-up">&#9650;</span><span class="gex-flat">&#9632;</span><span class="gex-down">&#9660;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span></div><span class="chip chip-none">STABLE</span></div></td>
+          <td data-sort="0">Below all MAs</td>
+          <td class="num" data-sort="10">10</td>
+          <td data-sort="-2.3"><span class="chip chip-none">—</span><div class="sub">SMA200 -2.3%</div></td>
+        </tr>
+        <tr>
+          <td class="ticker" data-sort="STX">STX</td>
+          <td class="sector" title="Hard Disk Drives" data-sort="Hard Disk Drives">Hard Disk Drives</td>
+          <td data-sort="Mark-down">Mark-down</td>
+          <td class="num" data-sort="460.99">$460.99</td>
+          <td class="num" data-sort="700.47">$700.47 / $460.99</td>
+          <td class="num pullback" data-sort="34.188473453538336">-34.2%</td>
+          <td data-sort="0.0"><span class="chip chip-warn">LR 0%</span></td>
+          <td data-sort="1"><span class="chip chip-none">Neutral</span></td>
+          <td data-sort="62.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 78 22" width="78" height="22"><rect class="bar-flat" x="0" y="16.3" width="6" height="5.7" rx="1"/><rect class="bar-down" x="8" y="17.4" width="6" height="4.6" rx="1"/><rect class="bar-down" x="16" y="18.9" width="6" height="3.1" rx="1"/><rect class="bar-flat" x="24" y="18.9" width="6" height="3.1" rx="1"/><rect class="bar-up" x="32" y="16.5" width="6" height="5.5" rx="1"/><rect class="bar-up" x="40" y="14.5" width="6" height="7.5" rx="1"/><rect class="bar-down" x="48" y="15.0" width="6" height="7.0" rx="1"/><rect class="bar-down" x="56" y="15.2" width="6" height="6.8" rx="1"/><rect class="bar-up" x="64" y="9.2" width="6" height="12.8" rx="1"/><rect class="bar-up" x="72" y="8.4" width="6" height="13.6" rx="1"/></svg></div><div class="iv-last bar-up">62</div></div></td>
+          <td data-sort="2"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-down">&#9660;</span><span class="gex-up">&#9650;</span><span class="gex-up">&#9650;</span><span class="gex-down">&#9660;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-up">&#9650;</span><span class="gex-up">&#9650;</span></div><span class="chip chip-bull">IMPROVING</span></div></td>
+          <td data-sort="0">Below all MAs</td>
+          <td class="num" data-sort="10">10</td>
+          <td data-sort="-33.8"><span class="chip chip-none">—</span><div class="sub">SMA200 -33.8%</div></td>
+        </tr>
+        <tr>
+          <td class="ticker" data-sort="WDC">WDC</td>
+          <td class="sector" title="Storage Solutions" data-sort="Storage Solutions">Storage Solutions</td>
+          <td data-sort="Mark-down">Mark-down</td>
+          <td class="num" data-sort="263.78">$263.78</td>
+          <td class="num" data-sort="396.42">$396.42 / $263.78</td>
+          <td class="num pullback" data-sort="33.45946218656981">-33.5%</td>
+          <td data-sort="0.0"><span class="chip chip-warn">LR 0%</span></td>
+          <td data-sort="2"><span class="chip chip-bull">EXPANSION</span></td>
+          <td data-sort="51.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 78 22" width="78" height="22"><rect class="bar-flat" x="0" y="20.0" width="6" height="2.0" rx="1"/><rect class="bar-down" x="8" y="20.0" width="6" height="2.0" rx="1"/><rect class="bar-down" x="16" y="20.0" width="6" height="2.0" rx="1"/><rect class="bar-flat" x="24" y="20.0" width="6" height="2.0" rx="1"/><rect class="bar-up" x="32" y="18.3" width="6" height="3.7" rx="1"/><rect class="bar-up" x="40" y="16.3" width="6" height="5.7" rx="1"/><rect class="bar-down" x="48" y="18.3" width="6" height="3.7" rx="1"/><rect class="bar-down" x="56" y="18.7" width="6" height="3.3" rx="1"/><rect class="bar-up" x="64" y="10.8" width="6" height="11.2" rx="1"/><rect class="bar-flat" x="72" y="10.8" width="6" height="11.2" rx="1"/></svg></div><div class="iv-last ">51</div></div></td>
+          <td data-sort="0"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-down">&#9660;</span><span class="gex-up">&#9650;</span><span class="gex-up">&#9650;</span><span class="gex-down">&#9660;</span><span class="gex-up">&#9650;</span><span class="gex-down">&#9660;</span><span class="gex-down">&#9660;</span><span class="gex-up">&#9650;</span><span class="gex-flat">&#9632;</span></div><span class="chip chip-bull">IMPROVING</span></div></td>
+          <td data-sort="0">Below all MAs</td>
+          <td class="num" data-sort="10">10</td>
+          <td data-sort="-37.3"><span class="chip chip-none">—</span><div class="sub">SMA200 -37.3%</div></td>
+        </tr>
+        <tr>
+          <td class="ticker" data-sort="CIEN">CIEN</td>
+          <td class="sector" title="Technology (Quantum Computing)" data-sort="Technology (Quantum Computing)">Technology (Quantum Computing)</td>
+          <td data-sort="Mark-down">Mark-down</td>
+          <td class="num" data-sort="243.39">$243.39</td>
+          <td class="num" data-sort="363.21">$363.21 / $230.81</td>
+          <td class="num pullback" data-sort="32.989179813331134">-33.0%</td>
+          <td data-sort="9.501510574018116"><span class="chip chip-warn">LR 10%</span></td>
+          <td data-sort="2"><span class="chip chip-bull">EXPANSION</span></td>
+          <td data-sort="70.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 78 22" width="78" height="22"><rect class="bar-flat" x="0" y="13.4" width="6" height="8.6" rx="1"/><rect class="bar-flat" x="8" y="13.4" width="6" height="8.6" rx="1"/><rect class="bar-down" x="16" y="13.9" width="6" height="8.1" rx="1"/><rect class="bar-flat" x="24" y="13.9" width="6" height="8.1" rx="1"/><rect class="bar-up" x="32" y="12.1" width="6" height="9.9" rx="1"/><rect class="bar-up" x="40" y="9.2" width="6" height="12.8" rx="1"/><rect class="bar-down" x="48" y="9.5" width="6" height="12.5" rx="1"/><rect class="bar-down" x="56" y="11.7" width="6" height="10.3" rx="1"/><rect class="bar-up" x="64" y="4.0" width="6" height="18.0" rx="1"/><rect class="bar-down" x="72" y="6.6" width="6" height="15.4" rx="1"/></svg></div><div class="iv-last bar-down">70</div></div></td>
+          <td data-sort="0"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-up">&#9650;</span><span class="gex-up">&#9650;</span><span class="gex-down">&#9660;</span><span class="gex-down">&#9660;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span></div><span class="chip chip-none">STABLE</span></div></td>
+          <td data-sort="0">Below all MAs</td>
+          <td class="num" data-sort="10">10</td>
+          <td data-sort="-40.0"><span class="chip chip-none">—</span><div class="sub">SMA200 -40.0%</div></td>
+        </tr>
+        <tr>
+          <td class="ticker" data-sort="MOD">MOD</td>
+          <td class="sector" title="Thermal Management / HVAC" data-sort="Thermal Management / HVAC">Thermal Management / HVAC</td>
+          <td data-sort="Mark-down">Mark-down</td>
+          <td class="num" data-sort="96.61">$96.61</td>
+          <td class="num" data-sort="143.54">$143.54 / $91.39</td>
+          <td class="num pullback" data-sort="32.694719242023126">-32.7%</td>
+          <td data-sort="10.009587727708533"><span class="chip chip-warn">LR 10%</span></td>
+          <td data-sort="1"><span class="chip chip-none">Neutral</span></td>
+          <td data-sort="81.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 78 22" width="78" height="22"><rect class="bar-flat" x="0" y="2.6" width="6" height="19.4" rx="1"/><rect class="bar-flat" x="8" y="2.6" width="6" height="19.4" rx="1"/><rect class="bar-down" x="16" y="3.3" width="6" height="18.7" rx="1"/><rect class="bar-down" x="24" y="4.2" width="6" height="17.8" rx="1"/><rect class="bar-up" x="32" y="2.2" width="6" height="19.8" rx="1"/><rect class="bar-up" x="40" y="0.0" width="6" height="22.0" rx="1"/><rect class="bar-down" x="48" y="1.3" width="6" height="20.7" rx="1"/><rect class="bar-down" x="56" y="6.6" width="6" height="15.4" rx="1"/><rect class="bar-up" x="64" y="1.8" width="6" height="20.2" rx="1"/><rect class="bar-down" x="72" y="4.2" width="6" height="17.8" rx="1"/></svg></div><div class="iv-last bar-down">81</div></div></td>
+          <td data-sort="0"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-down">&#9660;</span><span class="gex-up">&#9650;</span><span class="gex-flat">&#9632;</span></div><span class="chip chip-bull">IMPROVING</span></div></td>
+          <td data-sort="0">Below all MAs</td>
+          <td class="num" data-sort="10">10</td>
+          <td data-sort="-55.2"><span class="chip chip-none">—</span><div class="sub">SMA200 -55.2%</div></td>
+        </tr>
+        <tr>
+          <td class="ticker" data-sort="TEAM">TEAM</td>
+          <td class="sector" title="Application Software (Collaboration)" data-sort="Application Software (Collaboration)">Application Software (Collaboration)</td>
+          <td data-sort="Mark-down">Mark-down</td>
+          <td class="num" data-sort="153.68">$153.68</td>
+          <td class="num" data-sort="227.61">$227.61 / $153.68</td>
+          <td class="num pullback" data-sort="32.48099819867317">-32.5%</td>
+          <td data-sort="0.0"><span class="chip chip-warn">LR 0%</span></td>
+          <td data-sort="2"><span class="chip chip-bull">EXPANSION</span></td>
+          <td data-sort="38.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 70 22" width="70" height="22"><rect class="bar-flat" x="0" y="8.4" width="6" height="13.6" rx="1"/><rect class="bar-up" x="8" y="7.9" width="6" height="14.1" rx="1"/><rect class="bar-up" x="16" y="7.5" width="6" height="14.5" rx="1"/><rect class="bar-up" x="24" y="7.0" width="6" height="15.0" rx="1"/><rect class="bar-up" x="32" y="6.2" width="6" height="15.8" rx="1"/><rect class="bar-down" x="40" y="6.8" width="6" height="15.2" rx="1"/><rect class="bar-up" x="48" y="6.6" width="6" height="15.4" rx="1"/><rect class="bar-up" x="56" y="4.4" width="6" height="17.6" rx="1"/><rect class="bar-down" x="64" y="13.6" width="6" height="8.4" rx="1"/></svg></div><div class="iv-last bar-down">38</div></div></td>
+          <td data-sort="-2"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-down">&#9660;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-down">&#9660;</span></div><span class="chip chip-warn">WEAKENING</span></div></td>
+          <td data-sort="1">First Test</td>
+          <td class="num" data-sort="10">10</td>
+          <td data-sort="29.0"><span class="chip chip-bull">UPTREND PULLBACK</span><div class="sub">SMA200 +29.0%</div></td>
+        </tr>
+        <tr>
+          <td class="ticker" data-sort="CLS">CLS</td>
+          <td class="sector" title="Technology (Quantum Computing)" data-sort="Technology (Quantum Computing)">Technology (Quantum Computing)</td>
+          <td data-sort="Mark-down">Mark-down</td>
+          <td class="num" data-sort="206.68">$206.68</td>
+          <td class="num" data-sort="299.8">$299.80 / $205.64</td>
+          <td class="num pullback" data-sort="31.060707138092063">-31.1%</td>
+          <td data-sort="1.1045029736618737"><span class="chip chip-warn">LR 1%</span></td>
+          <td data-sort="1"><span class="chip chip-none">Neutral</span></td>
+          <td data-sort="85.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 78 22" width="78" height="22"><rect class="bar-flat" x="0" y="7.5" width="6" height="14.5" rx="1"/><rect class="bar-down" x="8" y="12.8" width="6" height="9.2" rx="1"/><rect class="bar-down" x="16" y="17.2" width="6" height="4.8" rx="1"/><rect class="bar-flat" x="24" y="17.2" width="6" height="4.8" rx="1"/><rect class="bar-up" x="32" y="13.4" width="6" height="8.6" rx="1"/><rect class="bar-up" x="40" y="10.8" width="6" height="11.2" rx="1"/><rect class="bar-down" x="48" y="11.0" width="6" height="11.0" rx="1"/><rect class="bar-down" x="56" y="11.4" width="6" height="10.6" rx="1"/><rect class="bar-up" x="64" y="1.5" width="6" height="20.5" rx="1"/><rect class="bar-down" x="72" y="3.3" width="6" height="18.7" rx="1"/></svg></div><div class="iv-last bar-down">85</div></div></td>
+          <td data-sort="-2"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-up">&#9650;</span><span class="gex-up">&#9650;</span><span class="gex-down">&#9660;</span><span class="gex-down">&#9660;</span><span class="gex-down">&#9660;</span><span class="gex-flat">&#9632;</span><span class="gex-down">&#9660;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span></div><span class="chip chip-none">STABLE</span></div></td>
+          <td data-sort="0">Below all MAs</td>
+          <td class="num" data-sort="10">10</td>
+          <td data-sort="-37.6"><span class="chip chip-none">—</span><div class="sub">SMA200 -37.6%</div></td>
+        </tr>
+        <tr>
+          <td class="ticker" data-sort="MU">MU</td>
+          <td class="sector" title="Memory & Storage Solutions" data-sort="Memory & Storage Solutions">Memory & Storage Solutions</td>
+          <td data-sort="Mark-down">Mark-down</td>
+          <td class="num" data-sort="690.0">$690.00</td>
+          <td class="num" data-sort="983.23">$983.23 / $656.39</td>
+          <td class="num pullback" data-sort="29.82313395644966">-29.8%</td>
+          <td data-sort="10.283319055195205"><span class="chip chip-warn">LR 10%</span></td>
+          <td data-sort="2"><span class="chip chip-bull">EXPANSION</span></td>
+          <td data-sort="53.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 78 22" width="78" height="22"><rect class="bar-flat" x="0" y="19.4" width="6" height="2.6" rx="1"/><rect class="bar-down" x="8" y="19.8" width="6" height="2.2" rx="1"/><rect class="bar-up" x="16" y="19.6" width="6" height="2.4" rx="1"/><rect class="bar-flat" x="24" y="19.6" width="6" height="2.4" rx="1"/><rect class="bar-up" x="32" y="18.3" width="6" height="3.7" rx="1"/><rect class="bar-up" x="40" y="16.3" width="6" height="5.7" rx="1"/><rect class="bar-down" x="48" y="16.7" width="6" height="5.3" rx="1"/><rect class="bar-down" x="56" y="16.9" width="6" height="5.1" rx="1"/><rect class="bar-up" x="64" y="8.8" width="6" height="13.2" rx="1"/><rect class="bar-down" x="72" y="10.3" width="6" height="11.7" rx="1"/></svg></div><div class="iv-last bar-down">53</div></div></td>
+          <td data-sort="1"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-up">&#9650;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-down">&#9660;</span><span class="gex-flat">&#9632;</span><span class="gex-up">&#9650;</span><span class="gex-down">&#9660;</span><span class="gex-up">&#9650;</span><span class="gex-flat">&#9632;</span></div><span class="chip chip-bull">IMPROVING</span></div></td>
+          <td data-sort="0">Below all MAs</td>
+          <td class="num" data-sort="10">10</td>
+          <td data-sort="-8.5"><span class="chip chip-none">—</span><div class="sub">SMA200 -8.5%</div></td>
+        </tr>
+        <tr>
+          <td class="ticker" data-sort="NBIS">NBIS</td>
+          <td class="sector" title="Technology" data-sort="Technology">Technology</td>
+          <td data-sort="Mark-down">Mark-down</td>
+          <td class="num" data-sort="129.49">$129.49</td>
+          <td class="num" data-sort="182.34">$182.34 / $120.37</td>
+          <td class="num pullback" data-sort="28.98431501590435">-29.0%</td>
+          <td data-sort="14.716798450863328"><span class="chip chip-warn">LR 15%</span></td>
+          <td data-sort="2"><span class="chip chip-bull">EXPANSION</span></td>
+          <td data-sort="49.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 78 22" width="78" height="22"><rect class="bar-flat" x="0" y="15.6" width="6" height="6.4" rx="1"/><rect class="bar-down" x="8" y="16.5" width="6" height="5.5" rx="1"/><rect class="bar-down" x="16" y="17.2" width="6" height="4.8" rx="1"/><rect class="bar-flat" x="24" y="17.2" width="6" height="4.8" rx="1"/><rect class="bar-up" x="32" y="14.7" width="6" height="7.3" rx="1"/><rect class="bar-up" x="40" y="12.3" width="6" height="9.7" rx="1"/><rect class="bar-down" x="48" y="13.4" width="6" height="8.6" rx="1"/><rect class="bar-up" x="56" y="13.0" width="6" height="9.0" rx="1"/><rect class="bar-up" x="64" y="8.1" width="6" height="13.9" rx="1"/><rect class="bar-down" x="72" y="11.2" width="6" height="10.8" rx="1"/></svg></div><div class="iv-last bar-down">49</div></div></td>
+          <td data-sort="1"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-up">&#9650;</span><span class="gex-up">&#9650;</span><span class="gex-down">&#9660;</span><span class="gex-down">&#9660;</span><span class="gex-up">&#9650;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span></div><span class="chip chip-none">STABLE</span></div></td>
+          <td data-sort="0">Below all MAs</td>
+          <td class="num" data-sort="10">10</td>
+          <td data-sort="-27.3"><span class="chip chip-none">—</span><div class="sub">SMA200 -27.3%</div></td>
+        </tr>
+        <tr>
+          <td class="ticker" data-sort="MCHP">MCHP</td>
+          <td class="sector" title="Microcontrollers & Mixed-Signal" data-sort="Microcontrollers & Mixed-Signal">Microcontrollers & Mixed-Signal</td>
+          <td data-sort="Mark-down">Mark-down</td>
+          <td class="num" data-sort="58.35">$58.35</td>
+          <td class="num" data-sort="81.12">$81.12 / $58.35</td>
+          <td class="num pullback" data-sort="28.069526627218938">-28.1%</td>
+          <td data-sort="0.0"><span class="chip chip-warn">LR 0%</span></td>
+          <td data-sort="2"><span class="chip chip-bull">EXPANSION</span></td>
+          <td data-sort="70.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 70 22" width="70" height="22"><rect class="bar-flat" x="0" y="9.9" width="6" height="12.1" rx="1"/><rect class="bar-flat" x="8" y="9.9" width="6" height="12.1" rx="1"/><rect class="bar-down" x="16" y="11.2" width="6" height="10.8" rx="1"/><rect class="bar-up" x="24" y="8.4" width="6" height="13.6" rx="1"/><rect class="bar-up" x="32" y="7.7" width="6" height="14.3" rx="1"/><rect class="bar-down" x="40" y="7.9" width="6" height="14.1" rx="1"/><rect class="bar-up" x="48" y="7.5" width="6" height="14.5" rx="1"/><rect class="bar-up" x="56" y="4.0" width="6" height="18.0" rx="1"/><rect class="bar-down" x="64" y="6.6" width="6" height="15.4" rx="1"/></svg></div><div class="iv-last bar-down">70</div></div></td>
+          <td data-sort="1"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-up">&#9650;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-up">&#9650;</span><span class="gex-down">&#9660;</span><span class="gex-up">&#9650;</span><span class="gex-down">&#9660;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span></div><span class="chip chip-none">STABLE</span></div></td>
+          <td data-sort="0">Below all MAs</td>
+          <td class="num" data-sort="10">10</td>
+          <td data-sort="-26.8"><span class="chip chip-none">—</span><div class="sub">SMA200 -26.8%</div></td>
+        </tr>
+        <tr>
+          <td class="ticker" data-sort="CRWV">CRWV</td>
+          <td class="sector" title="Technology" data-sort="Technology">Technology</td>
+          <td data-sort="Mark-down">Mark-down</td>
+          <td class="num" data-sort="46.4">$46.40</td>
+          <td class="num" data-sort="63.93">$63.93 / $43.66</td>
+          <td class="num pullback" data-sort="27.420616299077118">-27.4%</td>
+          <td data-sort="13.517513566847567"><span class="chip chip-warn">LR 14%</span></td>
+          <td data-sort="1"><span class="chip chip-none">Neutral</span></td>
+          <td data-sort="86.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 78 22" width="78" height="22"><rect class="bar-flat" x="0" y="5.7" width="6" height="16.3" rx="1"/><rect class="bar-down" x="8" y="7.5" width="6" height="14.5" rx="1"/><rect class="bar-down" x="16" y="9.5" width="6" height="12.5" rx="1"/><rect class="bar-flat" x="24" y="9.5" width="6" height="12.5" rx="1"/><rect class="bar-up" x="32" y="6.2" width="6" height="15.8" rx="1"/><rect class="bar-up" x="40" y="1.5" width="6" height="20.5" rx="1"/><rect class="bar-flat" x="48" y="1.5" width="6" height="20.5" rx="1"/><rect class="bar-down" x="56" y="1.8" width="6" height="20.2" rx="1"/><rect class="bar-up" x="64" y="0.0" width="6" height="22.0" rx="1"/><rect class="bar-down" x="72" y="3.1" width="6" height="18.9" rx="1"/></svg></div><div class="iv-last bar-down">86</div></div></td>
+          <td data-sort="1"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-up">&#9650;</span><span class="gex-up">&#9650;</span><span class="gex-down">&#9660;</span><span class="gex-down">&#9660;</span><span class="gex-up">&#9650;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span></div><span class="chip chip-none">STABLE</span></div></td>
+          <td data-sort="0">Below all MAs</td>
+          <td class="num" data-sort="10">10</td>
+          <td data-sort="-48.8"><span class="chip chip-none">—</span><div class="sub">SMA200 -48.8%</div></td>
+        </tr>
+        <tr>
+          <td class="ticker" data-sort="DRAM">DRAM</td>
+          <td class="sector" title="Technology (Semiconductors)" data-sort="Technology (Semiconductors)">Technology (Semiconductors)</td>
+          <td data-sort="Mark-down">Mark-down</td>
+          <td class="num" data-sort="39.29">$39.29</td>
+          <td class="num" data-sort="54.12">$54.12 / $37.01</td>
+          <td class="num pullback" data-sort="27.402069475240204">-27.4%</td>
+          <td data-sort="13.325540619520757"><span class="chip chip-warn">LR 13%</span></td>
+          <td data-sort="2"><span class="chip chip-bull">EXPANSION</span></td>
+          <td data-sort="52.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 78 22" width="78" height="22"><rect class="bar-flat" x="0" y="16.9" width="6" height="5.1" rx="1"/><rect class="bar-down" x="8" y="17.4" width="6" height="4.6" rx="1"/><rect class="bar-down" x="16" y="17.8" width="6" height="4.2" rx="1"/><rect class="bar-flat" x="24" y="17.8" width="6" height="4.2" rx="1"/><rect class="bar-up" x="32" y="15.8" width="6" height="6.2" rx="1"/><rect class="bar-up" x="40" y="14.3" width="6" height="7.7" rx="1"/><rect class="bar-down" x="48" y="15.0" width="6" height="7.0" rx="1"/><rect class="bar-up" x="56" y="14.5" width="6" height="7.5" rx="1"/><rect class="bar-up" x="64" y="10.1" width="6" height="11.9" rx="1"/><rect class="bar-down" x="72" y="10.6" width="6" height="11.4" rx="1"/></svg></div><div class="iv-last bar-down">52</div></div></td>
+          <td data-sort="1"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-up">&#9650;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-down">&#9660;</span><span class="gex-up">&#9650;</span><span class="gex-flat">&#9632;</span><span class="gex-down">&#9660;</span><span class="gex-up">&#9650;</span><span class="gex-flat">&#9632;</span></div><span class="chip chip-bull">IMPROVING</span></div></td>
+          <td data-sort="-1">—</td>
+          <td class="num" data-sort="10">10</td>
+          <td data-sort="521.7"><span class="chip chip-bull">UPTREND PULLBACK</span><div class="sub">SMA200 +521.7%</div></td>
+        </tr>
+        <tr>
+          <td class="ticker" data-sort="TTMI">TTMI</td>
+          <td class="sector" title="Technology (Quantum Computing)" data-sort="Technology (Quantum Computing)">Technology (Quantum Computing)</td>
+          <td data-sort="Mark-down">Mark-down</td>
+          <td class="num" data-sort="66.51">$66.51</td>
+          <td class="num" data-sort="90.79">$90.79 / $62.22</td>
+          <td class="num pullback" data-sort="26.74303337371957">-26.7%</td>
+          <td data-sort="15.015750787539394"><span class="chip chip-warn">LR 15%</span></td>
+          <td data-sort="2"><span class="chip chip-bull">EXPANSION</span></td>
+          <td data-sort="65.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 70 22" width="70" height="22"><rect class="bar-flat" x="0" y="13.6" width="6" height="8.4" rx="1"/><rect class="bar-down" x="8" y="14.3" width="6" height="7.7" rx="1"/><rect class="bar-flat" x="16" y="14.3" width="6" height="7.7" rx="1"/><rect class="bar-up" x="24" y="12.8" width="6" height="9.2" rx="1"/><rect class="bar-up" x="32" y="10.8" width="6" height="11.2" rx="1"/><rect class="bar-down" x="40" y="11.7" width="6" height="10.3" rx="1"/><rect class="bar-flat" x="48" y="11.7" width="6" height="10.3" rx="1"/><rect class="bar-up" x="56" y="9.0" width="6" height="13.0" rx="1"/><rect class="bar-up" x="64" y="7.7" width="6" height="14.3" rx="1"/></svg></div><div class="iv-last bar-up">65</div></div></td>
+          <td data-sort="-1"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-up">&#9650;</span><span class="gex-up">&#9650;</span><span class="gex-down">&#9660;</span><span class="gex-down">&#9660;</span><span class="gex-down">&#9660;</span><span class="gex-up">&#9650;</span><span class="gex-down">&#9660;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span></div><span class="chip chip-none">STABLE</span></div></td>
+          <td data-sort="0">Below all MAs</td>
+          <td class="num" data-sort="10">10</td>
+          <td data-sort="-48.0"><span class="chip chip-none">—</span><div class="sub">SMA200 -48.0%</div></td>
+        </tr>
+        <tr>
+          <td class="ticker" data-sort="HPE">HPE</td>
+          <td class="sector" title="Technology (Enterprise Hardware)" data-sort="Technology (Enterprise Hardware)">Technology (Enterprise Hardware)</td>
+          <td data-sort="Mark-down">Mark-down</td>
+          <td class="num" data-sort="44.77">$44.77</td>
+          <td class="num" data-sort="60.84">$60.84 / $44.16</td>
+          <td class="num pullback" data-sort="26.413543721236028">-26.4%</td>
+          <td data-sort="3.6570743405276156"><span class="chip chip-warn">LR 4%</span></td>
+          <td data-sort="2"><span class="chip chip-bull">EXPANSION</span></td>
+          <td data-sort="56.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 78 22" width="78" height="22"><rect class="bar-flat" x="0" y="14.3" width="6" height="7.7" rx="1"/><rect class="bar-down" x="8" y="14.7" width="6" height="7.3" rx="1"/><rect class="bar-up" x="16" y="14.5" width="6" height="7.5" rx="1"/><rect class="bar-flat" x="24" y="14.5" width="6" height="7.5" rx="1"/><rect class="bar-up" x="32" y="13.2" width="6" height="8.8" rx="1"/><rect class="bar-up" x="40" y="9.9" width="6" height="12.1" rx="1"/><rect class="bar-up" x="48" y="9.7" width="6" height="12.3" rx="1"/><rect class="bar-down" x="56" y="9.9" width="6" height="12.1" rx="1"/><rect class="bar-up" x="64" y="7.9" width="6" height="14.1" rx="1"/><rect class="bar-down" x="72" y="9.7" width="6" height="12.3" rx="1"/></svg></div><div class="iv-last bar-down">56</div></div></td>
+          <td data-sort="0"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-up">&#9650;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-down">&#9660;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span></div><span class="chip chip-none">STABLE</span></div></td>
+          <td data-sort="1">First Test</td>
+          <td class="num" data-sort="10">10</td>
+          <td data-sort="8.3"><span class="chip chip-none">—</span><div class="sub">SMA200 +8.3%</div></td>
+        </tr>
+        <tr>
+          <td class="ticker" data-sort="ARM">ARM</td>
+          <td class="sector" title="Semiconductors & Semiconductor IP" data-sort="Semiconductors & Semiconductor IP">Semiconductors & Semiconductor IP</td>
+          <td data-sort="Distribution">Distribution</td>
+          <td class="num" data-sort="174.62">$174.62</td>
+          <td class="num" data-sort="235.9">$235.90 / $166.72</td>
+          <td class="num pullback" data-sort="25.977108944467997">-26.0%</td>
+          <td data-sort="11.419485400404747"><span class="chip chip-warn">LR 11%</span></td>
+          <td data-sort="2"><span class="chip chip-bull">EXPANSION</span></td>
+          <td data-sort="52.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 78 22" width="78" height="22"><rect class="bar-flat" x="0" y="11.7" width="6" height="10.3" rx="1"/><rect class="bar-down" x="8" y="11.9" width="6" height="10.1" rx="1"/><rect class="bar-down" x="16" y="12.3" width="6" height="9.7" rx="1"/><rect class="bar-flat" x="24" y="12.3" width="6" height="9.7" rx="1"/><rect class="bar-up" x="32" y="10.8" width="6" height="11.2" rx="1"/><rect class="bar-up" x="40" y="9.9" width="6" height="12.1" rx="1"/><rect class="bar-down" x="48" y="10.8" width="6" height="11.2" rx="1"/><rect class="bar-flat" x="56" y="10.8" width="6" height="11.2" rx="1"/><rect class="bar-up" x="64" y="8.1" width="6" height="13.9" rx="1"/><rect class="bar-down" x="72" y="10.6" width="6" height="11.4" rx="1"/></svg></div><div class="iv-last bar-down">52</div></div></td>
+          <td data-sort="0"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-flat">&#9632;</span><span class="gex-up">&#9650;</span><span class="gex-flat">&#9632;</span><span class="gex-down">&#9660;</span><span class="gex-down">&#9660;</span><span class="gex-up">&#9650;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span></div><span class="chip chip-none">STABLE</span></div></td>
+          <td data-sort="0">Below all MAs</td>
+          <td class="num" data-sort="10">10</td>
+          <td data-sort="-24.2"><span class="chip chip-none">—</span><div class="sub">SMA200 -24.2%</div></td>
+        </tr>
+        <tr>
+          <td class="ticker" data-sort="VRT">VRT</td>
+          <td class="sector" title="Technology (Quantum Computing)" data-sort="Technology (Quantum Computing)">Technology (Quantum Computing)</td>
+          <td data-sort="Mark-down">Mark-down</td>
+          <td class="num" data-sort="182.86">$182.86</td>
+          <td class="num" data-sort="245.92">$245.92 / $176.73</td>
+          <td class="num pullback" data-sort="25.64248536109303">-25.6%</td>
+          <td data-sort="8.859661800838307"><span class="chip chip-warn">LR 9%</span></td>
+          <td data-sort="1"><span class="chip chip-none">Neutral</span></td>
+          <td data-sort="67.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 78 22" width="78" height="22"><rect class="bar-flat" x="0" y="11.0" width="6" height="11.0" rx="1"/><rect class="bar-flat" x="8" y="11.0" width="6" height="11.0" rx="1"/><rect class="bar-down" x="16" y="18.9" width="6" height="3.1" rx="1"/><rect class="bar-down" x="24" y="19.6" width="6" height="2.4" rx="1"/><rect class="bar-up" x="32" y="16.3" width="6" height="5.7" rx="1"/><rect class="bar-up" x="40" y="13.9" width="6" height="8.1" rx="1"/><rect class="bar-down" x="48" y="14.3" width="6" height="7.7" rx="1"/><rect class="bar-down" x="56" y="14.5" width="6" height="7.5" rx="1"/><rect class="bar-up" x="64" y="5.5" width="6" height="16.5" rx="1"/><rect class="bar-down" x="72" y="7.3" width="6" height="14.7" rx="1"/></svg></div><div class="iv-last bar-down">67</div></div></td>
+          <td data-sort="1"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-up">&#9650;</span><span class="gex-up">&#9650;</span><span class="gex-up">&#9650;</span><span class="gex-down">&#9660;</span><span class="gex-flat">&#9632;</span><span class="gex-up">&#9650;</span><span class="gex-down">&#9660;</span><span class="gex-down">&#9660;</span><span class="gex-flat">&#9632;</span></div><span class="chip chip-warn">WEAKENING</span></div></td>
+          <td data-sort="0">Below all MAs</td>
+          <td class="num" data-sort="10">10</td>
+          <td data-sort="-32.6"><span class="chip chip-none">—</span><div class="sub">SMA200 -32.6%</div></td>
+        </tr>
+        <tr>
+          <td class="ticker" data-sort="FLEX">FLEX</td>
+          <td class="sector" title="Technology (Quantum Computing)" data-sort="Technology (Quantum Computing)">Technology (Quantum Computing)</td>
+          <td data-sort="Mark-down">Mark-down</td>
+          <td class="num" data-sort="69.78">$69.78</td>
+          <td class="num" data-sort="93.07">$93.07 / $66.73</td>
+          <td class="num pullback" data-sort="25.02417535188567">-25.0%</td>
+          <td data-sort="11.579347000759295"><span class="chip chip-warn">LR 12%</span></td>
+          <td data-sort="-1"><span class="chip chip-none">N/A</span></td>
+          <td data-sort="-1"><span class="muted">—</span></td>
+          <td data-sort="-1"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-flat">&#9632;</span><span class="gex-up">&#9650;</span><span class="gex-up">&#9650;</span><span class="gex-down">&#9660;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-down">&#9660;</span><span class="gex-down">&#9660;</span><span class="gex-flat">&#9632;</span></div><span class="chip chip-warn">WEAKENING</span></div></td>
+          <td data-sort="-1">—</td>
+          <td class="num" data-sort="10">10</td>
+          <td data-sort="-999.0"><span class="chip chip-none">—</span><div class="sub"></div></td>
+        </tr>
+        <tr>
+          <td class="ticker" data-sort="BE">BE</td>
+          <td class="sector" title="Fuel Cells / Distributed Power Generation" data-sort="Fuel Cells / Distributed Power Generation">Fuel Cells / Distributed Power Generation</td>
+          <td data-sort="Mark-down">Mark-down</td>
+          <td class="num" data-sort="173.24">$173.24</td>
+          <td class="num" data-sort="228.08">$228.08 / $167.52</td>
+          <td class="num pullback" data-sort="24.044195019291475">-24.0%</td>
+          <td data-sort="9.445178335535005"><span class="chip chip-warn">LR 9%</span></td>
+          <td data-sort="2"><span class="chip chip-bull">EXPANSION</span></td>
+          <td data-sort="21.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 78 22" width="78" height="22"><rect class="bar-flat" x="0" y="20.0" width="6" height="2.0" rx="1"/><rect class="bar-flat" x="8" y="20.0" width="6" height="2.0" rx="1"/><rect class="bar-down" x="16" y="20.0" width="6" height="2.0" rx="1"/><rect class="bar-down" x="24" y="20.0" width="6" height="2.0" rx="1"/><rect class="bar-up" x="32" y="20.0" width="6" height="2.0" rx="1"/><rect class="bar-up" x="40" y="18.9" width="6" height="3.1" rx="1"/><rect class="bar-down" x="48" y="19.4" width="6" height="2.6" rx="1"/><rect class="bar-flat" x="56" y="19.4" width="6" height="2.6" rx="1"/><rect class="bar-up" x="64" y="15.6" width="6" height="6.4" rx="1"/><rect class="bar-down" x="72" y="17.4" width="6" height="4.6" rx="1"/></svg></div><div class="iv-last bar-down">21</div></div></td>
+          <td data-sort="1"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-up">&#9650;</span><span class="gex-up">&#9650;</span><span class="gex-down">&#9660;</span><span class="gex-down">&#9660;</span><span class="gex-up">&#9650;</span><span class="gex-up">&#9650;</span><span class="gex-down">&#9660;</span><span class="gex-down">&#9660;</span><span class="gex-up">&#9650;</span></div><span class="chip chip-none">STABLE</span></div></td>
+          <td data-sort="0">Below all MAs</td>
+          <td class="num" data-sort="10">10</td>
+          <td data-sort="-22.0"><span class="chip chip-none">—</span><div class="sub">SMA200 -22.0%</div></td>
+        </tr>
+        <tr>
+          <td class="ticker" data-sort="SANM">SANM</td>
+          <td class="sector" title="Technology (Quantum Computing)" data-sort="Technology (Quantum Computing)">Technology (Quantum Computing)</td>
+          <td data-sort="Mark-down">Mark-down</td>
+          <td class="num" data-sort="134.68">$134.68</td>
+          <td class="num" data-sort="175.78">$175.78 / $130.23</td>
+          <td class="num pullback" data-sort="23.381499601774944">-23.4%</td>
+          <td data-sort="9.769484083424842"><span class="chip chip-warn">LR 10%</span></td>
+          <td data-sort="2"><span class="chip chip-bull">EXPANSION</span></td>
+          <td data-sort="92.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 78 22" width="78" height="22"><rect class="bar-flat" x="0" y="4.2" width="6" height="17.8" rx="1"/><rect class="bar-flat" x="8" y="4.2" width="6" height="17.8" rx="1"/><rect class="bar-down" x="16" y="4.4" width="6" height="17.6" rx="1"/><rect class="bar-flat" x="24" y="4.4" width="6" height="17.6" rx="1"/><rect class="bar-up" x="32" y="3.7" width="6" height="18.3" rx="1"/><rect class="bar-up" x="40" y="3.3" width="6" height="18.7" rx="1"/><rect class="bar-flat" x="48" y="3.3" width="6" height="18.7" rx="1"/><rect class="bar-down" x="56" y="5.1" width="6" height="16.9" rx="1"/><rect class="bar-up" x="64" y="1.8" width="6" height="20.2" rx="1"/><rect class="bar-flat" x="72" y="1.8" width="6" height="20.2" rx="1"/></svg></div><div class="iv-last ">92</div></div></td>
+          <td data-sort="1"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-up">&#9650;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span></div><span class="chip chip-none">STABLE</span></div></td>
+          <td data-sort="0">Below all MAs</td>
+          <td class="num" data-sort="10">10</td>
+          <td data-sort="-29.7"><span class="chip chip-none">—</span><div class="sub">SMA200 -29.7%</div></td>
+        </tr>
+        <tr>
+          <td class="ticker" data-sort="SKHY">SKHY</td>
+          <td class="sector" title="Semiconductors / Memory" data-sort="Semiconductors / Memory">Semiconductors / Memory</td>
+          <td data-sort="Mark-down">Mark-down</td>
+          <td class="num" data-sort="127.34">$127.34</td>
+          <td class="num" data-sort="164.7">$164.70 / $123.90</td>
+          <td class="num pullback" data-sort="22.6836672738312">-22.7%</td>
+          <td data-sort="8.431372549019606"><span class="chip chip-warn">LR 8%</span></td>
+          <td data-sort="-1"><span class="chip chip-none">N/A</span></td>
+          <td data-sort="-1"><span class="muted">—</span></td>
+          <td data-sort="1"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-up">&#9650;</span><span class="gex-up">&#9650;</span><span class="gex-down">&#9660;</span><span class="gex-up">&#9650;</span><span class="gex-flat">&#9632;</span><span class="gex-down">&#9660;</span><span class="gex-down">&#9660;</span><span class="gex-up">&#9650;</span></div><span class="chip chip-bull">IMPROVING</span></div></td>
+          <td data-sort="-1">—</td>
+          <td class="num" data-sort="9">9</td>
+          <td data-sort="-999.0"><span class="chip chip-none">—</span><div class="sub"></div></td>
+        </tr>
+        <tr>
+          <td class="ticker" data-sort="ONTO">ONTO</td>
+          <td class="sector" title="Semiconductor Metrology" data-sort="Semiconductor Metrology">Semiconductor Metrology</td>
+          <td data-sort="Mark-down">Mark-down</td>
+          <td class="num" data-sort="173.28">$173.28</td>
+          <td class="num" data-sort="223.68">$223.68 / $155.99</td>
+          <td class="num pullback" data-sort="22.53218884120172">-22.5%</td>
+          <td data-sort="25.542916235780755"><span class="chip chip-warn">MR 26%</span></td>
+          <td data-sort="2"><span class="chip chip-bull">EXPANSION</span></td>
+          <td data-sort="75.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 78 22" width="78" height="22"><rect class="bar-flat" x="0" y="8.4" width="6" height="13.6" rx="1"/><rect class="bar-flat" x="8" y="8.4" width="6" height="13.6" rx="1"/><rect class="bar-down" x="16" y="9.2" width="6" height="12.8" rx="1"/><rect class="bar-flat" x="24" y="9.2" width="6" height="12.8" rx="1"/><rect class="bar-up" x="32" y="8.4" width="6" height="13.6" rx="1"/><rect class="bar-up" x="40" y="8.1" width="6" height="13.9" rx="1"/><rect class="bar-up" x="48" y="7.7" width="6" height="14.3" rx="1"/><rect class="bar-up" x="56" y="7.3" width="6" height="14.7" rx="1"/><rect class="bar-up" x="64" y="5.5" width="6" height="16.5" rx="1"/><rect class="bar-flat" x="72" y="5.5" width="6" height="16.5" rx="1"/></svg></div><div class="iv-last ">75</div></div></td>
+          <td data-sort="0"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span></div><span class="chip chip-none">STABLE</span></div></td>
+          <td data-sort="0">Below all MAs</td>
+          <td class="num" data-sort="10">10</td>
+          <td data-sort="-33.5"><span class="chip chip-none">—</span><div class="sub">SMA200 -33.5%</div></td>
+        </tr>
+        <tr>
+          <td class="ticker" data-sort="FOTO">FOTO</td>
+          <td class="sector" title="Photonics ETF" data-sort="Photonics ETF">Photonics ETF</td>
+          <td data-sort="Mark-down">Mark-down</td>
+          <td class="num" data-sort="12.74">$12.74</td>
+          <td class="num" data-sort="16.43">$16.43 / $11.48</td>
+          <td class="num pullback" data-sort="22.458916615946436">-22.5%</td>
+          <td data-sort="25.454545454545453"><span class="chip chip-warn">MR 25%</span></td>
+          <td data-sort="2"><span class="chip chip-bull">EXPANSION</span></td>
+          <td data-sort="91.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 78 22" width="78" height="22"><rect class="bar-flat" x="0" y="8.6" width="6" height="13.4" rx="1"/><rect class="bar-flat" x="8" y="8.6" width="6" height="13.4" rx="1"/><rect class="bar-up" x="16" y="6.6" width="6" height="15.4" rx="1"/><rect class="bar-down" x="24" y="9.5" width="6" height="12.5" rx="1"/><rect class="bar-down" x="32" y="12.8" width="6" height="9.2" rx="1"/><rect class="bar-up" x="40" y="3.5" width="6" height="18.5" rx="1"/><rect class="bar-up" x="48" y="3.3" width="6" height="18.7" rx="1"/><rect class="bar-down" x="56" y="7.3" width="6" height="14.7" rx="1"/><rect class="bar-up" x="64" y="1.5" width="6" height="20.5" rx="1"/><rect class="bar-down" x="72" y="2.0" width="6" height="20.0" rx="1"/></svg></div><div class="iv-last bar-down">91</div></div></td>
+          <td data-sort="0"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span></div><span class="chip chip-none">STABLE</span></div></td>
+          <td data-sort="-1">—</td>
+          <td class="num" data-sort="10">10</td>
+          <td data-sort="-999.0"><span class="chip chip-none">—</span><div class="sub"></div></td>
+        </tr>
+        <tr>
+          <td class="ticker" data-sort="AMD">AMD</td>
+          <td class="sector" title="Semiconductors" data-sort="Semiconductors">Semiconductors</td>
+          <td data-sort="Distribution">Distribution</td>
+          <td class="num" data-sort="449.04">$449.04</td>
+          <td class="num" data-sort="578.44">$578.44 / $404.40</td>
+          <td class="num pullback" data-sort="22.370513795726442">-22.4%</td>
+          <td data-sort="25.64927602849921"><span class="chip chip-warn">MR 26%</span></td>
+          <td data-sort="2"><span class="chip chip-bull">EXPANSION</span></td>
+          <td data-sort="57.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 78 22" width="78" height="22"><rect class="bar-flat" x="0" y="13.2" width="6" height="8.8" rx="1"/><rect class="bar-down" x="8" y="13.4" width="6" height="8.6" rx="1"/><rect class="bar-down" x="16" y="13.9" width="6" height="8.1" rx="1"/><rect class="bar-flat" x="24" y="13.9" width="6" height="8.1" rx="1"/><rect class="bar-up" x="32" y="11.9" width="6" height="10.1" rx="1"/><rect class="bar-up" x="40" y="9.2" width="6" height="12.8" rx="1"/><rect class="bar-down" x="48" y="10.8" width="6" height="11.2" rx="1"/><rect class="bar-down" x="56" y="13.6" width="6" height="8.4" rx="1"/><rect class="bar-up" x="64" y="7.5" width="6" height="14.5" rx="1"/><rect class="bar-down" x="72" y="9.5" width="6" height="12.5" rx="1"/></svg></div><div class="iv-last bar-down">57</div></div></td>
+          <td data-sort="0"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-up">&#9650;</span><span class="gex-up">&#9650;</span><span class="gex-down">&#9660;</span><span class="gex-down">&#9660;</span><span class="gex-up">&#9650;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-down">&#9660;</span></div><span class="chip chip-warn">WEAKENING</span></div></td>
+          <td data-sort="1">First Test</td>
+          <td class="num" data-sort="10">10</td>
+          <td data-sort="8.4"><span class="chip chip-none">—</span><div class="sub">SMA200 +8.4%</div></td>
+        </tr>
+        <tr>
+          <td class="ticker" data-sort="PANW">PANW</td>
+          <td class="sector" title="Technology (Quantum Computing)" data-sort="Technology (Quantum Computing)">Technology (Quantum Computing)</td>
+          <td data-sort="Distribution">Distribution</td>
+          <td class="num" data-sort="313.84">$313.84</td>
+          <td class="num" data-sort="401.7">$401.70 / $313.84</td>
+          <td class="num pullback" data-sort="21.872043813791393">-21.9%</td>
+          <td data-sort="0.0"><span class="chip chip-warn">LR 0%</span></td>
+          <td data-sort="-1"><span class="chip chip-none">N/A</span></td>
+          <td data-sort="-1"><span class="muted">—</span></td>
+          <td data-sort="-3"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-up">&#9650;</span><span class="gex-flat">&#9632;</span><span class="gex-down">&#9660;</span><span class="gex-down">&#9660;</span><span class="gex-up">&#9650;</span><span class="gex-down">&#9660;</span><span class="gex-flat">&#9632;</span><span class="gex-down">&#9660;</span><span class="gex-down">&#9660;</span></div><span class="chip chip-warn">WEAKENING</span></div></td>
+          <td data-sort="-1">—</td>
+          <td class="num" data-sort="10">10</td>
+          <td data-sort="-999.0"><span class="chip chip-none">—</span><div class="sub"></div></td>
+        </tr>
+        <tr>
+          <td class="ticker" data-sort="LRCX">LRCX</td>
+          <td class="sector" title="Wafer Fabrication Equipment" data-sort="Wafer Fabrication Equipment">Wafer Fabrication Equipment</td>
+          <td data-sort="Mark-down">Mark-down</td>
+          <td class="num" data-sort="200.44">$200.44</td>
+          <td class="num" data-sort="254.39">$254.39 / $185.20</td>
+          <td class="num pullback" data-sort="21.207594638154013">-21.2%</td>
+          <td data-sort="22.02630437924557"><span class="chip chip-warn">LR 22%</span></td>
+          <td data-sort="2"><span class="chip chip-bull">EXPANSION</span></td>
+          <td data-sort="49.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 78 22" width="78" height="22"><rect class="bar-flat" x="0" y="17.2" width="6" height="4.8" rx="1"/><rect class="bar-down" x="8" y="18.0" width="6" height="4.0" rx="1"/><rect class="bar-up" x="16" y="17.6" width="6" height="4.4" rx="1"/><rect class="bar-flat" x="24" y="17.6" width="6" height="4.4" rx="1"/><rect class="bar-up" x="32" y="16.3" width="6" height="5.7" rx="1"/><rect class="bar-up" x="40" y="14.1" width="6" height="7.9" rx="1"/><rect class="bar-down" x="48" y="15.0" width="6" height="7.0" rx="1"/><rect class="bar-flat" x="56" y="15.0" width="6" height="7.0" rx="1"/><rect class="bar-up" x="64" y="9.9" width="6" height="12.1" rx="1"/><rect class="bar-down" x="72" y="11.2" width="6" height="10.8" rx="1"/></svg></div><div class="iv-last bar-down">49</div></div></td>
+          <td data-sort="0"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-up">&#9650;</span><span class="gex-up">&#9650;</span><span class="gex-up">&#9650;</span><span class="gex-down">&#9660;</span><span class="gex-down">&#9660;</span><span class="gex-flat">&#9632;</span><span class="gex-down">&#9660;</span><span class="gex-up">&#9650;</span><span class="gex-down">&#9660;</span></div><span class="chip chip-warn">WEAKENING</span></div></td>
+          <td data-sort="0">Below all MAs</td>
+          <td class="num" data-sort="10">10</td>
+          <td data-sort="-29.5"><span class="chip chip-none">—</span><div class="sub">SMA200 -29.5%</div></td>
+        </tr>
+        <tr>
+          <td class="ticker" data-sort="AMAT">AMAT</td>
+          <td class="sector" title="Semiconductor Manufacturing Equipment" data-sort="Semiconductor Manufacturing Equipment">Semiconductor Manufacturing Equipment</td>
+          <td data-sort="Mark-down">Mark-down</td>
+          <td class="num" data-sort="332.71">$332.71</td>
+          <td class="num" data-sort="421.66">$421.66 / $319.25</td>
+          <td class="num pullback" data-sort="21.095195180951485">-21.1%</td>
+          <td data-sort="13.143247729713872"><span class="chip chip-warn">LR 13%</span></td>
+          <td data-sort="2"><span class="chip chip-bull">EXPANSION</span></td>
+          <td data-sort="61.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 78 22" width="78" height="22"><rect class="bar-flat" x="0" y="13.4" width="6" height="8.6" rx="1"/><rect class="bar-down" x="8" y="14.1" width="6" height="7.9" rx="1"/><rect class="bar-up" x="16" y="13.6" width="6" height="8.4" rx="1"/><rect class="bar-flat" x="24" y="13.6" width="6" height="8.4" rx="1"/><rect class="bar-up" x="32" y="12.8" width="6" height="9.2" rx="1"/><rect class="bar-up" x="40" y="11.0" width="6" height="11.0" rx="1"/><rect class="bar-down" x="48" y="11.2" width="6" height="10.8" rx="1"/><rect class="bar-down" x="56" y="11.7" width="6" height="10.3" rx="1"/><rect class="bar-up" x="64" y="7.3" width="6" height="14.7" rx="1"/><rect class="bar-down" x="72" y="8.6" width="6" height="13.4" rx="1"/></svg></div><div class="iv-last bar-down">61</div></div></td>
+          <td data-sort="0"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-flat">&#9632;</span><span class="gex-up">&#9650;</span><span class="gex-up">&#9650;</span><span class="gex-down">&#9660;</span><span class="gex-down">&#9660;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-up">&#9650;</span><span class="gex-down">&#9660;</span></div><span class="chip chip-warn">WEAKENING</span></div></td>
+          <td data-sort="0">Below all MAs</td>
+          <td class="num" data-sort="10">10</td>
+          <td data-sort="-25.3"><span class="chip chip-none">—</span><div class="sub">SMA200 -25.3%</div></td>
+        </tr>
+        <tr>
+          <td class="ticker" data-sort="PLXS">PLXS</td>
+          <td class="sector" title="Technology (Quantum Computing)" data-sort="Technology (Quantum Computing)">Technology (Quantum Computing)</td>
+          <td data-sort="Mark-down">Mark-down</td>
+          <td class="num" data-sort="192.17">$192.17</td>
+          <td class="num" data-sort="239.34">$239.34 / $187.73</td>
+          <td class="num pullback" data-sort="19.70836466950782">-19.7%</td>
+          <td data-sort="8.602983917845371"><span class="chip chip-warn">LR 9%</span></td>
+          <td data-sort="-1"><span class="chip chip-none">N/A</span></td>
+          <td data-sort="-1"><span class="muted">—</span></td>
+          <td data-sort="0"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span></div><span class="chip chip-none">STABLE</span></div></td>
+          <td data-sort="-1">—</td>
+          <td class="num" data-sort="10">10</td>
+          <td data-sort="-999.0"><span class="chip chip-none">—</span><div class="sub"></div></td>
+        </tr>
+        <tr>
+          <td class="ticker" data-sort="SMCI">SMCI</td>
+          <td class="sector" title="Server & Storage Systems" data-sort="Server & Storage Systems">Server & Storage Systems</td>
+          <td data-sort="Mark-down">Mark-down</td>
+          <td class="num" data-sort="28.76">$28.76</td>
+          <td class="num" data-sort="35.81">$35.81 / $27.08</td>
+          <td class="num pullback" data-sort="19.68723820161966">-19.7%</td>
+          <td data-sort="19.24398625429556"><span class="chip chip-warn">LR 19%</span></td>
+          <td data-sort="1"><span class="chip chip-none">Neutral</span></td>
+          <td data-sort="44.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 78 22" width="78" height="22"><rect class="bar-flat" x="0" y="10.1" width="6" height="11.9" rx="1"/><rect class="bar-flat" x="8" y="10.1" width="6" height="11.9" rx="1"/><rect class="bar-down" x="16" y="11.2" width="6" height="10.8" rx="1"/><rect class="bar-up" x="24" y="10.8" width="6" height="11.2" rx="1"/><rect class="bar-up" x="32" y="8.1" width="6" height="13.9" rx="1"/><rect class="bar-up" x="40" y="6.4" width="6" height="15.6" rx="1"/><rect class="bar-flat" x="48" y="6.4" width="6" height="15.6" rx="1"/><rect class="bar-down" x="56" y="14.1" width="6" height="7.9" rx="1"/><rect class="bar-up" x="64" y="10.8" width="6" height="11.2" rx="1"/><rect class="bar-down" x="72" y="12.3" width="6" height="9.7" rx="1"/></svg></div><div class="iv-last bar-down">44</div></div></td>
+          <td data-sort="-1"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-up">&#9650;</span><span class="gex-up">&#9650;</span><span class="gex-down">&#9660;</span><span class="gex-down">&#9660;</span><span class="gex-down">&#9660;</span><span class="gex-up">&#9650;</span><span class="gex-down">&#9660;</span><span class="gex-down">&#9660;</span><span class="gex-up">&#9650;</span></div><span class="chip chip-bull">IMPROVING</span></div></td>
+          <td data-sort="0">Below all MAs</td>
+          <td class="num" data-sort="10">10</td>
+          <td data-sort="-11.9"><span class="chip chip-none">—</span><div class="sub">SMA200 -11.9%</div></td>
+        </tr>
+        <tr>
+          <td class="ticker" data-sort="ORCL">ORCL</td>
+          <td class="sector" title="Technology (Software)" data-sort="Technology (Software)">Technology (Software)</td>
+          <td data-sort="Distribution">Distribution</td>
+          <td class="num" data-sort="116.1">$116.10</td>
+          <td class="num" data-sort="144.54">$144.54 / $115.16</td>
+          <td class="num pullback" data-sort="19.67621419676214">-19.7%</td>
+          <td data-sort="3.199455411844785"><span class="chip chip-warn">LR 3%</span></td>
+          <td data-sort="1"><span class="chip chip-none">Neutral</span></td>
+          <td data-sort="51.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 78 22" width="78" height="22"><rect class="bar-flat" x="0" y="13.9" width="6" height="8.1" rx="1"/><rect class="bar-flat" x="8" y="13.9" width="6" height="8.1" rx="1"/><rect class="bar-down" x="16" y="15.2" width="6" height="6.8" rx="1"/><rect class="bar-down" x="24" y="16.5" width="6" height="5.5" rx="1"/><rect class="bar-up" x="32" y="15.0" width="6" height="7.0" rx="1"/><rect class="bar-up" x="40" y="12.8" width="6" height="9.2" rx="1"/><rect class="bar-flat" x="48" y="12.8" width="6" height="9.2" rx="1"/><rect class="bar-down" x="56" y="13.4" width="6" height="8.6" rx="1"/><rect class="bar-up" x="64" y="9.9" width="6" height="12.1" rx="1"/><rect class="bar-down" x="72" y="10.8" width="6" height="11.2" rx="1"/></svg></div><div class="iv-last bar-down">51</div></div></td>
+          <td data-sort="0"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-down">&#9660;</span><span class="gex-up">&#9650;</span><span class="gex-flat">&#9632;</span><span class="gex-down">&#9660;</span><span class="gex-up">&#9650;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-down">&#9660;</span><span class="gex-up">&#9650;</span></div><span class="chip chip-warn">WEAKENING</span></div></td>
+          <td data-sort="0">Below all MAs</td>
+          <td class="num" data-sort="10">10</td>
+          <td data-sort="-25.6"><span class="chip chip-none">—</span><div class="sub">SMA200 -25.6%</div></td>
+        </tr>
+        <tr>
+          <td class="ticker" data-sort="COHR">COHR</td>
+          <td class="sector" title="Technology (Quantum Computing)" data-sort="Technology (Quantum Computing)">Technology (Quantum Computing)</td>
+          <td data-sort="Mark-down">Mark-down</td>
+          <td class="num" data-sort="192.81">$192.81</td>
+          <td class="num" data-sort="239.59">$239.59 / $169.76</td>
+          <td class="num pullback" data-sort="19.52502191243374">-19.5%</td>
+          <td data-sort="33.00873550050123"><span class="chip chip-warn">MR 33%</span></td>
+          <td data-sort="2"><span class="chip chip-bull">EXPANSION</span></td>
+          <td data-sort="56.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 78 22" width="78" height="22"><rect class="bar-flat" x="0" y="12.8" width="6" height="9.2" rx="1"/><rect class="bar-down" x="8" y="13.4" width="6" height="8.6" rx="1"/><rect class="bar-down" x="16" y="15.2" width="6" height="6.8" rx="1"/><rect class="bar-flat" x="24" y="15.2" width="6" height="6.8" rx="1"/><rect class="bar-up" x="32" y="11.7" width="6" height="10.3" rx="1"/><rect class="bar-up" x="40" y="9.2" width="6" height="12.8" rx="1"/><rect class="bar-down" x="48" y="9.7" width="6" height="12.3" rx="1"/><rect class="bar-down" x="56" y="10.3" width="6" height="11.7" rx="1"/><rect class="bar-up" x="64" y="7.0" width="6" height="15.0" rx="1"/><rect class="bar-down" x="72" y="9.7" width="6" height="12.3" rx="1"/></svg></div><div class="iv-last bar-down">56</div></div></td>
+          <td data-sort="0"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-up">&#9650;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-down">&#9660;</span><span class="gex-down">&#9660;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-up">&#9650;</span><span class="gex-flat">&#9632;</span></div><span class="chip chip-bull">IMPROVING</span></div></td>
+          <td data-sort="0">Below all MAs</td>
+          <td class="num" data-sort="10">10</td>
+          <td data-sort="-35.0"><span class="chip chip-none">—</span><div class="sub">SMA200 -35.0%</div></td>
+        </tr>
+        <tr>
+          <td class="ticker" data-sort="DCO">DCO</td>
+          <td class="sector" title="Technology (Quantum Computing)" data-sort="Technology (Quantum Computing)">Technology (Quantum Computing)</td>
+          <td data-sort="Mark-down">Mark-down</td>
+          <td class="num" data-sort="135.25">$135.25</td>
+          <td class="num" data-sort="168.06">$168.06 / $132.50</td>
+          <td class="num pullback" data-sort="19.52278947994764">-19.5%</td>
+          <td data-sort="7.733408323959505"><span class="chip chip-warn">LR 8%</span></td>
+          <td data-sort="2"><span class="chip chip-bull">EXPANSION</span></td>
+          <td data-sort="69.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 78 22" width="78" height="22"><rect class="bar-flat" x="0" y="5.3" width="6" height="16.7" rx="1"/><rect class="bar-down" x="8" y="6.2" width="6" height="15.8" rx="1"/><rect class="bar-down" x="16" y="9.2" width="6" height="12.8" rx="1"/><rect class="bar-flat" x="24" y="9.2" width="6" height="12.8" rx="1"/><rect class="bar-up" x="32" y="5.9" width="6" height="16.1" rx="1"/><rect class="bar-up" x="40" y="5.3" width="6" height="16.7" rx="1"/><rect class="bar-up" x="48" y="0.7" width="6" height="21.3" rx="1"/><rect class="bar-down" x="56" y="0.9" width="6" height="21.1" rx="1"/><rect class="bar-down" x="64" y="5.1" width="6" height="16.9" rx="1"/><rect class="bar-down" x="72" y="6.8" width="6" height="15.2" rx="1"/></svg></div><div class="iv-last bar-down">69</div></div></td>
+          <td data-sort="0"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span></div><span class="chip chip-none">STABLE</span></div></td>
+          <td data-sort="0">Below all MAs</td>
+          <td class="num" data-sort="10">10</td>
+          <td data-sort="-12.3"><span class="chip chip-none">—</span><div class="sub">SMA200 -12.3%</div></td>
+        </tr>
+        <tr>
+          <td class="ticker" data-sort="PLTR">PLTR</td>
+          <td class="sector" title="Technology (Software/Data Analytics)" data-sort="Technology (Software/Data Analytics)">Technology (Software/Data Analytics)</td>
+          <td data-sort="Mark-down">Mark-down</td>
+          <td class="num" data-sort="160.38">$160.38</td>
+          <td class="num" data-sort="198.73">$198.73 / $154.99</td>
+          <td class="num pullback" data-sort="19.297539375031448">-19.3%</td>
+          <td data-sort="12.322816643804273"><span class="chip chip-warn">LR 12%</span></td>
+          <td data-sort="1"><span class="chip chip-none">Neutral</span></td>
+          <td data-sort="49.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 78 22" width="78" height="22"><rect class="bar-flat" x="0" y="4.6" width="6" height="17.4" rx="1"/><rect class="bar-down" x="8" y="5.9" width="6" height="16.1" rx="1"/><rect class="bar-down" x="16" y="6.2" width="6" height="15.8" rx="1"/><rect class="bar-flat" x="24" y="6.2" width="6" height="15.8" rx="1"/><rect class="bar-up" x="32" y="0.0" width="6" height="22.0" rx="1"/><rect class="bar-down" x="40" y="0.2" width="6" height="21.8" rx="1"/><rect class="bar-down" x="48" y="14.1" width="6" height="7.9" rx="1"/><rect class="bar-down" x="56" y="16.9" width="6" height="5.1" rx="1"/><rect class="bar-up" x="64" y="8.6" width="6" height="13.4" rx="1"/><rect class="bar-down" x="72" y="11.2" width="6" height="10.8" rx="1"/></svg></div><div class="iv-last bar-down">49</div></div></td>
+          <td data-sort="-3"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-down">&#9660;</span><span class="gex-down">&#9660;</span><span class="gex-flat">&#9632;</span><span class="gex-down">&#9660;</span><span class="gex-flat">&#9632;</span><span class="gex-down">&#9660;</span><span class="gex-up">&#9650;</span><span class="gex-down">&#9660;</span><span class="gex-up">&#9650;</span></div><span class="chip chip-bull">IMPROVING</span></div></td>
+          <td data-sort="1">First Test</td>
+          <td class="num" data-sort="10">10</td>
+          <td data-sort="4.4"><span class="chip chip-none">—</span><div class="sub">SMA200 +4.4%</div></td>
+        </tr>
+        <tr>
+          <td class="ticker" data-sort="GLW">GLW</td>
+          <td class="sector" title="Technology (Quantum Computing)" data-sort="Technology (Quantum Computing)">Technology (Quantum Computing)</td>
+          <td data-sort="Mark-down">Mark-down</td>
+          <td class="num" data-sort="106.13">$106.13</td>
+          <td class="num" data-sort="131.2">$131.20 / $103.43</td>
+          <td class="num pullback" data-sort="19.10823170731707">-19.1%</td>
+          <td data-sort="9.722722362261399"><span class="chip chip-warn">LR 10%</span></td>
+          <td data-sort="1"><span class="chip chip-none">Neutral</span></td>
+          <td data-sort="61.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 78 22" width="78" height="22"><rect class="bar-flat" x="0" y="13.4" width="6" height="8.6" rx="1"/><rect class="bar-down" x="8" y="13.9" width="6" height="8.1" rx="1"/><rect class="bar-down" x="16" y="14.5" width="6" height="7.5" rx="1"/><rect class="bar-flat" x="24" y="14.5" width="6" height="7.5" rx="1"/><rect class="bar-up" x="32" y="13.2" width="6" height="8.8" rx="1"/><rect class="bar-up" x="40" y="12.1" width="6" height="9.9" rx="1"/><rect class="bar-down" x="48" y="12.8" width="6" height="9.2" rx="1"/><rect class="bar-down" x="56" y="13.9" width="6" height="8.1" rx="1"/><rect class="bar-up" x="64" y="8.8" width="6" height="13.2" rx="1"/><rect class="bar-up" x="72" y="8.6" width="6" height="13.4" rx="1"/></svg></div><div class="iv-last bar-up">61</div></div></td>
+          <td data-sort="0"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-up">&#9650;</span><span class="gex-up">&#9650;</span><span class="gex-down">&#9660;</span><span class="gex-down">&#9660;</span><span class="gex-up">&#9650;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-down">&#9660;</span></div><span class="chip chip-warn">WEAKENING</span></div></td>
+          <td data-sort="0">Below all MAs</td>
+          <td class="num" data-sort="10">10</td>
+          <td data-sort="-32.0"><span class="chip chip-none">—</span><div class="sub">SMA200 -32.0%</div></td>
+        </tr>
+        <tr>
+          <td class="ticker" data-sort="RXRX">RXRX</td>
+          <td class="sector" title="Pharmaceuticals / Biotechnology" data-sort="Pharmaceuticals / Biotechnology">Pharmaceuticals / Biotechnology</td>
+          <td data-sort="Mark-down">Mark-down</td>
+          <td class="num" data-sort="3.52">$3.52</td>
+          <td class="num" data-sort="4.35">$4.35 / $3.50</td>
+          <td class="num pullback" data-sort="19.080459770114935">-19.1%</td>
+          <td data-sort="2.3529411764705914"><span class="chip chip-warn">LR 2%</span></td>
+          <td data-sort="1"><span class="chip chip-none">Neutral</span></td>
+          <td data-sort="42.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 70 22" width="70" height="22"><rect class="bar-flat" x="0" y="15.4" width="6" height="6.6" rx="1"/><rect class="bar-up" x="8" y="10.1" width="6" height="11.9" rx="1"/><rect class="bar-flat" x="16" y="10.1" width="6" height="11.9" rx="1"/><rect class="bar-down" x="24" y="11.0" width="6" height="11.0" rx="1"/><rect class="bar-up" x="32" y="2.6" width="6" height="19.4" rx="1"/><rect class="bar-down" x="40" y="11.7" width="6" height="10.3" rx="1"/><rect class="bar-up" x="48" y="6.2" width="6" height="15.8" rx="1"/><rect class="bar-down" x="56" y="6.8" width="6" height="15.2" rx="1"/><rect class="bar-down" x="64" y="12.8" width="6" height="9.2" rx="1"/></svg></div><div class="iv-last bar-down">42</div></div></td>
+          <td data-sort="0"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span></div><span class="chip chip-none">STABLE</span></div></td>
+          <td data-sort="1">First Test</td>
+          <td class="num" data-sort="9">9</td>
+          <td data-sort="0.0"><span class="chip chip-none">—</span><div class="sub">SMA200 +0.0%</div></td>
+        </tr>
+        <tr>
+          <td class="ticker" data-sort="CRWD">CRWD</td>
+          <td class="sector" title="Technology (Quantum Computing)" data-sort="Technology (Quantum Computing)">Technology (Quantum Computing)</td>
+          <td data-sort="Mark-down">Mark-down</td>
+          <td class="num" data-sort="216.9">$216.90</td>
+          <td class="num" data-sort="268.02">$268.02 / $216.90</td>
+          <td class="num pullback" data-sort="19.07320349227669">-19.1%</td>
+          <td data-sort="0.0"><span class="chip chip-warn">LR 0%</span></td>
+          <td data-sort="2"><span class="chip chip-bull">EXPANSION</span></td>
+          <td data-sort="91.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 78 22" width="78" height="22"><rect class="bar-flat" x="0" y="7.7" width="6" height="14.3" rx="1"/><rect class="bar-down" x="8" y="8.8" width="6" height="13.2" rx="1"/><rect class="bar-up" x="16" y="7.9" width="6" height="14.1" rx="1"/><rect class="bar-flat" x="24" y="7.9" width="6" height="14.1" rx="1"/><rect class="bar-up" x="32" y="3.3" width="6" height="18.7" rx="1"/><rect class="bar-up" x="40" y="0.4" width="6" height="21.6" rx="1"/><rect class="bar-down" x="48" y="1.3" width="6" height="20.7" rx="1"/><rect class="bar-up" x="56" y="0.9" width="6" height="21.1" rx="1"/><rect class="bar-up" x="64" y="0.0" width="6" height="22.0" rx="1"/><rect class="bar-down" x="72" y="2.0" width="6" height="20.0" rx="1"/></svg></div><div class="iv-last bar-down">91</div></div></td>
+          <td data-sort="-3"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-up">&#9650;</span><span class="gex-flat">&#9632;</span><span class="gex-down">&#9660;</span><span class="gex-down">&#9660;</span><span class="gex-down">&#9660;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-down">&#9660;</span><span class="gex-flat">&#9632;</span></div><span class="chip chip-warn">WEAKENING</span></div></td>
+          <td data-sort="1">First Test</td>
+          <td class="num" data-sort="10">10</td>
+          <td data-sort="28.2"><span class="chip chip-bull">UPTREND PULLBACK</span><div class="sub">SMA200 +28.2%</div></td>
+        </tr>
+        <tr>
+          <td class="ticker" data-sort="DVN">DVN</td>
+          <td class="sector" title="Oil & Gas Exploration & Production" data-sort="Oil & Gas Exploration & Production">Oil & Gas Exploration & Production</td>
+          <td data-sort="Distribution">Distribution</td>
+          <td class="num" data-sort="42.21">$42.21</td>
+          <td class="num" data-sort="52.15">$52.15 / $42.21</td>
+          <td class="num pullback" data-sort="19.060402684563755">-19.1%</td>
+          <td data-sort="0.0"><span class="chip chip-warn">LR 0%</span></td>
+          <td data-sort="-1"><span class="chip chip-none">N/A</span></td>
+          <td data-sort="-1"><span class="muted">—</span></td>
+          <td data-sort="-2"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-down">&#9660;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-down">&#9660;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span></div><span class="chip chip-none">STABLE</span></div></td>
+          <td data-sort="-1">—</td>
+          <td class="num" data-sort="10">10</td>
+          <td data-sort="-999.0"><span class="chip chip-none">—</span><div class="sub"></div></td>
+        </tr>
+        <tr>
+          <td class="ticker" data-sort="KEYS">KEYS</td>
+          <td class="sector" title="Technology (Quantum Computing)" data-sort="Technology (Quantum Computing)">Technology (Quantum Computing)</td>
+          <td data-sort="Mark-down">Mark-down</td>
+          <td class="num" data-sort="272.13">$272.13</td>
+          <td class="num" data-sort="336.1">$336.10 / $260.61</td>
+          <td class="num pullback" data-sort="19.033025885153236">-19.0%</td>
+          <td data-sort="15.260299377400955"><span class="chip chip-warn">LR 15%</span></td>
+          <td data-sort="-1"><span class="chip chip-none">N/A</span></td>
+          <td data-sort="-1"><span class="muted">—</span></td>
+          <td data-sort="-1"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-up">&#9650;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-down">&#9660;</span><span class="gex-flat">&#9632;</span><span class="gex-up">&#9650;</span><span class="gex-down">&#9660;</span><span class="gex-down">&#9660;</span><span class="gex-flat">&#9632;</span></div><span class="chip chip-warn">WEAKENING</span></div></td>
+          <td data-sort="-1">—</td>
+          <td class="num" data-sort="10">10</td>
+          <td data-sort="-999.0"><span class="chip chip-none">—</span><div class="sub"></div></td>
+        </tr>
+        <tr>
+          <td class="ticker" data-sort="SMH">SMH</td>
+          <td class="sector" title="Semiconductors ETF" data-sort="Semiconductors ETF">Semiconductors ETF</td>
+          <td data-sort="Mark-down">Mark-down</td>
+          <td class="num" data-sort="463.96">$463.96</td>
+          <td class="num" data-sort="567.67">$567.67 / $447.73</td>
+          <td class="num pullback" data-sort="18.269417090915493">-18.3%</td>
+          <td data-sort="13.531765882941446"><span class="chip chip-warn">LR 14%</span></td>
+          <td data-sort="2"><span class="chip chip-bull">EXPANSION</span></td>
+          <td data-sort="79.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 78 22" width="78" height="22"><rect class="bar-flat" x="0" y="13.4" width="6" height="8.6" rx="1"/><rect class="bar-flat" x="8" y="13.4" width="6" height="8.6" rx="1"/><rect class="bar-down" x="16" y="15.2" width="6" height="6.8" rx="1"/><rect class="bar-up" x="24" y="14.3" width="6" height="7.7" rx="1"/><rect class="bar-up" x="32" y="11.7" width="6" height="10.3" rx="1"/><rect class="bar-up" x="40" y="8.1" width="6" height="13.9" rx="1"/><rect class="bar-down" x="48" y="9.7" width="6" height="12.3" rx="1"/><rect class="bar-down" x="56" y="12.1" width="6" height="9.9" rx="1"/><rect class="bar-up" x="64" y="0.0" width="6" height="22.0" rx="1"/><rect class="bar-down" x="72" y="4.6" width="6" height="17.4" rx="1"/></svg></div><div class="iv-last bar-down">79</div></div></td>
+          <td data-sort="1"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-up">&#9650;</span><span class="gex-up">&#9650;</span><span class="gex-up">&#9650;</span><span class="gex-down">&#9660;</span><span class="gex-up">&#9650;</span><span class="gex-down">&#9660;</span><span class="gex-down">&#9660;</span><span class="gex-up">&#9650;</span><span class="gex-down">&#9660;</span></div><span class="chip chip-bull">IMPROVING</span></div></td>
+          <td data-sort="-1">—</td>
+          <td class="num" data-sort="10">10</td>
+          <td data-sort="31.9"><span class="chip chip-bull">UPTREND PULLBACK</span><div class="sub">SMA200 +31.9%</div></td>
+        </tr>
+        <tr>
+          <td class="ticker" data-sort="NET">NET</td>
+          <td class="sector" title="Cybersecurity / Cloud Infrastructure" data-sort="Cybersecurity / Cloud Infrastructure">Cybersecurity / Cloud Infrastructure</td>
+          <td data-sort="Distribution">Distribution</td>
+          <td class="num" data-sort="268.75">$268.75</td>
+          <td class="num" data-sort="327.8">$327.80 / $244.51</td>
+          <td class="num pullback" data-sort="18.014032946918856">-18.0%</td>
+          <td data-sort="29.10313362948734"><span class="chip chip-warn">MR 29%</span></td>
+          <td data-sort="2"><span class="chip chip-bull">EXPANSION</span></td>
+          <td data-sort="57.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 78 22" width="78" height="22"><rect class="bar-flat" x="0" y="4.0" width="6" height="18.0" rx="1"/><rect class="bar-down" x="8" y="5.3" width="6" height="16.7" rx="1"/><rect class="bar-up" x="16" y="5.1" width="6" height="16.9" rx="1"/><rect class="bar-flat" x="24" y="5.1" width="6" height="16.9" rx="1"/><rect class="bar-up" x="32" y="0.7" width="6" height="21.3" rx="1"/><rect class="bar-up" x="40" y="0.0" width="6" height="22.0" rx="1"/><rect class="bar-down" x="48" y="1.1" width="6" height="20.9" rx="1"/><rect class="bar-down" x="56" y="1.8" width="6" height="20.2" rx="1"/><rect class="bar-down" x="64" y="2.2" width="6" height="19.8" rx="1"/><rect class="bar-down" x="72" y="9.5" width="6" height="12.5" rx="1"/></svg></div><div class="iv-last bar-down">57</div></div></td>
+          <td data-sort="-2"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-down">&#9660;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-down">&#9660;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span></div><span class="chip chip-none">STABLE</span></div></td>
+          <td data-sort="1">First Test</td>
+          <td class="num" data-sort="10">10</td>
+          <td data-sort="7.8"><span class="chip chip-none">—</span><div class="sub">SMA200 +7.8%</div></td>
+        </tr>
+        <tr>
+          <td class="ticker" data-sort="JBL">JBL</td>
+          <td class="sector" title="Technology (Quantum Computing)" data-sort="Technology (Quantum Computing)">Technology (Quantum Computing)</td>
+          <td data-sort="Mark-down">Mark-down</td>
+          <td class="num" data-sort="239.09">$239.09</td>
+          <td class="num" data-sort="290.93">$290.93 / $236.36</td>
+          <td class="num pullback" data-sort="17.818719279551782">-17.8%</td>
+          <td data-sort="5.002748763056607"><span class="chip chip-warn">LR 5%</span></td>
+          <td data-sort="-1"><span class="chip chip-none">N/A</span></td>
+          <td data-sort="-1"><span class="muted">—</span></td>
+          <td data-sort="1"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-up">&#9650;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span></div><span class="chip chip-none">STABLE</span></div></td>
+          <td data-sort="-1">—</td>
+          <td class="num" data-sort="10">10</td>
+          <td data-sort="-999.0"><span class="chip chip-none">—</span><div class="sub"></div></td>
+        </tr>
+        <tr>
+          <td class="ticker" data-sort="NOK">NOK</td>
+          <td class="sector" title="Communications Equipment" data-sort="Communications Equipment">Communications Equipment</td>
+          <td data-sort="Mark-down">Mark-down</td>
+          <td class="num" data-sort="7.66">$7.66</td>
+          <td class="num" data-sort="9.31">$9.31 / $7.46</td>
+          <td class="num pullback" data-sort="17.722878625134268">-17.7%</td>
+          <td data-sort="10.810810810810818"><span class="chip chip-warn">LR 11%</span></td>
+          <td data-sort="1"><span class="chip chip-none">Neutral</span></td>
+          <td data-sort="55.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 78 22" width="78" height="22"><rect class="bar-flat" x="0" y="13.4" width="6" height="8.6" rx="1"/><rect class="bar-down" x="8" y="13.9" width="6" height="8.1" rx="1"/><rect class="bar-up" x="16" y="12.8" width="6" height="9.2" rx="1"/><rect class="bar-flat" x="24" y="12.8" width="6" height="9.2" rx="1"/><rect class="bar-up" x="32" y="11.7" width="6" height="10.3" rx="1"/><rect class="bar-up" x="40" y="10.8" width="6" height="11.2" rx="1"/><rect class="bar-down" x="48" y="11.0" width="6" height="11.0" rx="1"/><rect class="bar-down" x="56" y="11.4" width="6" height="10.6" rx="1"/><rect class="bar-up" x="64" y="8.4" width="6" height="13.6" rx="1"/><rect class="bar-down" x="72" y="9.9" width="6" height="12.1" rx="1"/></svg></div><div class="iv-last bar-down">55</div></div></td>
+          <td data-sort="0"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-up">&#9650;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-down">&#9660;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span></div><span class="chip chip-none">STABLE</span></div></td>
+          <td data-sort="0">Below all MAs</td>
+          <td class="num" data-sort="10">10</td>
+          <td data-sort="-25.8"><span class="chip chip-none">—</span><div class="sub">SMA200 -25.8%</div></td>
+        </tr>
+        <tr>
+          <td class="ticker" data-sort="BHE">BHE</td>
+          <td class="sector" title="Technology (Quantum Computing)" data-sort="Technology (Quantum Computing)">Technology (Quantum Computing)</td>
+          <td data-sort="Mark-down">Mark-down</td>
+          <td class="num" data-sort="60.4">$60.40</td>
+          <td class="num" data-sort="73.36">$73.36 / $59.34</td>
+          <td class="num pullback" data-sort="17.66630316248637">-17.7%</td>
+          <td data-sort="7.560627674750324"><span class="chip chip-warn">LR 8%</span></td>
+          <td data-sort="1"><span class="chip chip-none">Neutral</span></td>
+          <td data-sort="73.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 78 22" width="78" height="22"><rect class="bar-flat" x="0" y="4.4" width="6" height="17.6" rx="1"/><rect class="bar-flat" x="8" y="4.4" width="6" height="17.6" rx="1"/><rect class="bar-up" x="16" y="4.0" width="6" height="18.0" rx="1"/><rect class="bar-flat" x="24" y="4.0" width="6" height="18.0" rx="1"/><rect class="bar-down" x="32" y="6.6" width="6" height="15.4" rx="1"/><rect class="bar-down" x="40" y="8.1" width="6" height="13.9" rx="1"/><rect class="bar-down" x="48" y="9.5" width="6" height="12.5" rx="1"/><rect class="bar-up" x="56" y="9.0" width="6" height="13.0" rx="1"/><rect class="bar-up" x="64" y="4.8" width="6" height="17.2" rx="1"/><rect class="bar-down" x="72" y="5.9" width="6" height="16.1" rx="1"/></svg></div><div class="iv-last bar-down">73</div></div></td>
+          <td data-sort="0"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span></div><span class="chip chip-none">STABLE</span></div></td>
+          <td data-sort="0">Below all MAs</td>
+          <td class="num" data-sort="10">10</td>
+          <td data-sort="-17.2"><span class="chip chip-none">—</span><div class="sub">SMA200 -17.2%</div></td>
+        </tr>
+        <tr>
+          <td class="ticker" data-sort="VLO">VLO</td>
+          <td class="sector" title="Oil & Gas Refining & Marketing" data-sort="Oil & Gas Refining & Marketing">Oil & Gas Refining & Marketing</td>
+          <td data-sort="Mark-down">Mark-down</td>
+          <td class="num" data-sort="346.45">$346.45</td>
+          <td class="num" data-sort="419.28">$419.28 / $346.45</td>
+          <td class="num pullback" data-sort="17.37025376836481">-17.4%</td>
+          <td data-sort="0.0"><span class="chip chip-warn">LR 0%</span></td>
+          <td data-sort="1"><span class="chip chip-none">Neutral</span></td>
+          <td data-sort="83.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 78 22" width="78" height="22"><rect class="bar-flat" x="0" y="3.5" width="6" height="18.5" rx="1"/><rect class="bar-up" x="8" y="2.0" width="6" height="20.0" rx="1"/><rect class="bar-down" x="16" y="2.4" width="6" height="19.6" rx="1"/><rect class="bar-flat" x="24" y="2.4" width="6" height="19.6" rx="1"/><rect class="bar-up" x="32" y="1.1" width="6" height="20.9" rx="1"/><rect class="bar-flat" x="40" y="1.1" width="6" height="20.9" rx="1"/><rect class="bar-flat" x="48" y="1.1" width="6" height="20.9" rx="1"/><rect class="bar-up" x="56" y="0.4" width="6" height="21.6" rx="1"/><rect class="bar-down" x="64" y="0.7" width="6" height="21.3" rx="1"/><rect class="bar-down" x="72" y="3.7" width="6" height="18.3" rx="1"/></svg></div><div class="iv-last bar-down">83</div></div></td>
+          <td data-sort="1"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-flat">&#9632;</span><span class="gex-down">&#9660;</span><span class="gex-flat">&#9632;</span><span class="gex-up">&#9650;</span><span class="gex-up">&#9650;</span><span class="gex-flat">&#9632;</span><span class="gex-down">&#9660;</span><span class="gex-flat">&#9632;</span><span class="gex-up">&#9650;</span></div><span class="chip chip-bull">IMPROVING</span></div></td>
+          <td data-sort="1">First Test</td>
+          <td class="num" data-sort="10">10</td>
+          <td data-sort="20.0"><span class="chip chip-bull">UPTREND PULLBACK</span><div class="sub">SMA200 +20.0%</div></td>
+        </tr>
+        <tr>
+          <td class="ticker" data-sort="KLAC">KLAC</td>
+          <td class="sector" title="Semiconductor Process Control Equipment" data-sort="Semiconductor Process Control Equipment">Semiconductor Process Control Equipment</td>
+          <td data-sort="Mark-down">Mark-down</td>
+          <td class="num" data-sort="138.49">$138.49</td>
+          <td class="num" data-sort="167.43">$167.43 / $129.80</td>
+          <td class="num pullback" data-sort="17.284835453622406">-17.3%</td>
+          <td data-sort="23.09327664097794"><span class="chip chip-warn">LR 23%</span></td>
+          <td data-sort="2"><span class="chip chip-bull">EXPANSION</span></td>
+          <td data-sort="47.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 78 22" width="78" height="22"><rect class="bar-flat" x="0" y="12.8" width="6" height="9.2" rx="1"/><rect class="bar-flat" x="8" y="12.8" width="6" height="9.2" rx="1"/><rect class="bar-down" x="16" y="14.1" width="6" height="7.9" rx="1"/><rect class="bar-flat" x="24" y="14.1" width="6" height="7.9" rx="1"/><rect class="bar-flat" x="32" y="14.1" width="6" height="7.9" rx="1"/><rect class="bar-up" x="40" y="13.4" width="6" height="8.6" rx="1"/><rect class="bar-flat" x="48" y="13.4" width="6" height="8.6" rx="1"/><rect class="bar-down" x="56" y="15.8" width="6" height="6.2" rx="1"/><rect class="bar-up" x="64" y="9.9" width="6" height="12.1" rx="1"/><rect class="bar-down" x="72" y="11.7" width="6" height="10.3" rx="1"/></svg></div><div class="iv-last bar-down">47</div></div></td>
+          <td data-sort="0"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-down">&#9660;</span><span class="gex-flat">&#9632;</span><span class="gex-up">&#9650;</span><span class="gex-flat">&#9632;</span><span class="gex-down">&#9660;</span><span class="gex-up">&#9650;</span><span class="gex-down">&#9660;</span><span class="gex-up">&#9650;</span><span class="gex-flat">&#9632;</span></div><span class="chip chip-bull">IMPROVING</span></div></td>
+          <td data-sort="0">Below all MAs</td>
+          <td class="num" data-sort="10">10</td>
+          <td data-sort="-23.9"><span class="chip chip-none">—</span><div class="sub">SMA200 -23.9%</div></td>
+        </tr>
+        <tr>
+          <td class="ticker" data-sort="AVGO">AVGO</td>
+          <td class="sector" title="Semiconductors & Infrastructure Software" data-sort="Semiconductors & Infrastructure Software">Semiconductors & Infrastructure Software</td>
+          <td data-sort="Mark-down">Mark-down</td>
+          <td class="num" data-sort="293.69">$293.69</td>
+          <td class="num" data-sort="351.81">$351.81 / $291.53</td>
+          <td class="num pullback" data-sort="16.520280833404396">-16.5%</td>
+          <td data-sort="3.5832780358328202"><span class="chip chip-warn">LR 4%</span></td>
+          <td data-sort="2"><span class="chip chip-bull">EXPANSION</span></td>
+          <td data-sort="70.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 78 22" width="78" height="22"><rect class="bar-flat" x="0" y="17.6" width="6" height="4.4" rx="1"/><rect class="bar-up" x="8" y="15.4" width="6" height="6.6" rx="1"/><rect class="bar-down" x="16" y="17.4" width="6" height="4.6" rx="1"/><rect class="bar-flat" x="24" y="17.4" width="6" height="4.6" rx="1"/><rect class="bar-up" x="32" y="16.3" width="6" height="5.7" rx="1"/><rect class="bar-up" x="40" y="13.0" width="6" height="9.0" rx="1"/><rect class="bar-down" x="48" y="15.0" width="6" height="7.0" rx="1"/><rect class="bar-down" x="56" y="15.8" width="6" height="6.2" rx="1"/><rect class="bar-up" x="64" y="4.0" width="6" height="18.0" rx="1"/><rect class="bar-down" x="72" y="6.6" width="6" height="15.4" rx="1"/></svg></div><div class="iv-last bar-down">70</div></div></td>
+          <td data-sort="0"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-up">&#9650;</span><span class="gex-up">&#9650;</span><span class="gex-down">&#9660;</span><span class="gex-down">&#9660;</span><span class="gex-flat">&#9632;</span><span class="gex-up">&#9650;</span><span class="gex-down">&#9660;</span><span class="gex-up">&#9650;</span><span class="gex-down">&#9660;</span></div><span class="chip chip-none">STABLE</span></div></td>
+          <td data-sort="0">Below all MAs</td>
+          <td class="num" data-sort="10">10</td>
+          <td data-sort="-20.1"><span class="chip chip-none">—</span><div class="sub">SMA200 -20.1%</div></td>
+        </tr>
+        <tr>
+          <td class="ticker" data-sort="CSCO">CSCO</td>
+          <td class="sector" title="Communications Equipment" data-sort="Communications Equipment">Communications Equipment</td>
+          <td data-sort="Mark-down">Mark-down</td>
+          <td class="num" data-sort="93.85">$93.85</td>
+          <td class="num" data-sort="111.38">$111.38 / $93.85</td>
+          <td class="num pullback" data-sort="15.738911833363261">-15.7%</td>
+          <td data-sort="0.0"><span class="chip chip-warn">LR 0%</span></td>
+          <td data-sort="2"><span class="chip chip-bull">EXPANSION</span></td>
+          <td data-sort="95.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 78 22" width="78" height="22"><rect class="bar-flat" x="0" y="3.5" width="6" height="18.5" rx="1"/><rect class="bar-flat" x="8" y="3.5" width="6" height="18.5" rx="1"/><rect class="bar-down" x="16" y="5.3" width="6" height="16.7" rx="1"/><rect class="bar-up" x="24" y="4.0" width="6" height="18.0" rx="1"/><rect class="bar-up" x="32" y="1.5" width="6" height="20.5" rx="1"/><rect class="bar-up" x="40" y="0.7" width="6" height="21.3" rx="1"/><rect class="bar-down" x="48" y="1.5" width="6" height="20.5" rx="1"/><rect class="bar-down" x="56" y="2.2" width="6" height="19.8" rx="1"/><rect class="bar-up" x="64" y="0.0" width="6" height="22.0" rx="1"/><rect class="bar-down" x="72" y="1.1" width="6" height="20.9" rx="1"/></svg></div><div class="iv-last bar-down">95</div></div></td>
+          <td data-sort="-1"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-up">&#9650;</span><span class="gex-flat">&#9632;</span><span class="gex-down">&#9660;</span><span class="gex-down">&#9660;</span><span class="gex-up">&#9650;</span><span class="gex-flat">&#9632;</span><span class="gex-down">&#9660;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span></div><span class="chip chip-none">STABLE</span></div></td>
+          <td data-sort="0">Below all MAs</td>
+          <td class="num" data-sort="10">10</td>
+          <td data-sort="-7.6"><span class="chip chip-none">—</span><div class="sub">SMA200 -7.6%</div></td>
+        </tr>
+        <tr>
+          <td class="ticker" data-sort="GEV">GEV</td>
+          <td class="sector" title="Electrical Equipment / Power Generation" data-sort="Electrical Equipment / Power Generation">Electrical Equipment / Power Generation</td>
+          <td data-sort="Mark-down">Mark-down</td>
+          <td class="num" data-sort="774.11">$774.11</td>
+          <td class="num" data-sort="918.2">$918.20 / $770.51</td>
+          <td class="num pullback" data-sort="15.692659551296018">-15.7%</td>
+          <td data-sort="2.4375380865326166"><span class="chip chip-warn">LR 2%</span></td>
+          <td data-sort="2"><span class="chip chip-bull">EXPANSION</span></td>
+          <td data-sort="61.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 78 22" width="78" height="22"><rect class="bar-flat" x="0" y="14.1" width="6" height="7.9" rx="1"/><rect class="bar-down" x="8" y="14.3" width="6" height="7.7" rx="1"/><rect class="bar-down" x="16" y="16.1" width="6" height="5.9" rx="1"/><rect class="bar-flat" x="24" y="16.1" width="6" height="5.9" rx="1"/><rect class="bar-up" x="32" y="14.1" width="6" height="7.9" rx="1"/><rect class="bar-up" x="40" y="13.0" width="6" height="9.0" rx="1"/><rect class="bar-down" x="48" y="13.9" width="6" height="8.1" rx="1"/><rect class="bar-up" x="56" y="13.2" width="6" height="8.8" rx="1"/><rect class="bar-up" x="64" y="5.7" width="6" height="16.3" rx="1"/><rect class="bar-down" x="72" y="8.6" width="6" height="13.4" rx="1"/></svg></div><div class="iv-last bar-down">61</div></div></td>
+          <td data-sort="-1"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-up">&#9650;</span><span class="gex-down">&#9660;</span><span class="gex-up">&#9650;</span><span class="gex-down">&#9660;</span><span class="gex-up">&#9650;</span><span class="gex-up">&#9650;</span><span class="gex-down">&#9660;</span><span class="gex-down">&#9660;</span><span class="gex-down">&#9660;</span></div><span class="chip chip-warn">WEAKENING</span></div></td>
+          <td data-sort="0">Below all MAs</td>
+          <td class="num" data-sort="10">10</td>
+          <td data-sort="-18.3"><span class="chip chip-none">—</span><div class="sub">SMA200 -18.3%</div></td>
+        </tr>
+        <tr>
+          <td class="ticker" data-sort="PINS">PINS</td>
+          <td class="sector" title="Interactive Media & Services" data-sort="Interactive Media & Services">Interactive Media & Services</td>
+          <td data-sort="Mark-down">Mark-down</td>
+          <td class="num" data-sort="18.96">$18.96</td>
+          <td class="num" data-sort="22.32">$22.32 / $18.96</td>
+          <td class="num pullback" data-sort="15.053763440860212">-15.1%</td>
+          <td data-sort="0.0"><span class="chip chip-warn">LR 0%</span></td>
+          <td data-sort="0"><span class="chip chip-warn">CONTRACTION</span></td>
+          <td data-sort="34.0"><div class="iv-cell"><div class="iv-spark-row"><svg class="spark" viewBox="0 0 78 22" width="78" height="22"><rect class="bar-flat" x="0" y="6.2" width="6" height="15.8" rx="1"/><rect class="bar-up" x="8" y="4.8" width="6" height="17.2" rx="1"/><rect class="bar-down" x="16" y="5.1" width="6" height="16.9" rx="1"/><rect class="bar-flat" x="24" y="5.1" width="6" height="16.9" rx="1"/><rect class="bar-down" x="32" y="13.6" width="6" height="8.4" rx="1"/><rect class="bar-up" x="40" y="13.2" width="6" height="8.8" rx="1"/><rect class="bar-down" x="48" y="13.9" width="6" height="8.1" rx="1"/><rect class="bar-down" x="56" y="16.1" width="6" height="5.9" rx="1"/><rect class="bar-up" x="64" y="12.8" width="6" height="9.2" rx="1"/><rect class="bar-down" x="72" y="14.5" width="6" height="7.5" rx="1"/></svg></div><div class="iv-last bar-down">34</div></div></td>
+          <td data-sort="-2"><div class="iv-cell"><div class="gex-glyphs"><span class="gex-down">&#9660;</span><span class="gex-flat">&#9632;</span><span class="gex-flat">&#9632;</span><span class="gex-down">&#9660;</span><span class="gex-up">&#9650;</span><span class="gex-flat">&#9632;</span><span class="gex-up">&#9650;</span><span class="gex-down">&#9660;</span><span class="gex-down">&#9660;</span></div><span class="chip chip-warn">WEAKENING</span></div></td>
+          <td data-sort="0">Below all MAs</td>
+          <td class="num" data-sort="10">10</td>
+          <td data-sort="-8.1"><span class="chip chip-none">—</span><div class="sub">SMA200 -8.1%</div></td>
+        </tr>
       </tbody>
     </table>
     </div>
@@ -131,6 +942,7 @@
       <b>IV Rank 10D:</b> one bar per trading day (0–100 scale) — <span class="iv-last bar-up">green</span> = higher than the prior day, <span class="iv-last bar-down">red</span> = lower, grey = first day/unchanged. Bold number is the latest IV Rank.<br>
       <b>GEX 10D:</b> one glyph per day-over-day change in GEX Scale — <span class="gex-up">&#9650;</span> Up (dealer positioning strengthening) · <span class="gex-down">&#9660;</span> Down (weakening) · <span class="gex-flat">&#9632;</span> Unchanged — with a recency chip below (IMPROVING/WEAKENING/STABLE over the last 2 days).<br>
       <b>EMA Trend:</b> BULLISH (above EMA21/SMA50/SMA200) &gt; Green Shoots (above EMA21+SMA50) &gt; Second Test (above 2 of 3 MAs) &gt; First Test (above 1 of 3 MAs).<br>
+      <b>Uptrend Tag:</b> UPTREND PULLBACK = price more than 15% above SMA200. Backtest (08 Nov 26, Jun–Nov snapshots): +3% touch within 10 days in 82% of signal-days Jun–Sep and 78% Oct–Nov, vs 56% for untagged screen Oct–Nov. Small sample (12 first signals out of sample). EXIT: set a +3% limit sell at entry — median price at day 10 was −10%, the bounce fades. Not a put-spread entry: Distribution/Mark-down stays ABORT.<br>
       <b>Sorting:</b> click any column header to sort by that column; click again to reverse.
     </div>
   </div>
