@@ -599,6 +599,23 @@ def build():
         grid_dt = None
         grid_frame = "<p class='empty'>No THE_GRID file found.</p>"
 
+    # bullish-board.html is written straight into docs/ by
+    # Strategyuild_bullish_board.py (board tiers + 70hitrate + the-edge in one
+    # page), the same in-place pattern as senti-grid.html and the-grid.html.
+    bull_board_dest = SITE_DIR / "bullish-board.html"
+    if bull_board_dest.exists():
+        bull_board_dt = datetime.fromtimestamp(bull_board_dest.stat().st_mtime)
+        bull_board_v = cache_bust(bull_board_dt)
+        bull_board_frame = (
+            '<div class="news-toolbar">'
+            f'<a class="open-full" href="bullish-board.html?v={bull_board_v}" target="_blank" rel="noopener">'
+            'Open full Bullish Board in new tab &#8599;</a></div>'
+            f'<iframe src="bullish-board.html?v={bull_board_v}" title="Bullish Board"></iframe>'
+        )
+    else:
+        bull_board_dt = None
+        bull_board_frame = "<p class='empty'>No Bullish Board file found.</p>"
+
     strat_dt, strat_path = latest_opt_strategist()
     if strat_path:
         shutil.copyfile(strat_path, SITE_DIR / "strategist.html")
@@ -624,6 +641,7 @@ def build():
         ("Rebounder", rebound_dt),
         ("Dual_X", dualx_dt),
         ("Edge", edge_dt),
+        ("Bullish board", bull_board_dt),
         ("Senti", senti_dt),
         ("THE_GRID", grid_dt),
         ("Strategist", strat_dt),
@@ -763,6 +781,7 @@ def build():
     <button data-target="rebounder">Rebounder</button>
     <button data-target="dualx">Dual_X</button>
     <button data-target="edge">Edge</button>
+    <button data-target="bullish">Bullish Board</button>
     <button data-target="senti">Senti</button>
     <button data-target="thegrid">THE_GRID</button>
     <button data-target="strategist">Strategist</button>
@@ -798,6 +817,10 @@ def build():
   <section id="edge">
     <h2>The Edge</h2>
     {edge_frame}
+  </section>
+  <section id="bullish">
+    <h2>Bullish Board</h2>
+    {bull_board_frame}
   </section>
   <section id="senti">
     {senti_frame}
@@ -859,6 +882,7 @@ def build():
         f"rebounder: {rebound_path.name if rebound_path else 'none'}, "
         f"dual_x: {dualx_path.name if dualx_path else 'none'}, "
         f"edge: {edge_path.name if edge_path else 'none'}, "
+        f"bullish board: {bull_board_dest.name if bull_board_dest.exists() else 'none'}, "
         f"research team: {research_path.name if research_path else 'none'})"
     )
 
