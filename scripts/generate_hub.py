@@ -479,18 +479,17 @@ def build():
         bulletin_frame = "<p class='empty'>No news bulletin file found.</p>"
         bulletin_css = ""
 
-    # oil-brief.html is frequently hand-authored straight into docs/ (bypassing
-    # the Dashboard folder entirely), so it can easily be newer than anything
-    # latest_oil_brief() finds there. Never let an older Dashboard-folder file
-    # clobber a hand-published copy that's already ahead of it.
+    # DISABLED 13 Nov 2026 - LICENCE BREACH. Do not re-enable.
+    # This repo is PUBLIC (kelvtay-code/news-fundamentals, served by GitHub Pages).
+    # The oil briefs are licensed Platts material and must never leave Google Drive and
+    # the Obsidian vault. This block copied the newest Dashboard oil_brief*.html into
+    # docs/oil-brief.html on EVERY hub run, which published "Oil Brief 10 November 2026",
+    # carrying "Platts Market on Close" text, to a public URL returning HTTP 200.
+    # The oil brief already has a private surface: the Oil Universe dashboard in the
+    # Drive Dashboard folder, rebuilt by `oiluniverse`.
     oil_dest = SITE_DIR / "oil-brief.html"
-    oil_dt, oil_path = latest_oil_brief()
-    if oil_path and (
-        not oil_dest.exists()
-        or datetime.fromtimestamp(oil_path.stat().st_mtime)
-        > datetime.fromtimestamp(oil_dest.stat().st_mtime)
-    ):
-        shutil.copyfile(oil_path, oil_dest)
+    oil_path = None
+    oil_dt = None   # nothing is published, so the sidebar shows no oil timestamp
     if oil_dest.exists():
         oil_v = cache_bust(datetime.fromtimestamp(oil_dest.stat().st_mtime))
         oil_frame = (
