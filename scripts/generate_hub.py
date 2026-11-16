@@ -490,16 +490,12 @@ def build():
     oil_dest = SITE_DIR / "oil-brief.html"
     oil_path = None
     oil_dt = None   # nothing is published, so the sidebar shows no oil timestamp
-    if oil_dest.exists():
-        oil_v = cache_bust(datetime.fromtimestamp(oil_dest.stat().st_mtime))
-        oil_frame = (
-            '<div class="news-toolbar">'
-            f'<a class="open-full" href="oil-brief.html?v={oil_v}" target="_blank" rel="noopener">'
-            'Open full oil brief in new tab &#8599;</a></div>'
-            f'<iframe src="oil-brief.html?v={oil_v}" title="Oil Brief"></iframe>'
-        )
-    else:
-        oil_frame = "<p class='empty'>No oil brief file found.</p>"
+    # The tab must not frame or link oil-brief.html even when the file is still on disk.
+    # Disabling only the copy left the old leaked brief served through this iframe.
+    oil_frame = (
+        "<p class='empty'>The oil brief is licensed Platts material and is not published "
+        "here. It lives in the private Drive dashboard and the Obsidian vault.</p>"
+    )
 
     bull_dt, bull_path = latest_bull_screener()
     if bull_path:
